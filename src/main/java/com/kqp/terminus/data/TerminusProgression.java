@@ -47,6 +47,7 @@ public class TerminusProgression {
 
                 addTrigger(new TimeTrigger("all_defeated", "4_evil_defeated", 5 * 20));
                 addTrigger(new SleepTrigger("start_awakening", "start_awakening"));
+                addTrigger(new SleepTrigger("start_awakening", "start_awakening_message"));
                 break;
             default:
                 break;
