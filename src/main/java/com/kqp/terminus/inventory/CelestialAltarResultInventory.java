@@ -12,11 +12,11 @@ public class CelestialAltarResultInventory implements Inventory {
     private final DefaultedList<ItemStack> stack;
 
     public CelestialAltarResultInventory() {
-        this.stack = DefaultedList.ofSize(1, ItemStack.EMPTY);
+        this.stack = DefaultedList.ofSize(24, ItemStack.EMPTY);
     }
 
     public int getInvSize() {
-        return 1;
+        return 24;
     }
 
     public boolean isInvEmpty() {
@@ -35,19 +35,19 @@ public class CelestialAltarResultInventory implements Inventory {
     }
 
     public ItemStack getInvStack(int slot) {
-        return (ItemStack) this.stack.get(0);
+        return (ItemStack) this.stack.get(slot);
     }
 
     public ItemStack takeInvStack(int slot, int amount) {
-        return Inventories.removeStack(this.stack, 0);
+        return Inventories.removeStack(this.stack, slot);
     }
 
     public ItemStack removeInvStack(int slot) {
-        return Inventories.removeStack(this.stack, 0);
+        return Inventories.removeStack(this.stack, slot);
     }
 
     public void setInvStack(int slot, ItemStack stack) {
-        this.stack.set(0, stack);
+        this.stack.set(slot, stack);
     }
 
     public void markDirty() {

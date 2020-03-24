@@ -1,11 +1,13 @@
 package com.kqp.terminus.client.container;
 
 import com.kqp.terminus.Terminus;
-import com.kqp.terminus.inventory.CelestialAltarInventory;
 import com.kqp.terminus.inventory.CelestialAltarResultInventory;
-import com.kqp.terminus.recipe.ComparableItemStack;
 import com.kqp.terminus.recipe.TerminusRecipe;
 import com.kqp.terminus.recipe.TerminusRecipes;
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.container.BlockContext;
 import net.minecraft.container.Container;
 import net.minecraft.container.Slot;
@@ -15,16 +17,22 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.s2c.play.ContainerSlotUpdateS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.PacketByteBuf;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CelestialAltarContainer extends Container {
     public final PlayerInventory playerInventory;
     public final BlockContext context;
 
-    public final CelestialAltarInventory craftingInv;
     public final CelestialAltarResultInventory resultInv;
+
+    public List<TerminusRecipe> recipes;
+    public List<ItemStack> outputs;
 
     public CelestialAltarContainer(int syncId, PlayerInventory playerInventory, BlockContext context) {
         super(null, syncId);
@@ -32,60 +40,64 @@ public class CelestialAltarContainer extends Container {
         this.context = context;
         this.playerInventory = playerInventory;
 
-        craftingInv = new CelestialAltarInventory(this);
         resultInv = new CelestialAltarResultInventory();
+        this.outputs = new ArrayList();
 
-        // Celestial Altar inventory (1 output + 15 input)
-        this.addSlot(new CelestialAltarResultSlot(playerInventory.player, craftingInv, resultInv, 0, 138, 36));
-
+        // Celestial Altar inventory (24 output)
         int i, j;
         int counter = 0;
         for (i = 0; i < 3; i++) {
-            for (j = 0; j < 5; j++) {
-                this.addSlot(new Slot(craftingInv, counter++, 8 + j * 18, 18 + i * 18));
+            for (j = 0; j < 8; j++) {
+                this.addSlot(new CelestialAltarResultSlot(playerInventory.player, resultInv, counter++, 8 + j * 18, 18 + i * 18) {
+                    @Override
+                    public void markDirty() {
+                        super.markDirty();
+                        updateResult();
+                    }
+                });
             }
         }
 
         // Player Inventory (27 storage + 9 hotbar)
         for (i = 0; i < 3; i++) {
             for (j = 0; j < 9; j++) {
-                this.addSlot(new Slot(playerInventory, i * 9 + j + 9, 8 + j * 18, 84 + i * 18));
+                this.addSlot(new Slot(playerInventory, i * 9 + j + 9, 8 + j * 18, 84 + i * 18) {
+                    @Override
+                    public void markDirty() {
+                        super.markDirty();
+                        updateResult();
+                    }
+                });
             }
         }
 
         for (j = 0; j < 9; j++) {
-            this.addSlot(new Slot(playerInventory, j, 8 + j * 18, 142));
+            this.addSlot(new Slot(playerInventory, j, 8 + j * 18, 142) {
+                @Override
+                public void markDirty() {
+                    super.markDirty();
+                    updateResult();
+                }
+            });
+        }
+
+        updateResult();
+    }
+
+    public void updateResult() {
+        recipes = TerminusRecipes.getMatches(playerInventory.main);
+        outputs = recipes.stream().map(recipe -> recipe.result.copy()).collect(Collectors.toList());
+
+        if (!playerInventory.player.world.isClient) {
+            PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+            ServerSidePacketRegistry.INSTANCE.sendToPlayer(playerInventory.player, Terminus.TNetworking.SYNC_RESULTS_ID, buf);
         }
     }
 
     @Override
-    public void close(PlayerEntity player) {
-        super.close(player);
-
-        this.context.run((world, blockPos) -> {
-            this.dropInventory(player, world, this.craftingInv);
-        });
-    }
-
-    public void updateResult(int syncId, World world, PlayerEntity player, CelestialAltarInventory craftingInventory, CelestialAltarResultInventory resultInventory) {
-        if (!world.isClient) {
-            ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity)player;
-            ItemStack itemStack = ItemStack.EMPTY;
-
-            Optional<TerminusRecipe> optional = TerminusRecipes.getFirstMatch(craftingInventory.getItemStacks());
-            System.out.println(TerminusRecipes.RECIPES);
-            if (optional.isPresent()) {
-                itemStack = optional.get().result.copy();
-            }
-
-            resultInventory.setInvStack(0, itemStack);
-            serverPlayerEntity.networkHandler.sendPacket(new ContainerSlotUpdateS2CPacket(syncId, 0, itemStack));
-        }
-    }
-
     public void onContentChanged(Inventory inventory) {
         this.context.run((world, blockPos) -> {
-            updateResult(this.syncId, world, playerInventory.player, this.craftingInv, this.resultInv);
+            updateResult();
         });
     }
 
@@ -101,27 +113,20 @@ public class CelestialAltarContainer extends Container {
         if (slot != null && slot.hasStack()) {
             ItemStack itemStack2 = slot.getStack();
             itemStack = itemStack2.copy();
-            if (invSlot == 0) {
-                this.context.run((world, blockPos) -> {
-                    itemStack2.getItem().onCraft(itemStack2, world, player);
-                });
-                if (!this.insertItem(itemStack2, 16, 52, true)) {
+            if (invSlot < 24) {
+                if (!this.insertItem(itemStack2, 24, 60, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onStackChanged(itemStack2, itemStack);
-            } else if (invSlot >= 16 && invSlot < 52) {
-                if (!this.insertItem(itemStack2, 1, 16, false)) {
-                    if (invSlot < 43) {
-                        if (!this.insertItem(itemStack2, 43, 58, false)) {
-                            return ItemStack.EMPTY;
-                        }
-                    } else if (!this.insertItem(itemStack2, 16, 43, false)) {
-                        return ItemStack.EMPTY;
-                    }
+            } else if (invSlot >= 24 && invSlot < 51) {
+                if (!this.insertItem(itemStack2, 51, 60, false)) {
+                    return ItemStack.EMPTY;
                 }
-            } else if (!this.insertItem(itemStack2, 16, 52, false)) {
+            } else {
+                if (!this.insertItem(itemStack2, 24, 51, false)) {
                 return ItemStack.EMPTY;
+            }
             }
 
             if (itemStack2.isEmpty()) {
@@ -143,8 +148,43 @@ public class CelestialAltarContainer extends Container {
         return itemStack;
     }
 
+    public void scrollItems(float position) {
+        int i = (this.outputs.size() + 8 - 1) / 8 - 3;
+        int j = (int)((double)(position * (float)i) + 0.5D);
+        if (j < 0) {
+            j = 0;
+        }
+
+        for(int k = 0; k < 3; ++k) {
+            for(int l = 0; l < 8; ++l) {
+                int m = l + (k + j) * 8;
+
+                ItemStack itemStack = ItemStack.EMPTY;
+
+                if (m >= 0 && m < this.outputs.size()) {
+                    itemStack = this.outputs.get(m);
+                }
+
+                resultInv.setInvStack(l + k * 8, itemStack);
+                ((CelestialAltarResultSlot) this.getSlot(l + k * 8)).currentIndex = m;
+
+                PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+                buf.writeInt(l + k * 8);
+                buf.writeItemStack(itemStack);
+                buf.writeInt(m);
+
+                ServerSidePacketRegistry.INSTANCE.sendToPlayer(playerInventory.player, Terminus.TNetworking.SYNC_RESULT_SLOT_ID, buf);
+            }
+        }
+
+    }
+
     @Override
     public boolean canInsertIntoSlot(ItemStack stack, Slot slot) {
         return slot.inventory != this.resultInv && super.canInsertIntoSlot(stack, slot);
+    }
+
+    public boolean shouldShowScrollbar() {
+        return this.outputs.size() > 24;
     }
 }

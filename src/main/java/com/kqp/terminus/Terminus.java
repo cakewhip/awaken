@@ -1,15 +1,18 @@
 package com.kqp.terminus;
 
 import com.kqp.terminus.block.CelestialAltarBlock;
+import com.kqp.terminus.client.container.CelestialAltarContainer;
 import com.kqp.terminus.data.TerminusDataBlockEntity;
 import com.kqp.terminus.data.TerminusWorldProperties;
 import com.kqp.terminus.group.BlockStats;
 import com.kqp.terminus.group.MaterialGroup;
 import com.kqp.terminus.group.OreGroup;
+import com.kqp.terminus.inventory.CelestialAltarResultInventory;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.fabricmc.fabric.api.event.world.WorldTickCallback;
+import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
@@ -46,6 +49,8 @@ public class Terminus implements ModInitializer {
         TItems.init();
 
         TContainers.init();
+
+        TNetworking.init();
 
         initCallbacks();
     }
@@ -122,6 +127,26 @@ public class Terminus implements ModInitializer {
                 final BlockPos pos = buf.readBlockPos();
 
                 return world.getBlockState(pos).createContainerFactory(world, pos).createMenu(syncId, player.inventory, player);
+            });
+        }
+    }
+
+    public static class TNetworking {
+        public static final Identifier SYNC_SCROLLBAR_ID = new Identifier("terminus", "sync_scrollbar");
+        public static final Identifier SYNC_RESULTS_ID = new Identifier("terminus", "sync_results");
+        public static final Identifier SYNC_RESULT_SLOT_ID = new Identifier("terminus", "sync_result_slot");
+
+        public static void init() {
+            info("Initializing networking");
+
+            ServerSidePacketRegistry.INSTANCE.register(SYNC_SCROLLBAR_ID, (packetContext, data) -> {
+                float scrollPosition = data.readFloat();
+
+                packetContext.getTaskQueue().execute(() -> {
+                    if (packetContext.getPlayer().container instanceof CelestialAltarContainer) {
+                        ((CelestialAltarContainer) packetContext.getPlayer().container).scrollItems(scrollPosition);
+                    }
+                });
             });
         }
     }
