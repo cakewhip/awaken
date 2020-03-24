@@ -12,7 +12,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public final class JsonUtil {
-    private static final String EVENT_DIR = "/assets/terminus/event/";
+    private static final String EVENT_DIR = "/data/terminus/event/";
 
     public static Event readEvent(String name) {
         InputStreamReader input = new InputStreamReader(JsonUtil.class.getResourceAsStream(EVENT_DIR + name + ".json"));
