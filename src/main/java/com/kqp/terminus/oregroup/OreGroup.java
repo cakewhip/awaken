@@ -11,10 +11,9 @@ public class OreGroup {
     public final BlockStats bs;
     public final Block ORE;
     public final Block BLOCK;
-    public final Item PIECE;
     public final Item INGOT;
 
-    public OreGroup(String name, BlockStats bs, String pieceName, String ingotName) {
+    public OreGroup(String name, BlockStats bs, String ingotName) {
         this.bs = bs;
 
         this.ORE = new Block(FabricBlockSettings.of(Material.STONE)
@@ -29,14 +28,7 @@ public class OreGroup {
                 .lightLevel(bs.lightLevel)
                 .build()
         );
-        Terminus.TBlocks.register(ORE, name + "_block");
-
-        if (pieceName != null) {
-            this.PIECE = new Item(new Item.Settings().group(ItemGroup.MATERIALS));
-            Terminus.TItems.register(PIECE, name + "_" + pieceName);
-        } else {
-            this.PIECE = null;
-        }
+        Terminus.TBlocks.register(BLOCK, name + "_block");
 
         if (ingotName != null) {
             this.INGOT = new Item(new Item.Settings().group(ItemGroup.MATERIALS));

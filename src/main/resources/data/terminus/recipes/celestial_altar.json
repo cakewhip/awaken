@@ -1,13 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ccc",
-    "ccc",
-    "ccc"
+    "SMS",
+    "MXM",
+    "SMS"
   ],
   "key": {
-    "c": {
-      "item": "minecraft:clay"
+    "S": {
+      "item": "terminus:sunstone_block"
+    },
+    "M": {
+      "item": "terminus:moonstone_block"
+    },
+    "X": {
+      "item": "minecraft:dragon_egg"
     }
   },
   "result": {

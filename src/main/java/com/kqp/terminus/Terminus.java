@@ -1,7 +1,6 @@
 package com.kqp.terminus;
 
 import com.kqp.terminus.block.CelestialAltarBlock;
-import com.kqp.terminus.client.container.CelestialAltarContainer;
 import com.kqp.terminus.data.TerminusDataBlockEntity;
 import com.kqp.terminus.data.TerminusWorldProperties;
 import com.kqp.terminus.oregroup.BlockStats;
@@ -13,7 +12,6 @@ import net.fabricmc.fabric.api.event.world.WorldTickCallback;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.container.BlockContext;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -27,9 +25,6 @@ import net.minecraft.world.World;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Optional;
-import java.util.function.BiFunction;
 
 public class Terminus implements ModInitializer {
     public static Logger LOGGER = LogManager.getLogger();
@@ -77,10 +72,10 @@ public class Terminus implements ModInitializer {
 
             SUNSTONE = new OreGroup(
                     "sunstone",
-                    new BlockStats(25.0F, 6.0F, 6), "fragment", "ingot");
+                    new BlockStats(25.0F, 6.0F, 6), "fragment");
             MOONSTONE = new OreGroup(
                     "moonstone",
-                    new BlockStats(25.0F, 6.0F, 6), "fragment", "ingot");
+                    new BlockStats(25.0F, 6.0F, 6), "fragment");
         }
     }
 

@@ -1,14 +1,15 @@
 {
     "block.terminus.moonstone_ore": "Moonstone Ore",
     "item.terminus.moonstone_ore": "Moonstone Ore",
-    "block.terminus.moonstone_block": "Moonstone Block",
-    "item.terminus.moonstone_block": "Moonstone Block",
+    "block.terminus.moonstone_block": "Moonstone",
+    "item.terminus.moonstone_block": "Moonstone",
     "item.terminus.moonstone_fragment": "Moonstone Fragment",
-    "item.terminus.moonstone_ingot": "Moonstone",
     "block.terminus.sunstone_ore": "Sunstone Ore",
     "item.terminus.sunstone_ore": "Sunstone Ore",
-    "block.terminus.sunstone_block": "Sunstone Block",
-    "item.terminus.sunstone_block": "Sunstone Block",
+    "block.terminus.sunstone_block": "Sunstone",
+    "item.terminus.sunstone_block": "Sunstone",
     "item.terminus.sunstone_fragment": "Sunstone Fragment",
-    "item.terminus.moonstone_ingot": "Sunstone"
+    "block.terminus.celestial_altar": "Celestial Altar",
+    "item.terminus.celestial_altar": "Celestial Altar",
+    "container.terminus.celestial_altar": "Celestial Altar"
 }

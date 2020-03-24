@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "terminus:moonstone_fragment"
+    }
+  },
+  "result": {
+    "item": "terminus:moonstone_block"
+  }
+}
