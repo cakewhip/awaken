@@ -26,8 +26,8 @@ public abstract class WorldChunkMixin implements Chunk {
         if (Terminus.worldProperties.isWorldAwakened()) {
             if (!dataBe.genNewOres) {
                 dataBe.genNewOres = true;
-                TerminusOreGen.generate(chunk, 32, 8, Terminus.Groups.MOONSTONE.ORE);
-                TerminusOreGen.generate(chunk, 32, 8, Terminus.Groups.SUNSTONE.ORE);
+                TerminusOreGen.generate(chunk, 32, 4, Terminus.Groups.MOONSTONE.ORE);
+                TerminusOreGen.generate(chunk, 32, 4, Terminus.Groups.SUNSTONE.ORE);
             }
         }
     }

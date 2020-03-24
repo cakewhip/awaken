@@ -1,5 +1,6 @@
 package com.kqp.terminus.recipe;
 
+import com.kqp.terminus.Terminus;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
@@ -13,10 +14,24 @@ public class TerminusRecipes {
 
     static {
         RECIPES.add(new TerminusRecipe(
-                new ItemStack(Items.BEDROCK, 1),
-                new ItemStack(Items.DIAMOND, 72),
-                new ItemStack(Items.FISHING_ROD, 1),
-                new ItemStack(Items.DIRT, 2)
+                new ItemStack(Terminus.Groups.CELESTIAL.SWORD, 1),
+                new ItemStack(Terminus.Groups.MOONSTONE.INGOT, 128),
+                new ItemStack(Terminus.Groups.SUNSTONE.INGOT, 128)
+        ));
+        RECIPES.add(new TerminusRecipe(
+                new ItemStack(Terminus.Groups.CELESTIAL.SHOVEL, 1),
+                new ItemStack(Terminus.Groups.MOONSTONE.INGOT, 64),
+                new ItemStack(Terminus.Groups.SUNSTONE.INGOT, 64)
+        ));
+        RECIPES.add(new TerminusRecipe(
+                new ItemStack(Terminus.Groups.CELESTIAL.PICKAXE, 1),
+                new ItemStack(Terminus.Groups.MOONSTONE.INGOT, 128),
+                new ItemStack(Terminus.Groups.SUNSTONE.INGOT, 128)
+        ));
+        RECIPES.add(new TerminusRecipe(
+                new ItemStack(Terminus.Groups.CELESTIAL.AXE, 1),
+                new ItemStack(Terminus.Groups.MOONSTONE.INGOT, 72),
+                new ItemStack(Terminus.Groups.SUNSTONE.INGOT, 72)
         ));
     }
 
