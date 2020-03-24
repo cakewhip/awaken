@@ -77,10 +77,10 @@ public class Terminus implements ModInitializer {
 
             SUNSTONE = new OreGroup(
                     "sunstone",
-                    new BlockStats(25.0F, 6.0F, 6), "fragment", true);
+                    new BlockStats(25.0F, 6.0F, 6), "fragment", "ingot");
             MOONSTONE = new OreGroup(
                     "moonstone",
-                    new BlockStats(25.0F, 6.0F, 6), "fragment", true);
+                    new BlockStats(25.0F, 6.0F, 6), "fragment", "ingot");
         }
     }
 

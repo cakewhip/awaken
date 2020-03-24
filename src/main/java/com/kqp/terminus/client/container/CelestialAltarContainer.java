@@ -3,6 +3,8 @@ package com.kqp.terminus.client.container;
 import com.kqp.terminus.Terminus;
 import com.kqp.terminus.inventory.CelestialAltarInventory;
 import com.kqp.terminus.inventory.CelestialAltarResultInventory;
+import com.kqp.terminus.recipe.ComparableItemStack;
+import com.kqp.terminus.recipe.TerminusRecipe;
 import com.kqp.terminus.recipe.TerminusRecipes;
 import net.minecraft.container.BlockContext;
 import net.minecraft.container.Container;
@@ -65,16 +67,16 @@ public class CelestialAltarContainer extends Container {
         });
     }
 
-    protected static void updateResult(int syncId, World world, PlayerEntity player, CelestialAltarInventory craftingInventory, CelestialAltarResultInventory resultInventory) {
+    public void updateResult(int syncId, World world, PlayerEntity player, CelestialAltarInventory craftingInventory, CelestialAltarResultInventory resultInventory) {
         if (!world.isClient) {
             ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity)player;
             ItemStack itemStack = ItemStack.EMPTY;
 
-            Optional<ItemStack> optional = TerminusRecipes.getFirstMatch(craftingInventory.getItemStacks());
+            Optional<TerminusRecipe> optional = TerminusRecipes.getFirstMatch(craftingInventory.getItemStacks());
+            System.out.println(TerminusRecipes.RECIPES);
             if (optional.isPresent()) {
-                itemStack = optional.get();
+                itemStack = optional.get().result.copy();
             }
-
 
             resultInventory.setInvStack(0, itemStack);
             serverPlayerEntity.networkHandler.sendPacket(new ContainerSlotUpdateS2CPacket(syncId, 0, itemStack));
@@ -143,7 +145,6 @@ public class CelestialAltarContainer extends Container {
 
     @Override
     public boolean canInsertIntoSlot(ItemStack stack, Slot slot) {
-        System.out.println(slot.inventory != this.resultInv);
         return slot.inventory != this.resultInv && super.canInsertIntoSlot(stack, slot);
     }
 }

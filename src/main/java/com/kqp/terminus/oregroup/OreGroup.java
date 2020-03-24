@@ -10,10 +10,11 @@ import net.minecraft.item.ItemGroup;
 public class OreGroup {
     public final BlockStats bs;
     public final Block ORE;
-    public final Item INGOT;
+    public final Block BLOCK;
     public final Item PIECE;
+    public final Item INGOT;
 
-    public OreGroup(String name, BlockStats bs, String pieceName, boolean ingot) {
+    public OreGroup(String name, BlockStats bs, String pieceName, String ingotName) {
         this.bs = bs;
 
         this.ORE = new Block(FabricBlockSettings.of(Material.STONE)
@@ -23,6 +24,13 @@ public class OreGroup {
         );
         Terminus.TBlocks.register(ORE, name + "_ore");
 
+        this.BLOCK = new Block(FabricBlockSettings.of(Material.STONE)
+                .strength(bs.hardness, bs.resistance)
+                .lightLevel(bs.lightLevel)
+                .build()
+        );
+        Terminus.TBlocks.register(ORE, name + "_block");
+
         if (pieceName != null) {
             this.PIECE = new Item(new Item.Settings().group(ItemGroup.MATERIALS));
             Terminus.TItems.register(PIECE, name + "_" + pieceName);
@@ -30,9 +38,9 @@ public class OreGroup {
             this.PIECE = null;
         }
 
-        if (ingot) {
+        if (ingotName != null) {
             this.INGOT = new Item(new Item.Settings().group(ItemGroup.MATERIALS));
-            Terminus.TItems.register(INGOT, name + "_ingot");
+            Terminus.TItems.register(INGOT, name + "_" + ingotName);
         } else {
             this.INGOT = null;
         }

@@ -1,10 +1,15 @@
 package com.kqp.terminus.client.container;
 
 import com.kqp.terminus.inventory.CelestialAltarInventory;
+import com.kqp.terminus.recipe.ComparableItemStack;
+import com.kqp.terminus.recipe.TerminusRecipe;
+import com.kqp.terminus.recipe.TerminusRecipes;
 import net.minecraft.container.Slot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+
+import java.util.Optional;
 
 public class CelestialAltarResultSlot extends Slot {
     private final CelestialAltarInventory craftingInv;
@@ -48,30 +53,31 @@ public class CelestialAltarResultSlot extends Slot {
 
     public ItemStack onTakeItem(PlayerEntity player, ItemStack stack) {
         this.onCrafted(stack);
-        /*
-        DefaultedList<ItemStack> defaultedList = player.world.getRecipeManager().getRemainingStacks(RecipeType.CRAFTING, this.craftingInv, player.world);
 
-        for(int i = 0; i < defaultedList.size(); ++i) {
-            ItemStack itemStack = this.craftingInv.getInvStack(i);
-            ItemStack itemStack2 = (ItemStack)defaultedList.get(i);
-            if (!itemStack.isEmpty()) {
-                this.craftingInv.takeInvStack(i, 1);
-                itemStack = this.craftingInv.getInvStack(i);
-            }
+        Optional<TerminusRecipe> optional = TerminusRecipes.getFirstMatch(craftingInv.getItemStacks());
 
-            if (!itemStack2.isEmpty()) {
-                if (itemStack.isEmpty()) {
-                    this.craftingInv.setInvStack(i, itemStack2);
-                } else if (ItemStack.areItemsEqualIgnoreDamage(itemStack, itemStack2) && ItemStack.areTagsEqual(itemStack, itemStack2)) {
-                    itemStack2.increment(itemStack.getCount());
-                    this.craftingInv.setInvStack(i, itemStack2);
-                } else if (!this.player.inventory.insertStack(itemStack2)) {
-                    this.player.dropItem(itemStack2, false);
+        if (optional.isPresent()) {
+            TerminusRecipe recipe = optional.get();
+            for (ComparableItemStack key : recipe.recipe.keySet()) {
+                ItemStack reagent = new ItemStack(key.item);
+                reagent.setTag(key.tag);
+                int count = recipe.recipe.get(key);
+
+                for (int i = 0; i < craftingInv.getInvSize(); i++) {
+                    ItemStack itemStack = craftingInv.getInvStack(i);
+
+                    if (ItemStack.areItemsEqual(reagent, itemStack)) {
+                        if (itemStack.getCount() > count) {
+                            itemStack.decrement(count);
+                            break;
+                        } else {
+                            count -= itemStack.getCount();
+                            craftingInv.setInvStack(i, ItemStack.EMPTY);
+                        }
+                    }
                 }
             }
         }
-
-         */
 
         return stack;
     }
