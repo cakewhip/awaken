@@ -8,7 +8,8 @@
     "RaidMixin",
     "MinecraftServerMixin",
     "ServerWorldMixin",
-    "WorldChunkMixin"
+    "WorldChunkMixin",
+    "RecipeManagerMixin"
   ],
   "client": [],
   "server": [],
