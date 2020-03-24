@@ -16,7 +16,9 @@
     "main": [
       "com.kqp.terminus.Terminus"
     ],
-    "client": [],
+    "client": [
+      "com.kqp.terminus.client.TerminusClient"
+    ],
     "server": []
   },
   "mixins": [
