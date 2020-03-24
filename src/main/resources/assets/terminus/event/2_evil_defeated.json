@@ -1,0 +1,19 @@
+{
+  "type": "MultiMessageEvent",
+  "properties": {
+    "messages": [
+      {
+        "text": "\u003c???\u003e Adventurer, you are getting very close!",
+        "color": "WHITE",
+        "bold": false,
+        "italic": true
+      },
+      {
+        "text": "I should go defeat ${undefeated}",
+        "color": "WHITE",
+        "bold": false,
+        "italic": true
+      }
+    ]
+  }
+}

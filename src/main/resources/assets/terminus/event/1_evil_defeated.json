@@ -1,0 +1,25 @@
+{
+  "type": "MultiMessageEvent",
+  "properties": {
+    "messages": [
+      {
+        "text": "\u003c???\u003e Adventurer, I need your help. I can\u0027t maintain this connection with you much longer. Defeat the evils of this world, and I will expl--",
+        "color": "WHITE",
+        "bold": false,
+        "italic": true
+      },
+      {
+        "text": "The voice in your head gets cut off...",
+        "color": "WHITE",
+        "bold": false,
+        "italic": true
+      },
+      {
+        "text": "I should go defeat ${undefeated}, and then may I should go defeate ${undefeated}",
+        "color": "WHITE",
+        "bold": false,
+        "italic": true
+      }
+    ]
+  }
+}

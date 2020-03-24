@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "com.kqp.terminus.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "WorldSaveHandlerMixin",
+    "LivingEntityMixin",
+    "RaidMixin",
+    "MinecraftServerMixin",
+    "ServerWorldMixin",
+    "WorldChunkMixin"
+  ],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

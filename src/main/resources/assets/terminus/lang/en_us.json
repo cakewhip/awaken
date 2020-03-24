@@ -1,0 +1,10 @@
+{
+    "block.terminus.moonstone_ore": "Moonstone Ore",
+    "item.terminus.moonstone_ore": "Moonstone Ore",
+    "item.terminus.moonstone_fragment": "Moonstone Fragment",
+    "item.terminus.moonstone_ingot": "Moonstone Ingot",
+    "block.terminus.sunstone_ore": "Sunstone Ore",
+    "item.terminus.sunstone_ore": "Sunstone Ore",
+    "item.terminus.sunstone_fragment": "Sunstone Fragment",
+    "item.terminus.moonstone_ingot": "Sunstone Ingot"
+}
