@@ -11,5 +11,9 @@
     "item.terminus.sunstone_fragment": "Sunstone Fragment",
     "block.terminus.celestial_altar": "Celestial Altar",
     "item.terminus.celestial_altar": "Celestial Altar",
-    "container.terminus.celestial_altar": "Celestial Altar"
+    "container.terminus.celestial_altar": "Celestial Altar",
+    "item.terminus.celestial_sword": "Celestial Sword",
+    "item.terminus.celestial_shovel": "Celestial Shovel",
+    "item.terminus.celestial_pickaxe": "Celestial Pickaxe",
+    "item.terminus.celestial_axe": "Celestial Axe"
 }
