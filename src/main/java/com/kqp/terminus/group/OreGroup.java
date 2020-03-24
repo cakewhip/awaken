@@ -1,11 +1,15 @@
-package com.kqp.terminus.oregroup;
+package com.kqp.terminus.group;
 
 import com.kqp.terminus.Terminus;
+import com.kqp.terminus.item.TerminusToolMaterial;
+import com.kqp.terminus.item.tool.TerminusAxeItem;
+import com.kqp.terminus.item.tool.TerminusPickaxeItem;
+import com.kqp.terminus.item.tool.TerminusShovelItem;
+import com.kqp.terminus.item.tool.TerminusSwordItem;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.item.*;
 
 public class OreGroup {
     public final BlockStats bs;

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terminus:sunstone_block"
+    }
+  ],
+  "result": {
+    "item": "terminus:sunstone_fragment",
+    "count": 9
+  }
+}

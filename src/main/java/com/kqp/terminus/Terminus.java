@@ -3,8 +3,9 @@ package com.kqp.terminus;
 import com.kqp.terminus.block.CelestialAltarBlock;
 import com.kqp.terminus.data.TerminusDataBlockEntity;
 import com.kqp.terminus.data.TerminusWorldProperties;
-import com.kqp.terminus.oregroup.BlockStats;
-import com.kqp.terminus.oregroup.OreGroup;
+import com.kqp.terminus.group.BlockStats;
+import com.kqp.terminus.group.MaterialGroup;
+import com.kqp.terminus.group.OreGroup;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
@@ -38,7 +39,7 @@ public class Terminus implements ModInitializer {
     public void onInitialize() {
         info("Initializing Terminus");
 
-        OreGroups.init();
+        Groups.init();
 
         TBlocks.init();
 
@@ -63,9 +64,9 @@ public class Terminus implements ModInitializer {
         });
     }
 
-    public static class OreGroups {
-
+    public static class Groups {
         public static OreGroup SUNSTONE, MOONSTONE;
+        public static MaterialGroup CELESTIAL;
 
         public static void init() {
             info("Initializing ore groups");
@@ -76,6 +77,7 @@ public class Terminus implements ModInitializer {
             MOONSTONE = new OreGroup(
                     "moonstone",
                     new BlockStats(25.0F, 6.0F, 6), "fragment");
+            CELESTIAL = new MaterialGroup("celestial");
         }
     }
 

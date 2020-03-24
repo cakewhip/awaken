@@ -1,6 +1,12 @@
 {
-    "parent": "block/cube_all",
+    "parent": "block/cube",
     "textures": {
-        "all": "terminus:block/celestial_altar"
+        "particle": "terminus:block/celestial_altar_top",
+        "down": "terminus:block/celestial_altar_top",
+        "up": "terminus:block/celestial_altar_top",
+        "north": "terminus:block/celestial_altar_side",
+        "east": "terminus:block/celestial_altar_side",
+        "south": "terminus:block/celestial_altar_side",
+        "west": "terminus:block/celestial_altar_side"
     }
 }

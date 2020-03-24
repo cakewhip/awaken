@@ -1,4 +1,4 @@
-package com.kqp.terminus.oregroup;
+package com.kqp.terminus.group;
 
 public class BlockStats {
     public float hardness, resistance;

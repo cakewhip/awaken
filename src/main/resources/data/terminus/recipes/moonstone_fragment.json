@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terminus:moonstone_block"
+    }
+  ],
+  "result": {
+    "item": "terminus:moonstone_fragment",
+    "count": 9
+  }
+}
