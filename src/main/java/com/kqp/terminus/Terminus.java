@@ -7,7 +7,8 @@ import com.kqp.terminus.data.TerminusWorldProperties;
 import com.kqp.terminus.group.BlockStats;
 import com.kqp.terminus.group.MaterialGroup;
 import com.kqp.terminus.group.OreGroup;
-import com.kqp.terminus.inventory.CelestialAltarResultInventory;
+import com.kqp.terminus.item.TerminusArmorMaterial;
+import com.kqp.terminus.item.TerminusToolMaterial;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
@@ -82,7 +83,7 @@ public class Terminus implements ModInitializer {
             MOONSTONE = new OreGroup(
                     "moonstone",
                     new BlockStats(25.0F, 6.0F, 6), "fragment");
-            CELESTIAL = new MaterialGroup("celestial");
+            CELESTIAL = new MaterialGroup("celestial_steel", TerminusToolMaterial.CELESTIAL, TerminusArmorMaterial.CELESTIAL);
         }
     }
 
@@ -106,8 +107,12 @@ public class Terminus implements ModInitializer {
     }
 
     public static class TItems {
+        public static final Item CELESTIAL_STEEL_INGOT = new Item(new Item.Settings().group(ItemGroup.MATERIALS));
+
         public static void init() {
             info("Initializing items");
+
+            register(CELESTIAL_STEEL_INGOT, "celestial_steel_ingot");
         }
 
         public static void register(Item item, String name) {

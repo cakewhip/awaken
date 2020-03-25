@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "terminus:item/celestial_axe"
+    "layer0": "terminus:item/celestial_steel_sword"
   }
 }

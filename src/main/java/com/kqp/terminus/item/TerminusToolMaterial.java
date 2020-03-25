@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 
 public enum TerminusToolMaterial implements ToolMaterial {
     CELESTIAL(4, 1000, 10.0F, 4.0F, 18, () -> {
-        return Ingredient.ofItems(new ItemConvertible[] { Terminus.Groups.SUNSTONE.INGOT, Terminus.Groups.MOONSTONE.INGOT });
+        return Ingredient.ofItems(new ItemConvertible[] { Terminus.TItems.CELESTIAL_STEEL_INGOT });
     });
 
     private final int miningLevel;

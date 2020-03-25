@@ -12,8 +12,13 @@
     "block.terminus.celestial_altar": "Celestial Altar",
     "item.terminus.celestial_altar": "Celestial Altar",
     "container.terminus.celestial_altar": "Celestial Altar",
-    "item.terminus.celestial_sword": "Celestial Sword",
-    "item.terminus.celestial_shovel": "Celestial Shovel",
-    "item.terminus.celestial_pickaxe": "Celestial Pickaxe",
-    "item.terminus.celestial_axe": "Celestial Axe"
+    "item.terminus.celestial_steel_sword": "Celestial Steel Sword",
+    "item.terminus.celestial_steel_shovel": "Celestial Steel Shovel",
+    "item.terminus.celestial_steel_pickaxe": "Celestial Steel Pickaxe",
+    "item.terminus.celestial_steel_axe": "Celestial Steel Axe",
+    "item.terminus.celestial_steel_helmet": "Celestial Steel Helmet",
+    "item.terminus.celestial_steel_chestplate": "Celestial Steel Chestplate",
+    "item.terminus.celestial_steel_leggings": "Celestial Steel Leggings",
+    "item.terminus.celestial_steel_boots": "Celestial Steel Boots",
+    "item.terminus.celestial_steel_ingot": "Celestial Steel Ingot"
 }
