@@ -9,10 +9,12 @@ import java.util.Objects;
 public class ComparableItemStack {
     public final Item item;
     public final CompoundTag tag;
+    public final int hashCode;
 
     public ComparableItemStack(ItemStack itemStack) {
         this.item = itemStack.getItem();
         this.tag = itemStack.getTag();
+        this.hashCode = Objects.hash(item, tag);
     }
 
     @Override
@@ -26,6 +28,6 @@ public class ComparableItemStack {
 
     @Override
     public int hashCode() {
-        return Objects.hash(item, tag);
+        return hashCode;
     }
 }
