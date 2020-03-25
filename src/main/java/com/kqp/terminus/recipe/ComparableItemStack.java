@@ -30,4 +30,9 @@ public class ComparableItemStack {
     public int hashCode() {
         return hashCode;
     }
+
+    @Override
+    public String toString() {
+        return item.getName().asFormattedString();
+    }
 }

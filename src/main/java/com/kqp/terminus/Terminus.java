@@ -9,6 +9,7 @@ import com.kqp.terminus.group.MaterialGroup;
 import com.kqp.terminus.group.OreGroup;
 import com.kqp.terminus.item.TerminusArmorMaterial;
 import com.kqp.terminus.item.TerminusToolMaterial;
+import com.kqp.terminus.recipe.TerminusRecipes;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
@@ -54,6 +55,8 @@ public class Terminus implements ModInitializer {
         TNetworking.init();
 
         initCallbacks();
+
+        TerminusRecipes.init();
     }
 
     private void initCallbacks() {

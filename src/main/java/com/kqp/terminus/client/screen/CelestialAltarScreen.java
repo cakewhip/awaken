@@ -4,14 +4,13 @@ import com.kqp.terminus.Terminus;
 import com.kqp.terminus.client.container.CelestialAltarContainer;
 import com.kqp.terminus.client.container.CelestialAltarResultSlot;
 import com.kqp.terminus.recipe.ComparableItemStack;
+import com.kqp.terminus.recipe.Reagent;
 import com.kqp.terminus.recipe.TerminusRecipe;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -50,10 +49,8 @@ public class CelestialAltarScreen extends ContainerScreen<CelestialAltarContaine
 
                 text.add("---");
                 text.add("To Craft: ");
-                for (ComparableItemStack cis : recipe.recipe.keySet()) {
-                    System.out.println(cis.item.getName());
-                    Text itemText = new LiteralText("").append(cis.item.getName());
-                    text.add(recipe.recipe.get(cis) + " " + itemText.asFormattedString());
+                for (Reagent reagent : recipe.reagents.keySet()) {
+                    text.add(recipe.reagents.get(reagent) + " x " + reagent.toString());
                 }
             }
         }

@@ -47,31 +47,12 @@ public class CelestialAltarResultSlot extends Slot {
     @Override
     protected void onCrafted(ItemStack stack) {
         if (!stack.isEmpty()) {
-            HashMap<ComparableItemStack, Integer> compMap = TerminusRecipe.toComparableMap(craftingInv.main);
+            HashMap<ComparableItemStack, Integer> compMap = TerminusRecipes.toComparableMap(craftingInv.main);
             List<TerminusRecipe> matches = TerminusRecipes.getMatchesForOutput(stack);
 
             for (TerminusRecipe recipe : matches) {
                 if (recipe.matches(compMap)) {
-                    for (ComparableItemStack key : recipe.recipe.keySet()) {
-                        ItemStack reagent = new ItemStack(key.item);
-                        reagent.setTag(key.tag);
-                        int count = recipe.recipe.get(key);
-
-                        for (int i = 0; i < craftingInv.main.size(); i++) {
-                            ItemStack itemStack = craftingInv.main.get(i);
-
-                            if (ItemStack.areItemsEqual(reagent, itemStack)) {
-                                if (itemStack.getCount() > count) {
-                                    itemStack.decrement(count);
-                                    break;
-                                } else {
-                                    count -= itemStack.getCount();
-                                    craftingInv.main.set(i, ItemStack.EMPTY);
-                                }
-                            }
-                        }
-                    }
-
+                    recipe.onCraft(craftingInv);
                     break;
                 }
             }

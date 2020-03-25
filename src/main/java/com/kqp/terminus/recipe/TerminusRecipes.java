@@ -2,17 +2,15 @@ package com.kqp.terminus.recipe;
 
 import com.kqp.terminus.Terminus;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 public class TerminusRecipes {
     public static final ArrayList<TerminusRecipe> RECIPES = new ArrayList();
 
-    static {
+    public static void init() {
         RECIPES.add(new TerminusRecipe(
                 new ItemStack(Terminus.Groups.CELESTIAL.SWORD, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 96)
@@ -49,7 +47,7 @@ public class TerminusRecipes {
 
     public static List<TerminusRecipe> getMatches(List<ItemStack> itemStacks) {
         ArrayList<TerminusRecipe> output = new ArrayList();
-        HashMap<ComparableItemStack, Integer> input = TerminusRecipe.toComparableMap(itemStacks);
+        HashMap<ComparableItemStack, Integer> input = TerminusRecipes.toComparableMap(itemStacks);
 
         for (TerminusRecipe recipe : RECIPES) {
             if (recipe.matches(input)) {
@@ -70,5 +68,21 @@ public class TerminusRecipes {
         }
 
         return output;
+    }
+
+    public static HashMap<ComparableItemStack, Integer> toComparableMap(List<ItemStack> input) {
+        HashMap<ComparableItemStack, Integer> ret = new HashMap();
+
+        input.forEach(itemStack -> {
+            ComparableItemStack key = new ComparableItemStack(itemStack);
+
+            if (ret.containsKey(key)) {
+                ret.replace(key, ret.get(key) + itemStack.getCount());
+            } else {
+                ret.put(key, itemStack.getCount());
+            }
+        });
+
+        return ret;
     }
 }
