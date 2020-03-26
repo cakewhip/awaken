@@ -76,9 +76,6 @@ public class CelestialAltarScreen extends ContainerScreen<CelestialAltarContaine
         this.blit(i, j + 6 * 18 + 17, 0, 126, this.containerWidth, 96);
 
         this.blit(i + 156, j + 18 + (int)((float)(55 - 18) * this.scrollPosition), 232 + (this.hasScrollbar() ? 0 : 12), 0, 12, 15);
-
-        if (hasShiftDown())
-            this.blit(i + 156, j - 18, 232 + (this.hasScrollbar() ? 0 : 12), 0, 12, 15);
     }
 
     @Override public boolean mouseScrolled(double d, double e, double amount) {
