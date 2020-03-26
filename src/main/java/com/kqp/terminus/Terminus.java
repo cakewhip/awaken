@@ -1,7 +1,7 @@
 package com.kqp.terminus;
 
 import com.kqp.terminus.block.CelestialAltarBlock;
-import com.kqp.terminus.client.container.CelestialAltarContainer;
+import com.kqp.terminus.client.container.TerminusCraftingContainer;
 import com.kqp.terminus.data.TerminusDataBlockEntity;
 import com.kqp.terminus.data.TerminusWorldProperties;
 import com.kqp.terminus.group.BlockStats;
@@ -13,28 +13,29 @@ import com.kqp.terminus.recipe.TerminusRecipeManager;
 import com.kqp.terminus.util.TimeUtil;
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.fabricmc.fabric.api.event.world.WorldTickCallback;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Util;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Random;
+
 public class Terminus implements ModInitializer {
     public static Logger LOGGER = LogManager.getLogger();
+
+    public static final Random RANDOM = new Random();
 
     public static final String MOD_ID = "terminus";
     public static final String MOD_NAME = "Terminus";
@@ -122,18 +123,8 @@ public class Terminus implements ModInitializer {
     }
 
     public static class TContainers {
-        public static final Identifier CELESTIAL_ALTAR_ID = new Identifier(Terminus.MOD_ID, "celestial_altar");
-        public static final String CELESTIAL_ALTAR_TRANSLATION_KEY = Util.createTranslationKey("container", CELESTIAL_ALTAR_ID);
-
         public static void init() {
             info("Initializing containers");
-
-            ContainerProviderRegistry.INSTANCE.registerFactory(CELESTIAL_ALTAR_ID, (syncId, identifier, player, buf) -> {
-                final World world = player.world;
-                final BlockPos pos = buf.readBlockPos();
-
-                return world.getBlockState(pos).createContainerFactory(world, pos).createMenu(syncId, player.inventory, player);
-            });
         }
     }
 
@@ -141,6 +132,7 @@ public class Terminus implements ModInitializer {
         public static final Identifier SYNC_SCROLLBAR_ID = new Identifier(Terminus.MOD_ID, "sync_scrollbar");
         public static final Identifier SYNC_RESULTS_ID = new Identifier(Terminus.MOD_ID, "sync_results");
         public static final Identifier SYNC_RESULT_SLOT_ID = new Identifier(Terminus.MOD_ID, "sync_result_slot");
+        public static final Identifier OPEN_CRAFTING_ID = new Identifier(Terminus.MOD_ID, "open_crafting");
 
         public static void init() {
             info("Initializing networking");
@@ -149,11 +141,20 @@ public class Terminus implements ModInitializer {
                 float scrollPosition = data.readFloat();
 
                 packetContext.getTaskQueue().execute(() -> {
-                    if (packetContext.getPlayer().container instanceof CelestialAltarContainer) {
-                        ((CelestialAltarContainer) packetContext.getPlayer().container).scrollItems(scrollPosition);
+                    if (packetContext.getPlayer().container instanceof TerminusCraftingContainer) {
+                        ((TerminusCraftingContainer) packetContext.getPlayer().container).scrollItems(scrollPosition);
                     }
                 });
             });
+
+            ServerSidePacketRegistry.INSTANCE.register(OPEN_CRAFTING_ID, ((packetContext, packetByteBuf) -> {
+                int syncId = packetByteBuf.readInt();
+
+                packetContext.getTaskQueue().execute(() -> {
+                    PlayerEntity player = packetContext.getPlayer();
+                    player.container = new TerminusCraftingContainer(syncId, player.inventory);
+                });
+            }));
         }
     }
 

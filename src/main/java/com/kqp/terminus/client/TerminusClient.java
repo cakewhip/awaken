@@ -1,32 +1,36 @@
 package com.kqp.terminus.client;
 
 import com.kqp.terminus.Terminus;
-import com.kqp.terminus.client.container.CelestialAltarContainer;
-import com.kqp.terminus.client.container.CelestialAltarResultSlot;
-import com.kqp.terminus.client.screen.CelestialAltarScreen;
+import com.kqp.terminus.client.container.TerminusCraftingContainer;
+import com.kqp.terminus.client.container.TerminusResultSlot;
+import com.kqp.terminus.client.screen.TerminusCraftingScreen;
+import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry;
+import net.fabricmc.fabric.api.client.keybinding.FabricKeyBinding;
+import net.fabricmc.fabric.api.client.keybinding.KeyBindingRegistry;
+import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.container.Container;
+import net.minecraft.client.util.InputUtil;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.PacketByteBuf;
+import org.lwjgl.glfw.GLFW;
+
+import java.util.Random;
 
 public class TerminusClient implements ClientModInitializer {
+    private static final Random RANDOM = new Random();
+    private static final String TERMINUS_KEY_BIND_CATEGORY = "Terminus";
+    private static FabricKeyBinding openCraftingKeyBind;
+
     @Override
     public void onInitializeClient() {
-        ScreenProviderRegistry.INSTANCE.<CelestialAltarContainer>registerFactory(
-                Terminus.TContainers.CELESTIAL_ALTAR_ID,
-                (container) -> new CelestialAltarScreen(
-                        container,
-                        MinecraftClient.getInstance().player.inventory,
-                        new TranslatableText(Terminus.TContainers.CELESTIAL_ALTAR_TRANSLATION_KEY)
-                )
-        );
-
         ClientSidePacketRegistry.INSTANCE.register(Terminus.TNetworking.SYNC_RESULTS_ID, (packetContext, data) -> packetContext.getTaskQueue().execute(() -> {
-            if (MinecraftClient.getInstance().currentScreen instanceof CelestialAltarScreen) {
-                ((CelestialAltarScreen) MinecraftClient.getInstance().currentScreen).syncScrollbar();
+            if (MinecraftClient.getInstance().currentScreen instanceof TerminusCraftingScreen) {
+                ((TerminusCraftingScreen) MinecraftClient.getInstance().currentScreen).syncScrollbar();
             }
         }));
 
@@ -36,11 +40,40 @@ public class TerminusClient implements ClientModInitializer {
             int currentIndex = data.readInt();
 
             packetContext.getTaskQueue().execute(() -> {
-                if (MinecraftClient.getInstance().currentScreen instanceof CelestialAltarScreen) {
-                    ((CelestialAltarScreen) MinecraftClient.getInstance().currentScreen).getContainer().setStackInSlot(slotIndex, stack);
-                    ((CelestialAltarResultSlot) ((CelestialAltarScreen) MinecraftClient.getInstance().currentScreen).getContainer().getSlot(slotIndex)).currentIndex = currentIndex;
+                if (MinecraftClient.getInstance().currentScreen instanceof TerminusCraftingScreen) {
+                    ((TerminusCraftingScreen) MinecraftClient.getInstance().currentScreen).getContainer().setStackInSlot(slotIndex, stack);
+                    ((TerminusResultSlot) ((TerminusCraftingScreen) MinecraftClient.getInstance().currentScreen).getContainer().getSlot(slotIndex)).currentIndex = currentIndex;
                 }
             });
+        });
+
+        KeyBindingRegistry.INSTANCE.addCategory(TERMINUS_KEY_BIND_CATEGORY);
+
+        openCraftingKeyBind = FabricKeyBinding.Builder.create(
+                new Identifier(Terminus.MOD_ID, "open_crafting"),
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_C,
+                TERMINUS_KEY_BIND_CATEGORY
+        ).build();
+
+        KeyBindingRegistry.INSTANCE.register(openCraftingKeyBind);
+
+        ClientTickCallback.EVENT.register(e -> {
+            if (openCraftingKeyBind.isPressed()) {
+                PlayerEntity player = MinecraftClient.getInstance().player;
+                int syncId = RANDOM.nextInt();
+                TerminusCraftingContainer container = new TerminusCraftingContainer(syncId, player.inventory);
+                player.container = container;
+
+                MinecraftClient.getInstance().openScreen(new TerminusCraftingScreen(
+                        container,
+                        player.inventory));
+
+                PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+                buf.writeInt(syncId);
+
+                ClientSidePacketRegistry.INSTANCE.sendToServer(Terminus.TNetworking.OPEN_CRAFTING_ID, buf);
+            }
         });
     }
 }

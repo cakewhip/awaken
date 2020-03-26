@@ -1,41 +1,40 @@
 package com.kqp.terminus.client.container;
 
 import com.kqp.terminus.Terminus;
+import com.kqp.terminus.block.CraftingInterface;
 import com.kqp.terminus.inventory.CelestialAltarResultInventory;
+import com.kqp.terminus.recipe.RecipeType;
 import com.kqp.terminus.recipe.TerminusRecipe;
 import com.kqp.terminus.recipe.TerminusRecipeManager;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
-import net.minecraft.container.BlockContext;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.container.Container;
 import net.minecraft.container.Slot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.PacketByteBuf;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class CelestialAltarContainer extends Container {
-    public static final String[] CRAFTING_TYPES = { "vanilla_crafting", "reinforced_anvil" };
-
+public class TerminusCraftingContainer extends Container {
     public final PlayerInventory playerInventory;
-    public final BlockContext context;
+    public String[] craftingTypes;
 
     public final CelestialAltarResultInventory resultInv;
 
     public List<TerminusRecipe> recipes;
     public List<ItemStack> outputs;
 
-    public CelestialAltarContainer(int syncId, PlayerInventory playerInventory, BlockContext context) {
+    public TerminusCraftingContainer(int syncId, PlayerInventory playerInventory) {
         super(null, syncId);
 
-        this.context = context;
         this.playerInventory = playerInventory;
+
+        gatherRecipeTypes(playerInventory.player);
 
         resultInv = new CelestialAltarResultInventory();
         this.outputs = new ArrayList();
@@ -45,7 +44,7 @@ public class CelestialAltarContainer extends Container {
         int counter = 0;
         for (i = 0; i < 3; i++) {
             for (j = 0; j < 8; j++) {
-                this.addSlot(new CelestialAltarResultSlot(playerInventory.player, resultInv, counter++, 8 + j * 18, 18 + i * 18) {
+                this.addSlot(new TerminusResultSlot(playerInventory.player, craftingTypes, resultInv, counter++, 8 + j * 18, 18 + i * 18) {
                     @Override
                     public void markDirty() {
                         super.markDirty();
@@ -81,26 +80,40 @@ public class CelestialAltarContainer extends Container {
         updateResult();
     }
 
+    private void gatherRecipeTypes(PlayerEntity player) {
+        HashSet<String> types = new HashSet<>();
+
+        for (int x = -3; x < 4; x++) {
+            for (int z = -3; z < 4; z++) {
+                for (int y = -1; y < 3; y++) {
+                    Block block = player.world.getBlockState(player.getBlockPos().add(x, y, z)).getBlock();
+                    System.out.println("Found a " + block);
+
+                    if (block instanceof CraftingInterface) {
+                        types.addAll(Arrays.asList(((CraftingInterface) block).getRecipeTypes()));
+                    } else if (block == Blocks.CRAFTING_TABLE) {
+                        types.add(RecipeType.VANILLA);
+                    } else if (block == Blocks.FURNACE) {
+                        types.add(RecipeType.FURNACE);
+                    } else if (block == Blocks.ANVIL) {
+                        types.add(RecipeType.ANVIL);
+                    }
+                }
+            }
+        }
+
+        craftingTypes = types.toArray(new String[0]);
+        System.out.println(Arrays.asList(craftingTypes));
+    }
+
     public void updateResult() {
-        recipes = TerminusRecipeManager.getMatches(CRAFTING_TYPES, playerInventory.main);
+        recipes = TerminusRecipeManager.getMatches(craftingTypes, playerInventory.main);
         outputs = recipes.stream().map(recipe -> recipe.result.copy()).collect(Collectors.toList());
 
         if (!playerInventory.player.world.isClient) {
             PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
             ServerSidePacketRegistry.INSTANCE.sendToPlayer(playerInventory.player, Terminus.TNetworking.SYNC_RESULTS_ID, buf);
         }
-    }
-
-    @Override
-    public void onContentChanged(Inventory inventory) {
-        this.context.run((world, blockPos) -> {
-            updateResult();
-        });
-    }
-
-    @Override
-    public boolean canUse(PlayerEntity player) {
-        return canUse(this.context, player, Terminus.TBlocks.CELESTIAL_ALTAR_BLOCK);
     }
 
     @Override
@@ -163,7 +176,7 @@ public class CelestialAltarContainer extends Container {
                 }
 
                 resultInv.setInvStack(l + k * 8, itemStack);
-                ((CelestialAltarResultSlot) this.getSlot(l + k * 8)).currentIndex = m;
+                ((TerminusResultSlot) this.getSlot(l + k * 8)).currentIndex = m;
 
                 PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
                 buf.writeInt(l + k * 8);
@@ -179,6 +192,11 @@ public class CelestialAltarContainer extends Container {
     @Override
     public boolean canInsertIntoSlot(ItemStack stack, Slot slot) {
         return slot.inventory != this.resultInv && super.canInsertIntoSlot(stack, slot);
+    }
+
+    @Override
+    public boolean canUse(PlayerEntity player) {
+        return true;
     }
 
     public boolean shouldShowScrollbar() {

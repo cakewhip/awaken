@@ -3,37 +3,34 @@ package com.kqp.terminus.recipe;
 import com.kqp.terminus.Terminus;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class TerminusRecipeManager {
     private static final HashMap<String, ArrayList<TerminusRecipe>> RECIPE_MAP = new HashMap();
 
     public static void init() {
-        addRecipe("reinforced_anvil", new ItemStack(Terminus.Groups.CELESTIAL.SWORD, 1),
+        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.SWORD, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 96)
         );
-        addRecipe("reinforced_anvil", new ItemStack(Terminus.Groups.CELESTIAL.SHOVEL, 1),
+        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.SHOVEL, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 72)
         );
-        addRecipe("reinforced_anvil", new ItemStack(Terminus.Groups.CELESTIAL.PICKAXE, 1),
+        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.PICKAXE, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 96)
         );
-        addRecipe("reinforced_anvil", new ItemStack(Terminus.Groups.CELESTIAL.AXE, 1),
+        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.AXE, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 72)
         );
-        addRecipe("reinforced_anvil", new ItemStack(Terminus.Groups.CELESTIAL.HELMET, 1),
+        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.HELMET, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 60)
         );
-        addRecipe("reinforced_anvil", new ItemStack(Terminus.Groups.CELESTIAL.CHESTPLATE, 1),
+        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.CHESTPLATE, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 96)
         );
-        addRecipe("reinforced_anvil", new ItemStack(Terminus.Groups.CELESTIAL.LEGGINGS, 1),
+        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.LEGGINGS, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 72)
         );
-        addRecipe("reinforced_anvil", new ItemStack(Terminus.Groups.CELESTIAL.BOOTS, 1),
+        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.BOOTS, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 60)
         );
     }
@@ -47,11 +44,15 @@ public class TerminusRecipeManager {
     }
 
     private static void add(String type, TerminusRecipe recipe) {
+        getRecipesForType(type).add(recipe);
+    }
+
+    private static List<TerminusRecipe> getRecipesForType(String type) {
         if (!RECIPE_MAP.containsKey(type)) {
             RECIPE_MAP.put(type, new ArrayList());
         }
 
-        RECIPE_MAP.get(type).add(recipe);
+        return RECIPE_MAP.get(type);
     }
 
     public static List<TerminusRecipe> getMatches(String[] types, List<ItemStack> itemStacks) {
@@ -59,7 +60,7 @@ public class TerminusRecipeManager {
         HashMap<ComparableItemStack, Integer> input = TerminusRecipeManager.toComparableMap(itemStacks);
 
         for (String type : types) {
-            List<TerminusRecipe> recipes = RECIPE_MAP.get(type);
+            List<TerminusRecipe> recipes = getRecipesForType(type);
 
             for (TerminusRecipe recipe : recipes) {
                 if (recipe.matches(input)) {
@@ -78,7 +79,7 @@ public class TerminusRecipeManager {
         ArrayList<TerminusRecipe> output = new ArrayList();
 
         for (String type : types) {
-            List<TerminusRecipe> recipes = RECIPE_MAP.get(type);
+            List<TerminusRecipe> recipes = getRecipesForType(type);
 
             for (TerminusRecipe recipe : recipes) {
                 if (ItemStack.areItemsEqual(recipe.result, itemStack)) {

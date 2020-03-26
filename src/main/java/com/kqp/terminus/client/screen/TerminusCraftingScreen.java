@@ -1,32 +1,33 @@
 package com.kqp.terminus.client.screen;
 
 import com.kqp.terminus.Terminus;
-import com.kqp.terminus.client.container.CelestialAltarContainer;
-import com.kqp.terminus.client.container.CelestialAltarResultSlot;
-import com.kqp.terminus.recipe.ComparableItemStack;
+import com.kqp.terminus.client.container.TerminusCraftingContainer;
+import com.kqp.terminus.client.container.TerminusResultSlot;
 import com.kqp.terminus.recipe.Reagent;
 import com.kqp.terminus.recipe.TerminusRecipe;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.container.SlotActionType;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
 
 import java.util.List;
 
-public class CelestialAltarScreen extends ContainerScreen<CelestialAltarContainer> {
+public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingContainer> {
+    public static final String TRANSLATION_KEY = Util.createTranslationKey("container", new Identifier(Terminus.MOD_ID, "terminus_crafting"));
     private static final Identifier TEXTURE = new Identifier(Terminus.MOD_ID, "textures/gui/container/celestial_altar.png");
 
     public float scrollPosition = 0.0F;
 
-    public CelestialAltarScreen(CelestialAltarContainer container, PlayerInventory playerInventory, Text title) {
-        super(container, playerInventory, title);
+    public TerminusCraftingScreen(TerminusCraftingContainer container, PlayerInventory playerInventory) {
+        super(container, playerInventory, new TranslatableText(TRANSLATION_KEY));
         this.containerHeight = 166;
         this.passEvents = false;
 
@@ -42,8 +43,8 @@ public class CelestialAltarScreen extends ContainerScreen<CelestialAltarContaine
 
     @Override
     public void renderTooltip(List<String> text, int x, int y) {
-        if (this.focusedSlot instanceof CelestialAltarResultSlot && container.recipes != null) {
-            int currentIndex = ((CelestialAltarResultSlot) this.focusedSlot).currentIndex;
+        if (this.focusedSlot instanceof TerminusResultSlot && container.recipes != null) {
+            int currentIndex = ((TerminusResultSlot) this.focusedSlot).currentIndex;
 
             if(container.recipes.size() > currentIndex) {
                 TerminusRecipe recipe = container.recipes.get(currentIndex);
@@ -82,7 +83,7 @@ public class CelestialAltarScreen extends ContainerScreen<CelestialAltarContaine
         if (!this.hasScrollbar()) {
             return false;
         } else {
-            int i = (((CelestialAltarContainer)this.container).outputs.size() + 8 - 1) / 8 - 3;
+            int i = (((TerminusCraftingContainer)this.container).outputs.size() + 8 - 1) / 8 - 3;
             this.scrollPosition = (float)((double)this.scrollPosition - amount / (double)i);
             this.scrollPosition = MathHelper.clamp(this.scrollPosition, 0.0F, 1.0F);
             syncScrollbar();
@@ -91,7 +92,7 @@ public class CelestialAltarScreen extends ContainerScreen<CelestialAltarContaine
     }
 
     private boolean hasScrollbar() {
-        return ((CelestialAltarContainer)this.container).shouldShowScrollbar();
+        return ((TerminusCraftingContainer)this.container).shouldShowScrollbar();
     }
 
     public void syncScrollbar() {

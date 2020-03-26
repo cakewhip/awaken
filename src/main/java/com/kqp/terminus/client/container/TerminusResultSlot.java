@@ -12,16 +12,18 @@ import net.minecraft.item.ItemStack;
 import java.util.HashMap;
 import java.util.List;
 
-public class CelestialAltarResultSlot extends Slot {
+public class TerminusResultSlot extends Slot {
+    private final String[] craftingTypes;
     private final PlayerEntity player;
 
     public PlayerInventory craftingInv;
 
     public int currentIndex = 0;
 
-    public CelestialAltarResultSlot(PlayerEntity player, Inventory inventory, int invSlot, int xPosition, int yPosition) {
+    public TerminusResultSlot(PlayerEntity player, String[] craftingTypes, Inventory inventory, int invSlot, int xPosition, int yPosition) {
         super(inventory, invSlot, xPosition, yPosition);
         this.player = player;
+        this.craftingTypes = craftingTypes;
         this.craftingInv = player.inventory;
     }
 
@@ -48,7 +50,7 @@ public class CelestialAltarResultSlot extends Slot {
     protected void onCrafted(ItemStack stack) {
         if (!stack.isEmpty()) {
             HashMap<ComparableItemStack, Integer> compMap = TerminusRecipeManager.toComparableMap(craftingInv.main);
-            List<TerminusRecipe> matches = TerminusRecipeManager.getMatchesForOutput(CelestialAltarContainer.CRAFTING_TYPES, stack);
+            List<TerminusRecipe> matches = TerminusRecipeManager.getMatchesForOutput(craftingTypes, stack);
 
             for (TerminusRecipe recipe : matches) {
                 if (recipe.matches(compMap)) {

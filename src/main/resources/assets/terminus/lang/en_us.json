@@ -11,7 +11,6 @@
     "item.terminus.sunstone_fragment": "Sunstone Fragment",
     "block.terminus.celestial_altar": "Celestial Altar",
     "item.terminus.celestial_altar": "Celestial Altar",
-    "container.terminus.celestial_altar": "Celestial Altar",
     "item.terminus.celestial_steel_sword": "Celestial Steel Sword",
     "item.terminus.celestial_steel_shovel": "Celestial Steel Shovel",
     "item.terminus.celestial_steel_pickaxe": "Celestial Steel Pickaxe",
@@ -20,5 +19,6 @@
     "item.terminus.celestial_steel_chestplate": "Celestial Steel Chestplate",
     "item.terminus.celestial_steel_leggings": "Celestial Steel Leggings",
     "item.terminus.celestial_steel_boots": "Celestial Steel Boots",
-    "item.terminus.celestial_steel_ingot": "Celestial Steel Ingot"
+    "item.terminus.celestial_steel_ingot": "Celestial Steel Ingot",
+    "container.terminus.terminus_crafting": "Crafting"
 }
