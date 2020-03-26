@@ -10,6 +10,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
+import net.minecraft.container.SlotActionType;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -27,7 +28,7 @@ public class CelestialAltarScreen extends ContainerScreen<CelestialAltarContaine
     public CelestialAltarScreen(CelestialAltarContainer container, PlayerInventory playerInventory, Text title) {
         super(container, playerInventory, title);
         this.containerHeight = 166;
-        this.passEvents = true;
+        this.passEvents = false;
 
         syncScrollbar();
     }
@@ -75,6 +76,9 @@ public class CelestialAltarScreen extends ContainerScreen<CelestialAltarContaine
         this.blit(i, j + 6 * 18 + 17, 0, 126, this.containerWidth, 96);
 
         this.blit(i + 156, j + 18 + (int)((float)(55 - 18) * this.scrollPosition), 232 + (this.hasScrollbar() ? 0 : 12), 0, 12, 15);
+
+        if (hasShiftDown())
+            this.blit(i + 156, j - 18, 232 + (this.hasScrollbar() ? 0 : 12), 0, 12, 15);
     }
 
     @Override public boolean mouseScrolled(double d, double e, double amount) {
