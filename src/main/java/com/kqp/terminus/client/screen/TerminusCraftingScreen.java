@@ -8,8 +8,11 @@ import com.kqp.terminus.recipe.TerminusRecipe;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -22,12 +25,13 @@ import java.util.List;
 
 public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingContainer> {
     public static final String TRANSLATION_KEY = Util.createTranslationKey("container", new Identifier(Terminus.MOD_ID, "terminus_crafting"));
-    private static final Identifier TEXTURE = new Identifier(Terminus.MOD_ID, "textures/gui/container/celestial_altar.png");
+    private static final Identifier TEXTURE = new Identifier(Terminus.MOD_ID, "textures/gui/container/crafting.png");
 
     public float scrollPosition = 0.0F;
 
     public TerminusCraftingScreen(TerminusCraftingContainer container, PlayerInventory playerInventory) {
         super(container, playerInventory, new TranslatableText(TRANSLATION_KEY));
+        this.containerWidth = 176;
         this.containerHeight = 166;
         this.passEvents = false;
 
@@ -39,6 +43,17 @@ public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingCont
         this.renderBackground();
         super.render(mouseX, mouseY, delta);
         this.drawMouseoverTooltip(mouseX, mouseY);
+
+        double aX = mouseX - this.x;
+        double aY = mouseY - this.y;
+
+        if (aY > -24 && aY < 0) {
+            if (aX > 0 && aX < 28) {
+                this.renderTooltip("Player", mouseX, mouseY);
+            } else if (aX > 29 && aX < 57) {
+                this.renderTooltip("Crafting", mouseX, mouseY);
+            }
+        }
     }
 
     @Override
@@ -63,20 +78,34 @@ public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingCont
 
     @Override
     protected void drawForeground(int mouseX, int mouseY) {
-        this.font.draw(this.title.asFormattedString(), 8.0F, 6.0F, 4210752);
-        this.font.draw(this.playerInventory.getDisplayName().asFormattedString(), 8.0F, (float)(this.containerHeight - 96 + 2), 4210752);
+        this.font.draw(this.title.asFormattedString(), 8.0F, 8.0F, 4210752);
+        this.font.draw(this.playerInventory.getDisplayName().asFormattedString(), 8.0F, (float)(this.containerHeight - 96 + 4), 4210752);
     }
 
     @Override
     protected void drawBackground(float delta, int mouseX, int mouseY) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.minecraft.getTextureManager().bindTexture(TEXTURE);
         int i = (this.width - this.containerWidth) / 2;
         int j = (this.height - this.containerHeight) / 2;
-        this.blit(i, j, 0, 0, this.containerWidth, 6 * 18 + 17);
-        this.blit(i, j + 6 * 18 + 17, 0, 126, this.containerWidth, 96);
+
+        this.minecraft.getTextureManager().bindTexture(TEXTURE);
+
+        this.blit(i, j - 28, 176, 0, 28, 32);
+
+        this.blit(i, j, 0, 0, 176, 166);
 
         this.blit(i + 156, j + 18 + (int)((float)(55 - 18) * this.scrollPosition), 232 + (this.hasScrollbar() ? 0 : 12), 0, 12, 15);
+
+        this.blit(i + 29, j - 28, 204, 32, 28, 32);
+
+        this.setBlitOffset(100);
+        this.itemRenderer.zOffset = 100.0F;
+        RenderSystem.enableRescaleNormal();
+        ItemStack itemStack = new ItemStack(Blocks.CRAFTING_TABLE);
+        this.itemRenderer.renderGuiItem(itemStack, this.x + 29 + (28 - 15) / 2, this.y - 28 + 10);
+        this.itemRenderer.renderGuiItemOverlay(this.font, itemStack, this.x + 29 + (28 - 15) / 2, this.y - 28 + 10);
+        this.itemRenderer.zOffset = 0.0F;
+        this.setBlitOffset(0);
     }
 
     @Override public boolean mouseScrolled(double d, double e, double amount) {
@@ -89,6 +118,22 @@ public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingCont
             syncScrollbar();
             return true;
         }
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (button == 0) {
+            double aX = mouseX - this.x;
+            double aY = mouseY - this.y;
+
+            if (aX > 0 && aX < 28) {
+                if (aY > -32 && aY < 0) {
+                    this.minecraft.openScreen(new InventoryScreen(this.minecraft.player));
+                }
+            }
+        }
+
+        return super.mouseClicked(mouseX, mouseY, button);
     }
 
     private boolean hasScrollbar() {

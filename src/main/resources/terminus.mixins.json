@@ -9,7 +9,8 @@
     "MinecraftServerMixin",
     "ServerWorldMixin",
     "WorldChunkMixin",
-    "RecipeManagerMixin"
+    "RecipeManagerMixin",
+    "InventoryScreenMixin"
   ],
   "client": [],
   "server": [],

@@ -23,8 +23,6 @@ import java.util.Random;
 
 public class TerminusClient implements ClientModInitializer {
     private static final Random RANDOM = new Random();
-    private static final String TERMINUS_KEY_BIND_CATEGORY = "Terminus";
-    private static FabricKeyBinding openCraftingKeyBind;
 
     @Override
     public void onInitializeClient() {
@@ -46,34 +44,21 @@ public class TerminusClient implements ClientModInitializer {
                 }
             });
         });
+    }
 
-        KeyBindingRegistry.INSTANCE.addCategory(TERMINUS_KEY_BIND_CATEGORY);
+    public static void openCraftingMenu() {
+        PlayerEntity player = MinecraftClient.getInstance().player;
+        int syncId = RANDOM.nextInt();
+        TerminusCraftingContainer container = new TerminusCraftingContainer(syncId, player.inventory);
+        player.container = container;
 
-        openCraftingKeyBind = FabricKeyBinding.Builder.create(
-                new Identifier(Terminus.MOD_ID, "open_crafting"),
-                InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_C,
-                TERMINUS_KEY_BIND_CATEGORY
-        ).build();
+        MinecraftClient.getInstance().openScreen(new TerminusCraftingScreen(
+                container,
+                player.inventory));
 
-        KeyBindingRegistry.INSTANCE.register(openCraftingKeyBind);
+        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+        buf.writeInt(syncId);
 
-        ClientTickCallback.EVENT.register(e -> {
-            if (openCraftingKeyBind.isPressed()) {
-                PlayerEntity player = MinecraftClient.getInstance().player;
-                int syncId = RANDOM.nextInt();
-                TerminusCraftingContainer container = new TerminusCraftingContainer(syncId, player.inventory);
-                player.container = container;
-
-                MinecraftClient.getInstance().openScreen(new TerminusCraftingScreen(
-                        container,
-                        player.inventory));
-
-                PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-                buf.writeInt(syncId);
-
-                ClientSidePacketRegistry.INSTANCE.sendToServer(Terminus.TNetworking.OPEN_CRAFTING_ID, buf);
-            }
-        });
+        ClientSidePacketRegistry.INSTANCE.sendToServer(Terminus.TNetworking.OPEN_CRAFTING_ID, buf);
     }
 }
