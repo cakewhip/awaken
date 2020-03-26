@@ -3,11 +3,9 @@ package com.kqp.terminus.client.container;
 import com.kqp.terminus.Terminus;
 import com.kqp.terminus.inventory.CelestialAltarResultInventory;
 import com.kqp.terminus.recipe.TerminusRecipe;
-import com.kqp.terminus.recipe.TerminusRecipes;
+import com.kqp.terminus.recipe.TerminusRecipeManager;
 import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
-import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.container.BlockContext;
 import net.minecraft.container.Container;
 import net.minecraft.container.Slot;
@@ -15,17 +13,16 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.s2c.play.ContainerSlotUpdateS2CPacket;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.PacketByteBuf;
-import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CelestialAltarContainer extends Container {
+    public static final String[] CRAFTING_TYPES = { "vanilla_crafting", "reinforced_anvil" };
+
     public final PlayerInventory playerInventory;
     public final BlockContext context;
 
@@ -85,7 +82,7 @@ public class CelestialAltarContainer extends Container {
     }
 
     public void updateResult() {
-        recipes = TerminusRecipes.getMatches(playerInventory.main);
+        recipes = TerminusRecipeManager.getMatches(CRAFTING_TYPES, playerInventory.main);
         outputs = recipes.stream().map(recipe -> recipe.result.copy()).collect(Collectors.toList());
 
         if (!playerInventory.player.world.isClient) {

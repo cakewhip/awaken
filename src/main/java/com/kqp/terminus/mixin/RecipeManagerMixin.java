@@ -3,7 +3,7 @@ package com.kqp.terminus.mixin;
 import com.google.gson.JsonObject;
 import com.kqp.terminus.Terminus;
 import com.kqp.terminus.recipe.Reagent;
-import com.kqp.terminus.recipe.TerminusRecipes;
+import com.kqp.terminus.recipe.TerminusRecipeManager;
 import com.kqp.terminus.util.TimeUtil;
 import net.minecraft.recipe.*;
 import net.minecraft.resource.ResourceManager;
@@ -54,7 +54,7 @@ public abstract class RecipeManagerMixin {
                 if (reagents.isEmpty()) {
                     Terminus.warn("Recipe for " + recipe.getOutput() + " has no reagents, ignoring");
                 } else {
-                    TerminusRecipes.addRecipe(recipe.getOutput(), reagents);
+                    TerminusRecipeManager.addRecipe("vanilla_crafting", recipe.getOutput(), reagents);
                 }
             }
         }

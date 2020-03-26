@@ -9,7 +9,7 @@ import com.kqp.terminus.group.MaterialGroup;
 import com.kqp.terminus.group.OreGroup;
 import com.kqp.terminus.item.TerminusArmorMaterial;
 import com.kqp.terminus.item.TerminusToolMaterial;
-import com.kqp.terminus.recipe.TerminusRecipes;
+import com.kqp.terminus.recipe.TerminusRecipeManager;
 import com.kqp.terminus.util.TimeUtil;
 import net.fabricmc.api.ModInitializer;
 
@@ -53,7 +53,7 @@ public class Terminus implements ModInitializer {
             TContainers.init();
             TNetworking.init();
             initCallbacks();
-            TerminusRecipes.init();
+            TerminusRecipeManager.init();
         }, (time) -> Terminus.info("Terminus load took " + time + "ms"));
     }
 

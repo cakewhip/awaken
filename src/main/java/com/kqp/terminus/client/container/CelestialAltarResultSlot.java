@@ -2,7 +2,7 @@ package com.kqp.terminus.client.container;
 
 import com.kqp.terminus.recipe.ComparableItemStack;
 import com.kqp.terminus.recipe.TerminusRecipe;
-import com.kqp.terminus.recipe.TerminusRecipes;
+import com.kqp.terminus.recipe.TerminusRecipeManager;
 import net.minecraft.container.Slot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -47,8 +47,8 @@ public class CelestialAltarResultSlot extends Slot {
     @Override
     protected void onCrafted(ItemStack stack) {
         if (!stack.isEmpty()) {
-            HashMap<ComparableItemStack, Integer> compMap = TerminusRecipes.toComparableMap(craftingInv.main);
-            List<TerminusRecipe> matches = TerminusRecipes.getMatchesForOutput(stack);
+            HashMap<ComparableItemStack, Integer> compMap = TerminusRecipeManager.toComparableMap(craftingInv.main);
+            List<TerminusRecipe> matches = TerminusRecipeManager.getMatchesForOutput(CelestialAltarContainer.CRAFTING_TYPES, stack);
 
             for (TerminusRecipe recipe : matches) {
                 if (recipe.matches(compMap)) {
