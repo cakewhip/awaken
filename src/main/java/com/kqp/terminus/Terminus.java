@@ -98,12 +98,14 @@ public class Terminus implements ModInitializer {
 
         public static final Block CELESTIAL_ALTAR_BLOCK = new CraftingBlock(
                 FabricBlockSettings.of(Material.STONE).strength(35.0F, 12.0F).lightLevel(4).build(),
-                RecipeType.CELESTIAL_ALTAR
+                RecipeType.CELESTIAL_ALTAR,
+                RecipeType.VANILLA
         );
 
         public static final Block CELESTIAL_STEEL_ANVIL_BLOCK = new TerminusAnvilBlock(
                 FabricBlockSettings.of(Material.METAL).strength(35.0F, 24.0F).lightLevel(4).build(),
-                RecipeType.CELESTIAL_STEEL_ANVIL
+                RecipeType.CELESTIAL_STEEL_ANVIL,
+                RecipeType.ANVIL
         );
 
         public static void init() {

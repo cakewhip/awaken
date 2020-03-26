@@ -2,6 +2,7 @@ package com.kqp.terminus.recipe;
 
 import com.kqp.terminus.Terminus;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 
 import java.util.*;
 
@@ -9,6 +10,12 @@ public class TerminusRecipeManager {
     private static final HashMap<String, ArrayList<TerminusRecipe>> RECIPE_MAP = new HashMap();
 
     public static void init() {
+        addRecipe(RecipeType.ANVIL, new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 1),
+                new ItemStack(Terminus.Groups.MOONSTONE.INGOT, 1),
+                new ItemStack(Terminus.Groups.SUNSTONE.INGOT, 1),
+                new ItemStack(Items.IRON_INGOT, 1),
+                new ItemStack(Items.GOLD_INGOT)
+        );
         addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.SWORD, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 96)
         );
