@@ -10,6 +10,7 @@ import com.kqp.terminus.group.OreGroup;
 import com.kqp.terminus.item.TerminusArmorMaterial;
 import com.kqp.terminus.item.TerminusToolMaterial;
 import com.kqp.terminus.recipe.TerminusRecipes;
+import com.kqp.terminus.util.TimeUtil;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
@@ -44,19 +45,15 @@ public class Terminus implements ModInitializer {
     public void onInitialize() {
         info("Initializing Terminus");
 
-        Groups.init();
-
-        TBlocks.init();
-
-        TItems.init();
-
-        TContainers.init();
-
-        TNetworking.init();
-
-        initCallbacks();
-
-        TerminusRecipes.init();
+        TimeUtil.profile(() -> {
+            Groups.init();
+            TBlocks.init();
+            TItems.init();
+            TContainers.init();
+            TNetworking.init();
+            initCallbacks();
+            TerminusRecipes.init();
+        }, (time) -> Terminus.info("Terminus load took " + time + "ms"));
     }
 
     private void initCallbacks() {

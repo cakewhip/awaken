@@ -24,7 +24,10 @@ public abstract class RecipeManagerMixin {
         RecipeManager recipeManager = (RecipeManager) (Object) this;
 
         Terminus.info("Converting vanilla shaped/shapeless recipes to Terminus recipes");
-        TimeUtil.bench(() -> addVanillaRecipes(recipeManager));
+        TimeUtil.profile(
+                () -> addVanillaRecipes(recipeManager),
+                time -> Terminus.info("Conversion of recipes took " + time + "ms")
+        );
     }
 
     private static void addVanillaRecipes(RecipeManager recipeManager) {
