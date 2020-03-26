@@ -29,7 +29,7 @@ public class TerminusRecipeManager {
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 72)
         );
         addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.HELMET, 1),
-                new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 60)
+                new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 64)
         );
         addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.CHESTPLATE, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 96)
@@ -38,7 +38,7 @@ public class TerminusRecipeManager {
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 72)
         );
         addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.BOOTS, 1),
-                new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 60)
+                new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 64)
         );
     }
     
