@@ -87,7 +87,6 @@ public class TerminusCraftingContainer extends Container {
             for (int z = -3; z < 4; z++) {
                 for (int y = -1; y < 3; y++) {
                     Block block = player.world.getBlockState(player.getBlockPos().add(x, y, z)).getBlock();
-                    System.out.println("Found a " + block);
 
                     if (block instanceof CraftingInterface) {
                         types.addAll(Arrays.asList(((CraftingInterface) block).getRecipeTypes()));
