@@ -21,7 +21,7 @@ import net.minecraft.util.math.MathHelper;
 import java.util.List;
 
 public class CelestialAltarScreen extends ContainerScreen<CelestialAltarContainer> {
-    private static final Identifier TEXTURE = new Identifier("terminus", "textures/gui/container/celestial_altar.png");
+    private static final Identifier TEXTURE = new Identifier(Terminus.MOD_ID, "textures/gui/container/celestial_altar.png");
 
     public float scrollPosition = 0.0F;
 

@@ -36,6 +36,7 @@ import org.apache.logging.log4j.Logger;
 public class Terminus implements ModInitializer {
     public static Logger LOGGER = LogManager.getLogger();
 
+    public static final String MOD_ID = "terminus";
     public static final String MOD_NAME = "Terminus";
 
     public static TerminusWorldProperties worldProperties;
@@ -97,12 +98,12 @@ public class Terminus implements ModInitializer {
 
             register(CELESTIAL_ALTAR_BLOCK, "celestial_altar");
 
-            TERMINUS_DATA_BE_TYPE = Registry.register(Registry.BLOCK_ENTITY_TYPE, "terminus:terminus_data", BlockEntityType.Builder.create(TerminusDataBlockEntity::new, Blocks.BEDROCK).build(null));
+            TERMINUS_DATA_BE_TYPE = Registry.register(Registry.BLOCK_ENTITY_TYPE, Terminus.MOD_ID + "terminus_data", BlockEntityType.Builder.create(TerminusDataBlockEntity::new, Blocks.BEDROCK).build(null));
         }
 
         public static void register(Block block, String name) {
-            Registry.register(Registry.BLOCK, new Identifier("terminus", name), block);
-            Registry.register(Registry.ITEM, new Identifier("terminus", name), new BlockItem(block, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
+            Registry.register(Registry.BLOCK, new Identifier(Terminus.MOD_ID, name), block);
+            Registry.register(Registry.ITEM, new Identifier(Terminus.MOD_ID, name), new BlockItem(block, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
         }
     }
 
@@ -116,12 +117,12 @@ public class Terminus implements ModInitializer {
         }
 
         public static void register(Item item, String name) {
-            Registry.register(Registry.ITEM, new Identifier("terminus", name), item);
+            Registry.register(Registry.ITEM, new Identifier(Terminus.MOD_ID, name), item);
         }
     }
 
     public static class TContainers {
-        public static final Identifier CELESTIAL_ALTAR_ID = new Identifier("terminus", "celestial_altar");
+        public static final Identifier CELESTIAL_ALTAR_ID = new Identifier(Terminus.MOD_ID, "celestial_altar");
         public static final String CELESTIAL_ALTAR_TRANSLATION_KEY = Util.createTranslationKey("container", CELESTIAL_ALTAR_ID);
 
         public static void init() {
@@ -137,9 +138,9 @@ public class Terminus implements ModInitializer {
     }
 
     public static class TNetworking {
-        public static final Identifier SYNC_SCROLLBAR_ID = new Identifier("terminus", "sync_scrollbar");
-        public static final Identifier SYNC_RESULTS_ID = new Identifier("terminus", "sync_results");
-        public static final Identifier SYNC_RESULT_SLOT_ID = new Identifier("terminus", "sync_result_slot");
+        public static final Identifier SYNC_SCROLLBAR_ID = new Identifier(Terminus.MOD_ID, "sync_scrollbar");
+        public static final Identifier SYNC_RESULTS_ID = new Identifier(Terminus.MOD_ID, "sync_results");
+        public static final Identifier SYNC_RESULT_SLOT_ID = new Identifier(Terminus.MOD_ID, "sync_result_slot");
 
         public static void init() {
             info("Initializing networking");
