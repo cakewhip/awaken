@@ -1,6 +1,7 @@
 package com.kqp.terminus;
 
-import com.kqp.terminus.block.CelestialAltarBlock;
+import com.kqp.terminus.block.CraftingBlock;
+import com.kqp.terminus.block.TerminusAnvilBlock;
 import com.kqp.terminus.client.container.TerminusCraftingContainer;
 import com.kqp.terminus.data.TerminusDataBlockEntity;
 import com.kqp.terminus.data.TerminusWorldProperties;
@@ -9,14 +10,17 @@ import com.kqp.terminus.group.MaterialGroup;
 import com.kqp.terminus.group.OreGroup;
 import com.kqp.terminus.item.TerminusArmorMaterial;
 import com.kqp.terminus.item.TerminusToolMaterial;
+import com.kqp.terminus.recipe.RecipeType;
 import com.kqp.terminus.recipe.TerminusRecipeManager;
 import com.kqp.terminus.util.TimeUtil;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.event.world.WorldTickCallback;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
@@ -92,12 +96,21 @@ public class Terminus implements ModInitializer {
     public static class TBlocks {
         public static BlockEntityType<TerminusDataBlockEntity> TERMINUS_DATA_BE_TYPE;
 
-        public static final Block CELESTIAL_ALTAR_BLOCK = new CelestialAltarBlock();
+        public static final Block CELESTIAL_ALTAR_BLOCK = new CraftingBlock(
+                FabricBlockSettings.of(Material.STONE).strength(35.0F, 12.0F).lightLevel(4).build(),
+                RecipeType.CELESTIAL_ALTAR
+        );
+
+        public static final Block CELESTIAL_STEEL_ANVIL_BLOCK = new TerminusAnvilBlock(
+                FabricBlockSettings.of(Material.METAL).strength(35.0F, 24.0F).lightLevel(4).build(),
+                RecipeType.CELESTIAL_STEEL_ANVIL
+        );
 
         public static void init() {
             info("Initializing blocks");
 
             register(CELESTIAL_ALTAR_BLOCK, "celestial_altar");
+            register(CELESTIAL_STEEL_ANVIL_BLOCK, "celestial_steel_anvil");
 
             TERMINUS_DATA_BE_TYPE = Registry.register(Registry.BLOCK_ENTITY_TYPE, Terminus.MOD_ID + "terminus_data", BlockEntityType.Builder.create(TerminusDataBlockEntity::new, Blocks.BEDROCK).build(null));
         }

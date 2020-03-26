@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=south": { "model": "terminus:block/celestial_steel_anvil" },
+    "facing=west": { "model": "terminus:block/celestial_steel_anvil", "y": 90 },
+    "facing=north": { "model": "terminus:block/celestial_steel_anvil", "y": 180 },
+    "facing=east": { "model": "terminus:block/celestial_steel_anvil", "y": 270 }
+  }
+}
