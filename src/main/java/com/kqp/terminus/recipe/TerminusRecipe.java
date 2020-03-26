@@ -3,6 +3,7 @@ package com.kqp.terminus.recipe;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.text.LiteralText;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,13 +16,25 @@ public class TerminusRecipe {
 
     public TerminusRecipe(ItemStack result, ItemStack... input) {
         this.result = result;
-        reagents = new HashMap();
-        itemStackReagentMap = new HashMap();
+        this.reagents = new HashMap();
+        this.itemStackReagentMap = new HashMap();
 
         Arrays.stream(input).forEach(inputStack -> {
             Reagent reagent = new Reagent(inputStack);
             reagents.put(reagent, inputStack.getCount());
             itemStackReagentMap.put(new ComparableItemStack(inputStack), reagent);
+        });
+    }
+
+    public TerminusRecipe(ItemStack result, HashMap<Reagent, Integer> reagents) {
+        this.result = result;
+        this.reagents = reagents;
+        this.itemStackReagentMap = new HashMap();
+
+        reagents.keySet().forEach(reagent -> {
+            reagent.matchingStacks.forEach(matchingStack -> {
+                itemStackReagentMap.put(matchingStack, reagent);
+            });
         });
     }
 
@@ -75,5 +88,9 @@ public class TerminusRecipe {
                 }
             }
         }
+    }
+
+    public String getSortString() {
+        return new LiteralText("").append(result.getName()).asFormattedString();
     }
 }

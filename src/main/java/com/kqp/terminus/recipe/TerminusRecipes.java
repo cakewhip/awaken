@@ -2,8 +2,10 @@ package com.kqp.terminus.recipe;
 
 import com.kqp.terminus.Terminus;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Util;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,38 +13,38 @@ public class TerminusRecipes {
     public static final ArrayList<TerminusRecipe> RECIPES = new ArrayList();
 
     public static void init() {
-        RECIPES.add(new TerminusRecipe(
-                new ItemStack(Terminus.Groups.CELESTIAL.SWORD, 1),
+        addRecipe(new ItemStack(Terminus.Groups.CELESTIAL.SWORD, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 96)
-        ));
-        RECIPES.add(new TerminusRecipe(
-                new ItemStack(Terminus.Groups.CELESTIAL.SHOVEL, 1),
+        );
+        addRecipe(new ItemStack(Terminus.Groups.CELESTIAL.SHOVEL, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 72)
-        ));
-        RECIPES.add(new TerminusRecipe(
-                new ItemStack(Terminus.Groups.CELESTIAL.PICKAXE, 1),
+        );
+        addRecipe(new ItemStack(Terminus.Groups.CELESTIAL.PICKAXE, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 96)
-        ));
-        RECIPES.add(new TerminusRecipe(
-                new ItemStack(Terminus.Groups.CELESTIAL.AXE, 1),
+        );
+        addRecipe(new ItemStack(Terminus.Groups.CELESTIAL.AXE, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 72)
-        ));
-        RECIPES.add(new TerminusRecipe(
-                new ItemStack(Terminus.Groups.CELESTIAL.HELMET, 1),
+        );
+        addRecipe(new ItemStack(Terminus.Groups.CELESTIAL.HELMET, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 60)
-        ));
-        RECIPES.add(new TerminusRecipe(
-                new ItemStack(Terminus.Groups.CELESTIAL.CHESTPLATE, 1),
+        );
+        addRecipe(new ItemStack(Terminus.Groups.CELESTIAL.CHESTPLATE, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 96)
-        ));
-        RECIPES.add(new TerminusRecipe(
-                new ItemStack(Terminus.Groups.CELESTIAL.LEGGINGS, 1),
+        );
+        addRecipe(new ItemStack(Terminus.Groups.CELESTIAL.LEGGINGS, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 72)
-        ));
-        RECIPES.add(new TerminusRecipe(
-                new ItemStack(Terminus.Groups.CELESTIAL.BOOTS, 1),
+        );
+        addRecipe(new ItemStack(Terminus.Groups.CELESTIAL.BOOTS, 1),
                 new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 60)
-        ));
+        );
+    }
+    
+    public static void addRecipe(ItemStack output, ItemStack... inputs) {
+        RECIPES.add(new TerminusRecipe(output, inputs));
+    }
+
+    public static void addRecipe(ItemStack output, HashMap<Reagent, Integer> reagents) {
+        RECIPES.add(new TerminusRecipe(output, reagents));
     }
 
     public static List<TerminusRecipe> getMatches(List<ItemStack> itemStacks) {
@@ -54,6 +56,8 @@ public class TerminusRecipes {
                 output.add(recipe);
             }
         }
+
+        output.sort(Comparator.comparing(TerminusRecipe::getSortString));
 
         return output;
     }
