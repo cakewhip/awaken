@@ -11,7 +11,6 @@ import com.kqp.terminus.group.OreGroup;
 import com.kqp.terminus.item.TerminusArmorMaterial;
 import com.kqp.terminus.item.TerminusToolMaterial;
 import com.kqp.terminus.recipe.RecipeType;
-import com.kqp.terminus.recipe.TerminusRecipeManager;
 import com.kqp.terminus.util.TimeUtil;
 import net.fabricmc.api.ModInitializer;
 
@@ -98,7 +97,7 @@ public class Terminus implements ModInitializer {
         public static final Block CELESTIAL_ALTAR_BLOCK = new CraftingBlock(
                 FabricBlockSettings.of(Material.STONE).strength(35.0F, 12.0F).lightLevel(4).build(),
                 RecipeType.CELESTIAL_ALTAR,
-                RecipeType.VANILLA
+                RecipeType.CRAFTING_TABLE
         );
 
         public static final Block CELESTIAL_STEEL_ANVIL_BLOCK = new TerminusAnvilBlock(

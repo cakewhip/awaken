@@ -16,7 +16,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.PacketByteBuf;
-import net.minecraft.util.Util;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -86,7 +85,7 @@ public class TerminusCraftingContainer extends Container {
                     if (block instanceof CraftingInterface) {
                         types.addAll(Arrays.asList(((CraftingInterface) block).getRecipeTypes()));
                     } else if (block == Blocks.CRAFTING_TABLE) {
-                        types.add(RecipeType.VANILLA);
+                        types.add(RecipeType.CRAFTING_TABLE);
                     } else if (block == Blocks.FURNACE) {
                         types.add(RecipeType.FURNACE);
                     } else if (block == Blocks.ANVIL) {
