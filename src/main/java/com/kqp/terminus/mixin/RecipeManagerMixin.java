@@ -54,8 +54,11 @@ public abstract class RecipeManagerMixin {
 
                 if (reagents.isEmpty()) {
                     Terminus.warn("Recipe for " + recipe.getOutput() + " has no reagents, ignoring");
+                } else if (recipe.getOutput() == null) {
+                    Terminus.warn("Output not found for vanilla recipe, ignoring");
                 } else {
                     TerminusRecipeManager.addRecipe(RecipeType.VANILLA, recipe.getOutput(), reagents);
+                    Terminus.info("Adding recipe for " + recipe.getOutput() + " with reagents " + reagents);
                 }
             }
         }

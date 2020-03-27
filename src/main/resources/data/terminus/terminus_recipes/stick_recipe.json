@@ -1,0 +1,23 @@
+{
+  "type": "vanilla",
+  "recipe": {
+    "output": {
+      "item": "minecraft:stick",
+      "count": 64
+    },
+    "reagents": [
+      {
+        "matching": [
+          {
+            "item": "minecraft:diamond"
+          }
+        ],
+        "count": 1
+      },
+      {
+        "item": "minecraft:iron_ingot",
+        "count": 4
+      }
+    ]
+  }
+}

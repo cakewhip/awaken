@@ -1,56 +1,17 @@
 package com.kqp.terminus.recipe;
 
-import com.kqp.terminus.Terminus;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 
 import java.util.*;
 
 public class TerminusRecipeManager {
     private static final HashMap<String, ArrayList<TerminusRecipe>> RECIPE_MAP = new HashMap();
 
-    public static void init() {
-        addRecipe(RecipeType.ANVIL, new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 1),
-                new ItemStack(Terminus.Groups.MOONSTONE.INGOT, 1),
-                new ItemStack(Terminus.Groups.SUNSTONE.INGOT, 1),
-                new ItemStack(Items.IRON_INGOT, 1),
-                new ItemStack(Items.GOLD_INGOT)
-        );
-        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.SWORD, 1),
-                new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 96)
-        );
-        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.SHOVEL, 1),
-                new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 72)
-        );
-        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.PICKAXE, 1),
-                new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 96)
-        );
-        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.AXE, 1),
-                new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 72)
-        );
-        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.HELMET, 1),
-                new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 64)
-        );
-        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.CHESTPLATE, 1),
-                new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 96)
-        );
-        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.LEGGINGS, 1),
-                new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 72)
-        );
-        addRecipe(RecipeType.CELESTIAL_STEEL_ANVIL, new ItemStack(Terminus.Groups.CELESTIAL.BOOTS, 1),
-                new ItemStack(Terminus.TItems.CELESTIAL_STEEL_INGOT, 64)
-        );
-    }
-    
-    public static void addRecipe(String type, ItemStack output, ItemStack... inputs) {
-        add(type, new TerminusRecipe(output, inputs));
-    }
-
     public static void addRecipe(String type, ItemStack output, HashMap<Reagent, Integer> reagents) {
-        add(type, new TerminusRecipe(output, reagents));
+        addRecipe(type, new TerminusRecipe(output, reagents));
     }
 
-    private static void add(String type, TerminusRecipe recipe) {
+    public static void addRecipe(String type, TerminusRecipe recipe) {
         getRecipesForType(type).add(recipe);
     }
 
@@ -76,7 +37,6 @@ public class TerminusRecipeManager {
             }
         }
 
-
         output.sort(Comparator.comparing(TerminusRecipe::getSortString));
 
         return output;
@@ -101,7 +61,7 @@ public class TerminusRecipeManager {
     public static HashMap<ComparableItemStack, Integer> toComparableMap(List<ItemStack> input) {
         HashMap<ComparableItemStack, Integer> ret = new HashMap();
 
-        input.forEach(itemStack -> {
+        input.stream().forEach(itemStack -> {
             ComparableItemStack key = new ComparableItemStack(itemStack);
 
             if (ret.containsKey(key)) {

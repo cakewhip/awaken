@@ -1,5 +1,6 @@
 package com.kqp.terminus.recipe;
 
+import com.google.gson.annotations.Expose;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
@@ -10,14 +11,21 @@ import java.util.HashMap;
 import java.util.List;
 
 public class TerminusRecipe {
-    public final ItemStack result;
-    public final HashMap<Reagent, Integer> reagents;
-    public final HashMap<ComparableItemStack, Reagent> itemStackReagentMap;
+    public ItemStack result;
+    public HashMap<Reagent, Integer> reagents;
 
-    public TerminusRecipe(ItemStack result, ItemStack... input) {
-        this.result = result;
+    @Expose(serialize = false, deserialize = false)
+    public HashMap<ComparableItemStack, Reagent> itemStackReagentMap;
+
+    public TerminusRecipe() {
         this.reagents = new HashMap();
         this.itemStackReagentMap = new HashMap();
+    }
+
+    public TerminusRecipe(ItemStack result, ItemStack... input) {
+        this();
+
+        this.result = result;
 
         Arrays.stream(input).forEach(inputStack -> {
             Reagent reagent = new Reagent(inputStack);
@@ -27,9 +35,10 @@ public class TerminusRecipe {
     }
 
     public TerminusRecipe(ItemStack result, HashMap<Reagent, Integer> reagents) {
+        this();
+
         this.result = result;
         this.reagents = reagents;
-        this.itemStackReagentMap = new HashMap();
 
         reagents.keySet().forEach(reagent -> {
             reagent.matchingStacks.forEach(matchingStack -> {

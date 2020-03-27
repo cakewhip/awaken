@@ -1,0 +1,27 @@
+{
+  "type": "anvil",
+  "recipe": {
+    "output": {
+      "item": "terminus:celestial_steel_ingot",
+      "count": 1
+    },
+    "reagents": [
+      {
+        "item": "terminus:moonstone_ingot",
+        "count": 1
+      },
+      {
+        "item": "terminus:sunstone_ingot",
+        "count": 1
+      },
+      {
+        "item": "minecraft:gold_ingot",
+        "count": 1
+      },
+      {
+        "item": "minecraft:iron_ingot",
+        "count": 1
+      }
+    ]
+  }
+}

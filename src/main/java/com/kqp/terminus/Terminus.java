@@ -58,7 +58,6 @@ public class Terminus implements ModInitializer {
             TContainers.init();
             TNetworking.init();
             initCallbacks();
-            TerminusRecipeManager.init();
         }, (time) -> Terminus.info("Terminus load took " + time + "ms"));
     }
 
