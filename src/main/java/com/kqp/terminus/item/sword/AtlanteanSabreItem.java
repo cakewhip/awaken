@@ -34,6 +34,7 @@ public class AtlanteanSabreItem extends TerminusSwordItem {
         return TypedActionResult.consume(itemStack);
     }
 
+    @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         if (user instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) user;

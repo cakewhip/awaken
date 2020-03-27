@@ -1,4 +1,5 @@
 {
+    "__comment": "Moonstone and Sunstone",
     "block.terminus.moonstone_ore": "Moonstone Ore",
     "item.terminus.moonstone_ore": "Moonstone Ore",
     "block.terminus.moonstone_block": "Moonstone",
@@ -9,6 +10,8 @@
     "block.terminus.sunstone_block": "Sunstone",
     "item.terminus.sunstone_block": "Sunstone",
     "item.terminus.sunstone_fragment": "Sunstone Fragment",
+
+    "__comment": "Celestial",
     "block.terminus.celestial_altar": "Celestial Altar",
     "item.terminus.celestial_altar": "Celestial Altar",
     "block.terminus.celestial_steel_anvil": "Celestial Steel Anvil",
@@ -22,6 +25,13 @@
     "item.terminus.celestial_steel_leggings": "Celestial Steel Leggings",
     "item.terminus.celestial_steel_boots": "Celestial Steel Boots",
     "item.terminus.celestial_steel_ingot": "Celestial Steel Ingot",
+
+    "__comment": "Phase 0 Swords",
     "item.terminus.atlantean_sabre": "Atlantean Sabre",
+    "item.terminus.ashen_blade": "Ashen Blade",
+    "item.terminus.glacial_shard": "Glacial Shard",
+    "item.terminus.enderian_cutlass": "Enderian Cutlass",
+
+    "__comment": "GUI Translations",
     "container.terminus.terminus_crafting": "Crafting"
 }

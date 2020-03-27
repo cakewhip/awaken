@@ -10,6 +10,8 @@ import com.kqp.terminus.group.MaterialGroup;
 import com.kqp.terminus.group.OreGroup;
 import com.kqp.terminus.item.TerminusArmorMaterial;
 import com.kqp.terminus.item.TerminusToolMaterial;
+import com.kqp.terminus.item.sword.EnderianCutlassItem;
+import com.kqp.terminus.item.sword.StatusEffectSwordItem;
 import com.kqp.terminus.item.sword.AtlanteanSabreItem;
 import com.kqp.terminus.item.tool.TerminusSwordItem;
 import com.kqp.terminus.recipe.RecipeType;
@@ -23,6 +25,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -125,9 +128,9 @@ public class Terminus implements ModInitializer {
 
     public static class TItems {
         public static final Item ATLANTEAN_SABRE = new AtlanteanSabreItem();
-        public static final Item ASHEN_BLADE = new TerminusSwordItem(TerminusToolMaterial.PHASE_0_SWORD);
-        public static final Item WINTER_BLADE = new TerminusSwordItem(TerminusToolMaterial.PHASE_0_SWORD);
-        public static final Item ENDERIAN_CUTLASS = new TerminusSwordItem(TerminusToolMaterial.PHASE_0_SWORD);
+        public static final Item ASHEN_BLADE = new StatusEffectSwordItem(TerminusToolMaterial.PHASE_0_SWORD, StatusEffects.WITHER, 4 * 20, 2);
+        public static final Item GLACIAL_SHARD = new StatusEffectSwordItem(TerminusToolMaterial.PHASE_0_SWORD, StatusEffects.SLOWNESS, 4 * 20, 2);
+        public static final Item ENDERIAN_CUTLASS = new EnderianCutlassItem();
 
         public static final Item CELESTIAL_STEEL_INGOT = new Item(new Item.Settings().group(ItemGroup.MATERIALS));
 
@@ -136,7 +139,7 @@ public class Terminus implements ModInitializer {
 
             register(ATLANTEAN_SABRE, "atlantean_sabre");
             register(ASHEN_BLADE, "ashen_blade");
-            register(WINTER_BLADE, "winter_blade");
+            register(GLACIAL_SHARD, "glacial_shard");
             register(ENDERIAN_CUTLASS, "enderian_cutlass");
 
             register(CELESTIAL_STEEL_INGOT, "celestial_steel_ingot");
