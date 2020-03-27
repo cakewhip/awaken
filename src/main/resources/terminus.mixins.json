@@ -10,7 +10,10 @@
     "ServerWorldMixin",
     "WorldChunkMixin",
     "RecipeManagerMixin",
-    "InventoryScreenMixin"
+    "InventoryScreenMixin",
+    "ZombieEntityMixin",
+    "AbstractSkeletonEntityMixin",
+    "SpiderEntityMixin"
   ],
   "client": [],
   "server": [],
