@@ -8,9 +8,10 @@ import net.minecraft.recipe.Ingredient;
 import java.util.function.Supplier;
 
 public enum TerminusToolMaterial implements ToolMaterial {
-    CELESTIAL(4, 1000, 10.0F, 4.0F, 18, () -> {
+    CELESTIAL(4, 1000, 10.0F, 7.0F, 18, () -> {
         return Ingredient.ofItems(new ItemConvertible[] { Terminus.TItems.CELESTIAL_STEEL_INGOT });
-    });
+    }),
+    PHASE_0_SWORD(-1, -1, -1.0F, 5F, -1, () -> { return Ingredient.ofItems(); });
 
     private final int miningLevel;
     private final int itemDurability;

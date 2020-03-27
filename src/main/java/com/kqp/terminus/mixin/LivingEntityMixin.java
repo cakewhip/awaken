@@ -1,7 +1,10 @@
 package com.kqp.terminus.mixin;
 
 import com.kqp.terminus.Terminus;
+import com.kqp.terminus.data.TerminusWorldProperties;
+import com.kqp.terminus.item.sword.AtlanteanSabreItem;
 import com.kqp.terminus.util.Broadcaster;
+import com.kqp.terminus.util.JsonUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.ZombieEntity;
@@ -11,10 +14,14 @@ import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
+import net.minecraft.world.level.LevelProperties;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.io.File;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -41,6 +48,15 @@ public abstract class LivingEntityMixin {
                     broadcaster.broadcastMessage("A distant figure fades into the shadows...", Formatting.DARK_RED, false, true);
                 }
             }
+        }
+    }
+
+    @Inject(at = @At("HEAD"), method = "isUsingRiptide", cancellable = true)
+    public void fixRiptideReturn(CallbackInfoReturnable<Boolean> callbackInfo) {
+        LivingEntity entity = (LivingEntity) (Object) this;
+
+        if (entity.getMainHandStack().getItem() instanceof AtlanteanSabreItem) {
+            callbackInfo.setReturnValue(false);
         }
     }
 }

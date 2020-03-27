@@ -10,6 +10,8 @@ import com.kqp.terminus.group.MaterialGroup;
 import com.kqp.terminus.group.OreGroup;
 import com.kqp.terminus.item.TerminusArmorMaterial;
 import com.kqp.terminus.item.TerminusToolMaterial;
+import com.kqp.terminus.item.sword.AtlanteanSabreItem;
+import com.kqp.terminus.item.tool.TerminusSwordItem;
 import com.kqp.terminus.recipe.RecipeType;
 import com.kqp.terminus.util.TimeUtil;
 import net.fabricmc.api.ModInitializer;
@@ -122,10 +124,20 @@ public class Terminus implements ModInitializer {
     }
 
     public static class TItems {
+        public static final Item ATLANTEAN_SABRE = new AtlanteanSabreItem();
+        public static final Item ASHEN_BLADE = new TerminusSwordItem(TerminusToolMaterial.PHASE_0_SWORD);
+        public static final Item WINTER_BLADE = new TerminusSwordItem(TerminusToolMaterial.PHASE_0_SWORD);
+        public static final Item ENDERIAN_CUTLASS = new TerminusSwordItem(TerminusToolMaterial.PHASE_0_SWORD);
+
         public static final Item CELESTIAL_STEEL_INGOT = new Item(new Item.Settings().group(ItemGroup.MATERIALS));
 
         public static void init() {
             info("Initializing items");
+
+            register(ATLANTEAN_SABRE, "atlantean_sabre");
+            register(ASHEN_BLADE, "ashen_blade");
+            register(WINTER_BLADE, "winter_blade");
+            register(ENDERIAN_CUTLASS, "enderian_cutlass");
 
             register(CELESTIAL_STEEL_INGOT, "celestial_steel_ingot");
         }
