@@ -16,6 +16,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.PacketByteBuf;
+import net.minecraft.util.Util;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -44,13 +45,7 @@ public class TerminusCraftingContainer extends Container {
         int counter = 0;
         for (i = 0; i < 3; i++) {
             for (j = 0; j < 8; j++) {
-                this.addSlot(new TerminusResultSlot(playerInventory.player, craftingTypes, resultInv, counter++, 8 + j * 18, 18 + i * 18) {
-                    @Override
-                    public void markDirty() {
-                        super.markDirty();
-                        updateResult();
-                    }
-                });
+                this.addSlot(new TerminusResultSlot(playerInventory.player, craftingTypes, resultInv, counter++, 8 + j * 18, 18 + i * 18));
             }
         }
 
@@ -102,7 +97,6 @@ public class TerminusCraftingContainer extends Container {
         }
 
         craftingTypes = types.toArray(new String[0]);
-        System.out.println(Arrays.asList(craftingTypes));
     }
 
     public void updateResult() {

@@ -62,5 +62,7 @@ public abstract class RecipeManagerMixin {
                 }
             }
         }
+
+        TerminusRecipeManager.sort();
     }
 }

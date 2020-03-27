@@ -1,6 +1,7 @@
 package com.kqp.terminus.recipe;
 
 import com.google.gson.annotations.Expose;
+import com.kqp.terminus.Terminus;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
@@ -100,6 +101,8 @@ public class TerminusRecipe {
     }
 
     public String getSortString() {
-        return new LiteralText("").append(result.getName()).asFormattedString();
+        String ret = new LiteralText("").append(result.getName()).asFormattedString();
+
+        return ret != null ? ret : "";
     }
 }

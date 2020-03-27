@@ -1,8 +1,10 @@
 package com.kqp.terminus.recipe;
 
+import com.kqp.terminus.Terminus;
 import net.minecraft.item.ItemStack;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class TerminusRecipeManager {
     private static final HashMap<String, ArrayList<TerminusRecipe>> RECIPE_MAP = new HashMap();
@@ -30,11 +32,7 @@ public class TerminusRecipeManager {
         for (String type : types) {
             List<TerminusRecipe> recipes = getRecipesForType(type);
 
-            for (TerminusRecipe recipe : recipes) {
-                if (recipe.matches(input)) {
-                    output.add(recipe);
-                }
-            }
+            output.addAll(recipes.parallelStream().filter(recipe -> recipe.matches(input)).collect(Collectors.toList()));
         }
 
         output.sort(Comparator.comparing(TerminusRecipe::getSortString));
@@ -72,5 +70,11 @@ public class TerminusRecipeManager {
         });
 
         return ret;
+    }
+
+    public static void sort() {
+        RECIPE_MAP.forEach((type, recipes) -> {
+            recipes.sort(Comparator.comparing(TerminusRecipe::getSortString));
+        });
     }
 }

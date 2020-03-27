@@ -44,7 +44,6 @@ public class MessageTemplater {
                 start = i;
             } else if (c == '}') {
                 String key = in.substring(start + 2, i);
-                System.out.println(key);
                 sb.append(TEMPLATE_MAP.get(key).template());
 
                 start = -1;

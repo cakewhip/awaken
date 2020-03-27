@@ -27,8 +27,6 @@ public class TerminusRecipeLoader extends JsonDataLoader {
     @Override
     protected void apply(Map<Identifier, JsonObject> loader, ResourceManager manager, Profiler profiler) {
         loader.forEach((id, json) -> {
-            Terminus.info("Loading recipe at " + id.getPath());
-
             String type = json.get("type").getAsString();
             JsonObject recipeNode = json.getAsJsonObject("recipe");
 
@@ -69,5 +67,7 @@ public class TerminusRecipeLoader extends JsonDataLoader {
                     new TerminusRecipe(output, reagents)
             );
         });
+
+        TerminusRecipeManager.sort();
     }
 }
