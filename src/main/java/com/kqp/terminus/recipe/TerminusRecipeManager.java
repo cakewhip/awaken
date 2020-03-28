@@ -1,6 +1,5 @@
 package com.kqp.terminus.recipe;
 
-import com.kqp.terminus.Terminus;
 import net.minecraft.item.ItemStack;
 
 import java.util.*;
@@ -70,6 +69,10 @@ public class TerminusRecipeManager {
         });
 
         return ret;
+    }
+
+    public static void clear() {
+        RECIPE_MAP.clear();
     }
 
     public static void sort() {

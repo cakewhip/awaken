@@ -32,6 +32,8 @@ public abstract class RecipeManagerMixin {
     }
 
     private static void addVanillaRecipes(RecipeManager recipeManager) {
+        TerminusRecipeManager.clear();
+
         List<Recipe> recipes = recipeManager.keys()
                 .map(recipeManager::get)
                 .filter(optionalRecipe -> optionalRecipe.isPresent())
@@ -58,11 +60,8 @@ public abstract class RecipeManagerMixin {
                     Terminus.warn("Output not found for vanilla recipe, ignoring");
                 } else {
                     TerminusRecipeManager.addRecipe(RecipeType.CRAFTING_TABLE, recipe.getOutput(), reagents);
-                    Terminus.info("Adding recipe for " + recipe.getOutput() + " with reagents " + reagents);
                 }
             }
         }
-
-        TerminusRecipeManager.sort();
     }
 }
