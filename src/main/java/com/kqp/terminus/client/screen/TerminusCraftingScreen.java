@@ -80,7 +80,7 @@ public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingCont
                     int offset = (recipe.reagents.get(reagent) + " x ").length();
                     if (split.size() > 1) {
                         for (int i = 1; i < split.size(); i++) {
-                            text.add(String.format("%1$" + offset + "s", "") + split.get(i));
+                            text.add(String.format("%" + offset + "s", "") + split.get(i));
                         }
                     }
                 }
