@@ -1,0 +1,6 @@
+{
+  "parent": "terminus:item/slimey_bow",
+  "textures": {
+    "layer0": "terminus:item/slimey_bow_pulling_1"
+  }
+}

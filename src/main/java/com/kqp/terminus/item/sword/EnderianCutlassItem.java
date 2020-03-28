@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class EnderianCutlassItem extends TerminusSwordItem {
     public EnderianCutlassItem() {
-        super(TerminusToolMaterial.PHASE_0_SWORD);
+        super(TerminusToolMaterial.PHASE_0_SPECIAL);
     }
 
     @Override
@@ -97,6 +97,7 @@ public class EnderianCutlassItem extends TerminusSwordItem {
     @Override
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(new LiteralText("Right-click to teleport"));
     }
 }

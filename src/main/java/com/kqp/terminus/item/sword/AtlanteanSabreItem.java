@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class AtlanteanSabreItem extends TerminusSwordItem {
     public AtlanteanSabreItem() {
-        super(TerminusToolMaterial.PHASE_0_SWORD);
+        super(TerminusToolMaterial.PHASE_0_SPECIAL);
     }
 
     @Override
@@ -79,6 +79,7 @@ public class AtlanteanSabreItem extends TerminusSwordItem {
     @Override
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        super.appendTooltip(stack, world, tooltip, context);
         tooltip.add(new LiteralText("Right-click while swimming for a speed boost"));
     }
 }

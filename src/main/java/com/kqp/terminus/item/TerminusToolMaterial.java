@@ -10,13 +10,16 @@ import java.util.function.Supplier;
  * Used to create custom tool materials.
  */
 public enum TerminusToolMaterial implements ToolMaterial {
-    CELESTIAL(4, 1000, 10.0F, 7.0F, 18, () -> {
+    CELESTIAL(4, 1000, 10.0F, 10.0F, 18, () -> {
         return Ingredient.ofItems(Terminus.TItems.CELESTIAL_STEEL_INGOT);
     }),
-    PHASE_0_SWORD(-1, -1, -1.0F, 5F, -1, () -> {
+    PHASE_0_SWORD(-1, -1, 8.0F, 6F, -1, () -> {
         return Ingredient.ofItems();
     }),
     JANG_KATANA(-1, -1, -1.0F, 14F, -1, () -> {
+        return Ingredient.ofItems();
+    }),
+    PHASE_0_SPECIAL(-1, -1, 10.0F, 4F, -1, () -> {
         return Ingredient.ofItems();
     });
 

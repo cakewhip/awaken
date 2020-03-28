@@ -8,14 +8,18 @@ import com.kqp.terminus.data.TerminusWorldProperties;
 import com.kqp.terminus.group.BlockStats;
 import com.kqp.terminus.group.MaterialGroup;
 import com.kqp.terminus.group.OreGroup;
+import com.kqp.terminus.item.pickaxe.EscapePlanItem;
 import com.kqp.terminus.item.TerminusArmorMaterial;
 import com.kqp.terminus.item.TerminusToolMaterial;
 import com.kqp.terminus.item.bow.FlameBowItem;
 import com.kqp.terminus.item.bow.StatusEffectBowItem;
+import com.kqp.terminus.item.shovel.ArchaeologistSpadeItem;
 import com.kqp.terminus.item.sword.AtlanteanSabreItem;
 import com.kqp.terminus.item.sword.EnderianCutlassItem;
 import com.kqp.terminus.item.sword.JangKatanaItem;
 import com.kqp.terminus.item.sword.StatusEffectSwordItem;
+import com.kqp.terminus.item.tool.TerminusAxeItem;
+import com.kqp.terminus.item.tool.TerminusShovelItem;
 import com.kqp.terminus.loot.LootTableHelper;
 import com.kqp.terminus.loot.TerminusRarity;
 import com.kqp.terminus.recipe.RecipeType;
@@ -144,15 +148,11 @@ public class Terminus implements ModInitializer {
 
         public static final Item CINDERED_BOW = new FlameBowItem(4.0D, false).setRarity(TerminusRarity.RARE);
         public static final Item SLIMEY_BOW = new StatusEffectBowItem(3.0D, false, StatusEffects.SLOWNESS, 2 * 20, 1).setRarity(TerminusRarity.RARE);
-        public static final Item RAIDERS_AXE = null;
-        public static final Item ESCAPE_PLAN = null;
-        public static final Item ARCHAEOLOGIST_SPADE = null;
-        public static final Item RUSTY_SHANK = null;
+        public static final Item RAIDERS_AXE = new TerminusAxeItem(TerminusToolMaterial.PHASE_0_SPECIAL).setRarity(TerminusRarity.UNCOMMON);
+        public static final Item ESCAPE_PLAN = new EscapePlanItem().setRarity(TerminusRarity.UNCOMMON);
+        public static final Item ARCHAEOLOGIST_SPADE = new ArchaeologistSpadeItem().setRarity(TerminusRarity.UNCOMMON);
+        public static final Item RUSTY_SHANK = new StatusEffectSwordItem(TerminusToolMaterial.PHASE_0_SPECIAL, StatusEffects.POISON, 8 * 20, 0).setRarity(TerminusRarity.UNCOMMON);
 
-        //TODO: add pillager axe (Raider's Axe)
-        //TODO: add pickaxe from mobs in cave (Escape Plan)
-        //TODO: add shovel from husks (Archaeologist's Spade)
-        //TODO: add sword from cave spiders (Rusty Shank, inflicts poison/tetanus)
         //TODO: add unbreakable elytra using post-awakened materials (Dragon Bone Wings)
 
         public static final Item CELESTIAL_STEEL_INGOT = new Item(new Item.Settings().group(ItemGroup.MATERIALS));
@@ -168,6 +168,10 @@ public class Terminus implements ModInitializer {
 
             register(CINDERED_BOW, "cindered_bow");
             register(SLIMEY_BOW, "slimey_bow");
+            register(RAIDERS_AXE, "raiders_axe");
+            register(ESCAPE_PLAN, "escape_plan");
+            register(ARCHAEOLOGIST_SPADE, "archaeologist_spade");
+            register(RUSTY_SHANK, "rusty_shank");
 
             register(CELESTIAL_STEEL_INGOT, "celestial_steel_ingot");
         }
