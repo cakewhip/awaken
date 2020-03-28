@@ -144,6 +144,10 @@ public class Terminus implements ModInitializer {
 
         public static final Item CINDERED_BOW = new FlameBowItem(4.0D, false).setRarity(TerminusRarity.RARE);
         public static final Item SLIMEY_BOW = new StatusEffectBowItem(3.0D, false, StatusEffects.SLOWNESS, 2 * 20, 1).setRarity(TerminusRarity.RARE);
+        public static final Item RAIDERS_AXE = null;
+        public static final Item ESCAPE_PLAN = null;
+        public static final Item ARCHAEOLOGIST_SPADE = null;
+        public static final Item RUSTY_SHANK = null;
 
         //TODO: add pillager axe (Raider's Axe)
         //TODO: add pickaxe from mobs in cave (Escape Plan)

@@ -22,16 +22,27 @@ public class LootTableHelper implements LootTableLoadingCallback {
     public static HashSet<LootEntry> LOOT_ENTRIES = new HashSet();
 
     public static void init() {
-        addLootEntry("minecraft:guardian", Terminus.TItems.ATLANTEAN_SABRE, 25 / 100F);
-        addLootEntry("minecraft:elder_guardian", Terminus.TItems.ATLANTEAN_SABRE, 1 / 100F);
+        addLootEntry("minecraft:guardian", Terminus.TItems.ATLANTEAN_SABRE, 25F / 100F);
+        addLootEntry("minecraft:elder_guardian", Terminus.TItems.ATLANTEAN_SABRE, 1F / 100F);
         addLootEntry("minecraft:drowned", Terminus.TItems.ATLANTEAN_SABRE, 0.25F / 100F);
-        addLootEntry("minecraft:wither_skeleton", Terminus.TItems.ASHEN_BLADE, 1 / 100F);
-        addLootEntry("minecraft:wither", Terminus.TItems.ASHEN_BLADE, 33 / 100F);
+        addLootEntry("minecraft:wither_skeleton", Terminus.TItems.ASHEN_BLADE, 1F / 100F);
+        addLootEntry("minecraft:wither", Terminus.TItems.ASHEN_BLADE, 33F / 100F);
         addLootEntry("minecraft:stray", Terminus.TItems.GLACIAL_SHARD, 2.5F / 100F);
-        addLootEntry("minecraft:enderman", Terminus.TItems.ENDERIAN_CUTLASS, 1 / 100F);
-        addLootEntry("minecraft:shulker", Terminus.TItems.ENDERIAN_CUTLASS, 5 / 100F);
-        addLootEntry("minecraft:endermite", Terminus.TItems.ENDERIAN_CUTLASS, 1 / 100F);
-        addLootEntry("minecraft:ender_dragon", Terminus.TItems.ENDERIAN_CUTLASS, 25 / 100F);
+        addLootEntry("minecraft:enderman", Terminus.TItems.ENDERIAN_CUTLASS, 1F / 100F);
+        addLootEntry("minecraft:shulker", Terminus.TItems.ENDERIAN_CUTLASS, 5F / 100F);
+        addLootEntry("minecraft:endermite", Terminus.TItems.ENDERIAN_CUTLASS, 1F / 100F);
+        addLootEntry("minecraft:ender_dragon", Terminus.TItems.ENDERIAN_CUTLASS, 25F / 100F);
+
+        addLootEntry("minecraft:blaze", Terminus.TItems.CINDERED_BOW, 2.5F / 100F);
+        addLootEntry("minecraft:ghast", Terminus.TItems.CINDERED_BOW, 5F / 100F);
+        addLootEntry("minecraft:slime", Terminus.TItems.SLIMEY_BOW, 5F / 100F);
+        addLootEntry("minecraft:pillager", Terminus.TItems.RAIDERS_AXE, 2.5F / 100F);
+        addLootEntry("minecraft:zombie", Terminus.TItems.ESCAPE_PLAN, 0.1F / 100F);
+        addLootEntry("minecraft:skeleton", Terminus.TItems.ESCAPE_PLAN, 0.1F / 100F);
+        addLootEntry("minecraft:creeper", Terminus.TItems.ESCAPE_PLAN, 0.1F / 100F);
+        addLootEntry("minecraft:spider", Terminus.TItems.ESCAPE_PLAN, 0.1F / 100F);
+        addLootEntry("minecraft:husk", Terminus.TItems.ARCHAEOLOGIST_SPADE, 5F / 100F);
+        addLootEntry("minecraft:cave_spider", Terminus.TItems.RUSTY_SHANK, 2.5F / 100F);
     }
 
     public static void addLootEntry(String id, ItemConvertible item, float chance) {
