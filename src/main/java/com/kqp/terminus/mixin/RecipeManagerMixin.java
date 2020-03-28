@@ -39,7 +39,6 @@ public abstract class RecipeManagerMixin {
 
     /**
      * Converts vanilla recipes to Terminus recipes.
-     * TODO: distinguish between 2x2 and 3x3 recipes and add distinct recipe types
      *
      * @param recipeManager The vanilla recipe manager
      */
@@ -71,7 +70,16 @@ public abstract class RecipeManagerMixin {
                 } else if (recipe.getOutput() == null) {
                     Terminus.warn("Output not found for vanilla recipe, ignoring");
                 } else {
-                    TerminusRecipeManager.addRecipe(RecipeType.CRAFTING_TABLE, recipe.getOutput(), reagents);
+                    boolean twoByTwo = false;
+
+                    if (recipe instanceof ShapedRecipe) {
+                        twoByTwo = ((ShapedRecipe) recipe).getWidth() <= 2 && ((ShapedRecipe) recipe).getHeight() <= 2;
+                    }
+                    TerminusRecipeManager.addRecipe(
+                            twoByTwo ? RecipeType.TWO_BY_TWO : RecipeType.CRAFTING_TABLE,
+                            recipe.getOutput(),
+                            reagents
+                    );
                 }
             }
         }

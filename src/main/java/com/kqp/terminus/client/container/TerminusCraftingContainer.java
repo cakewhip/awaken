@@ -119,6 +119,9 @@ public class TerminusCraftingContainer extends Container {
     private void gatherRecipeTypes(PlayerEntity player) {
         HashSet<String> types = new HashSet<>();
 
+        // 2x2 recipes should always be accessible
+        types.add(RecipeType.TWO_BY_TWO);
+
         // Finds blocks within a 6x3x6 box
         for (int x = -3; x < 4; x++) {
             for (int z = -3; z < 4; z++) {
