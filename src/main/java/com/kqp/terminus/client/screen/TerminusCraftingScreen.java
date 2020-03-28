@@ -72,7 +72,17 @@ public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingCont
                 text.add("---");
                 text.add("To Craft: ");
                 for (Reagent reagent : recipe.reagents.keySet()) {
-                    text.add(recipe.reagents.get(reagent) + " x " + reagent.toString());
+                    String reagentLine = recipe.reagents.get(reagent) + " x " + reagent.toString();
+                    List<String> split = this.font.wrapStringToWidthAsList(reagentLine, this.containerWidth - 50);
+
+                    text.add(split.get(0));
+
+                    int offset = (recipe.reagents.get(reagent) + " x ").length();
+                    if (split.size() > 1) {
+                        for (int i = 1; i < split.size(); i++) {
+                            text.add(String.format("%1$" + offset + "s", "") + split.get(i));
+                        }
+                    }
                 }
             }
         }
@@ -117,7 +127,7 @@ public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingCont
         if (!this.hasScrollbar()) {
             return false;
         } else {
-            int i = (((TerminusCraftingContainer)this.container).outputs.size() + 8 - 1) / 8 - 3;
+            int i = (this.container.outputs.size() + 8 - 1) / 8 - 3;
             this.scrollPosition = (float)((double)this.scrollPosition - amount / (double)i);
             this.scrollPosition = MathHelper.clamp(this.scrollPosition, 0.0F, 1.0F);
             syncScrollbar();
