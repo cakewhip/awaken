@@ -14,6 +14,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static com.kqp.terminus.data.TerminusDataBlockEntity.DATA_BLOCK_POS;
 
+/**
+ * Used to:
+ * Save/load Terminus chunk data.
+ * Gen new stuff post-awakening.
+ */
 @Mixin(WorldChunk.class)
 public abstract class WorldChunkMixin implements Chunk {
 

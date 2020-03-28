@@ -23,6 +23,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.io.File;
 
+/**
+ * Used to:
+ * Detect deaths for triggering the awakening.
+ * Deny riptide status when using the Atlantean sword.
+ */
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
     @Inject(at = @At("HEAD"), method = "onDeath")

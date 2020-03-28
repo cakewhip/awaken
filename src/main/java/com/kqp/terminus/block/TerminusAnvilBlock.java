@@ -11,12 +11,23 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TerminusAnvilBlock extends AnvilBlock implements CraftingInterface {
-    private final String[] craftingTypes;
+/**
+ * Terminus's anvil block type.
+ * Exists solely to implement {@link RecipeAccessProvider}. Sad.
+ */
+public class TerminusAnvilBlock extends AnvilBlock implements RecipeAccessProvider {
+    private final String[] recipeTypes;
 
-    public TerminusAnvilBlock(Settings settings, String... craftingTypes) {
+    /**
+     * Creates a new Terminus anvil block.
+     * Provides the passed recipes.
+     *
+     * @param settings      Settings for the anvil block
+     * @param recipeTypes Valid recipe types.
+     */
+    public TerminusAnvilBlock(Settings settings, String... recipeTypes) {
         super(settings);
-        this.craftingTypes = craftingTypes;
+        this.recipeTypes = recipeTypes;
     }
 
     @Override
@@ -32,6 +43,6 @@ public class TerminusAnvilBlock extends AnvilBlock implements CraftingInterface 
 
     @Override
     public String[] getRecipeTypes() {
-        return craftingTypes;
+        return recipeTypes;
     }
 }

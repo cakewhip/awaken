@@ -6,19 +6,52 @@ import net.minecraft.util.Tickable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data class used to hold world data related to Terminus.
+ */
 public class TerminusWorldProperties {
     public static final String FILE_NAME = "terminus.json";
 
+    /**
+     * If the ender dragon has been killed.
+     */
     private boolean postDragon = false;
+
+    /**
+     * If the wither has been killed.
+     */
     private boolean postWither = false;
+
+    /**
+     * If a raid has been defeated.
+     */
     private boolean postRaid = false;
+
+    /**
+     * If an elder guardian has been killed.
+     */
     private boolean postElderGuardian = false;
+
+    /**
+     * If the world has entered the awakening phase.
+     */
     private boolean worldAwakened = false;
-    
+
+    /**
+     * List of active triggers in the world.
+     * See {@link Trigger} for more info.
+     */
     public List<Trigger> triggers = new ArrayList();
 
+    /**
+     * Whether the world properties have been changed.
+     * Used to trigger stage evaluations (see {@link TerminusProgression#evaluateStage()}).
+     */
     private boolean dirty = false;
-    
+
+    /**
+     * Called on every tick using {@link net.fabricmc.fabric.api.event.world.WorldTickCallback}.
+     */
     public void tick() {
         for (int i = 0; i < triggers.size(); i++) {
             Trigger trigger = triggers.get(i);
@@ -38,7 +71,7 @@ public class TerminusWorldProperties {
             dirty = false;
         }
     }
-    
+
     public void markDirty() {
         dirty = true;
     }

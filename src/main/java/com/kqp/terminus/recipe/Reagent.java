@@ -6,10 +6,24 @@ import net.minecraft.item.ItemStack;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a reagent of a recipe.
+ * Multiple types of item stacks can fulfill this requirement, see {@link #matchingStacks}.
+ * Also caches the hash code.
+ */
 public class Reagent {
+    /**
+     * What stacks can fulfill this reagent requirement.
+     */
     public final HashSet<ComparableItemStack> matchingStacks;
+
     public final int hashCode;
 
+    /**
+     * Creates a reagent given item stacks.
+     *
+     * @param itemStacks ItemStacks
+     */
     public Reagent(List<ItemStack> itemStacks) {
         this.matchingStacks = new HashSet();
 
@@ -20,12 +34,13 @@ public class Reagent {
         hashCode = Objects.hash(matchingStacks);
     }
 
+    /**
+     * Takes one item stack and creates a reagent.
+     *
+     * @param itemStack ItemStack
+     */
     public Reagent(ItemStack itemStack) {
         this(Arrays.asList(itemStack));
-    }
-
-    public boolean itemStackMatches(ItemStack itemStack) {
-        return matchingStacks.contains(new ComparableItemStack(itemStack));
     }
 
     @Override

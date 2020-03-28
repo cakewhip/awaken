@@ -7,9 +7,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Used to template event messages.
+ */
 public class MessageTemplater {
+    /**
+     * Map of things to template.
+     */
     private static Map<String, MessageTemplate> TEMPLATE_MAP = new HashMap();
 
+    /**
+     * Adds some things to template.
+     */
     static {
         addTemplate("undefeated", () -> {
             ArrayList<String> list = new ArrayList();
@@ -32,6 +41,12 @@ public class MessageTemplater {
         TEMPLATE_MAP.put(key, template);
     }
 
+    /**
+     * Templates the passed String and returns it.
+     *
+     * @param in String to template
+     * @return String, but templated
+     */
     public static String templateString(String in) {
         StringBuilder sb = new StringBuilder();
 

@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Loads Terminus recipes from JSON files.
+ */
 public class TerminusRecipeLoader extends JsonDataLoader {
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
 
@@ -22,6 +25,13 @@ public class TerminusRecipeLoader extends JsonDataLoader {
         super(GSON, "terminus_recipes");
     }
 
+    /**
+     * Deserializes a map of JSON objects into Terminus recipe objects.
+     *
+     * @param loader
+     * @param manager
+     * @param profiler
+     */
     @Override
     protected void apply(Map<Identifier, JsonObject> loader, ResourceManager manager, Profiler profiler) {
         Terminus.info("Loading Terminus recipes");

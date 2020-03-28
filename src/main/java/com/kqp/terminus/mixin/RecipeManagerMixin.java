@@ -18,6 +18,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Used to convert vanilla recipes to Terminus recipes.
+ */
 @Mixin(RecipeManager.class)
 public abstract class RecipeManagerMixin {
     @Inject(at = @At("RETURN"), method = "apply")
@@ -31,6 +34,12 @@ public abstract class RecipeManagerMixin {
         );
     }
 
+    /**
+     * Converts vanilla recipes to Terminus recipes.
+     * TODO: distinguish between 2x2 and 3x3 recipes and add distinct recipe types
+     *
+     * @param recipeManager The vanilla recipe manager
+     */
     private static void addVanillaRecipes(RecipeManager recipeManager) {
         TerminusRecipeManager.clear();
 

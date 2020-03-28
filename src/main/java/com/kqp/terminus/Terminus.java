@@ -51,10 +51,11 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Random;
 
+/**
+ * Main entry point for Terminus.
+ */
 public class Terminus implements ModInitializer {
     public static Logger LOGGER = LogManager.getLogger();
-
-    public static final Random RANDOM = new Random();
 
     public static final String MOD_ID = "terminus";
     public static final String MOD_NAME = "Terminus";
@@ -184,6 +185,7 @@ public class Terminus implements ModInitializer {
         public static void init() {
             info("Initializing networking");
 
+            // Gets the client's scroll bar position and updates the server-side container
             ServerSidePacketRegistry.INSTANCE.register(SYNC_SCROLLBAR_ID, (packetContext, data) -> {
                 float scrollPosition = data.readFloat();
 
@@ -194,41 +196,44 @@ public class Terminus implements ModInitializer {
                 });
             });
 
-            ServerSidePacketRegistry.INSTANCE.register(OPEN_CRAFTING_C2S_ID, ((packetContext, packetByteBuf) -> {
-                int syncId = packetByteBuf.readInt();
-                double mouseX = packetByteBuf.readDouble();
-                double mouseY = packetByteBuf.readDouble();
+            // Packets for the server to coordinate the navigation between the inventory and the crafting screen
+            {
+                ServerSidePacketRegistry.INSTANCE.register(OPEN_CRAFTING_C2S_ID, ((packetContext, packetByteBuf) -> {
+                    int syncId = packetByteBuf.readInt();
+                    double mouseX = packetByteBuf.readDouble();
+                    double mouseY = packetByteBuf.readDouble();
 
-                packetContext.getTaskQueue().execute(() -> {
-                    ServerPlayerEntity player = (ServerPlayerEntity) packetContext.getPlayer();
-                    player.closeContainer();
+                    packetContext.getTaskQueue().execute(() -> {
+                        ServerPlayerEntity player = (ServerPlayerEntity) packetContext.getPlayer();
+                        player.closeContainer();
 
-                    PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-                    buf.writeInt(syncId);
-                    buf.writeDouble(mouseX);
-                    buf.writeDouble(mouseY);
+                        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+                        buf.writeInt(syncId);
+                        buf.writeDouble(mouseX);
+                        buf.writeDouble(mouseY);
 
-                    ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, OPEN_CRAFTING_S2C_ID, buf);
+                        ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, OPEN_CRAFTING_S2C_ID, buf);
 
-                    player.container = new TerminusCraftingContainer(syncId, player.inventory);
-                });
-            }));
+                        player.container = new TerminusCraftingContainer(syncId, player.inventory);
+                    });
+                }));
 
-            ServerSidePacketRegistry.INSTANCE.register(CLOSE_CRAFTING_C2S_ID, ((packetContext, packetByteBuf) -> {
-                double mouseX = packetByteBuf.readDouble();
-                double mouseY = packetByteBuf.readDouble();
+                ServerSidePacketRegistry.INSTANCE.register(CLOSE_CRAFTING_C2S_ID, ((packetContext, packetByteBuf) -> {
+                    double mouseX = packetByteBuf.readDouble();
+                    double mouseY = packetByteBuf.readDouble();
 
-                packetContext.getTaskQueue().execute(() -> {
-                    ServerPlayerEntity player = (ServerPlayerEntity) packetContext.getPlayer();
-                    player.closeContainer();
+                    packetContext.getTaskQueue().execute(() -> {
+                        ServerPlayerEntity player = (ServerPlayerEntity) packetContext.getPlayer();
+                        player.closeContainer();
 
-                    PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-                    buf.writeDouble(mouseX);
-                    buf.writeDouble(mouseY);
+                        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+                        buf.writeDouble(mouseX);
+                        buf.writeDouble(mouseY);
 
-                    ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, CLOSE_CRAFTING_S2C_ID, buf);
-                });
-            }));
+                        ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, CLOSE_CRAFTING_S2C_ID, buf);
+                    });
+                }));
+            }
         }
     }
 

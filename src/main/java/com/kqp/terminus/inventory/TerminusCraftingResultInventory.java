@@ -8,10 +8,14 @@ import net.minecraft.util.DefaultedList;
 
 import java.util.Iterator;
 
-public class CelestialAltarResultInventory implements Inventory {
+/**
+ * Inventory class for the result slots in Terminus's crafting container.
+ * Just 24 slots that only allow extraction.
+ */
+public class TerminusCraftingResultInventory implements Inventory {
     private final DefaultedList<ItemStack> stack;
 
-    public CelestialAltarResultInventory() {
+    public TerminusCraftingResultInventory() {
         this.stack = DefaultedList.ofSize(24, ItemStack.EMPTY);
     }
 

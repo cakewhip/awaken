@@ -14,7 +14,7 @@ public abstract class ServerWorldMixin {
     public void wakePlayers(CallbackInfo callbackInfo) {
         Terminus.worldProperties.triggers.forEach(trigger -> {
             if (trigger instanceof SleepTrigger) {
-                trigger.trigger();
+                trigger.activate();
             }
         });
     }

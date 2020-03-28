@@ -2,6 +2,9 @@ package com.kqp.terminus.util;
 
 import net.minecraft.util.Util;
 
+/**
+ * Utility class for measuring time performance.
+ */
 public class TimeUtil {
     public static void profile(Runnable runnable, ProfileCallback callback) {
         long start = Util.getMeasuringTimeMs();

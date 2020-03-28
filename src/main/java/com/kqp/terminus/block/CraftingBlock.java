@@ -2,16 +2,23 @@ package com.kqp.terminus.block;
 
 import net.minecraft.block.Block;
 
-public class CraftingBlock extends Block implements CraftingInterface {
-    private final String[] craftingTypes;
+/**
+ * Generic block type to provide a crafting interface.
+ * See {@link RecipeAccessProvider} for more information.
+ */
+public class CraftingBlock extends Block implements RecipeAccessProvider {
+    /**
+     * The recipe types to show the player within proximity.
+     */
+    private final String[] recipeTypes;
 
-    public CraftingBlock(Settings settings, String... craftingTypes) {
+    public CraftingBlock(Settings settings, String... recipeTypes) {
         super(settings);
-        this.craftingTypes = craftingTypes;
+        this.recipeTypes = recipeTypes;
     }
 
     @Override
     public String[] getRecipeTypes() {
-        return craftingTypes;
+        return recipeTypes;
     }
 }

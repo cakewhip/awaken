@@ -26,6 +26,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.nio.DoubleBuffer;
 
+/**
+ * Used to add the navigation tabs to reach the Terminus crafting screen.
+ */
 @Mixin(InventoryScreen.class)
 public abstract class InventoryScreenMixin extends AbstractInventoryScreen<CreativeInventoryScreen.CreativeContainer> {
     private static final Identifier TEXTURE = new Identifier(Terminus.MOD_ID, "textures/gui/container/crafting.png");
@@ -34,7 +37,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Creat
         super(container, playerInventory, text);
     }
 
-    @Inject(at = @At("HEAD"), method="mouseClicked", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "mouseClicked", cancellable = true)
     public void catchMouseClickEvent(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> callbackInfo) {
         if (button == 0) {
             double aX = mouseX - this.x;
@@ -43,8 +46,6 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Creat
             if (aX > 29 && aX < 57) {
                 if (aY > -32 && aY < 0) {
                     TerminusClient.triggerOpenCraftingMenu();
-
-                    //MinecraftClient.getInstance().player.closeContainer();
 
                     callbackInfo.setReturnValue(true);
                 }

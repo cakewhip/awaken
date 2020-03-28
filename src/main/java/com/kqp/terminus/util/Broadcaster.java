@@ -6,6 +6,9 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;
 import net.minecraft.util.Formatting;
 
+/**
+ * Utility class for broadcasting messages to each player's chat.
+ */
 public class Broadcaster {
     public static void broadcastMessage(String message, Formatting color, boolean bold, boolean italic) {
         LiteralText text = new LiteralText(message);
@@ -18,13 +21,6 @@ public class Broadcaster {
 
         Terminus.server.getPlayerManager().getPlayerList().forEach(player -> {
             player.sendChatMessage(text, MessageType.CHAT);
-
-                /*
-                player.networkHandler.sendPacket(new TitleS2CPacket(
-                        TitleS2CPacket.Action.TITLE,
-                        text
-                ));
-                */
         });
     }
 }

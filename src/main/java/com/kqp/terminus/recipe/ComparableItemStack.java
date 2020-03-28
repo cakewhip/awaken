@@ -6,6 +6,11 @@ import net.minecraft.nbt.CompoundTag;
 
 import java.util.Objects;
 
+/**
+ * Data class used to fast-compare item stacks.
+ * Only compares using the Item and the CompoundTag.
+ * Also caches the hash code.
+ */
 public class ComparableItemStack {
     public final Item item;
     public final CompoundTag tag;

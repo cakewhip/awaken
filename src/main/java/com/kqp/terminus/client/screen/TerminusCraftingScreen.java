@@ -7,31 +7,30 @@ import com.kqp.terminus.recipe.Reagent;
 import com.kqp.terminus.recipe.TerminusRecipe;
 import com.kqp.terminus.util.MouseUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.sun.prism.impl.BufferUtil;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
-import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
-import org.lwjgl.glfw.GLFW;
 
-import java.nio.DoubleBuffer;
 import java.util.List;
 
+/**
+ * Screen for Terminus's crafting system.
+ */
 public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingContainer> {
     public static final String TRANSLATION_KEY = Util.createTranslationKey("container", new Identifier(Terminus.MOD_ID, "terminus_crafting"));
     private static final Identifier TEXTURE = new Identifier(Terminus.MOD_ID, "textures/gui/container/crafting.png");
 
+    /**
+     * Position of the scroll bar.
+     */
     public float scrollPosition = 0.0F;
 
     public TerminusCraftingScreen(TerminusCraftingContainer container, PlayerInventory playerInventory) {
@@ -43,6 +42,13 @@ public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingCont
         syncScrollbar();
     }
 
+    /**
+     * Overriden to render the tooltips for the tabs.
+     *
+     * @param mouseX
+     * @param mouseY
+     * @param delta
+     */
     @Override
     public void render(int mouseX, int mouseY, float delta) {
         this.renderBackground();
@@ -61,12 +67,19 @@ public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingCont
         }
     }
 
+    /**
+     * Overriden to add the reagents needed to craft the hovered slot.
+     *
+     * @param text
+     * @param x
+     * @param y
+     */
     @Override
     public void renderTooltip(List<String> text, int x, int y) {
         if (this.focusedSlot instanceof TerminusResultSlot && container.recipes != null) {
             int currentIndex = ((TerminusResultSlot) this.focusedSlot).currentIndex;
 
-            if(container.recipes.size() > currentIndex) {
+            if (container.recipes.size() > currentIndex) {
                 TerminusRecipe recipe = container.recipes.get(currentIndex);
 
                 text.add("---");
@@ -77,9 +90,12 @@ public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingCont
 
                     text.add(split.get(0));
 
+                    // Used to bump up the wrapped lines
                     int offset = (recipe.reagents.get(reagent) + " x ").length();
+
                     if (split.size() > 1) {
                         for (int i = 1; i < split.size(); i++) {
+                            // Cool trick to insert 'offset' amount of spaces
                             text.add(String.format("%" + offset + "s", "") + split.get(i));
                         }
                     }
@@ -94,7 +110,7 @@ public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingCont
     @Override
     protected void drawForeground(int mouseX, int mouseY) {
         this.font.draw(this.title.asFormattedString(), 8.0F, 8.0F, 4210752);
-        this.font.draw(this.playerInventory.getDisplayName().asFormattedString(), 8.0F, (float)(this.containerHeight - 96 + 4), 4210752);
+        this.font.draw(this.playerInventory.getDisplayName().asFormattedString(), 8.0F, (float) (this.containerHeight - 96 + 4), 4210752);
     }
 
     @Override
@@ -109,7 +125,7 @@ public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingCont
 
         this.blit(i, j, 0, 0, 176, 166);
 
-        this.blit(i + 156, j + 18 + (int)((float)(55 - 18) * this.scrollPosition), 232 + (this.hasScrollbar() ? 0 : 12), 0, 12, 15);
+        this.blit(i + 156, j + 18 + (int) ((float) (55 - 18) * this.scrollPosition), 232 + (this.hasScrollbar() ? 0 : 12), 0, 12, 15);
 
         this.blit(i + 29, j - 28, 204, 32, 28, 32);
 
@@ -123,12 +139,13 @@ public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingCont
         this.setBlitOffset(0);
     }
 
-    @Override public boolean mouseScrolled(double d, double e, double amount) {
+    @Override
+    public boolean mouseScrolled(double d, double e, double amount) {
         if (!this.hasScrollbar()) {
             return false;
         } else {
             int i = (this.container.outputs.size() + 8 - 1) / 8 - 3;
-            this.scrollPosition = (float)((double)this.scrollPosition - amount / (double)i);
+            this.scrollPosition = (float) ((double) this.scrollPosition - amount / (double) i);
             this.scrollPosition = MathHelper.clamp(this.scrollPosition, 0.0F, 1.0F);
             syncScrollbar();
             return true;
@@ -156,9 +173,12 @@ public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingCont
     }
 
     private boolean hasScrollbar() {
-        return ((TerminusCraftingContainer)this.container).shouldShowScrollbar();
+        return this.container.shouldShowScrollbar();
     }
 
+    /**
+     * Sends the server the position of the scroll bar.
+     */
     public void syncScrollbar() {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeFloat(scrollPosition);

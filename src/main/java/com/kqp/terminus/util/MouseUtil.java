@@ -6,6 +6,9 @@ import org.lwjgl.glfw.GLFW;
 
 import java.nio.DoubleBuffer;
 
+/**
+ * Utility class for getting the client's mouse position.
+ */
 public class MouseUtil {
     public static double getMouseX() {
         DoubleBuffer mouseBuf = BufferUtil.newDoubleBuffer(1);

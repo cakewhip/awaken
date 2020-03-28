@@ -10,6 +10,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Used to give zombies better stats and equipment post-awakening.
+ */
 @Mixin(ZombieEntity.class)
 public abstract class ZombieEntityMixin {
     @Inject(at = @At("TAIL"), method = "initAttributes")

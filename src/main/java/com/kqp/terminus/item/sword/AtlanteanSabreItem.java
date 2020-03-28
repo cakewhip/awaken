@@ -19,6 +19,9 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+/**
+ * Class for the Atlantean Sabre.
+ */
 public class AtlanteanSabreItem extends TerminusSwordItem {
     public AtlanteanSabreItem() {
         super(TerminusToolMaterial.PHASE_0_SWORD);
@@ -53,7 +56,12 @@ public class AtlanteanSabreItem extends TerminusSwordItem {
         }
     }
 
-    public void propel(PlayerEntity player) {
+    /**
+     * Propels the player forward.
+     *
+     * @param player Player to propel forward
+     */
+    public static void propel(PlayerEntity player) {
         float f = player.yaw;
         float g = player.pitch;
         float h = -MathHelper.sin(f * 0.017453292F) * MathHelper.cos(g * 0.017453292F);
@@ -64,7 +72,7 @@ public class AtlanteanSabreItem extends TerminusSwordItem {
         h *= n / m;
         k *= n / m;
         l *= n / m;
-        player.addVelocity((double)h, (double)k, (double)l);
+        player.addVelocity((double) h, (double) k, (double) l);
         player.setPushCooldown(20);
     }
 

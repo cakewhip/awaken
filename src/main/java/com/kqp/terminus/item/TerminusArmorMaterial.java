@@ -14,6 +14,9 @@ import net.minecraft.util.Lazy;
 
 import java.util.function.Supplier;
 
+/**
+ * Used to create custom armor materials.
+ */
 public enum TerminusArmorMaterial implements ArmorMaterial {
     CELESTIAL("celestial", 28, new int[]{3, 6, 8, 3}, 16, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 12.0F, () -> {
         return Ingredient.ofItems(new ItemConvertible[] { Terminus.TItems.CELESTIAL_STEEL_INGOT });
@@ -28,7 +31,7 @@ public enum TerminusArmorMaterial implements ArmorMaterial {
     private final float toughness;
     private final Supplier<Ingredient> repairIngredientSupplier;
 
-    private TerminusArmorMaterial(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantability, SoundEvent equipSound, float toughness, Supplier<Ingredient> ingredientSupplier) {
+    TerminusArmorMaterial(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantability, SoundEvent equipSound, float toughness, Supplier<Ingredient> ingredientSupplier) {
         this.name = name;
         this.durabilityMultiplier = durabilityMultiplier;
         this.protectionAmounts = protectionAmounts;

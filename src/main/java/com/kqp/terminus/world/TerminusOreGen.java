@@ -7,6 +7,9 @@ import net.minecraft.world.chunk.WorldChunk;
 
 import java.util.Random;
 
+/**
+ * Used to generate ore veins.
+ */
 public class TerminusOreGen {
     public static final Random RANDOM = new Random();
 

@@ -24,6 +24,9 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+/**
+ * Class for the Enderian Cutlass.
+ */
 public class EnderianCutlassItem extends TerminusSwordItem {
     public EnderianCutlassItem() {
         super(TerminusToolMaterial.PHASE_0_SWORD);
@@ -34,12 +37,14 @@ public class EnderianCutlassItem extends TerminusSwordItem {
         if (user instanceof PlayerEntity && remainingUseTicks <= 7180) {
             PlayerEntity player = (PlayerEntity) user;
 
+            // Find what block the player is looking at
             BlockHitResult result = (BlockHitResult) player.rayTrace(128.0D, 0F, false);
 
+            // Only teleport if a solid block is found
             if (world.getBlockState(result.getBlockPos()).getBlock() != Blocks.AIR) {
                 BlockPos pos = result.getBlockPos().offset(result.getSide());
 
-                for(int i = 0; i < 32; ++i) {
+                for (int i = 0; i < 32; ++i) {
                     world.addParticle(ParticleTypes.PORTAL, player.getX(), player.getY() + world.random.nextDouble() * 2.0D, player.getZ(), world.random.nextGaussian(), 0.0D, world.random.nextGaussian());
                 }
 
@@ -52,6 +57,14 @@ public class EnderianCutlassItem extends TerminusSwordItem {
         }
     }
 
+    /**
+     * Overriden to tell the player when they can teleport.
+     *
+     * @param world             World
+     * @param user              User of item
+     * @param stack             ItemStack
+     * @param remainingUseTicks Ticks remaining
+     */
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         if (user instanceof PlayerEntity) {

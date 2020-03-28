@@ -29,17 +29,32 @@ import org.lwjgl.glfw.GLFW;
 import java.nio.DoubleBuffer;
 import java.util.Random;
 
+/**
+ * Entry-point for clients.
+ */
 public class TerminusClient implements ClientModInitializer {
+    /**
+     * Used to generate syncIds.
+     */
     private static final Random RANDOM = new Random();
 
     @Override
     public void onInitializeClient() {
+        initNetworking();
+    }
+
+    /**
+     * Registers packet listeners.
+     */
+    public static void initNetworking() {
+        // Server request to client to get the scroll bar position
         ClientSidePacketRegistry.INSTANCE.register(Terminus.TNetworking.SYNC_RESULTS_ID, (packetContext, data) -> packetContext.getTaskQueue().execute(() -> {
             if (MinecraftClient.getInstance().currentScreen instanceof TerminusCraftingScreen) {
                 ((TerminusCraftingScreen) MinecraftClient.getInstance().currentScreen).syncScrollbar();
             }
         }));
 
+        // Server sends what ItemStack is in what slot of the Terminus crafting GUI
         ClientSidePacketRegistry.INSTANCE.register(Terminus.TNetworking.SYNC_RESULT_SLOT_ID, (packetContext, data) -> {
             int slotIndex = data.readInt();
             ItemStack stack = data.readItemStack();
@@ -53,30 +68,37 @@ public class TerminusClient implements ClientModInitializer {
             });
         });
 
-        ClientSidePacketRegistry.INSTANCE.register(Terminus.TNetworking.OPEN_CRAFTING_S2C_ID, ((packetContext, packetByteBuf) -> {
-            int syncId = packetByteBuf.readInt();
-            double mouseX = packetByteBuf.readDouble();
-            double mouseY = packetByteBuf.readDouble();
+        // Packets for the client to coordinate the navigation between the inventory and the crafting screen
+        {
+            ClientSidePacketRegistry.INSTANCE.register(Terminus.TNetworking.OPEN_CRAFTING_S2C_ID, ((packetContext, packetByteBuf) -> {
+                int syncId = packetByteBuf.readInt();
+                double mouseX = packetByteBuf.readDouble();
+                double mouseY = packetByteBuf.readDouble();
 
-            packetContext.getTaskQueue().execute(() -> {
-                openCraftingMenu(syncId, mouseX, mouseY);
-            });
-        }));
+                packetContext.getTaskQueue().execute(() -> {
+                    openCraftingMenu(syncId, mouseX, mouseY);
+                });
+            }));
 
-        ClientSidePacketRegistry.INSTANCE.register(Terminus.TNetworking.CLOSE_CRAFTING_S2C_ID, ((packetContext, packetByteBuf) -> {
-            double mouseX = packetByteBuf.readDouble();
-            double mouseY = packetByteBuf.readDouble();
+            ClientSidePacketRegistry.INSTANCE.register(Terminus.TNetworking.CLOSE_CRAFTING_S2C_ID, ((packetContext, packetByteBuf) -> {
+                double mouseX = packetByteBuf.readDouble();
+                double mouseY = packetByteBuf.readDouble();
 
-            packetContext.getTaskQueue().execute(() -> {
-                ClientPlayerEntity player = MinecraftClient.getInstance().player;
-                player.closeScreen();
-                MinecraftClient.getInstance().openScreen(new InventoryScreen(player));
+                packetContext.getTaskQueue().execute(() -> {
+                    ClientPlayerEntity player = MinecraftClient.getInstance().player;
+                    player.closeScreen();
+                    MinecraftClient.getInstance().openScreen(new InventoryScreen(player));
 
-                InputUtil.setCursorParameters(MinecraftClient.getInstance().getWindow().getHandle(), 212993, mouseX, mouseY);
-            });
-        }));
+                    InputUtil.setCursorParameters(MinecraftClient.getInstance().getWindow().getHandle(), 212993, mouseX, mouseY);
+                });
+            }));
+        }
     }
 
+    /**
+     * Begins the process of opening the crafting menu from the inventory screen.
+     * It is a lot more complicated than initially thought due to how containers and screens need to be closed.
+     */
     public static void triggerOpenCraftingMenu() {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeInt(RANDOM.nextInt());
@@ -86,6 +108,14 @@ public class TerminusClient implements ClientModInitializer {
         ClientSidePacketRegistry.INSTANCE.sendToServer(Terminus.TNetworking.OPEN_CRAFTING_C2S_ID, buf);
     }
 
+    /**
+     * Finally opens the crafting menu.
+     * {@link #triggerOpenCraftingMenu()} needs to be invoked first.
+     *
+     * @param syncId
+     * @param mouseX
+     * @param mouseY
+     */
     private static void openCraftingMenu(int syncId, double mouseX, double mouseY) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         TerminusCraftingContainer container = new TerminusCraftingContainer(syncId, player.inventory);

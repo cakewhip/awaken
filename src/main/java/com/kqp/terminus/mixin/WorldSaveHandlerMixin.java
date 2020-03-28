@@ -18,6 +18,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.io.File;
 
+/**
+ * Used to save Terminus world data.
+ */
 @Mixin(WorldSaveHandler.class)
 public abstract class WorldSaveHandlerMixin implements PlayerSaveHandler {
     @Shadow

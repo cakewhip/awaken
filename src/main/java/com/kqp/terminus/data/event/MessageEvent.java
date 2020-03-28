@@ -4,6 +4,9 @@ import com.kqp.terminus.data.message.MessageTemplater;
 import com.kqp.terminus.util.Broadcaster;
 import net.minecraft.util.Formatting;
 
+/**
+ * Event for broadcasting a single message.
+ */
 public class MessageEvent extends Event {
     private final String message;
     private final Formatting color;

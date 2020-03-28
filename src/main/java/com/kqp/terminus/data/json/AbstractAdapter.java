@@ -4,7 +4,15 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
+/**
+ * GSON adapter for serializing and deserializing abstract classes.
+ *
+ * @param <T> Type to adapt
+ */
 public class AbstractAdapter<T> implements JsonSerializer<T>, JsonDeserializer<T> {
+    /**
+     * Package to look in for types.
+     */
     private final String packageName;
 
     public AbstractAdapter(String packageName) {

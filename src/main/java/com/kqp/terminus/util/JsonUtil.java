@@ -11,6 +11,9 @@ import com.kqp.terminus.data.json.AbstractAdapter;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Utility class for saving and loading JSON files.
+ */
 public final class JsonUtil {
     private static final String EVENT_DIR = "/data/terminus/event/";
 

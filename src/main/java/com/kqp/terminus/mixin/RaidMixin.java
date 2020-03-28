@@ -10,6 +10,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Used to detect when the raid has been defeated.
+ */
 @Mixin(Raid.class)
 public abstract class RaidMixin {
     @Inject(at = @At("HEAD"), method = "tick")

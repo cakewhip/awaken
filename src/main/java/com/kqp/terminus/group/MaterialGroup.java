@@ -10,12 +10,15 @@ import com.kqp.terminus.item.tool.TerminusSwordItem;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 
+/**
+ * Class to mass create a set of tools and armor for a given material.
+ */
 public class MaterialGroup {
     public final Item SWORD;
     public final Item SHOVEL;
     public final Item PICKAXE;
     public final Item AXE;
-    
+
     public final Item HELMET;
     public final Item CHESTPLATE;
     public final Item LEGGINGS;

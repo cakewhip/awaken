@@ -17,6 +17,9 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+/**
+ * Generic sword class for swords that apply a status effect to their target.
+ */
 public class StatusEffectSwordItem extends TerminusSwordItem {
     public StatusEffect effect;
     public int duration, amplifier;
@@ -44,6 +47,6 @@ public class StatusEffectSwordItem extends TerminusSwordItem {
                 effect.getName().asFormattedString(),
                 I18n.translate("enchantment.level." + (amplifier + 1)),
                 (duration / 20F)
-                )));
+        )));
     }
 }

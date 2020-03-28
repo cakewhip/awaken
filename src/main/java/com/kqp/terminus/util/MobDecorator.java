@@ -8,6 +8,9 @@ import net.minecraft.item.Items;
 
 import java.util.Random;
 
+/**
+ * Utility class for giving mobs equipment.
+ */
 public class MobDecorator {
     public static void giveArmor(HostileEntity entity) {
         Random r = entity.getRandom();

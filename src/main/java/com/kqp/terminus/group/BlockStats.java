@@ -1,5 +1,8 @@
 package com.kqp.terminus.group;
 
+/**
+ * Data class to hold block properties.
+ */
 public class BlockStats {
     public float hardness, resistance;
     public int lightLevel;

@@ -50,7 +50,7 @@ public class TerminusResultSlot extends Slot {
     protected void onCrafted(ItemStack stack) {
         if (!stack.isEmpty()) {
             HashMap<ComparableItemStack, Integer> compMap = TerminusRecipeManager.toComparableMap(craftingInv.main);
-            List<TerminusRecipe> matches = TerminusRecipeManager.getMatchesForOutput(container.craftingTypes, stack);
+            List<TerminusRecipe> matches = TerminusRecipeManager.getMatchesForOutput(container.recipeTypes, stack);
 
             for (TerminusRecipe recipe : matches) {
                 if (recipe.matches(compMap)) {

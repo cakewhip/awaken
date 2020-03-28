@@ -1,24 +1,26 @@
 package com.kqp.terminus.recipe;
 
-import com.google.gson.annotations.Expose;
-import com.kqp.terminus.Terminus;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Ingredient;
 import net.minecraft.text.LiteralText;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
+/**
+ * Represents a Terminus recipe with an ItemStack result and a map of reagents to their counts.
+ */
 public class TerminusRecipe {
     public ItemStack result;
     public HashMap<Reagent, Integer> reagents;
 
-    @Expose(serialize = false, deserialize = false)
+    /**
+     * A pre-calculated map of what item stacks match with a given reagent.
+     * I consider this the secret sauce of the Terminus recipe system.
+     */
     public HashMap<ComparableItemStack, Reagent> itemStackReagentMap;
 
-    public TerminusRecipe() {
+    private TerminusRecipe() {
         this.reagents = new HashMap();
         this.itemStackReagentMap = new HashMap();
     }
@@ -48,9 +50,17 @@ public class TerminusRecipe {
         });
     }
 
+    /**
+     * If this recipe matches a passed map of item stacks and their counts.
+     *
+     * @param itemStacks Input map of item stacks
+     * @return Whether this recipe matches the passed map
+     */
     public boolean matches(HashMap<ComparableItemStack, Integer> itemStacks) {
+        // Used to keep track of what matching reagents the passed map of item stacks has
         HashMap<Reagent, Integer> reagentMatchMap = new HashMap();
 
+        // If the item stack matches a required reagent, it places it into the match map with a count.
         itemStacks.forEach((itemStack, count) -> {
             if (itemStackReagentMap.containsKey(itemStack)) {
                 Reagent matchingReagent = itemStackReagentMap.get(itemStack);
@@ -63,6 +73,8 @@ public class TerminusRecipe {
             }
         });
 
+        // Iterate through the required reagents and what this map has.
+        // Returns false if it sees a required reagent is missing or doesn't have enough.
         for (Reagent reagent : reagents.keySet()) {
             if (!reagentMatchMap.containsKey(reagent) || reagentMatchMap.get(reagent) < reagents.get(reagent)) {
                 return false;
@@ -72,6 +84,12 @@ public class TerminusRecipe {
         return true;
     }
 
+    /**
+     * Called whenever this recipe is crafted.
+     * Consumes required reagents from the passed inventory.
+     *
+     * @param craftInv Inventory used to craft the recipe.
+     */
     public void onCraft(Inventory craftInv) {
         HashMap<Reagent, Integer> reagentMatchMap = new HashMap();
 

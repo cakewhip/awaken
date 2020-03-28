@@ -11,12 +11,22 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.item.*;
 
+/**
+ * Class to mass create blocks and items for a given type.
+ */
 public class OreGroup {
     public final BlockStats bs;
     public final Block ORE;
     public final Block BLOCK;
     public final Item INGOT;
 
+    /**
+     * Creates blocks and items using a given name.
+     *
+     * @param name      Name for blocks and items
+     * @param bs        Properties for blocks
+     * @param ingotName Name of the ingot, null to not make it
+     */
     public OreGroup(String name, BlockStats bs, String ingotName) {
         this.bs = bs;
 

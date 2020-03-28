@@ -9,7 +9,15 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Manages how the world has progressed.
+ */
 public class TerminusProgression {
+    /**
+     * Stage is determined by how many evils the player has defeated.
+     *
+     * @return Stage integer
+     */
     public static int getStage() {
         int stage = 0;
 
@@ -25,6 +33,9 @@ public class TerminusProgression {
         return stage;
     }
 
+    /**
+     * Evaluates what stage the world is at and what events to put in place.
+     */
     public static void evaluateStage() {
         int stage = getStage();
 

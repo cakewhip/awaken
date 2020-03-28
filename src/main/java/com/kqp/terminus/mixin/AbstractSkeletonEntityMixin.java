@@ -11,6 +11,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Used to give skeletons better stats and armor post-awakening.
+ */
 @Mixin(AbstractSkeletonEntity.class)
 public abstract class AbstractSkeletonEntityMixin {
     @Inject(at = @At("TAIL"), method = "initAttributes")

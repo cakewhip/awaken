@@ -19,6 +19,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+/**
+ * Used to give spiders better stats and a higher chance to have a skeleton rider.
+ */
 @Mixin(SpiderEntity.class)
 public abstract class SpiderEntityMixin {
     @Inject(at = @At("TAIL"), method = "initAttributes")
@@ -42,7 +45,7 @@ public abstract class SpiderEntityMixin {
                 SkeletonEntity skeletonEntity = (SkeletonEntity) EntityType.SKELETON.create(spider.world);
 
                 skeletonEntity.refreshPositionAndAngles(spider.getX(), spider.getY(), spider.getZ(), spider.yaw, 0.0F);
-                skeletonEntity.initialize(world, difficulty, spawnType, (EntityData)null, (CompoundTag)null);
+                skeletonEntity.initialize(world, difficulty, spawnType, (EntityData) null, (CompoundTag) null);
                 world.spawnEntity(skeletonEntity);
                 skeletonEntity.startRiding(spider);
             }

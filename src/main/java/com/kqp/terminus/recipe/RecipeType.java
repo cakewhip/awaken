@@ -1,5 +1,11 @@
 package com.kqp.terminus.recipe;
 
+import com.kqp.terminus.block.RecipeAccessProvider;
+
+/**
+ * Used to group recipes by what provider allows access to them.
+ * See {@link RecipeAccessProvider}.
+ */
 public class RecipeType {
     public static final String CRAFTING_TABLE = "crafting_table";
     public static final String ANVIL = "anvil";

@@ -18,6 +18,10 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+/**
+ * Class for the Jang Katana.
+ * TODO: make this a generic class that takes in a ToolMaterial and a list of status effects to apply
+ */
 public class JangKatanaItem extends TerminusSwordItem {
     public JangKatanaItem() {
         super(TerminusToolMaterial.JANG_KATANA);
@@ -33,14 +37,22 @@ public class JangKatanaItem extends TerminusSwordItem {
         return Rarity.EPIC;
     }
 
+    /**
+     * Applies effects for the Jang Katana.
+     * @param stack ItemStack
+     * @param world World
+     * @param entity Entity in possession of the item
+     * @param slot Slot the item is in
+     * @param selected If the item is being held
+     */
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (selected && entity instanceof LivingEntity) {
             LivingEntity le = (LivingEntity) entity;
 
-            le.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 1, 1));
-            le.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 1, 1));
-            le.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 1, 1));
+            le.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 20, 1));
+            le.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 20, 1));
+            le.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20, 1));
         }
     }
 

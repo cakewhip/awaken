@@ -15,6 +15,9 @@ import net.minecraft.util.Identifier;
 
 import java.util.HashSet;
 
+/**
+ * Class to help add things to the loot table of entities.
+ */
 public class LootTableHelper implements LootTableLoadingCallback {
     public static HashSet<LootEntry> LOOT_ENTRIES = new HashSet();
 
@@ -29,18 +32,15 @@ public class LootTableHelper implements LootTableLoadingCallback {
         addLootEntry("minecraft:endermite", Terminus.TItems.ENDERIAN_CUTLASS, 0.01F);
     }
 
-    public static void addLootEntry(Identifier id, ItemConvertible item, float chance) {
-        LOOT_ENTRIES.add(new LootEntry(id, item, chance));
-    }
-
     public static void addLootEntry(String id, ItemConvertible item, float chance) {
-        addLootEntry(new Identifier(id), item, chance);
+        LOOT_ENTRIES.add(new LootEntry(new Identifier(id), item, chance));
     }
 
     @Override
     public void onLootTableLoading(ResourceManager resourceManager, LootManager lootManager, Identifier id, FabricLootSupplierBuilder supplier, LootTableSetter lootTableSetter) {
         for (LootEntry lootEntry : LOOT_ENTRIES) {
             if (lootEntry.id.equals(id)) {
+                // Builder created with 2 conditions: random chance and player kill required
                 FabricLootPoolBuilder builder = FabricLootPoolBuilder.builder()
                         .withRolls(ConstantLootTableRange.create(1))
                         .withCondition(RandomChanceLootCondition.builder(lootEntry.chance))
@@ -52,6 +52,9 @@ public class LootTableHelper implements LootTableLoadingCallback {
         }
     }
 
+    /**
+     * Data class to represent a loot entry.
+     */
     static class LootEntry {
         public Identifier id;
         public ItemConvertible item;
