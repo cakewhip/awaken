@@ -139,8 +139,8 @@ public class Terminus implements ModInitializer {
 
     public static class TItems {
         public static final Item ATLANTEAN_SABRE = new AtlanteanSabreItem();
-        public static final Item ASHEN_BLADE = new StatusEffectSwordItem(TerminusToolMaterial.PHASE_0_SWORD, StatusEffects.WITHER, 4 * 20, 2);
-        public static final Item GLACIAL_SHARD = new StatusEffectSwordItem(TerminusToolMaterial.PHASE_0_SWORD, StatusEffects.SLOWNESS, 4 * 20, 2);
+        public static final Item ASHEN_BLADE = new StatusEffectSwordItem(TerminusToolMaterial.PHASE_0_SWORD, StatusEffects.WITHER, 4 * 20, 1);
+        public static final Item GLACIAL_SHARD = new StatusEffectSwordItem(TerminusToolMaterial.PHASE_0_SWORD, StatusEffects.SLOWNESS, 4 * 20, 1);
         public static final Item ENDERIAN_CUTLASS = new EnderianCutlassItem();
         public static final Item JANG_KATANA = new JangKatanaItem();
 

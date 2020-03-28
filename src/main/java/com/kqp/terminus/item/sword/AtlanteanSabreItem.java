@@ -2,14 +2,22 @@ package com.kqp.terminus.item.sword;
 
 import com.kqp.terminus.item.TerminusToolMaterial;
 import com.kqp.terminus.item.tool.TerminusSwordItem;
+import jdk.internal.jline.internal.Nullable;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class AtlanteanSabreItem extends TerminusSwordItem {
     public AtlanteanSabreItem() {
@@ -58,5 +66,11 @@ public class AtlanteanSabreItem extends TerminusSwordItem {
         l *= n / m;
         player.addVelocity((double)h, (double)k, (double)l);
         player.setPushCooldown(20);
+    }
+
+    @Override
+    @Environment(EnvType.CLIENT)
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(new LiteralText("Right-click while swimming for a speed boost"));
     }
 }

@@ -2,19 +2,27 @@ package com.kqp.terminus.item.sword;
 
 import com.kqp.terminus.item.TerminusToolMaterial;
 import com.kqp.terminus.item.tool.TerminusSwordItem;
+import jdk.internal.jline.internal.Nullable;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class EnderianCutlassItem extends TerminusSwordItem {
     public EnderianCutlassItem() {
@@ -26,7 +34,7 @@ public class EnderianCutlassItem extends TerminusSwordItem {
         if (user instanceof PlayerEntity && remainingUseTicks <= 7180) {
             PlayerEntity player = (PlayerEntity) user;
 
-            BlockHitResult result = (BlockHitResult) player.rayTrace(64.0D, 0F, false);
+            BlockHitResult result = (BlockHitResult) player.rayTrace(128.0D, 0F, false);
 
             if (world.getBlockState(result.getBlockPos()).getBlock() != Blocks.AIR) {
                 BlockPos pos = result.getBlockPos().offset(result.getSide());
@@ -39,7 +47,7 @@ public class EnderianCutlassItem extends TerminusSwordItem {
 
                 player.requestTeleport(pos.getX(), pos.getY(), pos.getZ());
                 player.fallDistance = 0.0F;
-                player.damage(DamageSource.MAGIC, 5.0F);
+                player.damage(DamageSource.MAGIC, 4.0F);
             }
         }
     }
@@ -71,5 +79,11 @@ public class EnderianCutlassItem extends TerminusSwordItem {
         user.setCurrentHand(hand);
 
         return TypedActionResult.consume(itemStack);
+    }
+
+    @Override
+    @Environment(EnvType.CLIENT)
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(new LiteralText("Right-click to teleport"));
     }
 }
