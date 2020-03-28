@@ -1,9 +1,6 @@
 package com.kqp.terminus.recipe;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import com.kqp.terminus.Terminus;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,7 +30,7 @@ public class TerminusRecipeLoader extends JsonDataLoader {
             JsonObject outputNode = recipeNode.getAsJsonObject("output");
             ItemStack output = new ItemStack(
                     Registry.ITEM.get(new Identifier(outputNode.get("item").getAsString())),
-                    outputNode.get("count").getAsInt()
+                    outputNode.get("count") != null ? outputNode.get("count").getAsInt() : 1
             );
 
             JsonArray reagentsNode = recipeNode.getAsJsonArray("reagents");
@@ -57,7 +54,8 @@ public class TerminusRecipeLoader extends JsonDataLoader {
                     });
                 }
 
-                int count = reagentNode.get("count").getAsInt();
+                JsonElement countNode = reagentNode.get("count");
+                int count = countNode != null ? countNode.getAsInt() : 1;
 
                 reagents.put(new Reagent(matchingStacks), count);
             });

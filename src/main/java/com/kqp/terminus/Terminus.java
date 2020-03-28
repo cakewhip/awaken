@@ -11,15 +11,19 @@ import com.kqp.terminus.group.OreGroup;
 import com.kqp.terminus.item.TerminusArmorMaterial;
 import com.kqp.terminus.item.TerminusToolMaterial;
 import com.kqp.terminus.item.sword.EnderianCutlassItem;
+import com.kqp.terminus.item.sword.JangKatanaItem;
 import com.kqp.terminus.item.sword.StatusEffectSwordItem;
 import com.kqp.terminus.item.sword.AtlanteanSabreItem;
 import com.kqp.terminus.item.tool.TerminusSwordItem;
+import com.kqp.terminus.loot.LootTableHelper;
 import com.kqp.terminus.recipe.RecipeType;
 import com.kqp.terminus.util.TimeUtil;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.event.world.WorldTickCallback;
+import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
+import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -30,6 +34,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.loot.ConstantLootTableRange;
+import net.minecraft.loot.condition.LootCondition;
+import net.minecraft.loot.condition.RandomChanceLootCondition;
+import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
@@ -61,11 +69,12 @@ public class Terminus implements ModInitializer {
             TItems.init();
             TContainers.init();
             TNetworking.init();
+            LootTableHelper.init();
             initCallbacks();
         }, (time) -> Terminus.info("Terminus load took " + time + "ms"));
     }
 
-    private void initCallbacks() {
+    private static void initCallbacks() {
         info("Initializing callbacks");
 
         WorldTickCallback.EVENT.register((world) -> {
@@ -77,6 +86,8 @@ public class Terminus implements ModInitializer {
                 }
             }
         });
+
+        LootTableLoadingCallback.EVENT.register(new LootTableHelper());
     }
 
     public static class Groups {
@@ -131,6 +142,7 @@ public class Terminus implements ModInitializer {
         public static final Item ASHEN_BLADE = new StatusEffectSwordItem(TerminusToolMaterial.PHASE_0_SWORD, StatusEffects.WITHER, 4 * 20, 2);
         public static final Item GLACIAL_SHARD = new StatusEffectSwordItem(TerminusToolMaterial.PHASE_0_SWORD, StatusEffects.SLOWNESS, 4 * 20, 2);
         public static final Item ENDERIAN_CUTLASS = new EnderianCutlassItem();
+        public static final Item JANG_KATANA = new JangKatanaItem();
 
         public static final Item CELESTIAL_STEEL_INGOT = new Item(new Item.Settings().group(ItemGroup.MATERIALS));
 
@@ -141,6 +153,7 @@ public class Terminus implements ModInitializer {
             register(ASHEN_BLADE, "ashen_blade");
             register(GLACIAL_SHARD, "glacial_shard");
             register(ENDERIAN_CUTLASS, "enderian_cutlass");
+            register(JANG_KATANA, "jang_katana");
 
             register(CELESTIAL_STEEL_INGOT, "celestial_steel_ingot");
         }

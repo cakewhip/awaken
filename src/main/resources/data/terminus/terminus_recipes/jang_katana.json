@@ -1,0 +1,37 @@
+{
+  "type": "anvil",
+  "recipe": {
+    "output": {
+      "item": "terminus:jang_katana"
+    },
+    "reagents": [
+      {
+        "item": "minecraft:wooden_sword"
+      },
+      {
+        "item": "minecraft:stone_sword"
+      },
+      {
+        "item": "minecraft:iron_sword"
+      },
+      {
+        "item": "minecraft:golden_sword"
+      },
+      {
+        "item": "minecraft:diamond_sword"
+      },
+      {
+        "item": "terminus:atlantean_sabre"
+      },
+      {
+        "item": "terminus:ashen_blade"
+      },
+      {
+        "item": "terminus:glacial_shard"
+      },
+      {
+        "item": "terminus:enderian_cutlass"
+      }
+    ]
+  }
+}
