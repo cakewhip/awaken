@@ -4,6 +4,7 @@ import com.kqp.terminus.item.TerminusToolMaterial;
 import com.kqp.terminus.item.tool.TerminusSwordItem;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
@@ -37,6 +38,8 @@ public class EnderianCutlassItem extends TerminusSwordItem {
                 player.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 0.5F, 1.0F);
 
                 player.requestTeleport(pos.getX(), pos.getY(), pos.getZ());
+                player.fallDistance = 0.0F;
+                player.damage(DamageSource.MAGIC, 5.0F);
             }
         }
     }
