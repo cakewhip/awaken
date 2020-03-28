@@ -42,6 +42,8 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Main entry point for Terminus.
+ *
+ * TODO: add mana awakening
  */
 public class Terminus implements ModInitializer {
     public static Logger LOGGER = LogManager.getLogger();
@@ -137,6 +139,14 @@ public class Terminus implements ModInitializer {
         public static final Item ENDERIAN_CUTLASS = new EnderianCutlassItem();
         public static final Item JANG_KATANA = new JangKatanaItem();
 
+        //TODO: add blaze & ghast bow (Cindered Bow)
+        //TODO: add slime bow (Slimey Bow)
+        //TODO: add pillager axe (Raider's/Bandit Axe)
+        //TODO: add pickaxe from mobs in cave (Escape Plan)
+        //TODO: add shovel from husks (Archaeologist's Spade)
+        //TODO: add sword from cave spiders (Rusty Shank, inflicts poison/tetanus)
+        //TODO: add unbreakable elytra using post-awakened materials (Dragon Bone Wings)
+
         public static final Item CELESTIAL_STEEL_INGOT = new Item(new Item.Settings().group(ItemGroup.MATERIALS));
 
         public static void init() {
@@ -160,6 +170,11 @@ public class Terminus implements ModInitializer {
         public static void init() {
             info("Initializing containers");
         }
+    }
+
+    public static class TEntities {
+        //TODO: add raptor chicken
+        //TODO: add killer bunny (https://minecraft.gamepedia.com/Rabbit#The_Killer_Bunny)
     }
 
     public static class TNetworking {
