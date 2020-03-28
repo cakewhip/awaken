@@ -44,7 +44,7 @@ public class TerminusCraftingContainer extends Container {
         int counter = 0;
         for (i = 0; i < 3; i++) {
             for (j = 0; j < 8; j++) {
-                this.addSlot(new TerminusResultSlot(playerInventory.player, craftingTypes, resultInv, counter++, 8 + j * 18, 18 + i * 18));
+                this.addSlot(new TerminusResultSlot(this, playerInventory.player, resultInv, counter++, 8 + j * 18, 18 + i * 18));
             }
         }
 

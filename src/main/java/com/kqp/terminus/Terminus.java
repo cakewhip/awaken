@@ -18,6 +18,7 @@ import com.kqp.terminus.item.tool.TerminusSwordItem;
 import com.kqp.terminus.loot.LootTableHelper;
 import com.kqp.terminus.recipe.RecipeType;
 import com.kqp.terminus.util.TimeUtil;
+import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
@@ -39,8 +40,10 @@ import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -173,7 +176,10 @@ public class Terminus implements ModInitializer {
         public static final Identifier SYNC_SCROLLBAR_ID = new Identifier(Terminus.MOD_ID, "sync_scrollbar");
         public static final Identifier SYNC_RESULTS_ID = new Identifier(Terminus.MOD_ID, "sync_results");
         public static final Identifier SYNC_RESULT_SLOT_ID = new Identifier(Terminus.MOD_ID, "sync_result_slot");
-        public static final Identifier OPEN_CRAFTING_ID = new Identifier(Terminus.MOD_ID, "open_crafting");
+        public static final Identifier OPEN_CRAFTING_C2S_ID = new Identifier(Terminus.MOD_ID, "open_crafting_c2s");
+        public static final Identifier OPEN_CRAFTING_S2C_ID = new Identifier(Terminus.MOD_ID, "open_crafting_s2c");
+        public static final Identifier CLOSE_CRAFTING_C2S_ID = new Identifier(Terminus.MOD_ID, "close_crafting_c2s");
+        public static final Identifier CLOSE_CRAFTING_S2C_ID = new Identifier(Terminus.MOD_ID, "close_crafting_s2c");
 
         public static void init() {
             info("Initializing networking");
@@ -188,12 +194,39 @@ public class Terminus implements ModInitializer {
                 });
             });
 
-            ServerSidePacketRegistry.INSTANCE.register(OPEN_CRAFTING_ID, ((packetContext, packetByteBuf) -> {
+            ServerSidePacketRegistry.INSTANCE.register(OPEN_CRAFTING_C2S_ID, ((packetContext, packetByteBuf) -> {
                 int syncId = packetByteBuf.readInt();
+                double mouseX = packetByteBuf.readDouble();
+                double mouseY = packetByteBuf.readDouble();
 
                 packetContext.getTaskQueue().execute(() -> {
-                    PlayerEntity player = packetContext.getPlayer();
+                    ServerPlayerEntity player = (ServerPlayerEntity) packetContext.getPlayer();
+                    player.closeContainer();
+
+                    PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+                    buf.writeInt(syncId);
+                    buf.writeDouble(mouseX);
+                    buf.writeDouble(mouseY);
+
+                    ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, OPEN_CRAFTING_S2C_ID, buf);
+
                     player.container = new TerminusCraftingContainer(syncId, player.inventory);
+                });
+            }));
+
+            ServerSidePacketRegistry.INSTANCE.register(CLOSE_CRAFTING_C2S_ID, ((packetContext, packetByteBuf) -> {
+                double mouseX = packetByteBuf.readDouble();
+                double mouseY = packetByteBuf.readDouble();
+
+                packetContext.getTaskQueue().execute(() -> {
+                    ServerPlayerEntity player = (ServerPlayerEntity) packetContext.getPlayer();
+                    player.closeContainer();
+
+                    PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+                    buf.writeDouble(mouseX);
+                    buf.writeDouble(mouseY);
+
+                    ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, CLOSE_CRAFTING_S2C_ID, buf);
                 });
             }));
         }

@@ -5,10 +5,13 @@ import com.kqp.terminus.client.container.TerminusCraftingContainer;
 import com.kqp.terminus.client.container.TerminusResultSlot;
 import com.kqp.terminus.recipe.Reagent;
 import com.kqp.terminus.recipe.TerminusRecipe;
+import com.kqp.terminus.util.MouseUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.sun.prism.impl.BufferUtil;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.entity.player.PlayerInventory;
@@ -20,7 +23,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
+import org.lwjgl.glfw.GLFW;
 
+import java.nio.DoubleBuffer;
 import java.util.List;
 
 public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingContainer> {
@@ -128,7 +133,11 @@ public class TerminusCraftingScreen extends ContainerScreen<TerminusCraftingCont
 
             if (aX > 0 && aX < 28) {
                 if (aY > -32 && aY < 0) {
-                    this.minecraft.openScreen(new InventoryScreen(this.minecraft.player));
+                    PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+                    buf.writeDouble(MouseUtil.getMouseX());
+                    buf.writeDouble(MouseUtil.getMouseY());
+
+                    ClientSidePacketRegistry.INSTANCE.sendToServer(Terminus.TNetworking.CLOSE_CRAFTING_C2S_ID, buf);
                 }
             }
         }

@@ -4,21 +4,29 @@ import com.kqp.terminus.Terminus;
 import com.kqp.terminus.client.container.TerminusCraftingContainer;
 import com.kqp.terminus.client.container.TerminusResultSlot;
 import com.kqp.terminus.client.screen.TerminusCraftingScreen;
+import com.kqp.terminus.util.MouseUtil;
+import com.sun.prism.impl.BufferUtil;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.keybinding.FabricKeyBinding;
 import net.fabricmc.fabric.api.client.keybinding.KeyBindingRegistry;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFW;
 
+import java.nio.DoubleBuffer;
 import java.util.Random;
 
 public class TerminusClient implements ClientModInitializer {
@@ -44,21 +52,50 @@ public class TerminusClient implements ClientModInitializer {
                 }
             });
         });
+
+        ClientSidePacketRegistry.INSTANCE.register(Terminus.TNetworking.OPEN_CRAFTING_S2C_ID, ((packetContext, packetByteBuf) -> {
+            int syncId = packetByteBuf.readInt();
+            double mouseX = packetByteBuf.readDouble();
+            double mouseY = packetByteBuf.readDouble();
+
+            packetContext.getTaskQueue().execute(() -> {
+                openCraftingMenu(syncId, mouseX, mouseY);
+            });
+        }));
+
+        ClientSidePacketRegistry.INSTANCE.register(Terminus.TNetworking.CLOSE_CRAFTING_S2C_ID, ((packetContext, packetByteBuf) -> {
+            double mouseX = packetByteBuf.readDouble();
+            double mouseY = packetByteBuf.readDouble();
+
+            packetContext.getTaskQueue().execute(() -> {
+                ClientPlayerEntity player = MinecraftClient.getInstance().player;
+                player.closeScreen();
+                MinecraftClient.getInstance().openScreen(new InventoryScreen(player));
+
+                InputUtil.setCursorParameters(MinecraftClient.getInstance().getWindow().getHandle(), 212993, mouseX, mouseY);
+            });
+        }));
     }
 
-    public static void openCraftingMenu() {
-        PlayerEntity player = MinecraftClient.getInstance().player;
-        int syncId = RANDOM.nextInt();
-        TerminusCraftingContainer container = new TerminusCraftingContainer(syncId, player.inventory);
-        player.container = container;
+    public static void triggerOpenCraftingMenu() {
+        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+        buf.writeInt(RANDOM.nextInt());
+        buf.writeDouble(MouseUtil.getMouseX());
+        buf.writeDouble(MouseUtil.getMouseY());
 
+        ClientSidePacketRegistry.INSTANCE.sendToServer(Terminus.TNetworking.OPEN_CRAFTING_C2S_ID, buf);
+    }
+
+    private static void openCraftingMenu(int syncId, double mouseX, double mouseY) {
+        ClientPlayerEntity player = MinecraftClient.getInstance().player;
+        TerminusCraftingContainer container = new TerminusCraftingContainer(syncId, player.inventory);
+
+        player.closeScreen();
+        player.container = container;
         MinecraftClient.getInstance().openScreen(new TerminusCraftingScreen(
                 container,
                 player.inventory));
 
-        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-        buf.writeInt(syncId);
-
-        ClientSidePacketRegistry.INSTANCE.sendToServer(Terminus.TNetworking.OPEN_CRAFTING_ID, buf);
+        InputUtil.setCursorParameters(MinecraftClient.getInstance().getWindow().getHandle(), 212993, mouseX, mouseY);
     }
 }
