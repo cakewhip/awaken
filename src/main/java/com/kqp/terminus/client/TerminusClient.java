@@ -5,28 +5,16 @@ import com.kqp.terminus.client.container.TerminusCraftingContainer;
 import com.kqp.terminus.client.container.TerminusResultSlot;
 import com.kqp.terminus.client.screen.TerminusCraftingScreen;
 import com.kqp.terminus.util.MouseUtil;
-import com.sun.prism.impl.BufferUtil;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.keybinding.FabricKeyBinding;
-import net.fabricmc.fabric.api.client.keybinding.KeyBindingRegistry;
-import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
-import org.lwjgl.BufferUtils;
-import org.lwjgl.glfw.GLFW;
 
-import java.nio.DoubleBuffer;
 import java.util.Random;
 
 /**

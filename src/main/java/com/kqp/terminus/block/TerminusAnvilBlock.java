@@ -22,7 +22,7 @@ public class TerminusAnvilBlock extends AnvilBlock implements RecipeAccessProvid
      * Creates a new Terminus anvil block.
      * Provides the passed recipes.
      *
-     * @param settings      Settings for the anvil block
+     * @param settings    Settings for the anvil block
      * @param recipeTypes Valid recipe types.
      */
     public TerminusAnvilBlock(Settings settings, String... recipeTypes) {

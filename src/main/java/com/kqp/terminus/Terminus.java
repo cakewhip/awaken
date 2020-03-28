@@ -10,20 +10,17 @@ import com.kqp.terminus.group.MaterialGroup;
 import com.kqp.terminus.group.OreGroup;
 import com.kqp.terminus.item.TerminusArmorMaterial;
 import com.kqp.terminus.item.TerminusToolMaterial;
+import com.kqp.terminus.item.sword.AtlanteanSabreItem;
 import com.kqp.terminus.item.sword.EnderianCutlassItem;
 import com.kqp.terminus.item.sword.JangKatanaItem;
 import com.kqp.terminus.item.sword.StatusEffectSwordItem;
-import com.kqp.terminus.item.sword.AtlanteanSabreItem;
-import com.kqp.terminus.item.tool.TerminusSwordItem;
 import com.kqp.terminus.loot.LootTableHelper;
 import com.kqp.terminus.recipe.RecipeType;
 import com.kqp.terminus.util.TimeUtil;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ModInitializer;
-
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.event.world.WorldTickCallback;
-import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.block.Block;
@@ -31,25 +28,17 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.loot.ConstantLootTableRange;
-import net.minecraft.loot.condition.LootCondition;
-import net.minecraft.loot.condition.RandomChanceLootCondition;
-import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Random;
 
 /**
  * Main entry point for Terminus.
@@ -83,7 +72,7 @@ public class Terminus implements ModInitializer {
 
         WorldTickCallback.EVENT.register((world) -> {
             if (!world.isClient) {
-                world = (ServerWorld) world;
+                world = world;
 
                 if (worldProperties != null) {
                     worldProperties.tick();

@@ -1,8 +1,8 @@
 package com.kqp.terminus.mixin;
 
 import com.kqp.terminus.Terminus;
-import com.kqp.terminus.util.JsonUtil;
 import com.kqp.terminus.data.TerminusWorldProperties;
+import com.kqp.terminus.util.JsonUtil;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.PlayerSaveHandler;

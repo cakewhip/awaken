@@ -8,6 +8,7 @@ import java.util.List;
 public class StringUtil {
     /**
      * Creates a comma separated string using 'and'.
+     *
      * @param list List of strings
      * @return Comma separated string
      */
@@ -31,6 +32,7 @@ public class StringUtil {
 
     /**
      * Creates a comma separated string using 'or'.
+     *
      * @param list List of strings
      * @return Comma separated string
      */

@@ -23,6 +23,6 @@ public class MessageEvent extends Event {
     @Override
     public void invoke() {
         Broadcaster broadcaster = new Broadcaster();
-        broadcaster.broadcastMessage(MessageTemplater.templateString(message), color, bold, italic);
+        Broadcaster.broadcastMessage(MessageTemplater.templateString(message), color, bold, italic);
     }
 }

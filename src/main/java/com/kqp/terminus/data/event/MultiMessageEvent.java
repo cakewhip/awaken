@@ -18,7 +18,7 @@ public class MultiMessageEvent extends Event {
     public void invoke() {
         Broadcaster broadcaster = new Broadcaster();
         for (Message message : messages) {
-            broadcaster.broadcastMessage(MessageTemplater.templateString(message.text), message.color, message.bold, message.italic);
+            Broadcaster.broadcastMessage(MessageTemplater.templateString(message.text), message.color, message.bold, message.italic);
         }
     }
 

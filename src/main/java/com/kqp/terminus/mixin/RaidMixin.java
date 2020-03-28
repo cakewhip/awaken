@@ -23,7 +23,7 @@ public abstract class RaidMixin {
         if (!world.isClient && raid.hasWon() && !Terminus.worldProperties.isPostRaid()) {
             Broadcaster broadcaster = new Broadcaster();
             Terminus.worldProperties.setPostRaid();
-            broadcaster.broadcastMessage("A distant figure fades into the shadows...", Formatting.DARK_RED, false, true);
+            Broadcaster.broadcastMessage("A distant figure fades into the shadows...", Formatting.DARK_RED, false, true);
         }
     }
 }

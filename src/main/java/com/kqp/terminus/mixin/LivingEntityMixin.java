@@ -1,10 +1,8 @@
 package com.kqp.terminus.mixin;
 
 import com.kqp.terminus.Terminus;
-import com.kqp.terminus.data.TerminusWorldProperties;
 import com.kqp.terminus.item.sword.AtlanteanSabreItem;
 import com.kqp.terminus.util.Broadcaster;
-import com.kqp.terminus.util.JsonUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.ZombieEntity;
@@ -14,14 +12,11 @@ import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
-import net.minecraft.world.level.LevelProperties;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.io.File;
 
 /**
  * Used to:
@@ -41,16 +36,16 @@ public abstract class LivingEntityMixin {
             if (source.getAttacker() instanceof PlayerEntity) {
                 if (le instanceof CowEntity && !Terminus.worldProperties.isPostDragon()) {
                     Terminus.worldProperties.setPostDragon();
-                    broadcaster.broadcastMessage("The ground shakes beneath you...", Formatting.DARK_RED, false, true);
+                    Broadcaster.broadcastMessage("The ground shakes beneath you...", Formatting.DARK_RED, false, true);
                 } else if (le instanceof SheepEntity && !Terminus.worldProperties.isPostWither()) {
                     Terminus.worldProperties.setPostWither();
-                    broadcaster.broadcastMessage("Screams echo from below...", Formatting.DARK_RED, false, true);
+                    Broadcaster.broadcastMessage("Screams echo from below...", Formatting.DARK_RED, false, true);
                 } else if (le instanceof PigEntity && !Terminus.worldProperties.isPostElderGuardian()) {
                     Terminus.worldProperties.setPostElderGuardian();
-                    broadcaster.broadcastMessage("A sharp chill goes down your spine...", Formatting.DARK_RED, false, true);
+                    Broadcaster.broadcastMessage("A sharp chill goes down your spine...", Formatting.DARK_RED, false, true);
                 } else if (le instanceof ZombieEntity && !Terminus.worldProperties.isPostRaid()) {
                     Terminus.worldProperties.setPostRaid();
-                    broadcaster.broadcastMessage("A distant figure fades into the shadows...", Formatting.DARK_RED, false, true);
+                    Broadcaster.broadcastMessage("A distant figure fades into the shadows...", Formatting.DARK_RED, false, true);
                 }
             }
         }

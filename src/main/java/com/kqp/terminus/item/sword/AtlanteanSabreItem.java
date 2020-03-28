@@ -72,7 +72,7 @@ public class AtlanteanSabreItem extends TerminusSwordItem {
         h *= n / m;
         k *= n / m;
         l *= n / m;
-        player.addVelocity((double) h, (double) k, (double) l);
+        player.addVelocity(h, k, l);
         player.setPushCooldown(20);
     }
 

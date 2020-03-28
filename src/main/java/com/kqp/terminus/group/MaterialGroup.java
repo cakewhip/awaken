@@ -1,8 +1,6 @@
 package com.kqp.terminus.group;
 
 import com.kqp.terminus.Terminus;
-import com.kqp.terminus.item.TerminusArmorMaterial;
-import com.kqp.terminus.item.TerminusToolMaterial;
 import com.kqp.terminus.item.tool.TerminusAxeItem;
 import com.kqp.terminus.item.tool.TerminusPickaxeItem;
 import com.kqp.terminus.item.tool.TerminusShovelItem;

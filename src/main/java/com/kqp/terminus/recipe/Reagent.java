@@ -3,7 +3,10 @@ package com.kqp.terminus.recipe;
 import com.kqp.terminus.util.StringUtil;
 import net.minecraft.item.ItemStack;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**

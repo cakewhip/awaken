@@ -1,7 +1,6 @@
 package com.kqp.terminus.item.tool;
 
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.ToolMaterial;
 

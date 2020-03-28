@@ -2,29 +2,20 @@ package com.kqp.terminus.mixin;
 
 import com.kqp.terminus.Terminus;
 import com.kqp.terminus.client.TerminusClient;
-import com.kqp.terminus.util.MouseUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.sun.prism.impl.BufferUtil;
-import io.netty.buffer.Unpooled;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
-import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.PacketByteBuf;
-import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.nio.DoubleBuffer;
 
 /**
  * Used to add the navigation tabs to reach the Terminus crafting screen.

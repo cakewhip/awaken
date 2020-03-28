@@ -39,7 +39,7 @@ public class TerminusCraftingResultInventory implements Inventory {
     }
 
     public ItemStack getInvStack(int slot) {
-        return (ItemStack) this.stack.get(slot);
+        return this.stack.get(slot);
     }
 
     public ItemStack takeInvStack(int slot, int amount) {

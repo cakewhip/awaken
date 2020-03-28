@@ -5,8 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.kqp.terminus.data.event.Event;
-import com.kqp.terminus.data.trigger.Trigger;
 import com.kqp.terminus.data.json.AbstractAdapter;
+import com.kqp.terminus.data.trigger.Trigger;
 
 import java.io.*;
 import java.util.ArrayList;

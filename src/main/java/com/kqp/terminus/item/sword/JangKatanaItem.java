@@ -39,10 +39,11 @@ public class JangKatanaItem extends TerminusSwordItem {
 
     /**
      * Applies effects for the Jang Katana.
-     * @param stack ItemStack
-     * @param world World
-     * @param entity Entity in possession of the item
-     * @param slot Slot the item is in
+     *
+     * @param stack    ItemStack
+     * @param world    World
+     * @param entity   Entity in possession of the item
+     * @param slot     Slot the item is in
      * @param selected If the item is being held
      */
     @Override

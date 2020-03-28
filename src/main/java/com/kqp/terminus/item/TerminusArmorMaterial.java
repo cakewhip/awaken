@@ -5,12 +5,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Lazy;
 
 import java.util.function.Supplier;
 
@@ -18,11 +15,11 @@ import java.util.function.Supplier;
  * Used to create custom armor materials.
  */
 public enum TerminusArmorMaterial implements ArmorMaterial {
-    CELESTIAL("celestial", 28, new int[]{3, 6, 8, 3}, 16, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 12.0F, () -> {
-        return Ingredient.ofItems(new ItemConvertible[] { Terminus.TItems.CELESTIAL_STEEL_INGOT });
+    CELESTIAL("celestial", 28, new int[] { 3, 6, 8, 3 }, 16, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 12.0F, () -> {
+        return Ingredient.ofItems(Terminus.TItems.CELESTIAL_STEEL_INGOT);
     });
 
-    private static final int[] BASE_DURABILITY = new int[]{13, 15, 16, 11};
+    private static final int[] BASE_DURABILITY = new int[] { 13, 15, 16, 11 };
     private final String name;
     private final int durabilityMultiplier;
     private final int[] protectionAmounts;

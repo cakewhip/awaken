@@ -1,14 +1,12 @@
 package com.kqp.terminus.mixin;
 
 import com.kqp.terminus.Terminus;
-import com.kqp.terminus.util.MobDecorator;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.SkeletonEntity;
-import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.IWorld;
@@ -42,10 +40,10 @@ public abstract class SpiderEntityMixin {
 
             if (spider.getPassengerList().size() == 0 && world.getRandom().nextFloat() < 0.75F) {
 
-                SkeletonEntity skeletonEntity = (SkeletonEntity) EntityType.SKELETON.create(spider.world);
+                SkeletonEntity skeletonEntity = EntityType.SKELETON.create(spider.world);
 
                 skeletonEntity.refreshPositionAndAngles(spider.getX(), spider.getY(), spider.getZ(), spider.yaw, 0.0F);
-                skeletonEntity.initialize(world, difficulty, spawnType, (EntityData) null, (CompoundTag) null);
+                skeletonEntity.initialize(world, difficulty, spawnType, null, null);
                 world.spawnEntity(skeletonEntity);
                 skeletonEntity.startRiding(spider);
             }

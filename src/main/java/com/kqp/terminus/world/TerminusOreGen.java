@@ -15,7 +15,7 @@ public class TerminusOreGen {
 
     public static void generate(WorldChunk chunk, int maxY, int n, Block block) {
         for (int i = 0; i < n; i++) {
-            genVein(chunk, block, 
+            genVein(chunk, block,
                     new BlockPos(RANDOM.nextInt(16), 4 + RANDOM.nextInt(maxY - 4), RANDOM.nextInt(16))
             );
         }
@@ -25,7 +25,7 @@ public class TerminusOreGen {
         int orientationX = RANDOM.nextBoolean() ? 1 : -1;
         int orientationY = RANDOM.nextBoolean() ? 1 : -1;
         int orientationZ = RANDOM.nextBoolean() ? 1 : -1;
-        
+
         switch (RANDOM.nextInt(4)) {
             case 0:
                 placeBlock(chunk, pos.add(0, 0, 0), block);
@@ -45,7 +45,7 @@ public class TerminusOreGen {
                 break;
         }
     }
-    
+
     private static void placeBlock(WorldChunk chunk, BlockPos pos, Block block) {
         if (chunk.getBlockState(pos).getBlock() == Blocks.STONE) {
             chunk.setBlockState(pos, block.getDefaultState(), false);
