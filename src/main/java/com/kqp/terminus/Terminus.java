@@ -10,11 +10,14 @@ import com.kqp.terminus.group.MaterialGroup;
 import com.kqp.terminus.group.OreGroup;
 import com.kqp.terminus.item.TerminusArmorMaterial;
 import com.kqp.terminus.item.TerminusToolMaterial;
+import com.kqp.terminus.item.bow.FlameBowItem;
+import com.kqp.terminus.item.bow.StatusEffectBowItem;
 import com.kqp.terminus.item.sword.AtlanteanSabreItem;
 import com.kqp.terminus.item.sword.EnderianCutlassItem;
 import com.kqp.terminus.item.sword.JangKatanaItem;
 import com.kqp.terminus.item.sword.StatusEffectSwordItem;
 import com.kqp.terminus.loot.LootTableHelper;
+import com.kqp.terminus.loot.TerminusRarity;
 import com.kqp.terminus.recipe.RecipeType;
 import com.kqp.terminus.util.TimeUtil;
 import io.netty.buffer.Unpooled;
@@ -133,15 +136,16 @@ public class Terminus implements ModInitializer {
     }
 
     public static class TItems {
-        public static final Item ATLANTEAN_SABRE = new AtlanteanSabreItem();
-        public static final Item ASHEN_BLADE = new StatusEffectSwordItem(TerminusToolMaterial.PHASE_0_SWORD, StatusEffects.WITHER, 4 * 20, 1);
-        public static final Item GLACIAL_SHARD = new StatusEffectSwordItem(TerminusToolMaterial.PHASE_0_SWORD, StatusEffects.SLOWNESS, 4 * 20, 1);
-        public static final Item ENDERIAN_CUTLASS = new EnderianCutlassItem();
-        public static final Item JANG_KATANA = new JangKatanaItem();
+        public static final Item ATLANTEAN_SABRE = new AtlanteanSabreItem().setRarity(TerminusRarity.EPIC);
+        public static final Item ASHEN_BLADE = new StatusEffectSwordItem(TerminusToolMaterial.PHASE_0_SWORD, StatusEffects.WITHER, 4 * 20, 1).setRarity(TerminusRarity.EPIC);
+        public static final Item GLACIAL_SHARD = new StatusEffectSwordItem(TerminusToolMaterial.PHASE_0_SWORD, StatusEffects.SLOWNESS, 4 * 20, 1).setRarity(TerminusRarity.EPIC);
+        public static final Item ENDERIAN_CUTLASS = new EnderianCutlassItem().setRarity(TerminusRarity.EPIC);
+        public static final Item JANG_KATANA = new JangKatanaItem().setRarity(TerminusRarity.FABLED);
 
-        //TODO: add blaze & ghast bow (Cindered Bow)
-        //TODO: add slime bow (Slimey Bow)
-        //TODO: add pillager axe (Raider's/Bandit Axe)
+        public static final Item CINDERED_BOW = new FlameBowItem(4.0D, false).setRarity(TerminusRarity.RARE);
+        public static final Item SLIMEY_BOW = new StatusEffectBowItem(3.0D, false, StatusEffects.SLOWNESS, 2 * 20, 1).setRarity(TerminusRarity.RARE);
+
+        //TODO: add pillager axe (Raider's Axe)
         //TODO: add pickaxe from mobs in cave (Escape Plan)
         //TODO: add shovel from husks (Archaeologist's Spade)
         //TODO: add sword from cave spiders (Rusty Shank, inflicts poison/tetanus)
@@ -157,6 +161,9 @@ public class Terminus implements ModInitializer {
             register(GLACIAL_SHARD, "glacial_shard");
             register(ENDERIAN_CUTLASS, "enderian_cutlass");
             register(JANG_KATANA, "jang_katana");
+
+            register(CINDERED_BOW, "cindered_bow");
+            register(SLIMEY_BOW, "slimey_bow");
 
             register(CELESTIAL_STEEL_INGOT, "celestial_steel_ingot");
         }

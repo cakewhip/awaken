@@ -2,6 +2,7 @@ package com.kqp.terminus.item.sword;
 
 import com.kqp.terminus.item.TerminusToolMaterial;
 import com.kqp.terminus.item.tool.TerminusSwordItem;
+import com.kqp.terminus.loot.TerminusRarity;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -13,7 +14,6 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -30,11 +30,6 @@ public class JangKatanaItem extends TerminusSwordItem {
     @Override
     public boolean hasEnchantmentGlint(ItemStack stack) {
         return true;
-    }
-
-    @Override
-    public Rarity getRarity(ItemStack stack) {
-        return Rarity.EPIC;
     }
 
     /**
@@ -60,6 +55,8 @@ public class JangKatanaItem extends TerminusSwordItem {
     @Override
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        super.appendTooltip(stack, world, tooltip, context);
+
         tooltip.add(new LiteralText("When equipped:"));
         tooltip.add(new LiteralText("Regeneration II"));
         tooltip.add(new LiteralText("Speed II"));
