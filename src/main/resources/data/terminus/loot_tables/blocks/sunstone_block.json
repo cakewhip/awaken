@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "terminus:sunstone_block"
+          "name": "awaken:sunstone_block"
         }
       ],
       "conditions": [

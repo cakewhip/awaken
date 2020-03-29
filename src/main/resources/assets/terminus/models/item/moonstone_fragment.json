@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "terminus:item/moonstone_fragment"
+    "layer0": "awaken:item/moonstone_fragment"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "parent": "terminus:item/cindered_bow",
+  "parent": "awaken:item/cindered_bow",
   "textures": {
-    "layer0": "terminus:item/cindered_bow_pulling_1"
+    "layer0": "awaken:item/cindered_bow_pulling_1"
   }
 }

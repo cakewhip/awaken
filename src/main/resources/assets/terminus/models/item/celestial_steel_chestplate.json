@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "terminus:item/celestial_steel_chestplate"
+    "layer0": "awaken:item/celestial_steel_chestplate"
   }
 }

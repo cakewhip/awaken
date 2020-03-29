@@ -1,0 +1,25 @@
+{
+  "required": true,
+  "package": "com.kqp.awaken.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "WorldSaveHandlerMixin",
+    "LivingEntityMixin",
+    "RaidMixin",
+    "MinecraftServerMixin",
+    "ServerWorldMixin",
+    "WorldChunkMixin",
+    "RecipeManagerMixin",
+    "ZombieEntityMixin",
+    "AbstractSkeletonEntityMixin",
+    "SpiderEntityMixin"
+  ],
+  "client": [
+    "InventoryScreenMixin",
+    "LivingEntityRendererMixin"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

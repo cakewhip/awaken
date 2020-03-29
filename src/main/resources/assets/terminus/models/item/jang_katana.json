@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "terminus:item/jang_katana"
+    "layer0": "awaken:item/jang_katana"
   }
 }

@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "terminus:block/sunstone_block" }
+        "": { "model": "awaken:block/sunstone_block" }
     }
 }

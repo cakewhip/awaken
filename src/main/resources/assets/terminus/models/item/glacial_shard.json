@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "terminus:item/glacial_shard"
+    "layer0": "awaken:item/glacial_shard"
   }
 }

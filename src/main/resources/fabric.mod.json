@@ -1,28 +1,28 @@
 {
   "schemaVersion": 1,
-  "id": "terminus",
+  "id": "awaken",
   "version": "${version}",
-  "name": "Terminus",
-  "description": "Terminus",
+  "name": "Awaken",
+  "description": "Awaken",
   "authors": [
     "KQP"
   ],
   "contributors": [],
   "contact": {},
   "license": "Apache-2.0",
-  "icon": "assets/terminus/icon.png",
+  "icon": "assets/awaken/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.kqp.terminus.Terminus"
+      "com.kqp.awaken.Awaken"
     ],
     "client": [
-      "com.kqp.terminus.client.TerminusClient"
+      "com.kqp.awaken.client.AwakenClient"
     ],
     "server": []
   },
   "mixins": [
-    "terminus.mixins.json"
+    "awaken.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.4.0",

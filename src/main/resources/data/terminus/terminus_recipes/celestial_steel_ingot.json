@@ -2,16 +2,16 @@
   "type": "anvil",
   "recipe": {
     "output": {
-      "item": "terminus:celestial_steel_ingot",
+      "item": "awaken:celestial_steel_ingot",
       "count": 1
     },
     "reagents": [
       {
-        "item": "terminus:moonstone_ingot",
+        "item": "awaken:moonstone_ingot",
         "count": 1
       },
       {
-        "item": "terminus:sunstone_ingot",
+        "item": "awaken:sunstone_ingot",
         "count": 1
       },
       {

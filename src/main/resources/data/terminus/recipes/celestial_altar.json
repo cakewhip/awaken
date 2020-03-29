@@ -7,16 +7,16 @@
   ],
   "key": {
     "S": {
-      "item": "terminus:sunstone_block"
+      "item": "awaken:sunstone_block"
     },
     "M": {
-      "item": "terminus:moonstone_block"
+      "item": "awaken:moonstone_block"
     },
     "X": {
       "item": "minecraft:dragon_egg"
     }
   },
   "result": {
-    "item": "terminus:celestial_altar"
+    "item": "awaken:celestial_altar"
   }
 }

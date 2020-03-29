@@ -7,10 +7,10 @@
   ],
   "key": {
     "C": {
-      "item": "terminus:moonstone_fragment"
+      "item": "awaken:moonstone_fragment"
     }
   },
   "result": {
-    "item": "terminus:moonstone_block"
+    "item": "awaken:moonstone_block"
   }
 }

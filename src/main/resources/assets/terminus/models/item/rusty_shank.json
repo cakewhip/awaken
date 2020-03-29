@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "terminus:item/rusty_shank"
+    "layer0": "awaken:item/rusty_shank"
   }
 }

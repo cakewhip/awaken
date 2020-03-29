@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "terminus:item/archaeologist_spade"
+    "layer0": "awaken:item/archaeologist_spade"
   }
 }

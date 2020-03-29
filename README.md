@@ -1,2 +1,2 @@
-# Terminus
-Terminus mod
+# Awaken
+Awaken mod

@@ -2,7 +2,7 @@
   "type": "anvil",
   "recipe": {
     "output": {
-      "item": "terminus:jang_katana"
+      "item": "awaken:jang_katana"
     },
     "reagents": [
       {
@@ -21,16 +21,16 @@
         "item": "minecraft:diamond_sword"
       },
       {
-        "item": "terminus:atlantean_sabre"
+        "item": "awaken:atlantean_sabre"
       },
       {
-        "item": "terminus:ashen_blade"
+        "item": "awaken:ashen_blade"
       },
       {
-        "item": "terminus:glacial_shard"
+        "item": "awaken:glacial_shard"
       },
       {
-        "item": "terminus:enderian_cutlass"
+        "item": "awaken:enderian_cutlass"
       }
     ]
   }

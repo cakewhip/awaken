@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "terminus:celestial_steel_anvil"
+          "name": "awaken:celestial_steel_anvil"
         }
       ],
       "conditions": [

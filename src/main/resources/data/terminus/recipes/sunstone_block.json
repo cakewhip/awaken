@@ -7,10 +7,10 @@
   ],
   "key": {
     "C": {
-      "item": "terminus:sunstone_fragment"
+      "item": "awaken:sunstone_fragment"
     }
   },
   "result": {
-    "item": "terminus:sunstone_block"
+    "item": "awaken:sunstone_block"
   }
 }

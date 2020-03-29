@@ -1,3 +1,3 @@
 {
-  "parent": "terminus:block/sunstone_block"
+  "parent": "awaken:block/sunstone_block"
 }

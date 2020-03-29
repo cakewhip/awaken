@@ -2,12 +2,12 @@
   "type": "celestial_steel_anvil",
   "recipe": {
     "output": {
-      "item": "terminus:celestial_steel_shovel",
+      "item": "awaken:celestial_steel_shovel",
       "count": 1
     },
     "reagents": [
       {
-        "item": "terminus:celestial_steel_ingot",
+        "item": "awaken:celestial_steel_ingot",
         "count": 72
       }
     ]

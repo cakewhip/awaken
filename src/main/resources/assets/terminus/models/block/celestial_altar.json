@@ -1,12 +1,12 @@
 {
     "parent": "block/cube",
     "textures": {
-        "particle": "terminus:block/celestial_altar_top",
-        "down": "terminus:block/celestial_altar_top",
-        "up": "terminus:block/celestial_altar_top",
-        "north": "terminus:block/celestial_altar_side",
-        "east": "terminus:block/celestial_altar_side",
-        "south": "terminus:block/celestial_altar_side",
-        "west": "terminus:block/celestial_altar_side"
+        "particle": "awaken:block/celestial_altar_top",
+        "down": "awaken:block/celestial_altar_top",
+        "up": "awaken:block/celestial_altar_top",
+        "north": "awaken:block/celestial_altar_side",
+        "east": "awaken:block/celestial_altar_side",
+        "south": "awaken:block/celestial_altar_side",
+        "west": "awaken:block/celestial_altar_side"
     }
 }

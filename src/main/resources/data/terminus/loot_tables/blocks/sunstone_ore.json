@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "terminus:sunstone_ore"
+              "name": "awaken:sunstone_ore"
             },
             {
               "type": "minecraft:item",
@@ -46,7 +46,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "terminus:sunstone_fragment"
+              "name": "awaken:sunstone_fragment"
             }
           ]
         }

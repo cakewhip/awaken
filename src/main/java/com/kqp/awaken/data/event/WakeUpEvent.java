@@ -1,0 +1,13 @@
+package com.kqp.awaken.data.event;
+
+import com.kqp.awaken.Awaken;
+
+/**
+ * Event for enabling the awakening, AKA phase 1.
+ */
+public class WakeUpEvent extends Event {
+    @Override
+    public void invoke() {
+        Awaken.worldProperties.setAwakening();
+    }
+}

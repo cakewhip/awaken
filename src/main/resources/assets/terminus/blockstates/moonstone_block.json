@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "terminus:block/moonstone_block" }
+        "": { "model": "awaken:block/moonstone_block" }
     }
 }

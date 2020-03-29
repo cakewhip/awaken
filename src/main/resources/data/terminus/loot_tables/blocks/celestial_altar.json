@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "terminus:celestial_altar"
+          "name": "awaken:celestial_altar"
         }
       ],
       "conditions": [

@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "terminus:item/raiders_axe"
+    "layer0": "awaken:item/raiders_axe"
   }
 }
