@@ -74,7 +74,10 @@ public abstract class RecipeManagerMixin {
 
                     if (recipe instanceof ShapedRecipe) {
                         twoByTwo = ((ShapedRecipe) recipe).getWidth() <= 2 && ((ShapedRecipe) recipe).getHeight() <= 2;
+                    } else if (recipe instanceof ShapelessRecipe) {
+                        twoByTwo = reagents.keySet().size() <= 4;
                     }
+
                     AwakenRecipeManager.addRecipe(
                             twoByTwo ? RecipeType.TWO_BY_TWO : RecipeType.CRAFTING_TABLE,
                             recipe.getOutput(),
