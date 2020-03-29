@@ -22,27 +22,27 @@ public class LootTableHelper implements LootTableLoadingCallback {
     public static HashSet<LootEntry> LOOT_ENTRIES = new HashSet();
 
     public static void init() {
-        addLootEntry("minecraft:guardian", Awaken.TItems.ATLANTEAN_SABRE, 25F / 100F);
-        addLootEntry("minecraft:elder_guardian", Awaken.TItems.ATLANTEAN_SABRE, 1F / 100F);
-        addLootEntry("minecraft:drowned", Awaken.TItems.ATLANTEAN_SABRE, 0.25F / 100F);
+        addLootEntry("minecraft:drowned", Awaken.TItems.ATLANTEAN_SABRE, 1F / 100F);
+        addLootEntry("minecraft:guardian", Awaken.TItems.ATLANTEAN_SABRE, 5F / 100F);
+        addLootEntry("minecraft:elder_guardian", Awaken.TItems.ATLANTEAN_SABRE, 15F / 100F);
         addLootEntry("minecraft:wither_skeleton", Awaken.TItems.ASHEN_BLADE, 1F / 100F);
         addLootEntry("minecraft:wither", Awaken.TItems.ASHEN_BLADE, 33F / 100F);
-        addLootEntry("minecraft:stray", Awaken.TItems.GLACIAL_SHARD, 2.5F / 100F);
+        addLootEntry("minecraft:stray", Awaken.TItems.GLACIAL_SHARD, 5F / 100F);
         addLootEntry("minecraft:enderman", Awaken.TItems.ENDERIAN_CUTLASS, 1F / 100F);
+        addLootEntry("minecraft:endermite", Awaken.TItems.ENDERIAN_CUTLASS, 2.5F / 100F);
         addLootEntry("minecraft:shulker", Awaken.TItems.ENDERIAN_CUTLASS, 5F / 100F);
-        addLootEntry("minecraft:endermite", Awaken.TItems.ENDERIAN_CUTLASS, 1F / 100F);
-        addLootEntry("minecraft:ender_dragon", Awaken.TItems.ENDERIAN_CUTLASS, 25F / 100F);
+        addLootEntry("minecraft:ender_dragon", Awaken.TItems.ENDERIAN_CUTLASS, 50F / 100F);
 
-        addLootEntry("minecraft:blaze", Awaken.TItems.CINDERED_BOW, 2.5F / 100F);
-        addLootEntry("minecraft:ghast", Awaken.TItems.CINDERED_BOW, 5F / 100F);
+        addLootEntry("minecraft:blaze", Awaken.TItems.CINDERED_BOW, 10F / 100F);
+        addLootEntry("minecraft:ghast", Awaken.TItems.CINDERED_BOW, 15F / 100F);
         addLootEntry("minecraft:slime", Awaken.TItems.SLIMEY_BOW, 5F / 100F);
         addLootEntry("minecraft:pillager", Awaken.TItems.RAIDERS_AXE, 2.5F / 100F);
         addLootEntry("minecraft:zombie", Awaken.TItems.ESCAPE_PLAN, 0.1F / 100F);
         addLootEntry("minecraft:skeleton", Awaken.TItems.ESCAPE_PLAN, 0.1F / 100F);
         addLootEntry("minecraft:creeper", Awaken.TItems.ESCAPE_PLAN, 0.1F / 100F);
         addLootEntry("minecraft:spider", Awaken.TItems.ESCAPE_PLAN, 0.1F / 100F);
-        addLootEntry("minecraft:husk", Awaken.TItems.ARCHAEOLOGIST_SPADE, 5F / 100F);
-        addLootEntry("minecraft:cave_spider", Awaken.TItems.RUSTY_SHANK, 2.5F / 100F);
+        addLootEntry("minecraft:husk", Awaken.TItems.ARCHAEOLOGIST_SPADE, 10F / 100F);
+        addLootEntry("minecraft:cave_spider", Awaken.TItems.RUSTY_SHANK, 10F / 100F);
     }
 
     public static void addLootEntry(String id, ItemConvertible item, float chance) {
