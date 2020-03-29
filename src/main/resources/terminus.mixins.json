@@ -10,12 +10,14 @@
     "ServerWorldMixin",
     "WorldChunkMixin",
     "RecipeManagerMixin",
-    "InventoryScreenMixin",
     "ZombieEntityMixin",
     "AbstractSkeletonEntityMixin",
     "SpiderEntityMixin"
   ],
-  "client": [],
+  "client": [
+    "InventoryScreenMixin",
+    "LivingEntityRendererMixin"
+  ],
   "server": [],
   "injectors": {
     "defaultRequire": 1

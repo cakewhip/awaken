@@ -3,10 +3,12 @@ package com.kqp.terminus.client;
 import com.kqp.terminus.Terminus;
 import com.kqp.terminus.client.container.TerminusCraftingContainer;
 import com.kqp.terminus.client.container.TerminusResultSlot;
+import com.kqp.terminus.client.entity.RaptorChickenRenderer;
 import com.kqp.terminus.client.screen.TerminusCraftingScreen;
 import com.kqp.terminus.util.MouseUtil;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
@@ -28,7 +30,14 @@ public class TerminusClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        initEntityRenderers();
         initNetworking();
+    }
+
+    public static void initEntityRenderers() {
+        EntityRendererRegistry.INSTANCE.register(Terminus.TEntities.RAPTOR_CHICKEN, (dispatcher, context) ->
+            new RaptorChickenRenderer(dispatcher)
+        );
     }
 
     /**

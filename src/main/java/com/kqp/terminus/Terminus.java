@@ -5,6 +5,7 @@ import com.kqp.terminus.block.TerminusAnvilBlock;
 import com.kqp.terminus.client.container.TerminusCraftingContainer;
 import com.kqp.terminus.data.TerminusDataBlockEntity;
 import com.kqp.terminus.data.TerminusWorldProperties;
+import com.kqp.terminus.entity.RaptorChickenEntity;
 import com.kqp.terminus.group.BlockStats;
 import com.kqp.terminus.group.MaterialGroup;
 import com.kqp.terminus.group.OreGroup;
@@ -27,6 +28,7 @@ import com.kqp.terminus.util.TimeUtil;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.event.world.WorldTickCallback;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
@@ -34,10 +36,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.EntityCategory;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -70,6 +76,7 @@ public class Terminus implements ModInitializer {
             TBlocks.init();
             TItems.init();
             TContainers.init();
+            TEntities.init();
             TNetworking.init();
             LootTableHelper.init();
             initCallbacks();
@@ -156,6 +163,7 @@ public class Terminus implements ModInitializer {
         //TODO: add unbreakable elytra using post-awakened materials (Dragon Bone Wings)
 
         public static final Item CELESTIAL_STEEL_INGOT = new Item(new Item.Settings().group(ItemGroup.MATERIALS));
+        public static final Item RAPTOR_CHICKEN_EGG = new Item(new Item.Settings().group(ItemGroup.MATERIALS));
 
         public static void init() {
             info("Initializing items");
@@ -174,6 +182,7 @@ public class Terminus implements ModInitializer {
             register(RUSTY_SHANK, "rusty_shank");
 
             register(CELESTIAL_STEEL_INGOT, "celestial_steel_ingot");
+            register(RAPTOR_CHICKEN_EGG, "raptor_chicken_egg");
         }
 
         public static void register(Item item, String name) {
@@ -188,7 +197,18 @@ public class Terminus implements ModInitializer {
     }
 
     public static class TEntities {
-        //TODO: add raptor chicken
+        public static final EntityType<RaptorChickenEntity> RAPTOR_CHICKEN = Registry.register(
+                Registry.ENTITY_TYPE,
+                new Identifier(MOD_ID, "raptor_chicken"),
+                FabricEntityTypeBuilder.create(EntityCategory.MONSTER, RaptorChickenEntity::new).size(EntityDimensions.fixed(0.95F, 1.65F)).build()
+        );
+
+        public static void init() {
+            info("Initializing entities");
+
+            Registry.register(Registry.ITEM, new Identifier(MOD_ID, "raptor_chicken_spawn_egg"), new SpawnEggItem(RAPTOR_CHICKEN, 0x9C0202, 0x610000, new Item.Settings().group(ItemGroup.MISC)));
+        }
+
         //TODO: add killer bunny (https://minecraft.gamepedia.com/Rabbit#The_Killer_Bunny)
     }
 

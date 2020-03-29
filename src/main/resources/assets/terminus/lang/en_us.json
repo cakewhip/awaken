@@ -41,6 +41,11 @@
     "item.terminus.archaeologist_spade": "Archaeologist's Spade",
     "item.terminus.rusty_shank": "Rusty Shank",
 
+    "__comment": "Entities",
+    "entity.terminus.raptor_chicken": "Raptor Chicken",
+    "item.terminus.raptor_chicken_spawn_egg": "Raptor Chicken Spawn Egg",
+    "item.terminus.raptor_chicken_egg": "Raptor Chicken Egg",
+
     "__comment": "GUI Translations",
     "container.terminus.terminus_crafting": "Crafting"
 }
