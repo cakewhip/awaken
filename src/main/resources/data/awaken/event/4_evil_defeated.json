@@ -3,13 +3,13 @@
   "properties": {
     "messages": [
       {
-        "text": "An evil presence fills the room...",
-        "color": "DARK_RED",
+        "text": "With the last evil defeated, the world stands still...",
+        "color": "WHITE",
         "bold": false,
         "italic": true
       },
       {
-        "text": "\u003c???\u003e ${sucker}...",
+        "text": "But an evil presence lingers...",
         "color": "DARK_RED",
         "bold": false,
         "italic": true

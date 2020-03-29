@@ -5,7 +5,7 @@ import com.kqp.awaken.Awaken;
 /**
  * Event for enabling the awakening, AKA phase 1.
  */
-public class WakeUpEvent extends Event {
+public class AwakenEvent extends Event {
     @Override
     public void invoke() {
         Awaken.worldProperties.setAwakening();

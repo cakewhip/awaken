@@ -3,13 +3,13 @@
   "properties": {
     "messages": [
       {
-        "text": "\u003c???\u003e Adventurer, you are getting very close!",
+        "text": "You feel the evils of the world fading away.",
         "color": "WHITE",
         "bold": false,
         "italic": true
       },
       {
-        "text": "I should go defeat ${undefeated}",
+        "text": "I should go defeat ${undefeated}.",
         "color": "WHITE",
         "bold": false,
         "italic": true

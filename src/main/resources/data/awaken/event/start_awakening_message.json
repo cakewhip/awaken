@@ -3,13 +3,13 @@
   "properties": {
     "messages": [
       {
-        "text": "You awake feeling a strange pull towards the cavern...",
+        "text": "You awake feeling a strange pull towards the caverns...",
         "color": "WHITE",
         "bold": false,
         "italic": true
       },
       {
-        "text": "[New ores have generated]",
+        "text": "New ores have generated!",
         "color": "LIGHT_PURPLE",
         "bold": false,
         "italic": true
