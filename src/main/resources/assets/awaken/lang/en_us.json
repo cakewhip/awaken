@@ -1,4 +1,29 @@
 {
+    "__comment": "Phase 1 Reagents",
+    "item.awaken.ender_dragon_scale": "Ender Dragon Scale",
+    "item.awaken.wither_rib": "Wither Rib",
+
+    "__comment": "Phase 1 Armor",
+    "item.awaken.wither_scale_boots": "Wither Scale Boots",
+    "item.awaken.wither_scale_leggings": "Wither Scale Leggings",
+    "item.awaken.wither_scale_chestplate": "Wither Scale Chestplate",
+    "item.awaken.wither_scale_helmet": "Wither Scale Helmet",
+
+    "__comment": "Phase 1 Special Tools",
+    "item.awaken.cindered_bow": "Cindered Bow",
+    "item.awaken.slimey_bow": "Slimey Bow",
+    "item.awaken.raiders_axe": "Raider's Axe",
+    "item.awaken.escape_plan": "The Escape Plan",
+    "item.awaken.archaeologist_spade": "Archaeologist's Spade",
+    "item.awaken.rusty_shank": "Rusty Shank",
+
+    "__comment": "Phase 1 Special Swords",
+    "item.awaken.atlantean_sabre": "Atlantean Sabre",
+    "item.awaken.ashen_blade": "Ashen Blade",
+    "item.awaken.glacial_shard": "Glacial Shard",
+    "item.awaken.enderian_cutlass": "Enderian Cutlass",
+    "item.awaken.jang_katana": "Jang Katana",
+
     "__comment": "Moonstone and Sunstone",
     "block.awaken.moonstone_ore": "Moonstone Ore",
     "item.awaken.moonstone_ore": "Moonstone Ore",
@@ -25,21 +50,6 @@
     "item.awaken.celestial_steel_leggings": "Celestial Steel Leggings",
     "item.awaken.celestial_steel_boots": "Celestial Steel Boots",
     "item.awaken.celestial_steel_ingot": "Celestial Steel Ingot",
-
-    "__comment": "Phase 0 Swords",
-    "item.awaken.atlantean_sabre": "Atlantean Sabre",
-    "item.awaken.ashen_blade": "Ashen Blade",
-    "item.awaken.glacial_shard": "Glacial Shard",
-    "item.awaken.enderian_cutlass": "Enderian Cutlass",
-    "item.awaken.jang_katana": "Jang Katana",
-
-    "__comment": "Phase 0 Special Items",
-    "item.awaken.cindered_bow": "Cindered Bow",
-    "item.awaken.slimey_bow": "Slimey Bow",
-    "item.awaken.raiders_axe": "Raider's Axe",
-    "item.awaken.escape_plan": "The Escape Plan",
-    "item.awaken.archaeologist_spade": "Archaeologist's Spade",
-    "item.awaken.rusty_shank": "Rusty Shank",
 
     "__comment": "Entities",
     "entity.awaken.raptor_chicken": "Raptor Chicken",

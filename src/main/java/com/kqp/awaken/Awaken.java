@@ -7,8 +7,9 @@ import com.kqp.awaken.data.AwakenDataBlockEntity;
 import com.kqp.awaken.data.AwakenWorldProperties;
 import com.kqp.awaken.entity.DireWolfEntity;
 import com.kqp.awaken.entity.RaptorChickenEntity;
+import com.kqp.awaken.group.ArmorGroup;
 import com.kqp.awaken.group.BlockStats;
-import com.kqp.awaken.group.MaterialGroup;
+import com.kqp.awaken.group.ToolGroup;
 import com.kqp.awaken.group.OreGroup;
 import com.kqp.awaken.item.pickaxe.EscapePlanItem;
 import com.kqp.awaken.item.AwakenArmorMaterial;
@@ -100,19 +101,33 @@ public class Awaken implements ModInitializer {
     }
 
     public static class Groups {
+        public static ArmorGroup WITHER_SCALE_ARMOR;
+
         public static OreGroup SUNSTONE, MOONSTONE;
-        public static MaterialGroup CELESTIAL;
+
+        public static ToolGroup CELESTIAL_STEEL_TOOLS;
+        public static ArmorGroup CELESTIAL_STEEL_ARMOR;
 
         public static void init() {
             info("Initializing ore groups");
 
-            SUNSTONE = new OreGroup(
-                    "sunstone",
-                    new BlockStats(25.0F, 6.0F, 6), "fragment");
-            MOONSTONE = new OreGroup(
-                    "moonstone",
-                    new BlockStats(25.0F, 6.0F, 6), "fragment");
-            CELESTIAL = new MaterialGroup("celestial_steel", AwakenToolMaterial.CELESTIAL, AwakenArmorMaterial.CELESTIAL);
+            // Phase 1
+            {
+                WITHER_SCALE_ARMOR = new ArmorGroup("wither_scale", AwakenArmorMaterial.WITHER_SCALE);
+            }
+
+            // Phase 2
+            {
+                SUNSTONE = new OreGroup(
+                        "sunstone",
+                        new BlockStats(25.0F, 6.0F, 6), "fragment");
+                MOONSTONE = new OreGroup(
+                        "moonstone",
+                        new BlockStats(25.0F, 6.0F, 6), "fragment");
+
+                CELESTIAL_STEEL_TOOLS = new ToolGroup("celestial_steel", AwakenToolMaterial.CELESTIAL_STEEL);
+                CELESTIAL_STEEL_ARMOR = new ArmorGroup("celestial_steel", AwakenArmorMaterial.CELESTIAL_STEEL);
+            }
         }
     }
 
@@ -147,11 +162,8 @@ public class Awaken implements ModInitializer {
     }
 
     public static class TItems {
-        public static final Item ATLANTEAN_SABRE = new AtlanteanSabreItem().setRarity(AwakenRarity.EPIC);
-        public static final Item ASHEN_BLADE = new StatusEffectSwordItem(AwakenToolMaterial.PHASE_0_SWORD, StatusEffects.WITHER, 4 * 20, 1).setRarity(AwakenRarity.EPIC);
-        public static final Item GLACIAL_SHARD = new StatusEffectSwordItem(AwakenToolMaterial.PHASE_0_SWORD, StatusEffects.SLOWNESS, 4 * 20, 1).setRarity(AwakenRarity.EPIC);
-        public static final Item ENDERIAN_CUTLASS = new EnderianCutlassItem().setRarity(AwakenRarity.EPIC);
-        public static final Item JANG_KATANA = new JangKatanaItem().setRarity(AwakenRarity.FABLED);
+        public static final Item ENDER_DRAGON_SCALE = new Item(new Item.Settings().group(ItemGroup.MATERIALS));
+        public static final Item WITHER_RIB = new Item(new Item.Settings().group(ItemGroup.MATERIALS));
 
         public static final Item CINDERED_BOW = new FlameBowItem(4.0D, false).setRarity(AwakenRarity.RARE);
         public static final Item SLIMEY_BOW = new StatusEffectBowItem(3.0D, false, StatusEffects.SLOWNESS, 2 * 20, 1).setRarity(AwakenRarity.RARE);
@@ -159,6 +171,12 @@ public class Awaken implements ModInitializer {
         public static final Item ESCAPE_PLAN = new EscapePlanItem().setRarity(AwakenRarity.UNCOMMON);
         public static final Item ARCHAEOLOGIST_SPADE = new ArchaeologistSpadeItem().setRarity(AwakenRarity.UNCOMMON);
         public static final Item RUSTY_SHANK = new StatusEffectSwordItem(AwakenToolMaterial.PHASE_0_SPECIAL, StatusEffects.POISON, 8 * 20, 0).setRarity(AwakenRarity.UNCOMMON);
+
+        public static final Item ATLANTEAN_SABRE = new AtlanteanSabreItem().setRarity(AwakenRarity.EPIC);
+        public static final Item ASHEN_BLADE = new StatusEffectSwordItem(AwakenToolMaterial.PHASE_0_SWORD, StatusEffects.WITHER, 4 * 20, 1).setRarity(AwakenRarity.EPIC);
+        public static final Item GLACIAL_SHARD = new StatusEffectSwordItem(AwakenToolMaterial.PHASE_0_SWORD, StatusEffects.SLOWNESS, 4 * 20, 1).setRarity(AwakenRarity.EPIC);
+        public static final Item ENDERIAN_CUTLASS = new EnderianCutlassItem().setRarity(AwakenRarity.EPIC);
+        public static final Item JANG_KATANA = new JangKatanaItem().setRarity(AwakenRarity.FABLED);
 
         //TODO: add unbreakable elytra using post-awakened materials (Dragon Bone Wings)
 
@@ -168,18 +186,27 @@ public class Awaken implements ModInitializer {
         public static void init() {
             info("Initializing items");
 
-            register(ATLANTEAN_SABRE, "atlantean_sabre");
-            register(ASHEN_BLADE, "ashen_blade");
-            register(GLACIAL_SHARD, "glacial_shard");
-            register(ENDERIAN_CUTLASS, "enderian_cutlass");
-            register(JANG_KATANA, "jang_katana");
+            // Phase 1
+            {
+                // Reagents
+                register(ENDER_DRAGON_SCALE, "ender_dragon_scale");
+                register(WITHER_RIB, "wither_rib");
 
-            register(CINDERED_BOW, "cindered_bow");
-            register(SLIMEY_BOW, "slimey_bow");
-            register(RAIDERS_AXE, "raiders_axe");
-            register(ESCAPE_PLAN, "escape_plan");
-            register(ARCHAEOLOGIST_SPADE, "archaeologist_spade");
-            register(RUSTY_SHANK, "rusty_shank");
+                // Special Tools
+                register(CINDERED_BOW, "cindered_bow");
+                register(SLIMEY_BOW, "slimey_bow");
+                register(RAIDERS_AXE, "raiders_axe");
+                register(ESCAPE_PLAN, "escape_plan");
+                register(ARCHAEOLOGIST_SPADE, "archaeologist_spade");
+                register(RUSTY_SHANK, "rusty_shank");
+
+                // Special Swords
+                register(ATLANTEAN_SABRE, "atlantean_sabre");
+                register(ASHEN_BLADE, "ashen_blade");
+                register(GLACIAL_SHARD, "glacial_shard");
+                register(ENDERIAN_CUTLASS, "enderian_cutlass");
+                register(JANG_KATANA, "jang_katana");
+            }
 
             register(CELESTIAL_STEEL_INGOT, "celestial_steel_ingot");
             register(RAPTOR_CHICKEN_EGG, "raptor_chicken_egg");

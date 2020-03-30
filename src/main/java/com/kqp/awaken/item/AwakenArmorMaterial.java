@@ -15,7 +15,10 @@ import java.util.function.Supplier;
  * Used to create custom armor materials.
  */
 public enum AwakenArmorMaterial implements ArmorMaterial {
-    CELESTIAL("celestial", 28, new int[] { 3, 6, 8, 3 }, 16, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 12.0F, () -> {
+    WITHER_SCALE("wither_scale", 44, new int[] { 5, 8, 10, 5 }, 16, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 16.0F, () -> {
+        return Ingredient.ofItems(Awaken.TItems.ENDER_DRAGON_SCALE, Awaken.TItems.WITHER_RIB);
+    }),
+    CELESTIAL_STEEL("celestial_steel", 44, new int[] { 3, 6, 8, 3 }, 24, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 24.0F, () -> {
         return Ingredient.ofItems(Awaken.TItems.CELESTIAL_STEEL_INGOT);
     });
 

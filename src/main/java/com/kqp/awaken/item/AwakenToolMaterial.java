@@ -10,7 +10,7 @@ import java.util.function.Supplier;
  * Used to create custom tool materials.
  */
 public enum AwakenToolMaterial implements ToolMaterial {
-    CELESTIAL(4, 1000, 10.0F, 10.0F, 18, () -> {
+    CELESTIAL_STEEL(4, 1000, 10.0F, 10.0F, 18, () -> {
         return Ingredient.ofItems(Awaken.TItems.CELESTIAL_STEEL_INGOT);
     }),
     PHASE_0_SWORD(-1, -1, 8.0F, 6F, -1, () -> {
