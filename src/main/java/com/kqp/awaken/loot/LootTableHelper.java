@@ -10,47 +10,66 @@ import net.minecraft.loot.LootManager;
 import net.minecraft.loot.condition.KilledByPlayerLootCondition;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.function.LimitCountLootFunction;
 import net.minecraft.resource.ResourceManager;
+import net.minecraft.util.BoundedIntUnaryOperator;
 import net.minecraft.util.Identifier;
 
 import java.util.HashSet;
+import java.util.Objects;
 
 /**
  * Class to help add things to the loot table of entities.
  */
-public class LootTableHelper implements LootTableLoadingCallback {
+public class LootTableHelper {
     public static HashSet<LootEntry> LOOT_ENTRIES = new HashSet();
 
     public static void init() {
-        addLootEntry("minecraft:drowned", Awaken.TItems.ATLANTEAN_SABRE, 1F / 100F);
-        addLootEntry("minecraft:guardian", Awaken.TItems.ATLANTEAN_SABRE, 5F / 100F);
-        addLootEntry("minecraft:elder_guardian", Awaken.TItems.ATLANTEAN_SABRE, 15F / 100F);
-        addLootEntry("minecraft:wither_skeleton", Awaken.TItems.ASHEN_BLADE, 1F / 100F);
-        addLootEntry("minecraft:wither", Awaken.TItems.ASHEN_BLADE, 33F / 100F);
-        addLootEntry("minecraft:stray", Awaken.TItems.GLACIAL_SHARD, 5F / 100F);
-        addLootEntry("minecraft:enderman", Awaken.TItems.ENDERIAN_CUTLASS, 1F / 100F);
-        addLootEntry("minecraft:endermite", Awaken.TItems.ENDERIAN_CUTLASS, 2.5F / 100F);
-        addLootEntry("minecraft:shulker", Awaken.TItems.ENDERIAN_CUTLASS, 5F / 100F);
-        addLootEntry("minecraft:ender_dragon", Awaken.TItems.ENDERIAN_CUTLASS, 50F / 100F);
+        // Phase 1
+        {
+            // Reagents
+            addLootEntry("minecraft:entities/ender_dragon", Awaken.TItems.ENDER_DRAGON_SCALE, 1F, 128);
+            addLootEntry("minecraft:entities/wither", Awaken.TItems.WITHER_RIB, 1F, 6);
 
-        addLootEntry("minecraft:blaze", Awaken.TItems.CINDERED_BOW, 10F / 100F);
-        addLootEntry("minecraft:ghast", Awaken.TItems.CINDERED_BOW, 15F / 100F);
-        addLootEntry("minecraft:slime", Awaken.TItems.SLIMEY_BOW, 5F / 100F);
-        addLootEntry("minecraft:pillager", Awaken.TItems.RAIDERS_AXE, 2.5F / 100F);
-        addLootEntry("minecraft:zombie", Awaken.TItems.ESCAPE_PLAN, 0.1F / 100F);
-        addLootEntry("minecraft:skeleton", Awaken.TItems.ESCAPE_PLAN, 0.1F / 100F);
-        addLootEntry("minecraft:creeper", Awaken.TItems.ESCAPE_PLAN, 0.1F / 100F);
-        addLootEntry("minecraft:spider", Awaken.TItems.ESCAPE_PLAN, 0.1F / 100F);
-        addLootEntry("minecraft:husk", Awaken.TItems.ARCHAEOLOGIST_SPADE, 10F / 100F);
-        addLootEntry("minecraft:cave_spider", Awaken.TItems.RUSTY_SHANK, 10F / 100F);
+            // Special Tools
+            addLootEntry("minecraft:entities/blaze", Awaken.TItems.CINDERED_BOW, 10F / 100F);
+            addLootEntry("minecraft:entities/ghast", Awaken.TItems.CINDERED_BOW, 15F / 100F);
+            addLootEntry("minecraft:entities/slime", Awaken.TItems.SLIMEY_BOW, 5F / 100F);
+            addLootEntry("minecraft:entities/pillager", Awaken.TItems.RAIDERS_AXE, 2.5F / 100F);
+            addLootEntry("minecraft:entities/zombie", Awaken.TItems.ESCAPE_PLAN, 0.1F / 100F);
+            addLootEntry("minecraft:entities/skeleton", Awaken.TItems.ESCAPE_PLAN, 0.1F / 100F);
+            addLootEntry("minecraft:entities/creeper", Awaken.TItems.ESCAPE_PLAN, 0.1F / 100F);
+            addLootEntry("minecraft:entities/spider", Awaken.TItems.ESCAPE_PLAN, 0.1F / 100F);
+            addLootEntry("minecraft:entities/husk", Awaken.TItems.ARCHAEOLOGIST_SPADE, 10F / 100F);
+            addLootEntry("minecraft:entities/cave_spider", Awaken.TItems.RUSTY_SHANK, 10F / 100F);
+
+            // Special Swords
+            addLootEntry("minecraft:entities/drowned", Awaken.TItems.ATLANTEAN_SABRE, 1F / 100F);
+            addLootEntry("minecraft:entities/guardian", Awaken.TItems.ATLANTEAN_SABRE, 5F / 100F);
+            addLootEntry("minecraft:entities/elder_guardian", Awaken.TItems.ATLANTEAN_SABRE, 15F / 100F);
+            addLootEntry("minecraft:entities/wither_skeleton", Awaken.TItems.ASHEN_BLADE, 1F / 100F);
+            addLootEntry("minecraft:entities/wither", Awaken.TItems.ASHEN_BLADE, 33F / 100F);
+            addLootEntry("minecraft:entities/stray", Awaken.TItems.GLACIAL_SHARD, 5F / 100F);
+            addLootEntry("minecraft:entities/enderman", Awaken.TItems.ENDERIAN_CUTLASS, 1F / 100F);
+            addLootEntry("minecraft:entities/endermite", Awaken.TItems.ENDERIAN_CUTLASS, 2.5F / 100F);
+            addLootEntry("minecraft:entities/shulker", Awaken.TItems.ENDERIAN_CUTLASS, 5F / 100F);
+            addLootEntry("minecraft:entities/ender_dragon", Awaken.TItems.ENDERIAN_CUTLASS, 50F / 100F);
+        }
     }
 
     public static void addLootEntry(String id, ItemConvertible item, float chance) {
-        LOOT_ENTRIES.add(new LootEntry(new Identifier(id), item, chance));
+        LOOT_ENTRIES.add(new LootEntry(new Identifier(id), item, chance, 1, 1));
     }
 
-    @Override
-    public void onLootTableLoading(ResourceManager resourceManager, LootManager lootManager, Identifier id, FabricLootSupplierBuilder supplier, LootTableSetter lootTableSetter) {
+    public static void addLootEntry(String id, ItemConvertible item, float chance, int count) {
+        LOOT_ENTRIES.add(new LootEntry(new Identifier(id), item, chance, count, count));
+    }
+
+    public static void addLootEntry(String id, ItemConvertible item, float chance, int min, int max) {
+        LOOT_ENTRIES.add(new LootEntry(new Identifier(id), item, chance, min, max));
+    }
+
+    public static void onLootTableLoading(ResourceManager resourceManager, LootManager lootManager, Identifier id, FabricLootSupplierBuilder supplier, LootTableLoadingCallback.LootTableSetter lootTableSetter) {
         for (LootEntry lootEntry : LOOT_ENTRIES) {
             if (lootEntry.id.equals(id)) {
                 // Builder created with 2 conditions: random chance and player kill required
@@ -58,7 +77,10 @@ public class LootTableHelper implements LootTableLoadingCallback {
                         .withRolls(ConstantLootTableRange.create(1))
                         .withCondition(RandomChanceLootCondition.builder(lootEntry.chance))
                         .withCondition(KilledByPlayerLootCondition.builder())
+                        .withFunction(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(lootEntry.min, lootEntry.max)))
                         .withEntry(ItemEntry.builder(lootEntry.item));
+
+                System.out.println("FOUND " + id);
 
                 supplier.withPool(builder);
             }
@@ -72,11 +94,31 @@ public class LootTableHelper implements LootTableLoadingCallback {
         public Identifier id;
         public ItemConvertible item;
         public float chance;
+        public int min, max;
 
-        public LootEntry(Identifier id, ItemConvertible item, float chance) {
+        public LootEntry(Identifier id, ItemConvertible item, float chance, int min, int max) {
             this.id = id;
             this.item = item;
             this.chance = chance;
+            this.min = min;
+            this.max = max;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            LootEntry lootEntry = (LootEntry) o;
+            return Float.compare(lootEntry.chance, chance) == 0 &&
+                    min == lootEntry.min &&
+                    max == lootEntry.max &&
+                    Objects.equals(id, lootEntry.id) &&
+                    Objects.equals(item, lootEntry.item);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id, item, chance, min, max);
         }
     }
 }

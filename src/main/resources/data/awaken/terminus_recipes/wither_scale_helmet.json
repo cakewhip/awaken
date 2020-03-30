@@ -1,0 +1,18 @@
+{
+  "type": "anvil",
+  "recipe": {
+    "output": {
+      "item": "awaken:wither_scale_helmet"
+    },
+    "reagents": [
+      {
+        "item": "awaken:ender_dragon_scale",
+        "count": 16
+      },
+      {
+        "item": "awaken:wither_rib",
+        "count": 1
+      }
+    ]
+  }
+}

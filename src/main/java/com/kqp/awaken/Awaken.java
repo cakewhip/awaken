@@ -97,7 +97,7 @@ public class Awaken implements ModInitializer {
             }
         });
 
-        LootTableLoadingCallback.EVENT.register(new LootTableHelper());
+        LootTableLoadingCallback.EVENT.register(LootTableHelper::onLootTableLoading);
     }
 
     public static class Groups {
