@@ -1,4 +1,4 @@
-package com.kqp.awaken.client;
+package com.kqp.awaken.client.model;
 
 import com.google.common.collect.ImmutableList;
 import com.kqp.awaken.entity.RaptorChickenEntity;
@@ -6,6 +6,10 @@ import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.util.math.MathHelper;
 
+/**
+ * Broken raptor chicken model.
+ * Rest in peace.
+ */
 public class RaptorChickenEntityModel<T extends RaptorChickenEntity> extends AnimalModel<T> {
     private final ModelPart head;
     private final ModelPart torso;

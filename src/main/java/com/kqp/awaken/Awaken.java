@@ -5,6 +5,7 @@ import com.kqp.awaken.block.AwakenAnvilBlock;
 import com.kqp.awaken.client.container.AwakenCraftingContainer;
 import com.kqp.awaken.data.AwakenDataBlockEntity;
 import com.kqp.awaken.data.AwakenWorldProperties;
+import com.kqp.awaken.entity.DireWolfEntity;
 import com.kqp.awaken.entity.RaptorChickenEntity;
 import com.kqp.awaken.group.BlockStats;
 import com.kqp.awaken.group.MaterialGroup;
@@ -202,10 +203,17 @@ public class Awaken implements ModInitializer {
                 FabricEntityTypeBuilder.create(EntityCategory.MONSTER, RaptorChickenEntity::new).size(EntityDimensions.fixed(0.95F, 1.65F)).build()
         );
 
+        public static final EntityType<DireWolfEntity> DIRE_WOLF = Registry.register(
+                Registry.ENTITY_TYPE,
+                new Identifier(MOD_ID, "dire_wolf"),
+                FabricEntityTypeBuilder.create(EntityCategory.MONSTER, DireWolfEntity::new).size(EntityDimensions.fixed(1.5F, 1F)).build()
+        );
+
         public static void init() {
             info("Initializing entities");
 
             Registry.register(Registry.ITEM, new Identifier(MOD_ID, "raptor_chicken_spawn_egg"), new SpawnEggItem(RAPTOR_CHICKEN, 0x9C0202, 0x610000, new Item.Settings().group(ItemGroup.MISC)));
+            Registry.register(Registry.ITEM, new Identifier(MOD_ID, "dire_wolf_spawn_egg"), new SpawnEggItem(DIRE_WOLF, 0xD6E9FF, 0x97ADCC, new Item.Settings().group(ItemGroup.MISC)));
         }
 
         //TODO: add killer bunny (https://minecraft.gamepedia.com/Rabbit#The_Killer_Bunny)

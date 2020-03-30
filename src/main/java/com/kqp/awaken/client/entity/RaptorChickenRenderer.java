@@ -39,9 +39,7 @@ public class RaptorChickenRenderer<T extends MobEntity> extends MobEntityRendere
     }
 
     @Override
-    public void render(T mobEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
-        matrixStack.scale(1.5F, 1.65F, 1.5F);
-
-        super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i);
+    protected void scale(T entity, MatrixStack matrices, float tickDelta) {
+        matrices.scale(1.5F, 1.65F, 1.5F);
     }
 }

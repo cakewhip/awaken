@@ -3,6 +3,7 @@ package com.kqp.awaken.client;
 import com.kqp.awaken.Awaken;
 import com.kqp.awaken.client.container.AwakenCraftingContainer;
 import com.kqp.awaken.client.container.AwakenResultSlot;
+import com.kqp.awaken.client.entity.DireWolfRenderer;
 import com.kqp.awaken.client.entity.RaptorChickenRenderer;
 import com.kqp.awaken.client.screen.AwakenCraftingScreen;
 import com.kqp.awaken.util.MouseUtil;
@@ -36,7 +37,11 @@ public class AwakenClient implements ClientModInitializer {
 
     public static void initEntityRenderers() {
         EntityRendererRegistry.INSTANCE.register(Awaken.TEntities.RAPTOR_CHICKEN, (dispatcher, context) ->
-            new RaptorChickenRenderer(dispatcher)
+                new RaptorChickenRenderer(dispatcher)
+        );
+
+        EntityRendererRegistry.INSTANCE.register(Awaken.TEntities.DIRE_WOLF, (dispatcher, context) ->
+                new DireWolfRenderer(dispatcher)
         );
     }
 

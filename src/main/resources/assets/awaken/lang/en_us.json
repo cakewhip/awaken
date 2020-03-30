@@ -45,6 +45,8 @@
     "entity.awaken.raptor_chicken": "Raptor Chicken",
     "item.awaken.raptor_chicken_spawn_egg": "Raptor Chicken Spawn Egg",
     "item.awaken.raptor_chicken_egg": "Raptor Chicken Egg",
+    "entity.awaken.dire_wolf": "Dire Wolf",
+    "item.awaken.dire_wolf_spawn_egg": "Dire Wolf Spawn Egg",
 
     "__comment": "GUI Translations",
     "container.awaken.awaken_crafting": "Crafting"

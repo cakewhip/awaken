@@ -2,10 +2,7 @@ package com.kqp.awaken.entity;
 
 import com.kqp.awaken.Awaken;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityDimensions;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -83,7 +80,6 @@ public class RaptorChickenEntity extends AnimalEntity {
         this.goalSelector.add(6, new LookAroundGoal(this));
         this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
         this.targetSelector.add(2, new FollowTargetGoal(this, PlayerEntity.class, false));
-        // TODO: make follow seeds and breed
     }
 
     @Override
@@ -92,7 +88,7 @@ public class RaptorChickenEntity extends AnimalEntity {
         this.getAttributes().register(EntityAttributes.ATTACK_DAMAGE).setBaseValue(12.0D);
         this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(20.0D);
         this.getAttributeInstance(EntityAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
-        this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
+        this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.33D);
     }
 
     @Override
@@ -184,6 +180,19 @@ public class RaptorChickenEntity extends AnimalEntity {
         super.writeCustomDataToTag(tag);
 
         tag.putInt("EggLayTime", this.eggLayTime);
+    }
+
+    @Override
+    public boolean tryAttack(Entity target) {
+        if (!super.tryAttack(target)) {
+            return false;
+        } else {
+            if (target instanceof LivingEntity) {
+                ((LivingEntity)target).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 200, 1));
+            }
+
+            return true;
+        }
     }
 
     private void resetEggTimer() {
