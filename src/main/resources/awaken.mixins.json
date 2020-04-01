@@ -12,7 +12,9 @@
     "RecipeManagerMixin",
     "ZombieEntityMixin",
     "AbstractSkeletonEntityMixin",
-    "SpiderEntityMixin"
+    "SpiderEntityMixin",
+    "DamageUtilMixin",
+    "ClampedEntityAttributeMixin"
   ],
   "client": [
     "InventoryScreenMixin",
