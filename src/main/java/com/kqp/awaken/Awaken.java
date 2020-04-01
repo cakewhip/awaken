@@ -103,6 +103,8 @@ public class Awaken implements ModInitializer {
     public static class Groups {
         public static ArmorGroup WITHER_SCALE_ARMOR;
 
+        public static OreGroup SALVIUM, VALERIUM;
+
         public static OreGroup SUNSTONE, MOONSTONE;
 
         public static ToolGroup CELESTIAL_STEEL_TOOLS;
@@ -118,12 +120,36 @@ public class Awaken implements ModInitializer {
 
             // Phase 2
             {
+                SALVIUM = new OreGroup(
+                        "salvium",
+                        new BlockStats(25.0F, 6.0F, 0),
+                        false,
+                        "ingot"
+                );
+
+                VALERIUM = new OreGroup(
+                        "valerium",
+                        new BlockStats(25.0F, 6.0F, 0),
+                        false,
+                        "ingot"
+                );
+            }
+
+            // Phase 3
+            {
                 SUNSTONE = new OreGroup(
                         "sunstone",
-                        new BlockStats(25.0F, 6.0F, 6), "fragment");
+                        new BlockStats(25.0F, 6.0F, 6),
+                        true,
+                        "fragment"
+                );
+
                 MOONSTONE = new OreGroup(
                         "moonstone",
-                        new BlockStats(25.0F, 6.0F, 6), "fragment");
+                        new BlockStats(25.0F, 6.0F, 6),
+                        true,
+                        "fragment"
+                );
 
                 CELESTIAL_STEEL_TOOLS = new ToolGroup("celestial_steel", AwakenToolMaterial.CELESTIAL_STEEL);
                 CELESTIAL_STEEL_ARMOR = new ArmorGroup("celestial_steel", AwakenArmorMaterial.CELESTIAL_STEEL);

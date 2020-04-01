@@ -1,0 +1,17 @@
+{
+  "type": "furnace",
+  "recipe": {
+    "output": {
+      "item": "awaken:salvium_ingot"
+    },
+    "reagents": [
+      {
+        "item": "awaken:salvium_ore",
+        "count": 3
+      },
+      {
+        "item": "minecraft:coal_block"
+      }
+    ]
+  }
+}

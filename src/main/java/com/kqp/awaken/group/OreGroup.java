@@ -23,7 +23,7 @@ public class OreGroup {
      * @param bs        Properties for blocks
      * @param ingotName Name of the ingot, null to not make it
      */
-    public OreGroup(String name, BlockStats bs, String ingotName) {
+    public OreGroup(String name, BlockStats bs, boolean hasBlock, String ingotName) {
         this.bs = bs;
 
         this.ORE = new Block(FabricBlockSettings.of(Material.STONE)
@@ -33,12 +33,16 @@ public class OreGroup {
         );
         Awaken.TBlocks.register(ORE, name + "_ore");
 
-        this.BLOCK = new Block(FabricBlockSettings.of(Material.STONE)
-                .strength(bs.hardness, bs.resistance)
-                .lightLevel(bs.lightLevel)
-                .build()
-        );
-        Awaken.TBlocks.register(BLOCK, name + "_block");
+        if (hasBlock) {
+            this.BLOCK = new Block(FabricBlockSettings.of(Material.STONE)
+                    .strength(bs.hardness, bs.resistance)
+                    .lightLevel(bs.lightLevel)
+                    .build()
+            );
+            Awaken.TBlocks.register(BLOCK, name + "_block");
+        } else {
+            this.BLOCK = null;
+        }
 
         if (ingotName != null) {
             this.INGOT = new Item(new Item.Settings().group(ItemGroup.MATERIALS));

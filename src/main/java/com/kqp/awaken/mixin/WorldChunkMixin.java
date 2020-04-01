@@ -21,7 +21,6 @@ import static com.kqp.awaken.data.AwakenDataBlockEntity.DATA_BLOCK_POS;
  */
 @Mixin(WorldChunk.class)
 public abstract class WorldChunkMixin implements Chunk {
-
     @Inject(at = @At("HEAD"), method = "loadToWorld")
     public void loadToWorld(CallbackInfo callbackInfo) {
         WorldChunk chunk = (WorldChunk) (Object) this;
@@ -31,8 +30,8 @@ public abstract class WorldChunkMixin implements Chunk {
         if (Awaken.worldProperties.isWorldAwakened()) {
             if (!dataBe.genNewOres) {
                 dataBe.genNewOres = true;
-                AwakenOreGen.generate(chunk, 32, 4, Awaken.Groups.MOONSTONE.ORE);
-                AwakenOreGen.generate(chunk, 32, 4, Awaken.Groups.SUNSTONE.ORE);
+                AwakenOreGen.generate(chunk, 64, 12, 12, Awaken.Groups.SALVIUM.ORE);
+                AwakenOreGen.generate(chunk, 64, 12, 12, Awaken.Groups.VALERIUM.ORE);
             }
         }
     }

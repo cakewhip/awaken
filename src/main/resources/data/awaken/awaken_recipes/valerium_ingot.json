@@ -1,0 +1,17 @@
+{
+  "type": "furnace",
+  "recipe": {
+    "output": {
+      "item": "awaken:valerium_ingot"
+    },
+    "reagents": [
+      {
+        "item": "awaken:valerium_ore",
+        "count": 3
+      },
+      {
+        "item": "minecraft:coal_block"
+      }
+    ]
+  }
+}
