@@ -104,6 +104,7 @@ public class Awaken implements ModInitializer {
         public static ArmorGroup WITHER_SCALE_ARMOR;
 
         public static OreGroup SALVIUM, VALERIUM;
+        public static ArmorGroup SALVIUM_ARMOR, VALERIUM_ARMOR;
 
         public static OreGroup SUNSTONE, MOONSTONE;
 
@@ -133,6 +134,9 @@ public class Awaken implements ModInitializer {
                         false,
                         "ingot"
                 );
+
+                SALVIUM_ARMOR = new ArmorGroup("salvium", AwakenArmorMaterial.SALVIUM);
+                VALERIUM_ARMOR = new ArmorGroup("valerium", AwakenArmorMaterial.VALERIUM);
             }
 
             // Phase 3
