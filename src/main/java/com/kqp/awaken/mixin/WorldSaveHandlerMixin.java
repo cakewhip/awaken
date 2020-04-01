@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.Awaken;
-import com.kqp.awaken.data.AwakenWorldProperties;
+import com.kqp.awaken.data.AwakenWorldData;
 import com.kqp.awaken.util.JsonUtil;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.nbt.CompoundTag;
@@ -29,16 +29,16 @@ public abstract class WorldSaveHandlerMixin implements PlayerSaveHandler {
 
     @Inject(at = @At("HEAD"), method = "saveWorld")
     public void saveWorld(LevelProperties levelProperties, @Nullable CompoundTag compoundTag, CallbackInfo callbackInfo) {
-        AwakenWorldProperties toSave = Awaken.worldProperties != null ? Awaken.worldProperties : new AwakenWorldProperties();
-        JsonUtil.save(new File(worldDir, AwakenWorldProperties.FILE_NAME), toSave);
+        AwakenWorldData toSave = Awaken.worldProperties != null ? Awaken.worldProperties : new AwakenWorldData();
+        JsonUtil.save(new File(worldDir, AwakenWorldData.FILE_NAME), toSave);
     }
 
     @Inject(at = @At("HEAD"), method = "readProperties")
     public void readProperties(CallbackInfoReturnable<LevelProperties> callbackInfo) {
         Awaken.worldProperties = JsonUtil.load(
-                new File(worldDir, AwakenWorldProperties.FILE_NAME),
-                AwakenWorldProperties.class,
-                new AwakenWorldProperties()
+                new File(worldDir, AwakenWorldData.FILE_NAME),
+                AwakenWorldData.class,
+                new AwakenWorldData()
         );
     }
 }

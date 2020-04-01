@@ -1,7 +1,12 @@
 package com.kqp.awaken.data;
 
+import com.kqp.awaken.Awaken;
 import com.kqp.awaken.data.trigger.Trigger;
+import com.kqp.awaken.util.Broadcaster;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Tickable;
+import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +16,7 @@ import java.util.List;
  *
  * TODO: redo events so that triggers live inside the event
  */
-public class AwakenWorldProperties {
+public class AwakenWorldData {
     public static final String FILE_NAME = "awaken.json";
 
     /**
@@ -38,6 +43,16 @@ public class AwakenWorldProperties {
      * If the world has entered the awakening phase.
      */
     private boolean worldAwakened = false;
+
+    /**
+     * Whether the blood moon is active or not.
+     */
+    private boolean bloodMoonActive = false;
+
+    /**
+     * How long the blood moon has been active.
+     */
+    private long bloodMoonTickTime = 0;
 
     /**
      * List of active triggers in the world.
@@ -68,10 +83,50 @@ public class AwakenWorldProperties {
             }
         }
 
+        tickBloodMoon();
+
         if (dirty) {
             AwakenProgression.evaluateStage();
             dirty = false;
         }
+    }
+
+    /**
+     * Updates stuff for blood moon handling.
+     */
+    public void tickBloodMoon() {
+        World world = Awaken.server.getWorld(DimensionType.OVERWORLD);
+        long time = world.getTimeOfDay() % 24000;
+
+        if (bloodMoonActive) {
+            if (time < AwakenConfig.NIGHT_START || time >= AwakenConfig.NIGHT_END) {
+                // Not night and blood moon active, end it
+
+                endBloodMoon();
+                return;
+            }
+
+            bloodMoonTickTime++;
+        } else if (time == AwakenConfig.NIGHT_START) {
+            // Moon is rising, roll blood moon chance
+
+            if (isWorldAwakened() && world.random.nextFloat() < AwakenConfig.BLOOD_MOON_CHANCE) {
+                startBloodMoon();
+            }
+        }
+    }
+
+    private void startBloodMoon() {
+        Awaken.info("Starting blood moon");
+        bloodMoonActive = true;
+        bloodMoonTickTime = 0;
+
+        Broadcaster.broadcastMessage("The blood moon rises...", Formatting.DARK_RED, true, false);
+    }
+
+    private void endBloodMoon() {
+        Awaken.info("Ending blood moon");
+        bloodMoonActive = false;
     }
 
     public void markDirty() {
@@ -120,5 +175,9 @@ public class AwakenWorldProperties {
 
     public void setAwakening() {
         this.worldAwakened = true;
+    }
+
+    public boolean isBloodMoonActive() {
+        return bloodMoonActive;
     }
 }

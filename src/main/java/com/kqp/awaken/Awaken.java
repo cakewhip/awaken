@@ -4,7 +4,7 @@ import com.kqp.awaken.block.CraftingBlock;
 import com.kqp.awaken.block.AwakenAnvilBlock;
 import com.kqp.awaken.client.container.AwakenCraftingContainer;
 import com.kqp.awaken.data.AwakenDataBlockEntity;
-import com.kqp.awaken.data.AwakenWorldProperties;
+import com.kqp.awaken.data.AwakenWorldData;
 import com.kqp.awaken.entity.DireWolfEntity;
 import com.kqp.awaken.entity.RaptorChickenEntity;
 import com.kqp.awaken.group.ArmorGroup;
@@ -65,7 +65,7 @@ public class Awaken implements ModInitializer {
     public static final String MOD_ID = "awaken";
     public static final String MOD_NAME = "Awaken";
 
-    public static AwakenWorldProperties worldProperties;
+    public static AwakenWorldData worldProperties;
     public static MinecraftServer server;
 
     @Override

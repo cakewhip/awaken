@@ -16,7 +16,8 @@
   ],
   "client": [
     "InventoryScreenMixin",
-    "LivingEntityRendererMixin"
+    "LivingEntityRendererMixin",
+    "WorldRendererMixin"
   ],
   "server": [],
   "injectors": {
