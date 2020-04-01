@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 /**
  * Manages all of the Awaken recipes.
+ * TODO: add list of common reagents that have multiple matches (any log, any plank, etc)
  */
 public class AwakenRecipeManager {
     /**

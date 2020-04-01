@@ -178,7 +178,7 @@ public class Awaken implements ModInitializer {
         public static final Item ENDERIAN_CUTLASS = new EnderianCutlassItem().setRarity(AwakenRarity.EPIC);
         public static final Item JANG_KATANA = new JangKatanaItem().setRarity(AwakenRarity.FABLED);
 
-        //TODO: add unbreakable elytra using post-awakened materials (Dragon Bone Wings)
+        // TODO: add unbreakable elytra using post-awakened materials (Dragon Bone Wings)
 
         public static final Item CELESTIAL_STEEL_INGOT = new Item(new Item.Settings().group(ItemGroup.MATERIALS));
         public static final Item RAPTOR_CHICKEN_EGG = new Item(new Item.Settings().group(ItemGroup.MATERIALS));
@@ -224,6 +224,8 @@ public class Awaken implements ModInitializer {
     }
 
     public static class TEntities {
+        // TODO: add spawning
+
         public static final EntityType<RaptorChickenEntity> RAPTOR_CHICKEN = Registry.register(
                 Registry.ENTITY_TYPE,
                 new Identifier(MOD_ID, "raptor_chicken"),
@@ -243,10 +245,12 @@ public class Awaken implements ModInitializer {
             Registry.register(Registry.ITEM, new Identifier(MOD_ID, "dire_wolf_spawn_egg"), new SpawnEggItem(DIRE_WOLF, 0xD6E9FF, 0x97ADCC, new Item.Settings().group(ItemGroup.MISC)));
         }
 
-        //TODO: add killer bunny (https://minecraft.gamepedia.com/Rabbit#The_Killer_Bunny)
+        // TODO: add killer bunny (https://minecraft.gamepedia.com/Rabbit#The_Killer_Bunny)
     }
 
     public static class TNetworking {
+        // TODO: move C2S IDs to client entry point
+        // TODO: label directions on variables (see open/close crafting IDs)
         public static final Identifier SYNC_CRAFTING_SCROLLBAR_ID = new Identifier(Awaken.MOD_ID, "sync_crafting_scrollbar");
         public static final Identifier SYNC_CRAFTING_RESULTS_ID = new Identifier(Awaken.MOD_ID, "sync_crafting_results");
         public static final Identifier SYNC_CRAFTING_RESULT_SLOT_ID = new Identifier(Awaken.MOD_ID, "sync_crafting_result_slot");
