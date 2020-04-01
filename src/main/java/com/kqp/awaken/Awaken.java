@@ -247,9 +247,14 @@ public class Awaken implements ModInitializer {
     }
 
     public static class TNetworking {
-        public static final Identifier SYNC_SCROLLBAR_ID = new Identifier(Awaken.MOD_ID, "sync_scrollbar");
-        public static final Identifier SYNC_RESULTS_ID = new Identifier(Awaken.MOD_ID, "sync_results");
-        public static final Identifier SYNC_RESULT_SLOT_ID = new Identifier(Awaken.MOD_ID, "sync_result_slot");
+        public static final Identifier SYNC_CRAFTING_SCROLLBAR_ID = new Identifier(Awaken.MOD_ID, "sync_crafting_scrollbar");
+        public static final Identifier SYNC_CRAFTING_RESULTS_ID = new Identifier(Awaken.MOD_ID, "sync_crafting_results");
+        public static final Identifier SYNC_CRAFTING_RESULT_SLOT_ID = new Identifier(Awaken.MOD_ID, "sync_crafting_result_slot");
+        public static final Identifier SYNC_LOOK_UP_SCROLLBAR_ID = new Identifier(Awaken.MOD_ID, "sync_look_up_scrollbar");
+        public static final Identifier SYNC_LOOK_UP_RESULTS_ID = new Identifier(Awaken.MOD_ID, "sync_look_up_results");
+        public static final Identifier SYNC_LOOK_UP_RESULT_SLOT_ID = new Identifier(Awaken.MOD_ID, "sync_look_up_result_slot");
+
+
         public static final Identifier OPEN_CRAFTING_C2S_ID = new Identifier(Awaken.MOD_ID, "open_crafting_c2s");
         public static final Identifier OPEN_CRAFTING_S2C_ID = new Identifier(Awaken.MOD_ID, "open_crafting_s2c");
         public static final Identifier CLOSE_CRAFTING_C2S_ID = new Identifier(Awaken.MOD_ID, "close_crafting_c2s");
@@ -259,12 +264,22 @@ public class Awaken implements ModInitializer {
             info("Initializing networking");
 
             // Gets the client's scroll bar position and updates the server-side container
-            ServerSidePacketRegistry.INSTANCE.register(SYNC_SCROLLBAR_ID, (packetContext, data) -> {
+            ServerSidePacketRegistry.INSTANCE.register(SYNC_CRAFTING_SCROLLBAR_ID, (packetContext, data) -> {
                 float scrollPosition = data.readFloat();
 
                 packetContext.getTaskQueue().execute(() -> {
                     if (packetContext.getPlayer().container instanceof AwakenCraftingContainer) {
-                        ((AwakenCraftingContainer) packetContext.getPlayer().container).scrollItems(scrollPosition);
+                        ((AwakenCraftingContainer) packetContext.getPlayer().container).scrollOutputs(scrollPosition);
+                    }
+                });
+            });
+
+            ServerSidePacketRegistry.INSTANCE.register(SYNC_LOOK_UP_SCROLLBAR_ID, (packetContext, data) -> {
+                float scrollPosition = data.readFloat();
+
+                packetContext.getTaskQueue().execute(() -> {
+                    if (packetContext.getPlayer().container instanceof AwakenCraftingContainer) {
+                        ((AwakenCraftingContainer) packetContext.getPlayer().container).scrollLookUpResults(scrollPosition);
                     }
                 });
             });

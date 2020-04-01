@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import java.util.HashMap;
 import java.util.List;
 
-public class AwakenResultSlot extends Slot {
+public class AwakenCraftingResultSlot extends Slot {
     private final AwakenCraftingContainer container;
     private final PlayerEntity player;
 
@@ -20,7 +20,7 @@ public class AwakenResultSlot extends Slot {
 
     public int currentIndex = 0;
 
-    public AwakenResultSlot(AwakenCraftingContainer container, PlayerEntity player, Inventory inventory, int invSlot, int xPosition, int yPosition) {
+    public AwakenCraftingResultSlot(AwakenCraftingContainer container, PlayerEntity player, Inventory inventory, int invSlot, int xPosition, int yPosition) {
         super(inventory, invSlot, xPosition, yPosition);
         this.player = player;
         this.container = container;
@@ -61,7 +61,7 @@ public class AwakenResultSlot extends Slot {
         }
 
         markDirty();
-        container.updateResult();
+        container.updateCraftingResults();
     }
 
     @Override
@@ -69,9 +69,5 @@ public class AwakenResultSlot extends Slot {
         this.onCrafted(stack);
 
         return stack;
-    }
-
-    public ItemStack getStackInSlot() {
-        return inventory.getInvStack(this.id);
     }
 }

@@ -2,7 +2,8 @@ package com.kqp.awaken.client;
 
 import com.kqp.awaken.Awaken;
 import com.kqp.awaken.client.container.AwakenCraftingContainer;
-import com.kqp.awaken.client.container.AwakenResultSlot;
+import com.kqp.awaken.client.container.AwakenCraftingResultSlot;
+import com.kqp.awaken.client.container.AwakenLookUpResultSlot;
 import com.kqp.awaken.client.entity.DireWolfRenderer;
 import com.kqp.awaken.client.entity.RaptorChickenRenderer;
 import com.kqp.awaken.client.screen.AwakenCraftingScreen;
@@ -50,14 +51,14 @@ public class AwakenClient implements ClientModInitializer {
      */
     public static void initNetworking() {
         // Server request to client to get the scroll bar position
-        ClientSidePacketRegistry.INSTANCE.register(Awaken.TNetworking.SYNC_RESULTS_ID, (packetContext, data) -> packetContext.getTaskQueue().execute(() -> {
+        ClientSidePacketRegistry.INSTANCE.register(Awaken.TNetworking.SYNC_CRAFTING_RESULTS_ID, (packetContext, data) -> packetContext.getTaskQueue().execute(() -> {
             if (MinecraftClient.getInstance().currentScreen instanceof AwakenCraftingScreen) {
-                ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).syncScrollbar();
+                ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).syncCraftingResultScrollbar();
             }
         }));
 
         // Server sends what ItemStack is in what slot of the Awaken crafting GUI
-        ClientSidePacketRegistry.INSTANCE.register(Awaken.TNetworking.SYNC_RESULT_SLOT_ID, (packetContext, data) -> {
+        ClientSidePacketRegistry.INSTANCE.register(Awaken.TNetworking.SYNC_CRAFTING_RESULT_SLOT_ID, (packetContext, data) -> {
             int slotIndex = data.readInt();
             ItemStack stack = data.readItemStack();
             int currentIndex = data.readInt();
@@ -65,7 +66,26 @@ public class AwakenClient implements ClientModInitializer {
             packetContext.getTaskQueue().execute(() -> {
                 if (MinecraftClient.getInstance().currentScreen instanceof AwakenCraftingScreen) {
                     ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).getContainer().setStackInSlot(slotIndex, stack);
-                    ((AwakenResultSlot) ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).getContainer().getSlot(slotIndex)).currentIndex = currentIndex;
+                    ((AwakenCraftingResultSlot) ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).getContainer().getSlot(slotIndex)).currentIndex = currentIndex;
+                }
+            });
+        });
+
+        ClientSidePacketRegistry.INSTANCE.register(Awaken.TNetworking.SYNC_LOOK_UP_RESULTS_ID, (packetContext, data) -> packetContext.getTaskQueue().execute(() -> {
+            if (MinecraftClient.getInstance().currentScreen instanceof AwakenCraftingScreen) {
+                ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).syncLookUpResultScrollbar();
+            }
+        }));
+
+        ClientSidePacketRegistry.INSTANCE.register(Awaken.TNetworking.SYNC_LOOK_UP_RESULT_SLOT_ID, (packetContext, data) -> {
+            int slotIndex = data.readInt();
+            ItemStack stack = data.readItemStack();
+            int currentIndex = data.readInt();
+
+            packetContext.getTaskQueue().execute(() -> {
+                if (MinecraftClient.getInstance().currentScreen instanceof AwakenCraftingScreen) {
+                    ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).getContainer().setStackInSlot(slotIndex, stack);
+                    ((AwakenLookUpResultSlot) ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).getContainer().getSlot(slotIndex)).currentIndex = currentIndex;
                 }
             });
         });

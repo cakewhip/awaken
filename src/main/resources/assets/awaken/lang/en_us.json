@@ -59,5 +59,6 @@
     "item.awaken.dire_wolf_spawn_egg": "Dire Wolf Spawn Egg",
 
     "__comment": "GUI Translations",
-    "container.awaken.awaken_crafting": "Crafting"
+    "container.awaken.awaken_crafting": "Crafting",
+    "container.awaken.awaken_crafting_recipe_look_up": "Search Uses"
 }

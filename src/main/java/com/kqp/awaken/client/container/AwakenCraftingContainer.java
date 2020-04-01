@@ -2,6 +2,7 @@ package com.kqp.awaken.client.container;
 
 import com.kqp.awaken.Awaken;
 import com.kqp.awaken.block.RecipeAccessProvider;
+import com.kqp.awaken.inventory.AwakenCraftingRecipeLookUpInventory;
 import com.kqp.awaken.inventory.AwakenCraftingResultInventory;
 import com.kqp.awaken.recipe.RecipeType;
 import com.kqp.awaken.recipe.AwakenRecipe;
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 
 /**
  * Container for Awaken's crafting GUI.
- * Has 24 result slots {@link AwakenResultSlot} and the player's inventory slots.
+ * Has 24 result slots {@link AwakenCraftingResultSlot} and the player's inventory slots.
  * Decides what recipes to show the player at {@link #gatherRecipeTypes(PlayerEntity)}.
  */
 public class AwakenCraftingContainer extends Container {
@@ -35,33 +36,48 @@ public class AwakenCraftingContainer extends Container {
     public final PlayerInventory playerInventory;
 
     /**
-     * What recipes to show the player.
+     * What recipe types to show the player.
      * See {@link RecipeType} for all of them.
      */
     public String[] recipeTypes;
 
     /**
-     * The result inventory.
+     * The crafting result inventory.
      */
-    public final AwakenCraftingResultInventory resultInv;
+    public final AwakenCraftingResultInventory craftingResultInventory;
+
+    /**
+     * The usages look-up inventory.
+     */
+    public final AwakenCraftingRecipeLookUpInventory lookUpInventory;
 
     /**
      * All the current valid recipes.
      * Calculated on both client and server side because I couldn't think of a better way.
      * Probably a better way, but screw it.
      */
-    public List<AwakenRecipe> recipes;
+    public List<AwakenRecipe> craftingResultRecipes;
 
     /**
-     * All the current valid outputs.
-     * Calculated on both client and server side, because see {@link #recipes}.
+     * The recipes resulting from the usage look-up.
      */
-    public List<ItemStack> outputs;
+    public List<AwakenRecipe> lookUpRecipes;
+
+    /**
+     * All the current crafting results.
+     * Calculated on both client and server side, because see {@link #craftingResultRecipes}.
+     */
+    public List<ItemStack> craftingResults;
+
+    /**
+     * The results of the usage look-up.
+     */
+    public List<ItemStack> lookUpResults;
 
     /**
      * Creates a new instance of the container.
      *
-     * @param syncId          Sync ID used by Minecraf to sync the container
+     * @param syncId          Sync ID used by Minecraft to sync the container
      * @param playerInventory The player's inventory
      */
     public AwakenCraftingContainer(int syncId, PlayerInventory playerInventory) {
@@ -71,15 +87,19 @@ public class AwakenCraftingContainer extends Container {
 
         gatherRecipeTypes(playerInventory.player);
 
-        resultInv = new AwakenCraftingResultInventory();
-        this.outputs = new ArrayList();
+        this.craftingResultInventory = new AwakenCraftingResultInventory();
+        this.lookUpInventory = new AwakenCraftingRecipeLookUpInventory();
 
-        // Celestial Altar inventory (24 output)
+        this.lookUpRecipes = new ArrayList();
+        this.craftingResults = new ArrayList();
+        this.lookUpResults = new ArrayList();
+
+        // Crafting results inventory (24 output)
         int i, j;
         int counter = 0;
         for (i = 0; i < 3; i++) {
             for (j = 0; j < 8; j++) {
-                this.addSlot(new AwakenResultSlot(this, playerInventory.player, resultInv, counter++, 8 + j * 18, 18 + i * 18));
+                this.addSlot(new AwakenCraftingResultSlot(this, playerInventory.player, craftingResultInventory, counter++, 8 + j * 18, 18 + i * 18));
             }
         }
 
@@ -90,7 +110,7 @@ public class AwakenCraftingContainer extends Container {
                     @Override
                     public void markDirty() {
                         super.markDirty();
-                        updateResult();
+                        updateCraftingResults();
                     }
                 });
             }
@@ -101,13 +121,36 @@ public class AwakenCraftingContainer extends Container {
                 @Override
                 public void markDirty() {
                     super.markDirty();
-                    updateResult();
+                    updateCraftingResults();
                 }
             });
         }
 
+        counter = 0;
+
+        // Look-up inventory (1 query slot + 18 result slots)
+        this.addSlot(new Slot(lookUpInventory, counter++, 209, 22) {
+            @Override
+            public void markDirty() {
+                super.markDirty();
+                updateRecipeLookUpResults();
+            }
+        });
+
+
+        for (i = 0; i < 6; i++) {
+            for (j = 0; j < 3; j++) {
+                this.addSlot(new AwakenLookUpResultSlot(lookUpInventory, counter++, 186 + j * 18, 48 + i * 18) {
+                    @Override
+                    public boolean canInsert(ItemStack stack) {
+                        return false;
+                    }
+                });
+            }
+        }
+
         // Update initial results
-        updateResult();
+        updateCraftingResults();
     }
 
     /**
@@ -148,14 +191,27 @@ public class AwakenCraftingContainer extends Container {
      * Updates the results given the valid recipe types and the player's inventory.
      * This method is called on every slot change.
      */
-    public void updateResult() {
-        recipes = AwakenRecipeManager.getMatches(recipeTypes, playerInventory.main);
-        outputs = recipes.stream().map(recipe -> recipe.result.copy()).collect(Collectors.toList());
+    public void updateCraftingResults() {
+        craftingResultRecipes = AwakenRecipeManager.getMatches(recipeTypes, playerInventory.main);
+        craftingResults = craftingResultRecipes.stream().map(recipe -> recipe.result.copy()).collect(Collectors.toList());
 
         // If on server, notify the client that something has changed so the client can reply with the scroll bar position.
         if (!playerInventory.player.world.isClient) {
             PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-            ServerSidePacketRegistry.INSTANCE.sendToPlayer(playerInventory.player, Awaken.TNetworking.SYNC_RESULTS_ID, buf);
+            ServerSidePacketRegistry.INSTANCE.sendToPlayer(playerInventory.player, Awaken.TNetworking.SYNC_CRAFTING_RESULTS_ID, buf);
+        }
+    }
+
+    public void updateRecipeLookUpResults() {
+        ItemStack query = this.lookUpInventory.getInvStack(0);
+
+        lookUpRecipes = AwakenRecipeManager.getRecipesUsingItemStack(recipeTypes, query);
+        lookUpResults = lookUpRecipes.stream().map(recipe -> recipe.result.copy()).collect(Collectors.toList());
+
+        // If on server, notify the client that something has changed so the client can reply with the scroll bar position.
+        if (!playerInventory.player.world.isClient) {
+            PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+            ServerSidePacketRegistry.INSTANCE.sendToPlayer(playerInventory.player, Awaken.TNetworking.SYNC_LOOK_UP_RESULTS_ID, buf);
         }
     }
 
@@ -170,21 +226,35 @@ public class AwakenCraftingContainer extends Container {
     public ItemStack transferSlot(PlayerEntity player, int invSlot) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(invSlot);
+
         if (slot != null && slot.hasStack()) {
             ItemStack itemStack2 = slot.getStack();
             itemStack = itemStack2.copy();
+
             if (invSlot < 24) {
+                // Shift click inside result slots
+
                 if (!this.insertItem(itemStack2, 24, 60, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onStackChanged(itemStack2, itemStack);
             } else if (invSlot >= 24 && invSlot < 51) {
+                // Shift click inside main inventory
+
                 if (!this.insertItem(itemStack2, 51, 60, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else {
+            } else if (invSlot >= 51 && invSlot < 60) {
+                // Shift click inside hot-bar slots
                 if (!this.insertItem(itemStack2, 24, 51, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (invSlot == 60) {
+                // Shift click inside recipe look-up slot
+                if (!this.insertItem(itemStack2, 51, 60, false)) {
+                    return ItemStack.EMPTY;
+                } else if (!this.insertItem(itemStack2, 24, 51, false)) {
                     return ItemStack.EMPTY;
                 }
             }
@@ -209,12 +279,12 @@ public class AwakenCraftingContainer extends Container {
     }
 
     /**
-     * Calculates what items should be in view given the position of the scroll bar.
+     * Calculates what outputs should be in view given the position of the scroll bar.
      *
      * @param position Position of the scroll bar
      */
-    public void scrollItems(float position) {
-        int i = (this.outputs.size() + 8 - 1) / 8 - 3;
+    public void scrollOutputs(float position) {
+        int i = (this.craftingResults.size() + 8 - 1) / 8 - 3;
         int j = (int) ((double) (position * (float) i) + 0.5D);
         if (j < 0) {
             j = 0;
@@ -226,12 +296,12 @@ public class AwakenCraftingContainer extends Container {
 
                 ItemStack itemStack = ItemStack.EMPTY;
 
-                if (m >= 0 && m < this.outputs.size()) {
-                    itemStack = this.outputs.get(m);
+                if (m >= 0 && m < this.craftingResults.size()) {
+                    itemStack = this.craftingResults.get(m);
                 }
 
-                resultInv.setInvStack(l + k * 8, itemStack);
-                ((AwakenResultSlot) this.getSlot(l + k * 8)).currentIndex = m;
+                craftingResultInventory.setInvStack(l + k * 8, itemStack);
+                ((AwakenCraftingResultSlot) this.getSlot(l + k * 8)).currentIndex = m;
 
                 PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
                 buf.writeInt(l + k * 8);
@@ -239,15 +309,55 @@ public class AwakenCraftingContainer extends Container {
                 buf.writeInt(m);
 
                 // Sends the client EACH ItemStack in the result inventory
-                ServerSidePacketRegistry.INSTANCE.sendToPlayer(playerInventory.player, Awaken.TNetworking.SYNC_RESULT_SLOT_ID, buf);
+                ServerSidePacketRegistry.INSTANCE.sendToPlayer(playerInventory.player, Awaken.TNetworking.SYNC_CRAFTING_RESULT_SLOT_ID, buf);
             }
         }
+    }
 
+    /**
+     * Calculates what results should be in view given the position of the scroll bar.
+     *
+     * @param position Position of the scroll bar
+     */
+    public void scrollLookUpResults(float position) {
+        if (!playerInventory.player.world.isClient) {
+            int i = (this.lookUpResults.size() + 3 - 1) / 3 - 6;
+            int j = (int) ((double) (position * (float) i) + 0.5D);
+
+            if (j < 0) {
+                j = 0;
+            }
+
+            for (int k = 0; k < 6; ++k) {
+                for (int l = 0; l < 3; ++l) {
+                    int m = (k + j) * 3 + l;
+
+                    ItemStack itemStack = ItemStack.EMPTY;
+
+                    if (m >= 0 && m < this.lookUpResults.size()) {
+                        itemStack = this.lookUpResults.get(m);
+                    }
+
+                    int slot = l + k * 3;
+
+                    lookUpInventory.setInvStack(1 + slot, itemStack);
+                    ((AwakenLookUpResultSlot) this.getSlot(61 + slot)).currentIndex = m;
+
+                    PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+                    buf.writeInt(61 + slot);
+                    buf.writeItemStack(itemStack);
+                    buf.writeInt(m);
+
+                    // Sends the client EACH ItemStack in the result inventory
+                    ServerSidePacketRegistry.INSTANCE.sendToPlayer(playerInventory.player, Awaken.TNetworking.SYNC_LOOK_UP_RESULT_SLOT_ID, buf);
+                }
+            }
+        }
     }
 
     @Override
     public boolean canInsertIntoSlot(ItemStack stack, Slot slot) {
-        return slot.inventory != this.resultInv && super.canInsertIntoSlot(stack, slot);
+        return slot.inventory != this.craftingResultInventory && super.canInsertIntoSlot(stack, slot);
     }
 
     @Override
@@ -255,7 +365,11 @@ public class AwakenCraftingContainer extends Container {
         return true;
     }
 
-    public boolean shouldShowScrollbar() {
-        return this.outputs.size() > 24;
+    public boolean shouldShowOutputsScrollbar() {
+        return this.craftingResults.size() > 24;
+    }
+
+    public boolean shouldShowLookUpResultsScrollbar() {
+        return this.lookUpResults.size() > 18;
     }
 }

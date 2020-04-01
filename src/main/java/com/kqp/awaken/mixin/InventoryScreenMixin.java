@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 @Mixin(InventoryScreen.class)
 public abstract class InventoryScreenMixin extends AbstractInventoryScreen<CreativeInventoryScreen.CreativeContainer> {
-    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/gui/container/crafting.png");
+    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/gui/container/crafting_2.png");
 
     public InventoryScreenMixin(CreativeInventoryScreen.CreativeContainer container, PlayerInventory playerInventory, Text text) {
         super(container, playerInventory, text);
@@ -47,7 +47,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Creat
     @Inject(at = @At("HEAD"), method = "drawBackground")
     public void drawCraftingTab(float delta, int mouseX, int mouseY, CallbackInfo callbackInfo) {
         this.minecraft.getTextureManager().bindTexture(TEXTURE);
-        this.blit(this.x + 29, this.y - 28, 204, 0, 28, 32);
+        this.blit(this.x + 29, this.y - 28, 28, 166, 28, 32);
 
         this.setBlitOffset(100);
         this.itemRenderer.zOffset = 100.0F;
@@ -62,7 +62,7 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Creat
     @Inject(at = @At("TAIL"), method = "drawBackground")
     public void drawPlayerTab(float delta, int mouseX, int mouseY, CallbackInfo callbackInfo) {
         this.minecraft.getTextureManager().bindTexture(TEXTURE);
-        this.blit(this.x, this.y - 28, 176, 32, 28, 32);
+        this.blit(this.x, this.y - 28, 0, 198, 28, 32);
     }
 
     @Inject(at = @At("TAIL"), method = "render")

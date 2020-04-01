@@ -1,11 +1,9 @@
 package com.kqp.awaken.recipe;
 
+import com.google.common.collect.Ordering;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -71,6 +69,10 @@ public class AwakenRecipeManager {
      * @return List of recipes that have the passed item stack as an output
      */
     public static List<AwakenRecipe> getMatchesForOutput(String[] types, ItemStack itemStack) {
+        if (itemStack.isEmpty()) {
+            return Collections.emptyList();
+        }
+
         ArrayList<AwakenRecipe> output = new ArrayList();
 
         for (String type : types) {
@@ -82,6 +84,41 @@ public class AwakenRecipeManager {
                 }
             }
         }
+
+        return output;
+    }
+
+    /**
+     * Returns a list of recipes that have the passed item stack as an input.
+     *
+     * @param types     Recipe types to access
+     * @param itemStack Item stack input
+     * @return List of recipes that have the passed item stack as an input
+     */
+    public static List<AwakenRecipe> getRecipesUsingItemStack(String[] types, ItemStack itemStack) {
+        if (itemStack.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        ArrayList<AwakenRecipe> output = new ArrayList();
+        ComparableItemStack comparableItemStack = new ComparableItemStack(itemStack);
+
+        for (String type : types) {
+            List<AwakenRecipe> recipes = getRecipesForType(type);
+
+            for (AwakenRecipe recipe : recipes) {
+                for (Reagent reagent : recipe.reagents.keySet()) {
+                    if (reagent.matchingStacks.contains(comparableItemStack)) {
+                        output.add(recipe);
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Sort for that hot UX
+        output.sort(Comparator.comparing(AwakenRecipe::getSortString));
 
         return output;
     }
