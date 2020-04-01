@@ -14,7 +14,7 @@ public class DamageUtilMixin {
     @Inject(at = @At("HEAD"), method = "getDamageLeft", cancellable = true)
     private static void overrideArmorDamageMitigationCalculation(float damage, float armor, float armorToughness, CallbackInfoReturnable<Float> callbackInfo) {
         // Each point of armor decreases damage by 0.32F
-        float newDamage = damage - armor * 0.32F;
+        float newDamage = damage - armor * 0.173469387755102F;
 
         // Each point of armor toughness decreases damage by 1%
         newDamage *= 1F - (armorToughness / 100F);
