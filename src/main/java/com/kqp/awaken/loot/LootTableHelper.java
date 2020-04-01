@@ -80,8 +80,6 @@ public class LootTableHelper {
                         .withFunction(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(lootEntry.min, lootEntry.max)))
                         .withEntry(ItemEntry.builder(lootEntry.item));
 
-                System.out.println("FOUND " + id);
-
                 supplier.withPool(builder);
             }
         }
