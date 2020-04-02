@@ -21,7 +21,7 @@ public class DamageUtilMixin {
         newDamage *= 1F - (armorToughness * 0.1F / 100F);
 
         // Calculate a minimum damage so the player takes some damage, also affected by armor toughness
-        float minDamage = 1F - (clampPercentage(armorToughness) * 0.5F / 100F);
+        float minDamage = 1F - (armorToughness * 0.5F / 100F);
 
         callbackInfo.setReturnValue(Math.max(minDamage, newDamage));
     }
@@ -29,12 +29,8 @@ public class DamageUtilMixin {
     @Inject(at = @At("HEAD"), method = "getDamageInflicted", cancellable = true)
     private static void overrideArmorEnchantmentDamageMitigationCalculation(float damage, float protection, CallbackInfoReturnable<Float> callbackInfo) {
         // Each level of protection adds a 0.5% damage mitigation
-        float multiplier = 1F - (0.5F * clampPercentage(protection) / 16F);
+        float multiplier = 1F - (0.5F * protection / 16F);
 
         callbackInfo.setReturnValue(damage * multiplier);
-    }
-
-    private static float clampPercentage(float value) {
-        return MathHelper.clamp(value, 0F, 100F);
     }
 }
