@@ -1,7 +1,6 @@
 package com.kqp.awaken.mixin;
 
 import net.minecraft.entity.DamageUtil;
-import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -26,7 +25,7 @@ public class DamageUtilMixin {
         callbackInfo.setReturnValue(Math.max(minDamage, newDamage));
     }
 
-    @Inject(at = @At("HEAD"), method = "getDamageInflicted", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "getInflictedDamage", cancellable = true)
     private static void overrideArmorEnchantmentDamageMitigationCalculation(float damage, float protection, CallbackInfoReturnable<Float> callbackInfo) {
         // Each level of protection adds a 0.5% damage mitigation
         float multiplier = 1F - (0.5F * protection / 16F);
