@@ -21,9 +21,10 @@ public abstract class AbstractSkeletonEntityMixin {
         AbstractSkeletonEntity ase = (AbstractSkeletonEntity) (Object) this;
         if (ase instanceof SkeletonEntity && Awaken.worldProperties.isWorldAwakened()) {
             SkeletonEntity skeleton = (SkeletonEntity) (Object) this;
+            boolean bm = Awaken.worldProperties.isBloodMoonActive();
 
-            skeleton.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.36D);
-            skeleton.getAttributeInstance(EntityAttributes.ARMOR).setBaseValue(3.0D);
+            skeleton.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(bm ? 0.38D : 0.36D);
+            skeleton.getAttributeInstance(EntityAttributes.ARMOR).setBaseValue(bm ? 15.0D : 10.0D);
         }
     }
 

@@ -19,10 +19,11 @@ public abstract class ZombieEntityMixin {
     protected void overrideAttributes(CallbackInfo callbackInfo) {
         if (Awaken.worldProperties.isWorldAwakened()) {
             ZombieEntity zombie = (ZombieEntity) (Object) this;
+            boolean bm = Awaken.worldProperties.isBloodMoonActive();
 
             zombie.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.28D);
-            zombie.getAttributeInstance(EntityAttributes.ARMOR).setBaseValue(6.0D);
-            zombie.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).setBaseValue(12.0D);
+            zombie.getAttributeInstance(EntityAttributes.ARMOR).setBaseValue(bm ? 15.0D : 10.0D);
+            zombie.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).setBaseValue(bm ? 15.0D : 10.0D);
         }
     }
 

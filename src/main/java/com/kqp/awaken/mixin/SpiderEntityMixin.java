@@ -26,10 +26,11 @@ public abstract class SpiderEntityMixin {
     protected void overrideAttributes(CallbackInfo callbackInfo) {
         if (Awaken.worldProperties.isWorldAwakened()) {
             SpiderEntity spider = (SpiderEntity) (Object) this;
+            boolean bm = Awaken.worldProperties.isBloodMoonActive();
 
             spider.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.28D);
-            spider.getAttributeInstance(EntityAttributes.ARMOR).setBaseValue(6.0D);
-            spider.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).setBaseValue(12.0D);
+            spider.getAttributeInstance(EntityAttributes.ARMOR).setBaseValue(bm ? 12.0D : 6.0D);
+            spider.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).setBaseValue(bm ? 16.0D : 8.0D);
         }
     }
 
@@ -38,7 +39,7 @@ public abstract class SpiderEntityMixin {
         if (Awaken.worldProperties.isWorldAwakened()) {
             SpiderEntity spider = (SpiderEntity) (Object) this;
 
-            if (spider.getPassengerList().size() == 0 && world.getRandom().nextFloat() < 0.75F) {
+            if (spider.getPassengerList().size() == 0 && world.getRandom().nextFloat() < 0.5F) {
 
                 SkeletonEntity skeletonEntity = EntityType.SKELETON.create(spider.world);
 
