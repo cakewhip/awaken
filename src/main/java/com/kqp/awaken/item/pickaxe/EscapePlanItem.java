@@ -1,15 +1,16 @@
 package com.kqp.awaken.item.pickaxe;
 
 import com.kqp.awaken.item.AwakenToolMaterial;
+import com.kqp.awaken.item.effect.EffectAttributeEquippable;
+import com.kqp.awaken.item.effect.Equippable;
+import com.kqp.awaken.item.effect.SpecialItemRegistry;
 import com.kqp.awaken.item.tool.AwakenPickaxeItem;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -17,27 +18,16 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+/**
+ * Class for the escape plan item.
+ */
 public class EscapePlanItem extends AwakenPickaxeItem {
     public EscapePlanItem() {
         super(AwakenToolMaterial.PHASE_0_SPECIAL);
-    }
 
-    /**
-     * Applies effects for the Escape Plan.
-     *
-     * @param stack    ItemStack
-     * @param world    World
-     * @param entity   Entity in possession of the item
-     * @param slot     Slot the item is in
-     * @param selected If the item is being held
-     */
-    @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        if (selected && entity instanceof LivingEntity) {
-            LivingEntity le = (LivingEntity) entity;
-
-            le.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 20, 1));
-        }
+        SpecialItemRegistry.EQUIPPABLE_ITEM.put(this, new EffectAttributeEquippable()
+                .addStatusEffect(StatusEffects.SPEED, 1)
+        );
     }
 
     @Override

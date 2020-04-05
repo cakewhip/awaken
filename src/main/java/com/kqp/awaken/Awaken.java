@@ -12,6 +12,7 @@ import com.kqp.awaken.group.BlockStats;
 import com.kqp.awaken.group.ToolGroup;
 import com.kqp.awaken.group.OreGroup;
 import com.kqp.awaken.item.effect.Equippable;
+import com.kqp.awaken.item.effect.SetBonusEquippable;
 import com.kqp.awaken.item.effect.SpecialItemRegistry;
 import com.kqp.awaken.item.pickaxe.EscapePlanItem;
 import com.kqp.awaken.item.AwakenArmorMaterial;
@@ -141,23 +142,9 @@ public class Awaken implements ModInitializer {
                 SALVIUM_ARMOR = new ArmorGroup("salvium", AwakenArmorMaterial.SALVIUM);
 
                 VALERIUM_ARMOR = new ArmorGroup("valerium", AwakenArmorMaterial.VALERIUM, "Set bonus: 15% extra melee damage");
-                SpecialItemRegistry.EQUIPPABLE_ARMOR.put(VALERIUM_ARMOR.CHESTPLATE, new Equippable() {
-                    private final EntityAttributeModifier VALERIUM_DMG_MOD =
-                            new EntityAttributeModifier("valerium_set_bonus", 1.15D, EntityAttributeModifier.Operation.MULTIPLY_BASE);
-
-                    @Override
-                    public void equip(ItemStack itemStack, PlayerEntity player) {
-                        EntityAttributeInstance instance = player.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE);
-
-                        instance.addModifier(VALERIUM_DMG_MOD);
-                    }
-
-                    @Override
-                    public void unEquip(ItemStack itemStack, PlayerEntity player) {
-                        player.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE)
-                                .removeModifier(VALERIUM_DMG_MOD);
-                    }
-                });
+                SpecialItemRegistry.EQUIPPABLE_ARMOR.put(VALERIUM_ARMOR.CHESTPLATE, new SetBonusEquippable()
+                    .addEntityAttributeModifier(EntityAttributes.ATTACK_DAMAGE, "valerium_set_bonus", 1.15D, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+                );
             }
 
             // Phase 3

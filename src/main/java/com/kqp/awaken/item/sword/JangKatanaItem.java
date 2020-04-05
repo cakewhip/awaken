@@ -1,6 +1,7 @@
 package com.kqp.awaken.item.sword;
 
 import com.kqp.awaken.item.AwakenToolMaterial;
+import com.kqp.awaken.item.effect.EffectAttributeEquippable;
 import com.kqp.awaken.item.effect.Equippable;
 import com.kqp.awaken.item.effect.SpecialItemRegistry;
 import com.kqp.awaken.item.tool.AwakenSwordItem;
@@ -22,17 +23,16 @@ import java.util.List;
 
 /**
  * Class for the Jang Katana.
- * TODO: make this a generic class that takes in a ToolMaterial and a list of status effects to apply
  */
-public class JangKatanaItem extends AwakenSwordItem implements Equippable {
-    private static final StatusEffectInstance REGEN_EFFECT = new StatusEffectInstance(StatusEffects.REGENERATION, Integer.MAX_VALUE, 1);
-    private static final StatusEffectInstance SPEED_EFFECT = new StatusEffectInstance(StatusEffects.SPEED, Integer.MAX_VALUE, 1);
-    private static final StatusEffectInstance RESISTANCE_EFFECT = new StatusEffectInstance(StatusEffects.RESISTANCE, Integer.MAX_VALUE, 1);
-
+public class JangKatanaItem extends AwakenSwordItem {
     public JangKatanaItem() {
         super(AwakenToolMaterial.JANG_KATANA);
 
-        SpecialItemRegistry.EQUIPPABLE_ITEM.put(this, this);
+        SpecialItemRegistry.EQUIPPABLE_ITEM.put(this, new EffectAttributeEquippable()
+                .addStatusEffect(StatusEffects.REGENERATION, 1)
+                .addStatusEffect(StatusEffects.SPEED, 1)
+                .addStatusEffect(StatusEffects.RESISTANCE, 1)
+        );
     }
 
     @Override
@@ -49,19 +49,5 @@ public class JangKatanaItem extends AwakenSwordItem implements Equippable {
         tooltip.add(new LiteralText("Regeneration II"));
         tooltip.add(new LiteralText("Speed II"));
         tooltip.add(new LiteralText("Resistance II"));
-    }
-
-    @Override
-    public void equip(ItemStack itemStack, PlayerEntity player) {
-        player.addStatusEffect(REGEN_EFFECT);
-        player.addStatusEffect(SPEED_EFFECT);
-        player.addStatusEffect(RESISTANCE_EFFECT);
-    }
-
-    @Override
-    public void unEquip(ItemStack itemStack, PlayerEntity player) {
-        player.removeStatusEffect(REGEN_EFFECT.getEffectType());
-        player.removeStatusEffect(SPEED_EFFECT.getEffectType());
-        player.removeStatusEffect(RESISTANCE_EFFECT.getEffectType());
     }
 }
