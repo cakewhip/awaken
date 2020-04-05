@@ -11,6 +11,7 @@ import com.kqp.awaken.group.ArmorGroup;
 import com.kqp.awaken.group.BlockStats;
 import com.kqp.awaken.group.ToolGroup;
 import com.kqp.awaken.group.OreGroup;
+import com.kqp.awaken.item.effect.SpecialItemRegistry;
 import com.kqp.awaken.item.pickaxe.EscapePlanItem;
 import com.kqp.awaken.item.AwakenArmorMaterial;
 import com.kqp.awaken.item.AwakenToolMaterial;
@@ -25,6 +26,7 @@ import com.kqp.awaken.item.tool.AwakenAxeItem;
 import com.kqp.awaken.loot.LootTableHelper;
 import com.kqp.awaken.loot.AwakenRarity;
 import com.kqp.awaken.recipe.RecipeType;
+import com.kqp.awaken.util.ItemUtil;
 import com.kqp.awaken.util.TimeUtil;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ModInitializer;
@@ -136,7 +138,11 @@ public class Awaken implements ModInitializer {
                 );
 
                 SALVIUM_ARMOR = new ArmorGroup("salvium", AwakenArmorMaterial.SALVIUM);
-                VALERIUM_ARMOR = new ArmorGroup("valerium", AwakenArmorMaterial.VALERIUM);
+
+                VALERIUM_ARMOR = new ArmorGroup("valerium", AwakenArmorMaterial.VALERIUM, "Set bonus: 15% extra melee damage");
+                SpecialItemRegistry.DAMAGE_MODIFIERS.put(VALERIUM_ARMOR.CHESTPLATE, (dmg, attacker, target, itemStack) ->
+                        dmg * (ItemUtil.wearingFullSet(attacker, VALERIUM_ARMOR) ? 1.15F : 1F)
+                );
             }
 
             // Phase 3

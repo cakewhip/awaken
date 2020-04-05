@@ -14,7 +14,8 @@
     "AbstractSkeletonEntityMixin",
     "SpiderEntityMixin",
     "DamageUtilMixin",
-    "ClampedEntityAttributeMixin"
+    "ClampedEntityAttributeMixin",
+    "PlayerEntityMixin"
   ],
   "client": [
     "InventoryScreenMixin",
