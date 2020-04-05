@@ -7,37 +7,82 @@ import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DefaultedList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.HashMap;
 
 /**
- * Used to apply damage buffs.
+ * Used to:
+ * Apply damage buffs
+ * Detect item equips/unequips
  */
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {
-    @Redirect(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getAttackDamage(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/EntityGroup;)F"))
-    private float applyDamageEffects(ItemStack itemStack, EntityGroup group, Entity entity) {
+    private static final HashMap<PlayerEntity, DefaultedList<ItemStack>> PLAYER_ARMOR_TRACKER = new HashMap();
+    private static final HashMap<PlayerEntity, ItemStack> PLAYER_HELD_TRACKER = new HashMap();
+
+    @Inject(method = "tick", at = @At(value = "HEAD"))
+    public void detectEquippableArmor(CallbackInfo callbackInfo) {
         PlayerEntity player = (PlayerEntity) (Object) this;
-        float damage = EnchantmentHelper.getAttackDamage(itemStack, group);
 
+        if (!player.world.isClient()) {
+            DefaultedList<ItemStack> curr = player.inventory.armor;
 
-        for (ItemStack invStack : player.inventory.main) {
-            Item i = invStack.getItem();
+            if (PLAYER_ARMOR_TRACKER.containsKey(player)) {
+                DefaultedList<ItemStack> prev = PLAYER_ARMOR_TRACKER.get(player);
 
-            if (SpecialItemRegistry.DAMAGE_MODIFIERS.containsKey(i)) {
-                damage = SpecialItemRegistry.DAMAGE_MODIFIERS.get(i).applyDamageModifier(damage, player, entity, itemStack);
+                for (int i = 0; i < curr.size(); i++) {
+                    ItemStack currItemStack = curr.get(i);
+                    ItemStack prevItemStack = prev.get(i);
+
+                    if (!ItemStack.areItemsEqual(currItemStack, prevItemStack)) {
+                        if (SpecialItemRegistry.EQUIPPABLE_ARMOR.containsKey(prevItemStack.getItem())) {
+                            SpecialItemRegistry.EQUIPPABLE_ARMOR.get(prevItemStack.getItem()).unEquip(prevItemStack, player);
+                        }
+
+                        if (SpecialItemRegistry.EQUIPPABLE_ARMOR.containsKey(currItemStack.getItem())) {
+                            SpecialItemRegistry.EQUIPPABLE_ARMOR.get(currItemStack.getItem()).equip(currItemStack, player);
+                        }
+                    }
+                }
             }
-        }
 
-        for (ItemStack invStack : player.inventory.armor) {
-            Item i = invStack.getItem();
-
-            if (SpecialItemRegistry.DAMAGE_MODIFIERS.containsKey(i)) {
-                damage = SpecialItemRegistry.DAMAGE_MODIFIERS.get(i).applyDamageModifier(damage, player, entity, itemStack);
+            DefaultedList<ItemStack> clone = DefaultedList.ofSize(4, ItemStack.EMPTY);
+            for (int i = 0; i < clone.size(); i++) {
+                clone.set(i, curr.get(i).copy());
             }
-        }
 
-        return damage;
+            PLAYER_ARMOR_TRACKER.put(player, clone);
+        }
+    }
+
+    @Inject(method = "tick", at = @At(value = "HEAD"))
+    public void detectEquippableItems(CallbackInfo callbackInfo) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+
+        if (!player.world.isClient()) {
+            ItemStack curr = player.inventory.getMainHandStack();
+
+            if (PLAYER_HELD_TRACKER.containsKey(player)) {
+                ItemStack prev = PLAYER_HELD_TRACKER.get(player);
+
+                if (!ItemStack.areItemsEqual(curr, prev)) {
+                    if (SpecialItemRegistry.EQUIPPABLE_ITEM.containsKey(prev.getItem())) {
+                        SpecialItemRegistry.EQUIPPABLE_ITEM.get(prev.getItem()).unEquip(prev, player);
+                    }
+
+                    if (SpecialItemRegistry.EQUIPPABLE_ITEM.containsKey(curr.getItem())) {
+                        SpecialItemRegistry.EQUIPPABLE_ITEM.get(curr.getItem()).equip(curr, player);
+                    }
+                }
+            }
+
+            PLAYER_HELD_TRACKER.put(player, curr.copy());
+        }
     }
 }

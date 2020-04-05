@@ -8,6 +8,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Used to trigger sleep events.
+ */
 @Mixin(ServerWorld.class)
 public abstract class ServerWorldMixin {
     @Inject(at = @At("HEAD"), method = "method_23660")

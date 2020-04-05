@@ -11,6 +11,7 @@ import com.kqp.awaken.group.ArmorGroup;
 import com.kqp.awaken.group.BlockStats;
 import com.kqp.awaken.group.ToolGroup;
 import com.kqp.awaken.group.OreGroup;
+import com.kqp.awaken.item.effect.Equippable;
 import com.kqp.awaken.item.effect.SpecialItemRegistry;
 import com.kqp.awaken.item.pickaxe.EscapePlanItem;
 import com.kqp.awaken.item.AwakenArmorMaterial;
@@ -26,7 +27,6 @@ import com.kqp.awaken.item.tool.AwakenAxeItem;
 import com.kqp.awaken.loot.LootTableHelper;
 import com.kqp.awaken.loot.AwakenRarity;
 import com.kqp.awaken.recipe.RecipeType;
-import com.kqp.awaken.util.ItemUtil;
 import com.kqp.awaken.util.TimeUtil;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ModInitializer;
@@ -42,11 +42,12 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.SpawnEggItem;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -140,9 +141,23 @@ public class Awaken implements ModInitializer {
                 SALVIUM_ARMOR = new ArmorGroup("salvium", AwakenArmorMaterial.SALVIUM);
 
                 VALERIUM_ARMOR = new ArmorGroup("valerium", AwakenArmorMaterial.VALERIUM, "Set bonus: 15% extra melee damage");
-                SpecialItemRegistry.DAMAGE_MODIFIERS.put(VALERIUM_ARMOR.CHESTPLATE, (dmg, attacker, target, itemStack) ->
-                        dmg * (ItemUtil.wearingFullSet(attacker, VALERIUM_ARMOR) ? 1.15F : 1F)
-                );
+                SpecialItemRegistry.EQUIPPABLE_ARMOR.put(VALERIUM_ARMOR.CHESTPLATE, new Equippable() {
+                    private final EntityAttributeModifier VALERIUM_DMG_MOD =
+                            new EntityAttributeModifier("valerium_set_bonus", 1.15D, EntityAttributeModifier.Operation.MULTIPLY_BASE);
+
+                    @Override
+                    public void equip(ItemStack itemStack, PlayerEntity player) {
+                        EntityAttributeInstance instance = player.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE);
+
+                        instance.addModifier(VALERIUM_DMG_MOD);
+                    }
+
+                    @Override
+                    public void unEquip(ItemStack itemStack, PlayerEntity player) {
+                        player.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE)
+                                .removeModifier(VALERIUM_DMG_MOD);
+                    }
+                });
             }
 
             // Phase 3
