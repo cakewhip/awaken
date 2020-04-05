@@ -7,6 +7,7 @@ import com.kqp.awaken.data.AwakenDataBlockEntity;
 import com.kqp.awaken.data.AwakenWorldData;
 import com.kqp.awaken.entity.DireWolfEntity;
 import com.kqp.awaken.entity.RaptorChickenEntity;
+import com.kqp.awaken.entity.attribute.TEntityAttributes;
 import com.kqp.awaken.group.ArmorGroup;
 import com.kqp.awaken.group.BlockStats;
 import com.kqp.awaken.group.ToolGroup;
@@ -139,7 +140,10 @@ public class Awaken implements ModInitializer {
                         "ingot"
                 );
 
-                SALVIUM_ARMOR = new ArmorGroup("salvium", AwakenArmorMaterial.SALVIUM);
+                SALVIUM_ARMOR = new ArmorGroup("salvium", AwakenArmorMaterial.SALVIUM, "Set bonus: 15% extra ranged damage");
+                SpecialItemRegistry.EQUIPPABLE_ARMOR.put(SALVIUM_ARMOR.CHESTPLATE, new SetBonusEquippable()
+                        .addEntityAttributeModifier(TEntityAttributes.RANGED_DAMAGE, "salvium_set_bonus", 1000D, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+                );
 
                 VALERIUM_ARMOR = new ArmorGroup("valerium", AwakenArmorMaterial.VALERIUM, "Set bonus: 15% extra melee damage");
                 SpecialItemRegistry.EQUIPPABLE_ARMOR.put(VALERIUM_ARMOR.CHESTPLATE, new SetBonusEquippable()

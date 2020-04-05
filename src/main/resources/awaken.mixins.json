@@ -15,7 +15,8 @@
     "SpiderEntityMixin",
     "DamageUtilMixin",
     "ClampedEntityAttributeMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "ArrowEntityMixin"
   ],
   "client": [
     "InventoryScreenMixin",
