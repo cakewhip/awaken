@@ -16,7 +16,7 @@
     "DamageUtilMixin",
     "ClampedEntityAttributeMixin",
     "PlayerEntityMixin",
-    "ArrowEntityMixin",
+    "ProjectileEntityMixin",
     "ChunkSerializerMixin"
   ],
   "client": [

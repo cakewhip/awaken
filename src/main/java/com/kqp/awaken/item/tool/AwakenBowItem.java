@@ -19,7 +19,6 @@ import java.util.List;
 
 /**
  * Class for special bows that don't break.
- * TODO: find better way of applying damage
  */
 public abstract class AwakenBowItem extends BowItem {
     public AwakenRarity rarity = AwakenRarity.OKAY;
