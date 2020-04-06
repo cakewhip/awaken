@@ -141,13 +141,13 @@ public class Awaken implements ModInitializer {
                 );
 
                 SALVIUM_ARMOR = new ArmorGroup("salvium", AwakenArmorMaterial.SALVIUM, "Set bonus: 15% extra ranged damage");
-                SpecialItemRegistry.EQUIPPABLE_ARMOR.put(SALVIUM_ARMOR.CHESTPLATE, new SetBonusEquippable()
-                        .addEntityAttributeModifier(TEntityAttributes.RANGED_DAMAGE, "salvium_set_bonus", 1000D, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+                SpecialItemRegistry.addArmor(SALVIUM_ARMOR, new SetBonusEquippable()
+                        .addEntityAttributeModifier(TEntityAttributes.RANGED_DAMAGE, "salvium_set_bonus", 0.15D, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
                 );
 
                 VALERIUM_ARMOR = new ArmorGroup("valerium", AwakenArmorMaterial.VALERIUM, "Set bonus: 15% extra melee damage");
-                SpecialItemRegistry.EQUIPPABLE_ARMOR.put(VALERIUM_ARMOR.CHESTPLATE, new SetBonusEquippable()
-                    .addEntityAttributeModifier(EntityAttributes.ATTACK_DAMAGE, "valerium_set_bonus", 1.15D, EntityAttributeModifier.Operation.MULTIPLY_BASE)
+                SpecialItemRegistry.addArmor(VALERIUM_ARMOR, new SetBonusEquippable()
+                    .addEntityAttributeModifier(EntityAttributes.ATTACK_DAMAGE, "valerium_set_bonus", 0.15D, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
                 );
             }
 
