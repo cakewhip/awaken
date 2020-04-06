@@ -50,10 +50,10 @@ public class LootTableHelper {
             addLootEntry("minecraft:entities/wither_skeleton", Awaken.TItems.ASHEN_BLADE, 1F / 100F);
             addLootEntry("minecraft:entities/wither", Awaken.TItems.ASHEN_BLADE, 33F / 100F);
             addLootEntry("minecraft:entities/stray", Awaken.TItems.GLACIAL_SHARD, 5F / 100F);
-            addLootEntry("minecraft:entities/enderman", Awaken.TItems.ENDERIAN_CUTLASS, 1F / 100F);
-            addLootEntry("minecraft:entities/endermite", Awaken.TItems.ENDERIAN_CUTLASS, 2.5F / 100F);
-            addLootEntry("minecraft:entities/shulker", Awaken.TItems.ENDERIAN_CUTLASS, 5F / 100F);
-            addLootEntry("minecraft:entities/ender_dragon", Awaken.TItems.ENDERIAN_CUTLASS, 50F / 100F);
+            addLootEntry("minecraft:entities/enderman", Awaken.TItems.ENDERIAN_CUTLASS, 0.1F / 100F);
+            addLootEntry("minecraft:entities/endermite", Awaken.TItems.ENDERIAN_CUTLASS, 1F / 100F);
+            addLootEntry("minecraft:entities/shulker", Awaken.TItems.ENDERIAN_CUTLASS, 2.5F / 100F);
+            addLootEntry("minecraft:entities/ender_dragon", Awaken.TItems.ENDERIAN_CUTLASS, 5F / 100F);
         }
     }
 

@@ -151,6 +151,7 @@ public class Awaken implements ModInitializer {
                 );
             }
 
+
             // Phase 3
             {
                 SUNSTONE = new OreGroup(

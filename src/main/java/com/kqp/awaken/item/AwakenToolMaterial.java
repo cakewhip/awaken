@@ -19,7 +19,7 @@ public enum AwakenToolMaterial implements ToolMaterial {
     JANG_KATANA(-1, -1, -1.0F, 14F, -1, () -> {
         return Ingredient.ofItems();
     }),
-    PHASE_0_SPECIAL(-1, -1, 7.0F, 4F, -1, () -> {
+    PHASE_0_SPECIAL(2, -1, 7.0F, 4F, -1, () -> {
         return Ingredient.ofItems();
     });
 
