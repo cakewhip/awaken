@@ -1,18 +1,14 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.Awaken;
-import com.kqp.awaken.data.AwakenDataBlockEntity;
+import com.kqp.awaken.data.AwakenTemporalChunkData;
 import com.kqp.awaken.world.AwakenOreGen;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.WorldChunk;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import static com.kqp.awaken.data.AwakenDataBlockEntity.DATA_BLOCK_POS;
 
 /**
  * Used to:
@@ -25,27 +21,16 @@ public abstract class WorldChunkMixin implements Chunk {
     public void loadToWorld(CallbackInfo callbackInfo) {
         WorldChunk chunk = (WorldChunk) (Object) this;
 
-        AwakenDataBlockEntity dataBe = getAwakenDataBlockEntity(chunk);
+        AwakenTemporalChunkData.ChunkData awakenData = AwakenTemporalChunkData.CHUNK_DATA_MAP.get(chunk.getPos());
+        if (awakenData != null) {
+            if (Awaken.worldProperties.isWorldAwakened()) {
+                if (!awakenData.genNewOres) {
+                    awakenData.genNewOres = true;
 
-        if (Awaken.worldProperties.isWorldAwakened()) {
-            if (!dataBe.genNewOres) {
-                dataBe.genNewOres = true;
-                AwakenOreGen.generate(chunk, 64, 12, 12, Awaken.Groups.SALVIUM.ORE);
-                AwakenOreGen.generate(chunk, 64, 12, 12, Awaken.Groups.VALERIUM.ORE);
+                    AwakenOreGen.generate(chunk, 64, 12, 12, Awaken.Groups.SALVIUM.ORE);
+                    AwakenOreGen.generate(chunk, 64, 12, 12, Awaken.Groups.VALERIUM.ORE);
+                }
             }
         }
-    }
-
-    private AwakenDataBlockEntity getAwakenDataBlockEntity(WorldChunk chunk) {
-        BlockEntity be = chunk.getBlockEntity(DATA_BLOCK_POS);
-
-        if (be == null || !(be instanceof AwakenDataBlockEntity)) {
-            be = new AwakenDataBlockEntity();
-
-            chunk.setBlockState(DATA_BLOCK_POS, Blocks.BEDROCK.getDefaultState(), false);
-            chunk.setBlockEntity(DATA_BLOCK_POS, be);
-        }
-
-        return (AwakenDataBlockEntity) be;
     }
 }

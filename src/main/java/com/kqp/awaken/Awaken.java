@@ -3,7 +3,6 @@ package com.kqp.awaken;
 import com.kqp.awaken.block.CraftingBlock;
 import com.kqp.awaken.block.AwakenAnvilBlock;
 import com.kqp.awaken.client.container.AwakenCraftingContainer;
-import com.kqp.awaken.data.AwakenDataBlockEntity;
 import com.kqp.awaken.data.AwakenWorldData;
 import com.kqp.awaken.entity.DireWolfEntity;
 import com.kqp.awaken.entity.RaptorChickenEntity;
@@ -12,7 +11,6 @@ import com.kqp.awaken.group.ArmorGroup;
 import com.kqp.awaken.group.BlockStats;
 import com.kqp.awaken.group.ToolGroup;
 import com.kqp.awaken.group.OreGroup;
-import com.kqp.awaken.item.effect.Equippable;
 import com.kqp.awaken.item.effect.SetBonusEquippable;
 import com.kqp.awaken.item.effect.SpecialItemRegistry;
 import com.kqp.awaken.item.pickaxe.EscapePlanItem;
@@ -44,11 +42,9 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -175,8 +171,6 @@ public class Awaken implements ModInitializer {
     }
 
     public static class TBlocks {
-        public static BlockEntityType<AwakenDataBlockEntity> AWAKEN_DATA_BE_TYPE;
-
         public static final Block CELESTIAL_ALTAR_BLOCK = new CraftingBlock(
                 FabricBlockSettings.of(Material.STONE).strength(35.0F, 12.0F).lightLevel(4).build(),
                 RecipeType.CELESTIAL_ALTAR,
@@ -194,8 +188,6 @@ public class Awaken implements ModInitializer {
 
             register(CELESTIAL_ALTAR_BLOCK, "celestial_altar");
             register(CELESTIAL_STEEL_ANVIL_BLOCK, "celestial_steel_anvil");
-
-            AWAKEN_DATA_BE_TYPE = Registry.register(Registry.BLOCK_ENTITY_TYPE, Awaken.MOD_ID + "awaken_data", BlockEntityType.Builder.create(AwakenDataBlockEntity::new, Blocks.BEDROCK).build(null));
         }
 
         public static void register(Block block, String name) {

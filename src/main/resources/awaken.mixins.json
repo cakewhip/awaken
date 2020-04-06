@@ -16,7 +16,8 @@
     "DamageUtilMixin",
     "ClampedEntityAttributeMixin",
     "PlayerEntityMixin",
-    "ArrowEntityMixin"
+    "ArrowEntityMixin",
+    "ChunkSerializerMixin"
   ],
   "client": [
     "InventoryScreenMixin",
