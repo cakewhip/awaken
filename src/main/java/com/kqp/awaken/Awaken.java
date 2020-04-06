@@ -57,8 +57,6 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * Main entry point for Awaken.
- *
- * TODO: add mana awakening
  */
 public class Awaken implements ModInitializer {
     public static Logger LOGGER = LogManager.getLogger();
