@@ -5,6 +5,9 @@ import com.kqp.awaken.item.sword.AtlanteanSabreItem;
 import com.kqp.awaken.util.Broadcaster;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.PigEntity;
@@ -22,6 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * Used to:
  * Detect deaths for triggering the awakening.
  * Deny riptide status when using the Atlantean sword.
+ * Give spiders poison effect post-awakening
  */
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -57,6 +61,21 @@ public abstract class LivingEntityMixin {
 
         if (entity.getMainHandStack().getItem() instanceof AtlanteanSabreItem) {
             callbackInfo.setReturnValue(false);
+        }
+    }
+
+    @Inject(method = "damage", at = @At("RETURN"))
+    public void implementSpiderPoison(DamageSource source, float amount, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
+        if (callbackInfoReturnable.getReturnValue()) {
+            if (Awaken.worldProperties.isWorldAwakened()) {
+                if (source.getAttacker() instanceof SpiderEntity) {
+                    LivingEntity livingEntity = (LivingEntity) (Object) this;
+
+                    if (livingEntity.getRandom().nextFloat() < 0.5F) {
+                        livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 6 * 20, 1));
+                    }
+                }
+            }
         }
     }
 }

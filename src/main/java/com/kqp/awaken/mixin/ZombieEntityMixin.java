@@ -1,8 +1,12 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.Awaken;
+import com.kqp.awaken.entity.attribute.TEntityAttributes;
 import com.kqp.awaken.util.MobDecorator;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.AbstractSkeletonEntity;
+import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.world.LocalDifficulty;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,23 +19,49 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 @Mixin(ZombieEntity.class)
 public abstract class ZombieEntityMixin {
+    private static final EntityAttributeModifier AWAKENED_HEALTH_MOD = new EntityAttributeModifier(
+            "awakened_health_mod",
+            0.75D,
+            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+    );
+
+    private static final EntityAttributeModifier AWAKENED_DAMAGE_MOD = new EntityAttributeModifier(
+            "awakened_damage_mod",
+            1.75D,
+            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+    );
+
+    private static final EntityAttributeModifier AWAKENED_SPEED_MOD = new EntityAttributeModifier(
+            "awakened_speed_mod",
+            0.2D,
+            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+    );
+
+    private static final EntityAttributeModifier BLOOD_MOON_HEALTH_MOD = new EntityAttributeModifier(
+            "blood_moon_health_mod",
+            0.5D,
+            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+    );
+
+    private static final EntityAttributeModifier BLOOD_MOON_DAMAGE_MOD = new EntityAttributeModifier(
+            "blood_moon_damage_mod",
+            0.5D,
+            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
+    );
+
     @Inject(at = @At("TAIL"), method = "initAttributes")
     protected void overrideAttributes(CallbackInfo callbackInfo) {
         if (Awaken.worldProperties.isWorldAwakened()) {
             ZombieEntity zombie = (ZombieEntity) (Object) this;
-            boolean bm = Awaken.worldProperties.isBloodMoonActive();
 
-            zombie.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.28D);
-            zombie.getAttributeInstance(EntityAttributes.ARMOR).setBaseValue(bm ? 15.0D : 10.0D);
-            zombie.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).setBaseValue(bm ? 15.0D : 10.0D);
-        }
-    }
+            zombie.getAttributeInstance(EntityAttributes.MAX_HEALTH).addModifier(AWAKENED_HEALTH_MOD);
+            zombie.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).addModifier(AWAKENED_DAMAGE_MOD);
+            zombie.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).addModifier(AWAKENED_SPEED_MOD);
 
-    @Inject(at = @At("TAIL"), method = "initEquipment")
-    protected void newEquipment(LocalDifficulty difficulty, CallbackInfo callbackInfo) {
-        if (Awaken.worldProperties.isWorldAwakened()) {
-            MobDecorator.giveArmor((ZombieEntity) (Object) this);
-            MobDecorator.giveSword((ZombieEntity) (Object) this);
+            if (Awaken.worldProperties.isBloodMoonActive()) {
+                zombie.getAttributeInstance(EntityAttributes.MAX_HEALTH).addModifier(BLOOD_MOON_HEALTH_MOD);
+                zombie.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).addModifier(BLOOD_MOON_DAMAGE_MOD);
+            }
         }
     }
 }
