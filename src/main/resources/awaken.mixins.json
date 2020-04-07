@@ -23,7 +23,8 @@
     "InventoryScreenMixin",
     "LivingEntityRendererMixin",
     "WorldRendererMixin",
-    "ZombieBaseEntityRendererMixin"
+    "ZombieBaseEntityRendererMixin",
+    "SkeletonEntityRendererMixin"
   ],
   "server": [],
   "injectors": {
