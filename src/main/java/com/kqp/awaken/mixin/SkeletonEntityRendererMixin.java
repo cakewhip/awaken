@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Used to override the zombie texture during blood moons.
+ * Used to override the skeleton texture during blood moons.
  */
 @Mixin(SkeletonEntityRenderer.class)
 public class SkeletonEntityRendererMixin {
