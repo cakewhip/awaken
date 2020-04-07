@@ -16,6 +16,7 @@ import net.minecraft.container.Slot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.PacketByteBuf;
 
 import java.util.ArrayList;
@@ -185,6 +186,21 @@ public class AwakenCraftingContainer extends Container {
         }
 
         recipeTypes = types.toArray(new String[0]);
+    }
+
+    /**
+     * Detect on close to drop stuff.
+     *
+     * @param player PlayerEntity
+     */
+    @Override
+    public void close(PlayerEntity player) {
+        super.close(player);
+        if (!player.isAlive() || player instanceof ServerPlayerEntity && ((ServerPlayerEntity)player).method_14239()) {
+            player.dropItem(lookUpInventory.getInvStack(0), false);
+        } else {
+            player.inventory.offerOrDrop(player.world, lookUpInventory.removeInvStack(0));
+        }
     }
 
     /**
