@@ -80,5 +80,12 @@
 
     "__comment": "GUI Translations",
     "container.awaken.awaken_crafting": "Crafting",
-    "container.awaken.awaken_crafting_recipe_look_up": "Search Uses"
+    "container.awaken.awaken_crafting_recipe_look_up": "Search Uses",
+
+    "__comment": "Recipe Type Translations",
+    "awaken.recipe_type.crafting_table": "Crafting Table",
+    "awaken.recipe_type.anvil": "Anvil",
+    "awaken.recipe_type.furnace": "Furnace",
+    "awaken.recipe_type.celestial_altar": "Celestial Altar",
+    "awaken.recipe_type.celestial_steel_anvil": "Celestial Steel Anvil"
 }

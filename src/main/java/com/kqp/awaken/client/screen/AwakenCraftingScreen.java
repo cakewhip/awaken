@@ -4,9 +4,12 @@ import com.kqp.awaken.Awaken;
 import com.kqp.awaken.client.container.AwakenCraftingContainer;
 import com.kqp.awaken.client.container.AwakenCraftingResultSlot;
 import com.kqp.awaken.client.container.AwakenLookUpResultSlot;
+import com.kqp.awaken.recipe.AwakenRecipeManager;
 import com.kqp.awaken.recipe.Reagent;
 import com.kqp.awaken.recipe.AwakenRecipe;
+import com.kqp.awaken.recipe.RecipeType;
 import com.kqp.awaken.util.MouseUtil;
+import com.kqp.awaken.util.StringUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
@@ -14,6 +17,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
@@ -98,8 +102,16 @@ public class AwakenCraftingScreen extends ContainerScreen<AwakenCraftingContaine
 
             if (currentIndex < recipes.size()) {
                 AwakenRecipe recipe = recipes.get(currentIndex);
+                String recipeType = AwakenRecipeManager.getRecipeTypeOf(recipe);
+
 
                 text.add("---");
+
+                if (!recipeType.equals(RecipeType.TWO_BY_TWO)) {
+                    String localizedRecipeType = new TranslatableText("awaken.recipe_type." + recipeType).asFormattedString();
+                    text.add("Requires " + StringUtil.prependArticle(localizedRecipeType));
+                }
+
                 text.add("To Craft: ");
                 for (Reagent reagent : recipe.reagents.keySet()) {
                     String reagentLine = recipe.reagents.get(reagent) + " x " + reagent.toString();

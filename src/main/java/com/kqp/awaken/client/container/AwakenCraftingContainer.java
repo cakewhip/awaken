@@ -221,7 +221,7 @@ public class AwakenCraftingContainer extends Container {
     public void updateRecipeLookUpResults() {
         ItemStack query = this.lookUpInventory.getInvStack(0);
 
-        lookUpRecipes = AwakenRecipeManager.getRecipesUsingItemStack(recipeTypes, query);
+        lookUpRecipes = AwakenRecipeManager.getRecipesUsingItemStack(query);
         lookUpResults = lookUpRecipes.stream().map(recipe -> recipe.result.copy()).collect(Collectors.toList());
 
         // If on server, notify the client that something has changed so the client can reply with the scroll bar position.

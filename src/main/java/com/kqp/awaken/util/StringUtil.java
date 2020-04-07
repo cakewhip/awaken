@@ -55,4 +55,24 @@ public class StringUtil {
             return "None";
         }
     }
+
+
+    /**
+     * Prepends the correct article to a given noun.
+     *
+     * @param noun The noun
+     * @return Article-lized noun
+     */
+    public static String prependArticle(String noun) {
+        switch (noun.toUpperCase().charAt(0)) {
+            case 'A':
+            case 'E':
+            case 'I':
+            case 'O':
+            case 'U':
+                return "an " + noun;
+            default:
+                return "a " + noun;
+        }
+    }
 }

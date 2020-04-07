@@ -16,12 +16,24 @@ public class AwakenRecipeManager {
      */
     private static final HashMap<String, ArrayList<AwakenRecipe>> RECIPE_MAP = new HashMap();
 
+    /**
+     * Map of recipes to recipe types.
+     */
+    private static final HashMap<AwakenRecipe, String> RECIPE_TYPE_MAP = new HashMap();
+
     public static void addRecipe(String type, ItemStack output, HashMap<Reagent, Integer> reagents) {
-        addRecipe(type, new AwakenRecipe(output, reagents));
+        AwakenRecipe recipe = new AwakenRecipe(output, reagents);
+        addRecipe(type, recipe);
+        RECIPE_TYPE_MAP.put(recipe, type);
     }
 
     public static void addRecipe(String type, AwakenRecipe recipe) {
         getRecipesForType(type).add(recipe);
+        RECIPE_TYPE_MAP.put(recipe, type);
+    }
+
+    public static String getRecipeTypeOf(AwakenRecipe recipe) {
+        return RECIPE_TYPE_MAP.get(recipe);
     }
 
     /**
@@ -92,11 +104,10 @@ public class AwakenRecipeManager {
     /**
      * Returns a list of recipes that have the passed item stack as an input.
      *
-     * @param types     Recipe types to access
      * @param itemStack Item stack input
      * @return List of recipes that have the passed item stack as an input
      */
-    public static List<AwakenRecipe> getRecipesUsingItemStack(String[] types, ItemStack itemStack) {
+    public static List<AwakenRecipe> getRecipesUsingItemStack(ItemStack itemStack) {
         if (itemStack.isEmpty()) {
             return Collections.emptyList();
         }
@@ -104,9 +115,7 @@ public class AwakenRecipeManager {
         ArrayList<AwakenRecipe> output = new ArrayList();
         ComparableItemStack comparableItemStack = new ComparableItemStack(itemStack);
 
-        for (String type : types) {
-            List<AwakenRecipe> recipes = getRecipesForType(type);
-
+        for (ArrayList<AwakenRecipe> recipes : RECIPE_MAP.values()) {
             for (AwakenRecipe recipe : recipes) {
                 for (Reagent reagent : recipe.reagents.keySet()) {
                     if (reagent.matchingStacks.contains(comparableItemStack)) {
