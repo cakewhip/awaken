@@ -36,9 +36,7 @@ import net.fabricmc.fabric.api.event.world.WorldTickCallback;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -200,14 +198,14 @@ public class Awaken implements ModInitializer {
 
         public static final Item CINDERED_BOW = new FlameBowItem(4.0D, false).setRarity(AwakenRarity.RARE);
         public static final Item SLIMEY_BOW = new StatusEffectBowItem(3.0D, false, StatusEffects.SLOWNESS, 2 * 20, 1).setRarity(AwakenRarity.RARE);
-        public static final Item RAIDERS_AXE = new AwakenAxeItem(AwakenToolMaterial.PHASE_0_SPECIAL).setRarity(AwakenRarity.UNCOMMON);
+        public static final Item RAIDERS_AXE = new AwakenAxeItem(AwakenToolMaterial.PHASE_1_SPECIAL_TOOL).setRarity(AwakenRarity.UNCOMMON);
         public static final Item ESCAPE_PLAN = new EscapePlanItem().setRarity(AwakenRarity.UNCOMMON);
         public static final Item ARCHAEOLOGIST_SPADE = new ArchaeologistSpadeItem().setRarity(AwakenRarity.UNCOMMON);
-        public static final Item RUSTY_SHANK = new StatusEffectSwordItem(AwakenToolMaterial.PHASE_0_SPECIAL, StatusEffects.POISON, 8 * 20, 0).setRarity(AwakenRarity.UNCOMMON);
+        public static final Item RUSTY_SHANK = new StatusEffectSwordItem(AwakenToolMaterial.PHASE_1_SPECIAL_TOOL, StatusEffects.POISON, 8 * 20, 0).setRarity(AwakenRarity.UNCOMMON);
 
         public static final Item ATLANTEAN_SABRE = new AtlanteanSabreItem().setRarity(AwakenRarity.EPIC);
-        public static final Item ASHEN_BLADE = new StatusEffectSwordItem(AwakenToolMaterial.PHASE_0_SWORD, StatusEffects.WITHER, 4 * 20, 1).setRarity(AwakenRarity.EPIC);
-        public static final Item GLACIAL_SHARD = new StatusEffectSwordItem(AwakenToolMaterial.PHASE_0_SWORD, StatusEffects.SLOWNESS, 4 * 20, 1).setRarity(AwakenRarity.EPIC);
+        public static final Item ASHEN_BLADE = new StatusEffectSwordItem(AwakenToolMaterial.PHASE_1_SPECIAL_SWORD, StatusEffects.WITHER, 4 * 20, 1).setRarity(AwakenRarity.EPIC);
+        public static final Item GLACIAL_SHARD = new StatusEffectSwordItem(AwakenToolMaterial.PHASE_1_SPECIAL_SWORD, StatusEffects.SLOWNESS, 4 * 20, 1).setRarity(AwakenRarity.EPIC);
         public static final Item ENDERIAN_CUTLASS = new EnderianCutlassItem().setRarity(AwakenRarity.EPIC);
         public static final Item JANG_KATANA = new JangKatanaItem().setRarity(AwakenRarity.FABLED);
 

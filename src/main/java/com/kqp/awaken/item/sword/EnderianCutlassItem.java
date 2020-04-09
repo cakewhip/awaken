@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class EnderianCutlassItem extends AwakenSwordItem {
     public EnderianCutlassItem() {
-        super(AwakenToolMaterial.PHASE_0_SPECIAL);
+        super(AwakenToolMaterial.PHASE_1_SPECIAL_TOOL);
     }
 
     @Override

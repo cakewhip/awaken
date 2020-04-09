@@ -27,7 +27,7 @@ public class ArchaeologistSpadeItem extends AwakenShovelItem {
     ));
 
     public ArchaeologistSpadeItem() {
-        super(AwakenToolMaterial.PHASE_0_SPECIAL);
+        super(AwakenToolMaterial.PHASE_1_SPECIAL_TOOL);
     }
 
 

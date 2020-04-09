@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class AtlanteanSabreItem extends AwakenSwordItem {
     public AtlanteanSabreItem() {
-        super(AwakenToolMaterial.PHASE_0_SPECIAL);
+        super(AwakenToolMaterial.PHASE_1_SPECIAL_TOOL);
     }
 
     @Override
