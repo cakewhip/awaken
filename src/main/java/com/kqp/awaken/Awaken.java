@@ -338,9 +338,10 @@ public class Awaken implements ModInitializer {
                         buf.writeDouble(mouseX);
                         buf.writeDouble(mouseY);
 
+                        player.currentScreenHandler = new AwakenCraftingScreenHandler(syncId, player.inventory);
+
                         ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, OPEN_CRAFTING_S2C_ID, buf);
 
-                        player.openHandledScreen(new AwakenCraftingScreenHandler(syncId, player.inventory));
                     });
                 }));
 

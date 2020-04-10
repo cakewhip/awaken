@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 @Mixin(InventoryScreen.class)
 public abstract class InventoryScreenMixin extends AbstractInventoryScreen<PlayerScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/gui/slot/crafting_2.png");
+    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/gui/crafting_2.png");
 
     public InventoryScreenMixin(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
         super(screenHandler, playerInventory, text);

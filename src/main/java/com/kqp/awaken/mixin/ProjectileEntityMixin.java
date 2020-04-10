@@ -25,10 +25,8 @@ public class ProjectileEntityMixin {
             EntityAttributeInstance attribute = owner.getAttributeInstance(TEntityAttributes.RANGED_DAMAGE);
 
             if (attribute != null) {
-                System.out.println("DMG WAS " + projectileEntity.getDamage());
                 attribute.setBaseValue(projectileEntity.getDamage());
                 projectileEntity.setDamage(attribute.getValue());
-                System.out.println("DMG IS " + projectileEntity.getDamage());
 
                 attribute.setBaseValue(0D);
             }

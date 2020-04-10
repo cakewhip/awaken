@@ -29,9 +29,9 @@ import java.util.List;
  * Screen for Awaken's crafting system.
  */
 public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHandler> {
-    public static final String TITLE_TRANSLATION_KEY = Util.createTranslationKey("slot", new Identifier(Awaken.MOD_ID, "awaken_crafting"));
-    public static final String RECIPE_LOOK_UP_TRANSLATION_KEY = Util.createTranslationKey("slot", new Identifier(Awaken.MOD_ID, "awaken_crafting_recipe_look_up"));
-    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/gui/slot/crafting_2.png");
+    public static final String TITLE_TRANSLATION_KEY = Util.createTranslationKey("gui", new Identifier(Awaken.MOD_ID, "awaken_crafting"));
+    public static final String RECIPE_LOOK_UP_TRANSLATION_KEY = Util.createTranslationKey("gui", new Identifier(Awaken.MOD_ID, "awaken_crafting_recipe_look_up"));
+    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/gui/crafting_2.png");
 
     /**
      * Position of the crafting outputs scroll bar.
@@ -45,8 +45,8 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
 
     public AwakenCraftingScreen(AwakenCraftingScreenHandler screenHandler, PlayerInventory playerInventory) {
         super(screenHandler, playerInventory, new TranslatableText(TITLE_TRANSLATION_KEY));
-        this.width = 256;
-        this.height = 166;
+        this.backgroundWidth = 256;
+        this.backgroundHeight = 166;
         this.passEvents = false;
 
         syncCraftingResultScrollbar();
@@ -138,7 +138,7 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
     protected void drawForeground(int mouseX, int mouseY) {
         this.textRenderer.draw(this.title.asFormattedString(), 8.0F, 8.0F, 4210752);
         this.textRenderer.draw(new TranslatableText(RECIPE_LOOK_UP_TRANSLATION_KEY).asFormattedString(), 186.0F, 8.0F, 4210752);
-        this.textRenderer.draw(this.playerInventory.getDisplayName().asFormattedString(), 8.0F, (float) (this.height - 96 + 4), 4210752);
+        this.textRenderer.draw(this.playerInventory.getDisplayName().asFormattedString(), 8.0F, (float) (this.backgroundHeight - 96 + 4), 4210752);
     }
 
     @Override
@@ -176,7 +176,7 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
         double aX = mouseX - this.x;
         double aY = mouseY - this.y;
 
-        if (aX >= 0 && aY >= 0 && aX < 176 && aY < this.height) {
+        if (aX >= 0 && aY >= 0 && aX < 176 && aY < this.backgroundHeight) {
             if (this.hasOutputsScrollbar()) {
                 int i = (this.getScreenHandler().craftingResults.size() + 8 - 1) / 8 - 3;
                 this.outputScrollPosition = (float) ((double) this.outputScrollPosition - amount / (double) i);
@@ -185,7 +185,7 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
 
                 return true;
             }
-        } else if (aX >= 176 + 2 && aY >= 0 && aX < 176 + 2 + 78 && aY < this.height) {
+        } else if (aX >= 176 + 2 && aY >= 0 && aX < 176 + 2 + 78 && aY < this.backgroundHeight) {
             if (this.hasRecipeLookUpScrollbar()) {
                 int i = (this.getScreenHandler().lookUpResults.size() + 3 - 1) / 3 - 6;
                 this.lookUpScrollPosition = (float) ((double) this.lookUpScrollPosition - amount / (double) i);

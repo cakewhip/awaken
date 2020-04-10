@@ -22,6 +22,7 @@ import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -107,12 +108,11 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
         this.context = context;
         this.player = playerInventory.player;
 
-        // Add slots
-
         // Crafting results inventory (24 output)
+        int counter = 0;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 8; j++) {
-                this.addSlot(new AwakenCraftingResultSlot(this, craftingResultInventory, playerInventory, i * 3 + j, 8 + j * 18, 18 + i * 18));
+                this.addSlot(new AwakenCraftingResultSlot(this, craftingResultInventory, playerInventory, counter++, 8 + j * 18, 18 + i * 18));
             }
         }
 
@@ -143,7 +143,9 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
 
         // Look-up inventory (1 query slot + 18 result slots)
         {
-            this.addSlot(new Slot(lookUpResultInventory, 0, 209, 22) {
+            counter = 0;
+
+            this.addSlot(new Slot(lookUpResultInventory, counter++, 209, 22) {
                 @Override
                 public void markDirty() {
                     super.markDirty();
@@ -153,10 +155,14 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
 
             for (int i = 0; i < 6; i++) {
                 for (int j = 0; j < 3; j++) {
-                    this.addSlot(new AwakenLookUpResultSlot(lookUpResultInventory, 1 + i * 6 + j, 186 + j * 18, 48 + i * 18));
+                    this.addSlot(new AwakenLookUpResultSlot(lookUpResultInventory, counter++, 186 + j * 18, 48 + i * 18));
                 }
             }
         }
+
+        this.craftingResults = new ArrayList();
+        this.lookUpRecipes = new ArrayList();
+        this.lookUpResults = new ArrayList();
 
         gatherRecipeTypes(player);
         updateCraftingResults();
@@ -240,7 +246,7 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
     }
 
     /**
-     * Handles the shift clicking. I honestly can't explain it further than that.
+     * Handles the shift clicking.
      *
      * @param player  The player
      * @param invSlot The slot that is being shift clicked (I think)
@@ -381,7 +387,7 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
 
     @Override
     public boolean canInsertIntoSlot(ItemStack stack, Slot slot) {
-        return slot.inventory != this.craftingResultInventory && super.canInsertIntoSlot(stack, slot);
+        return slot.inventory != this.craftingResultInventory;
     }
 
     @Override
