@@ -1,13 +1,17 @@
 package com.kqp.awaken.loot;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.kqp.awaken.Awaken;
+import com.kqp.awaken.loot.condition.BloodMoonLootCondition;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.FabricLootSupplierBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.Items;
 import net.minecraft.loot.ConstantLootTableRange;
 import net.minecraft.loot.LootManager;
 import net.minecraft.loot.condition.KilledByPlayerLootCondition;
+import net.minecraft.loot.condition.LootConditions;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.LimitCountLootFunction;
@@ -21,10 +25,13 @@ import java.util.Objects;
 /**
  * Class to help add things to the loot table of entities.
  */
-public class LootTableHelper {
-    public static HashSet<LootEntry> LOOT_ENTRIES = new HashSet();
+public class TLootTableHandler {
+    public static ArrayListMultimap<Identifier, FabricLootPoolBuilder> LOOT_MAP = ArrayListMultimap.create();
 
     public static void init() {
+        // Custom Loot Conditions
+        LootConditions.register(new BloodMoonLootCondition.Factory());
+
         // Phase 1
         {
             // Reagents
@@ -58,65 +65,43 @@ public class LootTableHelper {
     }
 
     public static void addLootEntry(String id, ItemConvertible item, float chance) {
-        LOOT_ENTRIES.add(new LootEntry(new Identifier(id), item, chance, 1, 1));
+        LOOT_MAP.put(new Identifier(id),
+                FabricLootPoolBuilder.builder()
+                        .withRolls(ConstantLootTableRange.create(1))
+                        .withCondition(RandomChanceLootCondition.builder(chance))
+                        .withCondition(KilledByPlayerLootCondition.builder())
+                        .withEntry(ItemEntry.builder(item))
+        );
     }
 
     public static void addLootEntry(String id, ItemConvertible item, float chance, int count) {
-        LOOT_ENTRIES.add(new LootEntry(new Identifier(id), item, chance, count, count));
+        LOOT_MAP.put(new Identifier(id),
+                FabricLootPoolBuilder.builder()
+                        .withRolls(ConstantLootTableRange.create(1))
+                        .withCondition(RandomChanceLootCondition.builder(chance))
+                        .withCondition(KilledByPlayerLootCondition.builder())
+                        .withFunction(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(count, count)))
+                        .withEntry(ItemEntry.builder(item))
+        );
     }
 
+    // TODO: the random drop count doesn't work
     public static void addLootEntry(String id, ItemConvertible item, float chance, int min, int max) {
-        LOOT_ENTRIES.add(new LootEntry(new Identifier(id), item, chance, min, max));
+        LOOT_MAP.put(new Identifier(id),
+                FabricLootPoolBuilder.builder()
+                        .withRolls(ConstantLootTableRange.create(1))
+                        .withCondition(RandomChanceLootCondition.builder(chance))
+                        .withCondition(KilledByPlayerLootCondition.builder())
+                        .withFunction(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(min, max)))
+                        .withEntry(ItemEntry.builder(item))
+        );
     }
 
     public static void onLootTableLoading(ResourceManager resourceManager, LootManager lootManager, Identifier id, FabricLootSupplierBuilder supplier, LootTableLoadingCallback.LootTableSetter lootTableSetter) {
-        for (LootEntry lootEntry : LOOT_ENTRIES) {
-            if (lootEntry.id.equals(id)) {
-                // Builder created with 2 conditions: random chance and player kill required
-                FabricLootPoolBuilder builder = FabricLootPoolBuilder.builder()
-                        .withRolls(ConstantLootTableRange.create(1))
-                        .withCondition(RandomChanceLootCondition.builder(lootEntry.chance))
-                        .withCondition(KilledByPlayerLootCondition.builder())
-                        .withFunction(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(lootEntry.min, lootEntry.max)))
-                        .withEntry(ItemEntry.builder(lootEntry.item));
-
+        LOOT_MAP.forEach((identifier, builder) -> {
+            if (identifier.equals(id)) {
                 supplier.withPool(builder);
             }
-        }
-    }
-
-    /**
-     * Data class to represent a loot entry.
-     */
-    static class LootEntry {
-        public Identifier id;
-        public ItemConvertible item;
-        public float chance;
-        public int min, max;
-
-        public LootEntry(Identifier id, ItemConvertible item, float chance, int min, int max) {
-            this.id = id;
-            this.item = item;
-            this.chance = chance;
-            this.min = min;
-            this.max = max;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            LootEntry lootEntry = (LootEntry) o;
-            return Float.compare(lootEntry.chance, chance) == 0 &&
-                    min == lootEntry.min &&
-                    max == lootEntry.max &&
-                    Objects.equals(id, lootEntry.id) &&
-                    Objects.equals(item, lootEntry.item);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(id, item, chance, min, max);
-        }
+        });
     }
 }

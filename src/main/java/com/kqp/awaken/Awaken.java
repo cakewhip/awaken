@@ -25,7 +25,7 @@ import com.kqp.awaken.item.sword.JangKatanaItem;
 import com.kqp.awaken.item.sword.StatusEffectSwordItem;
 import com.kqp.awaken.item.tool.AwakenAxeItem;
 import com.kqp.awaken.loot.AwakenRarity;
-import com.kqp.awaken.loot.LootTableHelper;
+import com.kqp.awaken.loot.TLootTableHandler;
 import com.kqp.awaken.recipe.RecipeType;
 import com.kqp.awaken.util.TimeUtil;
 import io.netty.buffer.Unpooled;
@@ -76,10 +76,10 @@ public class Awaken implements ModInitializer {
             Groups.init();
             TBlocks.init();
             TItems.init();
-            TscreenHandlers.init();
+            TScreenHandlers.init();
             TEntities.init();
             TNetworking.init();
-            LootTableHelper.init();
+            TLootTableHandler.init();
             initCallbacks();
         }, (time) -> Awaken.info("Awaken load took " + time + "ms"));
     }
@@ -97,7 +97,7 @@ public class Awaken implements ModInitializer {
             }
         });
 
-        LootTableLoadingCallback.EVENT.register(LootTableHelper::onLootTableLoading);
+        LootTableLoadingCallback.EVENT.register(TLootTableHandler::onLootTableLoading);
     }
 
     public static class Groups {
@@ -251,7 +251,7 @@ public class Awaken implements ModInitializer {
         }
     }
 
-    public static class TscreenHandlers {
+    public static class TScreenHandlers {
         public static void init() {
             info("Initializing screenHandlers");
         }
