@@ -4,12 +4,12 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DefaultedList;
+import net.minecraft.util.collection.DefaultedList;
 
 import java.util.Iterator;
 
 /**
- * Inventory class for the recipe look-up slot in Awaken's crafting container.
+ * Inventory class for the recipe look-up slot in Awaken's crafting slot.
  * Just 1 slot.
  */
 public class AwakenCraftingRecipeLookUpInventory implements Inventory {
@@ -19,11 +19,13 @@ public class AwakenCraftingRecipeLookUpInventory implements Inventory {
         this.stack = DefaultedList.ofSize(19, ItemStack.EMPTY);
     }
 
-    public int getInvSize() {
+    @Override
+    public int size() {
         return 19;
     }
 
-    public boolean isInvEmpty() {
+    @Override
+    public boolean isEmpty() {
         Iterator var1 = this.stack.iterator();
 
         ItemStack itemStack;
@@ -38,29 +40,36 @@ public class AwakenCraftingRecipeLookUpInventory implements Inventory {
         return false;
     }
 
-    public ItemStack getInvStack(int slot) {
+    @Override
+    public ItemStack getStack(int slot) {
         return this.stack.get(slot);
     }
 
-    public ItemStack takeInvStack(int slot, int amount) {
+    @Override
+    public ItemStack removeStack(int slot, int amount) {
         return Inventories.removeStack(this.stack, slot);
     }
 
-    public ItemStack removeInvStack(int slot) {
+    @Override
+    public ItemStack removeStack(int slot) {
         return Inventories.removeStack(this.stack, slot);
     }
 
-    public void setInvStack(int slot, ItemStack stack) {
+    @Override
+    public void setStack(int slot, ItemStack stack) {
         this.stack.set(slot, stack);
     }
 
+    @Override
     public void markDirty() {
     }
 
-    public boolean canPlayerUseInv(PlayerEntity player) {
+    @Override
+    public boolean canPlayerUse(PlayerEntity player) {
         return true;
     }
 
+    @Override
     public void clear() {
         this.stack.clear();
     }

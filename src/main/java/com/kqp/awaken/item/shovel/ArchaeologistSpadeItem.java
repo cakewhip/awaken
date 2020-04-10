@@ -32,8 +32,8 @@ public class ArchaeologistSpadeItem extends AwakenShovelItem {
 
 
     @Override
-    public float getMiningSpeed(ItemStack stack, BlockState state) {
-        return SAND_BLOCKS.contains(state.getBlock()) ? this.miningSpeed * 4.0F : super.getMiningSpeed(stack, state);
+    public float getMiningSpeedMultiplier(ItemStack stack, BlockState state) {
+        return SAND_BLOCKS.contains(state.getBlock()) ? this.miningSpeed * 4.0F : super.getMiningSpeedMultiplier(stack, state);
     }
 
     @Override

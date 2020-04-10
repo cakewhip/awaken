@@ -2,7 +2,6 @@ package com.kqp.awaken.client.entity;
 
 import com.kqp.awaken.Awaken;
 import com.kqp.awaken.entity.RaptorChickenEntity;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.model.ChickenEntityModel;
@@ -29,7 +28,7 @@ public class RaptorChickenRenderer<T extends MobEntity> extends MobEntityRendere
      * See {@link net.minecraft.client.render.entity.LivingEntityRenderer}
      *
      * @param chickenEntity Raptor chicken entity
-     * @param f tickDelta
+     * @param f             tickDelta
      * @return something???
      */
     public float getAnimationProgress(RaptorChickenEntity chickenEntity, float f) {

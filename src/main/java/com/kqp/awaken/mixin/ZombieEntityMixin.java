@@ -1,20 +1,13 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.Awaken;
-import com.kqp.awaken.entity.attribute.TEntityAttributes;
-import com.kqp.awaken.util.MobDecorator;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.world.LocalDifficulty;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Used to give zombies better stats and equipment post-awakening.

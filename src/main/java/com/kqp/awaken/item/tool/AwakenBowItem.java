@@ -7,8 +7,12 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.item.*;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.item.BowItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
@@ -57,7 +61,7 @@ public abstract class AwakenBowItem extends BowItem {
 
                 if (pullProgress >= 0.1F) {
                     if (!world.isClient) {
-                        ProjectileEntity projectileEntity = createProjectileEntity(arrowStack, world, playerEntity, remainingUseTicks);
+                        PersistentProjectileEntity projectileEntity = createProjectileEntity(arrowStack, world, playerEntity, remainingUseTicks);
                         projectileEntity.setProperties(playerEntity, playerEntity.pitch, playerEntity.yaw, 0.0F, pullProgress * 3.0F, 1.0F);
 
                         if (pullProgress == 1.0F) {
@@ -67,7 +71,7 @@ public abstract class AwakenBowItem extends BowItem {
                         projectileEntity.setDamage(baseDamage);
 
                         if (infinity || playerEntity.abilities.creativeMode) {
-                            projectileEntity.pickupType = ProjectileEntity.PickupPermission.CREATIVE_ONLY;
+                            projectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
                         }
 
                         world.spawnEntity(projectileEntity);
@@ -91,13 +95,13 @@ public abstract class AwakenBowItem extends BowItem {
     /**
      * Instantiate the projectile entity that the bow will fire.
      *
-     * @param stack The stack of arrows used
+     * @param stack             The stack of arrows used
      * @param world
      * @param user
      * @param remainingUseTicks
      * @return ProjectileEntity
      */
-    public abstract ProjectileEntity createProjectileEntity(ItemStack stack, World world, LivingEntity user, int remainingUseTicks);
+    public abstract PersistentProjectileEntity createProjectileEntity(ItemStack stack, World world, LivingEntity user, int remainingUseTicks);
 
     public Item setRarity(AwakenRarity rarity) {
         this.rarity = rarity;

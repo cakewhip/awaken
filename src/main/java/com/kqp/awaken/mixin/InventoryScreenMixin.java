@@ -4,11 +4,12 @@ import com.kqp.awaken.Awaken;
 import com.kqp.awaken.client.AwakenClient;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
-import net.minecraft.client.gui.screen.ingame.CreativeInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,11 +22,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * Used to add the navigation tabs to reach the Awaken crafting screen.
  */
 @Mixin(InventoryScreen.class)
-public abstract class InventoryScreenMixin extends AbstractInventoryScreen<CreativeInventoryScreen.CreativeContainer> {
-    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/gui/container/crafting_2.png");
+public abstract class InventoryScreenMixin extends AbstractInventoryScreen<PlayerScreenHandler> {
+    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/gui/slot/crafting_2.png");
 
-    public InventoryScreenMixin(CreativeInventoryScreen.CreativeContainer container, PlayerInventory playerInventory, Text text) {
-        super(container, playerInventory, text);
+    public InventoryScreenMixin(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
+        super(screenHandler, playerInventory, text);
     }
 
     @Inject(at = @At("HEAD"), method = "mouseClicked", cancellable = true)
@@ -46,23 +47,23 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Creat
 
     @Inject(at = @At("HEAD"), method = "drawBackground")
     public void drawCraftingTab(float delta, int mouseX, int mouseY, CallbackInfo callbackInfo) {
-        this.minecraft.getTextureManager().bindTexture(TEXTURE);
-        this.blit(this.x + 29, this.y - 28, 28, 166, 28, 32);
+        MinecraftClient.getInstance().getTextureManager().bindTexture(TEXTURE);
+        this.drawTexture(this.x + 29, this.y - 28, 28, 166, 28, 32);
 
-        this.setBlitOffset(100);
+        this.setZOffset(100);
         this.itemRenderer.zOffset = 100.0F;
         RenderSystem.enableRescaleNormal();
         ItemStack itemStack = new ItemStack(Blocks.CRAFTING_TABLE);
         this.itemRenderer.renderGuiItem(itemStack, this.x + 29 + (28 - 15) / 2, this.y - 28 + 10);
-        this.itemRenderer.renderGuiItemOverlay(this.font, itemStack, this.x + 29 + (28 - 15) / 2, this.y - 28 + 10);
+        this.itemRenderer.renderGuiItemOverlay(this.textRenderer, itemStack, this.x + 29 + (28 - 15) / 2, this.y - 28 + 10);
         this.itemRenderer.zOffset = 0.0F;
-        this.setBlitOffset(0);
+        this.setZOffset(0);
     }
 
     @Inject(at = @At("TAIL"), method = "drawBackground")
     public void drawPlayerTab(float delta, int mouseX, int mouseY, CallbackInfo callbackInfo) {
-        this.minecraft.getTextureManager().bindTexture(TEXTURE);
-        this.blit(this.x, this.y - 28, 0, 198, 28, 32);
+        MinecraftClient.getInstance().getTextureManager().bindTexture(TEXTURE);
+        this.drawTexture(this.x, this.y - 28, 0, 198, 28, 32);
     }
 
     @Inject(at = @At("TAIL"), method = "render")

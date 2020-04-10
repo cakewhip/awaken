@@ -10,7 +10,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
@@ -35,7 +35,7 @@ public class StatusEffectBowItem extends AwakenBowItem {
     }
 
     @Override
-    public ProjectileEntity createProjectileEntity(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
+    public PersistentProjectileEntity createProjectileEntity(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         ArrowEntity arrowEntity = new ArrowEntity(world, user) {
             @Override
             protected void onEntityHit(EntityHitResult hitResult) {

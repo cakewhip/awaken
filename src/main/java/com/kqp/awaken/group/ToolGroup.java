@@ -5,8 +5,8 @@ import com.kqp.awaken.item.tool.AwakenAxeItem;
 import com.kqp.awaken.item.tool.AwakenPickaxeItem;
 import com.kqp.awaken.item.tool.AwakenShovelItem;
 import com.kqp.awaken.item.tool.AwakenSwordItem;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ToolMaterial;
 
 /**
  * Class to mass create a set of tools for a given material.

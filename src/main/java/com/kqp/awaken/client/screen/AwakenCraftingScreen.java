@@ -1,12 +1,11 @@
 package com.kqp.awaken.client.screen;
 
 import com.kqp.awaken.Awaken;
-import com.kqp.awaken.client.container.AwakenCraftingContainer;
-import com.kqp.awaken.client.container.AwakenCraftingResultSlot;
-import com.kqp.awaken.client.container.AwakenLookUpResultSlot;
+import com.kqp.awaken.client.slot.AwakenCraftingResultSlot;
+import com.kqp.awaken.client.slot.AwakenLookUpResultSlot;
+import com.kqp.awaken.recipe.AwakenRecipe;
 import com.kqp.awaken.recipe.AwakenRecipeManager;
 import com.kqp.awaken.recipe.Reagent;
-import com.kqp.awaken.recipe.AwakenRecipe;
 import com.kqp.awaken.recipe.RecipeType;
 import com.kqp.awaken.util.MouseUtil;
 import com.kqp.awaken.util.StringUtil;
@@ -14,13 +13,13 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.LiteralText;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
 
@@ -29,10 +28,10 @@ import java.util.List;
 /**
  * Screen for Awaken's crafting system.
  */
-public class AwakenCraftingScreen extends ContainerScreen<AwakenCraftingContainer> {
-    public static final String TITLE_TRANSLATION_KEY = Util.createTranslationKey("container", new Identifier(Awaken.MOD_ID, "awaken_crafting"));
-    public static final String RECIPE_LOOK_UP_TRANSLATION_KEY = Util.createTranslationKey("container", new Identifier(Awaken.MOD_ID, "awaken_crafting_recipe_look_up"));
-    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/gui/container/crafting_2.png");
+public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHandler> {
+    public static final String TITLE_TRANSLATION_KEY = Util.createTranslationKey("slot", new Identifier(Awaken.MOD_ID, "awaken_crafting"));
+    public static final String RECIPE_LOOK_UP_TRANSLATION_KEY = Util.createTranslationKey("slot", new Identifier(Awaken.MOD_ID, "awaken_crafting_recipe_look_up"));
+    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/gui/slot/crafting_2.png");
 
     /**
      * Position of the crafting outputs scroll bar.
@@ -44,10 +43,10 @@ public class AwakenCraftingScreen extends ContainerScreen<AwakenCraftingContaine
      */
     public float lookUpScrollPosition = 0.0F;
 
-    public AwakenCraftingScreen(AwakenCraftingContainer container, PlayerInventory playerInventory) {
-        super(container, playerInventory, new TranslatableText(TITLE_TRANSLATION_KEY));
-        this.containerWidth = 256;
-        this.containerHeight = 166;
+    public AwakenCraftingScreen(AwakenCraftingScreenHandler screenHandler, PlayerInventory playerInventory) {
+        super(screenHandler, playerInventory, new TranslatableText(TITLE_TRANSLATION_KEY));
+        this.width = 256;
+        this.height = 166;
         this.passEvents = false;
 
         syncCraftingResultScrollbar();
@@ -87,17 +86,17 @@ public class AwakenCraftingScreen extends ContainerScreen<AwakenCraftingContaine
      */
     @Override
     public void renderTooltip(List<String> text, int x, int y) {
-        if ((this.focusedSlot instanceof AwakenCraftingResultSlot && container.craftingResultRecipes != null)
-            || (this.focusedSlot instanceof AwakenLookUpResultSlot && container.lookUpRecipes != null)) {
-            int currentIndex = -1;
-            List<AwakenRecipe> recipes = null;
+        if ((this.focusedSlot instanceof AwakenCraftingResultSlot && getScreenHandler().craftingResultRecipes != null)
+                || (this.focusedSlot instanceof AwakenLookUpResultSlot && getScreenHandler().lookUpRecipes != null)) {
+            int currentIndex;
+            List<AwakenRecipe> recipes;
 
-            if (this.focusedSlot instanceof  AwakenCraftingResultSlot) {
+            if (this.focusedSlot instanceof AwakenCraftingResultSlot) {
                 currentIndex = ((AwakenCraftingResultSlot) this.focusedSlot).currentIndex;
-                recipes = container.craftingResultRecipes;
+                recipes = getScreenHandler().craftingResultRecipes;
             } else {
                 currentIndex = ((AwakenLookUpResultSlot) this.focusedSlot).currentIndex;
-                recipes = container.lookUpRecipes;
+                recipes = getScreenHandler().lookUpRecipes;
             }
 
             if (currentIndex < recipes.size()) {
@@ -115,7 +114,7 @@ public class AwakenCraftingScreen extends ContainerScreen<AwakenCraftingContaine
                 text.add("To Craft: ");
                 for (Reagent reagent : recipe.reagents.keySet()) {
                     String reagentLine = recipe.reagents.get(reagent) + " x " + reagent.toString();
-                    List<String> split = this.font.wrapStringToWidthAsList(reagentLine, 126);
+                    List<String> split = this.textRenderer.wrapStringToWidthAsList(reagentLine, 126);
 
                     text.add(split.get(0));
 
@@ -137,39 +136,39 @@ public class AwakenCraftingScreen extends ContainerScreen<AwakenCraftingContaine
 
     @Override
     protected void drawForeground(int mouseX, int mouseY) {
-        this.font.draw(this.title.asFormattedString(), 8.0F, 8.0F, 4210752);
-        this.font.draw(new TranslatableText(RECIPE_LOOK_UP_TRANSLATION_KEY).asFormattedString(), 186.0F, 8.0F, 4210752);
-        this.font.draw(this.playerInventory.getDisplayName().asFormattedString(), 8.0F, (float) (this.containerHeight - 96 + 4), 4210752);
+        this.textRenderer.draw(this.title.asFormattedString(), 8.0F, 8.0F, 4210752);
+        this.textRenderer.draw(new TranslatableText(RECIPE_LOOK_UP_TRANSLATION_KEY).asFormattedString(), 186.0F, 8.0F, 4210752);
+        this.textRenderer.draw(this.playerInventory.getDisplayName().asFormattedString(), 8.0F, (float) (this.height - 96 + 4), 4210752);
     }
 
     @Override
     protected void drawBackground(float delta, int mouseX, int mouseY) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        int i = (this.width - this.containerWidth) / 2;
-        int j = (this.height - this.containerHeight) / 2;
+        int i = (this.width - this.backgroundWidth) / 2;
+        int j = (this.height - this.backgroundHeight) / 2;
 
-        this.minecraft.getTextureManager().bindTexture(TEXTURE);
+        MinecraftClient.getInstance().getTextureManager().bindTexture(TEXTURE);
 
-        this.blit(i, j - 28, 0, 166, 28, 32);
+        this.drawTexture(i, j - 28, 0, 166, 28, 32);
 
-        this.blit(i, j, 0, 0, 176, 166);
+        this.drawTexture(i, j, 0, 0, 176, 166);
 
-        this.blit(i + 176 + 2, j, 178, 0, 78, 166);
+        this.drawTexture(i + 176 + 2, j, 178, 0, 78, 166);
 
-        this.blit(i + 156, j + 18 + (int) ((float) (52 - 15) * this.outputScrollPosition), 56 + (this.hasOutputsScrollbar() ? 0 : 12), 166, 12, 15);
+        this.drawTexture(i + 156, j + 18 + (int) ((float) (52 - 15) * this.outputScrollPosition), 56 + (this.hasOutputsScrollbar() ? 0 : 12), 166, 12, 15);
 
-        this.blit(i + 242, j + 48 + (int) ((float) (106 - 11) * this.lookUpScrollPosition), 80 + (this.hasRecipeLookUpScrollbar() ? 0 : 6), 166, 6, 11);
+        this.drawTexture(i + 242, j + 48 + (int) ((float) (106 - 11) * this.lookUpScrollPosition), 80 + (this.hasRecipeLookUpScrollbar() ? 0 : 6), 166, 6, 11);
 
-        this.blit(i + 29, j - 28, 28, 198, 28, 32);
+        this.drawTexture(i + 29, j - 28, 28, 198, 28, 32);
 
-        this.setBlitOffset(100);
+        this.setZOffset(100);
         this.itemRenderer.zOffset = 100.0F;
         RenderSystem.enableRescaleNormal();
         ItemStack itemStack = new ItemStack(Blocks.CRAFTING_TABLE);
         this.itemRenderer.renderGuiItem(itemStack, this.x + 29 + (28 - 15) / 2, this.y - 28 + 10);
-        this.itemRenderer.renderGuiItemOverlay(this.font, itemStack, this.x + 29 + (28 - 15) / 2, this.y - 28 + 10);
+        this.itemRenderer.renderGuiItemOverlay(this.textRenderer, itemStack, this.x + 29 + (28 - 15) / 2, this.y - 28 + 10);
         this.itemRenderer.zOffset = 0.0F;
-        this.setBlitOffset(0);
+        this.setZOffset(0);
     }
 
     @Override
@@ -177,22 +176,22 @@ public class AwakenCraftingScreen extends ContainerScreen<AwakenCraftingContaine
         double aX = mouseX - this.x;
         double aY = mouseY - this.y;
 
-        if (aX >= 0 && aY >= 0 && aX < 176 && aY < this.containerHeight) {
+        if (aX >= 0 && aY >= 0 && aX < 176 && aY < this.height) {
             if (this.hasOutputsScrollbar()) {
-                int i = (this.container.craftingResults.size() + 8 - 1) / 8 - 3;
+                int i = (this.getScreenHandler().craftingResults.size() + 8 - 1) / 8 - 3;
                 this.outputScrollPosition = (float) ((double) this.outputScrollPosition - amount / (double) i);
                 this.outputScrollPosition = MathHelper.clamp(this.outputScrollPosition, 0.0F, 1.0F);
                 syncCraftingResultScrollbar();
 
                 return true;
             }
-        } else if (aX >= 176 + 2 && aY >= 0 && aX < 176 + 2 + 78 && aY < this.containerHeight) {
+        } else if (aX >= 176 + 2 && aY >= 0 && aX < 176 + 2 + 78 && aY < this.height) {
             if (this.hasRecipeLookUpScrollbar()) {
-                int i = (this.container.lookUpResults.size() + 3 - 1) / 3 - 6;
+                int i = (this.getScreenHandler().lookUpResults.size() + 3 - 1) / 3 - 6;
                 this.lookUpScrollPosition = (float) ((double) this.lookUpScrollPosition - amount / (double) i);
                 this.lookUpScrollPosition = MathHelper.clamp(this.lookUpScrollPosition, 0.0F, 1.0F);
 
-                this.container.scrollLookUpResults(this.lookUpScrollPosition);
+                this.getScreenHandler().scrollLookUpResults(this.lookUpScrollPosition);
                 syncLookUpResultScrollbar();
 
                 return true;
@@ -223,11 +222,11 @@ public class AwakenCraftingScreen extends ContainerScreen<AwakenCraftingContaine
     }
 
     private boolean hasOutputsScrollbar() {
-        return this.container.shouldShowOutputsScrollbar();
+        return this.getScreenHandler().shouldShowOutputsScrollbar();
     }
 
     private boolean hasRecipeLookUpScrollbar() {
-        return this.container.shouldShowLookUpResultsScrollbar();
+        return this.getScreenHandler().shouldShowLookUpResultsScrollbar();
     }
 
     /**

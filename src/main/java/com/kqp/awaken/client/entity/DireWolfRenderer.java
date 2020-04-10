@@ -3,12 +3,9 @@ package com.kqp.awaken.client.entity;
 import com.kqp.awaken.Awaken;
 import com.kqp.awaken.client.model.DireWolfEntityModel;
 import com.kqp.awaken.entity.DireWolfEntity;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.model.WolfEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.util.Identifier;
 
 /**

@@ -2,13 +2,27 @@ package com.kqp.awaken.entity;
 
 import com.kqp.awaken.Awaken;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.goal.AnimalMateGoal;
+import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.PounceAtTargetGoal;
+import net.minecraft.entity.ai.goal.RevengeGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.ai.pathing.PathNodeType;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -78,17 +92,16 @@ public class RaptorChickenEntity extends AnimalEntity {
         this.goalSelector.add(5, new WanderAroundFarGoal(this, 0.8D));
         this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(6, new LookAroundGoal(this));
-        this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
+        this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new FollowTargetGoal(this, PlayerEntity.class, false));
     }
 
-    @Override
-    protected void initAttributes() {
-        super.initAttributes();
-        this.getAttributes().register(EntityAttributes.ATTACK_DAMAGE).setBaseValue(12.0D);
-        this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(20.0D);
-        this.getAttributeInstance(EntityAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
-        this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.33D);
+    public static DefaultAttributeContainer.Builder createRaptorChickenAttributes() {
+        return HostileEntity.createHostileAttributes()
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.33D)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20D)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35D)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 12.0D);
     }
 
     @Override
@@ -96,13 +109,13 @@ public class RaptorChickenEntity extends AnimalEntity {
         super.tickMovement();
         this.field_6736 = this.field_6741;
         this.field_6738 = this.field_6743;
-        this.field_6743 = (float)((double)this.field_6743 + (double)(this.onGround ? -1 : 4) * 0.3D);
+        this.field_6743 = (float) ((double) this.field_6743 + (double) (this.onGround ? -1 : 4) * 0.3D);
         this.field_6743 = MathHelper.clamp(this.field_6743, 0.0F, 1.0F);
         if (!this.onGround && this.field_6737 < 1.0F) {
             this.field_6737 = 1.0F;
         }
 
-        this.field_6737 = (float)((double)this.field_6737 * 0.9D);
+        this.field_6737 = (float) ((double) this.field_6737 * 0.9D);
         Vec3d vec3d = this.getVelocity();
         if (!this.onGround && vec3d.y < 0.0D) {
             this.setVelocity(vec3d.multiply(1.0D, 0.6D, 1.0D));
@@ -143,7 +156,7 @@ public class RaptorChickenEntity extends AnimalEntity {
 
     @Override
     public boolean canHaveStatusEffect(StatusEffectInstance effect) {
-        return effect.getEffectType() == StatusEffects.POISON ? false : super.canHaveStatusEffect(effect);
+        return effect.getEffectType() != StatusEffects.POISON && super.canHaveStatusEffect(effect);
     }
 
     @Override
@@ -172,7 +185,7 @@ public class RaptorChickenEntity extends AnimalEntity {
 
     public void setInLove() {
         this.setLoveTicks(600);
-        this.world.sendEntityStatus(this, (byte)18);
+        this.world.sendEntityStatus(this, (byte) 18);
     }
 
     @Override
@@ -188,7 +201,7 @@ public class RaptorChickenEntity extends AnimalEntity {
             return false;
         } else {
             if (target instanceof LivingEntity) {
-                ((LivingEntity)target).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 200, 1));
+                ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 200, 1));
             }
 
             return true;

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 /**
  * Manages how the world has progressed.
- *
+ * <p>
  * TODO: find a better way to store the progresion
  */
 public class AwakenProgression {

@@ -93,8 +93,8 @@ public class AwakenRecipe {
     public void onCraft(Inventory craftInv) {
         HashMap<Reagent, Integer> reagentMatchMap = new HashMap();
 
-        for (int i = 0; i < craftInv.getInvSize(); i++) {
-            ItemStack itemStack = craftInv.getInvStack(i);
+        for (int i = 0; i < craftInv.size(); i++) {
+            ItemStack itemStack = craftInv.getStack(i);
             ComparableItemStack comparableItemStack = new ComparableItemStack(itemStack);
             int count = itemStack.getCount();
 
@@ -111,7 +111,7 @@ public class AwakenRecipe {
                         reagentMatchMap.put(matchingReagent, required);
                     } else if (count <= needed) {
                         reagentMatchMap.put(matchingReagent, already + count);
-                        craftInv.setInvStack(i, ItemStack.EMPTY);
+                        craftInv.setStack(i, ItemStack.EMPTY);
                     }
                 }
             }

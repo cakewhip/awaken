@@ -45,7 +45,7 @@ public enum AwakenToolMaterial implements ToolMaterial {
     }
 
     @Override
-    public float getMiningSpeed() {
+    public float getMiningSpeedMultiplier() {
         return miningSpeed;
     }
 

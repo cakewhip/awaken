@@ -3,7 +3,7 @@ package com.kqp.awaken.item.bow;
 import com.kqp.awaken.item.tool.AwakenBowItem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -16,7 +16,7 @@ public class FlameBowItem extends AwakenBowItem {
     }
 
     @Override
-    public ProjectileEntity createProjectileEntity(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
+    public PersistentProjectileEntity createProjectileEntity(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
         ArrowEntity arrowEntity = new ArrowEntity(world, user);
         arrowEntity.initFromStack(stack);
 

@@ -1,12 +1,12 @@
 package com.kqp.awaken.client;
 
 import com.kqp.awaken.Awaken;
-import com.kqp.awaken.client.container.AwakenCraftingContainer;
-import com.kqp.awaken.client.container.AwakenCraftingResultSlot;
-import com.kqp.awaken.client.container.AwakenLookUpResultSlot;
 import com.kqp.awaken.client.entity.DireWolfRenderer;
 import com.kqp.awaken.client.entity.RaptorChickenRenderer;
 import com.kqp.awaken.client.screen.AwakenCraftingScreen;
+import com.kqp.awaken.client.screen.AwakenCraftingScreenHandler;
+import com.kqp.awaken.client.slot.AwakenCraftingResultSlot;
+import com.kqp.awaken.client.slot.AwakenLookUpResultSlot;
 import com.kqp.awaken.util.MouseUtil;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ClientModInitializer;
@@ -17,7 +17,7 @@ import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.PacketByteBuf;
+import net.minecraft.network.PacketByteBuf;
 
 import java.util.Random;
 
@@ -65,8 +65,8 @@ public class AwakenClient implements ClientModInitializer {
 
             packetContext.getTaskQueue().execute(() -> {
                 if (MinecraftClient.getInstance().currentScreen instanceof AwakenCraftingScreen) {
-                    ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).getContainer().setStackInSlot(slotIndex, stack);
-                    ((AwakenCraftingResultSlot) ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).getContainer().getSlot(slotIndex)).currentIndex = currentIndex;
+                    ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).getScreenHandler().setStackInSlot(slotIndex, stack);
+                    ((AwakenCraftingResultSlot) ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).getScreenHandler().getSlot(slotIndex)).currentIndex = currentIndex;
                 }
             });
         });
@@ -84,8 +84,8 @@ public class AwakenClient implements ClientModInitializer {
 
             packetContext.getTaskQueue().execute(() -> {
                 if (MinecraftClient.getInstance().currentScreen instanceof AwakenCraftingScreen) {
-                    ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).getContainer().setStackInSlot(slotIndex, stack);
-                    ((AwakenLookUpResultSlot) ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).getContainer().getSlot(slotIndex)).currentIndex = currentIndex;
+                    ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).getScreenHandler().setStackInSlot(slotIndex, stack);
+                    ((AwakenLookUpResultSlot) ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).getScreenHandler().getSlot(slotIndex)).currentIndex = currentIndex;
                 }
             });
         });
@@ -119,7 +119,7 @@ public class AwakenClient implements ClientModInitializer {
 
     /**
      * Begins the process of opening the crafting menu from the inventory screen.
-     * It is a lot more complicated than initially thought due to how containers and screens need to be closed.
+     * It is a lot more complicated than initially thought due to how screen handlers and screens need to be closed.
      */
     public static void triggerOpenCraftingMenu() {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
@@ -140,12 +140,13 @@ public class AwakenClient implements ClientModInitializer {
      */
     private static void openCraftingMenu(int syncId, double mouseX, double mouseY) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        AwakenCraftingContainer container = new AwakenCraftingContainer(syncId, player.inventory);
+        AwakenCraftingScreenHandler screenHandler = new AwakenCraftingScreenHandler(syncId, player.inventory);
 
         player.closeScreen();
-        player.container = container;
+        player.currentScreenHandler = screenHandler;
+
         MinecraftClient.getInstance().openScreen(new AwakenCraftingScreen(
-                container,
+                screenHandler,
                 player.inventory));
 
         InputUtil.setCursorParameters(MinecraftClient.getInstance().getWindow().getHandle(), 212993, mouseX, mouseY);

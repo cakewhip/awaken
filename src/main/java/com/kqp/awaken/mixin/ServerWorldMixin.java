@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 @Mixin(ServerWorld.class)
 public abstract class ServerWorldMixin {
-    @Inject(at = @At("HEAD"), method = "method_23660")
+    @Inject(at = @At("HEAD"), method = "wakeSleepingPlayers")
     public void wakePlayers(CallbackInfo callbackInfo) {
         Awaken.worldProperties.triggers.forEach(trigger -> {
             if (trigger instanceof SleepTrigger) {

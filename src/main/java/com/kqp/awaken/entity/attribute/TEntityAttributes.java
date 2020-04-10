@@ -8,5 +8,5 @@ import net.minecraft.entity.attribute.EntityAttribute;
  */
 public class TEntityAttributes {
     public static final EntityAttribute RANGED_DAMAGE =
-            new ClampedEntityAttribute(null, "generic.rangedDamage", 2.0D, 0.0D, 2048.0D);
+            new ClampedEntityAttribute("generic.ranged_damage", 2.0D, 0.0D, 2048.0D);
 }

@@ -1,7 +1,6 @@
 package com.kqp.awaken.item.effect;
 
 import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -32,13 +31,7 @@ public class EffectAttributeEquippable implements Equippable {
     public void equip(ItemStack itemStack, PlayerEntity player) {
         statusEffects.forEach(statusEffect -> player.addStatusEffect(statusEffect));
         attributeModifiers.forEach((attribute, modifier) -> {
-            EntityAttributeInstance instance = player.getAttributeInstance(attribute);
-
-            if (instance == null) {
-                player.getAttributes().register(attribute);
-            }
-
-            player.getAttributeInstance(attribute).addModifier(modifier);
+            player.getAttributes().getCustomInstance(attribute).addTemporaryModifier(modifier);
         });
     }
 
@@ -46,13 +39,7 @@ public class EffectAttributeEquippable implements Equippable {
     public void unEquip(ItemStack itemStack, PlayerEntity player) {
         statusEffects.forEach(statusEffect -> player.removeStatusEffect(statusEffect.getEffectType()));
         attributeModifiers.forEach((attribute, modifier) -> {
-            EntityAttributeInstance instance = player.getAttributeInstance(attribute);
-
-            if (instance == null) {
-                player.getAttributes().register(attribute);
-            }
-
-            player.getAttributeInstance(attribute).removeModifier(modifier);
+            player.getAttributes().getCustomInstance(attribute).removeModifier(modifier);
         });
     }
 }

@@ -1,31 +1,31 @@
 package com.kqp.awaken;
 
-import com.kqp.awaken.block.CraftingBlock;
 import com.kqp.awaken.block.AwakenAnvilBlock;
-import com.kqp.awaken.client.container.AwakenCraftingContainer;
+import com.kqp.awaken.block.CraftingBlock;
+import com.kqp.awaken.client.screen.AwakenCraftingScreenHandler;
 import com.kqp.awaken.data.AwakenWorldData;
 import com.kqp.awaken.entity.DireWolfEntity;
 import com.kqp.awaken.entity.RaptorChickenEntity;
 import com.kqp.awaken.entity.attribute.TEntityAttributes;
 import com.kqp.awaken.group.ArmorGroup;
 import com.kqp.awaken.group.BlockStats;
-import com.kqp.awaken.group.ToolGroup;
 import com.kqp.awaken.group.OreGroup;
-import com.kqp.awaken.item.effect.SetBonusEquippable;
-import com.kqp.awaken.item.effect.SpecialItemRegistry;
-import com.kqp.awaken.item.pickaxe.EscapePlanItem;
+import com.kqp.awaken.group.ToolGroup;
 import com.kqp.awaken.item.AwakenArmorMaterial;
 import com.kqp.awaken.item.AwakenToolMaterial;
 import com.kqp.awaken.item.bow.FlameBowItem;
 import com.kqp.awaken.item.bow.StatusEffectBowItem;
+import com.kqp.awaken.item.effect.SetBonusEquippable;
+import com.kqp.awaken.item.effect.SpecialItemRegistry;
+import com.kqp.awaken.item.pickaxe.EscapePlanItem;
 import com.kqp.awaken.item.shovel.ArchaeologistSpadeItem;
 import com.kqp.awaken.item.sword.AtlanteanSabreItem;
 import com.kqp.awaken.item.sword.EnderianCutlassItem;
 import com.kqp.awaken.item.sword.JangKatanaItem;
 import com.kqp.awaken.item.sword.StatusEffectSwordItem;
 import com.kqp.awaken.item.tool.AwakenAxeItem;
-import com.kqp.awaken.loot.LootTableHelper;
 import com.kqp.awaken.loot.AwakenRarity;
+import com.kqp.awaken.loot.LootTableHelper;
 import com.kqp.awaken.recipe.RecipeType;
 import com.kqp.awaken.util.TimeUtil;
 import io.netty.buffer.Unpooled;
@@ -43,7 +43,10 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.*;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -73,7 +76,7 @@ public class Awaken implements ModInitializer {
             Groups.init();
             TBlocks.init();
             TItems.init();
-            TContainers.init();
+            TscreenHandlers.init();
             TEntities.init();
             TNetworking.init();
             LootTableHelper.init();
@@ -139,7 +142,7 @@ public class Awaken implements ModInitializer {
 
                 VALERIUM_ARMOR = new ArmorGroup("valerium", AwakenArmorMaterial.VALERIUM, "Set bonus: 15% extra melee damage");
                 SpecialItemRegistry.addArmor(VALERIUM_ARMOR, new SetBonusEquippable()
-                    .addEntityAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, "valerium_set_bonus", 0.15D, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+                        .addEntityAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, "valerium_set_bonus", 0.15D, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
                 );
             }
 
@@ -248,9 +251,9 @@ public class Awaken implements ModInitializer {
         }
     }
 
-    public static class TContainers {
+    public static class TscreenHandlers {
         public static void init() {
-            info("Initializing containers");
+            info("Initializing screenHandlers");
         }
     }
 
@@ -298,13 +301,13 @@ public class Awaken implements ModInitializer {
         public static void init() {
             info("Initializing networking");
 
-            // Gets the client's scroll bar position and updates the server-side container
+            // Receives the client's scroll bar position and updates the server-side screenHandler
             ServerSidePacketRegistry.INSTANCE.register(SYNC_CRAFTING_SCROLLBAR_ID, (packetContext, data) -> {
                 float scrollPosition = data.readFloat();
 
                 packetContext.getTaskQueue().execute(() -> {
-                    if (packetContext.getPlayer(). instanceof AwakenCraftingContainer) {
-                        ((AwakenCraftingContainer) packetContext.getPlayer().container).scrollOutputs(scrollPosition);
+                    if (packetContext.getPlayer().currentScreenHandler instanceof AwakenCraftingScreenHandler) {
+                        ((AwakenCraftingScreenHandler) packetContext.getPlayer().currentScreenHandler).scrollOutputs(scrollPosition);
                     }
                 });
             });
@@ -313,8 +316,8 @@ public class Awaken implements ModInitializer {
                 float scrollPosition = data.readFloat();
 
                 packetContext.getTaskQueue().execute(() -> {
-                    if (packetContext.getPlayer().container instanceof AwakenCraftingContainer) {
-                        ((AwakenCraftingContainer) packetContext.getPlayer().container).scrollLookUpResults(scrollPosition);
+                    if (packetContext.getPlayer().currentScreenHandler instanceof AwakenCraftingScreenHandler) {
+                        ((AwakenCraftingScreenHandler) packetContext.getPlayer().currentScreenHandler).scrollLookUpResults(scrollPosition);
                     }
                 });
             });
@@ -337,8 +340,7 @@ public class Awaken implements ModInitializer {
 
                         ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, OPEN_CRAFTING_S2C_ID, buf);
 
-                        player.container = new AwakenCraftingContainer(syncId, player.inventory);
-                        player.openHandledScreen();
+                        player.openHandledScreen(new AwakenCraftingScreenHandler(syncId, player.inventory));
                     });
                 }));
 
@@ -348,7 +350,7 @@ public class Awaken implements ModInitializer {
 
                     packetContext.getTaskQueue().execute(() -> {
                         ServerPlayerEntity player = (ServerPlayerEntity) packetContext.getPlayer();
-                        player.closeContainer();
+                        player.closeHandledScreen();
 
                         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
                         buf.writeDouble(mouseX);

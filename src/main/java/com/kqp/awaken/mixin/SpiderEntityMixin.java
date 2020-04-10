@@ -1,7 +1,6 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.Awaken;
-import com.kqp.awaken.entity.attribute.TEntityAttributes;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
@@ -10,7 +9,6 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.mob.SpiderEntity;
-import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.LocalDifficulty;
