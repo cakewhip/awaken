@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 /**
  * Manages all of the Awaken recipes.
- * TODO: add list of common reagents that have multiple matches (any log, any plank, etc)
+ * TODO: take note of block tags and shorten recipe lists {@link net.minecraft.tag.BlockTags}.
  */
 public class AwakenRecipeManager {
     /**
