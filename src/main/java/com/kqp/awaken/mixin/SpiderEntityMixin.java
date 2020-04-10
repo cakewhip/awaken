@@ -1,11 +1,11 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.Awaken;
+import com.kqp.awaken.util.EntityAttributeUtil;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnType;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.mob.SpiderEntity;
@@ -23,53 +23,31 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 @Mixin(SpiderEntity.class)
 public abstract class SpiderEntityMixin {
-    private static final EntityAttributeModifier AWAKENED_HEALTH_MOD = new EntityAttributeModifier(
-            "awakened_health_mod",
-            0.75D,
-            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
-    );
+    private static EntityAttributeUtil.EntityAttributeModifierGroup AWAKENED_MODS =
+            new EntityAttributeUtil.EntityAttributeModifierGroup("awakened", "spider")
+                    .add(EntityAttributes.GENERIC_MAX_HEALTH, 0.75D)
+                    .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1D)
+                    .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.75D);
 
-    private static final EntityAttributeModifier AWAKENED_DAMAGE_MOD = new EntityAttributeModifier(
-            "awakened_damage_mod",
-            1.75D,
-            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
-    );
-
-    private static final EntityAttributeModifier AWAKENED_SPEED_MOD = new EntityAttributeModifier(
-            "awakened_speed_mod",
-            0.1D,
-            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
-    );
-
-    private static final EntityAttributeModifier BLOOD_MOON_HEALTH_MOD = new EntityAttributeModifier(
-            "blood_moon_health_mod",
-            0.5D,
-            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
-    );
-
-    private static final EntityAttributeModifier BLOOD_MOON_DAMAGE_MOD = new EntityAttributeModifier(
-            "blood_moon_damage_mod",
-            0.5D,
-            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
-    );
+    private static EntityAttributeUtil.EntityAttributeModifierGroup BLOOD_MOON_MODS =
+            new EntityAttributeUtil.EntityAttributeModifierGroup("blood_moon", "spider")
+                    .add(EntityAttributes.GENERIC_MAX_HEALTH, 0.5D)
+                    .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.5D);
 
     @Inject(method = "<init>*", at = @At("RETURN"))
     private void addAwakenBuffs(CallbackInfo callbackInfo) {
         if (Awaken.worldProperties.isWorldAwakened()) {
             SpiderEntity spider = (SpiderEntity) (Object) this;
 
-            spider.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).addPersistentModifier(AWAKENED_HEALTH_MOD);
-            spider.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).addPersistentModifier(AWAKENED_DAMAGE_MOD);
-            spider.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).addPersistentModifier(AWAKENED_SPEED_MOD);
+            AWAKENED_MODS.apply(spider, true);
 
             if (Awaken.worldProperties.isBloodMoonActive()) {
-                spider.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).addPersistentModifier(BLOOD_MOON_HEALTH_MOD);
-                spider.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).addPersistentModifier(BLOOD_MOON_DAMAGE_MOD);
+                BLOOD_MOON_MODS.apply(spider, true);
             }
         }
     }
 
-    @Inject(at = @At("RETURN"), method = "initialize")
+    @Inject(method = "initialize", at = @At("RETURN"))
     public void addSkeletonRider(IWorld world, LocalDifficulty difficulty, SpawnType spawnType, @Nullable EntityData entityData, @Nullable CompoundTag entityTag, CallbackInfoReturnable callbackInfo) {
         if (Awaken.worldProperties.isBloodMoonActive()) {
             SpiderEntity spider = (SpiderEntity) (Object) this;

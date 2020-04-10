@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.Awaken;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
+import com.kqp.awaken.util.EntityAttributeUtil;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.ZombieEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,48 +14,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 @Mixin(ZombieEntity.class)
 public abstract class ZombieEntityMixin {
-    private static final EntityAttributeModifier AWAKENED_HEALTH_MOD = new EntityAttributeModifier(
-            "awakened_health_mod",
-            0.75D,
-            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
-    );
+    private static EntityAttributeUtil.EntityAttributeModifierGroup AWAKENED_MODS =
+            new EntityAttributeUtil.EntityAttributeModifierGroup("awakened", "zombie")
+                    .add(EntityAttributes.GENERIC_MAX_HEALTH, 0.75D)
+                    .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2D)
+                    .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.75D);
 
-    private static final EntityAttributeModifier AWAKENED_DAMAGE_MOD = new EntityAttributeModifier(
-            "awakened_damage_mod",
-            1.75D,
-            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
-    );
-
-    private static final EntityAttributeModifier AWAKENED_SPEED_MOD = new EntityAttributeModifier(
-            "awakened_speed_mod",
-            0.2D,
-            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
-    );
-
-    private static final EntityAttributeModifier BLOOD_MOON_HEALTH_MOD = new EntityAttributeModifier(
-            "blood_moon_health_mod",
-            0.5D,
-            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
-    );
-
-    private static final EntityAttributeModifier BLOOD_MOON_DAMAGE_MOD = new EntityAttributeModifier(
-            "blood_moon_damage_mod",
-            0.5D,
-            EntityAttributeModifier.Operation.MULTIPLY_TOTAL
-    );
+    private static EntityAttributeUtil.EntityAttributeModifierGroup BLOOD_MOON_MODS =
+            new EntityAttributeUtil.EntityAttributeModifierGroup("blood_moon", "zombie")
+                    .add(EntityAttributes.GENERIC_MAX_HEALTH, 0.5D)
+                    .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.5D);
 
     @Inject(method = "<init>*", at = @At("RETURN"))
     private void addAwakenBuffs(CallbackInfo callbackInfo) {
         if (Awaken.worldProperties.isWorldAwakened()) {
             ZombieEntity zombie = (ZombieEntity) (Object) this;
 
-            zombie.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).addPersistentModifier(AWAKENED_HEALTH_MOD);
-            zombie.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).addPersistentModifier(AWAKENED_DAMAGE_MOD);
-            zombie.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).addPersistentModifier(AWAKENED_SPEED_MOD);
+            AWAKENED_MODS.apply(zombie, true);
 
             if (Awaken.worldProperties.isBloodMoonActive()) {
-                zombie.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).addPersistentModifier(BLOOD_MOON_HEALTH_MOD);
-                zombie.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).addPersistentModifier(BLOOD_MOON_DAMAGE_MOD);
+                BLOOD_MOON_MODS.apply(zombie, true);
             }
         }
     }
