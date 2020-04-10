@@ -1,5 +1,8 @@
 package com.kqp.awaken.item.effect;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.effect.StatusEffect;
@@ -15,7 +18,7 @@ import java.util.HashMap;
  */
 public class EffectAttributeEquippable implements Equippable {
     private final ArrayList<StatusEffectInstance> statusEffects = new ArrayList();
-    private final HashMap<EntityAttribute, EntityAttributeModifier> attributeModifiers = new HashMap();
+    private final ArrayListMultimap<EntityAttribute, EntityAttributeModifier> attributeModifiers = ArrayListMultimap.create();
 
     public EffectAttributeEquippable addStatusEffect(StatusEffect effect, int amplifier) {
         statusEffects.add(new StatusEffectInstance(effect, Integer.MAX_VALUE, amplifier));
@@ -30,16 +33,12 @@ public class EffectAttributeEquippable implements Equippable {
     @Override
     public void equip(ItemStack itemStack, PlayerEntity player) {
         statusEffects.forEach(statusEffect -> player.addStatusEffect(statusEffect));
-        attributeModifiers.forEach((attribute, modifier) -> {
-            player.getAttributes().getCustomInstance(attribute).addTemporaryModifier(modifier);
-        });
+        player.getAttributes().addTemporaryModifiers(attributeModifiers);
     }
 
     @Override
     public void unEquip(ItemStack itemStack, PlayerEntity player) {
         statusEffects.forEach(statusEffect -> player.removeStatusEffect(statusEffect.getEffectType()));
-        attributeModifiers.forEach((attribute, modifier) -> {
-            player.getAttributes().getCustomInstance(attribute).removeModifier(modifier);
-        });
+        player.getAttributes().removeModifiers(attributeModifiers);
     }
 }
