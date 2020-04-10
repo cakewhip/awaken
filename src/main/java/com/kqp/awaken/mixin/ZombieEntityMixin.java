@@ -3,6 +3,7 @@ package com.kqp.awaken.mixin;
 import com.kqp.awaken.Awaken;
 import com.kqp.awaken.entity.attribute.TEntityAttributes;
 import com.kqp.awaken.util.MobDecorator;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
@@ -13,6 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Used to give zombies better stats and equipment post-awakening.
@@ -49,18 +51,18 @@ public abstract class ZombieEntityMixin {
             EntityAttributeModifier.Operation.MULTIPLY_TOTAL
     );
 
-    @Inject(at = @At("TAIL"), method = "initAttributes")
-    protected void overrideAttributes(CallbackInfo callbackInfo) {
+    @Inject(method = "<init>*", at = @At("RETURN"))
+    private void addAwakenBuffs(CallbackInfo callbackInfo) {
         if (Awaken.worldProperties.isWorldAwakened()) {
             ZombieEntity zombie = (ZombieEntity) (Object) this;
 
-            zombie.getAttributeInstance(EntityAttributes.MAX_HEALTH).addModifier(AWAKENED_HEALTH_MOD);
-            zombie.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).addModifier(AWAKENED_DAMAGE_MOD);
-            zombie.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).addModifier(AWAKENED_SPEED_MOD);
+            zombie.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).addPersistentModifier(AWAKENED_HEALTH_MOD);
+            zombie.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).addPersistentModifier(AWAKENED_DAMAGE_MOD);
+            zombie.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).addPersistentModifier(AWAKENED_SPEED_MOD);
 
             if (Awaken.worldProperties.isBloodMoonActive()) {
-                zombie.getAttributeInstance(EntityAttributes.MAX_HEALTH).addModifier(BLOOD_MOON_HEALTH_MOD);
-                zombie.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).addModifier(BLOOD_MOON_DAMAGE_MOD);
+                zombie.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).addPersistentModifier(BLOOD_MOON_HEALTH_MOD);
+                zombie.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).addPersistentModifier(BLOOD_MOON_DAMAGE_MOD);
             }
         }
     }

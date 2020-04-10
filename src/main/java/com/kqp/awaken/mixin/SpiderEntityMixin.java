@@ -10,6 +10,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.mob.SpiderEntity;
+import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.LocalDifficulty;
@@ -53,19 +54,19 @@ public abstract class SpiderEntityMixin {
             0.5D,
             EntityAttributeModifier.Operation.MULTIPLY_TOTAL
     );
-    
-    @Inject(at = @At("TAIL"), method = "initAttributes")
-    protected void overrideAttributes(CallbackInfo callbackInfo) {
+
+    @Inject(method = "<init>*", at = @At("RETURN"))
+    private void addAwakenBuffs(CallbackInfo callbackInfo) {
         if (Awaken.worldProperties.isWorldAwakened()) {
             SpiderEntity spider = (SpiderEntity) (Object) this;
 
-            spider.getAttributeInstance(EntityAttributes.MAX_HEALTH).addModifier(AWAKENED_HEALTH_MOD);
-            spider.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).addModifier(AWAKENED_DAMAGE_MOD);
-            spider.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).addModifier(AWAKENED_SPEED_MOD);
+            spider.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).addPersistentModifier(AWAKENED_HEALTH_MOD);
+            spider.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).addPersistentModifier(AWAKENED_DAMAGE_MOD);
+            spider.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).addPersistentModifier(AWAKENED_SPEED_MOD);
 
             if (Awaken.worldProperties.isBloodMoonActive()) {
-                spider.getAttributeInstance(EntityAttributes.MAX_HEALTH).addModifier(BLOOD_MOON_HEALTH_MOD);
-                spider.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).addModifier(BLOOD_MOON_DAMAGE_MOD);
+                spider.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).addPersistentModifier(BLOOD_MOON_HEALTH_MOD);
+                spider.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).addPersistentModifier(BLOOD_MOON_DAMAGE_MOD);
             }
         }
     }

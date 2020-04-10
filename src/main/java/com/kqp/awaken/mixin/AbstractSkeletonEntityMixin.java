@@ -7,6 +7,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
+import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.world.LocalDifficulty;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -48,19 +49,18 @@ public abstract class AbstractSkeletonEntityMixin {
             EntityAttributeModifier.Operation.MULTIPLY_TOTAL
     );
 
-    @Inject(at = @At("TAIL"), method = "initAttributes")
-    protected void overrideAttributes(CallbackInfo callbackInfo) {
-        AbstractSkeletonEntity ase = (AbstractSkeletonEntity) (Object) this;
-        if (ase instanceof SkeletonEntity && Awaken.worldProperties.isWorldAwakened()) {
+    @Inject(method = "<init>*", at = @At("RETURN"))
+    private void addAwakenBuffs(CallbackInfo callbackInfo) {
+        if (Awaken.worldProperties.isWorldAwakened() && ((Object) this) instanceof SkeletonEntity) {
             SkeletonEntity skeleton = (SkeletonEntity) (Object) this;
 
-            skeleton.getAttributeInstance(EntityAttributes.MAX_HEALTH).addModifier(AWAKENED_HEALTH_MOD);
-            skeleton.getAttributes().register(TEntityAttributes.RANGED_DAMAGE).addModifier(AWAKENED_DAMAGE_MOD);
-            skeleton.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).addModifier(AWAKENED_SPEED_MOD);
+            skeleton.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).addPersistentModifier(AWAKENED_HEALTH_MOD);
+            skeleton.getAttributes().getCustomInstance(TEntityAttributes.RANGED_DAMAGE).addPersistentModifier(AWAKENED_DAMAGE_MOD);
+            skeleton.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).addPersistentModifier(AWAKENED_SPEED_MOD);
 
             if (Awaken.worldProperties.isBloodMoonActive()) {
-                skeleton.getAttributeInstance(EntityAttributes.MAX_HEALTH).addModifier(BLOOD_MOON_HEALTH_MOD);
-                skeleton.getAttributeInstance(TEntityAttributes.RANGED_DAMAGE).addModifier(BLOOD_MOON_DAMAGE_MOD);
+                skeleton.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).addPersistentModifier(BLOOD_MOON_HEALTH_MOD);
+                skeleton.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).addPersistentModifier(BLOOD_MOON_DAMAGE_MOD);
             }
         }
     }

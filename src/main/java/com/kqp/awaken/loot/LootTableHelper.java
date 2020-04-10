@@ -11,8 +11,8 @@ import net.minecraft.loot.condition.KilledByPlayerLootCondition;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.LimitCountLootFunction;
+import net.minecraft.loot.operator.BoundedIntUnaryOperator;
 import net.minecraft.resource.ResourceManager;
-import net.minecraft.util.BoundedIntUnaryOperator;
 import net.minecraft.util.Identifier;
 
 import java.util.HashSet;

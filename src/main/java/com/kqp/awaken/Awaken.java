@@ -44,10 +44,10 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -139,7 +139,7 @@ public class Awaken implements ModInitializer {
 
                 VALERIUM_ARMOR = new ArmorGroup("valerium", AwakenArmorMaterial.VALERIUM, "Set bonus: 15% extra melee damage");
                 SpecialItemRegistry.addArmor(VALERIUM_ARMOR, new SetBonusEquippable()
-                    .addEntityAttributeModifier(EntityAttributes.ATTACK_DAMAGE, "valerium_set_bonus", 0.15D, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
+                    .addEntityAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, "valerium_set_bonus", 0.15D, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
                 );
             }
 
@@ -303,7 +303,7 @@ public class Awaken implements ModInitializer {
                 float scrollPosition = data.readFloat();
 
                 packetContext.getTaskQueue().execute(() -> {
-                    if (packetContext.getPlayer().container instanceof AwakenCraftingContainer) {
+                    if (packetContext.getPlayer(). instanceof AwakenCraftingContainer) {
                         ((AwakenCraftingContainer) packetContext.getPlayer().container).scrollOutputs(scrollPosition);
                     }
                 });
@@ -328,7 +328,7 @@ public class Awaken implements ModInitializer {
 
                     packetContext.getTaskQueue().execute(() -> {
                         ServerPlayerEntity player = (ServerPlayerEntity) packetContext.getPlayer();
-                        player.closeContainer();
+                        player.closeCurrentScreen();
 
                         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
                         buf.writeInt(syncId);
@@ -338,6 +338,7 @@ public class Awaken implements ModInitializer {
                         ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, OPEN_CRAFTING_S2C_ID, buf);
 
                         player.container = new AwakenCraftingContainer(syncId, player.inventory);
+                        player.openHandledScreen();
                     });
                 }));
 
