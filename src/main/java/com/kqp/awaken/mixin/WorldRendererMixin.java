@@ -1,6 +1,6 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.Awaken;
+import com.kqp.awaken.init.Awaken;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.util.Identifier;
 import org.objectweb.asm.Opcodes;

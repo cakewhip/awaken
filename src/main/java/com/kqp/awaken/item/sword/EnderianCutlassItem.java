@@ -1,6 +1,6 @@
 package com.kqp.awaken.item.sword;
 
-import com.kqp.awaken.item.AwakenToolMaterial;
+import com.kqp.awaken.item.material.AwakenToolMaterial;
 import com.kqp.awaken.item.tool.AwakenSwordItem;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;

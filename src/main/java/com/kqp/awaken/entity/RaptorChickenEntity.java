@@ -1,6 +1,7 @@
 package com.kqp.awaken.entity;
 
-import com.kqp.awaken.Awaken;
+import com.kqp.awaken.init.AwakenEntities;
+import com.kqp.awaken.init.AwakenItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
@@ -51,7 +52,7 @@ public class RaptorChickenEntity extends AnimalEntity {
     public float field_6737 = 1.0F;
 
     public RaptorChickenEntity(World world) {
-        super(Awaken.TEntities.RAPTOR_CHICKEN, world);
+        super(AwakenEntities.RAPTOR_CHICKEN, world);
 
         resetEggTimer();
 
@@ -124,7 +125,7 @@ public class RaptorChickenEntity extends AnimalEntity {
         this.field_6741 += this.field_6737 * 2.0F;
         if (!this.world.isClient && this.isAlive() && !this.isBaby() && --this.eggLayTime <= 0) {
             this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-            this.dropItem(Awaken.TItems.RAPTOR_CHICKEN_EGG);
+            this.dropItem(AwakenItems.RAPTOR_CHICKEN_EGG);
             resetEggTimer();
         }
     }
@@ -180,7 +181,7 @@ public class RaptorChickenEntity extends AnimalEntity {
 
     @Override
     public PassiveEntity createChild(PassiveEntity mate) {
-        return Awaken.TEntities.RAPTOR_CHICKEN.create(this.world);
+        return AwakenEntities.RAPTOR_CHICKEN.create(this.world);
     }
 
     public void setInLove() {

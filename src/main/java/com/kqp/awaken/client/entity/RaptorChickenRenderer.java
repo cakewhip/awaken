@@ -1,7 +1,7 @@
 package com.kqp.awaken.client.entity;
 
-import com.kqp.awaken.Awaken;
 import com.kqp.awaken.entity.RaptorChickenEntity;
+import com.kqp.awaken.init.Awaken;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.render.entity.model.ChickenEntityModel;

@@ -1,6 +1,6 @@
 package com.kqp.awaken.entity;
 
-import com.kqp.awaken.Awaken;
+import com.kqp.awaken.init.AwakenEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.AttackGoal;
@@ -25,7 +25,7 @@ import net.minecraft.world.World;
  */
 public class DireWolfEntity extends HostileEntity {
     public DireWolfEntity(World world) {
-        super(Awaken.TEntities.DIRE_WOLF, world);
+        super(AwakenEntities.DIRE_WOLF, world);
 
         this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
     }

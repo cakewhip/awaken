@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.Awaken;
-import com.kqp.awaken.client.AwakenClient;
+import com.kqp.awaken.init.client.AwakenClient;
+import com.kqp.awaken.init.Awaken;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;

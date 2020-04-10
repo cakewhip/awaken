@@ -1,4 +1,4 @@
-package com.kqp.awaken.group;
+package com.kqp.awaken.block.group;
 
 /**
  * Data class to hold block properties.

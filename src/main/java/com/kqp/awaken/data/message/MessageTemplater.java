@@ -1,6 +1,6 @@
 package com.kqp.awaken.data.message;
 
-import com.kqp.awaken.Awaken;
+import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.util.StringUtil;
 
 import java.util.ArrayList;

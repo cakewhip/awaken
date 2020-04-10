@@ -1,6 +1,6 @@
 package com.kqp.awaken.util;
 
-import com.kqp.awaken.Awaken;
+import com.kqp.awaken.init.Awaken;
 import net.minecraft.network.MessageType;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;

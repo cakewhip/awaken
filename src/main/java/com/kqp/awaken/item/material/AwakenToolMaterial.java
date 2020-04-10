@@ -1,6 +1,6 @@
-package com.kqp.awaken.item;
+package com.kqp.awaken.item.material;
 
-import com.kqp.awaken.Awaken;
+import com.kqp.awaken.init.AwakenItems;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 
@@ -11,7 +11,7 @@ import java.util.function.Supplier;
  */
 public enum AwakenToolMaterial implements ToolMaterial {
     CELESTIAL_STEEL(4, 1000, 10.0F, 10.0F, 18, () -> {
-        return Ingredient.ofItems(Awaken.TItems.CELESTIAL_STEEL_INGOT);
+        return Ingredient.ofItems(AwakenItems.CELESTIAL_STEEL_INGOT);
     }),
     PHASE_1_SPECIAL_SWORD(2, 750, 8.0F, 3F, 10, () -> {
         return Ingredient.ofItems();

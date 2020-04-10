@@ -1,7 +1,8 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.Awaken;
 import com.kqp.awaken.data.AwakenTemporalChunkData;
+import com.kqp.awaken.init.Awaken;
+import com.kqp.awaken.init.AwakenBlocks;
 import com.kqp.awaken.world.AwakenOreGen;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.WorldChunk;
@@ -27,8 +28,8 @@ public abstract class WorldChunkMixin implements Chunk {
                 if (!awakenData.genNewOres) {
                     awakenData.genNewOres = true;
 
-                    AwakenOreGen.generate(chunk, 64, 12, 12, Awaken.Groups.SALVIUM.ORE);
-                    AwakenOreGen.generate(chunk, 64, 12, 12, Awaken.Groups.VALERIUM.ORE);
+                    AwakenOreGen.generate(chunk, 64, 12, 12, AwakenBlocks.SALVIUM.ORE);
+                    AwakenOreGen.generate(chunk, 64, 12, 12, AwakenBlocks.VALERIUM.ORE);
                 }
             }
         }

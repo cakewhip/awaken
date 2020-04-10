@@ -1,6 +1,6 @@
 package com.kqp.awaken.group;
 
-import com.kqp.awaken.Awaken;
+import com.kqp.awaken.init.AwakenItems;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
@@ -61,9 +61,9 @@ public class ArmorGroup {
             }
         };
 
-        Awaken.TItems.register(HELMET, name + "_helmet");
-        Awaken.TItems.register(CHESTPLATE, name + "_chestplate");
-        Awaken.TItems.register(LEGGINGS, name + "_leggings");
-        Awaken.TItems.register(BOOTS, name + "_boots");
+        AwakenItems.register(HELMET, name + "_helmet");
+        AwakenItems.register(CHESTPLATE, name + "_chestplate");
+        AwakenItems.register(LEGGINGS, name + "_leggings");
+        AwakenItems.register(BOOTS, name + "_boots");
     }
 }

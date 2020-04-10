@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.kqp.awaken.Awaken;
+import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.util.TimeUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

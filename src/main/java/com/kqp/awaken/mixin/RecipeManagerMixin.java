@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin;
 
 import com.google.gson.JsonObject;
-import com.kqp.awaken.Awaken;
+import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.recipe.AwakenRecipeManager;
 import com.kqp.awaken.recipe.Reagent;
 import com.kqp.awaken.recipe.RecipeType;

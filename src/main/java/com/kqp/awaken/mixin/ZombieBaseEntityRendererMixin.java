@@ -1,6 +1,6 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.Awaken;
+import com.kqp.awaken.init.Awaken;
 import net.minecraft.client.render.entity.ZombieBaseEntityRenderer;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.util.Identifier;

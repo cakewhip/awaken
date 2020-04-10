@@ -1,6 +1,7 @@
-package com.kqp.awaken.item;
+package com.kqp.awaken.item.material;
 
-import com.kqp.awaken.Awaken;
+import com.kqp.awaken.init.Awaken;
+import com.kqp.awaken.init.AwakenItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.EquipmentSlot;
@@ -16,16 +17,16 @@ import java.util.function.Supplier;
  */
 public enum AwakenArmorMaterial implements ArmorMaterial {
     WITHER_SCALE("wither_scale", 40, new int[] { 6, 8, 10, 6 }, 14, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 5.0F, 0.5F, () -> {
-        return Ingredient.ofItems(Awaken.TItems.ENDER_DRAGON_SCALE, Awaken.TItems.WITHER_RIB);
+        return Ingredient.ofItems(AwakenItems.ENDER_DRAGON_SCALE, AwakenItems.WITHER_RIB);
     }),
     SALVIUM("salvium", 45, new int[] { 7, 9, 12, 7 }, 16, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 5.0F, 0.5F, () -> {
-        return Ingredient.ofItems(Awaken.Groups.SALVIUM.INGOT);
+        return Ingredient.ofItems(AwakenItems.SALVIUM_INGOT);
     }),
     VALERIUM("valerium", 45, new int[] { 7, 10, 12, 7 }, 16, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 7.5F, 0.5F, () -> {
-        return Ingredient.ofItems(Awaken.Groups.VALERIUM.INGOT);
+        return Ingredient.ofItems(AwakenItems.VALERIUM_INGOT);
     }),
     CELESTIAL_STEEL("celestial_steel", 44, new int[] { 3, 6, 8, 3 }, 24, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 24.0F, 0.5F, () -> {
-        return Ingredient.ofItems(Awaken.TItems.CELESTIAL_STEEL_INGOT);
+        return Ingredient.ofItems(AwakenItems.CELESTIAL_STEEL_INGOT);
     });
 
     private static final int[] BASE_DURABILITY = new int[] { 13, 15, 16, 11 };

@@ -1,7 +1,7 @@
 package com.kqp.awaken.data;
 
-import com.kqp.awaken.Awaken;
 import com.kqp.awaken.data.trigger.Trigger;
+import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.util.Broadcaster;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Tickable;

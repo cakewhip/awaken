@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.Awaken;
 import com.kqp.awaken.data.AwakenWorldData;
+import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.util.JsonUtil;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.nbt.CompoundTag;

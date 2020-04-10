@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.Awaken;
 import com.kqp.awaken.data.trigger.SleepTrigger;
+import com.kqp.awaken.init.Awaken;
 import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

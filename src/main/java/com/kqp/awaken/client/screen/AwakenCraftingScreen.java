@@ -1,8 +1,9 @@
 package com.kqp.awaken.client.screen;
 
-import com.kqp.awaken.Awaken;
 import com.kqp.awaken.client.slot.AwakenCraftingResultSlot;
 import com.kqp.awaken.client.slot.AwakenLookUpResultSlot;
+import com.kqp.awaken.init.Awaken;
+import com.kqp.awaken.init.AwakenServerNetworking;
 import com.kqp.awaken.recipe.AwakenRecipe;
 import com.kqp.awaken.recipe.AwakenRecipeManager;
 import com.kqp.awaken.recipe.Reagent;
@@ -213,7 +214,7 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
                     buf.writeDouble(MouseUtil.getMouseX());
                     buf.writeDouble(MouseUtil.getMouseY());
 
-                    ClientSidePacketRegistry.INSTANCE.sendToServer(Awaken.TNetworking.CLOSE_CRAFTING_C2S_ID, buf);
+                    ClientSidePacketRegistry.INSTANCE.sendToServer(AwakenServerNetworking.CLOSE_CRAFTING_C2S_ID, buf);
                 }
             }
         }
@@ -236,7 +237,7 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeFloat(outputScrollPosition);
 
-        ClientSidePacketRegistry.INSTANCE.sendToServer(Awaken.TNetworking.SYNC_CRAFTING_SCROLLBAR_ID, buf);
+        ClientSidePacketRegistry.INSTANCE.sendToServer(AwakenServerNetworking.SYNC_CRAFTING_SCROLLBAR_ID, buf);
     }
 
 
@@ -247,6 +248,6 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeFloat(lookUpScrollPosition);
 
-        ClientSidePacketRegistry.INSTANCE.sendToServer(Awaken.TNetworking.SYNC_LOOK_UP_SCROLLBAR_ID, buf);
+        ClientSidePacketRegistry.INSTANCE.sendToServer(AwakenServerNetworking.SYNC_LOOK_UP_SCROLLBAR_ID, buf);
     }
 }

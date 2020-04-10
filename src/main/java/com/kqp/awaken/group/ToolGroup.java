@@ -1,6 +1,6 @@
 package com.kqp.awaken.group;
 
-import com.kqp.awaken.Awaken;
+import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.item.tool.AwakenAxeItem;
 import com.kqp.awaken.item.tool.AwakenPickaxeItem;
 import com.kqp.awaken.item.tool.AwakenShovelItem;
@@ -23,9 +23,9 @@ public class ToolGroup {
         PICKAXE = new AwakenPickaxeItem(material);
         AXE = new AwakenAxeItem(material);
 
-        Awaken.TItems.register(SWORD, name + "_sword");
-        Awaken.TItems.register(SHOVEL, name + "_shovel");
-        Awaken.TItems.register(PICKAXE, name + "_pickaxe");
-        Awaken.TItems.register(AXE, name + "_axe");
+        AwakenItems.register(SWORD, name + "_sword");
+        AwakenItems.register(SHOVEL, name + "_shovel");
+        AwakenItems.register(PICKAXE, name + "_pickaxe");
+        AwakenItems.register(AXE, name + "_axe");
     }
 }

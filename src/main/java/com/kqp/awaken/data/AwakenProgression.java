@@ -1,9 +1,9 @@
 package com.kqp.awaken.data;
 
-import com.kqp.awaken.Awaken;
 import com.kqp.awaken.data.trigger.SleepTrigger;
 import com.kqp.awaken.data.trigger.TimeTrigger;
 import com.kqp.awaken.data.trigger.Trigger;
+import com.kqp.awaken.init.Awaken;
 
 import java.util.Arrays;
 import java.util.Set;

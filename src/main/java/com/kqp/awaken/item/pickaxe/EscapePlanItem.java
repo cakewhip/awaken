@@ -1,8 +1,8 @@
 package com.kqp.awaken.item.pickaxe;
 
-import com.kqp.awaken.item.AwakenToolMaterial;
 import com.kqp.awaken.item.effect.EffectAttributeEquippable;
 import com.kqp.awaken.item.effect.SpecialItemRegistry;
+import com.kqp.awaken.item.material.AwakenToolMaterial;
 import com.kqp.awaken.item.tool.AwakenPickaxeItem;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;

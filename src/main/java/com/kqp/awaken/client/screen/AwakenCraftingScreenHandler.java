@@ -1,9 +1,9 @@
 package com.kqp.awaken.client.screen;
 
-import com.kqp.awaken.Awaken;
 import com.kqp.awaken.block.RecipeAccessProvider;
 import com.kqp.awaken.client.slot.AwakenCraftingResultSlot;
 import com.kqp.awaken.client.slot.AwakenLookUpResultSlot;
+import com.kqp.awaken.init.AwakenServerNetworking;
 import com.kqp.awaken.inventory.AwakenCraftingRecipeLookUpInventory;
 import com.kqp.awaken.inventory.AwakenCraftingResultInventory;
 import com.kqp.awaken.recipe.AwakenRecipe;
@@ -228,7 +228,7 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
         // If on server, notify the client that something has changed so the client can reply with the scroll bar position.
         if (!player.world.isClient) {
             PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-            ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, Awaken.TNetworking.SYNC_CRAFTING_RESULTS_ID, buf);
+            ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, AwakenServerNetworking.SYNC_CRAFTING_RESULTS_ID, buf);
         }
     }
 
@@ -241,7 +241,7 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
         // If on server, notify the client that something has changed so the client can reply with the scroll bar position.
         if (!player.world.isClient) {
             PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-            ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, Awaken.TNetworking.SYNC_LOOK_UP_RESULTS_ID, buf);
+            ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, AwakenServerNetworking.SYNC_LOOK_UP_RESULTS_ID, buf);
         }
     }
 
@@ -339,7 +339,7 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
                 buf.writeInt(m);
 
                 // Sends the client EACH ItemStack in the result inventory
-                ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, Awaken.TNetworking.SYNC_CRAFTING_RESULT_SLOT_ID, buf);
+                ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, AwakenServerNetworking.SYNC_CRAFTING_RESULT_SLOT_ID, buf);
             }
         }
     }
@@ -379,7 +379,7 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
                     buf.writeInt(m);
 
                     // Sends the client EACH ItemStack in the result inventory
-                    ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, Awaken.TNetworking.SYNC_LOOK_UP_RESULT_SLOT_ID, buf);
+                    ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, AwakenServerNetworking.SYNC_LOOK_UP_RESULT_SLOT_ID, buf);
                 }
             }
         }

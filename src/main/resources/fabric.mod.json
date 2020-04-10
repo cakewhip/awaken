@@ -14,10 +14,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.kqp.awaken.Awaken"
+      "com.kqp.awaken.init.Awaken"
     ],
     "client": [
-      "com.kqp.awaken.client.AwakenClient"
+      "com.kqp.awaken.init.client.AwakenClient"
     ],
     "server": []
   },

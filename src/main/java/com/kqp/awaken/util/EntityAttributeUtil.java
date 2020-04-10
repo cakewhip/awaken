@@ -1,7 +1,7 @@
 package com.kqp.awaken.util;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.kqp.awaken.Awaken;
+import com.kqp.awaken.init.Awaken;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;

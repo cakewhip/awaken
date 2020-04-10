@@ -1,6 +1,6 @@
 package com.kqp.awaken.data.event;
 
-import com.kqp.awaken.Awaken;
+import com.kqp.awaken.init.Awaken;
 
 /**
  * Event for enabling the awakening, AKA phase 1.

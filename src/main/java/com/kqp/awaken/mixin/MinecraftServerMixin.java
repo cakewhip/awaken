@@ -1,6 +1,6 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.Awaken;
+import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.recipe.AwakenRecipeLoader;
 import net.minecraft.resource.ReloadableResourceManager;
 import net.minecraft.server.MinecraftServer;

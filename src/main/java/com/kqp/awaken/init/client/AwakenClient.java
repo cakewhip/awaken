@@ -1,12 +1,13 @@
-package com.kqp.awaken.client;
+package com.kqp.awaken.init.client;
 
-import com.kqp.awaken.Awaken;
 import com.kqp.awaken.client.entity.DireWolfRenderer;
 import com.kqp.awaken.client.entity.RaptorChickenRenderer;
 import com.kqp.awaken.client.screen.AwakenCraftingScreen;
 import com.kqp.awaken.client.screen.AwakenCraftingScreenHandler;
 import com.kqp.awaken.client.slot.AwakenCraftingResultSlot;
 import com.kqp.awaken.client.slot.AwakenLookUpResultSlot;
+import com.kqp.awaken.init.AwakenEntities;
+import com.kqp.awaken.init.AwakenServerNetworking;
 import com.kqp.awaken.util.MouseUtil;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ClientModInitializer;
@@ -37,11 +38,11 @@ public class AwakenClient implements ClientModInitializer {
     }
 
     public static void initEntityRenderers() {
-        EntityRendererRegistry.INSTANCE.register(Awaken.TEntities.RAPTOR_CHICKEN, (dispatcher, context) ->
+        EntityRendererRegistry.INSTANCE.register(AwakenEntities.RAPTOR_CHICKEN, (dispatcher, context) ->
                 new RaptorChickenRenderer(dispatcher)
         );
 
-        EntityRendererRegistry.INSTANCE.register(Awaken.TEntities.DIRE_WOLF, (dispatcher, context) ->
+        EntityRendererRegistry.INSTANCE.register(AwakenEntities.DIRE_WOLF, (dispatcher, context) ->
                 new DireWolfRenderer(dispatcher)
         );
     }
@@ -51,14 +52,14 @@ public class AwakenClient implements ClientModInitializer {
      */
     public static void initNetworking() {
         // Server request to client to get the scroll bar position
-        ClientSidePacketRegistry.INSTANCE.register(Awaken.TNetworking.SYNC_CRAFTING_RESULTS_ID, (packetContext, data) -> packetContext.getTaskQueue().execute(() -> {
+        ClientSidePacketRegistry.INSTANCE.register(AwakenServerNetworking.SYNC_CRAFTING_RESULTS_ID, (packetContext, data) -> packetContext.getTaskQueue().execute(() -> {
             if (MinecraftClient.getInstance().currentScreen instanceof AwakenCraftingScreen) {
                 ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).syncCraftingResultScrollbar();
             }
         }));
 
         // Server sends what ItemStack is in what slot of the Awaken crafting GUI
-        ClientSidePacketRegistry.INSTANCE.register(Awaken.TNetworking.SYNC_CRAFTING_RESULT_SLOT_ID, (packetContext, data) -> {
+        ClientSidePacketRegistry.INSTANCE.register(AwakenServerNetworking.SYNC_CRAFTING_RESULT_SLOT_ID, (packetContext, data) -> {
             int slotIndex = data.readInt();
             ItemStack stack = data.readItemStack();
             int currentIndex = data.readInt();
@@ -71,13 +72,13 @@ public class AwakenClient implements ClientModInitializer {
             });
         });
 
-        ClientSidePacketRegistry.INSTANCE.register(Awaken.TNetworking.SYNC_LOOK_UP_RESULTS_ID, (packetContext, data) -> packetContext.getTaskQueue().execute(() -> {
+        ClientSidePacketRegistry.INSTANCE.register(AwakenServerNetworking.SYNC_LOOK_UP_RESULTS_ID, (packetContext, data) -> packetContext.getTaskQueue().execute(() -> {
             if (MinecraftClient.getInstance().currentScreen instanceof AwakenCraftingScreen) {
                 ((AwakenCraftingScreen) MinecraftClient.getInstance().currentScreen).syncLookUpResultScrollbar();
             }
         }));
 
-        ClientSidePacketRegistry.INSTANCE.register(Awaken.TNetworking.SYNC_LOOK_UP_RESULT_SLOT_ID, (packetContext, data) -> {
+        ClientSidePacketRegistry.INSTANCE.register(AwakenServerNetworking.SYNC_LOOK_UP_RESULT_SLOT_ID, (packetContext, data) -> {
             int slotIndex = data.readInt();
             ItemStack stack = data.readItemStack();
             int currentIndex = data.readInt();
@@ -92,7 +93,7 @@ public class AwakenClient implements ClientModInitializer {
 
         // Packets for the client to coordinate the navigation between the inventory and the crafting screen
         {
-            ClientSidePacketRegistry.INSTANCE.register(Awaken.TNetworking.OPEN_CRAFTING_S2C_ID, ((packetContext, packetByteBuf) -> {
+            ClientSidePacketRegistry.INSTANCE.register(AwakenServerNetworking.OPEN_CRAFTING_S2C_ID, ((packetContext, packetByteBuf) -> {
                 int syncId = packetByteBuf.readInt();
                 double mouseX = packetByteBuf.readDouble();
                 double mouseY = packetByteBuf.readDouble();
@@ -102,7 +103,7 @@ public class AwakenClient implements ClientModInitializer {
                 });
             }));
 
-            ClientSidePacketRegistry.INSTANCE.register(Awaken.TNetworking.CLOSE_CRAFTING_S2C_ID, ((packetContext, packetByteBuf) -> {
+            ClientSidePacketRegistry.INSTANCE.register(AwakenServerNetworking.CLOSE_CRAFTING_S2C_ID, ((packetContext, packetByteBuf) -> {
                 double mouseX = packetByteBuf.readDouble();
                 double mouseY = packetByteBuf.readDouble();
 
@@ -127,7 +128,7 @@ public class AwakenClient implements ClientModInitializer {
         buf.writeDouble(MouseUtil.getMouseX());
         buf.writeDouble(MouseUtil.getMouseY());
 
-        ClientSidePacketRegistry.INSTANCE.sendToServer(Awaken.TNetworking.OPEN_CRAFTING_C2S_ID, buf);
+        ClientSidePacketRegistry.INSTANCE.sendToServer(AwakenServerNetworking.OPEN_CRAFTING_C2S_ID, buf);
     }
 
     /**
