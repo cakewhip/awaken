@@ -108,8 +108,7 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
                 text.add("---");
 
                 if (!recipeType.equals(RecipeType.TWO_BY_TWO)) {
-                    String localizedRecipeType = new TranslatableText("awaken.recipe_type." + recipeType).asFormattedString();
-                    text.add("Requires " + StringUtil.prependArticle(localizedRecipeType));
+                    text.add(new TranslatableText("awaken.recipe_type.requires." + recipeType).asFormattedString());
                 }
 
                 text.add("To Craft: ");

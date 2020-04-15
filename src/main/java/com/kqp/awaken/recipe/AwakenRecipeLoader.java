@@ -14,6 +14,7 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.recipe.ShapedRecipe;
 import net.minecraft.recipe.ShapelessRecipe;
+import net.minecraft.recipe.SmeltingRecipe;
 import net.minecraft.resource.JsonDataLoader;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
@@ -113,7 +114,7 @@ public class AwakenRecipeLoader extends JsonDataLoader {
                 .collect(Collectors.toList());
 
         for (Recipe recipe : recipes) {
-            if (recipe instanceof ShapedRecipe || recipe instanceof ShapelessRecipe) {
+            if (recipe instanceof ShapedRecipe || recipe instanceof ShapelessRecipe || recipe instanceof SmeltingRecipe) {
                 List<Ingredient> ingredientList = recipe.getPreviewInputs();
                 HashMap<Reagent, Integer> reagents = new HashMap();
 
@@ -131,16 +132,28 @@ public class AwakenRecipeLoader extends JsonDataLoader {
                 } else if (recipe.getOutput() == null) {
                     Awaken.warn("Output not found for vanilla recipe, ignoring");
                 } else {
-                    boolean twoByTwo = false;
+                    String recipeType;
 
                     if (recipe instanceof ShapedRecipe) {
-                        twoByTwo = ((ShapedRecipe) recipe).getWidth() <= 2 && ((ShapedRecipe) recipe).getHeight() <= 2;
+                        if (((ShapedRecipe) recipe).getWidth() <= 2 && ((ShapedRecipe) recipe).getHeight() <= 2) {
+                            recipeType = RecipeType.TWO_BY_TWO;
+                        } else {
+                            recipeType = RecipeType.CRAFTING_TABLE;
+                        }
                     } else if (recipe instanceof ShapelessRecipe) {
-                        twoByTwo = reagents.keySet().size() <= 4;
+                        if (reagents.keySet().size() <= 4) {
+                            recipeType = RecipeType.TWO_BY_TWO;
+                        } else {
+                            recipeType = RecipeType.CRAFTING_TABLE;
+                        }
+                    } else if (recipe instanceof SmeltingRecipe) {
+                        recipeType = RecipeType.ENDERIAN_HELL_FORGE;
+                    } else {
+                        throw new IllegalStateException("Couldn't determine Awaken recipe type for vanilla recipe: " + recipe);
                     }
 
                     AwakenRecipeManager.addRecipe(
-                            twoByTwo ? RecipeType.TWO_BY_TWO : RecipeType.CRAFTING_TABLE,
+                            recipeType,
                             recipe.getOutput(),
                             reagents
                     );
