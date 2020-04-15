@@ -4,10 +4,14 @@
     "item.awaken.wither_rib": "Wither Rib",
 
     "__comment": "Phase 1 Armor",
-    "item.awaken.wither_scale_boots": "Wither Scale Boots",
-    "item.awaken.wither_scale_leggings": "Wither Scale Leggings",
-    "item.awaken.wither_scale_chestplate": "Wither Scale Chestplate",
-    "item.awaken.wither_scale_helmet": "Wither Scale Helmet",
+    "item.awaken.dragon_scale_boots": "Dragon Scale Boots",
+    "item.awaken.dragon_scale_leggings": "Dragon Scale Leggings",
+    "item.awaken.dragon_scale_chestplate": "Dragon Scale Chestplate",
+    "item.awaken.dragon_scale_helmet": "Dragon Scale Helmet",
+    "item.awaken.wither_bone_boots": "Wither Bone Boots",
+    "item.awaken.wither_bone_leggings": "Wither Bone Leggings",
+    "item.awaken.wither_bone_chestplate": "Wither Bone Chestplate",
+    "item.awaken.wither_bone_helmet": "Wither Bone Helmet",
 
     "__comment": "Phase 1 Special Tools",
     "item.awaken.cindered_bow": "Cindered Bow",
@@ -87,5 +91,9 @@
     "awaken.recipe_type.anvil": "Anvil",
     "awaken.recipe_type.furnace": "Furnace",
     "awaken.recipe_type.celestial_altar": "Celestial Altar",
-    "awaken.recipe_type.celestial_steel_anvil": "Celestial Steel Anvil"
+    "awaken.recipe_type.celestial_steel_anvil": "Celestial Steel Anvil",
+
+    "__comment": "Entity Attributes",
+    "attribute.name.generic.ranged_damage": "Ranged Damage",
+    "attribute.name.generic.melee_damage": "Melee Damage"
 }

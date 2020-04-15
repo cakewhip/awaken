@@ -16,7 +16,7 @@
     "DamageUtilMixin",
     "ClampedEntityAttributeMixin",
     "PlayerEntityMixin",
-    "ProjectileEntityMixin",
+    "PersistentProjectileEntityMixin",
     "ChunkSerializerMixin",
     "SmithingScreenHandlerMixin"
   ],

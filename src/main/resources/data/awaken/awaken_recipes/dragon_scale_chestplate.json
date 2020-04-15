@@ -2,16 +2,19 @@
   "type": "anvil",
   "recipe": {
     "output": {
-      "item": "awaken:wither_scale_chestplate"
+      "item": "awaken:dragon_scale_chestplate"
     },
     "reagents": [
+      {
+        "item": "minecraft:netherite_ingot"
+      },
       {
         "item": "awaken:ender_dragon_scale",
         "count": 32
       },
       {
-        "item": "awaken:wither_rib",
-        "count": 2
+        "item": "minecraft:obsidian",
+        "count": 32
       }
     ]
   }

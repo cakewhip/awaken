@@ -1,6 +1,6 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.entity.attribute.TEntityAttributes;
+import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.util.EntityAttributeUtil;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -20,12 +20,12 @@ public abstract class AbstractSkeletonEntityMixin {
             new EntityAttributeUtil.EntityAttributeModifierGroup("awakened", "skeleton")
                     .add(EntityAttributes.GENERIC_MAX_HEALTH, 0.75D)
                     .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1D)
-                    .add(TEntityAttributes.RANGED_DAMAGE, 1.75D);
+                    .add(AwakenEntityAttributes.RANGED_DAMAGE, 1.75D);
 
     private static EntityAttributeUtil.EntityAttributeModifierGroup BLOOD_MOON_MODS =
             new EntityAttributeUtil.EntityAttributeModifierGroup("blood_moon", "skeleton")
                     .add(EntityAttributes.GENERIC_MAX_HEALTH, 0.5D)
-                    .add(TEntityAttributes.RANGED_DAMAGE, 0.5D);
+                    .add(AwakenEntityAttributes.RANGED_DAMAGE, 0.5D);
 
     @Inject(method = "<init>*", at = @At("RETURN"))
     private void addAwakenBuffs(CallbackInfo callbackInfo) {

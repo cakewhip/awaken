@@ -6,7 +6,7 @@ import net.minecraft.entity.attribute.EntityAttribute;
 /**
  * Custom entity attributes.
  */
-public class TEntityAttributes {
+public class AwakenEntityAttributes {
     public static final EntityAttribute RANGED_DAMAGE =
-            new ClampedEntityAttribute("generic.ranged_damage", 2.0D, 0.0D, 2048.0D);
+            new ClampedEntityAttribute("attribute.name.generic.ranged_damage", 2.0D, 0.0D, 2048.0D);
 }

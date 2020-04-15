@@ -1,6 +1,5 @@
 package com.kqp.awaken.item.material;
 
-import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.init.AwakenItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -16,8 +15,11 @@ import java.util.function.Supplier;
  * Used to create custom armor materials.
  */
 public enum AwakenArmorMaterial implements ArmorMaterial {
-    WITHER_SCALE("wither_scale", 40, new int[] { 6, 8, 10, 6 }, 14, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 5.0F, 0.5F, () -> {
-        return Ingredient.ofItems(AwakenItems.ENDER_DRAGON_SCALE, AwakenItems.WITHER_RIB);
+    DRAGON_SCALE("dragon_scale", 37, new int[] { 6, 8, 10, 6 }, 14, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 4.0F, 0.5F, () -> {
+        return Ingredient.ofItems(AwakenItems.ENDER_DRAGON_SCALE);
+    }),
+    WITHER_BONE("wither_bone", 37, new int[] { 6, 8, 10, 6 }, 14, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 4.0F, 0.5F, () -> {
+        return Ingredient.ofItems(AwakenItems.WITHER_RIB);
     }),
     SALVIUM("salvium", 45, new int[] { 7, 9, 12, 7 }, 16, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 5.0F, 0.5F, () -> {
         return Ingredient.ofItems(AwakenItems.SALVIUM_INGOT);

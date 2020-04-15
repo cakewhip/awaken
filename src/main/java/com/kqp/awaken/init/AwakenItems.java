@@ -1,12 +1,10 @@
 package com.kqp.awaken.init;
 
-import com.kqp.awaken.entity.attribute.TEntityAttributes;
-import com.kqp.awaken.group.ArmorGroup;
-import com.kqp.awaken.group.ToolGroup;
+import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
+import com.kqp.awaken.item.armor.ArmorSetBonus;
+import com.kqp.awaken.item.armor.AwakenArmorItem;
 import com.kqp.awaken.item.bow.FlameBowItem;
 import com.kqp.awaken.item.bow.StatusEffectBowItem;
-import com.kqp.awaken.item.effect.SetBonusEquippable;
-import com.kqp.awaken.item.effect.SpecialItemRegistry;
 import com.kqp.awaken.item.material.AwakenArmorMaterial;
 import com.kqp.awaken.item.material.AwakenToolMaterial;
 import com.kqp.awaken.item.pickaxe.EscapePlanItem;
@@ -17,7 +15,7 @@ import com.kqp.awaken.item.sword.JangKatanaItem;
 import com.kqp.awaken.item.sword.StatusEffectSwordItem;
 import com.kqp.awaken.item.tool.AwakenAxeItem;
 import com.kqp.awaken.loot.AwakenRarity;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
@@ -29,7 +27,17 @@ public class AwakenItems {
     public static final Item ENDER_DRAGON_SCALE = genericItem();
     public static final Item WITHER_RIB = genericItem();
 
-    public static ArmorGroup WITHER_SCALE_ARMOR;
+    public static final Item DRAGON_SCALE_HELMET = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.HEAD,
+            new ArmorSetBonus("dragon_scale", AwakenEntityAttributes.RANGED_DAMAGE, 0.1F), "Set bonus: 10% extra ranged damage");
+    public static final Item DRAGON_SCALE_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.CHEST, (AwakenArmorItem) DRAGON_SCALE_HELMET);
+    public static final Item DRAGON_SCALE_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.LEGS, (AwakenArmorItem) DRAGON_SCALE_HELMET);
+    public static final Item DRAGON_SCALE_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.FEET, (AwakenArmorItem) DRAGON_SCALE_HELMET);
+
+    public static final Item WITHER_BONE_HELMET = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.HEAD,
+            new ArmorSetBonus("wither_bone", EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.1F), "Set bonus: 10% extra melee damage");
+    public static final Item WITHER_BONE_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.CHEST, (AwakenArmorItem) WITHER_BONE_HELMET);
+    public static final Item WITHER_BONE_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.LEGS, (AwakenArmorItem) WITHER_BONE_HELMET);
+    public static final Item WITHER_BONE_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.FEET, (AwakenArmorItem) WITHER_BONE_HELMET);
 
     public static final Item CINDERED_BOW = new FlameBowItem(4.0D, false).setRarity(AwakenRarity.RARE);
     public static final Item SLIMEY_BOW = new StatusEffectBowItem(3.0D, false, StatusEffects.SLOWNESS, 2 * 20, 1).setRarity(AwakenRarity.RARE);
@@ -49,17 +57,20 @@ public class AwakenItems {
     public static final Item SALVIUM_INGOT = genericItem();
     public static final Item VALERIUM_INGOT = genericItem();
 
-    public static ArmorGroup SALVIUM_ARMOR;
-    public static ArmorGroup VALERIUM_ARMOR;
+    public static Item SALVIUM_HELMET;
+    public static Item SALVIUM_CHESTPLATE;
+    public static Item SALVIUM_LEGGINGS;
+    public static Item SALVIUM_BOOTS;
 
+    public static Item VALERIUM_HELMET;
+    public static Item VALERIUM_CHESTPLATE;
+    public static Item VALERIUM_LEGGINGS;
+    public static Item VALERIUM_BOOTS;
 
     public static final Item CELESTIAL_STEEL_INGOT = genericItem();
 
     public static final Item SUNSTONE_FRAGMENT = genericItem();
     public static final Item MOONSTONE_FRAGMENT = genericItem();
-
-    public static ToolGroup CELESTIAL_STEEL_TOOLS;
-    public static ArmorGroup CELESTIAL_STEEL_ARMOR;
 
 
     // TODO: add unbreakable elytra using post-awakened materials (Dragon Bone Wings)
@@ -89,7 +100,15 @@ public class AwakenItems {
             register(JANG_KATANA, "jang_katana");
 
             // Armor
-            WITHER_SCALE_ARMOR = new ArmorGroup("wither_scale", AwakenArmorMaterial.WITHER_SCALE);
+            register(DRAGON_SCALE_HELMET, "dragon_scale_helmet");
+            register(DRAGON_SCALE_CHESTPLATE, "dragon_scale_chestplate");
+            register(DRAGON_SCALE_LEGGINGS, "dragon_scale_leggings");
+            register(DRAGON_SCALE_BOOTS, "dragon_scale_boots");
+            
+            register(WITHER_BONE_HELMET, "wither_bone_helmet");
+            register(WITHER_BONE_CHESTPLATE, "wither_bone_chestplate");
+            register(WITHER_BONE_LEGGINGS, "wither_bone_leggings");
+            register(WITHER_BONE_BOOTS, "wither_bone_boots");
         }
 
         // Phase 2
@@ -100,15 +119,6 @@ public class AwakenItems {
             register(VALERIUM_INGOT, "valerium_ingot");
 
             // Armor
-            SALVIUM_ARMOR = new ArmorGroup("salvium", AwakenArmorMaterial.SALVIUM, "Set bonus: 15% extra ranged damage");
-            SpecialItemRegistry.addArmor(SALVIUM_ARMOR, new SetBonusEquippable()
-                    .addEntityAttributeModifier(TEntityAttributes.RANGED_DAMAGE, "salvium_set_bonus", 0.15D, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
-            );
-
-            VALERIUM_ARMOR = new ArmorGroup("valerium", AwakenArmorMaterial.VALERIUM, "Set bonus: 15% extra melee damage");
-            SpecialItemRegistry.addArmor(VALERIUM_ARMOR, new SetBonusEquippable()
-                    .addEntityAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, "valerium_set_bonus", 0.15D, EntityAttributeModifier.Operation.MULTIPLY_TOTAL)
-            );
         }
 
         // Phase 3
@@ -117,12 +127,6 @@ public class AwakenItems {
             register(SUNSTONE_FRAGMENT, "sunstone_fragment");
             register(MOONSTONE_FRAGMENT, "moonstone_fragment");
             register(CELESTIAL_STEEL_INGOT, "celestial_steel_ingot");
-
-            // Tools
-            CELESTIAL_STEEL_TOOLS = new ToolGroup("celestial_steel", AwakenToolMaterial.CELESTIAL_STEEL);
-
-            // Armor
-            CELESTIAL_STEEL_ARMOR = new ArmorGroup("celestial_steel", AwakenArmorMaterial.CELESTIAL_STEEL);
         }
     }
 

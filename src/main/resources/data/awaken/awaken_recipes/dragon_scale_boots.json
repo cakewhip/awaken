@@ -2,16 +2,19 @@
   "type": "anvil",
   "recipe": {
     "output": {
-      "item": "awaken:wither_scale_helmet"
+      "item": "awaken:dragon_scale_boots"
     },
     "reagents": [
+      {
+        "item": "minecraft:netherite_ingot"
+      },
       {
         "item": "awaken:ender_dragon_scale",
         "count": 16
       },
       {
-        "item": "awaken:wither_rib",
-        "count": 1
+        "item": "minecraft:obsidian",
+        "count": 16
       }
     ]
   }
