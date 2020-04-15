@@ -9,19 +9,14 @@ import java.util.function.Supplier;
 /**
  * Used to create custom tool materials.
  */
-public enum AwakenToolMaterial implements ToolMaterial {
-    CELESTIAL_STEEL(4, 1000, 10.0F, 10.0F, 18, () -> {
-        return Ingredient.ofItems(AwakenItems.CELESTIAL_STEEL_INGOT);
-    }),
-    PHASE_1_SPECIAL_SWORD(2, 750, 8.0F, 3F, 10, () -> {
-        return Ingredient.ofItems();
-    }),
-    PHASE_1_SPECIAL_TOOL(2, 750, 7.0F, 4F, 10, () -> {
-        return Ingredient.ofItems();
-    }),
-    JANG_KATANA(-1, -1, -1.0F, 14F, -1, () -> {
-        return Ingredient.ofItems();
-    });
+public class AwakenToolMaterial implements ToolMaterial {
+    public static final AwakenToolMaterial CELESTIAL_STEEL = new AwakenToolMaterial(
+            4,
+            1000,
+            10.0F,
+            10.0F,
+            18,
+            () -> Ingredient.ofItems(AwakenItems.CELESTIAL_STEEL_INGOT));
 
     private final int miningLevel;
     private final int itemDurability;
@@ -30,7 +25,7 @@ public enum AwakenToolMaterial implements ToolMaterial {
     private final int enchantability;
     private final Supplier<Ingredient> repairIngredient;
 
-    AwakenToolMaterial(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
+    private AwakenToolMaterial(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
         this.miningLevel = miningLevel;
         this.itemDurability = itemDurability;
         this.miningSpeed = miningSpeed;
@@ -67,5 +62,13 @@ public enum AwakenToolMaterial implements ToolMaterial {
     @Override
     public Ingredient getRepairIngredient() {
         return repairIngredient.get();
+    }
+
+    public static AwakenToolMaterial newSwordMaterial(int itemDurability, float attackDamage, int enchantability) {
+        return new AwakenToolMaterial(-1, itemDurability, 6F, attackDamage, enchantability, () -> Ingredient.EMPTY);
+    }
+
+    public static AwakenToolMaterial newToolMaterial(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability) {
+        return new AwakenToolMaterial(miningLevel, itemDurability, miningSpeed, attackDamage, enchantability, () -> Ingredient.EMPTY);
     }
 }

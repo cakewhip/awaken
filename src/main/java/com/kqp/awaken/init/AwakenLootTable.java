@@ -38,12 +38,12 @@ public class AwakenLootTable {
             addLootEntry("minecraft:entities/ghast", AwakenItems.CINDERED_BOW, 15F / 100F);
             addLootEntry("minecraft:entities/slime", AwakenItems.SLIMEY_BOW, 5F / 100F);
             addLootEntry("minecraft:entities/pillager", AwakenItems.RAIDERS_AXE, 2.5F / 100F);
-            addLootEntry("minecraft:entities/zombie", AwakenItems.ESCAPE_PLAN, 0.1F / 100F);
-            addLootEntry("minecraft:entities/skeleton", AwakenItems.ESCAPE_PLAN, 0.1F / 100F);
-            addLootEntry("minecraft:entities/creeper", AwakenItems.ESCAPE_PLAN, 0.1F / 100F);
-            addLootEntry("minecraft:entities/spider", AwakenItems.ESCAPE_PLAN, 0.1F / 100F);
+            addLootEntry("minecraft:entities/zombie", AwakenItems.ESCAPE_PLAN, 0.5F / 100F);
+            addLootEntry("minecraft:entities/skeleton", AwakenItems.ESCAPE_PLAN, 0.5F / 100F);
+            addLootEntry("minecraft:entities/creeper", AwakenItems.ESCAPE_PLAN, 0.5F / 100F);
+            addLootEntry("minecraft:entities/spider", AwakenItems.ESCAPE_PLAN, 0.5F / 100F);
             addLootEntry("minecraft:entities/husk", AwakenItems.ARCHAEOLOGIST_SPADE, 10F / 100F);
-            addLootEntry("minecraft:entities/cave_spider", AwakenItems.RUSTY_SHANK, 10F / 100F);
+            addLootEntry("minecraft:entities/cave_spider", AwakenItems.RUSTY_SHANK, 5F / 100F);
 
             // Special Swords
             addLootEntry("minecraft:entities/drowned", AwakenItems.ATLANTEAN_SABRE, 1F / 100F);

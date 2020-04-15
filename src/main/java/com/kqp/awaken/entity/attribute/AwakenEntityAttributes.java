@@ -9,4 +9,12 @@ import net.minecraft.entity.attribute.EntityAttribute;
 public class AwakenEntityAttributes {
     public static final EntityAttribute RANGED_DAMAGE =
             new ClampedEntityAttribute("attribute.name.generic.ranged_damage", 2.0D, 0.0D, 2048.0D);
+    public static final EntityAttribute BOW_DAMAGE =
+            new ClampedEntityAttribute("attribute.name.generic.bow_damage", 2.0D, 0.0D, 2048.0D);
+    public static final EntityAttribute CROSSBOW_DAMAGE =
+            new ClampedEntityAttribute("attribute.name.generic.crossbow_damage", 2.0D, 0.0D, 2048.0D);
+    public static final EntityAttribute SWORD_DAMAGE =
+            new ClampedEntityAttribute("attribute.name.generic.sword_damage", 2.0D, 0.0D, 2048.0D);
+    public static final EntityAttribute TRIDENT_DAMAGE =
+            new ClampedEntityAttribute("attribute.name.generic.trident_damage", 2.0D, 0.0D, 2048.0D);
 }

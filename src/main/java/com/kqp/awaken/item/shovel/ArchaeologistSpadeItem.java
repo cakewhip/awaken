@@ -10,6 +10,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ToolMaterial;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
@@ -26,8 +27,8 @@ public class ArchaeologistSpadeItem extends AwakenShovelItem {
             Blocks.SOUL_SAND
     ));
 
-    public ArchaeologistSpadeItem() {
-        super(AwakenToolMaterial.PHASE_1_SPECIAL_TOOL);
+    public ArchaeologistSpadeItem(ToolMaterial toolMaterial) {
+        super(toolMaterial);
     }
 
 

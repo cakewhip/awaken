@@ -5,6 +5,7 @@ import com.kqp.awaken.item.armor.ArmorSetBonus;
 import com.kqp.awaken.item.armor.AwakenArmorItem;
 import com.kqp.awaken.item.bow.FlameBowItem;
 import com.kqp.awaken.item.bow.StatusEffectBowItem;
+import com.kqp.awaken.item.effect.SetBonusEquippable;
 import com.kqp.awaken.item.material.AwakenArmorMaterial;
 import com.kqp.awaken.item.material.AwakenToolMaterial;
 import com.kqp.awaken.item.pickaxe.EscapePlanItem;
@@ -27,45 +28,57 @@ public class AwakenItems {
     public static final Item ENDER_DRAGON_SCALE = genericItem();
     public static final Item WITHER_RIB = genericItem();
 
-    public static final Item DRAGON_SCALE_HELMET = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.HEAD,
-            new ArmorSetBonus("dragon_scale", AwakenEntityAttributes.RANGED_DAMAGE, 0.1F), "Set bonus: 10% extra ranged damage");
-    public static final Item DRAGON_SCALE_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.CHEST, (AwakenArmorItem) DRAGON_SCALE_HELMET);
-    public static final Item DRAGON_SCALE_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.LEGS, (AwakenArmorItem) DRAGON_SCALE_HELMET);
-    public static final Item DRAGON_SCALE_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.FEET, (AwakenArmorItem) DRAGON_SCALE_HELMET);
+    public static final Item DRAGON_SCALE_HELMET = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.HEAD, new SetBonusEquippable()
+            .addEntityAttributeModifier(AwakenEntityAttributes.RANGED_DAMAGE, "dragon_scale_ranged_damage", 0.05F),
+            "Set bonus: 5% extra ranged damage");
+    public static final Item DRAGON_SCALE_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.CHEST);
+    public static final Item DRAGON_SCALE_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.LEGS);
+    public static final Item DRAGON_SCALE_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.FEET);
 
-    public static final Item WITHER_BONE_HELMET = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.HEAD,
-            new ArmorSetBonus("wither_bone", EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.1F), "Set bonus: 10% extra melee damage");
-    public static final Item WITHER_BONE_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.CHEST, (AwakenArmorItem) WITHER_BONE_HELMET);
-    public static final Item WITHER_BONE_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.LEGS, (AwakenArmorItem) WITHER_BONE_HELMET);
-    public static final Item WITHER_BONE_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.FEET, (AwakenArmorItem) WITHER_BONE_HELMET);
+    public static final Item WITHER_BONE_HELMET = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.HEAD, new SetBonusEquippable()
+            .addEntityAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, "wither_bone_damage", 0.05F),
+            "Set bonus: 5% extra melee damage");
+    public static final Item WITHER_BONE_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.CHEST);
+    public static final Item WITHER_BONE_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.LEGS);
+    public static final Item WITHER_BONE_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.FEET);
 
-    public static final Item CINDERED_BOW = new FlameBowItem(4.0D, false).setRarity(AwakenRarity.RARE);
-    public static final Item SLIMEY_BOW = new StatusEffectBowItem(3.0D, false, StatusEffects.SLOWNESS, 2 * 20, 1).setRarity(AwakenRarity.RARE);
-    public static final Item RAIDERS_AXE = new AwakenAxeItem(AwakenToolMaterial.PHASE_1_SPECIAL_TOOL).setRarity(AwakenRarity.UNCOMMON);
-    public static final Item ESCAPE_PLAN = new EscapePlanItem().setRarity(AwakenRarity.UNCOMMON);
-    public static final Item ARCHAEOLOGIST_SPADE = new ArchaeologistSpadeItem().setRarity(AwakenRarity.UNCOMMON);
-    public static final Item RUSTY_SHANK = new StatusEffectSwordItem(AwakenToolMaterial.PHASE_1_SPECIAL_TOOL, StatusEffects.POISON, 8 * 20, 0).setRarity(AwakenRarity.UNCOMMON);
+    public static final Item CINDERED_BOW = new FlameBowItem(5.0D, false).setRarity(AwakenRarity.RARE);
+    public static final Item SLIMEY_BOW = new StatusEffectBowItem(3.0D, false, StatusEffects.SLOWNESS, 2 * 20, 0).setRarity(AwakenRarity.RARE);
+    public static final Item RAIDERS_AXE = new AwakenAxeItem(AwakenToolMaterial.newSwordMaterial(1500, 4F, 5)).setRarity(AwakenRarity.UNCOMMON);
+    public static final Item ESCAPE_PLAN = new EscapePlanItem(AwakenToolMaterial.newToolMaterial(3, 1500, 8F, 1F, 10)).setRarity(AwakenRarity.UNCOMMON);
+    public static final Item ARCHAEOLOGIST_SPADE = new ArchaeologistSpadeItem(AwakenToolMaterial.newToolMaterial(0, 3000, 8F, 3F, 22)).setRarity(AwakenRarity.UNCOMMON);
+    public static final Item RUSTY_SHANK = new StatusEffectSwordItem(AwakenToolMaterial.newSwordMaterial(1000, 3F, 5), StatusEffects.POISON, 8 * 20, 0).setRarity(AwakenRarity.UNCOMMON);
 
-    public static final Item ATLANTEAN_SABRE = new AtlanteanSabreItem().setRarity(AwakenRarity.EPIC);
-    public static final Item ASHEN_BLADE = new StatusEffectSwordItem(AwakenToolMaterial.PHASE_1_SPECIAL_SWORD, StatusEffects.WITHER, 4 * 20, 1).setRarity(AwakenRarity.EPIC);
-    public static final Item GLACIAL_SHARD = new StatusEffectSwordItem(AwakenToolMaterial.PHASE_1_SPECIAL_SWORD, StatusEffects.SLOWNESS, 4 * 20, 1).setRarity(AwakenRarity.EPIC);
-    public static final Item ENDERIAN_CUTLASS = new EnderianCutlassItem().setRarity(AwakenRarity.EPIC);
+    public static final Item ATLANTEAN_SABRE = new AtlanteanSabreItem(AwakenToolMaterial.newSwordMaterial(1500, 5, 10)).setRarity(AwakenRarity.EPIC);
+    public static final Item ASHEN_BLADE = new StatusEffectSwordItem(AwakenToolMaterial.newSwordMaterial(1500, 5, 10), StatusEffects.WITHER, 4 * 20, 0).setRarity(AwakenRarity.EPIC);
+    public static final Item GLACIAL_SHARD = new StatusEffectSwordItem(AwakenToolMaterial.newSwordMaterial(1500, 5, 10), StatusEffects.SLOWNESS, 4 * 20, 0).setRarity(AwakenRarity.EPIC);
+    public static final Item ENDERIAN_CUTLASS = new EnderianCutlassItem(AwakenToolMaterial.newSwordMaterial(1500, 6, 10)).setRarity(AwakenRarity.EPIC);
     public static final Item JANG_KATANA = new JangKatanaItem().setRarity(AwakenRarity.FABLED);
 
 
     public static final Item RAPTOR_CHICKEN_EGG = genericItem();
     public static final Item SALVIUM_INGOT = genericItem();
     public static final Item VALERIUM_INGOT = genericItem();
+    
+    public static final Item SALVIUM_HEADGEAR = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
+            .addEntityAttributeModifier(AwakenEntityAttributes.BOW_DAMAGE, "salvium_bow_damage", 0.08F),
+            "Set bonus: 8% extra bow damage");
+    public static final Item SALVIUM_BERET = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
+            .addEntityAttributeModifier(AwakenEntityAttributes.CROSSBOW_DAMAGE, "salvium_crossbow_damage", 0.08F),
+            "Set bonus: 8% extra crossbow damage");
+    public static final Item SALVIUM_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.CHEST);
+    public static final Item SALVIUM_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.LEGS);
+    public static final Item SALVIUM_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.FEET);
 
-    public static Item SALVIUM_HELMET;
-    public static Item SALVIUM_CHESTPLATE;
-    public static Item SALVIUM_LEGGINGS;
-    public static Item SALVIUM_BOOTS;
-
-    public static Item VALERIUM_HELMET;
-    public static Item VALERIUM_CHESTPLATE;
-    public static Item VALERIUM_LEGGINGS;
-    public static Item VALERIUM_BOOTS;
+    public static final Item VALERIUM_HELMET = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
+            .addEntityAttributeModifier(AwakenEntityAttributes.SWORD_DAMAGE, "valerium_sword_damage", 0.08F),
+            "Set bonus: 8% extra sword damage");
+    public static final Item VALERIUM_MASK = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
+            .addEntityAttributeModifier(AwakenEntityAttributes.TRIDENT_DAMAGE, "valerium_trident_damage", 0.08F),
+            "Set bonus: 8% extra trident damage");
+    public static final Item VALERIUM_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.CHEST);
+    public static final Item VALERIUM_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.LEGS);
+    public static final Item VALERIUM_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.FEET);
 
     public static final Item CELESTIAL_STEEL_INGOT = genericItem();
 
@@ -119,6 +132,17 @@ public class AwakenItems {
             register(VALERIUM_INGOT, "valerium_ingot");
 
             // Armor
+            register(SALVIUM_HEADGEAR, "salvium_headgear");
+            register(SALVIUM_BERET, "salvium_beret");
+            register(SALVIUM_CHESTPLATE, "salvium_chestplate");
+            register(SALVIUM_LEGGINGS, "salvium_leggings");
+            register(SALVIUM_BOOTS, "salvium_boots");
+
+            register(VALERIUM_HELMET, "valerium_helmet");
+            register(VALERIUM_MASK, "valerium_mask");
+            register(VALERIUM_CHESTPLATE, "valerium_chestplate");
+            register(VALERIUM_LEGGINGS, "valerium_leggings");
+            register(VALERIUM_BOOTS, "valerium_boots");
         }
 
         // Phase 3

@@ -10,6 +10,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ToolMaterial;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
@@ -20,8 +21,8 @@ import java.util.List;
  * Class for the escape plan item.
  */
 public class EscapePlanItem extends AwakenPickaxeItem {
-    public EscapePlanItem() {
-        super(AwakenToolMaterial.PHASE_1_SPECIAL_TOOL);
+    public EscapePlanItem(ToolMaterial toolMaterial) {
+        super(toolMaterial);
 
         SpecialItemRegistry.EQUIPPABLE_ITEM.put(this, new EffectAttributeEquippable()
                 .addStatusEffect(StatusEffects.SPEED, 1)

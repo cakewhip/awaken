@@ -23,19 +23,27 @@ public class EffectAttributeEquippable implements Equippable {
         return this;
     }
 
-    public EffectAttributeEquippable addEntityAttributeModifier(EntityAttribute attribute, String name, double amount, EntityAttributeModifier.Operation operation) {
-        attributeModifiers.put(attribute, new EntityAttributeModifier(name, amount, operation));
+    public EffectAttributeEquippable addEntityAttributeModifier(EntityAttribute attribute, String name, double amount) {
+        attributeModifiers.put(attribute, new EntityAttributeModifier(name, amount, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
         return this;
     }
 
     @Override
     public void equip(ItemStack itemStack, PlayerEntity player) {
-        statusEffects.forEach(statusEffect -> player.addStatusEffect(statusEffect));
-        player.getAttributes().addTemporaryModifiers(attributeModifiers);
+        applyEffects(player);
     }
 
     @Override
     public void unEquip(ItemStack itemStack, PlayerEntity player) {
+        removeEffects(player);
+    }
+
+    public void applyEffects(PlayerEntity player) {
+        statusEffects.forEach(statusEffect -> player.addStatusEffect(statusEffect));
+        player.getAttributes().addTemporaryModifiers(attributeModifiers);
+    }
+
+    public void removeEffects(PlayerEntity player) {
         statusEffects.forEach(statusEffect -> player.removeStatusEffect(statusEffect.getEffectType()));
         player.getAttributes().removeModifiers(attributeModifiers);
     }

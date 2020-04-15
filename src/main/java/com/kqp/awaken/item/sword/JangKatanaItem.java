@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class JangKatanaItem extends AwakenSwordItem {
     public JangKatanaItem() {
-        super(AwakenToolMaterial.JANG_KATANA);
+        super(AwakenToolMaterial.newSwordMaterial(1500, 51232, 10));
 
         SpecialItemRegistry.EQUIPPABLE_ITEM.put(this, new EffectAttributeEquippable()
                 .addStatusEffect(StatusEffects.REGENERATION, 1)

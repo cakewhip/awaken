@@ -1,5 +1,6 @@
 package com.kqp.awaken.item.armor;
 
+import com.kqp.awaken.item.effect.EffectAttributeEquippable;
 import com.kqp.awaken.item.effect.SetBonusEquippable;
 import com.kqp.awaken.item.effect.SpecialItemRegistry;
 import jdk.internal.jline.internal.Nullable;
@@ -18,8 +19,6 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class AwakenArmorItem extends ArmorItem {
-    private ArmorSetBonus setBonus;
-
     private String[] customToolTips;
 
     public AwakenArmorItem(ArmorMaterial material, EquipmentSlot slot, String... customToolTips) {
@@ -27,20 +26,10 @@ public class AwakenArmorItem extends ArmorItem {
         this.customToolTips = customToolTips;
     }
 
-    public AwakenArmorItem(ArmorMaterial material, EquipmentSlot slot, AwakenArmorItem otherPiece) {
-        this(material, slot, otherPiece.setBonus, otherPiece.customToolTips);
-}
-
-    public AwakenArmorItem(ArmorMaterial material, EquipmentSlot slot, ArmorSetBonus setBonus, String... customToolTips) {
+    public AwakenArmorItem(ArmorMaterial material, EquipmentSlot slot, EffectAttributeEquippable setBonus, String... customToolTips) {
         this(material, slot, customToolTips);
-        this.setBonus = setBonus;
 
-        SpecialItemRegistry.EQUIPPABLE_ARMOR.put(this, new SetBonusEquippable().addEntityAttributeModifier(
-                setBonus.getAttribute(),
-                setBonus.getSetName() + "_set_bonus",
-                setBonus.getAmount(),
-                EntityAttributeModifier.Operation.MULTIPLY_TOTAL
-        ));
+        SpecialItemRegistry.EQUIPPABLE_ARMOR.put(this, setBonus);
     }
 
     @Override

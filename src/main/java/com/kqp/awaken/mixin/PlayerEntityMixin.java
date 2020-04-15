@@ -1,6 +1,8 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
+import com.kqp.awaken.item.effect.ArmorListener;
+import com.kqp.awaken.item.effect.Equippable;
 import com.kqp.awaken.item.effect.SpecialItemRegistry;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,7 +20,7 @@ import java.util.HashMap;
  * Used to:
  * Apply damage buffs
  * Detect item equips/unequips
- * Add ranged damage attribute
+ * Add custom attributes
  */
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {
@@ -39,6 +41,8 @@ public abstract class PlayerEntityMixin {
                     ItemStack currItemStack = curr.get(i);
                     ItemStack prevItemStack = prev.get(i);
 
+                    // TODO: make this prettier
+
                     if (!ItemStack.areItemsEqual(currItemStack, prevItemStack)) {
                         if (SpecialItemRegistry.EQUIPPABLE_ARMOR.containsKey(prevItemStack.getItem())) {
                             SpecialItemRegistry.EQUIPPABLE_ARMOR.get(prevItemStack.getItem()).unEquip(prevItemStack, player);
@@ -46,6 +50,26 @@ public abstract class PlayerEntityMixin {
 
                         if (SpecialItemRegistry.EQUIPPABLE_ARMOR.containsKey(currItemStack.getItem())) {
                             SpecialItemRegistry.EQUIPPABLE_ARMOR.get(currItemStack.getItem()).equip(currItemStack, player);
+                        }
+
+                        for (int j = 0; j < 4 && j != i; j++) {
+                            ItemStack equipStack = player.inventory.armor.get(i);
+
+                            if (SpecialItemRegistry.EQUIPPABLE_ARMOR.containsKey(prevItemStack.getItem())) {
+                                Equippable equippable = SpecialItemRegistry.EQUIPPABLE_ARMOR.get(prevItemStack.getItem());
+
+                                if (equippable instanceof ArmorListener) {
+                                    ((ArmorListener) equippable).onOtherUnEquip(prevItemStack, player);
+                                }
+                            }
+
+                            if (SpecialItemRegistry.EQUIPPABLE_ARMOR.containsKey(currItemStack.getItem())) {
+                                Equippable equippable = SpecialItemRegistry.EQUIPPABLE_ARMOR.get(currItemStack.getItem());
+
+                                if (equippable instanceof ArmorListener) {
+                                    ((ArmorListener) equippable).onOtherEquip(currItemStack, player);
+                                }
+                            }
                         }
                     }
                 }
@@ -88,5 +112,9 @@ public abstract class PlayerEntityMixin {
     @Inject(method = "createPlayerAttributes", at = @At("RETURN"), cancellable = true)
     private static void addRangedDamageAttribute(CallbackInfoReturnable<DefaultAttributeContainer.Builder> callbackInfoReturnable) {
         callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.RANGED_DAMAGE);
+        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.BOW_DAMAGE);
+        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.CROSSBOW_DAMAGE);
+        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.SWORD_DAMAGE);
+        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.TRIDENT_DAMAGE);
     }
 }
