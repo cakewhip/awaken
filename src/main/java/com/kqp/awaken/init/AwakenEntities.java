@@ -2,6 +2,7 @@ package com.kqp.awaken.init;
 
 import com.kqp.awaken.entity.DireWolfEntity;
 import com.kqp.awaken.entity.RaptorChickenEntity;
+import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityDimensions;
@@ -30,6 +31,8 @@ public class AwakenEntities {
 
     public static void init() {
         Awaken.info("Initializing entities");
+
+        Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "ranged_damage"), AwakenEntityAttributes.RANGED_DAMAGE);
 
         Registry.register(Registry.ITEM, new Identifier(Awaken.MOD_ID, "raptor_chicken_spawn_egg"), new SpawnEggItem(RAPTOR_CHICKEN, 0x9C0202, 0x610000, new Item.Settings().group(ItemGroup.MISC)));
         Registry.register(Registry.ITEM, new Identifier(Awaken.MOD_ID, "dire_wolf_spawn_egg"), new SpawnEggItem(DIRE_WOLF, 0xD6E9FF, 0x97ADCC, new Item.Settings().group(ItemGroup.MISC)));

@@ -3,6 +3,7 @@ package com.kqp.awaken.mixin;
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.util.hit.EntityHitResult;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,10 +19,10 @@ public class PersistentProjectileEntityMixin {
     @Inject(method = "onEntityHit", at = @At("HEAD"))
     public void overrideProjectileDamage(EntityHitResult entityHitResult, CallbackInfo callbackInfo) {
         PersistentProjectileEntity projectileEntity = (PersistentProjectileEntity) (Object) this;
-        if (projectileEntity.getOwner() instanceof LivingEntity) {
-            LivingEntity owner = (LivingEntity) projectileEntity.getOwner();
+        if (projectileEntity.getOwner() instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) projectileEntity.getOwner();
 
-            EntityAttributeInstance attribute = owner.getAttributeInstance(AwakenEntityAttributes.RANGED_DAMAGE);
+            EntityAttributeInstance attribute = player.getAttributeInstance(AwakenEntityAttributes.RANGED_DAMAGE);
 
             if (attribute != null) {
                 attribute.setBaseValue(projectileEntity.getDamage());

@@ -1,6 +1,7 @@
 package com.kqp.awaken.item.effect;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.effect.StatusEffect;

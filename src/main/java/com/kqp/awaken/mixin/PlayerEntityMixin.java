@@ -1,6 +1,8 @@
 package com.kqp.awaken.mixin;
 
+import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import com.kqp.awaken.item.effect.SpecialItemRegistry;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
@@ -8,6 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.HashMap;
 
@@ -15,6 +18,7 @@ import java.util.HashMap;
  * Used to:
  * Apply damage buffs
  * Detect item equips/unequips
+ * Add ranged damage attribute
  */
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {
@@ -79,5 +83,10 @@ public abstract class PlayerEntityMixin {
 
             PLAYER_HELD_TRACKER.put(player, curr.copy());
         }
+    }
+
+    @Inject(method = "createPlayerAttributes", at = @At("RETURN"), cancellable = true)
+    private static void addRangedDamageAttribute(CallbackInfoReturnable<DefaultAttributeContainer.Builder> callbackInfoReturnable) {
+        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.RANGED_DAMAGE);
     }
 }
