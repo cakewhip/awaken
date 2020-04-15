@@ -17,7 +17,8 @@
     "ClampedEntityAttributeMixin",
     "PlayerEntityMixin",
     "ProjectileEntityMixin",
-    "ChunkSerializerMixin"
+    "ChunkSerializerMixin",
+    "SmithingScreenHandlerMixin"
   ],
   "client": [
     "InventoryScreenMixin",

@@ -9,6 +9,11 @@ import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.util.TimeUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeManager;
+import net.minecraft.recipe.ShapedRecipe;
+import net.minecraft.recipe.ShapelessRecipe;
 import net.minecraft.resource.JsonDataLoader;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
@@ -16,8 +21,11 @@ import net.minecraft.util.profiler.Profiler;
 import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Loads Awaken recipes from JSON files.
@@ -88,5 +96,56 @@ public class AwakenRecipeLoader extends JsonDataLoader {
                 },
                 time -> Awaken.info("Loading of Awaken recipes took " + time + "ms")
         );
+    }
+
+    /**
+     * Converts vanilla recipes to Awaken recipes.
+     *
+     * @param recipeManager The vanilla recipe manager
+     */
+    public static void addVanillaRecipes(RecipeManager recipeManager) {
+        AwakenRecipeManager.clear();
+
+        List<Recipe> recipes = recipeManager.keys()
+                .map(recipeManager::get)
+                .filter(optionalRecipe -> optionalRecipe.isPresent())
+                .map(optionalRecipe -> optionalRecipe.get())
+                .collect(Collectors.toList());
+
+        for (Recipe recipe : recipes) {
+            if (recipe instanceof ShapedRecipe || recipe instanceof ShapelessRecipe) {
+                List<Ingredient> ingredientList = recipe.getPreviewInputs();
+                HashMap<Reagent, Integer> reagents = new HashMap();
+
+                for (Ingredient ingredient : ingredientList) {
+                    if (!ingredient.isEmpty()) {
+                        Reagent reagent = new Reagent(Arrays.asList(ingredient.getMatchingStacksClient()));
+                        int currentCount = reagents.getOrDefault(reagent, 0);
+
+                        reagents.put(reagent, currentCount + 1);
+                    }
+                }
+
+                if (reagents.isEmpty()) {
+                    Awaken.warn("Recipe for " + recipe.getOutput() + " has no reagents, ignoring");
+                } else if (recipe.getOutput() == null) {
+                    Awaken.warn("Output not found for vanilla recipe, ignoring");
+                } else {
+                    boolean twoByTwo = false;
+
+                    if (recipe instanceof ShapedRecipe) {
+                        twoByTwo = ((ShapedRecipe) recipe).getWidth() <= 2 && ((ShapedRecipe) recipe).getHeight() <= 2;
+                    } else if (recipe instanceof ShapelessRecipe) {
+                        twoByTwo = reagents.keySet().size() <= 4;
+                    }
+
+                    AwakenRecipeManager.addRecipe(
+                            twoByTwo ? RecipeType.TWO_BY_TWO : RecipeType.CRAFTING_TABLE,
+                            recipe.getOutput(),
+                            reagents
+                    );
+                }
+            }
+        }
     }
 }
