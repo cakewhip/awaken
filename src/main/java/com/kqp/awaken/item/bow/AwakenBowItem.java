@@ -1,5 +1,6 @@
-package com.kqp.awaken.item.tool;
+package com.kqp.awaken.item.bow;
 
+import com.kqp.awaken.entity.attribute.RangedWeaponProjectile;
 import com.kqp.awaken.loot.AwakenRarity;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
@@ -73,6 +74,8 @@ public abstract class AwakenBowItem extends BowItem {
                         if (infinity || playerEntity.abilities.creativeMode) {
                             projectileEntity.pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
                         }
+
+                        ((RangedWeaponProjectile) projectileEntity).setType(RangedWeaponProjectile.Type.BOW);
 
                         world.spawnEntity(projectileEntity);
                     }

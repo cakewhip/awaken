@@ -18,7 +18,10 @@
     "PlayerEntityMixin",
     "PersistentProjectileEntityMixin",
     "ChunkSerializerMixin",
-    "SmithingScreenHandlerMixin"
+    "SmithingScreenHandlerMixin",
+    "TridentEntityMixin",
+    "BowItemMixin",
+    "CrossbowItemMixin"
   ],
   "client": [
     "InventoryScreenMixin",

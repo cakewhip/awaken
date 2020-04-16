@@ -1,6 +1,5 @@
 package com.kqp.awaken.item.bow;
 
-import com.kqp.awaken.item.tool.AwakenBowItem;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

@@ -1,6 +1,5 @@
 package com.kqp.awaken.item.bow;
 
-import com.kqp.awaken.item.tool.AwakenBowItem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
