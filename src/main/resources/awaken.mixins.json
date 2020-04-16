@@ -7,7 +7,6 @@
     "LivingEntityMixin",
     "RaidMixin",
     "MinecraftServerMixin",
-    "ServerWorldMixin",
     "WorldChunkMixin",
     "RecipeManagerMixin",
     "ZombieEntityMixin",
@@ -22,7 +21,8 @@
     "TridentEntityMixin",
     "BowItemMixin",
     "CrossbowItemMixin",
-    "ArmorFeatureRendererMixin"
+    "ArmorFeatureRendererMixin",
+    "LevelPropertiesMixin"
   ],
   "client": [
     "InventoryScreenMixin",

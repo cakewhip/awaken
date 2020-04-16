@@ -1,15 +1,11 @@
 package com.kqp.awaken.data;
 
-import com.kqp.awaken.data.trigger.Trigger;
 import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.util.Broadcaster;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Tickable;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Data class used to hold world data related to Awaken.
@@ -54,41 +50,21 @@ public class AwakenWorldData {
      */
     private long bloodMoonTickTime = 0;
 
-    /**
-     * List of active triggers in the world.
-     * See {@link Trigger} for more info.
-     */
-    public List<Trigger> triggers = new ArrayList();
-
-    /**
-     * Whether the world properties have been changed.
-     * Used to trigger stage evaluations (see {@link AwakenProgression#evaluateStage()}).
-     */
-    private boolean dirty = false;
+    public AwakenWorldData(CompoundTag tag) {
+        postDragon = tag.getBoolean("PostDragon");
+        postWither = tag.getBoolean("PostWither");
+        postRaid = tag.getBoolean("PostRaid");
+        postElderGuardian = tag.getBoolean("PostElderGuardian");
+        worldAwakened = tag.getBoolean("WorldAwakened");
+        bloodMoonActive = tag.getBoolean("BloodMoonActive");
+        bloodMoonTickTime = tag.getLong("BloodMoonTickTime");
+    }
 
     /**
      * Called on every tick using {@link net.fabricmc.fabric.api.event.world.WorldTickCallback}.
      */
     public void tick() {
-        for (int i = 0; i < triggers.size(); i++) {
-            Trigger trigger = triggers.get(i);
-
-            if (trigger instanceof Tickable) {
-                ((Tickable) trigger).tick();
-            }
-
-            if (trigger.remove) {
-                triggers.remove(i);
-                i--;
-            }
-        }
-
         tickBloodMoon();
-
-        if (dirty) {
-            AwakenProgression.evaluateStage();
-            dirty = false;
-        }
     }
 
     /**
@@ -129,17 +105,12 @@ public class AwakenWorldData {
         bloodMoonActive = false;
     }
 
-    public void markDirty() {
-        dirty = true;
-    }
-
     public boolean isPostDragon() {
         return postDragon;
     }
 
     public void setPostDragon() {
         this.postDragon = true;
-        markDirty();
     }
 
     public boolean isPostWither() {
@@ -148,7 +119,6 @@ public class AwakenWorldData {
 
     public void setPostWither() {
         this.postWither = true;
-        markDirty();
     }
 
     public boolean isPostRaid() {
@@ -157,7 +127,6 @@ public class AwakenWorldData {
 
     public void setPostRaid() {
         this.postRaid = true;
-        markDirty();
     }
 
     public boolean isPostElderGuardian() {
@@ -166,7 +135,6 @@ public class AwakenWorldData {
 
     public void setPostElderGuardian() {
         this.postElderGuardian = true;
-        markDirty();
     }
 
     public boolean isWorldAwakened() {
@@ -179,5 +147,15 @@ public class AwakenWorldData {
 
     public boolean isBloodMoonActive() {
         return bloodMoonActive;
+    }
+
+    public void writeToTag(CompoundTag tag) {
+        tag.putBoolean("PostDragon", postDragon);
+        tag.putBoolean("PostWither", postWither);
+        tag.putBoolean("PostRaid", postRaid);
+        tag.putBoolean("PostElderGuardian", postElderGuardian);
+        tag.putBoolean("WorldAwakened", worldAwakened);
+        tag.putBoolean("BloodMoonActive", bloodMoonActive);
+        tag.putLong("BloodMoonTickTime", bloodMoonTickTime);
     }
 }
