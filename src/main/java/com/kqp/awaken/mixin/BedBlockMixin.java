@@ -32,7 +32,6 @@ public class BedBlockMixin {
                         && awakenLevelData.isPostWither()
                         && awakenLevelData.isPostElderGuardian()) {
                     awakenLevelData.setAwakening();
-                    System.out.println("AWAKENING");
 
                     callbackInfoReturnable.setReturnValue(ActionResult.SUCCESS);
 

@@ -18,13 +18,11 @@ public class GameJoinS2CPacketMixin implements AwakenLevelDataTagContainer {
 
     @Inject(method = "read", at = @At("TAIL"))
     private void readPacket(PacketByteBuf buf, CallbackInfo callbackInfo) {
-        System.out.println("Reading level data from server");
         awakenLevelDataTag = buf.readCompoundTag();
     }
 
     @Inject(method = "write", at = @At("TAIL"))
     private void writePacket(PacketByteBuf buf, CallbackInfo callbackInfo) {
-        System.out.println("Writing level data to send to client");
         buf.writeCompoundTag(awakenLevelDataTag);
     }
 

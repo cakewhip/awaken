@@ -20,7 +20,6 @@ public class ClientPlayNetworkHandlerMixin {
 
     @Inject(method = "onGameJoin", at = @At("TAIL"))
     private void receiveAwakenClientLevelData(GameJoinS2CPacket packet, CallbackInfo callbackInfo) {
-        System.out.println("Setting level data from packet");
         CompoundTag awakenLevelDataTag = ((AwakenLevelDataTagContainer) packet).getAwakenLevelDataTag();
         AwakenLevelData awakenLevelData = new AwakenLevelData(awakenLevelDataTag);
 

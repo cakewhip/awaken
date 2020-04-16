@@ -16,7 +16,6 @@ public class PlayerManagerMixin {
     @Redirect(method = "onPlayerConnect", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;sendPacket(Lnet/minecraft/network/Packet;)V"))
     public void fillAwakenLevelData(ServerPlayNetworkHandler networkHandler, Packet<?> packet) {
         if (packet instanceof GameJoinS2CPacket) {
-            System.out.println("Filling Awaken level data");
             CompoundTag awakenLevelDataTag = new CompoundTag();
             ((AwakenLevelDataContainer) networkHandler.player.world.getLevelProperties()).getAwakenLevelData().writeToTag(awakenLevelDataTag);
 

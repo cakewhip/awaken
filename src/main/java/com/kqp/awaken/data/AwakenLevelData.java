@@ -182,8 +182,6 @@ public class AwakenLevelData {
     }
 
     public void syncToClients(MinecraftServer server) {
-        Awaken.info("Syncing to clients");
-
         CompoundTag awakenLevelDataTag = new CompoundTag();
         this.writeToTag(awakenLevelDataTag);
 
