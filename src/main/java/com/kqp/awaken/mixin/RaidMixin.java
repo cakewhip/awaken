@@ -1,6 +1,7 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.init.Awaken;
+import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.util.Broadcaster;
 import net.minecraft.entity.raid.Raid;
 import net.minecraft.util.Formatting;
@@ -19,11 +20,11 @@ public abstract class RaidMixin {
     public void tick(CallbackInfo callbackInfo) {
         Raid raid = (Raid) (Object) this;
         World world = raid.getWorld();
+        AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) world.getLevelProperties()).getAwakenLevelData();
 
-        if (!world.isClient && raid.hasWon() && !Awaken.worldProperties.isPostRaid()) {
-            Broadcaster broadcaster = new Broadcaster();
-            Awaken.worldProperties.setPostRaid();
-            Broadcaster.broadcastMessage("A distant figure fades into the shadows...", Formatting.DARK_RED, false, true);
+        if (!world.isClient && raid.hasWon() && !awakenLevelData.isPostRaid()) {
+            awakenLevelData.setPostRaid();
+            Broadcaster.broadcastMessage(world.getServer(), "A distant figure fades into the shadows...", Formatting.DARK_RED, false, true);
         }
     }
 }

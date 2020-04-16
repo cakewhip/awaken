@@ -1,6 +1,5 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.recipe.AwakenRecipeLoader;
 import net.minecraft.resource.ReloadableResourceManager;
 import net.minecraft.server.MinecraftServer;
@@ -16,9 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Used to:
- * Grab the server instance.
- * Register the Awaken recipe loader.
+ * Used to register the Awaken recipe loader.
  */
 @Mixin(MinecraftServer.class)
 public abstract class MinecraftServerMixin extends ReentrantThreadExecutor<ServerTask> implements SnooperListener, CommandOutput, AutoCloseable, Runnable {
@@ -32,10 +29,6 @@ public abstract class MinecraftServerMixin extends ReentrantThreadExecutor<Serve
 
     @Inject(at = @At("RETURN"), method = "<init>*")
     public void construct(CallbackInfo callbackInfo) {
-        MinecraftServer server = (MinecraftServer) (Object) this;
-
-        Awaken.server = server;
-
         dataManager.registerListener(new AwakenRecipeLoader());
     }
 }

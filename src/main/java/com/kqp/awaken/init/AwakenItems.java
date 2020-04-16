@@ -1,7 +1,6 @@
 package com.kqp.awaken.init;
 
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
-import com.kqp.awaken.item.armor.ArmorSetBonus;
 import com.kqp.awaken.item.armor.AwakenArmorItem;
 import com.kqp.awaken.item.bow.FlameBowItem;
 import com.kqp.awaken.item.bow.StatusEffectBowItem;
@@ -59,14 +58,14 @@ public class AwakenItems {
     public static final Item RAPTOR_CHICKEN_EGG = genericItem();
     public static final Item SALVIUM_INGOT = genericItem();
     public static final Item VALERIUM_INGOT = genericItem();
-    
+
     public static final Item SALVIUM_HEADGEAR = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
             .addEntityAttributeModifier(AwakenEntityAttributes.BOW_DAMAGE, "salvium_bow_damage", 0.08F))
             .addToolTip("Set bonus: 8% extra bow damage");
     public static final Item SALVIUM_BERET = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
             .addEntityAttributeModifier(AwakenEntityAttributes.CROSSBOW_DAMAGE, "salvium_crossbow_damage", 0.08F))
             .addToolTip("Set bonus: 8% extra crossbow damage")
-            .setCustomTextureLayer("beret");;
+            .setCustomTextureLayer("beret");
     public static final Item SALVIUM_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.CHEST);
     public static final Item SALVIUM_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.LEGS);
     public static final Item SALVIUM_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.FEET);
@@ -119,7 +118,7 @@ public class AwakenItems {
             register(DRAGON_SCALE_CHESTPLATE, "dragon_scale_chestplate");
             register(DRAGON_SCALE_LEGGINGS, "dragon_scale_leggings");
             register(DRAGON_SCALE_BOOTS, "dragon_scale_boots");
-            
+
             register(WITHER_BONE_HELMET, "wither_bone_helmet");
             register(WITHER_BONE_CHESTPLATE, "wither_bone_chestplate");
             register(WITHER_BONE_LEGGINGS, "wither_bone_leggings");

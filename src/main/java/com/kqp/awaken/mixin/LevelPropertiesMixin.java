@@ -1,8 +1,7 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.data.AwakenWorldData;
-import com.kqp.awaken.data.AwakenWorldDataProvider;
-import com.kqp.awaken.init.Awaken;
+import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.mojang.datafixers.DataFixer;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.nbt.CompoundTag;
@@ -15,25 +14,30 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LevelProperties.class)
-@Implements(@Interface(iface = AwakenWorldDataProvider.class, prefix = "vw$"))
-public class LevelPropertiesMixin implements AwakenWorldDataProvider {
-    private AwakenWorldData awakenWorldData;
+@Implements(@Interface(iface = AwakenLevelDataContainer.class, prefix = "vw$"))
+public class LevelPropertiesMixin implements AwakenLevelDataContainer {
+    private AwakenLevelData awakenLevelData = new AwakenLevelData();
 
     @Inject(method = "<init>(Lnet/minecraft/nbt/CompoundTag;Lcom/mojang/datafixers/DataFixer;ILnet/minecraft/nbt/CompoundTag;)V", at = @At("RETURN"))
     private void loadAwakenData(CompoundTag tag, DataFixer dataFixer, int dataVersion, @Nullable CompoundTag playerData, CallbackInfo callbackInfo) {
-        CompoundTag awakenWorldDataTag = tag.getCompound("AwakenWorldData");
-        awakenWorldData = new AwakenWorldData(awakenWorldDataTag);
+        CompoundTag awakenWorldDataTag = tag.getCompound("AwakenLevelData");
+        awakenLevelData = new AwakenLevelData(awakenWorldDataTag);
     }
 
     @Inject(method = "updateProperties", at = @At("TAIL"))
     private void writeAwakenData(CompoundTag levelTag, CompoundTag playerTag, CallbackInfo callbackInfo) {
         CompoundTag awakenWorldDataTag = new CompoundTag();
-        awakenWorldData.writeToTag(awakenWorldDataTag);
-        levelTag.put("AwakenWorldData", awakenWorldDataTag);
+        awakenLevelData.writeToTag(awakenWorldDataTag);
+        levelTag.put("AwakenLevelData", awakenWorldDataTag);
     }
 
     @Override
-    public AwakenWorldData getAwakenWorldData() {
-        return awakenWorldData;
+    public AwakenLevelData getAwakenLevelData() {
+        return awakenLevelData;
+    }
+
+    @Override
+    public void setAwakenServerLevelData(AwakenLevelData awakenLevelData) {
+        this.awakenLevelData = awakenLevelData;
     }
 }

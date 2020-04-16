@@ -1,7 +1,8 @@
 package com.kqp.awaken.mixin;
 
+import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
-import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.util.EntityAttributeUtil;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
@@ -29,13 +30,17 @@ public abstract class AbstractSkeletonEntityMixin {
 
     @Inject(method = "<init>*", at = @At("RETURN"))
     private void addAwakenBuffs(CallbackInfo callbackInfo) {
-        if (Awaken.worldProperties.isWorldAwakened() && ((Object) this) instanceof SkeletonEntity) {
+        if (((Object) this) instanceof SkeletonEntity) {
             SkeletonEntity skeleton = (SkeletonEntity) (Object) this;
 
-            AWAKENED_MODS.apply(skeleton, true);
+            AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) skeleton.world.getLevelProperties()).getAwakenLevelData();
 
-            if (Awaken.worldProperties.isBloodMoonActive()) {
-                BLOOD_MOON_MODS.apply(skeleton, true);
+            if (awakenLevelData.isWorldAwakened()) {
+                AWAKENED_MODS.apply(skeleton, true);
+
+                if (awakenLevelData.isBloodMoonActive()) {
+                    BLOOD_MOON_MODS.apply(skeleton, true);
+                }
             }
         }
     }

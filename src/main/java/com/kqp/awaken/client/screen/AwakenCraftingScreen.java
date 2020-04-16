@@ -3,13 +3,12 @@ package com.kqp.awaken.client.screen;
 import com.kqp.awaken.client.slot.AwakenCraftingResultSlot;
 import com.kqp.awaken.client.slot.AwakenLookUpResultSlot;
 import com.kqp.awaken.init.Awaken;
-import com.kqp.awaken.init.AwakenServerNetworking;
+import com.kqp.awaken.init.AwakenNetworking;
 import com.kqp.awaken.recipe.AwakenRecipe;
 import com.kqp.awaken.recipe.AwakenRecipeManager;
 import com.kqp.awaken.recipe.Reagent;
 import com.kqp.awaken.recipe.RecipeType;
 import com.kqp.awaken.util.MouseUtil;
-import com.kqp.awaken.util.StringUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
@@ -213,7 +212,7 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
                     buf.writeDouble(MouseUtil.getMouseX());
                     buf.writeDouble(MouseUtil.getMouseY());
 
-                    ClientSidePacketRegistry.INSTANCE.sendToServer(AwakenServerNetworking.CLOSE_CRAFTING_C2S_ID, buf);
+                    ClientSidePacketRegistry.INSTANCE.sendToServer(AwakenNetworking.CLOSE_CRAFTING_C2S_ID, buf);
                 }
             }
         }
@@ -236,7 +235,7 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeFloat(outputScrollPosition);
 
-        ClientSidePacketRegistry.INSTANCE.sendToServer(AwakenServerNetworking.SYNC_CRAFTING_SCROLLBAR_ID, buf);
+        ClientSidePacketRegistry.INSTANCE.sendToServer(AwakenNetworking.SYNC_CRAFTING_SCROLLBAR_ID, buf);
     }
 
 
@@ -247,6 +246,6 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeFloat(lookUpScrollPosition);
 
-        ClientSidePacketRegistry.INSTANCE.sendToServer(AwakenServerNetworking.SYNC_LOOK_UP_SCROLLBAR_ID, buf);
+        ClientSidePacketRegistry.INSTANCE.sendToServer(AwakenNetworking.SYNC_LOOK_UP_SCROLLBAR_ID, buf);
     }
 }

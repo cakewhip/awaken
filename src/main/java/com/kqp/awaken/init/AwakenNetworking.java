@@ -7,7 +7,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
-public class AwakenServerNetworking {
+public class AwakenNetworking {
     // TODO: move C2S IDs to client entry point
     // TODO: label directions on variables (see open/close crafting IDs)
     public static final Identifier SYNC_CRAFTING_SCROLLBAR_ID = new Identifier(Awaken.MOD_ID, "sync_crafting_scrollbar");
@@ -22,6 +22,8 @@ public class AwakenServerNetworking {
     public static final Identifier OPEN_CRAFTING_S2C_ID = new Identifier(Awaken.MOD_ID, "open_crafting_s2c");
     public static final Identifier CLOSE_CRAFTING_C2S_ID = new Identifier(Awaken.MOD_ID, "close_crafting_c2s");
     public static final Identifier CLOSE_CRAFTING_S2C_ID = new Identifier(Awaken.MOD_ID, "close_crafting_s2c");
+
+    public static final Identifier SYNC_LEVEL_DATA_S2C_ID = new Identifier(Awaken.MOD_ID, "sync_level_data_s2c");
 
     public static void init() {
         Awaken.info("Initializing networking");

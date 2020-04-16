@@ -1,9 +1,7 @@
 package com.kqp.awaken.init;
 
-import com.kqp.awaken.data.AwakenWorldData;
 import com.kqp.awaken.util.TimeUtil;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.server.MinecraftServer;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,9 +15,6 @@ public class Awaken implements ModInitializer {
     public static final String MOD_ID = "awaken";
     public static final String MOD_NAME = "Awaken";
 
-    public static AwakenWorldData worldProperties;
-    public static MinecraftServer server;
-
     @Override
     public void onInitialize() {
         info("Initializing Awaken");
@@ -28,7 +23,7 @@ public class Awaken implements ModInitializer {
             AwakenBlocks.init();
             AwakenItems.init();
             AwakenEntities.init();
-            AwakenServerNetworking.init();
+            AwakenNetworking.init();
             AwakenLootTable.init();
             AwakenCallbacks.init();
         }, (time) -> Awaken.info("Awaken took " + time + "ms to load"));

@@ -1,20 +1,22 @@
 package com.kqp.awaken.data;
 
 import com.kqp.awaken.init.Awaken;
+import com.kqp.awaken.init.AwakenNetworking;
 import com.kqp.awaken.util.Broadcaster;
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 
 /**
  * Data class used to hold world data related to Awaken.
- * <p>
- * TODO: redo events so that triggers live inside the event
  */
-public class AwakenWorldData {
-    public static final String FILE_NAME = "awaken.json";
-
+public class AwakenLevelData {
     /**
      * If the ender dragon has been killed.
      */
@@ -50,7 +52,12 @@ public class AwakenWorldData {
      */
     private long bloodMoonTickTime = 0;
 
-    public AwakenWorldData(CompoundTag tag) {
+    /**
+     * Whether level data should be sent to clients.
+     */
+    private boolean dirty = false;
+
+    public AwakenLevelData(CompoundTag tag) {
         postDragon = tag.getBoolean("PostDragon");
         postWither = tag.getBoolean("PostWither");
         postRaid = tag.getBoolean("PostRaid");
@@ -60,49 +67,57 @@ public class AwakenWorldData {
         bloodMoonTickTime = tag.getLong("BloodMoonTickTime");
     }
 
+    public AwakenLevelData() {
+    }
+
     /**
      * Called on every tick using {@link net.fabricmc.fabric.api.event.world.WorldTickCallback}.
      */
-    public void tick() {
-        tickBloodMoon();
+    public void tick(MinecraftServer server) {
+        tickBloodMoon(server);
+
+        if (this.dirty) {
+            this.syncToClients(server);
+            this.dirty = false;
+        }
     }
 
     /**
      * Updates stuff for blood moon handling.
      */
-    public void tickBloodMoon() {
-        World world = Awaken.server.getWorld(DimensionType.OVERWORLD);
+    public void tickBloodMoon(MinecraftServer server) {
+        World world = server.getWorld(DimensionType.OVERWORLD);
         long time = world.getTimeOfDay() % 24000;
 
-        if (bloodMoonActive) {
+        if (this.bloodMoonActive) {
             if (time < AwakenConfig.NIGHT_START || time >= AwakenConfig.NIGHT_END) {
                 // Not night and blood moon active, end it
-
                 endBloodMoon();
                 return;
             }
 
-            bloodMoonTickTime++;
+            this.bloodMoonTickTime++;
         } else if (time == AwakenConfig.NIGHT_START) {
             // Moon is rising, roll blood moon chance
 
             if (isWorldAwakened() && world.random.nextFloat() < AwakenConfig.BLOOD_MOON_CHANCE) {
-                startBloodMoon();
+                startBloodMoon(server);
             }
         }
     }
 
-    private void startBloodMoon() {
-        Awaken.info("Starting blood moon");
-        bloodMoonActive = true;
-        bloodMoonTickTime = 0;
+    private void startBloodMoon(MinecraftServer server) {
+        this.bloodMoonActive = true;
+        this.bloodMoonTickTime = 0;
+        markDirty();
 
-        Broadcaster.broadcastMessage("The blood moon rises...", Formatting.DARK_RED, true, false);
+        Broadcaster.broadcastMessage(server, "The blood moon rises...", Formatting.DARK_RED, true, false);
     }
 
     private void endBloodMoon() {
         Awaken.info("Ending blood moon");
-        bloodMoonActive = false;
+        this.bloodMoonActive = false;
+        markDirty();
     }
 
     public boolean isPostDragon() {
@@ -142,11 +157,18 @@ public class AwakenWorldData {
     }
 
     public void setAwakening() {
-        this.worldAwakened = true;
+        if (!this.worldAwakened) {
+            this.worldAwakened = true;
+            markDirty();
+        }
     }
 
     public boolean isBloodMoonActive() {
         return bloodMoonActive;
+    }
+
+    public void markDirty() {
+        this.dirty = true;
     }
 
     public void writeToTag(CompoundTag tag) {
@@ -157,5 +179,19 @@ public class AwakenWorldData {
         tag.putBoolean("WorldAwakened", worldAwakened);
         tag.putBoolean("BloodMoonActive", bloodMoonActive);
         tag.putLong("BloodMoonTickTime", bloodMoonTickTime);
+    }
+
+    public void syncToClients(MinecraftServer server) {
+        Awaken.info("Syncing to clients");
+
+        CompoundTag awakenLevelDataTag = new CompoundTag();
+        this.writeToTag(awakenLevelDataTag);
+
+        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+        buf.writeCompoundTag(awakenLevelDataTag);
+
+        for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
+            ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, AwakenNetworking.SYNC_LEVEL_DATA_S2C_ID, buf);
+        }
     }
 }

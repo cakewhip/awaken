@@ -4,7 +4,8 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
-import com.kqp.awaken.init.Awaken;
+import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.data.AwakenLevelDataContainer;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameter;
@@ -24,7 +25,9 @@ public class BloodMoonLootCondition implements LootCondition {
     }
 
     public boolean test(LootContext lootContext) {
-        return Awaken.worldProperties.isBloodMoonActive();
+        AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) lootContext.getWorld().getLevelProperties()).getAwakenLevelData();
+
+        return awakenLevelData.isBloodMoonActive();
     }
 
     public static LootCondition.Builder builder() {

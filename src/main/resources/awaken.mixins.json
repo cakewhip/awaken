@@ -3,7 +3,6 @@
   "package": "com.kqp.awaken.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "WorldSaveHandlerMixin",
     "LivingEntityMixin",
     "RaidMixin",
     "MinecraftServerMixin",
@@ -22,7 +21,11 @@
     "BowItemMixin",
     "CrossbowItemMixin",
     "ArmorFeatureRendererMixin",
-    "LevelPropertiesMixin"
+    "LevelPropertiesMixin",
+    "GameJoinS2CPacketMixin",
+    "ClientPlayNetworkHandlerMixin",
+    "PlayerManagerMixin",
+    "BedBlockMixin"
   ],
   "client": [
     "InventoryScreenMixin",

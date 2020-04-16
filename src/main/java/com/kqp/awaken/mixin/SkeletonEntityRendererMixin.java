@@ -1,6 +1,9 @@
 package com.kqp.awaken.mixin;
 
+import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.init.Awaken;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.entity.SkeletonEntityRenderer;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.util.Identifier;
@@ -18,7 +21,9 @@ public class SkeletonEntityRendererMixin {
 
     @Inject(at = @At("HEAD"), method = "getTexture", cancellable = true)
     private void overrideTextureForBloodMoon(AbstractSkeletonEntity abstractSkeletonEntity, CallbackInfoReturnable<Identifier> callbackInfo) {
-        if (Awaken.worldProperties.isBloodMoonActive()) {
+        AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) MinecraftClient.getInstance().world.getLevelProperties()).getAwakenLevelData();
+
+        if (awakenLevelData.isBloodMoonActive()) {
             callbackInfo.setReturnValue(BLOOD_MOON_TEXTURE);
         }
     }

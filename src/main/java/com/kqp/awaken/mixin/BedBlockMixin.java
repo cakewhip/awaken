@@ -1,6 +1,7 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.init.Awaken;
+import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.util.Broadcaster;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
@@ -23,17 +24,20 @@ public class BedBlockMixin {
     private void triggerAwakening(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> callbackInfoReturnable) {
         if (!world.isClient) {
             if (world.getDimension().getType() == DimensionType.THE_END) {
-                if (!Awaken.worldProperties.isWorldAwakened()
-                        && Awaken.worldProperties.isPostRaid()
-                        && Awaken.worldProperties.isPostDragon()
-                        && Awaken.worldProperties.isPostWither()
-                        && Awaken.worldProperties.isPostElderGuardian()) {
-                    Awaken.worldProperties.setAwakening();
+                AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) world.getLevelProperties()).getAwakenLevelData();
+
+                if (!awakenLevelData.isWorldAwakened()
+                        && awakenLevelData.isPostRaid()
+                        && awakenLevelData.isPostDragon()
+                        && awakenLevelData.isPostWither()
+                        && awakenLevelData.isPostElderGuardian()) {
+                    awakenLevelData.setAwakening();
+                    System.out.println("AWAKENING");
 
                     callbackInfoReturnable.setReturnValue(ActionResult.SUCCESS);
 
                     player.changeDimension(DimensionType.OVERWORLD);
-                    Broadcaster.broadcastMessage("New ores have generated!", Formatting.LIGHT_PURPLE, false, true);
+                    Broadcaster.broadcastMessage(world.getServer(), "New ores have generated!", Formatting.LIGHT_PURPLE, false, true);
                 }
             }
         }

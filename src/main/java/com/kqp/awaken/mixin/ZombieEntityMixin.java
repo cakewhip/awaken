@@ -1,6 +1,7 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.init.Awaken;
+import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.util.EntityAttributeUtil;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.ZombieEntity;
@@ -27,12 +28,13 @@ public abstract class ZombieEntityMixin {
 
     @Inject(method = "<init>*", at = @At("RETURN"))
     private void addAwakenBuffs(CallbackInfo callbackInfo) {
-        if (Awaken.worldProperties.isWorldAwakened()) {
-            ZombieEntity zombie = (ZombieEntity) (Object) this;
+        ZombieEntity zombie = (ZombieEntity) (Object) this;
+        AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) zombie.world.getLevelProperties()).getAwakenLevelData();
 
+        if (awakenLevelData.isWorldAwakened()) {
             AWAKENED_MODS.apply(zombie, true);
 
-            if (Awaken.worldProperties.isBloodMoonActive()) {
+            if (awakenLevelData.isBloodMoonActive()) {
                 BLOOD_MOON_MODS.apply(zombie, true);
             }
         }

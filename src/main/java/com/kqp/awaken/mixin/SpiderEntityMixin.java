@@ -1,6 +1,7 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.init.Awaken;
+import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.util.EntityAttributeUtil;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.entity.EntityData;
@@ -36,22 +37,26 @@ public abstract class SpiderEntityMixin {
 
     @Inject(method = "<init>*", at = @At("RETURN"))
     private void addAwakenBuffs(CallbackInfo callbackInfo) {
-        if (Awaken.worldProperties.isWorldAwakened()) {
-            SpiderEntity spider = (SpiderEntity) (Object) this;
+        SpiderEntity spider = (SpiderEntity) (Object) this;
 
+        AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) spider.world.getLevelProperties()).getAwakenLevelData();
+
+        if (awakenLevelData.isWorldAwakened()) {
             AWAKENED_MODS.apply(spider, true);
 
-            if (Awaken.worldProperties.isBloodMoonActive()) {
+            if (awakenLevelData.isBloodMoonActive()) {
                 BLOOD_MOON_MODS.apply(spider, true);
             }
         }
     }
 
+
     @Inject(method = "initialize", at = @At("RETURN"))
     public void addSkeletonRider(IWorld world, LocalDifficulty difficulty, SpawnType spawnType, @Nullable EntityData entityData, @Nullable CompoundTag entityTag, CallbackInfoReturnable callbackInfo) {
-        if (Awaken.worldProperties.isBloodMoonActive()) {
-            SpiderEntity spider = (SpiderEntity) (Object) this;
+        SpiderEntity spider = (SpiderEntity) (Object) this;
 
+        AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) spider.world.getLevelProperties()).getAwakenLevelData();
+        if (awakenLevelData.isBloodMoonActive()) {
             if (spider.getPassengerList().size() == 0 && world.getRandom().nextFloat() < 0.5F) {
 
                 SkeletonEntity skeletonEntity = EntityType.SKELETON.create(spider.world);

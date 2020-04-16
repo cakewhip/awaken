@@ -8,5 +8,6 @@ import net.minecraft.item.ItemStack;
  */
 public interface ArmorListener {
     void onOtherEquip(ItemStack stack, PlayerEntity player);
+
     void onOtherUnEquip(ItemStack stack, PlayerEntity player);
 }

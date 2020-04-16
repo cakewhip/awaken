@@ -1,6 +1,7 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.init.Awaken;
+import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.item.sword.AtlanteanSabreItem;
 import com.kqp.awaken.util.Broadcaster;
 import net.minecraft.entity.LivingEntity;
@@ -13,6 +14,7 @@ import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -35,21 +37,22 @@ public abstract class LivingEntityMixin {
         World world = le.world;
 
         if (!world.isClient) {
-            Broadcaster broadcaster = new Broadcaster();
-
             if (source.getAttacker() instanceof PlayerEntity) {
-                if (le instanceof CowEntity && !Awaken.worldProperties.isPostDragon()) {
-                    Awaken.worldProperties.setPostDragon();
-                    Broadcaster.broadcastMessage("The ground shakes beneath you...", Formatting.DARK_RED, false, true);
-                } else if (le instanceof SheepEntity && !Awaken.worldProperties.isPostWither()) {
-                    Awaken.worldProperties.setPostWither();
-                    Broadcaster.broadcastMessage("Screams echo from below...", Formatting.DARK_RED, false, true);
-                } else if (le instanceof PigEntity && !Awaken.worldProperties.isPostElderGuardian()) {
-                    Awaken.worldProperties.setPostElderGuardian();
-                    Broadcaster.broadcastMessage("A sharp chill goes down your spine...", Formatting.DARK_RED, false, true);
-                } else if (le instanceof ZombieEntity && !Awaken.worldProperties.isPostRaid()) {
-                    Awaken.worldProperties.setPostRaid();
-                    Broadcaster.broadcastMessage("A distant figure fades into the shadows...", Formatting.DARK_RED, false, true);
+                AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) world.getLevelProperties()).getAwakenLevelData();
+                MinecraftServer server = world.getServer();
+
+                if (le instanceof CowEntity && !awakenLevelData.isPostDragon()) {
+                    awakenLevelData.setPostDragon();
+                    Broadcaster.broadcastMessage(server, "The ground shakes beneath you...", Formatting.DARK_RED, false, true);
+                } else if (le instanceof SheepEntity && !awakenLevelData.isPostWither()) {
+                    awakenLevelData.setPostWither();
+                    Broadcaster.broadcastMessage(server, "Screams echo from below...", Formatting.DARK_RED, false, true);
+                } else if (le instanceof PigEntity && !awakenLevelData.isPostElderGuardian()) {
+                    awakenLevelData.setPostElderGuardian();
+                    Broadcaster.broadcastMessage(server, "A sharp chill goes down your spine...", Formatting.DARK_RED, false, true);
+                } else if (le instanceof ZombieEntity && !awakenLevelData.isPostRaid()) {
+                    awakenLevelData.setPostRaid();
+                    Broadcaster.broadcastMessage(server, "A distant figure fades into the shadows...", Formatting.DARK_RED, false, true);
                 }
             }
         }
@@ -67,7 +70,9 @@ public abstract class LivingEntityMixin {
     @Inject(method = "damage", at = @At("RETURN"))
     public void implementSpiderPoison(DamageSource source, float amount, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
         if (callbackInfoReturnable.getReturnValue()) {
-            if (Awaken.worldProperties.isWorldAwakened()) {
+            AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) ((LivingEntity) (Object) this).world.getLevelProperties()).getAwakenLevelData();
+
+            if (awakenLevelData.isWorldAwakened()) {
                 if (source.getAttacker() instanceof SpiderEntity) {
                     LivingEntity livingEntity = (LivingEntity) (Object) this;
 

@@ -1,6 +1,5 @@
 package com.kqp.awaken.item.shovel;
 
-import com.kqp.awaken.item.material.AwakenToolMaterial;
 import com.kqp.awaken.item.tool.AwakenShovelItem;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
