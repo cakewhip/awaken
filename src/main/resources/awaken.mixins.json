@@ -21,7 +21,8 @@
     "SmithingScreenHandlerMixin",
     "TridentEntityMixin",
     "BowItemMixin",
-    "CrossbowItemMixin"
+    "CrossbowItemMixin",
+    "ArmorFeatureRendererMixin"
   ],
   "client": [
     "InventoryScreenMixin",
