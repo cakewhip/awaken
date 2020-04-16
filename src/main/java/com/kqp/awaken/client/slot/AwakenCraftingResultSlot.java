@@ -1,6 +1,6 @@
 package com.kqp.awaken.client.slot;
 
-import com.kqp.awaken.client.screen.AwakenCraftingScreenHandler;
+import com.kqp.awaken.screen.AwakenCraftingScreenHandler;
 import com.kqp.awaken.inventory.AwakenCraftingResultInventory;
 import com.kqp.awaken.recipe.AwakenRecipe;
 import com.kqp.awaken.recipe.AwakenRecipeManager;

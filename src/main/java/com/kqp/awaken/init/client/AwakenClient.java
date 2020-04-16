@@ -3,7 +3,7 @@ package com.kqp.awaken.init.client;
 import com.kqp.awaken.client.entity.DireWolfRenderer;
 import com.kqp.awaken.client.entity.RaptorChickenRenderer;
 import com.kqp.awaken.client.screen.AwakenCraftingScreen;
-import com.kqp.awaken.client.screen.AwakenCraftingScreenHandler;
+import com.kqp.awaken.screen.AwakenCraftingScreenHandler;
 import com.kqp.awaken.client.slot.AwakenCraftingResultSlot;
 import com.kqp.awaken.client.slot.AwakenLookUpResultSlot;
 import com.kqp.awaken.data.AwakenLevelData;

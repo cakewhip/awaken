@@ -8,6 +8,7 @@ import com.kqp.awaken.recipe.AwakenRecipe;
 import com.kqp.awaken.recipe.AwakenRecipeManager;
 import com.kqp.awaken.recipe.Reagent;
 import com.kqp.awaken.recipe.RecipeType;
+import com.kqp.awaken.screen.AwakenCraftingScreenHandler;
 import com.kqp.awaken.util.MouseUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.netty.buffer.Unpooled;

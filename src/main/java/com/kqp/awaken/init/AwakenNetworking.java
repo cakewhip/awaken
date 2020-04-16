@@ -1,6 +1,6 @@
 package com.kqp.awaken.init;
 
-import com.kqp.awaken.client.screen.AwakenCraftingScreenHandler;
+import com.kqp.awaken.screen.AwakenCraftingScreenHandler;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.network.PacketByteBuf;

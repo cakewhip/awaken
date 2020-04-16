@@ -1,4 +1,4 @@
-package com.kqp.awaken.client.screen;
+package com.kqp.awaken.screen;
 
 import com.kqp.awaken.block.RecipeAccessProvider;
 import com.kqp.awaken.client.slot.AwakenCraftingResultSlot;
@@ -272,19 +272,25 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
             } else if (invSlot >= 24 && invSlot < 51) {
                 // Shift click inside main inventory
 
-                if (!this.insertItem(itemStack2, 51, 60, false)) {
-                    return ItemStack.EMPTY;
+                if (!this.insertItem(itemStack2, 60, 61, false)) {
+                    if (!this.insertItem(itemStack2, 51, 60, false)) {
+                        return ItemStack.EMPTY;
+                    }
                 }
             } else if (invSlot >= 51 && invSlot < 60) {
                 // Shift click inside hot-bar slots
-                if (!this.insertItem(itemStack2, 24, 51, false)) {
-                    return ItemStack.EMPTY;
+                if (!this.insertItem(itemStack2, 60, 61, false)) {
+                    if (!this.insertItem(itemStack2, 24, 51, false)) {
+                        return ItemStack.EMPTY;
+                    }
                 }
             } else if (invSlot == 60) {
                 // Shift click inside recipe look-up slot
                 if (!this.insertItem(itemStack2, 51, 60, false)) {
+                    slot.markDirty();
                     return ItemStack.EMPTY;
                 } else if (!this.insertItem(itemStack2, 24, 51, false)) {
+                    slot.markDirty();
                     return ItemStack.EMPTY;
                 }
             }
