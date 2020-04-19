@@ -24,6 +24,7 @@ public class AwakenNetworking {
     public static final Identifier CLOSE_CRAFTING_S2C_ID = new Identifier(Awaken.MOD_ID, "close_crafting_s2c");
 
     public static final Identifier SYNC_LEVEL_DATA_S2C_ID = new Identifier(Awaken.MOD_ID, "sync_level_data_s2c");
+    public static final Identifier SYNC_RECIPES_S2C_ID = new Identifier(Awaken.MOD_ID, "sync_recipe_data_s2c");
 
     public static void init() {
         Awaken.info("Initializing networking");

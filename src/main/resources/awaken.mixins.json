@@ -7,7 +7,6 @@
     "RaidMixin",
     "MinecraftServerMixin",
     "WorldChunkMixin",
-    "RecipeManagerMixin",
     "ZombieEntityMixin",
     "AbstractSkeletonEntityMixin",
     "SpiderEntityMixin",
@@ -25,7 +24,8 @@
     "GameJoinS2CPacketMixin",
     "ClientPlayNetworkHandlerMixin",
     "PlayerManagerMixin",
-    "BedBlockMixin"
+    "BedBlockMixin",
+    "IngredientMixin"
   ],
   "client": [
     "InventoryScreenMixin",

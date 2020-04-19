@@ -61,7 +61,7 @@ public class AwakenCraftingResultSlot extends Slot {
     protected void onCrafted(ItemStack stack) {
         if (!stack.isEmpty()) {
             HashMap<ComparableItemStack, Integer> compMap = AwakenRecipeManager.toComparableMap(playerInventory.main);
-            List<AwakenRecipe> matches = AwakenRecipeManager.getMatchesForOutput(screenHandler.recipeTypes, stack);
+            List<AwakenRecipe> matches = screenHandler.awakenRecipeManager.getMatchesForOutput(screenHandler.recipeTypes, stack);
 
             for (AwakenRecipe recipe : matches) {
                 if (recipe.matches(compMap)) {

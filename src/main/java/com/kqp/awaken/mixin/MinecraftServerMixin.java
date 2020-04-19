@@ -1,13 +1,14 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.recipe.AwakenRecipeLoader;
+import com.kqp.awaken.recipe.AwakenRecipeManager;
+import com.kqp.awaken.recipe.AwakenRecipeManagerProvider;
+import net.minecraft.recipe.RecipeManager;
 import net.minecraft.resource.ReloadableResourceManager;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.ServerTask;
-import net.minecraft.server.command.CommandOutput;
-import net.minecraft.util.snooper.SnooperListener;
-import net.minecraft.util.thread.ReentrantThreadExecutor;
+import net.minecraft.world.level.LevelProperties;
 import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Implements;
+import org.spongepowered.asm.mixin.Interface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,17 +19,36 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Used to register the Awaken recipe loader.
  */
 @Mixin(MinecraftServer.class)
-public abstract class MinecraftServerMixin extends ReentrantThreadExecutor<ServerTask> implements SnooperListener, CommandOutput, AutoCloseable, Runnable {
+@Implements(@Interface(iface = AwakenRecipeManagerProvider.class, prefix = "vw$"))
+public abstract class MinecraftServerMixin implements AwakenRecipeManagerProvider {
+    private AwakenRecipeManager awakenRecipeManager;
+
     @Shadow
     @Final
     private ReloadableResourceManager dataManager;
 
-    public MinecraftServerMixin(String name) {
-        super(name);
-    }
+    @Shadow
+    @Final
+    private RecipeManager recipeManager;
 
     @Inject(at = @At("RETURN"), method = "<init>*")
     public void construct(CallbackInfo callbackInfo) {
-        dataManager.registerListener(new AwakenRecipeLoader());
+        this.awakenRecipeManager = new AwakenRecipeManager();
+        dataManager.registerListener(this.awakenRecipeManager);
+    }
+
+    @Inject(method = "reloadDataPacks", at = @At("RETURN"))
+    private void convertVanillaRecipes(LevelProperties levelProperties, CallbackInfo callbackInfo) {
+        this.awakenRecipeManager.addVanillaRecipes(this.recipeManager);
+    }
+
+    @Override
+    public AwakenRecipeManager getAwakenRecipeManager() {
+        return this.awakenRecipeManager;
+    }
+
+    @Override
+    public void setAwakenRecipeManager(AwakenRecipeManager awakenRecipeManager) {
+        this.awakenRecipeManager = awakenRecipeManager;
     }
 }

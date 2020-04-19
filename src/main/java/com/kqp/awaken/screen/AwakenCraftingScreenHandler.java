@@ -32,6 +32,8 @@ import java.util.stream.Collectors;
  * Screen handler for the crafting GUI.
  */
 public class AwakenCraftingScreenHandler extends ScreenHandler {
+    public final AwakenRecipeManager awakenRecipeManager;
+    
     /**
      * Inventory for the crafting results.
      */
@@ -103,6 +105,7 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
         // TODO: figure out screen handler type
 
         // Init fields
+        this.awakenRecipeManager = AwakenRecipeManager.getFor(playerInventory.player.world);
         this.craftingResultInventory = new AwakenCraftingResultInventory();
         this.lookUpResultInventory = new AwakenCraftingRecipeLookUpInventory();
         this.context = context;
@@ -222,7 +225,7 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
      * This method is called on every slot change.
      */
     public void updateCraftingResults() {
-        craftingResultRecipes = AwakenRecipeManager.getMatches(recipeTypes, player.inventory.main);
+        craftingResultRecipes = awakenRecipeManager.getMatches(recipeTypes, player.inventory.main);
         craftingResults = craftingResultRecipes.stream().map(recipe -> recipe.result.copy()).collect(Collectors.toList());
 
         // If on server, notify the client that something has changed so the client can reply with the scroll bar position.
@@ -235,7 +238,7 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
     public void updateRecipeLookUpResults() {
         ItemStack query = this.lookUpResultInventory.getStack(0);
 
-        lookUpRecipes = AwakenRecipeManager.getRecipesUsingItemStack(query);
+        lookUpRecipes = awakenRecipeManager.getRecipesUsingItemStack(query);
         lookUpResults = lookUpRecipes.stream().map(recipe -> recipe.result.copy()).collect(Collectors.toList());
 
         // If on server, notify the client that something has changed so the client can reply with the scroll bar position.

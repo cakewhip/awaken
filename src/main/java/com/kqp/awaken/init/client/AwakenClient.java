@@ -3,6 +3,9 @@ package com.kqp.awaken.init.client;
 import com.kqp.awaken.client.entity.DireWolfRenderer;
 import com.kqp.awaken.client.entity.RaptorChickenRenderer;
 import com.kqp.awaken.client.screen.AwakenCraftingScreen;
+import com.kqp.awaken.recipe.AwakenRecipe;
+import com.kqp.awaken.recipe.AwakenRecipeManagerProvider;
+import com.kqp.awaken.recipe.SyncAwakenRecipesPacket;
 import com.kqp.awaken.screen.AwakenCraftingScreenHandler;
 import com.kqp.awaken.client.slot.AwakenCraftingResultSlot;
 import com.kqp.awaken.client.slot.AwakenLookUpResultSlot;
@@ -22,7 +25,9 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.util.Identifier;
 
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -126,6 +131,15 @@ public class AwakenClient implements ClientModInitializer {
 
             packetContext.getTaskQueue().execute(() -> {
                 ((AwakenLevelDataContainer) MinecraftClient.getInstance().world.getLevelProperties()).setAwakenServerLevelData(new AwakenLevelData(awakenLevelDataTag));
+            });
+        }));
+
+        // Sync recipes from server to clients
+        ClientSidePacketRegistry.INSTANCE.register(AwakenNetworking.SYNC_RECIPES_S2C_ID, ((packetContext, data) -> {
+            HashMap<Identifier, AwakenRecipe> recipes = SyncAwakenRecipesPacket.receiveFromServer(data);
+
+            packetContext.getTaskQueue().execute(() -> {
+                ((AwakenRecipeManagerProvider) MinecraftClient.getInstance().getNetworkHandler()).getAwakenRecipeManager().setRecipes(recipes);
             });
         }));
     }

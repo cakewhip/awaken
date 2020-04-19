@@ -12,11 +12,13 @@ import java.util.Objects;
  * Also caches the hash code.
  */
 public class ComparableItemStack {
+    public final ItemStack itemStack;
     public final Item item;
     public final CompoundTag tag;
     public final int hashCode;
 
     public ComparableItemStack(ItemStack itemStack) {
+        this.itemStack = itemStack;
         this.item = itemStack.getItem();
         this.tag = itemStack.getTag();
         this.hashCode = Objects.hash(item, tag);

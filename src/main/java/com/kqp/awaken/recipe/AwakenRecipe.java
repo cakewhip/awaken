@@ -11,6 +11,7 @@ import java.util.HashMap;
  * Represents a Awaken recipe with an ItemStack result and a map of reagents to their counts.
  */
 public class AwakenRecipe {
+    public String recipeType;
     public ItemStack result;
     public HashMap<Reagent, Integer> reagents;
 
@@ -20,13 +21,14 @@ public class AwakenRecipe {
      */
     public HashMap<ComparableItemStack, Reagent> itemStackReagentMap;
 
-    private AwakenRecipe() {
+    private AwakenRecipe(String recipeType) {
+        this.recipeType = recipeType;
         this.reagents = new HashMap();
         this.itemStackReagentMap = new HashMap();
     }
 
-    public AwakenRecipe(ItemStack result, ItemStack... input) {
-        this();
+    public AwakenRecipe(String recipeType, ItemStack result, ItemStack... input) {
+        this(recipeType);
 
         this.result = result;
 
@@ -37,8 +39,8 @@ public class AwakenRecipe {
         });
     }
 
-    public AwakenRecipe(ItemStack result, HashMap<Reagent, Integer> reagents) {
-        this();
+    public AwakenRecipe(String recipeType, ItemStack result, HashMap<Reagent, Integer> reagents) {
+        this(recipeType);
 
         this.result = result;
         this.reagents = reagents;
