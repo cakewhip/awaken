@@ -14,6 +14,7 @@ import com.kqp.awaken.item.sword.EnderianCutlassItem;
 import com.kqp.awaken.item.sword.JangKatanaItem;
 import com.kqp.awaken.item.sword.StatusEffectSwordItem;
 import com.kqp.awaken.item.tool.AwakenAxeItem;
+import com.kqp.awaken.item.trident.AwakenTridentItem;
 import com.kqp.awaken.loot.AwakenRarity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -59,6 +60,8 @@ public class AwakenItems {
     public static final Item RAPTOR_CHICKEN_EGG = genericItem();
     public static final Item SALVIUM_INGOT = genericItem();
     public static final Item VALERIUM_INGOT = genericItem();
+
+    public static final Item FIERY_TRIDENT = new AwakenTridentItem(16D, 500);
 
     public static final Item SALVIUM_HEADGEAR = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
             .addEntityAttributeModifier(AwakenEntityAttributes.BOW_DAMAGE, "salvium_bow_damage", 0.08F))
@@ -133,6 +136,9 @@ public class AwakenItems {
             register(RAPTOR_CHICKEN_EGG, "raptor_chicken_egg");
             register(SALVIUM_INGOT, "salvium_ingot");
             register(VALERIUM_INGOT, "valerium_ingot");
+
+            // Weapons
+            register(FIERY_TRIDENT, "fiery_trident");
 
             // Armor
             register(SALVIUM_HEADGEAR, "salvium_headgear");
