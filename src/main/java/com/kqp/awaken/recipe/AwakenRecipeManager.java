@@ -10,6 +10,7 @@ import com.kqp.awaken.util.TimeUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeManager;
@@ -220,7 +221,12 @@ public class AwakenRecipeManager extends JsonDataLoader {
                             ArrayList<ItemStack> matchingStacks = new ArrayList();
 
                             if (reagentNode.get("item") != null) {
-                                Item item = Registry.ITEM.get(new Identifier(reagentNode.get("item").getAsString()));
+                                String itemName = reagentNode.get("item").getAsString();
+                                Item item = Registry.ITEM.get(new Identifier(itemName));
+
+                                if (item == Items.AIR) {
+                                    throw new IllegalStateException("Couldn't find item " + itemName + " while loading recipe " + id);
+                                }
 
                                 matchingStacks.add(new ItemStack(item));
                             } else {
@@ -262,7 +268,7 @@ public class AwakenRecipeManager extends JsonDataLoader {
                 .collect(Collectors.toList());
 
         for (Recipe recipe : recipes) {
-            if (recipe instanceof ShapedRecipe || recipe instanceof ShapelessRecipe) {
+            if (recipe instanceof ShapedRecipe || recipe instanceof ShapelessRecipe || recipe instanceof SmeltingRecipe) {
                 List<Ingredient> ingredientList = recipe.getPreviewInputs();
                 HashMap<Reagent, Integer> reagents = new HashMap();
 
@@ -294,6 +300,8 @@ public class AwakenRecipeManager extends JsonDataLoader {
                         } else {
                             recipeType = RecipeType.CRAFTING_TABLE;
                         }
+                    } else if (recipe instanceof SmeltingRecipe) {
+                        recipeType = RecipeType.ENDERIAN_HELL_FORGE;
                     } else {
                         throw new IllegalStateException("Couldn't determine Awaken recipe type for vanilla recipe: " + recipe);
                     }
@@ -305,13 +313,6 @@ public class AwakenRecipeManager extends JsonDataLoader {
                             reagents
                     );
                 }
-            } else if (recipe instanceof SmeltingRecipe) {
-                this.addRecipe(
-                        recipe.getId(),
-                        RecipeType.ENDERIAN_HELL_FORGE,
-                        recipe.getOutput(),
-                        new HashMap()
-                );
             }
         }
     }
