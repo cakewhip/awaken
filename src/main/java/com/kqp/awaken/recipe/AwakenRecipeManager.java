@@ -15,6 +15,7 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.recipe.ShapedRecipe;
 import net.minecraft.recipe.ShapelessRecipe;
+import net.minecraft.recipe.SmeltingRecipe;
 import net.minecraft.resource.JsonDataLoader;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
@@ -304,6 +305,13 @@ public class AwakenRecipeManager extends JsonDataLoader {
                             reagents
                     );
                 }
+            } else if (recipe instanceof SmeltingRecipe) {
+                this.addRecipe(
+                        recipe.getId(),
+                        RecipeType.ENDERIAN_HELL_FORGE,
+                        recipe.getOutput(),
+                        new HashMap()
+                );
             }
         }
     }
