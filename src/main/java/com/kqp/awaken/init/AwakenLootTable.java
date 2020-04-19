@@ -2,6 +2,7 @@ package com.kqp.awaken.init;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.kqp.awaken.loot.condition.BloodMoonLootCondition;
+import com.kqp.awaken.loot.condition.WorldAwakenedLootCondition;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.FabricLootSupplierBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
@@ -9,6 +10,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.loot.ConstantLootTableRange;
 import net.minecraft.loot.LootManager;
 import net.minecraft.loot.condition.KilledByPlayerLootCondition;
+import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.condition.LootConditions;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
@@ -25,6 +27,7 @@ public class AwakenLootTable {
 
     public static void init() {
         // Custom Loot Conditions
+        LootConditions.register(new WorldAwakenedLootCondition.Factory());
         LootConditions.register(new BloodMoonLootCondition.Factory());
 
         // Phase 1
@@ -59,24 +62,38 @@ public class AwakenLootTable {
         }
     }
 
-    public static void addLootEntry(String id, ItemConvertible item, float chance) {
-        LOOT_MAP.put(new Identifier(id),
+    public static void addLootEntry(String id, ItemConvertible item, float chance, LootCondition.Builder... conditions) {
+        FabricLootPoolBuilder fabricLootPoolBuilder =
                 FabricLootPoolBuilder.builder()
                         .withRolls(ConstantLootTableRange.create(1))
                         .withCondition(RandomChanceLootCondition.builder(chance))
                         .withCondition(KilledByPlayerLootCondition.builder())
-                        .withEntry(ItemEntry.builder(item))
+                        .withEntry(ItemEntry.builder(item));
+
+        for (LootCondition.Builder condition : conditions) {
+            fabricLootPoolBuilder = fabricLootPoolBuilder.withCondition(condition);
+        }
+
+        LOOT_MAP.put(new Identifier(id),
+                fabricLootPoolBuilder
         );
     }
 
-    public static void addLootEntry(String id, ItemConvertible item, float chance, int count) {
-        LOOT_MAP.put(new Identifier(id),
+    public static void addLootEntry(String id, ItemConvertible item, float chance, int count, LootCondition.Builder... conditions) {
+        FabricLootPoolBuilder fabricLootPoolBuilder =
                 FabricLootPoolBuilder.builder()
                         .withRolls(ConstantLootTableRange.create(1))
                         .withCondition(RandomChanceLootCondition.builder(chance))
                         .withCondition(KilledByPlayerLootCondition.builder())
                         .withFunction(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(count, count)))
-                        .withEntry(ItemEntry.builder(item))
+                        .withEntry(ItemEntry.builder(item));
+
+        for (LootCondition.Builder condition : conditions) {
+            fabricLootPoolBuilder = fabricLootPoolBuilder.withCondition(condition);
+        }
+
+        LOOT_MAP.put(new Identifier(id),
+                fabricLootPoolBuilder
         );
     }
 

@@ -17,6 +17,11 @@ import net.minecraft.util.registry.Registry;
 public class AwakenBlocks {
     public static OreBlocks SALVIUM, VALERIUM;
 
+    public static final Block ENDERIAN_HELL_FORGE = new CraftingBlock(
+            FabricBlockSettings.of(Material.STONE).strength(35.0F, 12.0F).lightLevel(12).build(),
+            RecipeType.ENDERIAN_HELL_FORGE
+    );
+
 
     public static OreBlocks MOONSTONE, SUNSTONE;
 
@@ -48,6 +53,8 @@ public class AwakenBlocks {
                     new BlockStats(25.0F, 6.0F, 0),
                     false
             );
+
+            register(ENDERIAN_HELL_FORGE, "enderian_hell_forge");
         }
 
         // Phase 3

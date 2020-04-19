@@ -25,7 +25,9 @@
     "ClientPlayNetworkHandlerMixin",
     "PlayerManagerMixin",
     "BedBlockMixin",
-    "IngredientMixin"
+    "IngredientMixin",
+    "NetherFortressGeneratorCorridorRightTurnMixin",
+    "NetherFortressGeneratorCorridorLeftTurnMixin"
   ],
   "client": [
     "InventoryScreenMixin",
