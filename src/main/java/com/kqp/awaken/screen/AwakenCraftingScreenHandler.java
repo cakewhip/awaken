@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  */
 public class AwakenCraftingScreenHandler extends ScreenHandler {
     public final AwakenRecipeManager awakenRecipeManager;
-    
+
     /**
      * Inventory for the crafting results.
      */

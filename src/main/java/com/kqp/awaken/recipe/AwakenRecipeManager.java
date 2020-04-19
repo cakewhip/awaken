@@ -79,8 +79,8 @@ public class AwakenRecipeManager extends JsonDataLoader {
     /**
      * Returns a list of recipes that a passed list of item stacks can craft.
      *
-     * @param recipeTypes      Recipe types to access
-     * @param itemStacks Input item stacks
+     * @param recipeTypes Recipe types to access
+     * @param itemStacks  Input item stacks
      * @return List of possible recipes
      */
     public List<AwakenRecipe> getMatches(String[] recipeTypes, List<ItemStack> itemStacks) {
@@ -103,8 +103,8 @@ public class AwakenRecipeManager extends JsonDataLoader {
     /**
      * Returns a list of recipes that have the passed item stack as an output.
      *
-     * @param recipeTypes     Recipe types to access
-     * @param itemStack Item stack output
+     * @param recipeTypes Recipe types to access
+     * @param itemStack   Item stack output
      * @return List of recipes that have the passed item stack as an output
      */
     public List<AwakenRecipe> getMatchesForOutput(String[] recipeTypes, ItemStack itemStack) {

@@ -1,7 +1,6 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.util.Broadcaster;
 import net.minecraft.entity.raid.Raid;
 import net.minecraft.util.Formatting;
@@ -20,7 +19,7 @@ public abstract class RaidMixin {
     public void tick(CallbackInfo callbackInfo) {
         Raid raid = (Raid) (Object) this;
         World world = raid.getWorld();
-        AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) world.getLevelProperties()).getAwakenLevelData();
+        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(world);
 
         if (!world.isClient && raid.hasWon() && !awakenLevelData.isPostRaid()) {
             awakenLevelData.setPostRaid();

@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 
 @Mixin(Ingredient.class)
 @Implements(@Interface(iface = MatchingStackProvider.class, prefix = "vw$"))
-public abstract class IngredientMixin implements MatchingStackProvider{
+public abstract class IngredientMixin implements MatchingStackProvider {
     @Shadow
     private ItemStack[] matchingStacks;
 

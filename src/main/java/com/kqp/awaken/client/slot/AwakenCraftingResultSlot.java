@@ -1,10 +1,10 @@
 package com.kqp.awaken.client.slot;
 
-import com.kqp.awaken.screen.AwakenCraftingScreenHandler;
 import com.kqp.awaken.inventory.AwakenCraftingResultInventory;
 import com.kqp.awaken.recipe.AwakenRecipe;
 import com.kqp.awaken.recipe.AwakenRecipeManager;
 import com.kqp.awaken.recipe.ComparableItemStack;
+import com.kqp.awaken.screen.AwakenCraftingScreenHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;

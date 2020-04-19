@@ -5,7 +5,6 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.data.AwakenLevelDataContainer;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameter;
@@ -25,7 +24,7 @@ public class BloodMoonLootCondition implements LootCondition {
     }
 
     public boolean test(LootContext lootContext) {
-        AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) lootContext.getWorld().getLevelProperties()).getAwakenLevelData();
+        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(lootContext.getWorld());
 
         return awakenLevelData.isBloodMoonActive();
     }

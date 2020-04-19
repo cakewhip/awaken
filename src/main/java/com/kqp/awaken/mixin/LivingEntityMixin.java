@@ -1,7 +1,6 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.item.sword.AtlanteanSabreItem;
 import com.kqp.awaken.util.Broadcaster;
 import net.minecraft.entity.LivingEntity;
@@ -38,7 +37,7 @@ public abstract class LivingEntityMixin {
 
         if (!world.isClient) {
             if (source.getAttacker() instanceof PlayerEntity) {
-                AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) world.getLevelProperties()).getAwakenLevelData();
+                AwakenLevelData awakenLevelData = AwakenLevelData.getFor(world);
                 MinecraftServer server = world.getServer();
 
                 if (le instanceof CowEntity && !awakenLevelData.isPostDragon()) {
@@ -70,7 +69,7 @@ public abstract class LivingEntityMixin {
     @Inject(method = "damage", at = @At("RETURN"))
     public void implementSpiderPoison(DamageSource source, float amount, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
         if (callbackInfoReturnable.getReturnValue()) {
-            AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) ((LivingEntity) (Object) this).world.getLevelProperties()).getAwakenLevelData();
+            AwakenLevelData awakenLevelData = AwakenLevelData.getFor(((LivingEntity) (Object) this).world);
 
             if (awakenLevelData.isWorldAwakened()) {
                 if (source.getAttacker() instanceof SpiderEntity) {

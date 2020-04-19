@@ -1,7 +1,6 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.util.Broadcaster;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
@@ -24,7 +23,7 @@ public class BedBlockMixin {
     private void triggerAwakening(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> callbackInfoReturnable) {
         if (!world.isClient) {
             if (world.getDimension().getType() == DimensionType.THE_END) {
-                AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) world.getLevelProperties()).getAwakenLevelData();
+                AwakenLevelData awakenLevelData = AwakenLevelData.getFor(world);
 
                 if (!awakenLevelData.isWorldAwakened()
                         && awakenLevelData.isPostRaid()

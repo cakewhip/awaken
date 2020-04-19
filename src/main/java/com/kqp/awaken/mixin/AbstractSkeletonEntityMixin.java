@@ -1,7 +1,6 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import com.kqp.awaken.util.EntityAttributeUtil;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -33,7 +32,7 @@ public abstract class AbstractSkeletonEntityMixin {
         if (((Object) this) instanceof SkeletonEntity) {
             SkeletonEntity skeleton = (SkeletonEntity) (Object) this;
 
-            AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) skeleton.world.getLevelProperties()).getAwakenLevelData();
+            AwakenLevelData awakenLevelData = AwakenLevelData.getFor(skeleton.world);
 
             if (awakenLevelData.isWorldAwakened()) {
                 AWAKENED_MODS.apply(skeleton, true);

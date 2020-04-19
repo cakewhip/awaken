@@ -1,7 +1,6 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.util.EntityAttributeUtil;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.entity.EntityData;
@@ -39,7 +38,7 @@ public abstract class SpiderEntityMixin {
     private void addAwakenBuffs(CallbackInfo callbackInfo) {
         SpiderEntity spider = (SpiderEntity) (Object) this;
 
-        AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) spider.world.getLevelProperties()).getAwakenLevelData();
+        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(spider.world);
 
         if (awakenLevelData.isWorldAwakened()) {
             AWAKENED_MODS.apply(spider, true);
@@ -55,7 +54,7 @@ public abstract class SpiderEntityMixin {
     public void addSkeletonRider(IWorld world, LocalDifficulty difficulty, SpawnType spawnType, @Nullable EntityData entityData, @Nullable CompoundTag entityTag, CallbackInfoReturnable callbackInfo) {
         SpiderEntity spider = (SpiderEntity) (Object) this;
 
-        AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) spider.world.getLevelProperties()).getAwakenLevelData();
+        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(spider.world);
         if (awakenLevelData.isBloodMoonActive()) {
             if (spider.getPassengerList().size() == 0 && world.getRandom().nextFloat() < 0.5F) {
 

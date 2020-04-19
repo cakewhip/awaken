@@ -1,9 +1,7 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.init.AwakenBlocks;
-import com.kqp.awaken.init.AwakenItems;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ai.TargetFinder;
 import net.minecraft.entity.ai.brain.MemoryModuleType;
@@ -27,7 +25,7 @@ public class PiglinBrainMixin {
     @Inject(method = "playerInteract", at = @At("HEAD"), cancellable = true)
     private static void addEnderianHellForgeBarter(PiglinEntity piglin, PlayerEntity player, Hand hand, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
         ItemStack itemStack = player.getStackInHand(hand);
-        AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) piglin.world.getLevelProperties()).getAwakenLevelData();
+        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(piglin.world);
 
         if (awakenLevelData.isWorldAwakened() && itemStack.getItem() == Items.DRAGON_HEAD) {
             ItemStack itemStack2 = itemStack.split(1);

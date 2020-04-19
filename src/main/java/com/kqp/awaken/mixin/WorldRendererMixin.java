@@ -1,7 +1,6 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.init.Awaken;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.WorldRenderer;
@@ -21,7 +20,7 @@ public abstract class WorldRendererMixin {
 
     @Redirect(method = "renderSky", at = @At(value = "FIELD", opcode = Opcodes.GETSTATIC, target = "Lnet/minecraft/client/render/WorldRenderer;MOON_PHASES:Lnet/minecraft/util/Identifier;"))
     private final Identifier bloodMoonRedirect() {
-        AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) MinecraftClient.getInstance().world.getLevelProperties()).getAwakenLevelData();
+        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(MinecraftClient.getInstance().world);
 
         if (awakenLevelData.isBloodMoonActive()) {
             return BLOOD_MOON;

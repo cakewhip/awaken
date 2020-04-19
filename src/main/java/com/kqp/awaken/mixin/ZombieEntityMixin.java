@@ -1,7 +1,6 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.util.EntityAttributeUtil;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.ZombieEntity;
@@ -29,7 +28,7 @@ public abstract class ZombieEntityMixin {
     @Inject(method = "<init>*", at = @At("RETURN"))
     private void addAwakenBuffs(CallbackInfo callbackInfo) {
         ZombieEntity zombie = (ZombieEntity) (Object) this;
-        AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) zombie.world.getLevelProperties()).getAwakenLevelData();
+        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(zombie.world);
 
         if (awakenLevelData.isWorldAwakened()) {
             AWAKENED_MODS.apply(zombie, true);

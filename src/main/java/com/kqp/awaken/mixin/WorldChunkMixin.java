@@ -1,7 +1,6 @@
 package com.kqp.awaken.mixin;
 
 import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.data.AwakenTemporalChunkData;
 import com.kqp.awaken.init.AwakenBlocks;
 import com.kqp.awaken.world.AwakenOreGen;
@@ -25,7 +24,7 @@ public abstract class WorldChunkMixin implements Chunk {
 
         AwakenTemporalChunkData.ChunkData awakenData = AwakenTemporalChunkData.CHUNK_DATA_MAP.get(chunk.getPos());
         if (awakenData != null) {
-            AwakenLevelData awakenLevelData = ((AwakenLevelDataContainer) chunk.getWorld().getLevelProperties()).getAwakenLevelData();
+            AwakenLevelData awakenLevelData = AwakenLevelData.getFor(chunk.getWorld());
 
             if (awakenLevelData.isWorldAwakened()) {
                 if (!awakenData.genNewOres) {

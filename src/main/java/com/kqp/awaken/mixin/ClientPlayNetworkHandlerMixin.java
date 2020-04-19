@@ -1,8 +1,8 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.data.AwakenLevelDataTagContainer;
 import com.kqp.awaken.data.AwakenLevelData;
 import com.kqp.awaken.data.AwakenLevelDataContainer;
+import com.kqp.awaken.data.AwakenLevelDataTagContainer;
 import com.kqp.awaken.recipe.AwakenRecipeManager;
 import com.kqp.awaken.recipe.AwakenRecipeManagerProvider;
 import net.minecraft.client.MinecraftClient;

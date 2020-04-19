@@ -1,6 +1,6 @@
 package com.kqp.awaken.mixin;
 
-import com.kqp.awaken.data.AwakenLevelDataContainer;
+import com.kqp.awaken.data.AwakenLevelData;
 import com.kqp.awaken.data.AwakenLevelDataTagContainer;
 import com.kqp.awaken.recipe.AwakenRecipeManager;
 import com.kqp.awaken.recipe.SyncAwakenRecipesPacket;
@@ -29,7 +29,7 @@ public class PlayerManagerMixin {
     public void fillAwakenLevelData(ServerPlayNetworkHandler networkHandler, Packet<?> packet) {
         if (packet instanceof GameJoinS2CPacket) {
             CompoundTag awakenLevelDataTag = new CompoundTag();
-            ((AwakenLevelDataContainer) networkHandler.player.world.getLevelProperties()).getAwakenLevelData().writeToTag(awakenLevelDataTag);
+            AwakenLevelData.getFor(networkHandler.player.world).writeToTag(awakenLevelDataTag);
 
             ((AwakenLevelDataTagContainer) packet).setAwakenLevelDataTag(awakenLevelDataTag);
         }

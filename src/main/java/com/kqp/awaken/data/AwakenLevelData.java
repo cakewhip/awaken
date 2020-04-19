@@ -192,4 +192,8 @@ public class AwakenLevelData {
             ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, AwakenNetworking.SYNC_LEVEL_DATA_S2C_ID, buf);
         }
     }
+
+    public static AwakenLevelData getFor(World world) {
+        return ((AwakenLevelDataContainer) world.getLevelProperties()).getAwakenLevelData();
+    }
 }

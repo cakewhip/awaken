@@ -5,7 +5,6 @@ import com.kqp.awaken.client.slot.AwakenLookUpResultSlot;
 import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.init.AwakenNetworking;
 import com.kqp.awaken.recipe.AwakenRecipe;
-import com.kqp.awaken.recipe.AwakenRecipeManager;
 import com.kqp.awaken.recipe.Reagent;
 import com.kqp.awaken.recipe.RecipeType;
 import com.kqp.awaken.screen.AwakenCraftingScreenHandler;
