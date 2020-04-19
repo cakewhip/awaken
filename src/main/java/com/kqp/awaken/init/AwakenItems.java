@@ -55,6 +55,7 @@ public class AwakenItems {
     public static final Item JANG_KATANA = new JangKatanaItem().setRarity(AwakenRarity.FABLED);
 
 
+    public static final Item CORSAIR_TOKEN = genericItem();
     public static final Item RAPTOR_CHICKEN_EGG = genericItem();
     public static final Item SALVIUM_INGOT = genericItem();
     public static final Item VALERIUM_INGOT = genericItem();
@@ -128,6 +129,7 @@ public class AwakenItems {
         // Phase 2
         {
             // Reagents
+            register(CORSAIR_TOKEN, "corsair_token");
             register(RAPTOR_CHICKEN_EGG, "raptor_chicken_egg");
             register(SALVIUM_INGOT, "salvium_ingot");
             register(VALERIUM_INGOT, "valerium_ingot");
