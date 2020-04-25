@@ -26,9 +26,6 @@ public enum AwakenArmorMaterial implements ArmorMaterial {
     }),
     VALERIUM("valerium", 45, new int[] { 7, 10, 12, 7 }, 16, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 7.5F, 0.5F, () -> {
         return Ingredient.ofItems(AwakenItems.VALERIUM_INGOT);
-    }),
-    CELESTIAL_STEEL("celestial_steel", 44, new int[] { 3, 6, 8, 3 }, 24, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 24.0F, 0.5F, () -> {
-        return Ingredient.ofItems(AwakenItems.CELESTIAL_STEEL_INGOT);
     });
 
     private static final int[] BASE_DURABILITY = new int[] { 13, 15, 16, 11 };

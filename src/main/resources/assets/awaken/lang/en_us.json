@@ -28,6 +28,7 @@
     "item.awaken.enderian_cutlass": "Enderian Cutlass",
     "item.awaken.jang_katana": "Jang Katana",
 
+
     "__comment": "Phase 2 Reagents",
     "item.awaken.creeper_tissue": "Creeper Tissue",
     "item.awaken.necrotic_heart": "Necrotic Heart",
@@ -55,34 +56,6 @@
     "item.awaken.valerium_leggings": "Valerium Leggings",
     "item.awaken.valerium_boots": "Valerium Boots",
 
-    "__comment": "Phase 3 Ore Groups",
-    "block.awaken.moonstone_ore": "Moonstone Ore",
-    "item.awaken.moonstone_ore": "Moonstone Ore",
-    "block.awaken.moonstone_block": "Moonstone",
-    "item.awaken.moonstone_block": "Moonstone",
-    "item.awaken.moonstone_fragment": "Moonstone Fragment",
-    "block.awaken.sunstone_ore": "Sunstone Ore",
-    "item.awaken.sunstone_ore": "Sunstone Ore",
-    "block.awaken.sunstone_block": "Sunstone",
-    "item.awaken.sunstone_block": "Sunstone",
-    "item.awaken.sunstone_fragment": "Sunstone Fragment",
-    "item.awaken.celestial_steel_ingot": "Celestial Steel Ingot",
-    
-    "__comment": "Phase 3 Tools and Armor",
-    "item.awaken.celestial_steel_sword": "Celestial Steel Sword",
-    "item.awaken.celestial_steel_shovel": "Celestial Steel Shovel",
-    "item.awaken.celestial_steel_pickaxe": "Celestial Steel Pickaxe",
-    "item.awaken.celestial_steel_axe": "Celestial Steel Axe",
-    "item.awaken.celestial_steel_helmet": "Celestial Steel Helmet",
-    "item.awaken.celestial_steel_chestplate": "Celestial Steel Chestplate",
-    "item.awaken.celestial_steel_leggings": "Celestial Steel Leggings",
-    "item.awaken.celestial_steel_boots": "Celestial Steel Boots",
-
-    "__comment": "Phase 3 Blocks",
-    "block.awaken.celestial_altar": "Celestial Altar",
-    "item.awaken.celestial_altar": "Celestial Altar",
-    "block.awaken.celestial_steel_anvil": "Celestial Steel Anvil",
-    "item.awaken.celestial_steel_anvil": "Celestial Steel Anvil",
 
     "__comment": "Entities",
     "entity.awaken.raptor_chicken": "Raptor Chicken",
@@ -106,10 +79,6 @@
     "awaken.recipe_type.requires.furnace": "Must be near a Furnace",
     "awaken.recipe_type.enderian_hell_forge": "Enderian Hell Forge",
     "awaken.recipe_type.requires.enderian_hell_forge": "Must be near an Enderian Hell Forge",
-    "awaken.recipe_type.celestial_altar": "Celestial Altar",
-    "awaken.recipe_type.requires.celestial_altar": "Must be near a Celestial Altar",
-    "awaken.recipe_type.celestial_steel_anvil": "Celestial Steel Anvil",
-    "awaken.recipe_type.requires.celestial_steel_anvil": "Must be near a Celestial Steel Anvil",
 
     "__comment": "Entity Attributes",
     "attribute.name.generic.ranged_damage": "Ranged Damage",

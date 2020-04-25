@@ -92,12 +92,6 @@ public class AwakenItems {
     public static final Item VALERIUM_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.LEGS);
     public static final Item VALERIUM_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.FEET);
 
-    public static final Item CELESTIAL_STEEL_INGOT = genericItem();
-
-    public static final Item SUNSTONE_FRAGMENT = genericItem();
-    public static final Item MOONSTONE_FRAGMENT = genericItem();
-
-
     // TODO: add unbreakable elytra using post-awakened materials (Dragon Bone Wings)
 
     public static void init() {
@@ -164,14 +158,6 @@ public class AwakenItems {
             register(VALERIUM_CHESTPLATE, "valerium_chestplate");
             register(VALERIUM_LEGGINGS, "valerium_leggings");
             register(VALERIUM_BOOTS, "valerium_boots");
-        }
-
-        // Phase 3
-        {
-            // Reagents
-            register(SUNSTONE_FRAGMENT, "sunstone_fragment");
-            register(MOONSTONE_FRAGMENT, "moonstone_fragment");
-            register(CELESTIAL_STEEL_INGOT, "celestial_steel_ingot");
         }
     }
 

@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "facing=south": { "model": "awaken:block/celestial_steel_anvil" },
-    "facing=west": { "model": "awaken:block/celestial_steel_anvil", "y": 90 },
-    "facing=north": { "model": "awaken:block/celestial_steel_anvil", "y": 180 },
-    "facing=east": { "model": "awaken:block/celestial_steel_anvil", "y": 270 }
-  }
-}

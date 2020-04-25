@@ -1,6 +1,5 @@
 package com.kqp.awaken.init;
 
-import com.kqp.awaken.block.AwakenAnvilBlock;
 import com.kqp.awaken.block.CraftingBlock;
 import com.kqp.awaken.block.group.BlockStats;
 import com.kqp.awaken.block.group.OreBlocks;
@@ -22,21 +21,6 @@ public class AwakenBlocks {
             RecipeType.ENDERIAN_HELL_FORGE
     );
 
-
-    public static OreBlocks MOONSTONE, SUNSTONE;
-
-    public static final Block CELESTIAL_ALTAR_BLOCK = new CraftingBlock(
-            FabricBlockSettings.of(Material.STONE).strength(35.0F, 12.0F).lightLevel(4).build(),
-            RecipeType.CELESTIAL_ALTAR,
-            RecipeType.CRAFTING_TABLE
-    );
-
-    public static final Block CELESTIAL_STEEL_ANVIL_BLOCK = new AwakenAnvilBlock(
-            FabricBlockSettings.of(Material.METAL).strength(35.0F, 24.0F).lightLevel(4).build(),
-            RecipeType.CELESTIAL_STEEL_ANVIL,
-            RecipeType.ANVIL
-    );
-
     public static void init() {
         Awaken.info("Initializing blocks");
 
@@ -55,24 +39,6 @@ public class AwakenBlocks {
             );
 
             register(ENDERIAN_HELL_FORGE, "enderian_hell_forge");
-        }
-
-        // Phase 3
-        {
-            SUNSTONE = new OreBlocks(
-                    "sunstone",
-                    new BlockStats(25.0F, 6.0F, 6),
-                    true
-            );
-
-            MOONSTONE = new OreBlocks(
-                    "moonstone",
-                    new BlockStats(25.0F, 6.0F, 6),
-                    true
-            );
-
-            register(CELESTIAL_ALTAR_BLOCK, "celestial_altar");
-            register(CELESTIAL_STEEL_ANVIL_BLOCK, "celestial_steel_anvil");
         }
     }
 

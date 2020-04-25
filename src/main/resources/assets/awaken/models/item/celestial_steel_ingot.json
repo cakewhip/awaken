@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "awaken:item/celestial_steel_ingot"
-  }
-}

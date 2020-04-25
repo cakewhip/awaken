@@ -1,6 +1,5 @@
 package com.kqp.awaken.item.material;
 
-import com.kqp.awaken.init.AwakenItems;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 
@@ -10,14 +9,6 @@ import java.util.function.Supplier;
  * Used to create custom tool materials.
  */
 public class AwakenToolMaterial implements ToolMaterial {
-    public static final AwakenToolMaterial CELESTIAL_STEEL = new AwakenToolMaterial(
-            4,
-            1000,
-            10.0F,
-            10.0F,
-            18,
-            () -> Ingredient.ofItems(AwakenItems.CELESTIAL_STEEL_INGOT));
-
     private final int miningLevel;
     private final int itemDurability;
     private final float miningSpeed;
