@@ -26,6 +26,7 @@ public class Awaken implements ModInitializer {
             AwakenNetworking.init();
             AwakenLootTable.init();
             AwakenCallbacks.init();
+            AwakenCommands.init();
         }, (time) -> Awaken.info("Awaken took " + time + "ms to load"));
     }
 

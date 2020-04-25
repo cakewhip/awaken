@@ -106,7 +106,7 @@ public class AwakenLevelData {
         }
     }
 
-    private void startBloodMoon(MinecraftServer server) {
+    public void startBloodMoon(MinecraftServer server) {
         this.bloodMoonActive = true;
         this.bloodMoonTickTime = 0;
         markDirty();
