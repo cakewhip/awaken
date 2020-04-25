@@ -30,7 +30,7 @@ public class AwakenItems {
     public static final Item NECROTIC_HEART = genericItem();
     public static final Item SPIDER_SILK = genericItem();
     public static final Item BONE_MARROW = genericItem();
-    public static final Item MOB_HEART = new HealthIncreaseItem("mob_heart", 10);
+    public static final Item MONSTER_HEART = new HealthIncreaseItem("monster_heart", 10);
 
     public static final Item ENDER_DRAGON_SCALE = genericItem();
     public static final Item WITHER_RIB = genericItem();
@@ -67,7 +67,7 @@ public class AwakenItems {
     public static final Item FIERY_CORE = genericItem();
     public static final Item MAGMA_STRAND = genericItem();
     public static final Item CINDERED_SOUL = genericItem();
-    public static final Item FIERY_HEART = new HealthIncreaseItem("fiery_heart", 10, (HealthIncreaseItem) MOB_HEART);
+    public static final Item FIERY_HEART = new HealthIncreaseItem("fiery_heart", 10, (HealthIncreaseItem) MONSTER_HEART);
 
     public static final Item CORSAIR_TOKEN = genericItem();
     public static final Item RAPTOR_CHICKEN_EGG = genericItem();
@@ -110,7 +110,7 @@ public class AwakenItems {
             register(NECROTIC_HEART, "necrotic_heart");
             register(SPIDER_SILK, "spider_silk");
             register(BONE_MARROW, "bone_marrow");
-            register(MOB_HEART, "mob_heart");
+            register(MONSTER_HEART, "monster_heart");
 
             register(ENDER_DRAGON_SCALE, "ender_dragon_scale");
             register(WITHER_RIB, "wither_rib");

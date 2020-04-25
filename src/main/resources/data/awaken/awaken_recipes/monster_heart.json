@@ -2,7 +2,7 @@
   "type": "crafting_table",
   "recipe": {
     "output": {
-      "item": "awaken:mob_heart"
+      "item": "awaken:monster_heart"
     },
     "reagents": [
       {
