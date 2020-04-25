@@ -26,6 +26,12 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class AwakenItems {
+    public static final Item CREEPER_TISSUE = genericItem();
+    public static final Item NECROTIC_HEART = genericItem();
+    public static final Item SPIDER_SILK = genericItem();
+    public static final Item BONE_MARROW = genericItem();
+    public static final Item MOB_HEART = new HealthIncreaseItem("mob_heart", 10);
+
     public static final Item ENDER_DRAGON_SCALE = genericItem();
     public static final Item WITHER_RIB = genericItem();
 
@@ -57,11 +63,11 @@ public class AwakenItems {
     public static final Item JANG_KATANA = new JangKatanaItem().setRarity(AwakenRarity.FABLED);
 
 
-    public static final Item CREEPER_TISSUE = genericItem();
-    public static final Item NECROTIC_HEART = genericItem();
-    public static final Item SPIDER_SILK = genericItem();
-    public static final Item BONE_MARROW = genericItem();
-    public static final Item MOB_HEART = new HealthIncreaseItem("mob_heart", 10);
+    public static final Item SMOLDERING_HEART = genericItem();
+    public static final Item FIERY_CORE = genericItem();
+    public static final Item MAGMA_STRAND = genericItem();
+    public static final Item CINDERED_SOUL = genericItem();
+    public static final Item FIERY_HEART = new HealthIncreaseItem("fiery_heart", 10, (HealthIncreaseItem) MOB_HEART);
 
     public static final Item CORSAIR_TOKEN = genericItem();
     public static final Item RAPTOR_CHICKEN_EGG = genericItem();
@@ -100,6 +106,12 @@ public class AwakenItems {
         // Phase 1
         {
             // Reagents
+            register(CREEPER_TISSUE, "creeper_tissue");
+            register(NECROTIC_HEART, "necrotic_heart");
+            register(SPIDER_SILK, "spider_silk");
+            register(BONE_MARROW, "bone_marrow");
+            register(MOB_HEART, "mob_heart");
+
             register(ENDER_DRAGON_SCALE, "ender_dragon_scale");
             register(WITHER_RIB, "wither_rib");
 
@@ -133,11 +145,12 @@ public class AwakenItems {
         // Phase 2
         {
             // Reagents
-            register(CREEPER_TISSUE, "creeper_tissue");
-            register(NECROTIC_HEART, "necrotic_heart");
-            register(SPIDER_SILK, "spider_silk");
-            register(BONE_MARROW, "bone_marrow");
-            register(MOB_HEART, "mob_heart");
+            register(SMOLDERING_HEART, "smoldering_heart");
+            register(FIERY_CORE, "fiery_core");
+            register(MAGMA_STRAND, "magma_strand");
+            register(CINDERED_SOUL, "cindered_soul");
+            register(FIERY_HEART, "fiery_heart");
+
             register(CORSAIR_TOKEN, "corsair_token");
             register(RAPTOR_CHICKEN_EGG, "raptor_chicken_egg");
             register(SALVIUM_INGOT, "salvium_ingot");

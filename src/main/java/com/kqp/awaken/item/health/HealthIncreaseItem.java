@@ -1,6 +1,8 @@
 package com.kqp.awaken.item.health;
 
 import com.kqp.awaken.init.Awaken;
+import jdk.internal.jline.internal.Nullable;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -8,6 +10,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -66,5 +70,10 @@ public class HealthIncreaseItem extends Item {
         }
 
         return TypedActionResult.fail(itemStack);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(new LiteralText("Right-click to increase max health by 1 heart (up to " + extraHearts + " times)"));
     }
 }

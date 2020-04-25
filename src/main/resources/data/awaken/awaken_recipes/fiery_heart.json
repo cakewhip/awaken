@@ -1,0 +1,25 @@
+{
+  "type": "enderian_hell_forge",
+  "recipe": {
+    "output": {
+      "item": "awaken:fiery_heart"
+    },
+    "reagents": [
+      {
+        "item": "awaken:smoldering_heart"
+      },
+      {
+        "item": "awaken:fiery_core",
+        "count": 2
+      },
+      {
+        "item": "awaken:magma_strand",
+        "count": 4
+      },
+      {
+        "item": "awaken:cindered_soul",
+        "count": 4
+      }
+    ]
+  }
+}

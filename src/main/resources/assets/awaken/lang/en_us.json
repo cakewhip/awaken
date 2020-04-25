@@ -1,5 +1,11 @@
 {
     "__comment": "Phase 1 Reagents",
+    "item.awaken.creeper_tissue": "Creeper Tissue",
+    "item.awaken.necrotic_heart": "Necrotic Heart",
+    "item.awaken.bone_marrow": "Bone Marrow",
+    "item.awaken.spider_silk": "Spider Silk",
+    "item.awaken.mob_heart": "Mob Heart",
+
     "item.awaken.ender_dragon_scale": "Ender Dragon Scale",
     "item.awaken.wither_rib": "Wither Rib",
 
@@ -8,6 +14,7 @@
     "item.awaken.dragon_scale_leggings": "Dragon Scale Leggings",
     "item.awaken.dragon_scale_chestplate": "Dragon Scale Chestplate",
     "item.awaken.dragon_scale_helmet": "Dragon Scale Helmet",
+
     "item.awaken.wither_bone_boots": "Wither Bone Boots",
     "item.awaken.wither_bone_leggings": "Wither Bone Leggings",
     "item.awaken.wither_bone_chestplate": "Wither Bone Chestplate",
@@ -30,11 +37,11 @@
 
 
     "__comment": "Phase 2 Reagents",
-    "item.awaken.creeper_tissue": "Creeper Tissue",
-    "item.awaken.necrotic_heart": "Necrotic Heart",
-    "item.awaken.bone_marrow": "Bone Marrow",
-    "item.awaken.spider_silk": "Spider Silk",
-    "item.awaken.mob_heart": "Mob Heart",
+    "item.awaken.smoldering_heart": "Smoldering Heart",
+    "item.awaken.fiery_core": "Fiery Core",
+    "item.awaken.magma_strand": "Magma Strand",
+    "item.awaken.cindered_soul": "Cindered Soul",
+    "item.awaken.fiery_heart": "Fiery Heart",
 
     "__comment": "Phase 2 Ore Groups",
     "block.awaken.salvium_ore": "Salvium Ore",
