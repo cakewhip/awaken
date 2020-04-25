@@ -35,6 +35,11 @@ public class AwakenLootTable {
         // Phase 1
         {
             // Reagents
+            addLootEntry("minecraft:entities/zombie", AwakenItems.NECROTIC_HEART, 1F / 100F);
+            addLootEntry("minecraft:entities/creeper", AwakenItems.CREEPER_TISSUE, 5F / 100F);
+            addLootEntry("minecraft:entities/spider", AwakenItems.SPIDER_SILK, 5F / 100F);
+            addLootEntry("minecraft:entities/skeleton", AwakenItems.BONE_MARROW, 5F / 100F);
+
             addLootEntry("minecraft:entities/ender_dragon", AwakenItems.ENDER_DRAGON_SCALE, 1F, 128);
             addLootEntry("minecraft:entities/wither", AwakenItems.WITHER_RIB, 1F, 6);
 
@@ -66,10 +71,10 @@ public class AwakenLootTable {
         // Phase 2
         {
             // Reagents
-            addLootEntry("minecraft:entities/zombie", AwakenItems.NECROTIC_HEART, 5F / 100F, FieryMoonLootCondition.builder());
-            addLootEntry("minecraft:entities/creeper", AwakenItems.CREEPER_TISSUE, 20F / 100F, FieryMoonLootCondition.builder());
-            addLootEntry("minecraft:entities/spider", AwakenItems.SPIDER_SILK, 20F / 100F, FieryMoonLootCondition.builder());
-            addLootEntry("minecraft:entities/skeleton", AwakenItems.BONE_MARROW, 20F / 100F, FieryMoonLootCondition.builder());
+            addLootEntry("awaken:entities/ancient_demonic_pigman", AwakenItems.SMOLDERING_HEART, 5F / 100F, FieryMoonLootCondition.builder());
+            addLootEntry("awaken:entities/ancient_demonic_ghast", AwakenItems.FIERY_CORE, 10F / 100F, FieryMoonLootCondition.builder());
+            addLootEntry("awaken:entities/ancient_demonic_strider", AwakenItems.MAGMA_STRAND, 20F / 100F, FieryMoonLootCondition.builder());
+            addLootEntry("awaken:entities/ancient_demonic_blaze", AwakenItems.CINDERED_SOUL, 20F / 100F, FieryMoonLootCondition.builder());
         }
     }
 
