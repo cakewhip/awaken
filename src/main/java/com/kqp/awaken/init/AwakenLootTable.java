@@ -1,6 +1,7 @@
 package com.kqp.awaken.init;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.kqp.awaken.loot.condition.BiomeSpecificLootCondition;
 import com.kqp.awaken.loot.condition.BloodMoonLootCondition;
 import com.kqp.awaken.loot.condition.WorldAwakenedLootCondition;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
@@ -29,6 +30,7 @@ public class AwakenLootTable {
         // Custom Loot Conditions
         LootConditions.register(new WorldAwakenedLootCondition.Factory());
         LootConditions.register(new BloodMoonLootCondition.Factory());
+        LootConditions.register(new BiomeSpecificLootCondition.Factory());
 
         // Phase 1
         {
