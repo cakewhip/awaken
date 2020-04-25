@@ -66,10 +66,10 @@ public class AwakenLootTable {
         // Phase 2
         {
             // Reagents
-            addLootEntry("minecraft:entities/zombie", AwakenItems.NECROTIC_HEART, 2.5F / 100F, BloodMoonLootCondition.builder());
-            addLootEntry("minecraft:entities/creeper", AwakenItems.CREEPER_TISSUE, 12.5F / 100F, BloodMoonLootCondition.builder());
-            addLootEntry("minecraft:entities/spider", AwakenItems.SPIDER_SILK, 12.5F / 100F, BloodMoonLootCondition.builder());
-            addLootEntry("minecraft:entities/skeleton", AwakenItems.BONE_MARROW, 12.5F / 100F, BloodMoonLootCondition.builder());
+            addLootEntry("minecraft:entities/zombie", AwakenItems.NECROTIC_HEART, 5F / 100F, BloodMoonLootCondition.builder());
+            addLootEntry("minecraft:entities/creeper", AwakenItems.CREEPER_TISSUE, 20F / 100F, BloodMoonLootCondition.builder());
+            addLootEntry("minecraft:entities/spider", AwakenItems.SPIDER_SILK, 20F / 100F, BloodMoonLootCondition.builder());
+            addLootEntry("minecraft:entities/skeleton", AwakenItems.BONE_MARROW, 20F / 100F, BloodMoonLootCondition.builder());
         }
     }
 
