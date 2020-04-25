@@ -31,6 +31,7 @@
   "client": [
     "client.gui.screen.ingame.InventoryScreenMixin",
     "client.MinecraftClientMixin",
+    "client.network.ClientPlayerInteractionManagerMixin",
     "client.network.ClientPlayNetworkHandlerMixin",
     "client.render.entity.feature.ArmorFeatureRendererMixin",
     "client.render.entity.LivingEntityRendererMixin",

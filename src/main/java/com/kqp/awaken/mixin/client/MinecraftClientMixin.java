@@ -1,11 +1,13 @@
 package com.kqp.awaken.mixin.client;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static net.minecraft.util.hit.HitResult.Type.ENTITY;
@@ -26,6 +28,21 @@ public class MinecraftClientMixin {
                 if (client.crosshairTarget.getType() == ENTITY) {
                     if (!canAttack(client.player)) {
                         callbackInfo.cancel();
+                    }
+                }
+            }
+        }
+    }
+
+    @Redirect(method = "doAttack", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;resetLastAttackedTicks()V"))
+    public void cancelResetAttackCooldown(ClientPlayerEntity player) {
+        MinecraftClient client = (MinecraftClient) (Object) this;
+
+        if (this.attackCooldown <= 0) {
+            if (client.crosshairTarget != null && !client.player.isRiding()) {
+                if (client.crosshairTarget.getType() == ENTITY) {
+                    if (canAttack(client.player)) {
+                        client.player.resetLastAttackedTicks();
                     }
                 }
             }
