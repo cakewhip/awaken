@@ -39,28 +39,28 @@ public class AwakenLootTable {
             addLootEntry("minecraft:entities/wither", AwakenItems.WITHER_RIB, 1F, 6);
 
             // Special Tools
-            addLootEntry("minecraft:entities/blaze", AwakenItems.CINDERED_BOW, 10F / 100F);
-            addLootEntry("minecraft:entities/ghast", AwakenItems.CINDERED_BOW, 15F / 100F);
+            addLootEntry("minecraft:entities/blaze", AwakenItems.CINDERED_BOW, 15F / 100F);
+            addLootEntry("minecraft:entities/ghast", AwakenItems.CINDERED_BOW, 20F / 100F);
             addLootEntry("minecraft:entities/slime", AwakenItems.SLIMEY_BOW, 5F / 100F);
-            addLootEntry("minecraft:entities/pillager", AwakenItems.RAIDERS_AXE, 2.5F / 100F);
-            addLootEntry("minecraft:entities/zombie", AwakenItems.ESCAPE_PLAN, 0.5F / 100F);
-            addLootEntry("minecraft:entities/skeleton", AwakenItems.ESCAPE_PLAN, 0.5F / 100F);
-            addLootEntry("minecraft:entities/creeper", AwakenItems.ESCAPE_PLAN, 0.5F / 100F);
-            addLootEntry("minecraft:entities/spider", AwakenItems.ESCAPE_PLAN, 0.5F / 100F);
-            addLootEntry("minecraft:entities/husk", AwakenItems.ARCHAEOLOGIST_SPADE, 10F / 100F);
-            addLootEntry("minecraft:entities/cave_spider", AwakenItems.RUSTY_SHANK, 5F / 100F);
+            addLootEntry("minecraft:entities/pillager", AwakenItems.RAIDERS_AXE, 5F / 100F);
+            addLootEntry("minecraft:entities/zombie", AwakenItems.ESCAPE_PLAN, 2.5F / 100F);
+            addLootEntry("minecraft:entities/skeleton", AwakenItems.ESCAPE_PLAN, 2.5F / 100F);
+            addLootEntry("minecraft:entities/creeper", AwakenItems.ESCAPE_PLAN, 2.5F / 100F);
+            addLootEntry("minecraft:entities/spider", AwakenItems.ESCAPE_PLAN, 2.5F / 100F);
+            addLootEntry("minecraft:entities/husk", AwakenItems.ARCHAEOLOGIST_SPADE, 15F / 100F);
+            addLootEntry("minecraft:entities/cave_spider", AwakenItems.RUSTY_SHANK, 10F / 100F);
 
             // Special Swords
-            addLootEntry("minecraft:entities/drowned", AwakenItems.ATLANTEAN_SABRE, 1F / 100F);
-            addLootEntry("minecraft:entities/guardian", AwakenItems.ATLANTEAN_SABRE, 5F / 100F);
-            addLootEntry("minecraft:entities/elder_guardian", AwakenItems.ATLANTEAN_SABRE, 15F / 100F);
-            addLootEntry("minecraft:entities/wither_skeleton", AwakenItems.ASHEN_BLADE, 1F / 100F);
+            addLootEntry("minecraft:entities/drowned", AwakenItems.ATLANTEAN_SABRE, 10F / 100F);
+            addLootEntry("minecraft:entities/guardian", AwakenItems.ATLANTEAN_SABRE, 15F / 100F);
+            addLootEntry("minecraft:entities/elder_guardian", AwakenItems.ATLANTEAN_SABRE, 20F / 100F);
+            addLootEntry("minecraft:entities/wither_skeleton", AwakenItems.ASHEN_BLADE, 5F / 100F);
             addLootEntry("minecraft:entities/wither", AwakenItems.ASHEN_BLADE, 33F / 100F);
-            addLootEntry("minecraft:entities/stray", AwakenItems.GLACIAL_SHARD, 5F / 100F);
-            addLootEntry("minecraft:entities/enderman", AwakenItems.ENDERIAN_CUTLASS, 0.1F / 100F);
-            addLootEntry("minecraft:entities/endermite", AwakenItems.ENDERIAN_CUTLASS, 1F / 100F);
-            addLootEntry("minecraft:entities/shulker", AwakenItems.ENDERIAN_CUTLASS, 2.5F / 100F);
-            addLootEntry("minecraft:entities/ender_dragon", AwakenItems.ENDERIAN_CUTLASS, 5F / 100F);
+            addLootEntry("minecraft:entities/stray", AwakenItems.GLACIAL_SHARD, 15F / 100F);
+            addLootEntry("minecraft:entities/enderman", AwakenItems.ENDERIAN_CUTLASS, 2.5F / 100F);
+            addLootEntry("minecraft:entities/endermite", AwakenItems.ENDERIAN_CUTLASS, 10F / 100F);
+            addLootEntry("minecraft:entities/shulker", AwakenItems.ENDERIAN_CUTLASS, 15F / 100F);
+            addLootEntry("minecraft:entities/ender_dragon", AwakenItems.ENDERIAN_CUTLASS, 25F / 100F);
         }
 
         // Phase 2
