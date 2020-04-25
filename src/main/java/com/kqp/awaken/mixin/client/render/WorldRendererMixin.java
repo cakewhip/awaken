@@ -11,19 +11,19 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /**
- * Used to replace the moon texture during a blood moon.
+ * Used to replace the moon texture during a fiery moon.
  */
 @Mixin(WorldRenderer.class)
 public abstract class WorldRendererMixin {
     private static final Identifier NORMAL_MOON = new Identifier("textures/environment/moon_phases.png");
-    private static final Identifier BLOOD_MOON = new Identifier(Awaken.MOD_ID, "textures/environment/blood_moon.png");
+    private static final Identifier FIERY_MOON = new Identifier(Awaken.MOD_ID, "textures/environment/fiery_moon.png");
 
     @Redirect(method = "renderSky", at = @At(value = "FIELD", opcode = Opcodes.GETSTATIC, target = "Lnet/minecraft/client/render/WorldRenderer;MOON_PHASES:Lnet/minecraft/util/Identifier;"))
-    private final Identifier bloodMoonRedirect() {
+    private final Identifier fieryMoonRedirect() {
         AwakenLevelData awakenLevelData = AwakenLevelData.getFor(MinecraftClient.getInstance().world);
 
-        if (awakenLevelData.isBloodMoonActive()) {
-            return BLOOD_MOON;
+        if (awakenLevelData.isFieryMoonActive()) {
+            return FIERY_MOON;
         } else {
             return NORMAL_MOON;
         }

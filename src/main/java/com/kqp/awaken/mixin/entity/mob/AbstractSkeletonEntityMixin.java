@@ -22,8 +22,8 @@ public abstract class AbstractSkeletonEntityMixin {
                     .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1D)
                     .add(AwakenEntityAttributes.RANGED_DAMAGE, 1.75D);
 
-    private static EntityAttributeUtil.EntityAttributeModifierGroup BLOOD_MOON_MODS =
-            new EntityAttributeUtil.EntityAttributeModifierGroup("blood_moon", "skeleton")
+    private static EntityAttributeUtil.EntityAttributeModifierGroup FIERY_MOON_MODS =
+            new EntityAttributeUtil.EntityAttributeModifierGroup("fiery_moon", "skeleton")
                     .add(EntityAttributes.GENERIC_MAX_HEALTH, 0.5D)
                     .add(AwakenEntityAttributes.RANGED_DAMAGE, 0.5D);
 
@@ -37,8 +37,8 @@ public abstract class AbstractSkeletonEntityMixin {
             if (awakenLevelData.isWorldAwakened()) {
                 AWAKENED_MODS.apply(skeleton, true);
 
-                if (awakenLevelData.isBloodMoonActive()) {
-                    BLOOD_MOON_MODS.apply(skeleton, true);
+                if (awakenLevelData.isFieryMoonActive()) {
+                    FIERY_MOON_MODS.apply(skeleton, true);
                 }
             }
         }

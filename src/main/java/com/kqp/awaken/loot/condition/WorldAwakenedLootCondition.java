@@ -38,7 +38,7 @@ public class WorldAwakenedLootCondition implements LootCondition {
             super(new Identifier("world_awakened"), WorldAwakenedLootCondition.class);
         }
 
-        public void toJson(JsonObject jsonObject, WorldAwakenedLootCondition bloodMoonLootCondition, JsonSerializationContext jsonSerializationContext) {
+        public void toJson(JsonObject jsonObject, WorldAwakenedLootCondition fieryMoonLootCondition, JsonSerializationContext jsonSerializationContext) {
         }
 
         public WorldAwakenedLootCondition fromJson(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext) {

@@ -20,8 +20,8 @@ public abstract class ZombieEntityMixin {
                     .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2D)
                     .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.75D);
 
-    private static EntityAttributeUtil.EntityAttributeModifierGroup BLOOD_MOON_MODS =
-            new EntityAttributeUtil.EntityAttributeModifierGroup("blood_moon", "zombie")
+    private static EntityAttributeUtil.EntityAttributeModifierGroup FIERY_MOON_MODS =
+            new EntityAttributeUtil.EntityAttributeModifierGroup("fiery_moon", "zombie")
                     .add(EntityAttributes.GENERIC_MAX_HEALTH, 0.5D)
                     .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.5D);
 
@@ -33,8 +33,8 @@ public abstract class ZombieEntityMixin {
         if (awakenLevelData.isWorldAwakened()) {
             AWAKENED_MODS.apply(zombie, true);
 
-            if (awakenLevelData.isBloodMoonActive()) {
-                BLOOD_MOON_MODS.apply(zombie, true);
+            if (awakenLevelData.isFieryMoonActive()) {
+                FIERY_MOON_MODS.apply(zombie, true);
             }
         }
     }

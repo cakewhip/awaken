@@ -12,18 +12,18 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Used to override the zombie texture during blood moons.
+ * Used to override the zombie texture during fiery moons.
  */
 @Mixin(ZombieBaseEntityRenderer.class)
 public class ZombieBaseEntityRendererMixin {
-    private static final Identifier BLOOD_MOON_TEXTURE = new Identifier(Awaken.MOD_ID, "textures/entity/blood_moon/zombie.png");
+    private static final Identifier FIERY_MOON_TEXTURE = new Identifier(Awaken.MOD_ID, "textures/entity/fiery_moon/zombie.png");
 
     @Inject(method = "getTexture", at = @At("HEAD"), cancellable = true)
-    private void overrideTextureForBloodMoon(ZombieEntity zombieEntity, CallbackInfoReturnable<Identifier> callbackInfo) {
+    private void overrideTextureForFieryMoon(ZombieEntity zombieEntity, CallbackInfoReturnable<Identifier> callbackInfo) {
         AwakenLevelData awakenLevelData = AwakenLevelData.getFor(MinecraftClient.getInstance().world);
 
-        if (awakenLevelData.isBloodMoonActive()) {
-            callbackInfo.setReturnValue(BLOOD_MOON_TEXTURE);
+        if (awakenLevelData.isFieryMoonActive()) {
+            callbackInfo.setReturnValue(FIERY_MOON_TEXTURE);
         }
     }
 }

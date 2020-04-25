@@ -12,18 +12,18 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Used to override the skeleton texture during blood moons.
+ * Used to override the skeleton texture during fiery moons.
  */
 @Mixin(SkeletonEntityRenderer.class)
 public class SkeletonEntityRendererMixin {
-    private static final Identifier BLOOD_MOON_TEXTURE = new Identifier(Awaken.MOD_ID, "textures/entity/blood_moon/skeleton.png");
+    private static final Identifier FIERY_MOON_TEXTURE = new Identifier(Awaken.MOD_ID, "textures/entity/fiery_moon/skeleton.png");
 
     @Inject(method = "getTexture", at = @At("HEAD"), cancellable = true)
-    private void overrideTextureForBloodMoon(AbstractSkeletonEntity abstractSkeletonEntity, CallbackInfoReturnable<Identifier> callbackInfo) {
+    private void overrideTextureForFieryMoon(AbstractSkeletonEntity abstractSkeletonEntity, CallbackInfoReturnable<Identifier> callbackInfo) {
         AwakenLevelData awakenLevelData = AwakenLevelData.getFor(MinecraftClient.getInstance().world);
 
-        if (awakenLevelData.isBloodMoonActive()) {
-            callbackInfo.setReturnValue(BLOOD_MOON_TEXTURE);
+        if (awakenLevelData.isFieryMoonActive()) {
+            callbackInfo.setReturnValue(FIERY_MOON_TEXTURE);
         }
     }
 }

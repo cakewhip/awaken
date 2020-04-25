@@ -43,14 +43,14 @@ public class AwakenLevelData {
     private boolean worldAwakened = false;
 
     /**
-     * Whether the blood moon is active or not.
+     * Whether the fiery moon is active or not.
      */
-    private boolean bloodMoonActive = false;
+    private boolean fieryMoonActive = false;
 
     /**
-     * How long the blood moon has been active.
+     * How long the fiery moon has been active.
      */
-    private long bloodMoonTickTime = 0;
+    private long fieryMoonTickTime = 0;
 
     /**
      * Whether level data should be sent to clients.
@@ -63,8 +63,8 @@ public class AwakenLevelData {
         postRaid = tag.getBoolean("PostRaid");
         postElderGuardian = tag.getBoolean("PostElderGuardian");
         worldAwakened = tag.getBoolean("WorldAwakened");
-        bloodMoonActive = tag.getBoolean("BloodMoonActive");
-        bloodMoonTickTime = tag.getLong("BloodMoonTickTime");
+        fieryMoonActive = tag.getBoolean("FieryMoonActive");
+        fieryMoonTickTime = tag.getLong("FieryMoonTickTime");
     }
 
     public AwakenLevelData() {
@@ -74,7 +74,7 @@ public class AwakenLevelData {
      * Called on every tick using {@link net.fabricmc.fabric.api.event.world.WorldTickCallback}.
      */
     public void tick(MinecraftServer server) {
-        tickBloodMoon(server);
+        tickFieryMoon(server);
 
         if (this.dirty) {
             this.syncToClients(server);
@@ -83,40 +83,40 @@ public class AwakenLevelData {
     }
 
     /**
-     * Updates stuff for blood moon handling.
+     * Updates stuff for fiery moon handling.
      */
-    public void tickBloodMoon(MinecraftServer server) {
+    public void tickFieryMoon(MinecraftServer server) {
         World world = server.getWorld(DimensionType.OVERWORLD);
         long time = world.getTimeOfDay() % 24000;
 
-        if (this.bloodMoonActive) {
+        if (this.fieryMoonActive) {
             if (time < AwakenConfig.NIGHT_START || time >= AwakenConfig.NIGHT_END) {
-                // Not night and blood moon active, end it
-                endBloodMoon();
+                // Not night and fiery moon active, end it
+                endFieryMoon();
                 return;
             }
 
-            this.bloodMoonTickTime++;
+            this.fieryMoonTickTime++;
         } else if (time == AwakenConfig.NIGHT_START) {
-            // Moon is rising, roll blood moon chance
+            // Moon is rising, roll fiery moon chance
 
-            if (isWorldAwakened() && world.random.nextFloat() < AwakenConfig.BLOOD_MOON_CHANCE) {
-                startBloodMoon(server);
+            if (isWorldAwakened() && world.random.nextFloat() < AwakenConfig.FIERY_MOON_CHANCE) {
+                startFieryMoon(server);
             }
         }
     }
 
-    public void startBloodMoon(MinecraftServer server) {
-        this.bloodMoonActive = true;
-        this.bloodMoonTickTime = 0;
+    public void startFieryMoon(MinecraftServer server) {
+        this.fieryMoonActive = true;
+        this.fieryMoonTickTime = 0;
         markDirty();
 
-        Broadcaster.broadcastMessage(server, "The blood moon rises...", Formatting.DARK_RED, true, false);
+        Broadcaster.broadcastMessage(server, "The fiery moon rises...", Formatting.GOLD, true, false);
     }
 
-    private void endBloodMoon() {
-        Awaken.info("Ending blood moon");
-        this.bloodMoonActive = false;
+    private void endFieryMoon() {
+        Awaken.info("Ending fiery moon");
+        this.fieryMoonActive = false;
         markDirty();
     }
 
@@ -163,8 +163,8 @@ public class AwakenLevelData {
         }
     }
 
-    public boolean isBloodMoonActive() {
-        return bloodMoonActive;
+    public boolean isFieryMoonActive() {
+        return fieryMoonActive;
     }
 
     public void markDirty() {
@@ -177,8 +177,8 @@ public class AwakenLevelData {
         tag.putBoolean("PostRaid", postRaid);
         tag.putBoolean("PostElderGuardian", postElderGuardian);
         tag.putBoolean("WorldAwakened", worldAwakened);
-        tag.putBoolean("BloodMoonActive", bloodMoonActive);
-        tag.putLong("BloodMoonTickTime", bloodMoonTickTime);
+        tag.putBoolean("FieryMoonActive", fieryMoonActive);
+        tag.putLong("FieryMoonTickTime", fieryMoonTickTime);
     }
 
     public void syncToClients(MinecraftServer server) {

@@ -13,10 +13,10 @@ import net.minecraft.util.Identifier;
 
 import java.util.Set;
 
-public class BloodMoonLootCondition implements LootCondition {
-    private static final BloodMoonLootCondition INSTANCE = new BloodMoonLootCondition();
+public class FieryMoonLootCondition implements LootCondition {
+    private static final FieryMoonLootCondition INSTANCE = new FieryMoonLootCondition();
 
-    private BloodMoonLootCondition() {
+    private FieryMoonLootCondition() {
     }
 
     public Set<LootContextParameter<?>> getRequiredParameters() {
@@ -26,23 +26,23 @@ public class BloodMoonLootCondition implements LootCondition {
     public boolean test(LootContext lootContext) {
         AwakenLevelData awakenLevelData = AwakenLevelData.getFor(lootContext.getWorld());
 
-        return awakenLevelData.isBloodMoonActive();
+        return awakenLevelData.isFieryMoonActive();
     }
 
     public static LootCondition.Builder builder() {
         return () -> INSTANCE;
     }
 
-    public static class Factory extends LootCondition.Factory<BloodMoonLootCondition> {
+    public static class Factory extends LootCondition.Factory<FieryMoonLootCondition> {
         public Factory() {
-            super(new Identifier("blood_moon_active"), BloodMoonLootCondition.class);
+            super(new Identifier("fiery_moon_active"), FieryMoonLootCondition.class);
         }
 
-        public void toJson(JsonObject jsonObject, BloodMoonLootCondition bloodMoonLootCondition, JsonSerializationContext jsonSerializationContext) {
+        public void toJson(JsonObject jsonObject, FieryMoonLootCondition fieryMoonLootCondition, JsonSerializationContext jsonSerializationContext) {
         }
 
-        public BloodMoonLootCondition fromJson(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext) {
-            return BloodMoonLootCondition.INSTANCE;
+        public FieryMoonLootCondition fromJson(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext) {
+            return FieryMoonLootCondition.INSTANCE;
         }
     }
 }

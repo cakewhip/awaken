@@ -20,10 +20,10 @@ public class AwakenCommands {
                 return 1;
             }));
 
-            dispatcher.register(CommandManager.literal("trigger_blood_moon").executes(ctx -> {
+            dispatcher.register(CommandManager.literal("trigger_fiery_moon").executes(ctx -> {
                 AwakenLevelData awakenLevelData = AwakenLevelData.getFor(ctx.getSource().getWorld());
 
-                awakenLevelData.startBloodMoon(ctx.getSource().getMinecraftServer());
+                awakenLevelData.startFieryMoon(ctx.getSource().getMinecraftServer());
 
                 return 1;
             }));

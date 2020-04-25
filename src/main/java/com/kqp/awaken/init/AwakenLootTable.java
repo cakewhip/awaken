@@ -2,7 +2,7 @@ package com.kqp.awaken.init;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.kqp.awaken.loot.condition.BiomeSpecificLootCondition;
-import com.kqp.awaken.loot.condition.BloodMoonLootCondition;
+import com.kqp.awaken.loot.condition.FieryMoonLootCondition;
 import com.kqp.awaken.loot.condition.WorldAwakenedLootCondition;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.FabricLootSupplierBuilder;
@@ -29,7 +29,7 @@ public class AwakenLootTable {
     public static void init() {
         // Custom Loot Conditions
         LootConditions.register(new WorldAwakenedLootCondition.Factory());
-        LootConditions.register(new BloodMoonLootCondition.Factory());
+        LootConditions.register(new FieryMoonLootCondition.Factory());
         LootConditions.register(new BiomeSpecificLootCondition.Factory());
 
         // Phase 1
@@ -66,10 +66,10 @@ public class AwakenLootTable {
         // Phase 2
         {
             // Reagents
-            addLootEntry("minecraft:entities/zombie", AwakenItems.NECROTIC_HEART, 5F / 100F, BloodMoonLootCondition.builder());
-            addLootEntry("minecraft:entities/creeper", AwakenItems.CREEPER_TISSUE, 20F / 100F, BloodMoonLootCondition.builder());
-            addLootEntry("minecraft:entities/spider", AwakenItems.SPIDER_SILK, 20F / 100F, BloodMoonLootCondition.builder());
-            addLootEntry("minecraft:entities/skeleton", AwakenItems.BONE_MARROW, 20F / 100F, BloodMoonLootCondition.builder());
+            addLootEntry("minecraft:entities/zombie", AwakenItems.NECROTIC_HEART, 5F / 100F, FieryMoonLootCondition.builder());
+            addLootEntry("minecraft:entities/creeper", AwakenItems.CREEPER_TISSUE, 20F / 100F, FieryMoonLootCondition.builder());
+            addLootEntry("minecraft:entities/spider", AwakenItems.SPIDER_SILK, 20F / 100F, FieryMoonLootCondition.builder());
+            addLootEntry("minecraft:entities/skeleton", AwakenItems.BONE_MARROW, 20F / 100F, FieryMoonLootCondition.builder());
         }
     }
 
