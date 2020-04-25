@@ -3,6 +3,7 @@ package com.kqp.awaken.mixin.client;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.hit.EntityHitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,12 +24,13 @@ public class MinecraftClientMixin {
     @Inject(method = "doAttack", at = @At("HEAD"), cancellable = true)
     private void doAttack(CallbackInfo callbackInfo) {
         MinecraftClient client = (MinecraftClient) (Object) this;
-        if (this.attackCooldown <= 0) {
-            if (client.crosshairTarget != null && !client.player.isRiding()) {
-                if (client.crosshairTarget.getType() == ENTITY) {
-                    if (!canAttack(client.player)) {
-                        callbackInfo.cancel();
-                    }
+
+        if (client.crosshairTarget != null) {
+            if (client.crosshairTarget.getType() == ENTITY) {
+                callbackInfo.cancel();
+
+                if (canAttack(client.player)) {
+                    client.interactionManager.attackEntity(client.player, ((EntityHitResult) client.crosshairTarget).getEntity());
                 }
             }
         }
@@ -38,12 +40,10 @@ public class MinecraftClientMixin {
     public void cancelResetAttackCooldown(ClientPlayerEntity player) {
         MinecraftClient client = (MinecraftClient) (Object) this;
 
-        if (this.attackCooldown <= 0) {
-            if (client.crosshairTarget != null && !client.player.isRiding()) {
-                if (client.crosshairTarget.getType() == ENTITY) {
-                    if (canAttack(client.player)) {
-                        client.player.resetLastAttackedTicks();
-                    }
+        if (client.crosshairTarget != null) {
+            if (client.crosshairTarget.getType() == ENTITY) {
+                if (canAttack(client.player)) {
+                    client.player.resetLastAttackedTicks();
                 }
             }
         }
