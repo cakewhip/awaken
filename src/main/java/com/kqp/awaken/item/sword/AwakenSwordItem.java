@@ -22,7 +22,7 @@ public class AwakenSwordItem extends SwordItem {
     public AwakenRarity rarity = AwakenRarity.OKAY;
 
     public AwakenSwordItem(AwakenToolMaterial material) {
-        super(material, 0, material.getAttackSpeed() - 4, new Item.Settings().group(ItemGroup.COMBAT));
+        super(material, -1, material.getAttackSpeed() - 4, new Item.Settings().group(ItemGroup.COMBAT));
     }
 
     public Item setRarity(AwakenRarity rarity) {

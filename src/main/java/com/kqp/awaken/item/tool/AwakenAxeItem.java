@@ -1,5 +1,6 @@
 package com.kqp.awaken.item.tool;
 
+import com.kqp.awaken.item.material.AwakenToolMaterial;
 import com.kqp.awaken.loot.AwakenRarity;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
@@ -9,7 +10,6 @@ import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolMaterial;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 
@@ -21,8 +21,8 @@ import java.util.List;
 public class AwakenAxeItem extends AxeItem {
     public AwakenRarity rarity = AwakenRarity.OKAY;
 
-    public AwakenAxeItem(ToolMaterial material) {
-        super(material, 5.0F, -3.0F, new Item.Settings().group(ItemGroup.TOOLS));
+    public AwakenAxeItem(AwakenToolMaterial material) {
+        super(material, -1F, material.getAttackSpeed() - 4, new Item.Settings().group(ItemGroup.TOOLS));
     }
 
     public Item setRarity(AwakenRarity rarity) {

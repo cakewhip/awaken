@@ -1,5 +1,6 @@
 package com.kqp.awaken.item.tool;
 
+import com.kqp.awaken.item.material.AwakenToolMaterial;
 import com.kqp.awaken.loot.AwakenRarity;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
@@ -9,7 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
-import net.minecraft.item.ToolMaterial;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 
@@ -21,8 +21,8 @@ import java.util.List;
 public class AwakenPickaxeItem extends PickaxeItem {
     public AwakenRarity rarity = AwakenRarity.OKAY;
 
-    public AwakenPickaxeItem(ToolMaterial material) {
-        super(material, 1, -3.0F, new Settings().group(ItemGroup.TOOLS));
+    public AwakenPickaxeItem(AwakenToolMaterial material) {
+        super(material, -1, material.getAttackSpeed() - 4, new Settings().group(ItemGroup.TOOLS));
     }
 
     public Item setRarity(AwakenRarity rarity) {
