@@ -5,6 +5,7 @@ import com.kqp.awaken.item.armor.AwakenArmorItem;
 import com.kqp.awaken.item.bow.FlameBowItem;
 import com.kqp.awaken.item.bow.StatusEffectBowItem;
 import com.kqp.awaken.item.effect.SetBonusEquippable;
+import com.kqp.awaken.item.health.HealthIncreaseItem;
 import com.kqp.awaken.item.material.AwakenArmorMaterial;
 import com.kqp.awaken.item.material.AwakenToolMaterial;
 import com.kqp.awaken.item.pickaxe.EscapePlanItem;
@@ -55,6 +56,12 @@ public class AwakenItems {
     public static final Item ENDERIAN_CUTLASS = new EnderianCutlassItem(AwakenToolMaterial.newSwordMaterial(1500, 6, 10)).setRarity(AwakenRarity.EPIC);
     public static final Item JANG_KATANA = new JangKatanaItem().setRarity(AwakenRarity.FABLED);
 
+
+    public static final Item CREEPER_TISSUE = genericItem();
+    public static final Item NECROTIC_HEART = genericItem();
+    public static final Item SPIDER_SILK = genericItem();
+    public static final Item BONE_MARROW = genericItem();
+    public static final Item MOB_HEART = new HealthIncreaseItem("mob_heart", 10);
 
     public static final Item CORSAIR_TOKEN = genericItem();
     public static final Item RAPTOR_CHICKEN_EGG = genericItem();
@@ -132,6 +139,11 @@ public class AwakenItems {
         // Phase 2
         {
             // Reagents
+            register(CREEPER_TISSUE, "creeper_tissue");
+            register(NECROTIC_HEART, "necrotic_heart");
+            register(SPIDER_SILK, "spider_silk");
+            register(BONE_MARROW, "bone_marrow");
+            register(MOB_HEART, "mob_heart");
             register(CORSAIR_TOKEN, "corsair_token");
             register(RAPTOR_CHICKEN_EGG, "raptor_chicken_egg");
             register(SALVIUM_INGOT, "salvium_ingot");

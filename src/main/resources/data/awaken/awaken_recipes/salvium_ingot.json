@@ -1,5 +1,5 @@
 {
-  "type": "furnace",
+  "type": "enderian_hell_forge",
   "recipe": {
     "output": {
       "item": "awaken:salvium_ingot"

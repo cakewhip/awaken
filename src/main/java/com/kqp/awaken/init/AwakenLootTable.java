@@ -60,6 +60,15 @@ public class AwakenLootTable {
             addLootEntry("minecraft:entities/shulker", AwakenItems.ENDERIAN_CUTLASS, 2.5F / 100F);
             addLootEntry("minecraft:entities/ender_dragon", AwakenItems.ENDERIAN_CUTLASS, 5F / 100F);
         }
+
+        // Phase 2
+        {
+            // Reagents
+            addLootEntry("minecraft:entities/zombie", AwakenItems.NECROTIC_HEART, 2.5F / 100F, BloodMoonLootCondition.builder());
+            addLootEntry("minecraft:entities/creeper", AwakenItems.CREEPER_TISSUE, 12.5F / 100F, BloodMoonLootCondition.builder());
+            addLootEntry("minecraft:entities/spider", AwakenItems.SPIDER_SILK, 12.5F / 100F, BloodMoonLootCondition.builder());
+            addLootEntry("minecraft:entities/skeleton", AwakenItems.BONE_MARROW, 12.5F / 100F, BloodMoonLootCondition.builder());
+        }
     }
 
     public static void addLootEntry(String id, ItemConvertible item, float chance, LootCondition.Builder... conditions) {

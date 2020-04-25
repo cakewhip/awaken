@@ -23,6 +23,7 @@
     "screen.SmithingScreenHandlerMixin",
     "server.MinecraftServerMixin",
     "server.PlayerManagerMixin",
+    "server.network.ServerPlayerEntityMixin",
     "world.chunk.WorldChunkMixin",
     "world.level.LevelPropertiesMixin",
     "world.ChunkSerializerMixin"

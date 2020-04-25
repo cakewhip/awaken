@@ -27,7 +27,14 @@
     "item.awaken.glacial_shard": "Glacial Shard",
     "item.awaken.enderian_cutlass": "Enderian Cutlass",
     "item.awaken.jang_katana": "Jang Katana",
-    
+
+    "__comment": "Phase 2 Reagents",
+    "item.awaken.creeper_tissue": "Creeper Tissue",
+    "item.awaken.necrotic_heart": "Necrotic Heart",
+    "item.awaken.bone_marrow": "Bone Marrow",
+    "item.awaken.spider_silk": "Spider Silk",
+    "item.awaken.mob_heart": "Mob Heart",
+
     "__comment": "Phase 2 Ore Groups",
     "block.awaken.salvium_ore": "Salvium Ore",
     "item.awaken.salvium_ore": "Salvium Ore",

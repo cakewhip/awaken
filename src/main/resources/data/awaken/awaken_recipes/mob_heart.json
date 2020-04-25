@@ -1,0 +1,25 @@
+{
+  "type": "crafting_table",
+  "recipe": {
+    "output": {
+      "item": "awaken:mob_heart"
+    },
+    "reagents": [
+      {
+        "item": "awaken:necrotic_heart"
+      },
+      {
+        "item": "awaken:creeper_tissue",
+        "count": 4
+      },
+      {
+        "item": "awaken:spider_silk",
+        "count": 4
+      },
+      {
+        "item": "awaken:bone_marrow",
+        "count": 4
+      }
+    ]
+  }
+}
