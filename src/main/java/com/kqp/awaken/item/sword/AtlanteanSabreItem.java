@@ -1,6 +1,6 @@
 package com.kqp.awaken.item.sword;
 
-import com.kqp.awaken.item.tool.AwakenSwordItem;
+import com.kqp.awaken.item.material.AwakenToolMaterial;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -8,7 +8,6 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolMaterial;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
@@ -23,7 +22,7 @@ import java.util.List;
  * Class for the Atlantean Sabre.
  */
 public class AtlanteanSabreItem extends AwakenSwordItem {
-    public AtlanteanSabreItem(ToolMaterial material) {
+    public AtlanteanSabreItem(AwakenToolMaterial material) {
         super(material);
     }
 

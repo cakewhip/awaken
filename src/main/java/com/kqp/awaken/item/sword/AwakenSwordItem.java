@@ -1,5 +1,6 @@
-package com.kqp.awaken.item.tool;
+package com.kqp.awaken.item.sword;
 
+import com.kqp.awaken.item.material.AwakenToolMaterial;
 import com.kqp.awaken.loot.AwakenRarity;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
@@ -9,7 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
-import net.minecraft.item.ToolMaterial;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 
@@ -21,8 +21,8 @@ import java.util.List;
 public class AwakenSwordItem extends SwordItem {
     public AwakenRarity rarity = AwakenRarity.OKAY;
 
-    public AwakenSwordItem(ToolMaterial material) {
-        super(material, 3, -2.4F, new Item.Settings().group(ItemGroup.COMBAT));
+    public AwakenSwordItem(AwakenToolMaterial material) {
+        super(material, 0, material.getAttackSpeed() - 4, new Item.Settings().group(ItemGroup.COMBAT));
     }
 
     public Item setRarity(AwakenRarity rarity) {

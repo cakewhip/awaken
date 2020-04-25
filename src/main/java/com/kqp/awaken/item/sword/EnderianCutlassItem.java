@@ -1,6 +1,6 @@
 package com.kqp.awaken.item.sword;
 
-import com.kqp.awaken.item.tool.AwakenSwordItem;
+import com.kqp.awaken.item.material.AwakenToolMaterial;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -9,7 +9,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.ToolMaterial;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.LiteralText;
@@ -24,7 +23,7 @@ import java.util.List;
  * Class for the Enderian Cutlass.
  */
 public class EnderianCutlassItem extends AwakenSwordItem {
-    public EnderianCutlassItem(ToolMaterial material) {
+    public EnderianCutlassItem(AwakenToolMaterial material) {
         super(material);
     }
 

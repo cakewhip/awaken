@@ -12,7 +12,6 @@ import com.kqp.awaken.item.pickaxe.EscapePlanItem;
 import com.kqp.awaken.item.shovel.ArchaeologistSpadeItem;
 import com.kqp.awaken.item.sword.AtlanteanSabreItem;
 import com.kqp.awaken.item.sword.EnderianCutlassItem;
-import com.kqp.awaken.item.sword.JangKatanaItem;
 import com.kqp.awaken.item.sword.StatusEffectSwordItem;
 import com.kqp.awaken.item.tool.AwakenAxeItem;
 import com.kqp.awaken.item.trident.AwakenTridentItem;
@@ -51,16 +50,15 @@ public class AwakenItems {
 
     public static final Item CINDERED_BOW = new FlameBowItem(5.0D, false).setRarity(AwakenRarity.RARE);
     public static final Item SLIMEY_BOW = new StatusEffectBowItem(3.0D, false, StatusEffects.SLOWNESS, 2 * 20, 0).setRarity(AwakenRarity.RARE);
-    public static final Item RAIDERS_AXE = new AwakenAxeItem(AwakenToolMaterial.newSwordMaterial(1500, 4F, 5)).setRarity(AwakenRarity.UNCOMMON);
-    public static final Item ESCAPE_PLAN = new EscapePlanItem(AwakenToolMaterial.newToolMaterial(3, 1500, 8F, 1F, 10)).setRarity(AwakenRarity.UNCOMMON);
-    public static final Item ARCHAEOLOGIST_SPADE = new ArchaeologistSpadeItem(AwakenToolMaterial.newToolMaterial(0, 3000, 8F, 3F, 22)).setRarity(AwakenRarity.UNCOMMON);
-    public static final Item RUSTY_SHANK = new StatusEffectSwordItem(AwakenToolMaterial.newSwordMaterial(1000, 3F, 5), StatusEffects.POISON, 8 * 20, 0).setRarity(AwakenRarity.UNCOMMON);
+    public static final Item RAIDERS_AXE = new AwakenAxeItem(AwakenToolMaterial.sword(1500, 4F, 1.6F, 10)).setRarity(AwakenRarity.UNCOMMON);
+    public static final Item ESCAPE_PLAN = new EscapePlanItem(AwakenToolMaterial.tool(-1, 3, 1500, 8F, 1F, 10)).setRarity(AwakenRarity.UNCOMMON);
+    public static final Item ARCHAEOLOGIST_SPADE = new ArchaeologistSpadeItem(AwakenToolMaterial.tool(-1, 3000, 8F, 3F, 3F, 22)).setRarity(AwakenRarity.UNCOMMON);
+    public static final Item RUSTY_SHANK = new StatusEffectSwordItem(AwakenToolMaterial.sword(1000, 3F, 1.6F, 5), StatusEffects.POISON, 8 * 20, 0).setRarity(AwakenRarity.UNCOMMON);
 
-    public static final Item ATLANTEAN_SABRE = new AtlanteanSabreItem(AwakenToolMaterial.newSwordMaterial(1500, 5, 10)).setRarity(AwakenRarity.EPIC);
-    public static final Item ASHEN_BLADE = new StatusEffectSwordItem(AwakenToolMaterial.newSwordMaterial(1500, 5, 10), StatusEffects.WITHER, 4 * 20, 0).setRarity(AwakenRarity.EPIC);
-    public static final Item GLACIAL_SHARD = new StatusEffectSwordItem(AwakenToolMaterial.newSwordMaterial(1500, 5, 10), StatusEffects.SLOWNESS, 4 * 20, 0).setRarity(AwakenRarity.EPIC);
-    public static final Item ENDERIAN_CUTLASS = new EnderianCutlassItem(AwakenToolMaterial.newSwordMaterial(1500, 6, 10)).setRarity(AwakenRarity.EPIC);
-    public static final Item JANG_KATANA = new JangKatanaItem().setRarity(AwakenRarity.FABLED);
+    public static final Item ATLANTEAN_SABRE = new AtlanteanSabreItem(AwakenToolMaterial.sword(1500, 5, 1.6F, 10)).setRarity(AwakenRarity.EPIC);
+    public static final Item ASHEN_BLADE = new StatusEffectSwordItem(AwakenToolMaterial.sword(1500, 5, 1.6F, 10), StatusEffects.WITHER, 4 * 20, 0).setRarity(AwakenRarity.EPIC);
+    public static final Item GLACIAL_SHARD = new StatusEffectSwordItem(AwakenToolMaterial.sword(1500, 5, 1.6F, 10), StatusEffects.SLOWNESS, 4 * 20, 0).setRarity(AwakenRarity.EPIC);
+    public static final Item ENDERIAN_CUTLASS = new EnderianCutlassItem(AwakenToolMaterial.sword(1500, 6, 1.6F, 10)).setRarity(AwakenRarity.EPIC);
 
 
     public static final Item SMOLDERING_HEART = genericItem();
@@ -128,7 +126,6 @@ public class AwakenItems {
             register(ASHEN_BLADE, "ashen_blade");
             register(GLACIAL_SHARD, "glacial_shard");
             register(ENDERIAN_CUTLASS, "enderian_cutlass");
-            register(JANG_KATANA, "jang_katana");
 
             // Armor
             register(DRAGON_SCALE_HELMET, "dragon_scale_helmet");

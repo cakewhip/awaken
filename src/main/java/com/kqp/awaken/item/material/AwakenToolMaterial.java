@@ -1,5 +1,6 @@
 package com.kqp.awaken.item.material;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 
@@ -10,56 +11,62 @@ import java.util.function.Supplier;
  */
 public class AwakenToolMaterial implements ToolMaterial {
     private final int miningLevel;
-    private final int itemDurability;
+    private final int durability;
     private final float miningSpeed;
     private final float attackDamage;
+    private final float attackSpeed;
     private final int enchantability;
     private final Supplier<Ingredient> repairIngredient;
 
-    private AwakenToolMaterial(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
+    private AwakenToolMaterial(int miningLevel, int durability, float miningSpeed, float attackDamage, float attackSpeed, int enchantability, Supplier<Ingredient> repairIngredient) {
         this.miningLevel = miningLevel;
-        this.itemDurability = itemDurability;
+        this.durability = durability;
         this.miningSpeed = miningSpeed;
         this.attackDamage = attackDamage;
+        this.attackSpeed = attackSpeed;
         this.enchantability = enchantability;
         this.repairIngredient = repairIngredient;
     }
 
     @Override
     public int getDurability() {
-        return itemDurability;
+        return this.durability;
     }
 
     @Override
     public float getMiningSpeedMultiplier() {
-        return miningSpeed;
+        return this.miningSpeed;
     }
 
     @Override
     public float getAttackDamage() {
-        return attackDamage;
+        return this.attackDamage;
+    }
+
+    public float getAttackSpeed() {
+        return this.attackSpeed;
     }
 
     @Override
     public int getMiningLevel() {
-        return miningLevel;
+        return this.miningLevel;
     }
 
     @Override
     public int getEnchantability() {
-        return enchantability;
+        return this.enchantability;
     }
 
     @Override
     public Ingredient getRepairIngredient() {
-        return repairIngredient.get();
+        return this.repairIngredient.get();
     }
 
-    public static AwakenToolMaterial newSwordMaterial(int itemDurability, float attackDamage, int enchantability) {
-        return new AwakenToolMaterial(-1, itemDurability, 6F, attackDamage, enchantability, () -> Ingredient.EMPTY);
+    public static AwakenToolMaterial sword(int durability, float attackDamage, float attackSpeed, int enchantability, Item... repairItems) {
+        return AwakenToolMaterial.tool(-1, durability, 6F, attackDamage, attackSpeed, enchantability, repairItems);
     }
 
-    public static AwakenToolMaterial newToolMaterial(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability) {
-        return new AwakenToolMaterial(miningLevel, itemDurability, miningSpeed, attackDamage, enchantability, () -> Ingredient.EMPTY);
+    public static AwakenToolMaterial tool(int miningLevel, int durability, float miningSpeed, float attackDamage, float attackSpeed, int enchantability, Item... repairItems) {
+        return new AwakenToolMaterial(miningLevel, durability, miningSpeed, attackDamage, attackSpeed, enchantability, () -> Ingredient.ofItems(repairItems));
     }
 }

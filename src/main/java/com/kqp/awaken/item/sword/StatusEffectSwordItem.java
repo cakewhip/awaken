@@ -1,6 +1,6 @@
 package com.kqp.awaken.item.sword;
 
-import com.kqp.awaken.item.tool.AwakenSwordItem;
+import com.kqp.awaken.item.material.AwakenToolMaterial;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -10,7 +10,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolMaterial;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
@@ -24,7 +23,7 @@ public class StatusEffectSwordItem extends AwakenSwordItem {
     public StatusEffect effect;
     public int duration, amplifier;
 
-    public StatusEffectSwordItem(ToolMaterial material, StatusEffect effect, int duration, int amplifier) {
+    public StatusEffectSwordItem(AwakenToolMaterial material, StatusEffect effect, int duration, int amplifier) {
         super(material);
 
         this.effect = effect;
