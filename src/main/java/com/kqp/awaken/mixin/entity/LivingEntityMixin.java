@@ -1,9 +1,13 @@
 package com.kqp.awaken.mixin.entity;
 
 import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import com.kqp.awaken.item.sword.AtlanteanSabreItem;
 import com.kqp.awaken.util.Broadcaster;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -13,6 +17,9 @@ import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.AxeItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
@@ -79,6 +86,39 @@ public abstract class LivingEntityMixin {
                         livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 6 * 20, 1));
                     }
                 }
+            }
+        }
+    }
+
+    @Inject(method = "getAttribute", at = @At("HEAD"), cancellable = true)
+    public void getAttribute(EntityAttribute entityAttribute, CallbackInfoReturnable<Double> callbackInfo) {
+        if (((Object) this) instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) (Object) this;
+
+            if (entityAttribute == EntityAttributes.GENERIC_ATTACK_DAMAGE) {
+                double damage = player.getAttributes().getValue(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+
+                EntityAttributeInstance attribute = player.getAttributeInstance(AwakenEntityAttributes.MELEE_DAMAGE);
+                attribute.setBaseValue(damage);
+                damage = attribute.getValue();
+                attribute.setBaseValue(0D);
+
+                ItemStack held = player.getMainHandStack();
+                attribute = null;
+
+                if (held.getItem() instanceof SwordItem) {
+                    attribute = player.getAttributeInstance(AwakenEntityAttributes.SWORD_DAMAGE);
+                } else if (held.getItem() instanceof AxeItem) {
+                    attribute = player.getAttributeInstance(AwakenEntityAttributes.AXE_DAMAGE);
+                }
+
+                if (attribute != null) {
+                    attribute.setBaseValue(damage);
+                    damage = attribute.getValue();
+                    attribute.setBaseValue(0D);
+                }
+
+                callbackInfo.setReturnValue(damage);
             }
         }
     }

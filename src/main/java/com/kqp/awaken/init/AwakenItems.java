@@ -42,7 +42,7 @@ public class AwakenItems {
     public static final Item DRAGON_SCALE_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.FEET);
 
     public static final Item WITHER_BONE_HELMET = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.HEAD, new SetBonusEquippable()
-            .addEntityAttributeModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, "wither_bone_damage", 0.05F))
+            .addEntityAttributeModifier(AwakenEntityAttributes.MELEE_DAMAGE, "wither_bone_damage", 0.05F))
             .addToolTip("Set bonus: 5% extra melee damage");
     public static final Item WITHER_BONE_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.CHEST);
     public static final Item WITHER_BONE_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.LEGS);
@@ -81,6 +81,10 @@ public class AwakenItems {
             .addEntityAttributeModifier(AwakenEntityAttributes.CROSSBOW_DAMAGE, "salvium_crossbow_damage", 0.08F))
             .addToolTip("Set bonus: 8% extra crossbow damage")
             .setCustomTextureLayer("beret");
+    public static final Item SALVIUM_MASK = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
+            .addEntityAttributeModifier(AwakenEntityAttributes.TRIDENT_DAMAGE, "salvium_trident_damage", 0.08F))
+            .addToolTip("Set bonus: 8% extra trident damage")
+            .setCustomTextureLayer("mask");
     public static final Item SALVIUM_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.CHEST);
     public static final Item SALVIUM_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.LEGS);
     public static final Item SALVIUM_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.FEET);
@@ -88,10 +92,10 @@ public class AwakenItems {
     public static final Item VALERIUM_HELMET = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
             .addEntityAttributeModifier(AwakenEntityAttributes.SWORD_DAMAGE, "valerium_sword_damage", 0.08F))
             .addToolTip("Set bonus: 8% extra sword damage");
-    public static final Item VALERIUM_MASK = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
-            .addEntityAttributeModifier(AwakenEntityAttributes.TRIDENT_DAMAGE, "valerium_trident_damage", 0.08F))
-            .addToolTip("Set bonus: 8% extra trident damage")
-            .setCustomTextureLayer("mask");
+    public static final Item VALERIUM_CAP = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
+            .addEntityAttributeModifier(AwakenEntityAttributes.AXE_DAMAGE, "valerium_axe_damage", 0.08F))
+            .addToolTip("Set bonus: 8% extra axe damage")
+            .setCustomTextureLayer("cap");
     public static final Item VALERIUM_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.CHEST);
     public static final Item VALERIUM_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.LEGS);
     public static final Item VALERIUM_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.FEET);
@@ -159,12 +163,13 @@ public class AwakenItems {
             // Armor
             register(SALVIUM_HEADGEAR, "salvium_headgear");
             register(SALVIUM_BERET, "salvium_beret");
+            register(SALVIUM_MASK, "valerium_mask");
             register(SALVIUM_CHESTPLATE, "salvium_chestplate");
             register(SALVIUM_LEGGINGS, "salvium_leggings");
             register(SALVIUM_BOOTS, "salvium_boots");
 
             register(VALERIUM_HELMET, "valerium_helmet");
-            register(VALERIUM_MASK, "valerium_mask");
+            register(VALERIUM_CAP, "valerium_cap");
             register(VALERIUM_CHESTPLATE, "valerium_chestplate");
             register(VALERIUM_LEGGINGS, "valerium_leggings");
             register(VALERIUM_BOOTS, "valerium_boots");
