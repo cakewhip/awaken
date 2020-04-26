@@ -2,8 +2,10 @@ package com.kqp.awaken.init;
 
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import com.kqp.awaken.item.armor.AwakenArmorItem;
+import com.kqp.awaken.item.bow.AwakenBowItem;
 import com.kqp.awaken.item.bow.FlameBowItem;
 import com.kqp.awaken.item.bow.StatusEffectBowItem;
+import com.kqp.awaken.item.crossbow.AwakenCrossbowItem;
 import com.kqp.awaken.item.effect.SetBonusEquippable;
 import com.kqp.awaken.item.health.HealthIncreaseItem;
 import com.kqp.awaken.item.material.AwakenArmorMaterial;
@@ -11,13 +13,14 @@ import com.kqp.awaken.item.material.AwakenToolMaterial;
 import com.kqp.awaken.item.pickaxe.EscapePlanItem;
 import com.kqp.awaken.item.shovel.ArchaeologistSpadeItem;
 import com.kqp.awaken.item.sword.AtlanteanSabreItem;
+import com.kqp.awaken.item.sword.AwakenSwordItem;
 import com.kqp.awaken.item.sword.EnderianCutlassItem;
 import com.kqp.awaken.item.sword.StatusEffectSwordItem;
 import com.kqp.awaken.item.tool.AwakenAxeItem;
+import com.kqp.awaken.item.tool.AwakenPickaxeItem;
 import com.kqp.awaken.item.trident.AwakenTridentItem;
 import com.kqp.awaken.loot.AwakenRarity;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -35,20 +38,20 @@ public class AwakenItems {
     public static final Item WITHER_RIB = genericItem();
 
     public static final Item DRAGON_SCALE_HELMET = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.HEAD, new SetBonusEquippable()
-            .addEntityAttributeModifier(AwakenEntityAttributes.RANGED_DAMAGE, "dragon_scale_ranged_damage", 0.05F))
-            .addToolTip("Set bonus: 5% extra ranged damage");
+            .addEntityAttributeModifier(AwakenEntityAttributes.RANGED_DAMAGE, "dragon_scale_ranged_damage", 5F / 100F))
+            .addToolTip("Set bonus:").addToolTip("5% extra ranged damage");
     public static final Item DRAGON_SCALE_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.CHEST);
     public static final Item DRAGON_SCALE_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.LEGS);
     public static final Item DRAGON_SCALE_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.FEET);
 
     public static final Item WITHER_BONE_HELMET = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.HEAD, new SetBonusEquippable()
-            .addEntityAttributeModifier(AwakenEntityAttributes.MELEE_DAMAGE, "wither_bone_damage", 0.05F))
-            .addToolTip("Set bonus: 5% extra melee damage");
+            .addEntityAttributeModifier(AwakenEntityAttributes.MELEE_DAMAGE, "wither_bone_damage", 5F / 100F))
+            .addToolTip("Set bonus:").addToolTip("5% extra melee damage");
     public static final Item WITHER_BONE_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.CHEST);
     public static final Item WITHER_BONE_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.LEGS);
     public static final Item WITHER_BONE_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.FEET);
 
-    public static final Item CINDERED_BOW = new FlameBowItem(5.0D).setRarity(AwakenRarity.RARE);
+    public static final Item CINDERED_BOW = new FlameBowItem(512321.0D).setRarity(AwakenRarity.RARE);
     public static final Item SLIMEY_BOW = new StatusEffectBowItem(3.0D, StatusEffects.SLOWNESS, 2 * 20, 0).setRarity(AwakenRarity.RARE);
     public static final Item RAIDERS_AXE = new AwakenAxeItem(AwakenToolMaterial.sword(500, 10F, 1F, 10)).setRarity(AwakenRarity.UNCOMMON);
     public static final Item ESCAPE_PLAN = new EscapePlanItem(AwakenToolMaterial.tool(-1, 3, 1500, 6F, 1F, 10)).setRarity(AwakenRarity.UNCOMMON);
@@ -72,30 +75,43 @@ public class AwakenItems {
     public static final Item SALVIUM_INGOT = genericItem();
     public static final Item VALERIUM_INGOT = genericItem();
 
+    public static final Item SALVIUM_BOW = new AwakenBowItem(4D);
+    public static final Item VALERIUM_SWORD = new AwakenSwordItem(AwakenToolMaterial.sword(2031, 12F, 1.6F, 10, VALERIUM_INGOT));
+    public static final Item SALVERIUM_PICKAXE = new AwakenPickaxeItem(AwakenToolMaterial.tool(4, 2031, 9F, 6F, 1.2F, 15, SALVIUM_INGOT, VALERIUM_INGOT));
     public static final Item FIERY_TRIDENT = new AwakenTridentItem(16D, 500);
 
     public static final Item SALVIUM_HEADGEAR = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
-            .addEntityAttributeModifier(AwakenEntityAttributes.BOW_DAMAGE, "salvium_bow_damage", 0.08F))
-            .addToolTip("Set bonus: 8% extra bow damage");
+            .addEntityAttributeModifier(AwakenEntityAttributes.RANGED_DAMAGE, "salvium_ranged_damage", 7F / 100F)
+            .addEntityAttributeModifier(AwakenEntityAttributes.BOW_DAMAGE, "salvium_bow_damage", 5F / 100F))
+            .addToolTip("Set bonus:").addToolTip("7% extra ranged damage").addToolTip("5% extra bow damage");
     public static final Item SALVIUM_BERET = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
-            .addEntityAttributeModifier(AwakenEntityAttributes.CROSSBOW_DAMAGE, "salvium_crossbow_damage", 0.08F))
-            .addToolTip("Set bonus: 8% extra crossbow damage")
+            .addEntityAttributeModifier(AwakenEntityAttributes.RANGED_DAMAGE, "salvium_ranged_damage", 7F / 100F)
+            .addEntityAttributeModifier(AwakenEntityAttributes.CROSSBOW_DAMAGE, "salvium_crossbow_damage", 5F / 100F))
+            .addToolTip("Set bonus:").addToolTip("7% extra ranged damage").addToolTip("5% extra crossbow damage")
             .setCustomTextureLayer("beret");
     public static final Item SALVIUM_MASK = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
-            .addEntityAttributeModifier(AwakenEntityAttributes.TRIDENT_DAMAGE, "salvium_trident_damage", 0.08F))
-            .addToolTip("Set bonus: 8% extra trident damage")
+            .addEntityAttributeModifier(AwakenEntityAttributes.RANGED_DAMAGE, "salvium_ranged_damage", 7F / 100F)
+            .addEntityAttributeModifier(AwakenEntityAttributes.TRIDENT_DAMAGE, "salvium_trident_damage", 5F / 100F))
+            .addToolTip("Set bonus:").addToolTip("7% extra ranged damage").addToolTip("5% extra trident damage")
             .setCustomTextureLayer("mask");
     public static final Item SALVIUM_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.CHEST);
     public static final Item SALVIUM_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.LEGS);
     public static final Item SALVIUM_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.FEET);
 
     public static final Item VALERIUM_HELMET = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
-            .addEntityAttributeModifier(AwakenEntityAttributes.SWORD_DAMAGE, "valerium_sword_damage", 0.08F))
-            .addToolTip("Set bonus: 8% extra sword damage");
+            .addEntityAttributeModifier(AwakenEntityAttributes.MELEE_DAMAGE, "valerium_melee_damage", 7F / 100F)
+            .addEntityAttributeModifier(AwakenEntityAttributes.SWORD_DAMAGE, "valerium_sword_damage", 5F / 100F))
+            .addToolTip("Set bonus:").addToolTip("7% extra melee damage").addToolTip("5% extra sword damage");
     public static final Item VALERIUM_CAP = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
-            .addEntityAttributeModifier(AwakenEntityAttributes.AXE_DAMAGE, "valerium_axe_damage", 0.08F))
-            .addToolTip("Set bonus: 8% extra axe damage")
+            .addEntityAttributeModifier(AwakenEntityAttributes.MELEE_DAMAGE, "valerium_melee_damage", 7F / 100F)
+            .addEntityAttributeModifier(AwakenEntityAttributes.SWORD_DAMAGE, "valerium_axe_damage", 5F / 100F))
+            .addToolTip("Set bonus:").addToolTip("7% extra melee damage").addToolTip("5% extra axe damage")
             .setCustomTextureLayer("cap");
+    public static final Item VALERIUM_MASK = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.HEAD, new SetBonusEquippable()
+            .addEntityAttributeModifier(AwakenEntityAttributes.RANGED_DAMAGE, "valerium_melee_damage", 7F / 100F)
+            .addEntityAttributeModifier(AwakenEntityAttributes.TRIDENT_DAMAGE, "valerium_trident_damage", 5F / 100F))
+            .addToolTip("Set bonus:").addToolTip("7% extra melee damage").addToolTip("5% extra trident damage")
+            .setCustomTextureLayer("mask");
     public static final Item VALERIUM_CHESTPLATE = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.CHEST);
     public static final Item VALERIUM_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.LEGS);
     public static final Item VALERIUM_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.FEET);
@@ -163,13 +179,14 @@ public class AwakenItems {
             // Armor
             register(SALVIUM_HEADGEAR, "salvium_headgear");
             register(SALVIUM_BERET, "salvium_beret");
-            register(SALVIUM_MASK, "valerium_mask");
+            register(SALVIUM_MASK, "salvium_mask");
             register(SALVIUM_CHESTPLATE, "salvium_chestplate");
             register(SALVIUM_LEGGINGS, "salvium_leggings");
             register(SALVIUM_BOOTS, "salvium_boots");
 
             register(VALERIUM_HELMET, "valerium_helmet");
             register(VALERIUM_CAP, "valerium_cap");
+            register(VALERIUM_MASK, "valerium_mask");
             register(VALERIUM_CHESTPLATE, "valerium_chestplate");
             register(VALERIUM_LEGGINGS, "valerium_leggings");
             register(VALERIUM_BOOTS, "valerium_boots");
