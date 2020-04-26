@@ -3,6 +3,7 @@ package com.kqp.awaken.mixin.client;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Hand;
 import net.minecraft.util.hit.EntityHitResult;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,6 +32,7 @@ public class MinecraftClientMixin {
 
                 if (canAttack(client.player)) {
                     client.interactionManager.attackEntity(client.player, ((EntityHitResult) client.crosshairTarget).getEntity());
+                    client.player.swingHand(Hand.MAIN_HAND);
                 }
             }
         }
