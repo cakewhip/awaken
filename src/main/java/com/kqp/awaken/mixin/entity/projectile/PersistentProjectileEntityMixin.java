@@ -43,6 +43,9 @@ public class PersistentProjectileEntityMixin implements RangedWeaponProjectile {
                 case CROSSBOW:
                     attribute = player.getAttributeInstance(AwakenEntityAttributes.CROSSBOW_DAMAGE);
                     break;
+                case TRIDENT:
+                    attribute = player.getAttributeInstance(AwakenEntityAttributes.TRIDENT_DAMAGE);
+                    break;
                 case NONE:
                     attribute = null;
                     break;

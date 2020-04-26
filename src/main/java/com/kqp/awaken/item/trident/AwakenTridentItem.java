@@ -49,4 +49,8 @@ public class AwakenTridentItem extends TridentItem {
     public Multimap<EntityAttribute, EntityAttributeModifier> getModifiers(EquipmentSlot equipmentSlot) {
         return equipmentSlot == EquipmentSlot.MAINHAND ? this.attributeMap : super.getModifiers(equipmentSlot);
     }
+
+    public double getDamage() {
+        return damage;
+    }
 }
