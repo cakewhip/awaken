@@ -49,7 +49,7 @@ public class StatusEffectBowItem extends AwakenBowItem {
 
         tooltip.add(new LiteralText(String.format(
                 "Applies %s %s for %.2f seconds",
-                effect.getName().asFormattedString(),
+                I18n.translate(effect.getName().asString()),
                 I18n.translate("enchantment.level." + (amplifier + 1)),
                 (duration / 20F)
         )));

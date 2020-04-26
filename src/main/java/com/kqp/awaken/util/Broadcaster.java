@@ -13,14 +13,15 @@ public class Broadcaster {
     public static void broadcastMessage(MinecraftServer server, String message, Formatting color, boolean bold, boolean italic) {
         LiteralText text = new LiteralText(message);
 
-        Style style = new Style();
-        style.setColor(color);
-        style.setBold(bold);
-        style.setItalic(italic);
+        Style style = Style.EMPTY
+                .withColor(color)
+                .withBold(bold)
+                .withItalic(italic);
+
         text.setStyle(style);
 
         server.getPlayerManager().getPlayerList().forEach(player -> {
-            player.sendChatMessage(text, MessageType.CHAT);
+            player.sendMessage(text, MessageType.CHAT);
         });
     }
 }

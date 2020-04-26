@@ -121,8 +121,6 @@ public class AwakenRecipe {
     }
 
     public String getSortString() {
-        String ret = new LiteralText("").append(result.getName()).asFormattedString();
-
-        return ret != null ? ret : "";
+        return result.getTranslationKey();
     }
 }

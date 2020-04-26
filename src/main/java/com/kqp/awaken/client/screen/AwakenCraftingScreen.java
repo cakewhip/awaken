@@ -11,23 +11,30 @@ import com.kqp.awaken.screen.AwakenCraftingScreenHandler;
 import com.kqp.awaken.util.MouseUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.netty.buffer.Unpooled;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Screen for Awaken's crafting system.
  */
+@Environment(EnvType.CLIENT)
 public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHandler> {
     public static final String TITLE_TRANSLATION_KEY = Util.createTranslationKey("gui", new Identifier(Awaken.MOD_ID, "awaken_crafting"));
     public static final String RECIPE_LOOK_UP_TRANSLATION_KEY = Util.createTranslationKey("gui", new Identifier(Awaken.MOD_ID, "awaken_crafting_recipe_look_up"));
@@ -55,37 +62,38 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
     /**
      * Overriden to render the tooltips for the tabs.
      *
+     * @param matrices
      * @param mouseX
      * @param mouseY
      * @param delta
      */
     @Override
-    public void render(int mouseX, int mouseY, float delta) {
-        this.renderBackground();
-        super.render(mouseX, mouseY, delta);
-        this.drawMouseoverTooltip(mouseX, mouseY);
+    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        this.renderBackground(matrices);
+        
+        super.render(matrices, mouseX, mouseY, delta);
+        this.drawMouseoverTooltip(matrices, mouseX, mouseY);
 
         double aX = mouseX - this.x;
         double aY = mouseY - this.y;
 
         if (aY > -24 && aY < 0) {
             if (aX > 0 && aX < 28) {
-                this.renderTooltip("Player", mouseX, mouseY);
+                this.renderTooltip(matrices, Arrays.asList(new LiteralText("Player")), mouseX, mouseY);
             } else if (aX > 29 && aX < 57) {
-                this.renderTooltip("Crafting", mouseX, mouseY);
+                this.renderTooltip(matrices, Arrays.asList(new LiteralText("Crafting")), mouseX, mouseY);
             }
         }
     }
 
     /**
      * Overriden to add the reagents needed to craft the hovered slot.
-     *
-     * @param text
+     *  @param text
      * @param x
      * @param y
      */
     @Override
-    public void renderTooltip(List<String> text, int x, int y) {
+    public void renderTooltip(MatrixStack matrices, List<Text> text, int x, int y) {
         if ((this.focusedSlot instanceof AwakenCraftingResultSlot && getScreenHandler().craftingResultRecipes != null)
                 || (this.focusedSlot instanceof AwakenLookUpResultSlot && getScreenHandler().lookUpRecipes != null)) {
             int currentIndex;
@@ -102,16 +110,16 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
             if (currentIndex < recipes.size()) {
                 AwakenRecipe recipe = recipes.get(currentIndex);
 
-                text.add("---");
+                text.add(new LiteralText("---"));
 
                 if (!recipe.recipeType.equals(RecipeType.TWO_BY_TWO)) {
-                    text.add(new TranslatableText("awaken.recipe_type.requires." + recipe.recipeType).asFormattedString());
+                    text.add(new TranslatableText("awaken.recipe_type.requires." + recipe.recipeType));
                 }
 
-                text.add("To Craft: ");
+                text.add(new LiteralText("To Craft: "));
                 for (Reagent reagent : recipe.reagents.keySet()) {
                     String reagentLine = recipe.reagents.get(reagent) + " x " + reagent.toString();
-                    List<String> split = this.textRenderer.wrapStringToWidthAsList(reagentLine, 126);
+                    List<Text> split = this.textRenderer.wrapLines(new LiteralText(reagentLine), 126);
 
                     text.add(split.get(0));
 
@@ -121,42 +129,42 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
                     if (split.size() > 1) {
                         for (int i = 1; i < split.size(); i++) {
                             // Cool trick to insert 'offset' amount of spaces
-                            text.add(String.format("%" + offset + "s", "") + split.get(i));
+                            text.add(new LiteralText(String.format("%" + offset + "s", "") + split.get(i)));
                         }
                     }
                 }
             }
         }
 
-        super.renderTooltip(text, x, y);
+        super.renderTooltip(matrices, text, x, y);
     }
 
     @Override
-    protected void drawForeground(int mouseX, int mouseY) {
-        this.textRenderer.draw(this.title.asFormattedString(), 8.0F, 8.0F, 4210752);
-        this.textRenderer.draw(new TranslatableText(RECIPE_LOOK_UP_TRANSLATION_KEY).asFormattedString(), 186.0F, 8.0F, 4210752);
-        this.textRenderer.draw(this.playerInventory.getDisplayName().asFormattedString(), 8.0F, (float) (this.backgroundHeight - 96 + 4), 4210752);
+    protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
+        this.textRenderer.draw(matrices, this.title, 8.0F, 8.0F, 4210752);
+        this.textRenderer.draw(matrices, new TranslatableText(RECIPE_LOOK_UP_TRANSLATION_KEY), 186.0F, 8.0F, 4210752);
+        this.textRenderer.draw(matrices, this.playerInventory.getDisplayName(), 8.0F, (float) (this.backgroundHeight - 96 + 4), 4210752);
     }
 
     @Override
-    protected void drawBackground(float delta, int mouseX, int mouseY) {
+    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         int i = (this.width - this.backgroundWidth) / 2;
         int j = (this.height - this.backgroundHeight) / 2;
 
         MinecraftClient.getInstance().getTextureManager().bindTexture(TEXTURE);
 
-        this.drawTexture(i, j - 28, 0, 166, 28, 32);
+        this.drawTexture(matrices, i, j - 28, 0, 166, 28, 32);
 
-        this.drawTexture(i, j, 0, 0, 176, 166);
+        this.drawTexture(matrices, i, j, 0, 0, 176, 166);
 
-        this.drawTexture(i + 176 + 2, j, 178, 0, 78, 166);
+        this.drawTexture(matrices, i + 176 + 2, j, 178, 0, 78, 166);
 
-        this.drawTexture(i + 156, j + 18 + (int) ((float) (52 - 15) * this.outputScrollPosition), 56 + (this.hasOutputsScrollbar() ? 0 : 12), 166, 12, 15);
+        this.drawTexture(matrices, i + 156, j + 18 + (int) ((float) (52 - 15) * this.outputScrollPosition), 56 + (this.hasOutputsScrollbar() ? 0 : 12), 166, 12, 15);
 
-        this.drawTexture(i + 242, j + 48 + (int) ((float) (106 - 11) * this.lookUpScrollPosition), 80 + (this.hasRecipeLookUpScrollbar() ? 0 : 6), 166, 6, 11);
+        this.drawTexture(matrices, i + 242, j + 48 + (int) ((float) (106 - 11) * this.lookUpScrollPosition), 80 + (this.hasRecipeLookUpScrollbar() ? 0 : 6), 166, 6, 11);
 
-        this.drawTexture(i + 29, j - 28, 28, 198, 28, 32);
+        this.drawTexture(matrices, i + 29, j - 28, 28, 198, 28, 32);
 
         this.setZOffset(100);
         this.itemRenderer.zOffset = 100.0F;

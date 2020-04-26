@@ -38,7 +38,7 @@ public abstract class MinecraftServerMixin implements AwakenRecipeManagerProvide
     }
 
     @Inject(method = "reloadDataPacks", at = @At("RETURN"))
-    private void convertVanillaRecipes(LevelProperties levelProperties, CallbackInfo callbackInfo) {
+    private void convertVanillaRecipes(CallbackInfo callbackInfo) {
         this.awakenRecipeManager.addVanillaRecipes(this.recipeManager);
     }
 

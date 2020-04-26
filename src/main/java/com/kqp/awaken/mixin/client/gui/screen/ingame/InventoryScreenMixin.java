@@ -7,9 +7,11 @@ import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.PlayerScreenHandler;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,6 +19,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Arrays;
 
 /**
  * Used to add the navigation tabs to reach the Awaken crafting screen.
@@ -46,9 +50,9 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     }
 
     @Inject(method = "drawBackground", at = @At("HEAD"))
-    public void drawCraftingTab(float delta, int mouseX, int mouseY, CallbackInfo callbackInfo) {
+    public void drawCraftingTab(MatrixStack matrices, float delta, int mouseX, int mouseY, CallbackInfo callbackInfo) {
         MinecraftClient.getInstance().getTextureManager().bindTexture(TEXTURE);
-        this.drawTexture(this.x + 29, this.y - 28, 28, 166, 28, 32);
+        this.drawTexture(matrices, this.x + 29, this.y - 28, 28, 166, 28, 32);
 
         this.setZOffset(100);
         this.itemRenderer.zOffset = 100.0F;
@@ -61,21 +65,21 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     }
 
     @Inject(method = "drawBackground", at = @At("TAIL"))
-    public void drawPlayerTab(float delta, int mouseX, int mouseY, CallbackInfo callbackInfo) {
+    public void drawPlayerTab(MatrixStack matrices, float delta, int mouseX, int mouseY, CallbackInfo callbackInfo) {
         MinecraftClient.getInstance().getTextureManager().bindTexture(TEXTURE);
-        this.drawTexture(this.x, this.y - 28, 0, 198, 28, 32);
+        this.drawTexture(matrices, this.x, this.y - 28, 0, 198, 28, 32);
     }
 
     @Inject(method = "render", at = @At("TAIL"))
-    public void drawTooltips(int mouseX, int mouseY, float delta, CallbackInfo callbackInfo) {
+    public void drawTooltips(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo callbackInfo) {
         double aX = mouseX - this.x;
         double aY = mouseY - this.y;
 
         if (aY > -24 && aY < 0) {
             if (aX > 0 && aX < 28) {
-                this.renderTooltip("Player", mouseX, mouseY);
+                this.renderTooltip(matrices, Arrays.asList(new LiteralText("Player")), mouseX, mouseY);
             } else if (aX > 29 && aX < 57) {
-                this.renderTooltip("Crafting", mouseX, mouseY);
+                this.renderTooltip(matrices, Arrays.asList(new LiteralText("Crafting")), mouseX, mouseY);
             }
         }
     }

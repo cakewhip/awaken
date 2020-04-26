@@ -40,6 +40,6 @@ public class ComparableItemStack {
 
     @Override
     public String toString() {
-        return item.getName().asFormattedString();
+        return item.getTranslationKey();
     }
 }
