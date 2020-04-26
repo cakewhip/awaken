@@ -1,5 +1,6 @@
 package com.kqp.awaken.recipe;
 
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -40,6 +41,6 @@ public class ComparableItemStack {
 
     @Override
     public String toString() {
-        return item.getTranslationKey();
+        return I18n.translate(item.getTranslationKey());
     }
 }

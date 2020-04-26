@@ -119,18 +119,11 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
                 text.add(new LiteralText("To Craft: "));
                 for (Reagent reagent : recipe.reagents.keySet()) {
                     String reagentLine = recipe.reagents.get(reagent) + " x " + reagent.toString();
+                    System.out.println(reagentLine);
                     List<Text> split = this.textRenderer.wrapLines(new LiteralText(reagentLine), 126);
 
-                    text.add(split.get(0));
-
-                    // Used to bump up the wrapped lines
-                    int offset = (recipe.reagents.get(reagent) + " x ").length();
-
-                    if (split.size() > 1) {
-                        for (int i = 1; i < split.size(); i++) {
-                            // Cool trick to insert 'offset' amount of spaces
-                            text.add(new LiteralText(String.format("%" + offset + "s", "") + split.get(i)));
-                        }
+                    for (Text splitLine : split) {
+                        text.add(splitLine);
                     }
                 }
             }
