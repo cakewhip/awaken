@@ -1,14 +1,14 @@
-package com.kqp.awaken.item.bow;
+package com.kqp.awaken.item.crossbow;
 
 import com.kqp.awaken.loot.AwakenRarity;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.item.BowItem;
+import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -19,9 +19,9 @@ import net.minecraft.world.World;
 import java.util.List;
 
 /**
- * Class for custom bows.
+ * Class for custom crossbows.
  */
-public class AwakenBowItem extends BowItem {
+public class AwakenCrossbowItem extends CrossbowItem {
     public AwakenRarity rarity = AwakenRarity.OKAY;
 
     /**
@@ -30,7 +30,7 @@ public class AwakenBowItem extends BowItem {
      */
     public double baseDamage;
 
-    public AwakenBowItem(double baseDamage) {
+    public AwakenCrossbowItem(double baseDamage) {
         super(new Item.Settings().maxCount(1).group(ItemGroup.COMBAT));
 
         this.baseDamage = baseDamage;

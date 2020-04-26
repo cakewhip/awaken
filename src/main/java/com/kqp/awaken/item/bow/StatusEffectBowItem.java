@@ -25,8 +25,8 @@ public class StatusEffectBowItem extends AwakenBowItem {
     public StatusEffect effect;
     public int duration, amplifier;
 
-    public StatusEffectBowItem(double baseDamage, boolean infinity, StatusEffect effect, int duration, int amplifier) {
-        super(baseDamage, infinity);
+    public StatusEffectBowItem(double baseDamage, StatusEffect effect, int duration, int amplifier) {
+        super(baseDamage);
 
         this.effect = effect;
         this.duration = duration;
@@ -34,26 +34,19 @@ public class StatusEffectBowItem extends AwakenBowItem {
     }
 
     @Override
-    public PersistentProjectileEntity createProjectileEntity(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
-        ArrowEntity arrowEntity = new ArrowEntity(world, user) {
-            @Override
-            protected void onEntityHit(EntityHitResult hitResult) {
-                super.onEntityHit(hitResult);
+    public void modifyProjectileEntity(PersistentProjectileEntity projectileEntity) {
+        super.modifyProjectileEntity(projectileEntity);
 
-                if (hitResult.getEntity() instanceof LivingEntity) {
-                    ((LivingEntity) hitResult.getEntity()).addStatusEffect(new StatusEffectInstance(effect, duration, amplifier));
-                }
-            }
-        };
-
-        arrowEntity.initFromStack(stack);
-
-        return arrowEntity;
+        if (projectileEntity instanceof ArrowEntity) {
+            ((ArrowEntity) projectileEntity).addEffect(new StatusEffectInstance(effect, duration, amplifier));
+        }
     }
 
     @Override
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        super.appendTooltip(stack, world, tooltip, context);
+
         tooltip.add(new LiteralText(String.format(
                 "Applies %s %s for %.2f seconds",
                 effect.getName().asFormattedString(),

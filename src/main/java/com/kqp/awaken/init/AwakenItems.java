@@ -48,8 +48,8 @@ public class AwakenItems {
     public static final Item WITHER_BONE_LEGGINGS = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.LEGS);
     public static final Item WITHER_BONE_BOOTS = new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.FEET);
 
-    public static final Item CINDERED_BOW = new FlameBowItem(5.0D, false).setRarity(AwakenRarity.RARE);
-    public static final Item SLIMEY_BOW = new StatusEffectBowItem(3.0D, false, StatusEffects.SLOWNESS, 2 * 20, 0).setRarity(AwakenRarity.RARE);
+    public static final Item CINDERED_BOW = new FlameBowItem(5.0D).setRarity(AwakenRarity.RARE);
+    public static final Item SLIMEY_BOW = new StatusEffectBowItem(3.0D, StatusEffects.SLOWNESS, 2 * 20, 0).setRarity(AwakenRarity.RARE);
     public static final Item RAIDERS_AXE = new AwakenAxeItem(AwakenToolMaterial.sword(500, 10F, 1F, 10)).setRarity(AwakenRarity.UNCOMMON);
     public static final Item ESCAPE_PLAN = new EscapePlanItem(AwakenToolMaterial.tool(-1, 3, 1500, 6F, 1F, 10)).setRarity(AwakenRarity.UNCOMMON);
     public static final Item ARCHAEOLOGIST_SPADE = new ArchaeologistSpadeItem(AwakenToolMaterial.tool(-1, 3000, 8F, 6F, 1F, 22)).setRarity(AwakenRarity.UNCOMMON);
