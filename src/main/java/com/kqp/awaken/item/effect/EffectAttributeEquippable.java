@@ -22,8 +22,13 @@ public class EffectAttributeEquippable implements Equippable {
         return this;
     }
 
-    public EffectAttributeEquippable addEntityAttributeModifier(EntityAttribute attribute, String name, double amount) {
+    public EffectAttributeEquippable addEntityAttributeMultiplier(EntityAttribute attribute, String name, double amount) {
         attributeModifiers.put(attribute, new EntityAttributeModifier(name, amount, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
+        return this;
+    }
+
+    public EffectAttributeEquippable addEntityAttributeAddition(EntityAttribute attribute, String name, double amount) {
+        attributeModifiers.put(attribute, new EntityAttributeModifier(name, amount, EntityAttributeModifier.Operation.ADDITION));
         return this;
     }
 
