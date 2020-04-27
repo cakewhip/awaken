@@ -38,17 +38,23 @@ public class AwakenEntities {
     public static void init() {
         Awaken.info("Initializing entities");
 
-        Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "ranged_damage"), AwakenEntityAttributes.RANGED_DAMAGE);
-        Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "bow_damage"), AwakenEntityAttributes.BOW_DAMAGE);
-        Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "crossbow_damage"), AwakenEntityAttributes.CROSSBOW_DAMAGE);
-        Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "trident_damage"), AwakenEntityAttributes.TRIDENT_DAMAGE);
+        // Custom Attributes
+        {
+            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "ranged_damage"), AwakenEntityAttributes.RANGED_DAMAGE);
+            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "bow_damage"), AwakenEntityAttributes.BOW_DAMAGE);
+            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "crossbow_damage"), AwakenEntityAttributes.CROSSBOW_DAMAGE);
+            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "trident_damage"), AwakenEntityAttributes.TRIDENT_DAMAGE);
 
-        Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "melee_damage"), AwakenEntityAttributes.MELEE_DAMAGE);
-        Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "sword_damage"), AwakenEntityAttributes.SWORD_DAMAGE);
-        Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "axe_damage"), AwakenEntityAttributes.AXE_DAMAGE);
+            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "melee_damage"), AwakenEntityAttributes.MELEE_DAMAGE);
+            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "sword_damage"), AwakenEntityAttributes.SWORD_DAMAGE);
+            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "axe_damage"), AwakenEntityAttributes.AXE_DAMAGE);
+        }
 
-        register(RAPTOR_CHICKEN, 0x9C0202, 0x610000, RaptorChickenEntity.createRaptorChickenAttributes());
-        register(DIRE_WOLF, 0xD6E9FF, 0x97ADCC, DireWolfEntity.createDireWolfAttributes());
+        // Phase 2 Mobs
+        {
+            register(RAPTOR_CHICKEN, 0x9C0202, 0x610000, RaptorChickenEntity.createRaptorChickenAttributes());
+            register(DIRE_WOLF, 0xD6E9FF, 0x97ADCC, DireWolfEntity.createDireWolfAttributes());
+        }
     }
 
     private static <T extends LivingEntity> void register(EntityType<T> type, int primaryColor, int secondaryColor, DefaultAttributeContainer.Builder attributeBuilder) {
