@@ -20,6 +20,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
+import net.minecraft.item.TridentItem;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
@@ -110,6 +111,8 @@ public abstract class LivingEntityMixin {
                     attribute = player.getAttributeInstance(AwakenEntityAttributes.SWORD_DAMAGE);
                 } else if (held.getItem() instanceof AxeItem) {
                     attribute = player.getAttributeInstance(AwakenEntityAttributes.AXE_DAMAGE);
+                } else if (held.getItem() instanceof TridentItem) {
+                    attribute = player.getAttributeInstance(AwakenEntityAttributes.TRIDENT_DAMAGE);
                 }
 
                 if (attribute != null) {
