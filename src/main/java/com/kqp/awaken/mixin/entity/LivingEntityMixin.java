@@ -90,8 +90,8 @@ public abstract class LivingEntityMixin {
         }
     }
 
-    @Inject(method = "getAttribute", at = @At("HEAD"), cancellable = true)
-    public void getAttribute(EntityAttribute entityAttribute, CallbackInfoReturnable<Double> callbackInfo) {
+    @Inject(method = "getAttributeValue", at = @At("HEAD"), cancellable = true)
+    public void buffDamage(EntityAttribute entityAttribute, CallbackInfoReturnable<Double> callbackInfo) {
         if (((Object) this) instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) (Object) this;
 

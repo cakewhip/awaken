@@ -3,10 +3,16 @@ package com.kqp.awaken.init;
 import com.kqp.awaken.entity.DireWolfEntity;
 import com.kqp.awaken.entity.RaptorChickenEntity;
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
+import net.fabricmc.fabric.api.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
@@ -41,8 +47,15 @@ public class AwakenEntities {
         Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "sword_damage"), AwakenEntityAttributes.SWORD_DAMAGE);
         Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "axe_damage"), AwakenEntityAttributes.AXE_DAMAGE);
 
-        Registry.register(Registry.ITEM, new Identifier(Awaken.MOD_ID, "raptor_chicken_spawn_egg"), new SpawnEggItem(RAPTOR_CHICKEN, 0x9C0202, 0x610000, new Item.Settings().group(ItemGroup.MISC)));
-        Registry.register(Registry.ITEM, new Identifier(Awaken.MOD_ID, "dire_wolf_spawn_egg"), new SpawnEggItem(DIRE_WOLF, 0xD6E9FF, 0x97ADCC, new Item.Settings().group(ItemGroup.MISC)));
+        register(RAPTOR_CHICKEN, 0x9C0202, 0x610000, RaptorChickenEntity.createRaptorChickenAttributes());
+        register(DIRE_WOLF, 0xD6E9FF, 0x97ADCC, DireWolfEntity.createDireWolfAttributes());
     }
 
+    private static <T extends LivingEntity> void register(EntityType<T> type, int primaryColor, int secondaryColor, DefaultAttributeContainer.Builder attributeBuilder) {
+        Registry.register(Registry.ITEM, new Identifier(EntityType.getId(type).toString() + "_spawn_egg"),
+                new SpawnEggItem(type, primaryColor, secondaryColor, new Item.Settings().group(ItemGroup.MISC))
+        );
+
+        FabricDefaultAttributeRegistry.register(type, attributeBuilder);
+    }
 }
