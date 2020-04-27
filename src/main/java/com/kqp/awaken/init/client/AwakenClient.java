@@ -1,5 +1,6 @@
 package com.kqp.awaken.init.client;
 
+import com.kqp.awaken.client.entity.AbominationRenderer;
 import com.kqp.awaken.client.entity.DireWolfRenderer;
 import com.kqp.awaken.client.entity.RaptorChickenRenderer;
 import com.kqp.awaken.client.screen.AwakenCraftingScreen;
@@ -52,6 +53,10 @@ public class AwakenClient implements ClientModInitializer {
 
         EntityRendererRegistry.INSTANCE.register(AwakenEntities.DIRE_WOLF, (dispatcher, context) ->
                 new DireWolfRenderer(dispatcher)
+        );
+
+        EntityRendererRegistry.INSTANCE.register(AwakenEntities.ABOMINATION, (dispatcher, context) ->
+                new AbominationRenderer(dispatcher)
         );
     }
 
