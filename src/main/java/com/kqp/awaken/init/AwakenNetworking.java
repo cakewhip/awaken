@@ -1,7 +1,7 @@
 package com.kqp.awaken.init;
 
 import com.kqp.awaken.network.AwakenPacket;
-import com.kqp.awaken.network.entity.SpawnAbominationParticleS2C;
+import com.kqp.awaken.network.entity.AbominationSmashAttackS2C;
 import com.kqp.awaken.network.recipe.SyncRecipesS2C;
 import com.kqp.awaken.network.screen.SyncCraftingResultSlotS2C;
 import com.kqp.awaken.network.screen.SyncCraftingResultsS2C;
@@ -30,7 +30,7 @@ public class AwakenNetworking {
 
     public static final SyncRecipesS2C SYNC_RECIPES_S2C = new SyncRecipesS2C();
 
-    public static final SpawnAbominationParticleS2C SPAWN_ABOMINATION_PARTICLE_S2C = new SpawnAbominationParticleS2C();
+    public static final AbominationSmashAttackS2C ABOMINATION_SMASH_ATTACK_S2C = new AbominationSmashAttackS2C();
 
 
     // Client to Server

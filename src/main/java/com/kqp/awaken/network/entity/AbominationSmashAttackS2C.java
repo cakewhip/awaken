@@ -8,10 +8,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
-public class SpawnAbominationParticleS2C extends AwakenPacketS2C {
-    public SpawnAbominationParticleS2C() {
+public class AbominationSmashAttackS2C extends AwakenPacketS2C {
+    public AbominationSmashAttackS2C() {
         super("spawn_abomination_particles_s2c");
     }
 
@@ -32,6 +34,10 @@ public class SpawnAbominationParticleS2C extends AwakenPacketS2C {
 
             Entity entity = world.getEntityById(id);
             world.addParticle(ParticleTypes.EXPLOSION_EMITTER, entity.getX(), entity.getY() + 0.1, entity.getZ(), 1.0D, 0.0D, 0.0D);
+            world.playSound(
+                    entity.getX(), entity.getY(), entity.getZ(),
+                    SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS,
+                    4.0F, 0.14f, false);
         });
     }
 }

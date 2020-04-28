@@ -64,7 +64,7 @@ public class AwakenClient implements ClientModInitializer {
         register(AwakenNetworking.SYNC_RECIPES_S2C);
 
 
-        register(AwakenNetworking.SPAWN_ABOMINATION_PARTICLE_S2C);
+        register(AwakenNetworking.ABOMINATION_SMASH_ATTACK_S2C);
     }
 
     private static void register(AwakenPacket packet) {

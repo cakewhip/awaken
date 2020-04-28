@@ -2,15 +2,21 @@ package com.kqp.awaken.entity.ai;
 
 import com.kqp.awaken.entity.AbominationEntity;
 import com.kqp.awaken.init.AwakenNetworking;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 import java.util.EnumSet;
+import java.util.List;
 
 public class SmashAttackGoal extends Goal {
-    private static final int RANGE = 8;
+    private static final int RANGE = 12;
     private static final int COOL_DOWN = 5 * 20;
 
     private final MobEntity mob;
@@ -56,9 +62,24 @@ public class SmashAttackGoal extends Goal {
             if (this.inSmashingRange()) {
                 this.coolDown = COOL_DOWN;
 
-                AwakenNetworking.SPAWN_ABOMINATION_PARTICLE_S2C.send((AbominationEntity) this.mob);
+                doSmashAttack();
             }
         }
+    }
+
+    public void doSmashAttack() {
+        World world = this.mob.world;
+        Vec3d cent = this.mob.getPos().add(0, this.mob.getHeight() / -2, 0);
+
+        List<Entity> entities = world.getEntities(null, new Box(cent.add(-12, -3, -12), cent.add(12, 3, 12)));
+
+        for (Entity entity : entities) {
+            if (this.mob.squaredDistanceTo(entity) < RANGE) {
+                entity.damage(DamageSource.explosion(this.mob), (float) this.mob.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE));
+            }
+        }
+
+        AwakenNetworking.ABOMINATION_SMASH_ATTACK_S2C.send((AbominationEntity) this.mob);
     }
 
     public boolean inSmashingRange() {

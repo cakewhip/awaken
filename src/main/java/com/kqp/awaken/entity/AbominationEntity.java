@@ -41,10 +41,11 @@ public class AbominationEntity extends HostileEntity {
 
     public static DefaultAttributeContainer.Builder createAbominationAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.2D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 800D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5D)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 600D)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 18.0D);
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 18.0D)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0D);
     }
 
     @Override
@@ -80,7 +81,7 @@ public class AbominationEntity extends HostileEntity {
         this.goalSelector.add(5, new LookAroundGoal(this));
 
         this.targetSelector.add(1, new RevengeGoal(this));
-        this.targetSelector.add(2, new FollowTargetGoal(this, MobEntity.class, 0, false, false, CAN_ATTACK_PREDICATE));
+        this.targetSelector.add(2, new FollowTargetGoal(this, MobEntity.class, 0, false, true, CAN_ATTACK_PREDICATE));
     }
 
     static {
