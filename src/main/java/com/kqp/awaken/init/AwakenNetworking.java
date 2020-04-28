@@ -26,6 +26,8 @@ public class AwakenNetworking {
     public static final Identifier SYNC_LEVEL_DATA_S2C_ID = new Identifier(Awaken.MOD_ID, "sync_level_data_s2c");
     public static final Identifier SYNC_RECIPES_S2C_ID = new Identifier(Awaken.MOD_ID, "sync_recipe_data_s2c");
 
+    public static final Identifier SPAWN_ABOMINATION_SMASH_PARTICLE_S2C_ID = new Identifier(Awaken.MOD_ID, "spawn_particle");
+
     public static void init() {
         Awaken.info("Initializing networking");
 

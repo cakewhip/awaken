@@ -1,5 +1,6 @@
 package com.kqp.awaken.entity;
 
+import com.kqp.awaken.entity.ai.SmashAttackGoal;
 import com.kqp.awaken.init.AwakenEntities;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.block.BlockState;
@@ -28,7 +29,7 @@ import java.util.function.Predicate;
 public class AbominationEntity extends HostileEntity {
     private static final Predicate<LivingEntity> CAN_ATTACK_PREDICATE;
 
-    private final ServerBossBar bossBar;
+    public final ServerBossBar bossBar;
 
     public AbominationEntity(World world) {
         super(AwakenEntities.ABOMINATION, world);
@@ -41,7 +42,7 @@ public class AbominationEntity extends HostileEntity {
 
     public static DefaultAttributeContainer.Builder createAbominationAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.2D)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 800D)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 18.0D);
@@ -74,7 +75,7 @@ public class AbominationEntity extends HostileEntity {
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(2, new AttackGoal(this));
+        this.goalSelector.add(2, new SmashAttackGoal(this));
         this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D));
         this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 64.0F));
         this.goalSelector.add(5, new LookAroundGoal(this));

@@ -16,7 +16,7 @@ public class AbominationRenderer<T extends AbominationEntity, M extends BipedEnt
     private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/entity/abomination.png");
 
     public AbominationRenderer(EntityRenderDispatcher dispatcher) {
-        super(dispatcher, (M) new AbominationEntityModel(), 4F);
+        super(dispatcher, (M) new AbominationEntityModel(), 1.5F);
     }
 
     public Identifier getTexture(AbominationEntity AbominationEntity) {
@@ -25,6 +25,6 @@ public class AbominationRenderer<T extends AbominationEntity, M extends BipedEnt
 
     @Override
     protected void scale(T entity, MatrixStack matrices, float tickDelta) {
-        matrices.scale(5F, 5F, 5F);
+        matrices.scale(3F, 3F, 3F);
     }
 }

@@ -36,7 +36,7 @@ public class AwakenEntities {
     public static final EntityType<AbominationEntity> ABOMINATION = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(Awaken.MOD_ID, "abomination"),
-            FabricEntityTypeBuilder.create(EntityCategory.MONSTER, AbominationEntity::new).size(EntityDimensions.fixed(5F, 5F)).build()
+            FabricEntityTypeBuilder.create(EntityCategory.MONSTER, AbominationEntity::new).size(EntityDimensions.fixed(0.6F * 3F, 1.95F * 3F)).build()
     );
 
     public static void init() {

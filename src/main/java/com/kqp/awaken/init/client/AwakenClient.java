@@ -10,6 +10,7 @@ import com.kqp.awaken.data.AwakenLevelData;
 import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.init.AwakenEntities;
 import com.kqp.awaken.init.AwakenNetworking;
+import com.kqp.awaken.network.SpawnAbominationParticleS2CPacket;
 import com.kqp.awaken.recipe.AwakenRecipe;
 import com.kqp.awaken.recipe.AwakenRecipeManagerProvider;
 import com.kqp.awaken.recipe.SyncAwakenRecipesPacket;
@@ -23,9 +24,11 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
@@ -147,6 +150,8 @@ public class AwakenClient implements ClientModInitializer {
                 ((AwakenRecipeManagerProvider) MinecraftClient.getInstance().getNetworkHandler()).getAwakenRecipeManager().setRecipes(recipes);
             });
         }));
+
+        ClientSidePacketRegistry.INSTANCE.register(AwakenNetworking.SPAWN_ABOMINATION_SMASH_PARTICLE_S2C_ID, SpawnAbominationParticleS2CPacket::accept);
     }
 
     /**
