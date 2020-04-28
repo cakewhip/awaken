@@ -9,14 +9,11 @@ import com.kqp.awaken.inventory.AwakenCraftingResultInventory;
 import com.kqp.awaken.recipe.AwakenRecipe;
 import com.kqp.awaken.recipe.AwakenRecipeManager;
 import com.kqp.awaken.recipe.RecipeType;
-import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.slot.Slot;
@@ -230,8 +227,7 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
 
         // If on server, notify the client that something has changed so the client can reply with the scroll bar position.
         if (!player.world.isClient) {
-            PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-            ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, AwakenNetworking.SYNC_CRAFTING_RESULTS_ID, buf);
+            AwakenNetworking.SYNC_CRAFTING_RESULTS_S2C.sendEmptyToPlayer((ServerPlayerEntity) player);
         }
     }
 
@@ -243,8 +239,7 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
 
         // If on server, notify the client that something has changed so the client can reply with the scroll bar position.
         if (!player.world.isClient) {
-            PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-            ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, AwakenNetworking.SYNC_LOOK_UP_RESULTS_ID, buf);
+            AwakenNetworking.SYNC_LOOK_UP_RESULTS_S2C.sendEmptyToPlayer((ServerPlayerEntity) player);
         }
     }
 
@@ -342,13 +337,15 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
                 craftingResultInventory.setStack(l + k * 8, itemStack);
                 ((AwakenCraftingResultSlot) this.getSlot(l + k * 8)).currentIndex = m;
 
-                PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-                buf.writeInt(l + k * 8);
-                buf.writeItemStack(itemStack);
-                buf.writeInt(m);
+                final int sendL = l, sendK = k;
+                final ItemStack sendStack = itemStack;
 
                 // Sends the client EACH ItemStack in the result inventory
-                ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, AwakenNetworking.SYNC_CRAFTING_RESULT_SLOT_ID, buf);
+                AwakenNetworking.SYNC_CRAFTING_RESULT_SLOT_S2C.sendToPlayer((ServerPlayerEntity) player, (buf) -> {
+                    buf.writeInt(sendL + sendK * 8);
+                    buf.writeItemStack(sendStack);
+                    buf.writeInt(m);
+                });
             }
         }
     }
@@ -382,13 +379,14 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
                     lookUpResultInventory.setStack(1 + slot, itemStack);
                     ((AwakenLookUpResultSlot) this.getSlot(61 + slot)).currentIndex = m;
 
-                    PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-                    buf.writeInt(61 + slot);
-                    buf.writeItemStack(itemStack);
-                    buf.writeInt(m);
+                    final ItemStack toSend = itemStack;
 
                     // Sends the client EACH ItemStack in the result inventory
-                    ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, AwakenNetworking.SYNC_LOOK_UP_RESULT_SLOT_ID, buf);
+                    AwakenNetworking.SYNC_LOOK_UP_RESULT_SLOT_S2C.sendToPlayer((ServerPlayerEntity) player, (buf) -> {
+                        buf.writeInt(61 + slot);
+                        buf.writeItemStack(toSend);
+                        buf.writeInt(m);
+                    });
                 }
             }
         }

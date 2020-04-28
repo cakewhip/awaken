@@ -5,8 +5,6 @@ import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
@@ -14,7 +12,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.BaseText;
 import net.minecraft.text.Text;
-import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 
 import java.util.List;

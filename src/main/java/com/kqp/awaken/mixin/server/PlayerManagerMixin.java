@@ -3,7 +3,7 @@ package com.kqp.awaken.mixin.server;
 import com.kqp.awaken.data.AwakenLevelData;
 import com.kqp.awaken.data.AwakenLevelDataTagContainer;
 import com.kqp.awaken.recipe.AwakenRecipeManager;
-import com.kqp.awaken.recipe.SyncAwakenRecipesPacket;
+import com.kqp.awaken.recipe.SyncAwakenRecipes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.Packet;
@@ -27,7 +27,7 @@ public class PlayerManagerMixin {
     @Inject(method = "onPlayerConnect", at = @At("RETURN"))
     public void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, CallbackInfo callbackInfo) {
         AwakenRecipeManager awakenRecipeManager = AwakenRecipeManager.getFor(player.world);
-        SyncAwakenRecipesPacket.sendToPlayer(awakenRecipeManager.getRecipes(), player);
+        SyncAwakenRecipes.syncToPlayer(awakenRecipeManager.getRecipes(), player);
     }
 
     @Redirect(method = "onPlayerConnect", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;sendPacket(Lnet/minecraft/network/Packet;)V"))

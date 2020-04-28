@@ -1,27 +1,23 @@
 package com.kqp.awaken.recipe;
 
 import com.kqp.awaken.init.AwakenNetworking;
-import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class SyncAwakenRecipesPacket {
-    public static void sendToPlayer(HashMap<Identifier, AwakenRecipe> recipes, PlayerEntity player) {
-        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+public class SyncAwakenRecipes {
+    public static void syncToPlayer(HashMap<Identifier, AwakenRecipe> recipes, ServerPlayerEntity player) {
+        AwakenNetworking.SYNC_RECIPES_S2C.sendToPlayer(player, (buf) -> {
+            buf.writeInt(recipes.size());
 
-        buf.writeInt(recipes.size());
-
-        recipes.forEach(((identifier, betterCraftingRecipe) -> {
-            writeRecipe(buf, identifier, betterCraftingRecipe);
-        }));
-
-        ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, AwakenNetworking.SYNC_RECIPES_S2C_ID, buf);
+            recipes.forEach(((identifier, betterCraftingRecipe) -> {
+                writeRecipe(buf, identifier, betterCraftingRecipe);
+            }));
+        });
     }
 
     public static HashMap<Identifier, AwakenRecipe> receiveFromServer(PacketByteBuf buf) {

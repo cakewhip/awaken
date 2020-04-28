@@ -3,10 +3,7 @@ package com.kqp.awaken.data;
 import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.init.AwakenNetworking;
 import com.kqp.awaken.util.Broadcaster;
-import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Formatting;
@@ -185,11 +182,10 @@ public class AwakenLevelData {
         CompoundTag awakenLevelDataTag = new CompoundTag();
         this.writeToTag(awakenLevelDataTag);
 
-        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-        buf.writeCompoundTag(awakenLevelDataTag);
-
         for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
-            ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, AwakenNetworking.SYNC_LEVEL_DATA_S2C_ID, buf);
+            AwakenNetworking.SYNC_LEVEL_DATA_S2C.sendToPlayer(player, (buf) -> {
+                buf.writeCompoundTag(awakenLevelDataTag);
+            });
         }
     }
 

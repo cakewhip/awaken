@@ -5,7 +5,6 @@ import com.kqp.awaken.recipe.AwakenRecipeManagerProvider;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.resource.ReloadableResourceManager;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.level.LevelProperties;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Implements;
 import org.spongepowered.asm.mixin.Interface;

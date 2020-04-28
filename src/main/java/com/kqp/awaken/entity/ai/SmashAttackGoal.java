@@ -1,7 +1,7 @@
 package com.kqp.awaken.entity.ai;
 
 import com.kqp.awaken.entity.AbominationEntity;
-import com.kqp.awaken.network.SpawnAbominationParticleS2CPacket;
+import com.kqp.awaken.init.AwakenNetworking;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -56,7 +56,7 @@ public class SmashAttackGoal extends Goal {
             if (this.inSmashingRange()) {
                 this.coolDown = COOL_DOWN;
 
-                SpawnAbominationParticleS2CPacket.send((AbominationEntity) this.mob);
+                AwakenNetworking.SPAWN_ABOMINATION_PARTICLE_S2C.send((AbominationEntity) this.mob);
             }
         }
     }

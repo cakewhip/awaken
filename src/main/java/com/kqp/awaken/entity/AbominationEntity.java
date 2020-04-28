@@ -6,7 +6,6 @@ import jdk.internal.jline.internal.Nullable;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.AttackGoal;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
@@ -80,7 +79,7 @@ public class AbominationEntity extends HostileEntity {
         this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 64.0F));
         this.goalSelector.add(5, new LookAroundGoal(this));
 
-        this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
+        this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new FollowTargetGoal(this, MobEntity.class, 0, false, false, CAN_ATTACK_PREDICATE));
     }
 

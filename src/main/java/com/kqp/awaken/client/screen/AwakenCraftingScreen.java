@@ -10,17 +10,14 @@ import com.kqp.awaken.recipe.RecipeType;
 import com.kqp.awaken.screen.AwakenCraftingScreenHandler;
 import com.kqp.awaken.util.MouseUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
-import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -70,7 +67,7 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
-        
+
         super.render(matrices, mouseX, mouseY, delta);
         this.drawMouseoverTooltip(matrices, mouseX, mouseY);
 
@@ -88,7 +85,8 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
 
     /**
      * Overriden to add the reagents needed to craft the hovered slot.
-     *  @param text
+     *
+     * @param text
      * @param x
      * @param y
      */
@@ -119,7 +117,6 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
                 text.add(new LiteralText("To Craft: "));
                 for (Reagent reagent : recipe.reagents.keySet()) {
                     String reagentLine = recipe.reagents.get(reagent) + " x " + reagent.toString();
-                    System.out.println(reagentLine);
                     List<Text> split = this.textRenderer.wrapLines(new LiteralText(reagentLine), 126);
 
                     for (Text splitLine : split) {
@@ -207,11 +204,10 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
 
             if (aX > 0 && aX < 28) {
                 if (aY > -32 && aY < 0) {
-                    PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-                    buf.writeDouble(MouseUtil.getMouseX());
-                    buf.writeDouble(MouseUtil.getMouseY());
-
-                    ClientSidePacketRegistry.INSTANCE.sendToServer(AwakenNetworking.CLOSE_CRAFTING_C2S_ID, buf);
+                    AwakenNetworking.CLOSE_CRAFTING_C2S.sendToServer((buf) -> {
+                        buf.writeDouble(MouseUtil.getMouseX());
+                        buf.writeDouble(MouseUtil.getMouseY());
+                    });
                 }
             }
         }
@@ -231,10 +227,9 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
      * Sends the server the position of the scroll bar.
      */
     public void syncCraftingResultScrollbar() {
-        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-        buf.writeFloat(outputScrollPosition);
-
-        ClientSidePacketRegistry.INSTANCE.sendToServer(AwakenNetworking.SYNC_CRAFTING_SCROLLBAR_ID, buf);
+        AwakenNetworking.SYNC_CRAFTING_SCROLLBAR_C2S.sendToServer((buf) -> {
+            buf.writeFloat(outputScrollPosition);
+        });
     }
 
 
@@ -242,9 +237,8 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
      * Sends the server the position of the scroll bar.
      */
     public void syncLookUpResultScrollbar() {
-        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-        buf.writeFloat(lookUpScrollPosition);
-
-        ClientSidePacketRegistry.INSTANCE.sendToServer(AwakenNetworking.SYNC_LOOK_UP_SCROLLBAR_ID, buf);
+        AwakenNetworking.SYNC_LOOK_UP_SCROLLBAR_C2S.sendToServer((buf) -> {
+            buf.writeFloat(lookUpScrollPosition);
+        });
     }
 }

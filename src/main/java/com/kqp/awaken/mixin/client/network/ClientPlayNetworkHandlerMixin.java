@@ -9,8 +9,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.packet.s2c.play.GameJoinS2CPacket;
-import net.minecraft.recipe.RecipeManager;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Implements;
 import org.spongepowered.asm.mixin.Interface;
 import org.spongepowered.asm.mixin.Mixin;
