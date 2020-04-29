@@ -12,9 +12,9 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
-public class AbominationSmashAttackS2C extends AwakenPacketS2C {
-    public AbominationSmashAttackS2C() {
-        super("spawn_abomination_smash_attack_s2c");
+public class AbominationSpawnSpawnlingsS2C extends AwakenPacketS2C {
+    public AbominationSpawnSpawnlingsS2C() {
+        super("spawn_abomination_spawn_spawnlings_s2c");
     }
 
     public void send(AbominationEntity abomination) {
@@ -33,10 +33,10 @@ public class AbominationSmashAttackS2C extends AwakenPacketS2C {
             World world = MinecraftClient.getInstance().world;
 
             Entity entity = world.getEntityById(id);
-            world.addParticle(ParticleTypes.EXPLOSION_EMITTER, entity.getX(), entity.getY() - entity.getHeight() / 2F, entity.getZ(), 1.0D, 0.0D, 0.0D);
+            world.addParticle(ParticleTypes.POOF, entity.getX(), entity.getY() - entity.getHeight() / 2F, entity.getZ(), 1.0D, 0.0D, 0.0D);
             world.playSound(
                     entity.getX(), entity.getY(), entity.getZ(),
-                    SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.HOSTILE,
+                    SoundEvents.ENTITY_HOGLIN_ANGRY, SoundCategory.HOSTILE,
                     4.0F, 0.14f, false);
         });
     }

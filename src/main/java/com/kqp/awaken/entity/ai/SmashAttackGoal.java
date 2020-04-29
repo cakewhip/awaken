@@ -17,7 +17,7 @@ import java.util.List;
 
 public class SmashAttackGoal extends Goal {
     private static final int RANGE = 12;
-    private static final int COOL_DOWN = 5 * 20;
+    private static final int COOL_DOWN = 3 * 20;
 
     private final MobEntity mob;
     private int coolDown;

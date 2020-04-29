@@ -1,10 +1,13 @@
 package com.kqp.awaken.entity;
 
+import com.kqp.awaken.entity.ai.AbominationMoveSetGoal;
 import com.kqp.awaken.entity.ai.SmashAttackGoal;
+import com.kqp.awaken.entity.ai.SpawnSpawnlingsGoal;
 import com.kqp.awaken.init.AwakenEntities;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityGroup;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
@@ -37,6 +40,19 @@ public class AbominationEntity extends HostileEntity {
         this.setHealth(this.getMaximumHealth());
         this.getNavigation().setCanSwim(true);
         this.experiencePoints = 50;
+    }
+
+    @Override
+    protected void initGoals() {
+        this.goalSelector.add(1, new AbominationMoveSetGoal(this));
+        //this.goalSelector.add(2, new SmashAttackGoal(this));
+        //this.goalSelector.add(3, new SpawnSpawnlingsGoal(this));
+        this.goalSelector.add(4, new WanderAroundFarGoal(this, 1.0D));
+        this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 64.0F));
+        this.goalSelector.add(6, new LookAroundGoal(this));
+
+        this.targetSelector.add(1, new RevengeGoal(this));
+        this.targetSelector.add(2, new FollowTargetGoal(this, MobEntity.class, 0, false, true, CAN_ATTACK_PREDICATE));
     }
 
     public static DefaultAttributeContainer.Builder createAbominationAttributes() {
@@ -73,18 +89,10 @@ public class AbominationEntity extends HostileEntity {
     public void slowMovement(BlockState state, Vec3d multiplier) {
     }
 
-    @Override
-    protected void initGoals() {
-        this.goalSelector.add(2, new SmashAttackGoal(this));
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D));
-        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 64.0F));
-        this.goalSelector.add(5, new LookAroundGoal(this));
-
-        this.targetSelector.add(1, new RevengeGoal(this));
-        this.targetSelector.add(2, new FollowTargetGoal(this, MobEntity.class, 0, false, true, CAN_ATTACK_PREDICATE));
-    }
-
     static {
-        CAN_ATTACK_PREDICATE = (livingEntity) -> livingEntity.getGroup() != EntityGroup.UNDEAD && livingEntity.isMobOrPlayer();
+        CAN_ATTACK_PREDICATE = (livingEntity) -> livingEntity.isMobOrPlayer()
+                && livingEntity.getGroup() != EntityGroup.UNDEAD
+                && livingEntity.getGroup() != EntityGroup.ARTHROPOD
+                && livingEntity.getType() != EntityType.CREEPER;
     }
 }
