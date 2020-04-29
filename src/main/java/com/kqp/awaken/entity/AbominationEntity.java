@@ -1,14 +1,11 @@
 package com.kqp.awaken.entity;
 
 import com.kqp.awaken.entity.ai.AbominationMoveSetGoal;
-import com.kqp.awaken.entity.ai.SmashAttackGoal;
-import com.kqp.awaken.entity.ai.SpawnSpawnlingsGoal;
 import com.kqp.awaken.init.AwakenEntities;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityGroup;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
@@ -29,7 +26,15 @@ import net.minecraft.world.World;
 import java.util.function.Predicate;
 
 public class AbominationEntity extends HostileEntity {
-    private static final Predicate<LivingEntity> CAN_ATTACK_PREDICATE;
+    public static final EntityType[] FRIENDLY_TYPES = {
+            EntityType.ZOMBIE,
+            EntityType.SKELETON,
+            EntityType.SPIDER,
+            EntityType.CAVE_SPIDER,
+            EntityType.CREEPER
+    };
+
+    public static final Predicate<Entity> CAN_ATTACK_PREDICATE;
 
     public final ServerBossBar bossBar;
 
@@ -45,11 +50,9 @@ public class AbominationEntity extends HostileEntity {
     @Override
     protected void initGoals() {
         this.goalSelector.add(1, new AbominationMoveSetGoal(this));
-        //this.goalSelector.add(2, new SmashAttackGoal(this));
-        //this.goalSelector.add(3, new SpawnSpawnlingsGoal(this));
-        this.goalSelector.add(4, new WanderAroundFarGoal(this, 1.0D));
-        this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 64.0F));
-        this.goalSelector.add(6, new LookAroundGoal(this));
+        this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0D));
+        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 64.0F));
+        this.goalSelector.add(4, new LookAroundGoal(this));
 
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new FollowTargetGoal(this, MobEntity.class, 0, false, true, CAN_ATTACK_PREDICATE));
@@ -97,9 +100,14 @@ public class AbominationEntity extends HostileEntity {
     }
 
     static {
-        CAN_ATTACK_PREDICATE = (livingEntity) -> livingEntity.isMobOrPlayer()
-                && livingEntity.getGroup() != EntityGroup.UNDEAD
-                && livingEntity.getGroup() != EntityGroup.ARTHROPOD
-                && livingEntity.getType() != EntityType.CREEPER;
+        CAN_ATTACK_PREDICATE = (entity) -> {
+            for (EntityType type : FRIENDLY_TYPES) {
+                if (entity.getType() == type) {
+                    return false;
+                }
+            }
+
+            return true;
+        };
     }
 }

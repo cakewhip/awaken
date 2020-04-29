@@ -13,7 +13,7 @@ public class MoveSetGoal<T extends HostileEntity> extends Goal {
     private final int[] pattern;
 
     private int currentPatternIndex;
-    private int coolDown;
+    private int currentDuration;
 
     public Move currentMove;
 
@@ -42,9 +42,9 @@ public class MoveSetGoal<T extends HostileEntity> extends Goal {
 
     @Override
     public void tick() {
-        this.coolDown = Math.max(this.coolDown - 1, 0);
+        this.currentDuration = Math.max(this.currentDuration - 1, 0);
 
-        if (this.coolDown <= 0) {
+        if (this.currentDuration <= 0) {
             // Get current move and stop it
             Move currentMove = moveSet.get(this.pattern[this.currentPatternIndex]);
             currentMove.stop(this.mob);
@@ -68,7 +68,7 @@ public class MoveSetGoal<T extends HostileEntity> extends Goal {
     private void selectMove(int moveSetIndex) {
         this.currentMove = moveSet.get(moveSetIndex);
         this.currentMove.start(this.mob);
-        this.coolDown = this.currentMove.coolDown;
+        this.currentDuration = this.currentMove.duration;
     }
 
     public void addMove(Move move) {

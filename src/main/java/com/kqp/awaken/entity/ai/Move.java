@@ -3,10 +3,10 @@ package com.kqp.awaken.entity.ai;
 import net.minecraft.entity.mob.HostileEntity;
 
 public abstract class Move<T extends HostileEntity> {
-    public final int coolDown;
+    public final int duration;
 
-    public Move(int coolDown) {
-        this.coolDown = coolDown;
+    public Move(int duration) {
+        this.duration = duration;
     }
 
     public abstract void start(T mob);
