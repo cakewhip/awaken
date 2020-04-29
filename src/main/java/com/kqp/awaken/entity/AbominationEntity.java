@@ -58,10 +58,17 @@ public class AbominationEntity extends HostileEntity {
     public static DefaultAttributeContainer.Builder createAbominationAttributes() {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 600D)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 800D)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 18.0D)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0D);
+    }
+
+    @Override
+    protected void mobTick() {
+        super.mobTick();
+
+        this.bossBar.setPercent(this.getHealth() / this.getMaximumHealth());
     }
 
     @Override
