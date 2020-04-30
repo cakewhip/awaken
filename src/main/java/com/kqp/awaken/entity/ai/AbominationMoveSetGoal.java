@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Random;
 
 public class AbominationMoveSetGoal extends MoveSetGoal<AbominationEntity> {
-
-
     public AbominationMoveSetGoal(AbominationEntity mob) {
         super(mob, new int[] { 0, 1, 1, 1 });
 
@@ -52,15 +50,15 @@ public class AbominationMoveSetGoal extends MoveSetGoal<AbominationEntity> {
     }
 
     class SmashAttackMove extends Move<AbominationEntity> {
-        private static final int RANGE = 12;
+        private static final int RANGE = 8;
+        private static final int SQUARED_RANGE = RANGE * RANGE;
 
         public SmashAttackMove() {
-            super(3 * 20);
+            super(5 * 20);
         }
 
         @Override
         public void start(AbominationEntity mob) {
-
         }
 
         @Override
@@ -73,8 +71,6 @@ public class AbominationMoveSetGoal extends MoveSetGoal<AbominationEntity> {
                 double speed = mob.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
 
                 mob.getNavigation().startMovingTo(target, speed);
-
-                System.out.println(mob.squaredDistanceTo(target) < RANGE);
             }
         }
 
@@ -82,9 +78,9 @@ public class AbominationMoveSetGoal extends MoveSetGoal<AbominationEntity> {
         public void stop(AbominationEntity mob) {
             LivingEntity target = mob.getTarget();
 
-            if (target != null && mob.squaredDistanceTo(target) < RANGE) {
+            if (target != null && mob.squaredDistanceTo(target) < SQUARED_RANGE) {
                 World world = mob.world;
-                Vec3d cent = mob.getPos().add(0, mob.getHeight() / -2, 0);
+                Vec3d cent = mob.getPos();
 
                 List<Entity> entities = world.getEntities(null, new Box(
                         cent.add(-RANGE, -6, -RANGE),
@@ -92,7 +88,7 @@ public class AbominationMoveSetGoal extends MoveSetGoal<AbominationEntity> {
                 ));
 
                 for (Entity entity : entities) {
-                    if (AbominationEntity.CAN_ATTACK_PREDICATE.test(entity) && mob.squaredDistanceTo(entity) < RANGE) {
+                    if (AbominationEntity.CAN_ATTACK_PREDICATE.test(entity) && mob.squaredDistanceTo(entity) < SQUARED_RANGE) {
                         entity.damage(DamageSource.explosion(mob), (float) mob.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE));
                     }
                 }
