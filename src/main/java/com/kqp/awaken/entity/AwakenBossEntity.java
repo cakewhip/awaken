@@ -1,5 +1,6 @@
 package com.kqp.awaken.entity;
 
+import com.kqp.awaken.data.AwakenConfig;
 import com.kqp.awaken.init.AwakenNetworking;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.block.BlockState;
@@ -77,12 +78,12 @@ public class AwakenBossEntity extends HostileEntity {
     public boolean isDespawning() {
         long time = world.getTimeOfDay() % 24000;
 
-        return time > 22400;
+        return time > AwakenConfig.BOSS_DESPAWN_TIME_START;
     }
 
     public boolean shouldRemove() {
         long time = world.getTimeOfDay() % 24000;
 
-        return time < 13000 || time > 23000;
+        return time < AwakenConfig.VALID_BOSS_TIME_START || time > AwakenConfig.VALID_BOSS_TIME_END;
     }
 }

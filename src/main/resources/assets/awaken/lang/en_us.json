@@ -1,4 +1,9 @@
 {
+    "__comment": "Boss Spawner Item",
+    "item.boss_spawner.not_top": "This should be used on top of a block",
+    "item.boss_spawner.no_space": "There is not enough space (17x8x17 needed)",
+    "item.boss_spawner.wrong_time": "It is not the right time for this",
+
     "__comment": "Phase 1 Reagents",
     "item.awaken.creeper_tissue": "Creeper Tissue",
     "item.awaken.necrotic_heart": "Necrotic Heart",
