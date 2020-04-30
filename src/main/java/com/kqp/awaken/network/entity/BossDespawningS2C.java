@@ -1,6 +1,6 @@
 package com.kqp.awaken.network.entity;
 
-import com.kqp.awaken.entity.AbominationEntity;
+import com.kqp.awaken.entity.AwakenBossEntity;
 import com.kqp.awaken.network.AwakenPacketS2C;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.minecraft.client.MinecraftClient;
@@ -12,15 +12,15 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class AbominationDespawningS2C extends AwakenPacketS2C {
-    public AbominationDespawningS2C() {
-        super("abomination_despawning_s2c");
+public class BossDespawningS2C extends AwakenPacketS2C {
+    public BossDespawningS2C() {
+        super("boss_despawning_s2c");
     }
 
-    public void send(AbominationEntity abomination) {
-        for (ServerPlayerEntity player : abomination.bossBar.getPlayers()) {
+    public void send(AwakenBossEntity boss) {
+        for (ServerPlayerEntity player : boss.bossBar.getPlayers()) {
             this.sendToPlayer(player, (buf) -> {
-                buf.writeInt(abomination.getEntityId());
+                buf.writeInt(boss.getEntityId());
             });
         }
     }

@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 
 import java.util.function.Predicate;
 
-public class AbominationEntity extends HostileEntity {
+public class AbominationEntity extends AwakenBossEntity {
     public static final EntityType[] FRIENDLY_TYPES = {
             EntityType.ZOMBIE,
             EntityType.SKELETON,
@@ -38,16 +38,9 @@ public class AbominationEntity extends HostileEntity {
 
     public static final Predicate<Entity> CAN_ATTACK_PREDICATE;
 
-    public final ServerBossBar bossBar;
-
-    private int despawnTickTime;
-
     public AbominationEntity(World world) {
         super(AwakenEntities.ABOMINATION, world);
 
-        this.bossBar = new ServerBossBar(this.getDisplayName(), BossBar.Color.YELLOW, BossBar.Style.PROGRESS);
-        this.setHealth(this.getMaximumHealth());
-        this.getNavigation().setCanSwim(true);
         this.experiencePoints = 50;
     }
 
@@ -69,62 +62,6 @@ public class AbominationEntity extends HostileEntity {
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 18.0D)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0D);
-    }
-
-    @Override
-    protected void mobTick() {
-        super.mobTick();
-
-        this.bossBar.setPercent(this.getHealth() / this.getMaximumHealth());
-
-        if (this.shouldRemove()) {
-            this.remove();
-        } else if (this.isDespawning()) {
-            this.despawnTickTime++;
-
-            this.setOnFireFor(30);
-
-            if (this.despawnTickTime % 5 == 0) {
-                AwakenNetworking.ABOMINATION_DESPAWNING_S2C.send(this);
-            }
-        }
-    }
-
-    @Override
-    public void setCustomName(@Nullable Text name) {
-        super.setCustomName(name);
-
-        this.bossBar.setName(this.getDisplayName());
-    }
-
-    @Override
-    public void onStartedTrackingBy(ServerPlayerEntity player) {
-        super.onStartedTrackingBy(player);
-
-        this.bossBar.addPlayer(player);
-    }
-
-    @Override
-    public void onStoppedTrackingBy(ServerPlayerEntity player) {
-        super.onStoppedTrackingBy(player);
-
-        this.bossBar.removePlayer(player);
-    }
-
-    @Override
-    public void slowMovement(BlockState state, Vec3d multiplier) {
-    }
-
-    public boolean isDespawning() {
-        long time = world.getTimeOfDay() % 24000;
-
-        return time > 22400;
-    }
-
-    public boolean shouldRemove() {
-        long time = world.getTimeOfDay() % 24000;
-
-        return time < 13000 || time > 23000;
     }
 
     static {
