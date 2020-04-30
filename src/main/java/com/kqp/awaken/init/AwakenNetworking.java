@@ -1,9 +1,9 @@
 package com.kqp.awaken.init;
 
 import com.kqp.awaken.network.AwakenPacket;
-import com.kqp.awaken.network.entity.BossDespawningS2C;
 import com.kqp.awaken.network.entity.AbominationSmashAttackS2C;
 import com.kqp.awaken.network.entity.AbominationSpawnSpawnlingsS2C;
+import com.kqp.awaken.network.entity.BossDespawningS2C;
 import com.kqp.awaken.network.recipe.SyncRecipesS2C;
 import com.kqp.awaken.network.screen.SyncCraftingResultSlotS2C;
 import com.kqp.awaken.network.screen.SyncCraftingResultsS2C;

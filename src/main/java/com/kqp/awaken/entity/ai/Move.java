@@ -10,6 +10,8 @@ public abstract class Move<T extends HostileEntity> {
     }
 
     public abstract void start(T mob);
+
     public abstract void tick(T mob);
+
     public abstract void stop(T mob);
 }
