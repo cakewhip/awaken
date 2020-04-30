@@ -73,7 +73,7 @@ public class AwakenItems {
     public static final Item CINDERED_SOUL = genericItem();
     public static final Item FIERY_HEART = new HealthIncreaseItem("fiery_heart", 10, (HealthIncreaseItem) MONSTER_HEART);
 
-    public static final Item ABOMINATION_SPAWNER = new BossSpawnerItem(AwakenEntities.ABOMINATION);
+    public static final Item ABOMINABLE_AMALGAM = new BossSpawnerItem(AwakenEntities.ABOMINATION);
 
     public static final Item CORSAIR_TOKEN = genericItem();
     public static final Item RAPTOR_CHICKEN_EGG = genericItem();
@@ -179,7 +179,7 @@ public class AwakenItems {
             register(CINDERED_SOUL, "cindered_soul");
             register(FIERY_HEART, "fiery_heart");
 
-            register(ABOMINATION_SPAWNER, "abomination_spawner");
+            register(ABOMINABLE_AMALGAM, "abominable_amalgam");
 
             register(CORSAIR_TOKEN, "corsair_token");
             register(RAPTOR_CHICKEN_EGG, "raptor_chicken_egg");

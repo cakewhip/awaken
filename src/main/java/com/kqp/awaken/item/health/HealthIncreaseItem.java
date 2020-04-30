@@ -74,6 +74,6 @@ public class HealthIncreaseItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(new LiteralText("Right-click to increase max health by 1 heart (up to " + extraHearts + " times)"));
+        tooltip.add(new LiteralText("Use to increase max health"));
     }
 }

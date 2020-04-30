@@ -24,19 +24,28 @@ public class AwakenEntities {
     public static final EntityType<RaptorChickenEntity> RAPTOR_CHICKEN = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(Awaken.MOD_ID, "raptor_chicken"),
-            FabricEntityTypeBuilder.create(EntityCategory.MONSTER, RaptorChickenEntity::new).size(EntityDimensions.fixed(0.95F, 1.65F)).build()
+            FabricEntityTypeBuilder.create(EntityCategory.MONSTER, RaptorChickenEntity::new)
+                    .size(EntityDimensions.fixed(0.95F, 1.65F))
+                    .trackable(72, 3)
+                    .build()
     );
 
     public static final EntityType<DireWolfEntity> DIRE_WOLF = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(Awaken.MOD_ID, "dire_wolf"),
-            FabricEntityTypeBuilder.create(EntityCategory.MONSTER, DireWolfEntity::new).size(EntityDimensions.fixed(1.5F, 1F)).build()
+            FabricEntityTypeBuilder.create(EntityCategory.MONSTER, DireWolfEntity::new)
+                    .size(EntityDimensions.fixed(1.5F, 1F))
+                    .trackable(72, 3)
+                    .build()
     );
 
     public static final EntityType<AbominationEntity> ABOMINATION = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(Awaken.MOD_ID, "abomination"),
-            FabricEntityTypeBuilder.create(EntityCategory.MONSTER, AbominationEntity::new).size(EntityDimensions.fixed(0.6F * 3F, 1.95F * 3F)).build()
+            FabricEntityTypeBuilder.create(EntityCategory.MONSTER, AbominationEntity::new)
+                    .size(EntityDimensions.fixed(0.6F * 3F, 1.95F * 3F))
+                    .trackable(72, 3)
+                    .build()
     );
 
     public static void init() {

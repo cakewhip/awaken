@@ -40,12 +40,14 @@
     "item.awaken.enderian_cutlass": "Enderian Cutlass",
 
 
-    "__comment": "Phase 2 Reagents",
+    "__comment": "Phase 2 Items",
     "item.awaken.smoldering_heart": "Smoldering Heart",
     "item.awaken.fiery_core": "Fiery Core",
     "item.awaken.magma_strand": "Magma Strand",
     "item.awaken.cindered_soul": "Cindered Soul",
     "item.awaken.fiery_heart": "Fiery Heart",
+    "item.awaken.corsair_token": "Corsair Token",
+    "item.awaken.abominable_amalgam": "Abominable Amalgam",
 
     "__comment": "Phase 2 Ore Groups",
     "block.awaken.salvium_ore": "Salvium Ore",
@@ -68,12 +70,14 @@
     "item.awaken.valerium_boots": "Valerium Boots",
 
 
-    "__comment": "Entities",
+    "__comment": "Phase 2 Entities",
     "entity.awaken.raptor_chicken": "Raptor Chicken",
     "item.awaken.raptor_chicken_spawn_egg": "Raptor Chicken Spawn Egg",
     "item.awaken.raptor_chicken_egg": "Raptor Chicken Egg",
     "entity.awaken.dire_wolf": "Dire Wolf",
     "item.awaken.dire_wolf_spawn_egg": "Dire Wolf Spawn Egg",
+    "entity.awaken.abomination": "Abomination",
+    "item.awaken.dire_wolf_spawn_egg": "Abomination Spawn Egg",
 
     "__comment": "GUI Translations",
     "gui.awaken.awaken_crafting": "Crafting",
