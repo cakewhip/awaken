@@ -19,12 +19,17 @@ public class AbominationRenderer<T extends AbominationEntity, M extends BipedEnt
         super(dispatcher, (M) new AbominationEntityModel(), 1.5F);
     }
 
-    public Identifier getTexture(AbominationEntity AbominationEntity) {
+    public Identifier getTexture(AbominationEntity abominationEntity) {
         return TEXTURE;
     }
 
     @Override
     protected void scale(T entity, MatrixStack matrices, float tickDelta) {
         matrices.scale(3F, 3F, 3F);
+    }
+
+    @Override
+    protected boolean isShaking(AbominationEntity abominationEntity) {
+        return abominationEntity.isDespawning();
     }
 }

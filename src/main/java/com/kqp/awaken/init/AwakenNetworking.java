@@ -1,6 +1,7 @@
 package com.kqp.awaken.init;
 
 import com.kqp.awaken.network.AwakenPacket;
+import com.kqp.awaken.network.entity.AbominationDespawningS2C;
 import com.kqp.awaken.network.entity.AbominationSmashAttackS2C;
 import com.kqp.awaken.network.entity.AbominationSpawnSpawnlingsS2C;
 import com.kqp.awaken.network.recipe.SyncRecipesS2C;
@@ -33,6 +34,7 @@ public class AwakenNetworking {
 
     public static final AbominationSmashAttackS2C ABOMINATION_SMASH_ATTACK_S2C = new AbominationSmashAttackS2C();
     public static final AbominationSpawnSpawnlingsS2C ABOMINATION_SPAWN_SPAWNLINGS_S2C = new AbominationSpawnSpawnlingsS2C();
+    public static final AbominationDespawningS2C ABOMINATION_DESPAWNING_S2C = new AbominationDespawningS2C();
 
 
     // Client to Server

@@ -8,13 +8,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
-public class AbominationSmashAttackS2C extends AwakenPacketS2C {
-    public AbominationSmashAttackS2C() {
-        super("spawn_abomination_smash_attack_s2c");
+import java.util.Random;
+
+public class AbominationDespawningS2C extends AwakenPacketS2C {
+    public AbominationDespawningS2C() {
+        super("abomination_despawning_s2c");
     }
 
     public void send(AbominationEntity abomination) {
@@ -31,13 +31,26 @@ public class AbominationSmashAttackS2C extends AwakenPacketS2C {
 
         context.getTaskQueue().execute(() -> {
             World world = MinecraftClient.getInstance().world;
-
             Entity entity = world.getEntityById(id);
-            world.addParticle(ParticleTypes.EXPLOSION_EMITTER, entity.getX(), entity.getY(), entity.getZ(), 1.0D, 0.0D, 0.0D);
-            world.playSound(
-                    entity.getX(), entity.getY(), entity.getZ(),
-                    SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.HOSTILE,
-                    4.0F, 0.14f, false);
+            Random r = world.random;
+
+            for (int i = 0; i < 3; i++) {
+                world.addParticle(ParticleTypes.LAVA,
+                        entity.getX() + 2 * (r.nextDouble() - r.nextDouble()),
+                        entity.getY(),
+                        entity.getZ() + 2 * (r.nextDouble() - r.nextDouble()),
+                        r.nextDouble() - r.nextDouble(), r.nextDouble(), r.nextDouble() - r.nextDouble()
+                );
+            }
+
+            for (int i = 0; i < 3; i++) {
+                world.addParticle(ParticleTypes.LARGE_SMOKE,
+                        entity.getX() + 2 * (r.nextDouble() - r.nextDouble()),
+                        entity.getY(),
+                        entity.getZ() + 2 * (r.nextDouble() - r.nextDouble()),
+                        0, r.nextDouble(), 0
+                );
+            }
         });
     }
 }

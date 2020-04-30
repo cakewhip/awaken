@@ -2,6 +2,7 @@ package com.kqp.awaken.entity;
 
 import com.kqp.awaken.entity.ai.AbominationMoveSetGoal;
 import com.kqp.awaken.init.AwakenEntities;
+import com.kqp.awaken.init.AwakenNetworking;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -18,6 +19,7 @@ import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
@@ -37,6 +39,8 @@ public class AbominationEntity extends HostileEntity {
     public static final Predicate<Entity> CAN_ATTACK_PREDICATE;
 
     public final ServerBossBar bossBar;
+
+    private int despawnTickTime;
 
     public AbominationEntity(World world) {
         super(AwakenEntities.ABOMINATION, world);
@@ -72,6 +76,18 @@ public class AbominationEntity extends HostileEntity {
         super.mobTick();
 
         this.bossBar.setPercent(this.getHealth() / this.getMaximumHealth());
+
+        if (this.shouldRemove()) {
+            this.remove();
+        } else if (this.isDespawning()) {
+            this.despawnTickTime++;
+
+            this.setOnFireFor(30);
+
+            if (this.despawnTickTime % 5 == 0) {
+                AwakenNetworking.ABOMINATION_DESPAWNING_S2C.send(this);
+            }
+        }
     }
 
     @Override
@@ -97,6 +113,18 @@ public class AbominationEntity extends HostileEntity {
 
     @Override
     public void slowMovement(BlockState state, Vec3d multiplier) {
+    }
+
+    public boolean isDespawning() {
+        long time = world.getTimeOfDay() % 24000;
+
+        return time > 22400;
+    }
+
+    public boolean shouldRemove() {
+        long time = world.getTimeOfDay() % 24000;
+
+        return time < 13000 || time > 23000;
     }
 
     static {
