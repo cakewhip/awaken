@@ -3,7 +3,9 @@ package com.kqp.awaken.entity.ai;
 import com.kqp.awaken.entity.AbominationEntity;
 import com.kqp.awaken.init.AwakenNetworking;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.util.math.Box;
@@ -39,10 +41,12 @@ public class AbominationMoveSetGoal extends MoveSetGoal<AbominationEntity> {
             World world = mob.world;
             Random r = world.random;
 
-            for (int i = 0; i < 4 + r.nextInt(3); i++) {
-                Entity entity = AbominationEntity.FRIENDLY_TYPES[r.nextInt(AbominationEntity.FRIENDLY_TYPES.length)].create(world);
-                entity.refreshPositionAndAngles(mob.getX(), mob.getY(), mob.getZ(), 0F, 0F);
-                world.spawnEntity(entity);
+            for (int i = 0; i < 4 + r.nextInt(4); i++) {
+                EntityType type = AbominationEntity.FRIENDLY_TYPES[r.nextInt(AbominationEntity.FRIENDLY_TYPES.length)];
+
+                type.spawn(world, null, null, null,
+                        mob.getBlockPos().add(2 * (r.nextDouble() - r.nextDouble()), 0, 2 * (r.nextDouble() - r.nextDouble())),
+                        SpawnType.MOB_SUMMONED, true, false);
             }
 
             AwakenNetworking.ABOMINATION_SPAWN_SPAWNLINGS_S2C.send(mob);
@@ -88,7 +92,7 @@ public class AbominationMoveSetGoal extends MoveSetGoal<AbominationEntity> {
                 ));
 
                 for (Entity entity : entities) {
-                    if (AbominationEntity.CAN_ATTACK_PREDICATE.test(entity) && mob.squaredDistanceTo(entity) < SQUARED_RANGE) {
+                    if (entity != mob && AbominationEntity.CAN_ATTACK_PREDICATE.test(entity) && mob.squaredDistanceTo(entity) < SQUARED_RANGE) {
                         entity.damage(DamageSource.explosion(mob), (float) mob.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE));
                     }
                 }
