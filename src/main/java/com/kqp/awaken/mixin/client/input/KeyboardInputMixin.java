@@ -12,6 +12,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Used to implement the confusion status effect.
+ */
 @Mixin(KeyboardInput.class)
 public class KeyboardInputMixin {
     @Shadow
@@ -34,8 +37,8 @@ public class KeyboardInputMixin {
                 input.movementForward = input.pressingForward == input.pressingBack ? 0.0F : (input.pressingForward ? 1.0F : -1.0F);
                 input.movementSideways = input.pressingLeft == input.pressingRight ? 0.0F : (input.pressingLeft ? 1.0F : -1.0F);
 
-                input.jumping = settings.keyJump.isPressed();
-                input.sneaking = settings.keySneak.isPressed();
+                input.jumping = settings.keySneak.isPressed();
+                input.sneaking = settings.keyJump.isPressed();
 
                 if (sneaking) {
                     input.movementSideways = (float) (input.movementSideways * 0.3D);
