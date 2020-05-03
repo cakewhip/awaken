@@ -3,6 +3,7 @@ package com.kqp.awaken.init;
 import com.kqp.awaken.entity.AbominationEntity;
 import com.kqp.awaken.entity.DireWolfEntity;
 import com.kqp.awaken.entity.RaptorChickenEntity;
+import com.kqp.awaken.entity.SpiderSacEntity;
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import com.kqp.awaken.entity.effect.AwakenStatusEffects;
 import net.fabricmc.fabric.api.entity.FabricDefaultAttributeRegistry;
@@ -12,7 +13,6 @@ import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
@@ -37,6 +37,15 @@ public class AwakenEntities {
             new Identifier(Awaken.MOD_ID, "dire_wolf"),
             FabricEntityTypeBuilder.create(EntityCategory.MONSTER, DireWolfEntity::new)
                     .size(EntityDimensions.fixed(1.5F, 1F))
+                    .trackable(72, 3)
+                    .build()
+    );
+
+    public static final EntityType<SpiderSacEntity> SPIDER_SAC = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(Awaken.MOD_ID, "spider_sac"),
+            FabricEntityTypeBuilder.create(EntityCategory.MONSTER, SpiderSacEntity::new)
+                    .size(EntityDimensions.fixed(0.8F, 0.8F))
                     .trackable(72, 3)
                     .build()
     );
@@ -74,6 +83,7 @@ public class AwakenEntities {
         {
             register(RAPTOR_CHICKEN, 0x9C0202, 0x610000, RaptorChickenEntity.createRaptorChickenAttributes());
             register(DIRE_WOLF, 0xD6E9FF, 0x97ADCC, DireWolfEntity.createDireWolfAttributes());
+            register(SPIDER_SAC, 0x000000, 0xFFFFFF, SpiderSacEntity.createSpiderSacAttributes());
             register(ABOMINATION, 0xFFFFFF, 0x000000, AbominationEntity.createAbominationAttributes());
         }
     }

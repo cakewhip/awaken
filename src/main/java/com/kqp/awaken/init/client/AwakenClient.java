@@ -3,6 +3,7 @@ package com.kqp.awaken.init.client;
 import com.kqp.awaken.client.entity.AbominationRenderer;
 import com.kqp.awaken.client.entity.DireWolfRenderer;
 import com.kqp.awaken.client.entity.RaptorChickenRenderer;
+import com.kqp.awaken.client.entity.SpiderSacRenderer;
 import com.kqp.awaken.init.AwakenEntities;
 import com.kqp.awaken.init.AwakenNetworking;
 import com.kqp.awaken.network.AwakenPacket;
@@ -35,6 +36,10 @@ public class AwakenClient implements ClientModInitializer {
 
         EntityRendererRegistry.INSTANCE.register(AwakenEntities.DIRE_WOLF, (dispatcher, context) ->
                 new DireWolfRenderer(dispatcher)
+        );
+
+        EntityRendererRegistry.INSTANCE.register(AwakenEntities.SPIDER_SAC, (dispatcher, context) ->
+                new SpiderSacRenderer(dispatcher)
         );
 
         EntityRendererRegistry.INSTANCE.register(AwakenEntities.ABOMINATION, (dispatcher, context) ->
