@@ -5,6 +5,7 @@ import com.kqp.awaken.block.group.BlockStats;
 import com.kqp.awaken.block.group.OreBlocks;
 import com.kqp.awaken.recipe.RecipeType;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
@@ -14,6 +15,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class AwakenBlocks {
+    public static final Block CRACKED_BEDROCK = new Block(FabricBlockSettings.of(Material.STONE).strength(100.0F, 1200.0F).breakByTool(FabricToolTags.PICKAXES, 4).build());
+
     public static OreBlocks SALVIUM, VALERIUM;
 
     public static final Block ENDERIAN_HELL_FORGE = new CraftingBlock(
@@ -26,6 +29,8 @@ public class AwakenBlocks {
 
         // Phase 2
         {
+            register(CRACKED_BEDROCK, "cracked_bedrock");
+
             SALVIUM = new OreBlocks(
                     "salvium",
                     new BlockStats(25.0F, 6.0F, 0),
