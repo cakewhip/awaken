@@ -1,6 +1,7 @@
 package com.kqp.awaken.init;
 
 import com.kqp.awaken.util.TimeUtil;
+import com.kqp.awaken.world.dimension.AwakenDimensions;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -28,6 +29,7 @@ public class Awaken implements ModInitializer {
             AwakenCallbacks.init();
             AwakenCommands.init();
             AwakenWorld.init();
+            AwakenDimensions.init();
         }, (time) -> Awaken.info("Awaken took " + time + "ms to load"));
     }
 
