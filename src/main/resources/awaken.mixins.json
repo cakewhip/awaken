@@ -30,6 +30,7 @@
   ],
   "client": [
     "client.gui.screen.ingame.InventoryScreenMixin",
+    "client.input.KeyboardInputMixin",
     "client.MinecraftClientMixin",
     "client.network.ClientPlayerInteractionManagerMixin",
     "client.network.ClientPlayNetworkHandlerMixin",

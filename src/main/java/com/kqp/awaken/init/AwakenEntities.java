@@ -4,6 +4,7 @@ import com.kqp.awaken.entity.AbominationEntity;
 import com.kqp.awaken.entity.DireWolfEntity;
 import com.kqp.awaken.entity.RaptorChickenEntity;
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
+import com.kqp.awaken.entity.effect.AwakenStatusEffects;
 import net.fabricmc.fabric.api.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
@@ -11,6 +12,7 @@ import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
@@ -61,6 +63,11 @@ public class AwakenEntities {
             Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "melee_damage"), AwakenEntityAttributes.MELEE_DAMAGE);
             Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "sword_damage"), AwakenEntityAttributes.SWORD_DAMAGE);
             Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "axe_damage"), AwakenEntityAttributes.AXE_DAMAGE);
+        }
+
+        // Custom Status Effects
+        {
+            Registry.register(Registry.STATUS_EFFECT, new Identifier(Awaken.MOD_ID, "confusion"), AwakenStatusEffects.CONFUSION);
         }
 
         // Phase 2 Mobs

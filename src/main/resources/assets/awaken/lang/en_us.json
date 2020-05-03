@@ -97,5 +97,8 @@
 
     "__comment": "Entity Attributes",
     "attribute.name.generic.ranged_damage": "Ranged Damage",
-    "attribute.name.generic.melee_damage": "Melee Damage"
+    "attribute.name.generic.melee_damage": "Melee Damage",
+
+    "__comment": "Status Effects",
+    "effect.awaken.confusion": "Confusion"
 }
