@@ -1,6 +1,7 @@
 package com.kqp.awaken.entity;
 
 import com.kqp.awaken.init.AwakenEntities;
+import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -87,5 +88,10 @@ public class SpiderSacEntity extends HostileEntity {
 
         tag.putBoolean("Hatching", this.hatching);
         tag.putInt("HatchTime", this.hatchTime);
+    }
+
+    @Override
+    public EntityGroup getGroup() {
+        return EntityGroup.ARTHROPOD;
     }
 }
