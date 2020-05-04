@@ -5,7 +5,7 @@ BLOCKS = [
     "ancient_redstone_ore",
     "ancient_lapis_ore",
     "ancient_diamond_ore",
-    "ancient_emerald_ore"
+    "ancient_emerald_ore",
     "ancient_salvium_ore",
     "ancient_valerium_ore",
     "cracked_bedrock"
