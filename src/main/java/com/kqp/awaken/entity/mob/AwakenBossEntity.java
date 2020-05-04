@@ -1,4 +1,4 @@
-package com.kqp.awaken.entity;
+package com.kqp.awaken.entity.mob;
 
 import com.kqp.awaken.data.AwakenConfig;
 import com.kqp.awaken.init.AwakenNetworking;

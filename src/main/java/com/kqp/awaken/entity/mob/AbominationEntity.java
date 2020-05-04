@@ -1,4 +1,4 @@
-package com.kqp.awaken.entity;
+package com.kqp.awaken.entity.mob;
 
 import com.kqp.awaken.entity.ai.AbominationMoveSetGoal;
 import com.kqp.awaken.init.AwakenEntities;

@@ -1,6 +1,6 @@
 package com.kqp.awaken.network.entity;
 
-import com.kqp.awaken.entity.AbominationEntity;
+import com.kqp.awaken.entity.mob.AbominationEntity;
 import com.kqp.awaken.network.AwakenPacketS2C;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.minecraft.client.MinecraftClient;

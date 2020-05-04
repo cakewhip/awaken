@@ -1,7 +1,7 @@
 package com.kqp.awaken.client.model;
 
 import com.google.common.collect.ImmutableList;
-import com.kqp.awaken.entity.DireWolfEntity;
+import com.kqp.awaken.entity.mob.DireWolfEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelPart;

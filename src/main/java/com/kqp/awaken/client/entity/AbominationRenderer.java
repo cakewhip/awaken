@@ -1,7 +1,7 @@
 package com.kqp.awaken.client.entity;
 
 import com.kqp.awaken.client.model.AbominationEntityModel;
-import com.kqp.awaken.entity.AbominationEntity;
+import com.kqp.awaken.entity.mob.AbominationEntity;
 import com.kqp.awaken.init.Awaken;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

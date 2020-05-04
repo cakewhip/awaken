@@ -1,7 +1,7 @@
 package com.kqp.awaken.client.entity;
 
 import com.kqp.awaken.client.model.DireWolfEntityModel;
-import com.kqp.awaken.entity.DireWolfEntity;
+import com.kqp.awaken.entity.mob.DireWolfEntity;
 import com.kqp.awaken.init.Awaken;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MobEntityRenderer;

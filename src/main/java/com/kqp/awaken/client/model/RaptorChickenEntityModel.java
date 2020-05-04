@@ -1,7 +1,7 @@
 package com.kqp.awaken.client.model;
 
 import com.google.common.collect.ImmutableList;
-import com.kqp.awaken.entity.RaptorChickenEntity;
+import com.kqp.awaken.entity.mob.RaptorChickenEntity;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.util.math.MathHelper;

@@ -1,6 +1,6 @@
 package com.kqp.awaken.entity.ai;
 
-import com.kqp.awaken.entity.AbominationEntity;
+import com.kqp.awaken.entity.mob.AbominationEntity;
 import com.kqp.awaken.init.AwakenNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

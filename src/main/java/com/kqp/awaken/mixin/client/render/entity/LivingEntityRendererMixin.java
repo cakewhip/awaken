@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin.client.render.entity;
 
 import com.kqp.awaken.client.entity.RaptorChickenRenderer;
-import com.kqp.awaken.entity.RaptorChickenEntity;
+import com.kqp.awaken.entity.mob.RaptorChickenEntity;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.entity.LivingEntity;

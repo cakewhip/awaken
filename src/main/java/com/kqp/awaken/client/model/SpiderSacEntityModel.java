@@ -1,6 +1,6 @@
 package com.kqp.awaken.client.model;
 
-import com.kqp.awaken.entity.SpiderSacEntity;
+import com.kqp.awaken.entity.mob.SpiderSacEntity;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;

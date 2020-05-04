@@ -1,4 +1,4 @@
-package com.kqp.awaken.entity;
+package com.kqp.awaken.entity.mob;
 
 import com.kqp.awaken.init.AwakenEntities;
 import com.kqp.awaken.init.AwakenItems;
