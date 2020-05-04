@@ -1,7 +1,9 @@
 package com.kqp.awaken.mixin.block;
 
 import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.init.AwakenDimensions;
 import com.kqp.awaken.util.Broadcaster;
+import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -37,7 +39,7 @@ public class BedBlockMixin {
 
                     callbackInfoReturnable.setReturnValue(ActionResult.SUCCESS);
 
-                    player.changeDimension(DimensionType.OVERWORLD);
+                    FabricDimensions.teleport(player, DimensionType.OVERWORLD);
                     Broadcaster.broadcastMessage(world.getServer(), "New ores have generated!", Formatting.LIGHT_PURPLE, false, true);
                 }
             }

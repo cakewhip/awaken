@@ -1,6 +1,7 @@
 package com.kqp.awaken.entity.mob;
 
 import com.kqp.awaken.init.AwakenEntities;
+import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
@@ -13,14 +14,13 @@ import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 
 public class VoidGhostEntity extends HostileEntity {
     private WanderGoal wanderGoal;
@@ -37,7 +37,7 @@ public class VoidGhostEntity extends HostileEntity {
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2D)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 60D)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 14.0D)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0D)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.8D);
     }
 
@@ -82,15 +82,11 @@ public class VoidGhostEntity extends HostileEntity {
 
     @Override
     public boolean tryAttack(Entity target) {
-        if (!super.tryAttack(target)) {
-            return false;
-        } else {
-            if (target instanceof LivingEntity) {
-                ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 2 * 20, 0));
-            }
-
-            return true;
+        if (target instanceof PlayerEntity) {
+            FabricDimensions.teleport(target, DimensionType.OVERWORLD);
         }
+
+        return true;
     }
 
     @Override

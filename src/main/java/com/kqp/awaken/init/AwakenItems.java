@@ -86,7 +86,7 @@ public class AwakenItems {
 
     public static final Item SALVIUM_BOW = register("salvium_bow", new AwakenBowItem(4D));
     public static final Item VALERIUM_SWORD = register("valerium_sword", new AwakenSwordItem(AwakenToolMaterial.sword(1561, 12F, 1.6F, 10, VALERIUM_INGOT)));
-    public static final Item SALVERIUM_PICKAXE = register("salverium_pickaxe", new AwakenPickaxeItem(AwakenToolMaterial.tool(4, 1561, 11F, 6F, 1.2F, 15, SALVIUM_INGOT, VALERIUM_INGOT)));
+    public static final Item SALVERIUM_PICKAXE = register("salverium_pickaxe", new AwakenPickaxeItem(AwakenToolMaterial.tool(4, 1561, 16F, 6F, 1.2F, 15, SALVIUM_INGOT, VALERIUM_INGOT)));
     public static final Item FIERY_TRIDENT = register("fiery_trident", new AwakenTridentItem(16D, 500));
 
     public static final Item SALVIUM_HEADGEAR = register("salvium_headgear", new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.HEAD, new SetBonusEquippable()

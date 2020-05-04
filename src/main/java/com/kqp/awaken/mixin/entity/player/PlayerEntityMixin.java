@@ -5,6 +5,7 @@ import com.kqp.awaken.item.effect.ArmorListener;
 import com.kqp.awaken.item.effect.Equippable;
 import com.kqp.awaken.item.effect.SpecialItemRegistry;
 import com.kqp.awaken.init.AwakenDimensions;
+import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -85,7 +86,7 @@ public abstract class PlayerEntityMixin {
             PLAYER_ARMOR_TRACKER.put(player, clone);
 
             if (player.getY() <= -8D) {
-                player.changeDimension(AwakenDimensions.NULL_SPACE);
+                FabricDimensions.teleport(player, AwakenDimensions.NULL_SPACE);
             }
         }
     }
