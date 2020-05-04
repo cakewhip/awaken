@@ -24,7 +24,7 @@ public abstract class WorldChunkMixin implements Chunk {
 
         AwakenTemporalChunkData.ChunkData awakenData = AwakenTemporalChunkData.CHUNK_DATA_MAP.get(chunk.getPos());
         if (awakenData != null) {
-            AwakenLevelData awakenLevelData = AwakenLevelData.getFor(chunk.getWorld());
+            AwakenLevelData awakenLevelData = AwakenLevelData.getFor(chunk.getWorld().getServer());
 
             if (awakenLevelData.isWorldAwakened()) {
                 if (!awakenData.genNewOres) {

@@ -45,7 +45,7 @@ public abstract class LivingEntityMixin {
 
         if (!world.isClient) {
             if (source.getAttacker() instanceof PlayerEntity) {
-                AwakenLevelData awakenLevelData = AwakenLevelData.getFor(world);
+                AwakenLevelData awakenLevelData = AwakenLevelData.getFor(world.getServer());
                 MinecraftServer server = world.getServer();
 
                 if (le instanceof CowEntity && !awakenLevelData.isPostDragon()) {
@@ -77,7 +77,7 @@ public abstract class LivingEntityMixin {
     @Inject(method = "damage", at = @At("RETURN"))
     public void implementSpiderPoison(DamageSource source, float amount, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
         if (callbackInfoReturnable.getReturnValue()) {
-            AwakenLevelData awakenLevelData = AwakenLevelData.getFor(((LivingEntity) (Object) this).world);
+            AwakenLevelData awakenLevelData = AwakenLevelData.getFor(((LivingEntity) (Object) this).world.getServer());
 
             if (awakenLevelData.isWorldAwakened()) {
                 if (source.getAttacker() instanceof SpiderEntity) {

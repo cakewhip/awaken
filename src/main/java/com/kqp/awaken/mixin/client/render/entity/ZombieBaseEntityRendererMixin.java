@@ -1,5 +1,6 @@
 package com.kqp.awaken.mixin.client.render.entity;
 
+import com.kqp.awaken.client.AwakenClientLevelData;
 import com.kqp.awaken.data.AwakenLevelData;
 import com.kqp.awaken.init.Awaken;
 import net.minecraft.client.MinecraftClient;
@@ -20,7 +21,7 @@ public class ZombieBaseEntityRendererMixin {
 
     @Inject(method = "getTexture", at = @At("HEAD"), cancellable = true)
     private void overrideTextureForFieryMoon(ZombieEntity zombieEntity, CallbackInfoReturnable<Identifier> callbackInfo) {
-        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(MinecraftClient.getInstance().world);
+        AwakenLevelData awakenLevelData = AwakenClientLevelData.INSTANCE.getAwakenLevelData();
 
         if (awakenLevelData.isFieryMoonActive()) {
             callbackInfo.setReturnValue(FIERY_MOON_TEXTURE);

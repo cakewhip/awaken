@@ -28,13 +28,16 @@ public abstract class ZombieEntityMixin {
     @Inject(method = "<init>*", at = @At("RETURN"))
     private void addAwakenBuffs(CallbackInfo callbackInfo) {
         ZombieEntity zombie = (ZombieEntity) (Object) this;
-        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(zombie.world);
 
-        if (awakenLevelData.isWorldAwakened()) {
-            AWAKENED_MODS.apply(zombie, true);
+        if (!zombie.world.isClient) {
+            AwakenLevelData awakenLevelData = AwakenLevelData.getFor(zombie.world.getServer());
 
-            if (awakenLevelData.isFieryMoonActive()) {
-                FIERY_MOON_MODS.apply(zombie, true);
+            if (awakenLevelData.isWorldAwakened()) {
+                AWAKENED_MODS.apply(zombie, true);
+
+                if (awakenLevelData.isFieryMoonActive()) {
+                    FIERY_MOON_MODS.apply(zombie, true);
+                }
             }
         }
     }

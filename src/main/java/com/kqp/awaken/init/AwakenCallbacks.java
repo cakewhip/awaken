@@ -12,7 +12,7 @@ public class AwakenCallbacks {
         WorldTickCallback.EVENT.register((world) -> {
             if (!world.isClient) {
                 if (world.getDimension().getType() == DimensionType.OVERWORLD) {
-                    AwakenLevelData.getFor(world).tick(world.getServer());
+                    AwakenLevelData.getFor(world.getServer()).tick(world.getServer());
                 }
             }
         });

@@ -189,7 +189,7 @@ public class AwakenLevelData {
         }
     }
 
-    public static AwakenLevelData getFor(World world) {
-        return ((AwakenLevelDataContainer) world.getLevelProperties()).getAwakenLevelData();
+    public static AwakenLevelData getFor(MinecraftServer server) {
+        return ((AwakenLevelDataContainer) server.getWorld(DimensionType.OVERWORLD).getLevelProperties()).getAwakenLevelData();
     }
 }

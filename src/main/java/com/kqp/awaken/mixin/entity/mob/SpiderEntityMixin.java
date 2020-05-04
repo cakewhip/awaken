@@ -38,32 +38,35 @@ public abstract class SpiderEntityMixin {
     private void addAwakenBuffs(CallbackInfo callbackInfo) {
         SpiderEntity spider = (SpiderEntity) (Object) this;
 
-        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(spider.world);
+        if (!spider.world.isClient) {
+            AwakenLevelData awakenLevelData = AwakenLevelData.getFor(spider.world.getServer());
 
-        if (awakenLevelData.isWorldAwakened()) {
-            AWAKENED_MODS.apply(spider, true);
+            if (awakenLevelData.isWorldAwakened()) {
+                AWAKENED_MODS.apply(spider, true);
 
-            if (awakenLevelData.isFieryMoonActive()) {
-                FIERY_MOON_MODS.apply(spider, true);
+                if (awakenLevelData.isFieryMoonActive()) {
+                    FIERY_MOON_MODS.apply(spider, true);
+                }
             }
         }
     }
-
 
     @Inject(method = "initialize", at = @At("RETURN"))
     public void addSkeletonRider(IWorld world, LocalDifficulty difficulty, SpawnType spawnType, @Nullable EntityData entityData, @Nullable CompoundTag entityTag, CallbackInfoReturnable callbackInfo) {
         SpiderEntity spider = (SpiderEntity) (Object) this;
 
-        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(spider.world);
-        if (awakenLevelData.isFieryMoonActive()) {
-            if (spider.getPassengerList().size() == 0 && world.getRandom().nextFloat() < 0.5F) {
+        if (!spider.world.isClient) {
+            AwakenLevelData awakenLevelData = AwakenLevelData.getFor(spider.world.getServer());
+            if (awakenLevelData.isFieryMoonActive()) {
+                if (spider.getPassengerList().size() == 0 && world.getRandom().nextFloat() < 0.5F) {
 
-                SkeletonEntity skeletonEntity = EntityType.SKELETON.create(spider.world);
+                    SkeletonEntity skeletonEntity = EntityType.SKELETON.create(spider.world);
 
-                skeletonEntity.refreshPositionAndAngles(spider.getX(), spider.getY(), spider.getZ(), spider.yaw, 0.0F);
-                skeletonEntity.initialize(world, difficulty, spawnType, null, null);
-                world.spawnEntity(skeletonEntity);
-                skeletonEntity.startRiding(spider);
+                    skeletonEntity.refreshPositionAndAngles(spider.getX(), spider.getY(), spider.getZ(), spider.yaw, 0.0F);
+                    skeletonEntity.initialize(world, difficulty, spawnType, null, null);
+                    world.spawnEntity(skeletonEntity);
+                    skeletonEntity.startRiding(spider);
+                }
             }
         }
     }

@@ -8,7 +8,7 @@ public class AwakenCommands {
     public static void init() {
         CommandRegistry.INSTANCE.register(false, dispatcher -> {
             dispatcher.register(CommandManager.literal("trigger_awakening").executes(ctx -> {
-                AwakenLevelData awakenLevelData = AwakenLevelData.getFor(ctx.getSource().getWorld());
+                AwakenLevelData awakenLevelData = AwakenLevelData.getFor(ctx.getSource().getWorld().getServer());
 
                 awakenLevelData.setPostDragon();
                 awakenLevelData.setPostElderGuardian();
@@ -21,7 +21,7 @@ public class AwakenCommands {
             }));
 
             dispatcher.register(CommandManager.literal("trigger_fiery_moon").executes(ctx -> {
-                AwakenLevelData awakenLevelData = AwakenLevelData.getFor(ctx.getSource().getWorld());
+                AwakenLevelData awakenLevelData = AwakenLevelData.getFor(ctx.getSource().getWorld().getServer());
 
                 awakenLevelData.startFieryMoon(ctx.getSource().getMinecraftServer());
 

@@ -28,7 +28,7 @@ public class PiglinBrainMixin {
     @Inject(method = "playerInteract", at = @At("HEAD"), cancellable = true)
     private static void addEnderianHellForgeBarter(PiglinEntity piglin, PlayerEntity player, Hand hand, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
         ItemStack itemStack = player.getStackInHand(hand);
-        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(piglin.world);
+        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(piglin.world.getServer());
 
         if (awakenLevelData.isWorldAwakened() && itemStack.getItem() == Items.DRAGON_HEAD) {
             ItemStack itemStack2 = itemStack.split(1);

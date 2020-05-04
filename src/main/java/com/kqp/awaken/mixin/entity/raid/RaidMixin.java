@@ -19,11 +19,14 @@ public abstract class RaidMixin {
     public void tick(CallbackInfo callbackInfo) {
         Raid raid = (Raid) (Object) this;
         World world = raid.getWorld();
-        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(world);
 
-        if (!world.isClient && raid.hasWon() && !awakenLevelData.isPostRaid()) {
-            awakenLevelData.setPostRaid();
-            Broadcaster.broadcastMessage(world.getServer(), "A distant figure fades into the shadows...", Formatting.DARK_RED, false, true);
+        if (!world.isClient) {
+            AwakenLevelData awakenLevelData = AwakenLevelData.getFor(world.getServer());
+
+            if (raid.hasWon() && !awakenLevelData.isPostRaid()) {
+                awakenLevelData.setPostRaid();
+                Broadcaster.broadcastMessage(world.getServer(), "A distant figure fades into the shadows...", Formatting.DARK_RED, false, true);
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.kqp.awaken.network.world;
 
+import com.kqp.awaken.client.AwakenClientLevelData;
 import com.kqp.awaken.data.AwakenLevelData;
 import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.network.AwakenPacketS2C;
@@ -18,7 +19,7 @@ public class SyncLevelDataS2C extends AwakenPacketS2C {
         CompoundTag awakenLevelDataTag = data.readCompoundTag();
 
         context.getTaskQueue().execute(() -> {
-            ((AwakenLevelDataContainer) MinecraftClient.getInstance().world.getLevelProperties()).setAwakenServerLevelData(new AwakenLevelData(awakenLevelDataTag));
+            AwakenClientLevelData.INSTANCE.setAwakenServerLevelData(new AwakenLevelData(awakenLevelDataTag));
         });
     }
 }

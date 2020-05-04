@@ -34,7 +34,7 @@ public class PlayerManagerMixin {
     public void fillAwakenLevelData(ServerPlayNetworkHandler networkHandler, Packet<?> packet) {
         if (packet instanceof GameJoinS2CPacket) {
             CompoundTag awakenLevelDataTag = new CompoundTag();
-            AwakenLevelData.getFor(networkHandler.player.world).writeToTag(awakenLevelDataTag);
+            AwakenLevelData.getFor(networkHandler.player.world.getServer()).writeToTag(awakenLevelDataTag);
 
             ((AwakenLevelDataTagContainer) packet).setAwakenLevelDataTag(awakenLevelDataTag);
         }

@@ -1,5 +1,6 @@
 package com.kqp.awaken.mixin.client.render;
 
+import com.kqp.awaken.client.AwakenClientLevelData;
 import com.kqp.awaken.data.AwakenLevelData;
 import com.kqp.awaken.init.Awaken;
 import net.minecraft.client.MinecraftClient;
@@ -20,7 +21,7 @@ public abstract class WorldRendererMixin {
 
     @Redirect(method = "renderSky", at = @At(value = "FIELD", opcode = Opcodes.GETSTATIC, target = "Lnet/minecraft/client/render/WorldRenderer;MOON_PHASES:Lnet/minecraft/util/Identifier;"))
     private final Identifier fieryMoonRedirect() {
-        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(MinecraftClient.getInstance().world);
+        AwakenLevelData awakenLevelData = AwakenClientLevelData.INSTANCE.getAwakenLevelData();
 
         if (awakenLevelData.isFieryMoonActive()) {
             return FIERY_MOON;

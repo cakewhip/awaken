@@ -24,7 +24,7 @@ public class FieryMoonLootCondition implements LootCondition {
     }
 
     public boolean test(LootContext lootContext) {
-        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(lootContext.getWorld());
+        AwakenLevelData awakenLevelData = AwakenLevelData.getFor(lootContext.getWorld().getServer());
 
         return awakenLevelData.isFieryMoonActive();
     }

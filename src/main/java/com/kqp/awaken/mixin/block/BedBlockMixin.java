@@ -26,7 +26,7 @@ public class BedBlockMixin {
     private void triggerAwakening(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> callbackInfoReturnable) {
         if (!world.isClient) {
             if (world.getDimension().getType() == DimensionType.THE_END) {
-                AwakenLevelData awakenLevelData = AwakenLevelData.getFor(world);
+                AwakenLevelData awakenLevelData = AwakenLevelData.getFor(world.getServer());
 
                 if (!awakenLevelData.isWorldAwakened()
                         && awakenLevelData.isPostRaid()

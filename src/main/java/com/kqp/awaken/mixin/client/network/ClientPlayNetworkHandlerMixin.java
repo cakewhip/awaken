@@ -1,5 +1,6 @@
 package com.kqp.awaken.mixin.client.network;
 
+import com.kqp.awaken.client.AwakenClientLevelData;
 import com.kqp.awaken.data.AwakenLevelData;
 import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.data.AwakenLevelDataTagContainer;
@@ -40,7 +41,7 @@ public class ClientPlayNetworkHandlerMixin implements AwakenRecipeManagerProvide
         CompoundTag awakenLevelDataTag = ((AwakenLevelDataTagContainer) packet).getAwakenLevelDataTag();
         AwakenLevelData awakenLevelData = new AwakenLevelData(awakenLevelDataTag);
 
-        ((AwakenLevelDataContainer) client.world.getLevelProperties()).setAwakenServerLevelData(awakenLevelData);
+        AwakenClientLevelData.INSTANCE.setAwakenServerLevelData(awakenLevelData);
     }
 
     @Override

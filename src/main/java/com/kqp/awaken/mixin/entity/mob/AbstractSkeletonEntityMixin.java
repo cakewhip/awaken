@@ -32,13 +32,15 @@ public abstract class AbstractSkeletonEntityMixin {
         if (((Object) this) instanceof SkeletonEntity) {
             SkeletonEntity skeleton = (SkeletonEntity) (Object) this;
 
-            AwakenLevelData awakenLevelData = AwakenLevelData.getFor(skeleton.world);
+            if (!skeleton.world.isClient) {
+                AwakenLevelData awakenLevelData = AwakenLevelData.getFor(skeleton.world.getServer());
 
-            if (awakenLevelData.isWorldAwakened()) {
-                AWAKENED_MODS.apply(skeleton, true);
+                if (awakenLevelData.isWorldAwakened()) {
+                    AWAKENED_MODS.apply(skeleton, true);
 
-                if (awakenLevelData.isFieryMoonActive()) {
-                    FIERY_MOON_MODS.apply(skeleton, true);
+                    if (awakenLevelData.isFieryMoonActive()) {
+                        FIERY_MOON_MODS.apply(skeleton, true);
+                    }
                 }
             }
         }
