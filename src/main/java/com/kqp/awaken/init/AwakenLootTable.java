@@ -10,12 +10,14 @@ import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.loot.ConstantLootTableRange;
 import net.minecraft.loot.LootManager;
+import net.minecraft.loot.UniformLootTableRange;
 import net.minecraft.loot.condition.KilledByPlayerLootCondition;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.condition.LootConditions;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.LimitCountLootFunction;
+import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.operator.BoundedIntUnaryOperator;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
@@ -120,7 +122,7 @@ public class AwakenLootTable {
                         .withRolls(ConstantLootTableRange.create(1))
                         .withCondition(RandomChanceLootCondition.builder(chance))
                         .withCondition(KilledByPlayerLootCondition.builder())
-                        .withFunction(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(min, max)))
+                        .withFunction(SetCountLootFunction.builder(new UniformLootTableRange(min, max)))
                         .withEntry(ItemEntry.builder(item))
         );
     }
