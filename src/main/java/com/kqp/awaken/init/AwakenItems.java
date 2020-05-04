@@ -80,7 +80,7 @@ public class AwakenItems {
     public static final Item CORSAIR_TOKEN = genericItem("corsair_token");
     public static final Item RAPTOR_CHICKEN_EGG = genericItem("raptor_chicken_egg");
     public static final Item SALVIUM_INGOT = genericItem("salvium_ingot");
-    public static final Item VALERIUM_INGOT = genericItem("salvium_ingot");
+    public static final Item VALERIUM_INGOT = genericItem("valerium_ingot");
 
     public static final Item SALVIUM_BOW = register("salvium_bow", new AwakenBowItem(4D));
     public static final Item VALERIUM_SWORD = register("valerium_sword", new AwakenSwordItem(AwakenToolMaterial.sword(2031, 12F, 1.6F, 10, VALERIUM_INGOT)));
