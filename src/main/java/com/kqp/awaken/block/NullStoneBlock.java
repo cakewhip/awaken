@@ -2,11 +2,9 @@ package com.kqp.awaken.block;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -14,8 +12,8 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class NullStoneBlock extends Block {
-    public NullStoneBlock() {
-        super(FabricBlockSettings.of(Material.STONE).lightLevel(5).strength(60.0F, 120.0F).breakByTool(FabricToolTags.PICKAXES, 5).build());
+    public NullStoneBlock(AbstractBlock.Settings settings) {
+        super(settings);
     }
 
     @Override

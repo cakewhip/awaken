@@ -30,8 +30,8 @@ public abstract class WorldChunkMixin implements Chunk {
                 if (!awakenData.genNewOres) {
                     awakenData.genNewOres = true;
 
-                    AwakenOreGen.generate(chunk, 64, 12, 12, AwakenBlocks.SALVIUM.ORE);
-                    AwakenOreGen.generate(chunk, 64, 12, 12, AwakenBlocks.VALERIUM.ORE);
+                    AwakenOreGen.generate(chunk, 64, 12, 12, AwakenBlocks.SALVIUM_ORE);
+                    AwakenOreGen.generate(chunk, 64, 12, 12, AwakenBlocks.VALERIUM_ORE);
                 }
             }
         }
