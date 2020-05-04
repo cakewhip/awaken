@@ -1,6 +1,9 @@
 package com.kqp.awaken.world.dimension;
 
+import com.kqp.awaken.init.AwakenBlocks;
 import com.kqp.awaken.mixin.world.gen.chunk.SurfaceChunkGeneratorAccessor;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.source.BiomeSource;
@@ -26,6 +29,22 @@ public class NullSpaceChunkGenerator extends CavesChunkGenerator {
 
     @Override
     public int getSeaLevel() {
-        return 12;
+        return 0;
+    }
+
+    @Override
+    protected BlockState method_26262(double d, int i) {
+        BlockState blockState3;
+        if (d > 0.0D) {
+            if (i < 32) {
+                blockState3 = AwakenBlocks.NULL_STONE.getDefaultState();
+            } else {
+                blockState3 = this.defaultBlock;
+            }
+        } else {
+            blockState3 = Blocks.AIR.getDefaultState();
+        }
+
+        return blockState3;
     }
 }

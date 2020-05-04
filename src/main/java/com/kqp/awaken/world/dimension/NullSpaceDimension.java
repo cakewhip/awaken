@@ -1,6 +1,7 @@
 package com.kqp.awaken.world.dimension;
 
 import com.kqp.awaken.init.AwakenBiomes;
+import com.kqp.awaken.init.AwakenBlocks;
 import com.kqp.awaken.init.AwakenDimensions;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -20,14 +21,14 @@ public class NullSpaceDimension extends Dimension {
     private static final Vec3d FOG_COLOR = new Vec3d(0F, 0F, 0F);
 
     public NullSpaceDimension(World world, DimensionType type) {
-        super(world, type, -0.05F);
+        super(world, type, 0F);
     }
 
     @Override
     public ChunkGenerator<?> createChunkGenerator() {
         CavesChunkGeneratorConfig config = AwakenDimensions.NULL_SPACE_CHUNK_GENERATOR.createConfig();
-        config.setDefaultBlock(Blocks.STONE.getDefaultState());
-        config.setDefaultFluid(Blocks.LAVA.getDefaultState());
+        config.setDefaultBlock(AwakenBlocks.ANCIENT_STONE.getDefaultState());
+        config.setDefaultFluid(Blocks.AIR.getDefaultState());
 
         FixedBiomeSourceConfig biomeConfig = BiomeSourceType.FIXED.getConfig(world.getSeed()).setBiome(AwakenBiomes.NULL_SPACE);
 

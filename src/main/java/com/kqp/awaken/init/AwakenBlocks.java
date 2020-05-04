@@ -1,6 +1,7 @@
 package com.kqp.awaken.init;
 
 import com.kqp.awaken.block.CraftingBlock;
+import com.kqp.awaken.block.NullStoneBlock;
 import com.kqp.awaken.block.group.BlockStats;
 import com.kqp.awaken.block.group.OreBlocks;
 import com.kqp.awaken.recipe.RecipeType;
@@ -16,6 +17,9 @@ import net.minecraft.util.registry.Registry;
 
 public class AwakenBlocks {
     public static final Block CRACKED_BEDROCK = new Block(FabricBlockSettings.of(Material.STONE).strength(100.0F, 1200.0F).breakByTool(FabricToolTags.PICKAXES, 4).build());
+    public static final Block ANCIENT_STONE = new Block(FabricBlockSettings.of(Material.STONE).strength(40.0F, 40.0F).breakByTool(FabricToolTags.PICKAXES, 4).build());
+    public static final Block ANCIENT_COBBLESTONE = new Block(FabricBlockSettings.of(Material.STONE).strength(40.0F, 40.0F).breakByTool(FabricToolTags.PICKAXES, 3).build());
+    public static final Block NULL_STONE = new NullStoneBlock();
 
     public static OreBlocks SALVIUM, VALERIUM;
 
@@ -30,6 +34,9 @@ public class AwakenBlocks {
         // Phase 2
         {
             register(CRACKED_BEDROCK, "cracked_bedrock");
+            register(ANCIENT_STONE, "ancient_stone");
+            register(ANCIENT_COBBLESTONE, "ancient_cobblestone");
+            register(NULL_STONE, "null_stone");
 
             SALVIUM = new OreBlocks(
                     "salvium",
