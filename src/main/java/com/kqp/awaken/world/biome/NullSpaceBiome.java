@@ -3,9 +3,10 @@ package com.kqp.awaken.world.biome;
 import com.google.common.collect.ImmutableSet;
 import com.kqp.awaken.init.AwakenBiomes;
 import com.kqp.awaken.init.AwakenBlocks;
+import com.kqp.awaken.init.AwakenEntities;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IWorld;
@@ -18,7 +19,6 @@ import net.minecraft.world.gen.carver.CaveCarver;
 import net.minecraft.world.gen.decorator.CountDepthDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 
@@ -29,7 +29,7 @@ import java.util.function.Function;
 
 public class NullSpaceBiome extends Biome {
     private static final NullSpaceOreFeature ORE = new NullSpaceOreFeature(OreFeatureConfig::deserialize);
-    
+
     public NullSpaceBiome() {
         super(new Biome.Settings()
                 .configureSurfaceBuilder(AwakenBiomes.NULL_SPACE_SURFACE_BUILDER, AwakenBiomes.NULL_SPACE_CONFIG)
@@ -46,6 +46,8 @@ public class NullSpaceBiome extends Biome {
                         .build())
                 .parent(null)
         );
+
+        addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(AwakenEntities.VOID_GHOST, 95, 4, 6));
 
         addCarver(GenerationStep.Carver.AIR, Biome.configureCarver(new NullSpaceCaveCarver(ProbabilityConfig::deserialize, 256), new ProbabilityConfig(0.6F)));
         addCarver(GenerationStep.Carver.AIR, Biome.configureCarver(Carver.CANYON, new ProbabilityConfig(0.02F)));

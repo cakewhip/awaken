@@ -6,6 +6,7 @@ import com.kqp.awaken.entity.mob.RaptorChickenEntity;
 import com.kqp.awaken.entity.mob.SpiderSacEntity;
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import com.kqp.awaken.entity.effect.AwakenStatusEffects;
+import com.kqp.awaken.entity.mob.VoidGhostEntity;
 import net.fabricmc.fabric.api.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
@@ -50,6 +51,15 @@ public class AwakenEntities {
                     .build()
     );
 
+    public static final EntityType<VoidGhostEntity> VOID_GHOST = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(Awaken.MOD_ID, "void_ghost"),
+            FabricEntityTypeBuilder.create(EntityCategory.MONSTER, VoidGhostEntity::new)
+                    .size(EntityDimensions.fixed(0.6F, 1.9F))
+                    .trackable(72, 3)
+                    .build()
+    );
+
     public static final EntityType<AbominationEntity> ABOMINATION = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(Awaken.MOD_ID, "abomination"),
@@ -84,6 +94,7 @@ public class AwakenEntities {
             register(RAPTOR_CHICKEN, 0x9C0202, 0x610000, RaptorChickenEntity.createRaptorChickenAttributes());
             register(DIRE_WOLF, 0xD6E9FF, 0x97ADCC, DireWolfEntity.createDireWolfAttributes());
             register(SPIDER_SAC, 0x000000, 0xFFFFFF, SpiderSacEntity.createSpiderSacAttributes());
+            register(VOID_GHOST, 0x0000000, 0xFFFFFF, VoidGhostEntity.createVoidGhostAttributes());
             register(ABOMINATION, 0xFFFFFF, 0x000000, AbominationEntity.createAbominationAttributes());
         }
     }
