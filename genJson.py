@@ -27,7 +27,12 @@ ITEMS = [
     "tarnished_core",
     "wild_core",
     "earth_core",
-    "abominable_amalgam"
+    "abominable_amalgam",
+    "void_crux",
+    "corsair_token",
+    "raptor_chicken_egg",
+    "salvium_ingot",
+    "valerium_ingot"
 ]
 
 modelsDir = "src/main/resources/assets/awaken/models/"
