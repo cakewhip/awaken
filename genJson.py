@@ -32,8 +32,23 @@ ITEMS = [
     "corsair_token",
     "raptor_chicken_egg",
     "salvium_ingot",
-    "valerium_ingot"
+    "valerium_ingot",
+    "fortified_stick"
 ]
+
+
+TOOLS = [
+    "valerium_sword",
+    "salverium_pickaxe"
+]
+
+
+BOWS = [
+    "slimey_bow",
+    "cindered_bow",
+    "salvium_bow"
+]
+
 
 modelsDir = "src/main/resources/assets/awaken/models/"
 itemModelsDir = modelsDir + "item/"
@@ -79,6 +94,68 @@ def item_json(name):
 }}""".format(name)
 
 
+def tool_json(name):
+    return """{{
+  \"parent\": \"minecraft:item/handheld\",
+  \"textures\": {{
+    \"layer0\": \"awaken:item/{}\"
+  }}
+}}""".format(name)
+
+
+def bow_json(name):
+    return """{{
+  \"parent\": \"item/generated\",
+  \"textures\": {{
+    \"layer0\": \"awaken:item/{}\"
+  }},
+  \"display\": {{
+    \"thirdperson_righthand\": {{
+      \"rotation\": [ -80, 260, -40 ],
+      \"translation\": [ -1, -2, 2.5 ],
+      \"scale\": [ 0.9, 0.9, 0.9 ]
+    }},
+    \"thirdperson_lefthand\": {{
+      \"rotation\": [ -80, -280, 40 ],
+      \"translation\": [ -1, -2, 2.5 ],
+      \"scale\": [ 0.9, 0.9, 0.9 ]
+    }},
+    \"firstperson_righthand\": {{
+      \"rotation\": [ 0, -90, 25 ],
+      \"translation\": [ 1.13, 3.2, 1.13],
+      \"scale\": [ 0.68, 0.68, 0.68 ]
+    }},
+    \"firstperson_lefthand\": {{
+      \"rotation\": [ 0, 90, -25 ],
+      \"translation\": [ 1.13, 3.2, 1.13],
+      \"scale\": [ 0.68, 0.68, 0.68 ]
+    }}
+  }},
+  \"overrides\": [
+    {{
+      \"predicate\": {{
+        \"pulling\": 1
+      }},
+      \"model\": \"awaken:item/{}_pulling_0\"
+    }},
+    {{
+      \"predicate\": {{
+        \"pulling\": 1,
+        \"pull\": 0.65
+      }},
+      \"model\": \"awaken:item/{}_pulling_1\"
+    }},
+    {{
+      \"predicate\": {{
+        \"pulling\": 1,
+        \"pull\": 0.9
+      }},
+      \"model\": \"awaken:item/{}_pulling_2\"
+    }}
+  ]
+}}""".format(name, name, name, name)
+
+
 def write_block(name):
     write_json("{}{}.json".format(blockModelsDir, name), block_json(name))
     write_json("{}{}.json".format(itemModelsDir, name), item_block_json(name))
@@ -89,8 +166,22 @@ def write_item(name):
     write_json("{}{}.json".format(itemModelsDir, name), item_json(name))
 
 
+def write_tool(name):
+    write_json("{}{}.json".format(itemModelsDir, name), tool_json(name))
+
+
+def write_bow(name):
+    write_json("{}{}.json".format(itemModelsDir, name), bow_json(name))
+
+
 for block in BLOCKS:
     write_block(block)
 
 for item in ITEMS:
     write_item(item)
+
+for tool in TOOLS:
+    write_tool(tool)
+
+for bow in BOWS:
+    write_bow(bow)

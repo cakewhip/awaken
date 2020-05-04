@@ -67,6 +67,8 @@ public class AwakenItems {
     public static final Item ENDERIAN_CUTLASS = register("enderian_cutlass", new EnderianCutlassItem(AwakenToolMaterial.sword(1500, 6F, 1.8F, 10)).setRarity(AwakenRarity.EPIC));
 
 
+    public static final Item FORTIFIED_STICK = genericItem("fortified_stick");
+
     public static final Item SMOLDERING_HEART = genericItem("smoldering_heart");
     public static final Item FIERY_CORE = genericItem("fiery_core");
     public static final Item MAGMA_STRAND = genericItem("magma_strand");

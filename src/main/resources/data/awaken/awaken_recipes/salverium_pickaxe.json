@@ -1,0 +1,22 @@
+{
+  "type": "anvil",
+  "recipe": {
+    "output": {
+      "item": "awaken:salverium_pickaxe"
+    },
+    "reagents": [
+      {
+        "item": "awaken:fortified_stick",
+        "count": 4
+      },
+      {
+        "item": "awaken:salvium_ingot",
+        "count": 24
+      },
+      {
+        "item": "awaken:valerium_ingot",
+        "count": 24
+      }
+    ]
+  }
+}

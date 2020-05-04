@@ -1,0 +1,18 @@
+{
+  "type": "anvil",
+  "recipe": {
+    "output": {
+      "item": "awaken:valerium_sword"
+    },
+    "reagents": [
+      {
+        "item": "awaken:fortified_stick",
+        "count": 2
+      },
+      {
+        "item": "awaken:valerium_ingot",
+        "count": 32
+      }
+    ]
+  }
+}
