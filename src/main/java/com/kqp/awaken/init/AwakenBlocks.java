@@ -16,15 +16,26 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class AwakenBlocks {
-    public static final Block CRACKED_BEDROCK = new Block(FabricBlockSettings.of(Material.STONE).strength(100.0F, 1200.0F).breakByTool(FabricToolTags.PICKAXES, 4).build());
-    public static final Block ANCIENT_STONE = new Block(FabricBlockSettings.of(Material.STONE).strength(40.0F, 40.0F).breakByTool(FabricToolTags.PICKAXES, 4).build());
-    public static final Block ANCIENT_COBBLESTONE = new Block(FabricBlockSettings.of(Material.STONE).strength(40.0F, 40.0F).breakByTool(FabricToolTags.PICKAXES, 3).build());
+    public static final Block CRACKED_BEDROCK = new Block(FabricBlockSettings.of(Material.STONE).strength(100F, 1200F).breakByTool(FabricToolTags.PICKAXES, 4).build());
+
+    public static final Block ANCIENT_STONE = new Block(FabricBlockSettings.of(Material.STONE).strength(40F, 40F).breakByTool(FabricToolTags.PICKAXES, 4).build());
+    public static final Block ANCIENT_COBBLESTONE = new Block(FabricBlockSettings.of(Material.STONE).strength(40F, 40F).breakByTool(FabricToolTags.PICKAXES, 2).build());
     public static final Block NULL_STONE = new NullStoneBlock();
+
+    public static final Block ANCIENT_COAL_ORE = ancientOre("ancient_coal_ore", 45F);
+    public static final Block ANCIENT_IRON_ORE = ancientOre("ancient_coal_ore", 45F);
+    public static final Block ANCIENT_GOLD_ORE = ancientOre("ancient_coal_ore", 45F);
+    public static final Block ANCIENT_REDSTONE_ORE = ancientOre("ancient_coal_ore", 45F);
+    public static final Block ANCIENT_LAPIS_ORE = ancientOre("ancient_coal_ore", 45F);
+    public static final Block ANCIENT_DIAMOND_ORE = ancientOre("ancient_coal_ore", 45F);
+    public static final Block ANCIENT_EMERALD_ORE = ancientOre("ancient_coal_ore", 45F);
+    public static final Block ANCIENT_SALVIUM_ORE = ancientOre("ancient_coal_ore", 70F);
+    public static final Block ANCIENT_VALERIUM_ORE = ancientOre("ancient_coal_ore", 70F);
 
     public static OreBlocks SALVIUM, VALERIUM;
 
     public static final Block ENDERIAN_HELL_FORGE = new CraftingBlock(
-            FabricBlockSettings.of(Material.STONE).strength(35.0F, 12.0F).lightLevel(12).build(),
+            FabricBlockSettings.of(Material.STONE).strength(35F, 12F).lightLevel(12).build(),
             RecipeType.ENDERIAN_HELL_FORGE
     );
 
@@ -34,19 +45,20 @@ public class AwakenBlocks {
         // Phase 2
         {
             register(CRACKED_BEDROCK, "cracked_bedrock");
+            
             register(ANCIENT_STONE, "ancient_stone");
             register(ANCIENT_COBBLESTONE, "ancient_cobblestone");
             register(NULL_STONE, "null_stone");
-
+            
             SALVIUM = new OreBlocks(
                     "salvium",
-                    new BlockStats(25.0F, 6.0F, 0),
+                    new BlockStats(25F, 6F, 0),
                     false
             );
 
             VALERIUM = new OreBlocks(
                     "valerium",
-                    new BlockStats(25.0F, 6.0F, 0),
+                    new BlockStats(25F, 6F, 0),
                     false
             );
 
@@ -57,5 +69,13 @@ public class AwakenBlocks {
     public static void register(Block block, String name) {
         Registry.register(Registry.BLOCK, new Identifier(Awaken.MOD_ID, name), block);
         Registry.register(Registry.ITEM, new Identifier(Awaken.MOD_ID, name), new BlockItem(block, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
+    }
+    
+    public static Block ancientOre(String name, float hardness) {
+        Block block = new Block(FabricBlockSettings.of(Material.STONE).strength(hardness, 40F).breakByTool(FabricToolTags.PICKAXES, 4).build());
+        
+        register(block, name);
+        
+        return block;
     }
 }
