@@ -1,8 +1,8 @@
 package com.kqp.awaken.world.worldgen;
 
+import com.kqp.awaken.init.AwakenBlocks;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
@@ -20,6 +20,6 @@ public class NullSpaceSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig
     @Override
     public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, TernarySurfaceConfig surfaceBlocks) {
         BlockPos pos = new BlockPos(x & 15, height, z & 15);
-        chunk.setBlockState(pos, Blocks.DIAMOND_ORE.getDefaultState(), false);
+        chunk.setBlockState(pos, AwakenBlocks.CRACKED_BEDROCK.getDefaultState(), false);
     }
 }

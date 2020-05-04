@@ -2,6 +2,8 @@ package com.kqp.awaken.world.dimension;
 
 import com.kqp.awaken.init.AwakenBiomes;
 import com.kqp.awaken.init.AwakenDimensions;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -15,10 +17,10 @@ import net.minecraft.world.gen.chunk.CavesChunkGeneratorConfig;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 
 public class NullSpaceDimension extends Dimension {
-    private static final Vec3d FOG_COLOR = new Vec3d(1F, 1F, 1F);
+    private static final Vec3d FOG_COLOR = new Vec3d(0F, 0F, 0F);
 
     public NullSpaceDimension(World world, DimensionType type) {
-        super(world, type, 0F);
+        super(world, type, -0.05F);
     }
 
     @Override
@@ -70,5 +72,11 @@ public class NullSpaceDimension extends Dimension {
     @Override
     public DimensionType getType() {
         return AwakenDimensions.NULL_SPACE;
+    }
+
+    @Override
+    @Environment(EnvType.CLIENT)
+    public float[] getBackgroundColor(float skyAngle, float tickDelta) {
+        return null;
     }
 }

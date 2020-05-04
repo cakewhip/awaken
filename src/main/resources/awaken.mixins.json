@@ -25,6 +25,7 @@
     "server.PlayerManagerMixin",
     "server.network.ServerPlayerEntityMixin",
     "world.chunk.WorldChunkMixin",
+    "world.gen.chunk.SurfaceChunkGeneratorAccessor",
     "world.level.LevelPropertiesMixin",
     "world.ChunkSerializerMixin"
   ],
