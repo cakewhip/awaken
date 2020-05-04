@@ -23,14 +23,14 @@ public class AwakenBlocks {
     public static final Block NULL_STONE = new NullStoneBlock();
 
     public static final Block ANCIENT_COAL_ORE = ancientOre("ancient_coal_ore", 45F);
-    public static final Block ANCIENT_IRON_ORE = ancientOre("ancient_coal_ore", 45F);
-    public static final Block ANCIENT_GOLD_ORE = ancientOre("ancient_coal_ore", 45F);
-    public static final Block ANCIENT_REDSTONE_ORE = ancientOre("ancient_coal_ore", 45F);
-    public static final Block ANCIENT_LAPIS_ORE = ancientOre("ancient_coal_ore", 45F);
-    public static final Block ANCIENT_DIAMOND_ORE = ancientOre("ancient_coal_ore", 45F);
-    public static final Block ANCIENT_EMERALD_ORE = ancientOre("ancient_coal_ore", 45F);
-    public static final Block ANCIENT_SALVIUM_ORE = ancientOre("ancient_coal_ore", 70F);
-    public static final Block ANCIENT_VALERIUM_ORE = ancientOre("ancient_coal_ore", 70F);
+    public static final Block ANCIENT_IRON_ORE = ancientOre("ancient_iron_ore", 45F);
+    public static final Block ANCIENT_GOLD_ORE = ancientOre("ancient_gold_ore", 45F);
+    public static final Block ANCIENT_REDSTONE_ORE = ancientOre("ancient_redstone_ore", 45F);
+    public static final Block ANCIENT_LAPIS_ORE = ancientOre("ancient_lapis_ore", 45F);
+    public static final Block ANCIENT_DIAMOND_ORE = ancientOre("ancient_diamond_ore", 45F);
+    public static final Block ANCIENT_EMERALD_ORE = ancientOre("ancient_emerald_ore", 45F);
+    public static final Block ANCIENT_SALVIUM_ORE = ancientOre("ancient_salvium_ore", 70F);
+    public static final Block ANCIENT_VALERIUM_ORE = ancientOre("ancient_valerium_ore", 70F);
 
     public static OreBlocks SALVIUM, VALERIUM;
 
