@@ -39,7 +39,7 @@ public class BedBlockMixin {
 
                     callbackInfoReturnable.setReturnValue(ActionResult.SUCCESS);
 
-                    FabricDimensions.teleport(player, DimensionType.OVERWORLD);
+                    player.changeDimension(DimensionType.OVERWORLD);
                     Broadcaster.broadcastMessage(world.getServer(), "New ores have generated!", Formatting.LIGHT_PURPLE, false, true);
                 }
             }

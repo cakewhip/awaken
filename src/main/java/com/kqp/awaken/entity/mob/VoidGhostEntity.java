@@ -1,7 +1,7 @@
 package com.kqp.awaken.entity.mob;
 
 import com.kqp.awaken.init.AwakenEntities;
-import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
+import com.kqp.awaken.world.dimension.NullSpaceTraveler;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
@@ -20,7 +20,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 
 public class VoidGhostEntity extends HostileEntity {
     private WanderGoal wanderGoal;
@@ -82,8 +81,8 @@ public class VoidGhostEntity extends HostileEntity {
 
     @Override
     public boolean tryAttack(Entity target) {
-        if (target instanceof PlayerEntity) {
-            FabricDimensions.teleport(target, DimensionType.OVERWORLD);
+        if (target instanceof NullSpaceTraveler) {
+            ((NullSpaceTraveler) target).setReturnMarker(true);
         }
 
         return true;
