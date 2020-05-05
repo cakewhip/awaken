@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "awaken:block/corrupted_null_stone_bricks"
+    }
+}

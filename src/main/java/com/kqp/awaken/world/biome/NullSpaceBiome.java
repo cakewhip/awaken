@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableSet;
 import com.kqp.awaken.init.AwakenBiomes;
 import com.kqp.awaken.init.AwakenBlocks;
 import com.kqp.awaken.init.AwakenEntities;
+import com.kqp.awaken.world.feature.VoidTowerFeature;
+import com.kqp.awaken.world.feature.decorator.VoidTowerDecorator;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCategory;
@@ -16,12 +18,15 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.carver.Carver;
 import net.minecraft.world.gen.carver.CaveCarver;
+import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountDepthDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.BoulderFeatureConfig;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.OreFeature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 
@@ -34,6 +39,8 @@ public class NullSpaceBiome extends Biome {
     private static final NullSpaceOreFeature ORE = new NullSpaceOreFeature(OreFeatureConfig::deserialize);
     private static final NullSpikeFeature SPIKE = new NullSpikeFeature(NullSpikeFeatureConfig::deserialize);
     private static final NullSpikeDecorator SPIKE_DECORATOR = new NullSpikeDecorator(CountDecoratorConfig::deserialize);
+    private static final VoidTowerFeature VOID_TOWER = new VoidTowerFeature(DefaultFeatureConfig::deserialize);
+    private static final VoidTowerDecorator VOID_TOWER_DECORATOR = new VoidTowerDecorator(ChanceDecoratorConfig::deserialize);
 
     public NullSpaceBiome() {
         super(new Biome.Settings()
@@ -58,6 +65,7 @@ public class NullSpaceBiome extends Biome {
         addCarver(GenerationStep.Carver.AIR, Biome.configureCarver(Carver.CANYON, new ProbabilityConfig(0.02F)));
 
         addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS, SPIKE.configure(new NullSpikeFeatureConfig()).createDecoratedFeature(SPIKE_DECORATOR.configure(new CountDecoratorConfig(3))));
+        addFeature(GenerationStep.Feature.SURFACE_STRUCTURES, VOID_TOWER.configure(FeatureConfig.DEFAULT).createDecoratedFeature(VOID_TOWER_DECORATOR.configure(new ChanceDecoratorConfig(1))));
 
         addFeature(GenerationStep.Feature.UNDERGROUND_ORES, ORE.configure(new OreFeatureConfig(null, AwakenBlocks.ANCIENT_COAL_ORE.getDefaultState(), 17)).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(160, 0, 0, 256))));
         addFeature(GenerationStep.Feature.UNDERGROUND_ORES, ORE.configure(new OreFeatureConfig(null, AwakenBlocks.ANCIENT_IRON_ORE.getDefaultState(), 9)).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(160, 0, 0, 256))));

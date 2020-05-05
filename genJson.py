@@ -11,7 +11,10 @@ BLOCKS = [
     "cracked_bedrock",
     "null_stone",
     "ancient_stone",
-    "ancient_cobblestone"
+    "ancient_cobblestone",
+    "null_stone_bricks",
+    "glowing_null_stone_bricks",
+    "corrupted_null_stone_bricks"
 ]
 
 

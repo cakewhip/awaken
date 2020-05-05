@@ -20,6 +20,9 @@ public class AwakenBlocks {
 
     public static final Block ANCIENT_STONE = register("ancient_stone", new Block(stoneSettings(7.5F, 80F, 4).build()));
     public static final Block ANCIENT_COBBLESTONE = register("ancient_cobblestone", new Block(stoneSettings(5F, 60F, 2).build()));
+    public static final Block NULL_STONE_BRICKS = register("null_stone_bricks", new Block(stoneSettings(-1F, 70F, -1).build()));
+    public static final Block GLOWING_NULL_STONE_BRICKS = register("glowing_null_stone_bricks", new Block(stoneSettings(-1F, 70F, -1).lightLevel(1).build()));
+    public static final Block CORRUPTED_NULL_STONE_BRICKS = register("corrupted_null_stone_bricks", new Block(stoneSettings(-1F, 70F, -1).build()));
     public static final Block NULL_STONE = register("null_stone", new NullStoneBlock(stoneSettings(160F, 1200F, 5).lightLevel(5).build()));
 
     public static final Block ANCIENT_COAL_ORE = register("ancient_coal_ore", new AwakenOreBlock(ancientOreSettings(10F).build(), 0, 2));

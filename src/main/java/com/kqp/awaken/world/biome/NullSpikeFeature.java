@@ -1,10 +1,9 @@
 package com.kqp.awaken.world.biome;
 
 import com.kqp.awaken.init.AwakenBlocks;
-import com.kqp.awaken.util.SphereUtil;
+import com.kqp.awaken.util.GenUtil;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.StructureAccessor;
@@ -26,7 +25,7 @@ public class NullSpikeFeature extends Feature<NullSpikeFeatureConfig> {
         BlockPos cent = blockPos;
 
         while (radius > 1) {
-            for (BlockPos offset : SphereUtil.getSphereBlockOffsets(radius)) {
+            for (BlockPos offset : GenUtil.getSphereBlockOffsets(radius)) {
                 world.setBlockState(cent.add(offset), AwakenBlocks.NULL_STONE.getDefaultState(), 3);
             }
 
@@ -39,7 +38,7 @@ public class NullSpikeFeature extends Feature<NullSpikeFeatureConfig> {
             while (random.nextFloat() < branchPerc && branches < 4) {
                 cent = add(cent, bVec);
 
-                for (BlockPos offset : SphereUtil.getSphereBlockOffsets(radius)) {
+                for (BlockPos offset : GenUtil.getSphereBlockOffsets(radius)) {
                     world.setBlockState(cent.add(offset), AwakenBlocks.NULL_STONE.getDefaultState(), 3);
                 }
 

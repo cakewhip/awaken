@@ -1,7 +1,7 @@
 package com.kqp.awaken.world.feature;
 
 import com.kqp.awaken.init.AwakenBlocks;
-import com.kqp.awaken.util.SphereUtil;
+import com.kqp.awaken.util.GenUtil;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -37,7 +37,7 @@ public class CrackedBedrockFeature extends Feature<DefaultFeatureConfig> {
             }
 
             BlockPos cent = pos.add(0, 128, 0);
-            for (BlockPos offset : SphereUtil.getSphereBlockOffsets(5)) {
+            for (BlockPos offset : GenUtil.getSphereBlockOffsets(5)) {
                 world.setBlockState(cent.add(offset), Blocks.DIAMOND_BLOCK.getDefaultState(), 3);
             }
 
