@@ -18,22 +18,24 @@ import net.minecraft.util.registry.Registry;
 public class AwakenBlocks {
     public static final Block CRACKED_BEDROCK = register("cracked_bedrock", new Block(stoneSettings(80F, 1200F, 4).build()));
 
-    public static final Block ANCIENT_STONE = register("ancient_stone", new Block(stoneSettings(10F, 80F, 4).build()));
+    public static final Block ANCIENT_STONE = register("ancient_stone", new Block(stoneSettings(7.5F, 80F, 4).build()));
     public static final Block ANCIENT_COBBLESTONE = register("ancient_cobblestone", new Block(stoneSettings(5F, 60F, 2).build()));
-    public static final Block NULL_STONE = register("null_stone", new NullStoneBlock(stoneSettings(100F, 1200F, 5).lightLevel(5).build()));
+    public static final Block NULL_STONE = register("null_stone", new NullStoneBlock(stoneSettings(160F, 1200F, 5).lightLevel(5).build()));
 
-    public static final Block ANCIENT_COAL_ORE = register("ancient_coal_ore", new AwakenOreBlock(ancientOreSettings(15F).build(), 0, 2));
-    public static final Block ANCIENT_IRON_ORE = register("ancient_iron_ore", new AwakenOreBlock(ancientOreSettings(15F).build()));
-    public static final Block ANCIENT_GOLD_ORE = register("ancient_gold_ore", new AwakenOreBlock(ancientOreSettings(15F).build()));
-    public static final Block ANCIENT_REDSTONE_ORE = register("ancient_redstone_ore", new RedstoneOreBlock(ancientOreSettings(15F).build()));
-    public static final Block ANCIENT_LAPIS_ORE = register("ancient_lapis_ore", new AwakenOreBlock(ancientOreSettings(15F).build(), 2, 5));
-    public static final Block ANCIENT_DIAMOND_ORE = register("ancient_diamond_ore", new AwakenOreBlock(ancientOreSettings(15F).build(), 3, 7));
-    public static final Block ANCIENT_EMERALD_ORE = register("ancient_emerald_ore", new AwakenOreBlock(ancientOreSettings(15F).build(), 3, 7));
-    public static final Block ANCIENT_SALVIUM_ORE = register("ancient_salvium_ore", new AwakenOreBlock(ancientOreSettings(18F).build()));
-    public static final Block ANCIENT_VALERIUM_ORE = register("ancient_valerium_ore", new AwakenOreBlock(ancientOreSettings(18F).build()));
+    public static final Block ANCIENT_COAL_ORE = register("ancient_coal_ore", new AwakenOreBlock(ancientOreSettings(10F).build(), 0, 2));
+    public static final Block ANCIENT_IRON_ORE = register("ancient_iron_ore", new AwakenOreBlock(ancientOreSettings(10F).build()));
+    public static final Block ANCIENT_GOLD_ORE = register("ancient_gold_ore", new AwakenOreBlock(ancientOreSettings(10F).build()));
+    public static final Block ANCIENT_REDSTONE_ORE = register("ancient_redstone_ore", new RedstoneOreBlock(ancientOreSettings(10F).build()));
+    public static final Block ANCIENT_LAPIS_ORE = register("ancient_lapis_ore", new AwakenOreBlock(ancientOreSettings(10F).build(), 2, 5));
+    public static final Block ANCIENT_DIAMOND_ORE = register("ancient_diamond_ore", new AwakenOreBlock(ancientOreSettings(10F).build(), 3, 7));
+    public static final Block ANCIENT_EMERALD_ORE = register("ancient_emerald_ore", new AwakenOreBlock(ancientOreSettings(10F).build(), 3, 7));
+    public static final Block ANCIENT_SALVIUM_ORE = register("ancient_salvium_ore", new AwakenOreBlock(ancientOreSettings(15F).build()));
+    public static final Block ANCIENT_VALERIUM_ORE = register("ancient_valerium_ore", new AwakenOreBlock(ancientOreSettings(15F).build()));
 
-    public static final Block SALVIUM_ORE = register("salvium_ore", new AwakenOreBlock(stoneSettings(150F, 40F, 3).build()));
-    public static final Block VALERIUM_ORE = register("valerium_ore", new AwakenOreBlock(stoneSettings(15F, 40F, 3).build()));
+    public static final Block SALVIUM_ORE = register("salvium_ore", new AwakenOreBlock(stoneSettings(10F, 40F, 3).build()));
+    public static final Block VALERIUM_ORE = register("valerium_ore", new AwakenOreBlock(stoneSettings(10F, 40F, 3).build()));
+
+    // TODO: find out why vanilla pickaxes don't work
 
     public static final Block ENDERIAN_HELL_FORGE = register("enderian_hell_forge", new CraftingBlock(
             FabricBlockSettings.of(Material.STONE).strength(35F, 12F).lightLevel(12).build(),

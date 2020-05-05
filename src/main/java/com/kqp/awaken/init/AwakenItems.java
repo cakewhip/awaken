@@ -57,7 +57,7 @@ public class AwakenItems {
     public static final Item CINDERED_BOW = register("cindered_bow", new FlameBowItem(512321.0D).setRarity(AwakenRarity.RARE));
     public static final Item SLIMEY_BOW = register("slimey_bow", new StatusEffectBowItem(3.0D, StatusEffects.SLOWNESS, 2 * 20, 0).setRarity(AwakenRarity.RARE));
     public static final Item RAIDERS_AXE = register("raiders_axe", new AwakenAxeItem(AwakenToolMaterial.sword(500, 10F, 1F, 10)).setRarity(AwakenRarity.UNCOMMON));
-    public static final Item ESCAPE_PLAN = register("escape_plan", new EscapePlanItem(AwakenToolMaterial.tool(-1, 3, 1500, 6F, 1F, 10)).setRarity(AwakenRarity.UNCOMMON));
+    public static final Item ESCAPE_PLAN = register("escape_plan", new EscapePlanItem(AwakenToolMaterial.tool(3, 1500, 7F, 6F, 1F, 10)).setRarity(AwakenRarity.UNCOMMON));
     public static final Item ARCHAEOLOGIST_SPADE = register("archaeologist_spade", new ArchaeologistSpadeItem(AwakenToolMaterial.tool(-1, 3000, 8F, 6F, 1F, 22)).setRarity(AwakenRarity.UNCOMMON));
     public static final Item RUSTY_SHANK = register("rusty_shank", new StatusEffectSwordItem(AwakenToolMaterial.sword(2500, 5F, 1.8F, 5), StatusEffects.POISON, 8 * 20, 0).setRarity(AwakenRarity.UNCOMMON));
 
