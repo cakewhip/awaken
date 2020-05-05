@@ -18,6 +18,7 @@ import java.util.List;
 
 /**
  * Class for the escape plan item.
+ * TODO: make this tool use an entity attribute modifier
  */
 public class EscapePlanItem extends AwakenPickaxeItem {
     public EscapePlanItem(AwakenToolMaterial toolMaterial) {
