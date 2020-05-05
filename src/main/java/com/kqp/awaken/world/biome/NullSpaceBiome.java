@@ -4,11 +4,11 @@ import com.google.common.collect.ImmutableSet;
 import com.kqp.awaken.init.AwakenBiomes;
 import com.kqp.awaken.init.AwakenBlocks;
 import com.kqp.awaken.init.AwakenEntities;
+import com.kqp.awaken.world.gen.decorator.NullSpikeDecorator;
+import com.kqp.awaken.world.gen.decorator.VoidTowerDecorator;
+import com.kqp.awaken.world.gen.feature.NullSpikeFeature;
 import com.kqp.awaken.world.gen.feature.NullSpikeFeatureConfig;
 import com.kqp.awaken.world.gen.feature.VoidTowerFeature;
-import com.kqp.awaken.world.feature.decorator.VoidTowerDecorator;
-import com.kqp.awaken.world.gen.decorator.NullSpikeDecorator;
-import com.kqp.awaken.world.gen.feature.NullSpikeFeature;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCategory;
@@ -37,11 +37,11 @@ import java.util.Random;
 import java.util.function.Function;
 
 public class NullSpaceBiome extends Biome {
-    private static final NullSpaceOreFeature ORE = new NullSpaceOreFeature(OreFeatureConfig::deserialize);
-    private static final NullSpikeFeature SPIKE = new NullSpikeFeature(NullSpikeFeatureConfig::deserialize);
-    private static final NullSpikeDecorator SPIKE_DECORATOR = new NullSpikeDecorator(CountDecoratorConfig::deserialize);
-    private static final VoidTowerFeature VOID_TOWER = new VoidTowerFeature(DefaultFeatureConfig::deserialize);
-    private static final VoidTowerDecorator VOID_TOWER_DECORATOR = new VoidTowerDecorator(ChanceDecoratorConfig::deserialize);
+    public static final NullSpaceOreFeature ORE = new NullSpaceOreFeature(OreFeatureConfig::deserialize);
+    public static final NullSpikeFeature SPIKE = new NullSpikeFeature(NullSpikeFeatureConfig::deserialize);
+    public static final NullSpikeDecorator SPIKE_DECORATOR = new NullSpikeDecorator(CountDecoratorConfig::deserialize);
+    public static final VoidTowerFeature VOID_TOWER = new VoidTowerFeature(DefaultFeatureConfig::deserialize);
+    public static final VoidTowerDecorator VOID_TOWER_DECORATOR = new VoidTowerDecorator(ChanceDecoratorConfig::deserialize);
 
     public NullSpaceBiome() {
         super(new Biome.Settings()

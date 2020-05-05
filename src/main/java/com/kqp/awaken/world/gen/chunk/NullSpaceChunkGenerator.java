@@ -2,13 +2,21 @@ package com.kqp.awaken.world.gen.chunk;
 
 import com.kqp.awaken.init.AwakenBlocks;
 import com.kqp.awaken.mixin.world.gen.chunk.SurfaceChunkGeneratorAccessor;
+import com.kqp.awaken.world.biome.NullSpaceBiome;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeSource;
+import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.CavesChunkGenerator;
 import net.minecraft.world.gen.chunk.CavesChunkGeneratorConfig;
+import net.minecraft.world.gen.feature.Feature;
+
+import java.util.List;
 
 public class NullSpaceChunkGenerator extends CavesChunkGenerator {
     public NullSpaceChunkGenerator(IWorld world, BiomeSource biomeSource, CavesChunkGeneratorConfig config) {
@@ -46,5 +54,10 @@ public class NullSpaceChunkGenerator extends CavesChunkGenerator {
         }
 
         return blockState3;
+    }
+
+    @Override
+    public List<Biome.SpawnEntry> getEntitySpawnList(StructureAccessor structureAccessor, EntityCategory entityCategory, BlockPos blockPos) {
+        return super.getEntitySpawnList(structureAccessor, entityCategory, blockPos);
     }
 }

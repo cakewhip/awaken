@@ -1,24 +1,39 @@
 package com.kqp.awaken.world.gen.feature;
 
+import com.google.common.collect.Lists;
 import com.kqp.awaken.init.AwakenBlocks;
 import com.kqp.awaken.util.GenUtil;
 import com.mojang.datafixers.Dynamic;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 
+import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 
+/**
+ * TODO: figure out how structure features work so I can add these god dang mob spawns
+ */
 public class VoidTowerFeature extends Feature<DefaultFeatureConfig> {
+    private static final List<Biome.SpawnEntry> MONSTER_SPAWNS;
+
     public VoidTowerFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> configDeserializer) {
         super(configDeserializer);
+    }
+
+    @Override
+    public List<Biome.SpawnEntry> getMonsterSpawns() {
+        return MONSTER_SPAWNS;
     }
 
     @Override
@@ -52,10 +67,10 @@ public class VoidTowerFeature extends Feature<DefaultFeatureConfig> {
                 boolean allClear = false;
                 int clearIndex = -1;
 
-                while(!allClear) {
+                while (!allClear) {
                     allClear = true;
 
-                    for(BlockPos offset : GenUtil.getHollowDiskOffsets(6)) {
+                    for (BlockPos offset : GenUtil.getHollowDiskOffsets(6)) {
                         BlockPos current = pos.add(offset).add(0, clearIndex, 0);
 
                         if (world.getBlockState(current).getBlock() == Blocks.AIR) {
@@ -99,7 +114,7 @@ public class VoidTowerFeature extends Feature<DefaultFeatureConfig> {
                 if (spaceAvailable > 32) {
                     return currentValid;
                 }
-            } else if (currentBlock == AwakenBlocks.ANCIENT_STONE.getDefaultState()){
+            } else if (currentBlock == AwakenBlocks.ANCIENT_STONE.getDefaultState()) {
                 spaceAvailable = 0;
                 currentValid = pos.add(0, i, 0);
             } else {
@@ -121,5 +136,22 @@ public class VoidTowerFeature extends Feature<DefaultFeatureConfig> {
         } else {
             return AwakenBlocks.NULL_STONE_BRICKS.getDefaultState();
         }
+    }
+
+    static {
+        MONSTER_SPAWNS = Lists.newArrayList(new Biome.SpawnEntry[] { new Biome.SpawnEntry(EntityType.PILLAGER, 1, 3, 6) });
+    }
+
+    public boolean isInsideStructure(IWorld world, StructureAccessor structureAccessor, BlockPos blockPos) {
+        Block block = world.getBlockState(blockPos).getBlock();
+        if (block == AwakenBlocks.CORRUPTED_NULL_STONE_BRICKS
+                || block == AwakenBlocks.GLOWING_NULL_STONE_BRICKS
+                || block == AwakenBlocks.NULL_STONE_BRICKS) {
+            return true;
+        }
+
+        System.out.println(world.getBlockState(blockPos.add(0, -1, 0)).getBlock().getTranslationKey());
+
+        return false;
     }
 }
