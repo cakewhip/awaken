@@ -19,6 +19,8 @@ public class NullSpacePlacer implements EntityPlacer {
 
         generateSpawnRoom(nullSpace, loc);
 
+        entity.fallDistance = 0F;
+
         return new BlockPattern.TeleportTarget(new Vec3d(loc.getX(), loc.getY() + 1, loc.getZ()), Vec3d.ZERO, 0);
     }
 
