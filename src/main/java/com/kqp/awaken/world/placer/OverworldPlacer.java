@@ -16,10 +16,14 @@ public class OverworldPlacer implements EntityPlacer {
     public BlockPattern.TeleportTarget placeEntity(Entity entity, ServerWorld serverWorld, Direction direction, double v, double v1) {
         ServerWorld overworld = serverWorld.getServer().getWorld(DimensionType.OVERWORLD);
 
-        BlockPos loc = overworld.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, overworld.getSpawnPos());
+        BlockPos loc = overworld.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, overworld.method_27911());
 
         if (entity instanceof ServerPlayerEntity) {
-            loc = ((ServerPlayerEntity) entity).getSpawnPointPosition();
+            BlockPos playerSpawn = ((ServerPlayerEntity) entity).getSpawnPointPosition();
+
+            if (playerSpawn != null) {
+                loc = playerSpawn;
+            }
         }
 
         return new BlockPattern.TeleportTarget(new Vec3d(loc.getX(), loc.getY(), loc.getZ()), Vec3d.ZERO, 0);

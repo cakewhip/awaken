@@ -33,10 +33,10 @@ public class NullSpaceChunkGenerator extends CavesChunkGenerator {
     }
 
     @Override
-    protected BlockState method_26262(double d, int i) {
+    protected BlockState getBlockState(double density, int y) {
         BlockState blockState3;
-        if (d > 0.0D) {
-            if (i < 32) {
+        if (density > 0.0D) {
+            if (y < 32) {
                 blockState3 = AwakenBlocks.NULL_STONE.getDefaultState();
             } else {
                 blockState3 = this.defaultBlock;

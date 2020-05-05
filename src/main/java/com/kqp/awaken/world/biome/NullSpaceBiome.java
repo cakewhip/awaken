@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableSet;
 import com.kqp.awaken.init.AwakenBiomes;
 import com.kqp.awaken.init.AwakenBlocks;
 import com.kqp.awaken.init.AwakenEntities;
+import com.kqp.awaken.world.biome.NullSpaceBiome.NullSpaceCaveCarver;
+import com.kqp.awaken.world.biome.NullSpaceBiome.NullSpaceOreFeature;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityCategory;

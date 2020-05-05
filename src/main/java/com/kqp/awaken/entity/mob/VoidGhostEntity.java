@@ -1,5 +1,6 @@
 package com.kqp.awaken.entity.mob;
 
+import com.kqp.awaken.entity.mob.VoidGhostEntity.WanderGoal;
 import com.kqp.awaken.init.AwakenEntities;
 import com.kqp.awaken.world.dimension.NullSpaceTraveler;
 import net.minecraft.block.BlockState;
