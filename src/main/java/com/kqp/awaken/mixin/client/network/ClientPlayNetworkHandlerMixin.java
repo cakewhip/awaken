@@ -2,7 +2,6 @@ package com.kqp.awaken.mixin.client.network;
 
 import com.kqp.awaken.client.AwakenClientLevelData;
 import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.kqp.awaken.data.AwakenLevelDataTagContainer;
 import com.kqp.awaken.recipe.AwakenRecipeManager;
 import com.kqp.awaken.recipe.AwakenRecipeManagerProvider;

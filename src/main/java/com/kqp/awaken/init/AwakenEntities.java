@@ -1,11 +1,11 @@
 package com.kqp.awaken.init;
 
+import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
+import com.kqp.awaken.entity.effect.AwakenStatusEffects;
 import com.kqp.awaken.entity.mob.AbominationEntity;
 import com.kqp.awaken.entity.mob.DireWolfEntity;
 import com.kqp.awaken.entity.mob.RaptorChickenEntity;
 import com.kqp.awaken.entity.mob.SpiderSacEntity;
-import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
-import com.kqp.awaken.entity.effect.AwakenStatusEffects;
 import com.kqp.awaken.entity.mob.VoidGhostEntity;
 import net.fabricmc.fabric.api.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;

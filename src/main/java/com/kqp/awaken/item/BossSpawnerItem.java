@@ -2,7 +2,6 @@ package com.kqp.awaken.item;
 
 import com.kqp.awaken.data.AwakenConfig;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.player.PlayerEntity;

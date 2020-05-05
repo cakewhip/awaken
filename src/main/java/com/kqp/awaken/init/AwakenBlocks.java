@@ -46,14 +46,14 @@ public class AwakenBlocks {
     public static Block register(String name, Block block) {
         Registry.register(Registry.BLOCK, new Identifier(Awaken.MOD_ID, name), block);
         Registry.register(Registry.ITEM, new Identifier(Awaken.MOD_ID, name), new BlockItem(block, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
-        
+
         return block;
     }
 
     public static FabricBlockSettings stoneSettings(float hardness, float resistance, int miningLevel) {
         return FabricBlockSettings.of(Material.STONE).strength(hardness, resistance).breakByTool(FabricToolTags.PICKAXES, miningLevel);
     }
-    
+
     public static FabricBlockSettings ancientOreSettings(float hardness) {
         return stoneSettings(hardness, 80F, 4);
     }

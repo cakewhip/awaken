@@ -20,7 +20,7 @@ public class AwakenWorld {
         Registry.BIOME.forEach(biome -> biome.addFeature(
                 GenerationStep.Feature.UNDERGROUND_DECORATION,
                 CRACKED_BEDROCK.configure(new DefaultFeatureConfig())
-                .createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(1, 0, 0, 1)))
+                        .createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(1, 0, 0, 1)))
         ));
     }
 }
