@@ -57,7 +57,7 @@ public class AwakenBlocks {
     }
 
     public static FabricBlockSettings stoneSettings(float hardness, float resistance, int miningLevel) {
-        return FabricBlockSettings.of(Material.STONE).strength(hardness, resistance).breakByTool(FabricToolTags.PICKAXES, miningLevel);
+        return FabricBlockSettings.of(Material.STONE).breakByTool(FabricToolTags.PICKAXES, miningLevel).strength(hardness, resistance);
     }
 
     public static FabricBlockSettings ancientOreSettings(float hardness) {
