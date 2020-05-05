@@ -27,7 +27,7 @@ public class AwakenDimensions {
             })
             .factory(NullSpaceDimension::new)
             .skyLight(false)
-            .buildAndRegister(new Identifier(Awaken.MOD_ID, "null"));
+            .buildAndRegister(new Identifier(Awaken.MOD_ID, "null_space"));
 
 
     public static final ChunkGeneratorType<CavesChunkGeneratorConfig, CavesChunkGenerator> NULL_SPACE_CHUNK_GENERATOR = registerChunkGenerator(
