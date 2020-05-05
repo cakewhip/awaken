@@ -1,4 +1,4 @@
-package com.kqp.awaken.world.dimension;
+package com.kqp.awaken.world.chunk;
 
 import net.minecraft.world.gen.chunk.CavesChunkGeneratorConfig;
 

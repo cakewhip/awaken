@@ -1,4 +1,4 @@
-package com.kqp.awaken.world.dimension;
+package com.kqp.awaken.world.chunk;
 
 import com.kqp.awaken.init.AwakenBlocks;
 import com.kqp.awaken.mixin.world.gen.chunk.SurfaceChunkGeneratorAccessor;

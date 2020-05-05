@@ -5,9 +5,12 @@ import com.kqp.awaken.init.AwakenDimensions;
 import com.kqp.awaken.item.effect.ArmorListener;
 import com.kqp.awaken.item.effect.Equippable;
 import com.kqp.awaken.item.effect.SpecialItemRegistry;
+import com.kqp.awaken.world.placer.NullSpacePlacer;
+import com.kqp.awaken.world.placer.OverworldPlacer;
 import com.kqp.awaken.world.dimension.NullSpaceTraveler;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
@@ -45,11 +48,12 @@ public class PlayerEntityMixin implements NullSpaceTraveler {
         if (!player.world.isClient) {
 
             if (player.dimension == DimensionType.OVERWORLD && player.getY() <= -8D) {
-                FabricDimensions.teleport(player, AwakenDimensions.NULL_SPACE);
+                FabricDimensions.teleport(player, AwakenDimensions.NULL_SPACE, new NullSpacePlacer());
             }
 
             if (player.dimension == AwakenDimensions.NULL_SPACE && this.returnMarker) {
-                player.changeDimension(DimensionType.OVERWORLD);
+                FabricDimensions.teleport(player, DimensionType.OVERWORLD, new OverworldPlacer());
+                this.setReturnMarker(false);
             }
         }
     }
