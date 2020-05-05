@@ -1,7 +1,7 @@
 package com.kqp.awaken.init;
 
 import com.kqp.awaken.world.biome.NullSpaceBiome;
-import com.kqp.awaken.world.worldgen.NullSpaceSurfaceBuilder;
+import com.kqp.awaken.world.gen.NullSpaceSurfaceBuilder;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;

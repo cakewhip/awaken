@@ -1,4 +1,4 @@
-package com.kqp.awaken.world.biome;
+package com.kqp.awaken.world.gen.decorator;
 
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.util.math.BlockPos;

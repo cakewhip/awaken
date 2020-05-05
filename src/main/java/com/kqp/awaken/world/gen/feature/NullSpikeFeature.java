@@ -1,4 +1,4 @@
-package com.kqp.awaken.world.biome;
+package com.kqp.awaken.world.gen.feature;
 
 import com.kqp.awaken.init.AwakenBlocks;
 import com.kqp.awaken.util.GenUtil;

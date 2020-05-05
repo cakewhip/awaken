@@ -1,4 +1,4 @@
-package com.kqp.awaken.world.biome;
+package com.kqp.awaken.world.gen.feature;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.Dynamic;

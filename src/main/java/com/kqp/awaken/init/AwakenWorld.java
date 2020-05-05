@@ -1,6 +1,6 @@
 package com.kqp.awaken.init;
 
-import com.kqp.awaken.world.feature.CrackedBedrockFeature;
+import com.kqp.awaken.world.gen.feature.CrackedBedrockFeature;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.GenerationStep;

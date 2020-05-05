@@ -1,4 +1,4 @@
-package com.kqp.awaken.world.worldgen;
+package com.kqp.awaken.world.gen;
 
 import com.kqp.awaken.init.AwakenBlocks;
 import com.mojang.datafixers.Dynamic;
