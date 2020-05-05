@@ -41,6 +41,10 @@ public class CrackedBedrockFeature extends Feature<DefaultFeatureConfig> {
                 world.setBlockState(cent.add(offset), Blocks.DIAMOND_BLOCK.getDefaultState(), 3);
             }
 
+            for (int i = 0; i < 128; i++) {
+                world.setBlockState(pos.add(0, i, 0), Blocks.AIR.getDefaultState(), 3);
+            }
+
             return true;
         }
 

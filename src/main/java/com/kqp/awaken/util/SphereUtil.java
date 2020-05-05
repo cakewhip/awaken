@@ -9,6 +9,10 @@ import java.util.HashSet;
 public class SphereUtil {
     private static final HashMap<Integer, ImmutableSet<BlockPos>> SPHERE_CACHE = new HashMap();
 
+    static {
+        SPHERE_CACHE.put(1, ImmutableSet.of(new BlockPos(0, 0, 0)));
+    }
+
     /**
      * Returns a set of block positions used to offset from a center to form a sphere.
      *
