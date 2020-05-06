@@ -30,6 +30,7 @@
     "world.ChunkSerializerMixin"
   ],
   "client": [
+    "client.gui.hud.InGameHudMixin",
     "client.gui.screen.ingame.InventoryScreenMixin",
     "client.input.KeyboardInputMixin",
     "client.MinecraftClientMixin",
