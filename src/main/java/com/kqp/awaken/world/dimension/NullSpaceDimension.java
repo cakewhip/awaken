@@ -21,7 +21,7 @@ public class NullSpaceDimension extends Dimension {
     private static final Vec3d FOG_COLOR = new Vec3d(0F, 0F, 0F);
 
     public NullSpaceDimension(World world, DimensionType type) {
-        super(world, type, 0F);
+        super(world, type, 0.03F);
     }
 
     @Override
