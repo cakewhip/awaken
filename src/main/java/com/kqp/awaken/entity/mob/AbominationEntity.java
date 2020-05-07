@@ -1,6 +1,7 @@
 package com.kqp.awaken.entity.mob;
 
-import com.kqp.awaken.entity.ai.AbominationMoveSetGoal;
+import com.kqp.awaken.entity.ai.abomination.AbominationPhase1MoveSetGoal;
+import com.kqp.awaken.entity.ai.abomination.AbominationPhase2MoveSetGoal;
 import com.kqp.awaken.init.AwakenEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -33,14 +34,16 @@ public class AbominationEntity extends AwakenBossEntity {
         super(AwakenEntities.ABOMINATION, world);
 
         this.experiencePoints = 50;
+        this.regenCoolDown = 20;
     }
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(1, new AbominationMoveSetGoal(this));
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0D));
-        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 64.0F));
-        this.goalSelector.add(4, new LookAroundGoal(this));
+        this.goalSelector.add(1, new AbominationPhase1MoveSetGoal(this));
+        this.goalSelector.add(2, new AbominationPhase2MoveSetGoal(this));
+        this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D));
+        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 64.0F));
+        this.goalSelector.add(5, new LookAroundGoal(this));
 
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new FollowTargetGoal(this, MobEntity.class, 0, false, true, CAN_ATTACK_PREDICATE));
@@ -49,10 +52,25 @@ public class AbominationEntity extends AwakenBossEntity {
     public static DefaultAttributeContainer.Builder createAbominationAttributes() {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.5D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 800D)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 18.0D)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 1200D)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 72D)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 14.0D)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0D);
+    }
+
+    @Override
+    protected void mobTick() {
+        if (aboveHalfHealth()) {
+            this.regenAmt = 4;
+        } else {
+            this.regenAmt = 6;
+        }
+
+        super.mobTick();
+    }
+
+    public boolean aboveHalfHealth() {
+        return (this.getHealth() / this.getMaximumHealth()) >= 0.5;
     }
 
     static {

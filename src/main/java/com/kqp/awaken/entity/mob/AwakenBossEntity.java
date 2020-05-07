@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.boss.ServerBossBar;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -17,6 +18,9 @@ public class AwakenBossEntity extends HostileEntity {
     public final ServerBossBar bossBar;
 
     private int despawnTickTime;
+    protected int regenAmt, regenCoolDown;
+
+    protected int regenTimer;
 
     public AwakenBossEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
@@ -43,6 +47,20 @@ public class AwakenBossEntity extends HostileEntity {
                 AwakenNetworking.BOSS_DESPAWNING_S2C.send(this);
             }
         }
+
+        if (regenTimer == 0) {
+            this.heal(regenAmt);
+            regenTimer = regenCoolDown;
+        } else {
+            regenTimer = Math.max(0, regenTimer - 1);
+        }
+    }
+
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        this.regenTimer = regenCoolDown;
+
+        return super.damage(source, amount);
     }
 
     @Override
