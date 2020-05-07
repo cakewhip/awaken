@@ -84,7 +84,7 @@ public abstract class LivingEntityMixin {
                     LivingEntity livingEntity = (LivingEntity) (Object) this;
 
                     if (livingEntity.getRandom().nextFloat() < 0.5F) {
-                        livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 6 * 20, 1));
+                        livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 3 * 20, 0));
                     }
                 }
             }
