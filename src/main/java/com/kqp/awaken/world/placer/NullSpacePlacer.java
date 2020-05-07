@@ -21,7 +21,7 @@ public class NullSpacePlacer implements EntityPlacer {
 
         entity.fallDistance = 0F;
 
-        return new BlockPattern.TeleportTarget(new Vec3d(loc.getX(), loc.getY() + 1, loc.getZ()), Vec3d.ZERO, 0);
+        return new BlockPattern.TeleportTarget(new Vec3d(loc.getX() + 0.5D, loc.getY() + 1, loc.getZ() + 0.5D), Vec3d.ZERO, 0);
     }
 
     private void generateSpawnRoom(ServerWorld world, BlockPos cent) {
