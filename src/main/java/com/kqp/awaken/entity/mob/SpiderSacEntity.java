@@ -95,4 +95,9 @@ public class SpiderSacEntity extends HostileEntity {
     public EntityGroup getGroup() {
         return EntityGroup.ARTHROPOD;
     }
+
+    @Override
+    public void refreshPositionAndAngles(double x, double y, double z, float yaw, float pitch) {
+        super.refreshPositionAndAngles(x, y, z, yaw, pitch);
+    }
 }

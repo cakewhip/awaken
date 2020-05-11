@@ -26,8 +26,10 @@
     "server.network.ServerPlayerEntityMixin",
     "world.chunk.WorldChunkMixin",
     "world.gen.chunk.SurfaceChunkGeneratorAccessor",
+    "world.gen.chunk.ChunkGeneratorAccessor",
     "world.level.LevelPropertiesMixin",
-    "world.ChunkSerializerMixin"
+    "world.ChunkSerializerMixin",
+    "world.SpawnHelperMixin"
   ],
   "client": [
     "client.gui.screen.ingame.InventoryScreenMixin",

@@ -7,6 +7,9 @@ import com.kqp.awaken.entity.mob.DireWolfEntity;
 import com.kqp.awaken.entity.mob.RaptorChickenEntity;
 import com.kqp.awaken.entity.mob.SpiderSacEntity;
 import com.kqp.awaken.entity.mob.VoidGhostEntity;
+import com.kqp.awaken.world.spawning.CaveSpawnCondition;
+import com.kqp.awaken.world.spawning.ConditionalSpawnEntry;
+import com.kqp.awaken.world.spawning.SpawnCondition;
 import net.fabricmc.fabric.api.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
@@ -19,6 +22,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
 
 public class AwakenEntities {
     // TODO: add spawning
@@ -94,6 +98,7 @@ public class AwakenEntities {
             register(RAPTOR_CHICKEN, 0x9C0202, 0x610000, RaptorChickenEntity.createRaptorChickenAttributes());
             register(DIRE_WOLF, 0xD6E9FF, 0x97ADCC, DireWolfEntity.createDireWolfAttributes());
             register(SPIDER_SAC, 0x000000, 0xFFFFFF, SpiderSacEntity.createSpiderSacAttributes());
+            addHostileSpawn(SPIDER_SAC, 150, 1, 1, CaveSpawnCondition.INSTANCE);
             register(VOID_GHOST, 0x0000000, 0xFFFFFF, VoidGhostEntity.createVoidGhostAttributes());
             register(ABOMINATION, 0xFFFFFF, 0x000000, AbominationEntity.createAbominationAttributes());
         }
@@ -105,5 +110,17 @@ public class AwakenEntities {
         );
 
         FabricDefaultAttributeRegistry.register(type, attributeBuilder);
+    }
+
+    private static void addHostileSpawn(EntityType<?> type, int weight, int min, int max, SpawnCondition... spawnConditions) {
+        for (Biome biome : Biome.BIOMES) {
+            ConditionalSpawnEntry spawnEntry = new ConditionalSpawnEntry(type, weight, min, max);
+
+            for (SpawnCondition spawnCondition : spawnConditions) {
+                spawnEntry.addCondition(spawnCondition);
+            }
+
+            biome.getEntitySpawnList(EntityCategory.MONSTER).add(spawnEntry);
+        }
     }
 }
