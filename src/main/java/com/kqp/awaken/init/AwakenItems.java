@@ -20,6 +20,7 @@ import com.kqp.awaken.item.tool.AwakenAxeItem;
 import com.kqp.awaken.item.tool.AwakenPickaxeItem;
 import com.kqp.awaken.item.trident.AwakenTridentItem;
 import com.kqp.awaken.item.trinket.RocketBoots;
+import com.kqp.awaken.item.trinket.wings.WingsItem;
 import com.kqp.awaken.loot.AwakenRarity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -55,8 +56,6 @@ public class AwakenItems {
         public static final Item MAGMA_STRAND = genericItem("magma_strand");
         public static final Item CINDERED_SOUL = genericItem("cindered_soul");
         public static final Item FIERY_HEART = register("fiery_heart", new HealthIncreaseItem("fiery_heart", 10, (HealthIncreaseItem) MONSTER_HEART));
-
-
     }
 
     public static class Armor {
@@ -149,6 +148,8 @@ public class AwakenItems {
 
     public static class Accessories {
         public static final Item ROCKET_BOOTS = register("rocket_boots", new RocketBoots());
+
+        public static final Item TEST_WINGS = register("test_wings", new WingsItem(100));
     }
 
     public static class BossSpawners {
@@ -159,9 +160,17 @@ public class AwakenItems {
         public static final Item FIERY_TRIDENT = register("fiery_trident", new AwakenTridentItem(16D, 500));
     }
 
-    // TODO: add unbreakable elytra using post-awakened materials (Dragon Bone Wings)
-
     public static void init() {
+        new Reagents();
+        new Armor();
+        new Pickaxes();
+        new Shovels();
+        new Swords();
+        new Axes();
+        new Bows();
+        new Accessories();
+        new BossSpawners();
+        new Tridents();
     }
 
     public static Item register(String name, Item item) {

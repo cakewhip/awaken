@@ -41,6 +41,7 @@
     "client.network.ClientPlayNetworkHandlerMixin",
     "client.render.entity.feature.ArmorFeatureRendererMixin",
     "client.render.entity.LivingEntityRendererMixin",
+    "client.render.entity.PlayerEntityRendererMixin",
     "client.render.entity.SkeletonEntityRendererMixin",
     "client.render.entity.ZombieBaseEntityRendererMixin",
     "client.render.WorldRendererMixin"
