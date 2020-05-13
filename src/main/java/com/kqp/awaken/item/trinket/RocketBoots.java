@@ -29,4 +29,9 @@ public class RocketBoots extends ArmorItem implements FlyingItem {
     public int getMaxFlyTime() {
         return 20;
     }
+
+    @Override
+    public boolean canFloat() {
+        return true;
+    }
 }

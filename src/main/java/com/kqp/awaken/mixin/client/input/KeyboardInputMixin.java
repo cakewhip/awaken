@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin.client.input;
 
 import com.kqp.awaken.entity.effect.AwakenStatusEffects;
-import com.kqp.awaken.entity.player.PlayerFlyingInfo;
+import com.kqp.awaken.entity.player.PlayerFlightProperties;
 import com.kqp.awaken.init.AwakenNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.input.KeyboardInput;
@@ -51,8 +51,8 @@ public class KeyboardInputMixin {
             }
 
             if (input.jumping != previousJumping) {
-                if (!input.jumping || !player.isOnGround()) {
-                    ((PlayerFlyingInfo) player).setSecondSpacing(input.jumping);
+                if (!input.jumping || (!player.isOnGround())) {
+                    ((PlayerFlightProperties) player).setSecondSpacing(input.jumping);
 
                     AwakenNetworking.PLAYER_INPUT_SYNC_C2S.sendToServer((buf) -> {
                         buf.writeBoolean(input.jumping);

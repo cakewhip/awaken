@@ -1,7 +1,7 @@
 package com.kqp.awaken.client.model;
 
 import com.google.common.collect.ImmutableList;
-import com.kqp.awaken.entity.player.PlayerFlyingInfo;
+import com.kqp.awaken.entity.player.PlayerFlightProperties;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.entity.model.AnimalModel;
@@ -62,17 +62,17 @@ public class WingsEntityModel<T extends LivingEntity> extends AnimalModel<T> {
         leftWing.roll = (float) (Math.PI / -16);
         leftWing.yaw = (float) (Math.PI - Math.PI / 8);
 
-        if (entity instanceof PlayerFlyingInfo) {
-            PlayerFlyingInfo flyingInfo = (PlayerFlyingInfo) entity;
+        if (entity instanceof PlayerFlightProperties) {
+            PlayerFlightProperties flightProperties = (PlayerFlightProperties) entity;
 
             // We do flutter animation if they're flying or still mid-flutter animation
-            if (flyingInfo.isFlying() || flutterTickTimer != 0) {
+            if (flightProperties.isFlying() || flutterTickTimer != 0) {
                 float flutterTickDur = (float) (BASE_FLUTTER_TICK_DURATION * (MAX_FLYING_SPEED - entity.getVelocity().y));
                 float halfFlutterTickDur = flutterTickDur / 2F;
 
                 // If they're not flying still and the tick delta pushes the flutter timer over,
                 // Reset to 0 so that it doesn't restart next loop
-                if (!flyingInfo.isFlying() && flutterTickTimer + tickDelta > flutterTickDur) {
+                if (!flightProperties.isFlying() && flutterTickTimer + tickDelta > flutterTickDur) {
                     flutterTickTimer = 0;
                 } else {
                     flutterTickTimer += tickDelta;

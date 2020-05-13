@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin.entity.player;
 
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
-import com.kqp.awaken.entity.player.PlayerFlyingInfo;
+import com.kqp.awaken.entity.player.PlayerFlightProperties;
 import com.kqp.awaken.init.AwakenDimensions;
 import com.kqp.awaken.item.effect.ArmorListener;
 import com.kqp.awaken.item.effect.Equippable;
@@ -39,12 +39,13 @@ import java.util.Random;
  */
 @Mixin(PlayerEntity.class)
 // @Implements(@Interface(iface = NullSpaceTraveler.class, prefix = "vw$"))
-public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlyingInfo {
+public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlightProperties {
     public boolean returnMarker = false;
 
     public boolean secondSpacing;
     public boolean flying;
     public int flyTime;
+    public boolean floating;
 
     private static final HashMap<PlayerEntity, DefaultedList<ItemStack>> PLAYER_ARMOR_TRACKER = new HashMap();
     private static final HashMap<PlayerEntity, ItemStack> PLAYER_HELD_TRACKER = new HashMap();
@@ -166,19 +167,34 @@ public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlyingInfo {
         if (this.canFly()) {
             if (player.isOnGround()) {
                 flyTime = this.getFlyingItem().getMaxFlyTime();
+
+                this.setFloating(false);
             } else {
-                if (this.isSecondSpacing() && flyTime > 0) {
-                    this.setFlying(true);
-
-                    flyTime = Math.max(0, flyTime - 1);
-
+                if (this.isSecondSpacing()) {
                     Random r = player.getRandom();
-                    player.world.addParticle(ParticleTypes.LAVA,
-                            player.getX(), player.getY(), player.getZ(),
-                            r.nextDouble() - r.nextDouble(), -r.nextDouble(), r.nextDouble() - r.nextDouble()
-                    );
+
+                    if (flyTime > 0) {
+                        this.setFlying(true);
+                        this.setFloating(false);
+
+                        flyTime = Math.max(0, flyTime - 1);
+
+                        player.world.addParticle(ParticleTypes.LAVA,
+                                player.getX(), player.getY(), player.getZ(),
+                                r.nextDouble() - r.nextDouble(), -r.nextDouble(), r.nextDouble() - r.nextDouble()
+                        );
+                    } else {
+                        this.setFloating(true);
+                        this.setFlying(false);
+
+                        player.world.addParticle(ParticleTypes.POOF,
+                                player.getX(), player.getY(), player.getZ(),
+                                r.nextDouble() - r.nextDouble(), -r.nextDouble(), r.nextDouble() - r.nextDouble()
+                        );
+                    }
                 } else {
                     this.setFlying(false);
+                    this.setFloating(false);
                 }
             }
         }
@@ -234,5 +250,20 @@ public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlyingInfo {
     @Override
     public void setFlyTime(int flyTime) {
 
+    }
+
+    @Override
+    public boolean canFloat() {
+        return getFlyingItem().canFloat();
+    }
+
+    @Override
+    public boolean isFloating() {
+        return floating;
+    }
+
+    @Override
+    public void setFloating(boolean floating) {
+        this.floating = floating;
     }
 }

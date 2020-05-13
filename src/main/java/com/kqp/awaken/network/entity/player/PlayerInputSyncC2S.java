@@ -1,6 +1,6 @@
 package com.kqp.awaken.network.entity.player;
 
-import com.kqp.awaken.entity.player.PlayerFlyingInfo;
+import com.kqp.awaken.entity.player.PlayerFlightProperties;
 import com.kqp.awaken.network.AwakenPacketC2S;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.minecraft.network.PacketByteBuf;
@@ -15,7 +15,7 @@ public class PlayerInputSyncC2S extends AwakenPacketC2S {
         boolean jumping = data.readBoolean();
 
         context.getTaskQueue().execute(() -> {
-            ((PlayerFlyingInfo) context.getPlayer()).setSecondSpacing(jumping);
+            ((PlayerFlightProperties) context.getPlayer()).setSecondSpacing(jumping);
         });
     }
 }

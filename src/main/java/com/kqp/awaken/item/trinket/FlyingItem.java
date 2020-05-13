@@ -23,4 +23,11 @@ public interface FlyingItem {
      * @return flying time
      */
     int getMaxFlyTime();
+
+    /**
+     * Whether or not the flying item lets the player float in the air after exhausting their flight time.
+     *
+     * @return true or false
+     */
+    boolean canFloat();
 }
