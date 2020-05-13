@@ -1,9 +1,9 @@
 package com.kqp.awaken.init;
 
+import com.kqp.awaken.world.dimension.NullSpaceDimension;
 import com.kqp.awaken.world.gen.chunk.AwakenChunkGeneratorType;
 import com.kqp.awaken.world.gen.chunk.NullSpaceChunkGenerator;
 import com.kqp.awaken.world.gen.chunk.NullSpaceChunkGeneratorConfig;
-import com.kqp.awaken.world.dimension.NullSpaceDimension;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensionType;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.util.Identifier;

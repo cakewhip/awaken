@@ -16,19 +16,19 @@ import java.util.function.Supplier;
  */
 public class AwakenArmorMaterial implements ArmorMaterial {
     public static final AwakenArmorMaterial DRAGON_SCALE = new AwakenArmorMaterial("dragon_scale", 37, new int[] { 6, 8, 10, 6 }, 14, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 4.0F, 0.5F, () -> {
-        return Ingredient.ofItems(AwakenItems.ENDER_DRAGON_SCALE);
+        return Ingredient.ofItems(AwakenItems.Reagents.ENDER_DRAGON_SCALE);
     });
 
     public static final AwakenArmorMaterial WITHER_BONE = new AwakenArmorMaterial("wither_bone", 37, new int[] { 6, 8, 10, 6 }, 14, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 4.0F, 0.5F, () -> {
-        return Ingredient.ofItems(AwakenItems.WITHER_RIB);
+        return Ingredient.ofItems(AwakenItems.Reagents.WITHER_RIB);
     });
 
     public static final AwakenArmorMaterial SALVIUM = new AwakenArmorMaterial("salvium", 45, new int[] { 7, 9, 12, 7 }, 16, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 5.0F, 0.5F, () -> {
-        return Ingredient.ofItems(AwakenItems.SALVIUM_INGOT);
+        return Ingredient.ofItems(AwakenItems.Reagents.SALVIUM_INGOT);
     });
 
     public static final AwakenArmorMaterial VALERIUM = new AwakenArmorMaterial("valerium", 45, new int[] { 7, 10, 12, 7 }, 16, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 7.5F, 0.5F, () -> {
-        return Ingredient.ofItems(AwakenItems.VALERIUM_INGOT);
+        return Ingredient.ofItems(AwakenItems.Reagents.VALERIUM_INGOT);
     });
 
     private static final int[] BASE_DURABILITY = new int[] { 13, 15, 16, 11 };
@@ -93,6 +93,6 @@ public class AwakenArmorMaterial implements ArmorMaterial {
     }
 
     public static AwakenArmorMaterial trinketMaterial(String name, int durability) {
-        return new AwakenArmorMaterial(name, durability, new int[] {0, 0, 0, 0}, 1, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0F, 0F, () -> Ingredient.EMPTY);
+        return new AwakenArmorMaterial(name, durability, new int[] { 0, 0, 0, 0 }, 1, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0F, 0F, () -> Ingredient.EMPTY);
     }
 }

@@ -2,7 +2,6 @@ package com.kqp.awaken.world.gen.decorator;
 
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Heightmap;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;

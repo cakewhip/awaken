@@ -7,14 +7,18 @@ import com.kqp.awaken.item.trinket.FlyingItem;
  */
 public interface PlayerFlyingInfo {
     void setSecondSpacing(boolean secondSpacing);
+
     boolean isSecondSpacing();
 
     void setFlying(boolean flying);
+
     boolean isFlying();
 
     FlyingItem getFlyingItem();
+
     boolean canFly();
 
     int getFlyTime();
+
     void setFlyTime(int flyTime);
 }

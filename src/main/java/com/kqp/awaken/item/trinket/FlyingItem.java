@@ -10,7 +10,7 @@ public interface FlyingItem {
 
     /**
      * Fly speed.
-     *
+     * <p>
      * I believe the minimum (to fight gravity) is like ~0.075.
      *
      * @return flying acceleration

@@ -2,7 +2,6 @@ package com.kqp.awaken.world.gen.chunk;
 
 import com.kqp.awaken.init.AwakenBlocks;
 import com.kqp.awaken.mixin.world.gen.chunk.SurfaceChunkGeneratorAccessor;
-import com.kqp.awaken.world.biome.NullSpaceBiome;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityCategory;
@@ -14,7 +13,6 @@ import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.CavesChunkGenerator;
 import net.minecraft.world.gen.chunk.CavesChunkGeneratorConfig;
-import net.minecraft.world.gen.feature.Feature;
 
 import java.util.List;
 

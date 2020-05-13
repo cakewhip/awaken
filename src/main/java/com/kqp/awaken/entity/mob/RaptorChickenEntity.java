@@ -125,7 +125,7 @@ public class RaptorChickenEntity extends AnimalEntity {
         this.field_6741 += this.field_6737 * 2.0F;
         if (!this.world.isClient && this.isAlive() && !this.isBaby() && --this.eggLayTime <= 0) {
             this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-            this.dropItem(AwakenItems.RAPTOR_CHICKEN_EGG);
+            this.dropItem(AwakenItems.Reagents.RAPTOR_CHICKEN_EGG);
             resetEggTimer();
         }
     }

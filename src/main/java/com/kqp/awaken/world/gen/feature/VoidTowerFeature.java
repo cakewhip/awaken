@@ -139,7 +139,7 @@ public class VoidTowerFeature extends Feature<DefaultFeatureConfig> {
     }
 
     static {
-        MONSTER_SPAWNS = Lists.newArrayList(new Biome.SpawnEntry[] { new Biome.SpawnEntry(EntityType.PILLAGER, 1, 3, 6) });
+        MONSTER_SPAWNS = Lists.newArrayList(new Biome.SpawnEntry(EntityType.PILLAGER, 1, 3, 6));
     }
 
     public boolean isInsideStructure(IWorld world, StructureAccessor structureAccessor, BlockPos blockPos) {
