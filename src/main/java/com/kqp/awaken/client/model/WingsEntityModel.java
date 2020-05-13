@@ -22,7 +22,7 @@ public class WingsEntityModel<T extends LivingEntity> extends AnimalModel<T> {
      * we need to subtract the velocity from some constant.
      * It makes sense for this constant to be the max flying speed.
      * Which is declared here.
-     *
+     * <p>
      * TODO: find the actual max flying speed lmao
      */
     private static final float MAX_FLYING_SPEED = 2F;
@@ -65,14 +65,22 @@ public class WingsEntityModel<T extends LivingEntity> extends AnimalModel<T> {
         if (entity instanceof PlayerFlightProperties) {
             PlayerFlightProperties flightProperties = (PlayerFlightProperties) entity;
 
-            // We do flutter animation if they're flying or still mid-flutter animation
-            if (flightProperties.isFlying() || flutterTickTimer != 0) {
-                float flutterTickDur = (float) (BASE_FLUTTER_TICK_DURATION * (MAX_FLYING_SPEED - entity.getVelocity().y));
+            // We do flutter animation if they're flying, floating or still mid-flutter animation
+            if (flightProperties.isFlying() || flightProperties.isFloating() || flutterTickTimer != 0) {
+                double velY = entity.getVelocity().y;
+                float flutterTickDur;
+
+                if (velY > 0) {
+                    flutterTickDur = (float) (BASE_FLUTTER_TICK_DURATION * (MAX_FLYING_SPEED - velY);
+                } else {
+                    flutterTickDur = 50;
+                }
+
                 float halfFlutterTickDur = flutterTickDur / 2F;
 
                 // If they're not flying still and the tick delta pushes the flutter timer over,
                 // Reset to 0 so that it doesn't restart next loop
-                if (!flightProperties.isFlying() && flutterTickTimer + tickDelta > flutterTickDur) {
+                if (!flightProperties.isFlying() && !flightProperties.isFloating() && flutterTickTimer + tickDelta > flutterTickDur) {
                     flutterTickTimer = 0;
                 } else {
                     flutterTickTimer += tickDelta;

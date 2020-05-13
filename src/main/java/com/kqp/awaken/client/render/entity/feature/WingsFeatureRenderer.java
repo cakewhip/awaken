@@ -9,7 +9,6 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
-import net.minecraft.client.render.entity.model.ElytraEntityModel;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -20,7 +19,7 @@ import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<T>> extends FeatureRenderer<T, M> {
-    private final WingsEntityModel<T> elytraModel = new WingsEntityModel<>();
+    private final WingsEntityModel<T> wingsModel = new WingsEntityModel<>();
 
     public WingsFeatureRenderer(FeatureRendererContext<T, M> context) {
         super(context);
@@ -36,11 +35,11 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
             matrices.push();
             matrices.translate(0.0D, 0.0D, 0.125D);
 
-            this.getContextModel().copyStateTo(this.elytraModel);
-            this.elytraModel.setAngles(entity, limbDistance, limbDistance, customAngle, headYaw, headPitch);
+            this.getContextModel().copyStateTo(this.wingsModel);
+            this.wingsModel.setAngles(entity, limbDistance, limbDistance, customAngle, headYaw, headPitch);
 
-            VertexConsumer vertexConsumer = ItemRenderer.getArmorVertexConsumer(vertexConsumers, this.elytraModel.getLayer(texture), false, itemStack.hasEnchantmentGlint());
-            this.elytraModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+            VertexConsumer vertexConsumer = ItemRenderer.getArmorVertexConsumer(vertexConsumers, this.wingsModel.getLayer(texture), false, itemStack.hasEnchantmentGlint());
+            this.wingsModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
 
             matrices.pop();
         }
