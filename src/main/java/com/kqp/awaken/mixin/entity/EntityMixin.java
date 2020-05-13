@@ -30,10 +30,9 @@ public class EntityMixin {
             } else if (flightProperties.isFloating()) {
                 landGently = true;
 
-                if (vel.y < FLOAT_SPEED - 0.1D) {
-                    vel = vel.add(0D, 0.1D, 0D);
-                } else {
-                    vel = new Vec3d(vel.x, FLOAT_SPEED, vel.z);
+                if (vel.y < FLOAT_SPEED) {
+                    vel = vel.add(0D, 0.2D, 0D);
+                    vel = new Vec3d(vel.x, Math.min(vel.y, FLOAT_SPEED), vel.z);
                 }
             }
 
