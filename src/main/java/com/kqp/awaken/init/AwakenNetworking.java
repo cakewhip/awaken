@@ -4,6 +4,7 @@ import com.kqp.awaken.network.AwakenPacket;
 import com.kqp.awaken.network.entity.AbominationSmashAttackS2C;
 import com.kqp.awaken.network.entity.AbominationSpawnSpawnlingsS2C;
 import com.kqp.awaken.network.entity.BossDespawningS2C;
+import com.kqp.awaken.network.entity.player.PlayerInputSyncC2S;
 import com.kqp.awaken.network.recipe.SyncRecipesS2C;
 import com.kqp.awaken.network.screen.SyncCraftingResultSlotS2C;
 import com.kqp.awaken.network.screen.SyncCraftingResultsS2C;
@@ -44,6 +45,8 @@ public class AwakenNetworking {
     public static final OpenCraftingC2S OPEN_CRAFTING_C2S = new OpenCraftingC2S();
     public static final CloseCraftingC2S CLOSE_CRAFTING_C2S = new CloseCraftingC2S();
 
+    public static final PlayerInputSyncC2S PLAYER_INPUT_SYNC_C2S = new PlayerInputSyncC2S();
+
     public static void init() {
         Awaken.info("Initializing networking");
 
@@ -52,6 +55,8 @@ public class AwakenNetworking {
 
         register(OPEN_CRAFTING_C2S);
         register(CLOSE_CRAFTING_C2S);
+
+        register(PLAYER_INPUT_SYNC_C2S);
     }
 
     private static void register(AwakenPacket packet) {

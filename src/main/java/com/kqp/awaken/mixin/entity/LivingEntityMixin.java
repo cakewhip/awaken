@@ -2,6 +2,7 @@ package com.kqp.awaken.mixin.entity;
 
 import com.kqp.awaken.data.AwakenLevelData;
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
+import com.kqp.awaken.entity.player.PlayerFlyingInfo;
 import com.kqp.awaken.item.sword.AtlanteanSabreItem;
 import com.kqp.awaken.util.Broadcaster;
 import net.minecraft.entity.LivingEntity;
@@ -122,6 +123,19 @@ public abstract class LivingEntityMixin {
                 }
 
                 callbackInfo.setReturnValue(damage);
+            }
+        }
+    }
+
+    @Inject(method = "getMovementSpeed", at = @At("HEAD"), cancellable = true)
+    private void overideFlyingMovementSpeed(float slipperiness, CallbackInfoReturnable<Float> callbackInfo) {
+        LivingEntity entity = ((LivingEntity) (Object) this);
+
+        if (this instanceof PlayerFlyingInfo) {
+            PlayerFlyingInfo flyingStatus = (PlayerFlyingInfo) entity;
+
+            if (flyingStatus.canFly() && !entity.isOnGround()) {
+                callbackInfo.setReturnValue((float) (entity.getMovementSpeed() * 0.28663526131445843));
             }
         }
     }

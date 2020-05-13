@@ -1,6 +1,8 @@
 package com.kqp.awaken.mixin.client.input;
 
 import com.kqp.awaken.entity.effect.AwakenStatusEffects;
+import com.kqp.awaken.entity.player.PlayerFlyingInfo;
+import com.kqp.awaken.init.AwakenNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.input.KeyboardInput;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -21,13 +23,15 @@ public class KeyboardInputMixin {
     @Final
     private GameOptions settings;
 
+    private boolean previousJumping = false;
+
     @Inject(method = "tick", at = @At("TAIL"))
     public void tick(boolean sneaking, CallbackInfo callbackInfo) {
+        KeyboardInput input = (KeyboardInput) (Object) this;
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
 
         if (player != null) {
             if (player.hasStatusEffect(AwakenStatusEffects.CONFUSION)) {
-                KeyboardInput input = (KeyboardInput) (Object) this;
 
                 input.pressingForward = settings.keyBack.isPressed();
                 input.pressingBack = settings.keyForward.isPressed();
@@ -45,6 +49,18 @@ public class KeyboardInputMixin {
                     input.movementForward = (float) (input.movementForward * 0.3D);
                 }
             }
+
+            if (input.jumping != previousJumping) {
+                if (!input.jumping || !player.isOnGround()) {
+                    ((PlayerFlyingInfo) player).setSecondSpacing(input.jumping);
+
+                    AwakenNetworking.PLAYER_INPUT_SYNC_C2S.sendToServer((buf) -> {
+                        buf.writeBoolean(input.jumping);
+                    });
+                }
+            }
+
+            previousJumping = input.jumping;
         }
     }
 }

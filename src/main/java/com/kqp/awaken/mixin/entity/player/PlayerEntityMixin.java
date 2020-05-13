@@ -1,21 +1,24 @@
 package com.kqp.awaken.mixin.entity.player;
 
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
+import com.kqp.awaken.entity.player.PlayerFlyingInfo;
 import com.kqp.awaken.init.AwakenDimensions;
 import com.kqp.awaken.item.effect.ArmorListener;
 import com.kqp.awaken.item.effect.Equippable;
 import com.kqp.awaken.item.effect.SpecialItemRegistry;
+import com.kqp.awaken.item.trinket.FlyingItem;
 import com.kqp.awaken.world.dimension.NullSpaceTraveler;
 import com.kqp.awaken.world.placer.NullSpacePlacer;
 import com.kqp.awaken.world.placer.OverworldPlacer;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.dimension.DimensionType;
-import org.spongepowered.asm.mixin.Implements;
-import org.spongepowered.asm.mixin.Interface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,6 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Used to:
@@ -30,12 +34,17 @@ import java.util.HashMap;
  * Detect item equips/unequips
  * Add custom attributes
  * Buff melee damage
- * Transport player to and from the null space.
+ * Transport player to and from the null space
+ * Rocket boots go brrrrrrrrrrrrrrrr
  */
 @Mixin(PlayerEntity.class)
-@Implements(@Interface(iface = NullSpaceTraveler.class, prefix = "vw$"))
-public class PlayerEntityMixin implements NullSpaceTraveler {
+// @Implements(@Interface(iface = NullSpaceTraveler.class, prefix = "vw$"))
+public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlyingInfo {
     public boolean returnMarker = false;
+
+    public boolean secondSpacing;
+    public boolean flying;
+    public int flyTime;
 
     private static final HashMap<PlayerEntity, DefaultedList<ItemStack>> PLAYER_ARMOR_TRACKER = new HashMap();
     private static final HashMap<PlayerEntity, ItemStack> PLAYER_HELD_TRACKER = new HashMap();
@@ -151,6 +160,30 @@ public class PlayerEntityMixin implements NullSpaceTraveler {
         callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.AXE_DAMAGE);
     }
 
+    @Inject(method = "tick", at = @At("HEAD"))
+    public void makeRocketBootsGoBrrrr(CallbackInfo callbackInfo) {
+        PlayerEntity player = ((PlayerEntity) (Object) this);
+        if (this.canFly()) {
+            if (player.isOnGround()) {
+                flyTime = this.getFlyingItem().getMaxFlyTime();
+            } else {
+                if (this.isSecondSpacing() && flyTime > 0) {
+                    this.setFlying(true);
+
+                    flyTime = Math.max(0, flyTime - 1);
+
+                    Random r = player.getRandom();
+                    player.world.addParticle(ParticleTypes.LAVA,
+                            player.getX(), player.getY(), player.getZ(),
+                            r.nextDouble() - r.nextDouble(), -r.nextDouble(), r.nextDouble() - r.nextDouble()
+                    );
+                } else {
+                    this.setFlying(false);
+                }
+            }
+        }
+    }
+
     @Override
     public void setReturnMarker(boolean returnMarker) {
         this.returnMarker = returnMarker;
@@ -159,5 +192,47 @@ public class PlayerEntityMixin implements NullSpaceTraveler {
     @Override
     public boolean getReturnMarker() {
         return returnMarker;
+    }
+
+    @Override
+    public void setSecondSpacing(boolean secondSpacing) {
+        this.secondSpacing = secondSpacing;
+    }
+
+    @Override
+    public boolean isSecondSpacing() {
+        return secondSpacing;
+    }
+
+    @Override
+    public void setFlying(boolean flying) {
+        this.flying = flying;
+    }
+
+    @Override
+    public boolean isFlying() {
+        return flying;
+    }
+
+    @Override
+    public FlyingItem getFlyingItem() {
+        Item currentItem = ((PlayerEntity) (Object) this).getEquippedStack(EquipmentSlot.FEET).getItem();
+
+        return currentItem instanceof FlyingItem ? (FlyingItem) currentItem : null;
+    }
+
+    @Override
+    public boolean canFly() {
+        return getFlyingItem() != null;
+    }
+
+    @Override
+    public int getFlyTime() {
+        return 0;
+    }
+
+    @Override
+    public void setFlyTime(int flyTime) {
+
     }
 }

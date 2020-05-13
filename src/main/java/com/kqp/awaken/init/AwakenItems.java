@@ -19,6 +19,7 @@ import com.kqp.awaken.item.sword.StatusEffectSwordItem;
 import com.kqp.awaken.item.tool.AwakenAxeItem;
 import com.kqp.awaken.item.tool.AwakenPickaxeItem;
 import com.kqp.awaken.item.trident.AwakenTridentItem;
+import com.kqp.awaken.item.trinket.RocketBoots;
 import com.kqp.awaken.loot.AwakenRarity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -65,6 +66,8 @@ public class AwakenItems {
     public static final Item ASHEN_BLADE = register("ashen_blade", new StatusEffectSwordItem(AwakenToolMaterial.sword(1500, 8F, 1.7F, 10), StatusEffects.WITHER, 4 * 20, 0).setRarity(AwakenRarity.EPIC));
     public static final Item GLACIAL_SHARD = register("glacial_shard", new StatusEffectSwordItem(AwakenToolMaterial.sword(1500, 9F, 1.2F, 10), StatusEffects.SLOWNESS, 4 * 20, 0).setRarity(AwakenRarity.EPIC));
     public static final Item ENDERIAN_CUTLASS = register("enderian_cutlass", new EnderianCutlassItem(AwakenToolMaterial.sword(1500, 6F, 1.8F, 10)).setRarity(AwakenRarity.EPIC));
+
+    public static final Item ROCKET_BOOTS = register("rocket_boots", new RocketBoots());
 
 
     public static final Item FORTIFIED_STICK = genericItem("fortified_stick");
