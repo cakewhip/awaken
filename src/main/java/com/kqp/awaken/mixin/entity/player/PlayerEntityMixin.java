@@ -169,6 +169,7 @@ public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlightPropert
                 flyTime = this.getFlyingItem().getMaxFlyTime();
 
                 this.setFloating(false);
+                this.setSecondSpacing(false);
             } else {
                 if (this.isSecondSpacing()) {
                     Random r = player.getRandom();
