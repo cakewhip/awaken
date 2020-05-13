@@ -71,7 +71,7 @@ public class WingsEntityModel<T extends LivingEntity> extends AnimalModel<T> {
                 float flutterTickDur;
 
                 if (velY > 0) {
-                    flutterTickDur = (float) (BASE_FLUTTER_TICK_DURATION * (MAX_FLYING_SPEED - velY);
+                    flutterTickDur = (float) (BASE_FLUTTER_TICK_DURATION * (MAX_FLYING_SPEED - velY));
                 } else {
                     flutterTickDur = 50;
                 }
