@@ -58,6 +58,7 @@ public class WingsEntityModel<T extends LivingEntity> extends AnimalModel<T> {
         float tickDelta = MinecraftClient.getInstance().getTickDelta();
 
         // Idle wing angles
+        leftWing.pivotX = 1F;
         leftWing.pitch = (float) (Math.PI / -16);
         leftWing.roll = (float) (Math.PI / -16);
         leftWing.yaw = (float) (Math.PI - Math.PI / 8);
