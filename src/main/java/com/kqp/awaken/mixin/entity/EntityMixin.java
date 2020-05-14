@@ -17,28 +17,30 @@ public class EntityMixin {
         if (entity instanceof PlayerFlightProperties) {
             PlayerFlightProperties flightProperties = (PlayerFlightProperties) entity;
 
-            boolean landGently = false;
+            if (entity.isAlive()) {
+                boolean landGently = false;
 
-            if (flightProperties.isFlying()) {
-                landGently = true;
+                if (flightProperties.isFlying()) {
+                    landGently = true;
 
-                FlyingItem flyingItem = flightProperties.getFlyingItem();
-                vel = vel.add(0D, flyingItem.getFlySpeed(), 0D);
+                    FlyingItem flyingItem = flightProperties.getFlyingItem();
+                    vel = vel.add(0D, flyingItem.getFlySpeed(), 0D);
 
-                vel = new Vec3d(vel.x, absMin(vel.y, flyingItem.getMaxFlySpeed()), vel.z);
+                    vel = new Vec3d(vel.x, absMin(vel.y, flyingItem.getMaxFlySpeed()), vel.z);
 
-            } else if (flightProperties.isFloating()) {
-                landGently = true;
+                } else if (flightProperties.isFloating()) {
+                    landGently = true;
 
-                if (vel.y < FLOAT_SPEED) {
-                    vel = vel.add(0D, 0.2D, 0D);
-                    vel = new Vec3d(vel.x, Math.min(vel.y, FLOAT_SPEED), vel.z);
+                    if (vel.y < FLOAT_SPEED) {
+                        vel = vel.add(0D, 0.2D, 0D);
+                        vel = new Vec3d(vel.x, Math.min(vel.y, FLOAT_SPEED), vel.z);
+                    }
                 }
-            }
 
-            if (landGently) {
-                if (vel.y > -0.4) {
-                    entity.fallDistance = 0;
+                if (landGently) {
+                    if (vel.y > -0.4) {
+                        entity.fallDistance = 0;
+                    }
                 }
             }
         }
