@@ -11,6 +11,7 @@ import com.kqp.awaken.world.spawning.CaveSpawnCondition;
 import com.kqp.awaken.world.spawning.ConditionalSpawnEntry;
 import com.kqp.awaken.world.spawning.PostAwakeningSpawnCondition;
 import com.kqp.awaken.world.spawning.SpawnCondition;
+import com.kqp.awaken.world.spawning.SurfaceSpawnCondition;
 import net.fabricmc.fabric.api.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
@@ -105,7 +106,9 @@ public class AwakenEntities {
             );
 
             register(DIRE_WOLF, 0xD6E9FF, 0x97ADCC, DireWolfEntity.createDireWolfAttributes());
-            addHostileSpawn(spawnEntry(DIRE_WOLF, 100, 1, 3, PostAwakeningSpawnCondition.INSTANCE), biome -> biome.getTemperature() <= 0.05F);
+            addHostileSpawn(spawnEntry(DIRE_WOLF, 100, 1, 3, PostAwakeningSpawnCondition.INSTANCE, SurfaceSpawnCondition.INSTANCE),
+                    biome -> biome.getTemperature() <= 0.05F
+            );
 
             register(SPIDER_SAC, 0x000000, 0xFFFFFF, SpiderSacEntity.createSpiderSacAttributes());
             addHostileSpawn(spawnEntry(SPIDER_SAC, 25, 1, 1, CaveSpawnCondition.INSTANCE), biome -> true);
