@@ -9,6 +9,6 @@ public class CaveSpawnCondition extends SpawnCondition {
 
     @Override
     public boolean test(World spawnWorld, BlockPos pos) {
-        return pos.getY() < spawnWorld.getSeaLevel() && spawnWorld.getBlockState(pos).getBlock().is(Blocks.CAVE_AIR);
+        return spawnWorld.getBlockState(pos).getBlock().is(Blocks.CAVE_AIR);
     }
 }

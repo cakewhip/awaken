@@ -9,6 +9,7 @@ import com.kqp.awaken.entity.mob.SpiderSacEntity;
 import com.kqp.awaken.entity.mob.VoidGhostEntity;
 import com.kqp.awaken.world.spawning.CaveSpawnCondition;
 import com.kqp.awaken.world.spawning.ConditionalSpawnEntry;
+import com.kqp.awaken.world.spawning.PostAwakeningSpawnCondition;
 import com.kqp.awaken.world.spawning.SpawnCondition;
 import net.fabricmc.fabric.api.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
@@ -23,6 +24,9 @@ import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
+
+import java.util.function.Predicate;
 
 public class AwakenEntities {
     // TODO: add spawning
@@ -96,10 +100,18 @@ public class AwakenEntities {
         // Phase 2 Mobs
         {
             register(RAPTOR_CHICKEN, 0x9C0202, 0x610000, RaptorChickenEntity.createRaptorChickenAttributes());
+            addHostileSpawn(spawnEntry(RAPTOR_CHICKEN, 100, 1, 3, PostAwakeningSpawnCondition.INSTANCE),
+                    biome -> biome == Biomes.JUNGLE || biome == Biomes.JUNGLE_EDGE || biome == Biomes.JUNGLE_HILLS
+            );
+
             register(DIRE_WOLF, 0xD6E9FF, 0x97ADCC, DireWolfEntity.createDireWolfAttributes());
+            addHostileSpawn(spawnEntry(DIRE_WOLF, 100, 1, 3, PostAwakeningSpawnCondition.INSTANCE), biome -> biome.getTemperature() <= 0.05F);
+
             register(SPIDER_SAC, 0x000000, 0xFFFFFF, SpiderSacEntity.createSpiderSacAttributes());
-            addHostileSpawn(SPIDER_SAC, 150, 1, 1, CaveSpawnCondition.INSTANCE);
+            addHostileSpawn(spawnEntry(SPIDER_SAC, 25, 1, 1, CaveSpawnCondition.INSTANCE), biome -> true);
+
             register(VOID_GHOST, 0x0000000, 0xFFFFFF, VoidGhostEntity.createVoidGhostAttributes());
+
             register(ABOMINATION, 0xFFFFFF, 0x000000, AbominationEntity.createAbominationAttributes());
         }
     }
@@ -112,15 +124,22 @@ public class AwakenEntities {
         FabricDefaultAttributeRegistry.register(type, attributeBuilder);
     }
 
-    private static void addHostileSpawn(EntityType<?> type, int weight, int min, int max, SpawnCondition... spawnConditions) {
+    private static Biome.SpawnEntry spawnEntry(EntityType<?> type, int weight, int min, int max, SpawnCondition... spawnConditions) {
+        ConditionalSpawnEntry spawnEntry = new ConditionalSpawnEntry(type, weight, min, max);
+
+        for (SpawnCondition spawnCondition : spawnConditions) {
+            spawnEntry.addCondition(spawnCondition);
+        }
+
+        return spawnEntry;
+    }
+
+    private static void addHostileSpawn(Biome.SpawnEntry spawnEntry, Predicate<Biome> biomePredicate) {
         for (Biome biome : Biome.BIOMES) {
-            ConditionalSpawnEntry spawnEntry = new ConditionalSpawnEntry(type, weight, min, max);
-
-            for (SpawnCondition spawnCondition : spawnConditions) {
-                spawnEntry.addCondition(spawnCondition);
+            if (biomePredicate.test(biome)) {
+                System.out.println("adding " + spawnEntry.type.getTranslationKey() + " to " + biome.getTranslationKey());
+                biome.getEntitySpawnList(EntityCategory.MONSTER).add(spawnEntry);
             }
-
-            biome.getEntitySpawnList(EntityCategory.MONSTER).add(spawnEntry);
         }
     }
 }

@@ -34,12 +34,12 @@ public class SpawnHelperMixin {
                     if (spawnEntry instanceof ConditionalSpawnEntry) {
                         for (SpawnCondition condition : ((ConditionalSpawnEntry) spawnEntry).getSpawnConditions()) {
                             if (!condition.test(world, pos)) {
-                                return true;
+                                return false;
                             }
                         }
                     }
 
-                    return false;
+                    return true;
                 })
                 .collect(Collectors.toList());
 
