@@ -1,0 +1,161 @@
+list of features for a 1.0.0b release with their todos, progress, and target progress
+    code base:
+        uncouple mechanical changes from mixin class [???%/100%]
+            this means that mixins will call other organized classes to modify/add behavior
+    combat:
+        no more weapon spamming, must wait for cooldown [100%/100%]
+        new armor calculations [100%/100%]
+        weapon categories with attribute mods for them  [90%/100%]
+            test trident damage for melee and ranged (might be iffy)
+        no more "guaranteed" crits (jump hitting and bows) [0%/100%]
+    crafting:
+        crafting screen and its handler [75%/100%]
+            test some more networking cases
+            potentially make it so that last crafted item stays in same position / switch to terraria-style sliding window view
+    items:
+        early-game picks, shovels [100%/100%]
+        early-game melee weapons [100%/100%]
+        early-game ranged weapons [80%/100%]
+            there was some issue with the textures of slimey and cindered bows
+        early-game alchemy:
+            potion bag [0%/100%]
+                need to implement (each bag can only hold one type of splash potion, but holds up to 16)
+                need to texture
+            potion flask [0%/100%]
+                need to implement (each flash can only hold one type of potion, but holds up to 8 and has a short cooldown)
+                need to texture
+        early-game armor:
+            dragon scale set [90%/100%]
+                need to adjust stats
+            wither bone set [90%/100%]
+                need to adjust stats
+            witch set [0%/100%]
+                need to implement (amplify positive effects and diminish negative effects by 125%, affects ingested and thrown potions)
+        early-game accessories:
+            molten jetpack (damaged) [80%/100%]
+                need to retexture, rename
+                add as drop from magma slimes AND/OR loot in nether fortresses
+            shulker charm [0%/100%]
+                need to implement (breaks all fall damage)
+                need to texture
+                add as drop from shulkers
+            molten jetpack [0%/100%]
+                need to implement (better version of molten jetpack)
+                need to texture
+                add as trade from tinkerer (requires damaged molten jetpack and, uh, emeralds???)
+            worn tool belt [0%/100%]
+                need to implement (reduces initial cool-down when switching to item)
+                need to texture
+                add as a trade from tinkerer
+            guardian aglet [0%/100%]
+                need to implement (improves walking in water)
+                need to texture
+                add as a drop from guardians and elder guardians
+            metal detector ring [0%/100%]
+                need to implement (beeps in the direction of a metal ore)
+                need to texture
+                add as a drop from zombie miners
+            carnivorous mask [0%/100%]
+                need to implement (25% more hunger and saturation restored from meat)
+                need to texture
+                add as trade from butcher villagers
+            farmer's gloves [0%/100%]
+                need to implement (33% more hunger and saturation restored from plant-based food)
+                need to texture
+                add as trade from farmer villagers
+            belt of discord [0%/100%]
+                need to implement (75% less damage from ender pearls)
+                need to texture
+                add as drop from endermen
+            silky gloves [0%/100%]
+                need to implement (allows wall climbing)
+                need to texture
+                add as drop from spiders
+            broken ankle chain [0%/100%]
+                need to implement (decrease speed by 5%, increase armor by 2.5%)
+                need to texture
+                add as a drop from mobs in stronghold
+        post-awakening accessories:
+            rib cage [0%/100%]
+                need to implement (boost skeleton spawn rate, nearby skeletons are friendly and target whoever you attack, equippable on chest)
+                need to texture
+                add as drop from skeletons
+            raptor wings [0%/100%]
+                need to implement (a little worse than repaired molten jetpack, but can float)
+                need to texture
+                add recipe (raptor chicken feathers, chicken feathers)
+            glacial aglet [0%/100%]
+                need to implement (frostwalker effect)
+                need to texture
+                add as drop from mobs in ice biomes
+            glacial ankle chain [0%/100%]
+                need to implement (frostwalker effect, decrease speed by 5%, increase armor by 5%)
+            scorched mask [0%/100%]
+                need to implement (fire damage and time spent on fire reduced by 50%)
+                need to texture
+                add as drop from mobs in nether hostile mobs
+            prospector's ring [0%/100%]
+                need to implement (beeps in the direction of a mineral ore)
+                need to texture
+                add as a drop from zombie miners
+        post-awakening melee weapons [10%/100%]
+            need to add more
+        post-awakening ranged weapons [10%/100%]
+            need to add more
+        post-awakening tridents [50%/100%]
+            adding one more should be fine
+        post-awakening alchemy:
+            arcane potion bag [0%/100%]
+                need to implement (each bag can only hold one type of splash potion, but holds up to 64)
+                need to texture
+            arcane potion flask [0%/100%]
+                need to implement (each flash can only hold one type of potion, but holds up to 32 and has a short cooldown)
+                need to texture
+        post-awakening armor:
+            salvium set [90%/100%]
+                need to adjust stats
+            valerium set [90%/100%]
+                need to adjust stats
+            alchemist armor [0%/100%]
+                need to implement (amplify positive effects and diminish negative effects by 175%, affects ingested and thrown potions)
+    entities:
+        villagers:
+            tinkerer [0%/100%]
+                need to implement
+                need to texture
+        hostile mobs:
+            direwolf [50%/100%]
+                need to fix texture and model (might just be fine)
+                fix walking and attacking speed (it's the ai class that dictates speed)
+                adjust stats
+                add some useful drops
+            raptor chicken [50%/100%]
+                find use for raptor chicken eggs
+                add raptor chicken feathers
+                adjust stats
+            zombie miner [0%/100%]
+                need to implement (basically just a zombie with a pickaxe)
+                need to texture
+            void ghost [75%/100%]
+                fix texture (looks dumb right now)
+                find use for void crux
+                adjust stats
+        bosses:
+            abomination [75%/100%]
+                need to add animations
+                need to improve model and texture
+            nether hive [0%/0%]
+                need to implement
+                need to model, texture, and animate
+    world gen:
+        overworld:
+            cracked bedrock [90%/100%]
+                don't forget to remove the diamond sphere markers
+        null space [10%/100%]
+            increase gravity [0%/100%]
+                need to implement
+            null stone spikes [75%/100%]
+                make them useful
+
+    general bugs:
+        pickaxe mining levels don't work (vanilla diamond pickaxe can't mine mining level 3 mod block)
