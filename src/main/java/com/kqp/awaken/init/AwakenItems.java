@@ -19,6 +19,7 @@ import com.kqp.awaken.item.sword.StatusEffectSwordItem;
 import com.kqp.awaken.item.tool.AwakenAxeItem;
 import com.kqp.awaken.item.tool.AwakenPickaxeItem;
 import com.kqp.awaken.item.trident.AwakenTridentItem;
+import com.kqp.awaken.item.trinket.AwakenTrinket;
 import com.kqp.awaken.item.trinket.RocketBoots;
 import com.kqp.awaken.item.trinket.wings.WingsItem;
 import com.kqp.awaken.loot.AwakenRarity;
@@ -146,8 +147,16 @@ public class AwakenItems {
         public static final Item SALVIUM_BOW = register("salvium_bow", new AwakenBowItem(4D));
     }
 
-    public static class Accessories {
+    public static class Trinkets {
         public static final Item ROCKET_BOOTS = register("rocket_boots", new RocketBoots());
+        public static final Item GUARDIAN_AGLET = register("guardian_aglet", new AwakenTrinket(200));
+        public static final Item GLACIAL_AGLET = register("glacial_aglet", new AwakenTrinket(200));
+        public static final Item CARNIVOROUS_MASK = register("carnivorous_mask", new AwakenTrinket(200));
+        public static final Item FARMERS_HANKERCHIEF = register("farmers_hankerchief", new AwakenTrinket(200));
+        public static final Item BABY_BIB = register("baby_bib", new AwakenTrinket(200));
+        public static final Item ADULT_BIB = register("adult bib", new AwakenTrinket(200));
+
+        public static final Item LUCKY_TACKLE = register("lucky_tackle", new AwakenTrinket(200));
 
         public static final Item TEST_WINGS = register("test_wings", new WingsItem(100));
     }
@@ -168,7 +177,7 @@ public class AwakenItems {
         new Swords();
         new Axes();
         new Bows();
-        new Accessories();
+        new Trinkets();
         new BossSpawners();
         new Tridents();
     }

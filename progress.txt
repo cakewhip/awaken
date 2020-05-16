@@ -75,27 +75,17 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
             jetpack [80%]
                 need to retexture, rename
                 add as loot in dungeons
-            tool belt [0%]
-                need to implement (reduces initial cool-down when switching to item)
-                need to texture
-                add as a trade from tinkerer
-            guardian aglet [0%]
-                need to implement (depth strider effect)
+            guardian aglet [90%]
                 need to texture
                 add as a drop from fishing near an ocean monument
-            glacial aglet [0%]
-                need to implement (frostwalker effect)
+            glacial aglet [90%]
                 need to texture
                 add as drop from mobs in ice biomes
-            metal detector ring [0%]
-                need to implement (beeps in the direction of a metal ore)
-                need to texture
-                add as a drop from zombie miners
-            carnivorous mask [0%]
+            carnivorous mask [90%]
                 need to implement (25% more hunger restored from meat)
                 need to texture
                 add as trade from master butcher villagers
-            farmer's hankerchief [0%]
+            farmer's hankerchief [90%]
                 need to implement (33% more hunger restored from plant-based food)
                 need to texture
                 add as trade from master farmer villagers
@@ -115,8 +105,7 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to implement (decrease armor by 1.5%, increase speed by 2%)
                 need to texture
                 add as a drop from mobs in stronghold
-            lucky charm [0%]
-                need to implement (plus 1 level of luck of the sea)
+            lucky tackle [90%]
                 need to texture
                 add recipe (3 rabbit's foot, 9 gold)
             rain hat [0%]
@@ -160,12 +149,12 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to implement (fire damage and time spent on fire reduced by 50%)
                 need to texture
                 add as drop from fiery moon mobs
-            baby bib [0%]
-                need to implement (6% more saturation from food)
+            baby bib [90%]
+                need to implement (15% more saturation from food)
                 need to texture
                 add as drop from baby zombies
-            adult bib [0%]
-                need to implement (25% more hunger restored and 10% more saturation from food)
+            adult bib [90%]
+                need to implement (33% more hunger restored and 25% more saturation from food)
                 need to texture
                 add recipe (carnivorous mask, farmer's hankerchief, baby bib)
             prospector's ring [0%]
@@ -180,7 +169,7 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to implement (plus 1 level of luck of the sea while in a boat)
                 need to texture
                 add as drop from fishing in deep ocean biomes
-            magic tackle [0%]
+            ancient hook [0%]
                 need to implement (can fish in any condition without penalty)
                 need to texture
                 add as drop from fishing in deep ocean biomes

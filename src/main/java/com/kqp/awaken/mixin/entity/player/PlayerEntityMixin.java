@@ -2,6 +2,7 @@ package com.kqp.awaken.mixin.entity.player;
 
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import com.kqp.awaken.entity.player.PlayerFlightProperties;
+import com.kqp.awaken.entity.player.PlayerReference;
 import com.kqp.awaken.init.AwakenDimensions;
 import com.kqp.awaken.item.effect.ArmorListener;
 import com.kqp.awaken.item.effect.Equippable;
@@ -10,16 +11,21 @@ import com.kqp.awaken.item.trinket.FlyingItem;
 import com.kqp.awaken.world.dimension.NullSpaceTraveler;
 import com.kqp.awaken.world.placer.NullSpacePlacer;
 import com.kqp.awaken.world.placer.OverworldPlacer;
+import com.mojang.authlib.GameProfile;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -36,10 +42,14 @@ import java.util.Random;
  * Buff melee damage
  * Transport player to and from the null space
  * Rocket boots go brrrrrrrrrrrrrrrr
+ * Set player reference in HungerManager
  */
 @Mixin(PlayerEntity.class)
 // @Implements(@Interface(iface = NullSpaceTraveler.class, prefix = "vw$"))
 public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlightProperties {
+    @Shadow
+    protected HungerManager hungerManager;
+
     public boolean returnMarker = false;
 
     public boolean secondSpacing;
@@ -199,6 +209,11 @@ public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlightPropert
                 }
             }
         }
+    }
+
+    @Inject(method = "<init>*", at = @At("RETURN"))
+    private void setPlayerReference(World world, BlockPos blockPos, GameProfile gameProfile, CallbackInfo callbackInfo) {
+        ((PlayerReference) hungerManager).setPlayer((PlayerEntity) (Object) this);
     }
 
     @Override
