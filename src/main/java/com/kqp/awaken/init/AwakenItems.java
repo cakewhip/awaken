@@ -154,7 +154,8 @@ public class AwakenItems {
         public static final Item CARNIVOROUS_MASK = register("carnivorous_mask", new AwakenTrinket(200));
         public static final Item FARMERS_HANKERCHIEF = register("farmers_hankerchief", new AwakenTrinket(200));
         public static final Item BABY_BIB = register("baby_bib", new AwakenTrinket(200));
-        public static final Item ADULT_BIB = register("adult bib", new AwakenTrinket(200));
+        public static final Item ADULT_BIB = register("adult_bib", new AwakenTrinket(200));
+        public static final Item DISCORD_BELT = register("discord_belt", new AwakenTrinket(200));
 
         public static final Item LUCKY_TACKLE = register("lucky_tackle", new AwakenTrinket(200));
 

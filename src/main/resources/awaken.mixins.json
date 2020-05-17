@@ -13,6 +13,7 @@
     "entity.mob.ZombieEntityMixin",
     "entity.player.HungerManagerMixin",
     "entity.player.PlayerEntityMixin",
+    "entity.projectile.EnderPearlEntityMixin",
     "entity.projectile.PersistentProjectileEntityMixin",
     "entity.projectile.TridentEntityMixin",
     "entity.raid.RaidMixin",
