@@ -89,8 +89,7 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to implement (33% more hunger restored from plant-based food)
                 need to texture
                 add as trade from master farmer villagers
-            belt of discord [0%]
-                need to implement (75% less damage from ender pearls)
+            belt of discord [90%]
                 need to texture
                 add as drop from endermen
             silky gloves [0%]
