@@ -3,8 +3,10 @@ package com.kqp.awaken.mixin.entity;
 import com.kqp.awaken.data.AwakenLevelData;
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import com.kqp.awaken.entity.player.PlayerFlightProperties;
+import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.item.sword.AtlanteanSabreItem;
 import com.kqp.awaken.util.Broadcaster;
+import com.kqp.awaken.util.TrinketUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -35,7 +37,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * Used to:
  * Detect deaths for triggering the awakening.
  * Deny riptide status when using the Atlantean sword.
- * Give spiders poison effect post-awakening
+ * Give spiders poison effect post-awakening.
+ * Apply the silky glove effect.
  */
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -136,6 +139,19 @@ public abstract class LivingEntityMixin {
 
             if (flightProperties.canFly() && !entity.isOnGround()) {
                 callbackInfo.setReturnValue((float) (entity.getMovementSpeed() * 0.28663526131445843));
+            }
+        }
+    }
+
+    @Inject(method = "isClimbing", at = @At("HEAD"), cancellable = true)
+    private void applySilkyGloveEffect(CallbackInfoReturnable<Boolean> callbackInfo) {
+        LivingEntity entity = (LivingEntity) (Object) this;
+
+        if (!entity.isSpectator()) {
+            if (entity.horizontalCollision) {
+                if (TrinketUtil.hasTrinket(entity, AwakenItems.Trinkets.SILKY_GLOVE)) {
+                    callbackInfo.setReturnValue(true);
+                }
             }
         }
     }

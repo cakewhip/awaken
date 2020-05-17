@@ -156,6 +156,8 @@ public class AwakenItems {
         public static final Item BABY_BIB = register("baby_bib", new AwakenTrinket(200));
         public static final Item ADULT_BIB = register("adult_bib", new AwakenTrinket(200));
         public static final Item DISCORD_BELT = register("discord_belt", new AwakenTrinket(200));
+        public static final Item SILKY_GLOVE = register("silky_glove", new AwakenTrinket(200));
+        public static final Item RAIN_HAT = register("rain_hat", new AwakenTrinket(200));
 
         public static final Item LUCKY_TACKLE = register("lucky_tackle", new AwakenTrinket(200));
 

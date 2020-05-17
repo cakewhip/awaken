@@ -14,6 +14,7 @@
     "entity.player.HungerManagerMixin",
     "entity.player.PlayerEntityMixin",
     "entity.projectile.EnderPearlEntityMixin",
+    "entity.projectile.FishingBobberEntityMixin",
     "entity.projectile.PersistentProjectileEntityMixin",
     "entity.projectile.TridentEntityMixin",
     "entity.raid.RaidMixin",

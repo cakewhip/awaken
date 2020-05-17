@@ -92,8 +92,7 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
             belt of discord [90%]
                 need to texture
                 add as drop from endermen
-            silky gloves [0%]
-                need to implement (allows wall climbing)
+            silky glove [90%]
                 need to texture
                 add as drop from spiders
             broken ankle chain [0%]
@@ -107,8 +106,7 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
             lucky tackle [90%]
                 need to texture
                 add recipe (3 rabbit's foot, 9 gold)
-            rain hat [0%]
-                need to implement (fishing wait time reduced by 20%, stacks with rain bonus)
+            rain hat [90%]
                 need to texture
                 add as trade from master fisherman
             shock-wave shield attachment [0%]
