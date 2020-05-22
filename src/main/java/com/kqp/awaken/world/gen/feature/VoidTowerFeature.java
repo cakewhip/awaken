@@ -150,8 +150,6 @@ public class VoidTowerFeature extends Feature<DefaultFeatureConfig> {
             return true;
         }
 
-        System.out.println(world.getBlockState(blockPos.add(0, -1, 0)).getBlock().getTranslationKey());
-
         return false;
     }
 }

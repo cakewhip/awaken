@@ -39,6 +39,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * Deny riptide status when using the Atlantean sword.
  * Give spiders poison effect post-awakening.
  * Apply the silky glove effect.
+ * Apply the shock-wave shield effect.
  */
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -152,6 +153,18 @@ public abstract class LivingEntityMixin {
                 if (TrinketUtil.hasTrinket(entity, AwakenItems.Trinkets.SILKY_GLOVE)) {
                     callbackInfo.setReturnValue(true);
                 }
+            }
+        }
+    }
+
+    @Inject(method = "takeShieldHit", at = @At("HEAD"), cancellable = true)
+    private void applyShockwaveShieldEffect(LivingEntity attacker, CallbackInfo callbackInfo) {
+        LivingEntity entity = (LivingEntity) (Object) this;
+        if (TrinketUtil.hasTrinket(entity, AwakenItems.Trinkets.SHOCKWAVE_SHIELD)) {
+            if (entity.getRandom().nextFloat() < 0.75F) {
+                attacker.takeKnockback(0.5F * 1.5F, entity.getX() - attacker.getX(), entity.getZ() - attacker.getZ());
+
+                callbackInfo.cancel();
             }
         }
     }

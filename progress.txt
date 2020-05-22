@@ -110,11 +110,10 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to texture
                 add as trade from master fisherman
             shock-wave shield attachment [0%]
-                need to implement (when blocking an attack, 15% chance to knockback enemy)
                 need to texture
                 add as drop when killing a mob you shielded from
-            archer's glove [0%]
-                need to implement (15% chance to not consume arrows)
+            ranger's glove [0%]
+                need to fix visual bug
                 need to texture
                 add as drop from skeletons
             boxing gloves [0%]

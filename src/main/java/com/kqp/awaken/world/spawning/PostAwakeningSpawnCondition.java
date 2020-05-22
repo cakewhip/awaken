@@ -9,7 +9,6 @@ public class PostAwakeningSpawnCondition extends SpawnCondition {
 
     @Override
     public boolean test(World spawnWorld, BlockPos pos) {
-        System.out.println(AwakenLevelData.getFor(spawnWorld.getServer()).isWorldAwakened());
         return AwakenLevelData.getFor(spawnWorld.getServer()).isWorldAwakened();
     }
 }

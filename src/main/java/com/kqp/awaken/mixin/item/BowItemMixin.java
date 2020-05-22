@@ -1,7 +1,9 @@
 package com.kqp.awaken.mixin.item;
 
 import com.kqp.awaken.entity.attribute.RangedWeaponProjectile;
+import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.item.bow.AwakenBowItem;
+import com.kqp.awaken.util.TrinketUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ArrowItem;
@@ -13,7 +15,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /**
- * Used to modify bow projectiles.
+ * Used to:
+ * Modify bow projectiles.
+ * Apply the ranger's glove effect.
  */
 @Mixin(BowItem.class)
 public class BowItemMixin {
@@ -29,5 +33,25 @@ public class BowItemMixin {
         ((RangedWeaponProjectile) projectileEntity).setType(RangedWeaponProjectile.Type.BOW);
 
         return projectileEntity;
+    }
+
+    /**
+     * TODO: figure out why the cancel causes a visual error
+     */
+    @Redirect(method = "onStoppedUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;decrement(I)V"))
+    private void applyRangersGloveEffect(ItemStack arrowStack, int amt,
+                                         ItemStack bowStack, World world, LivingEntity user, int remainingUseTicks) {
+        boolean consume = true;
+
+        if (TrinketUtil.hasTrinket(user, AwakenItems.Trinkets.RANGERS_GLOVE) || true) {
+            if (user.getRandom().nextFloat() < 0.20F) {
+                consume = false;
+            }
+        }
+
+        if (consume) {
+            System.out.println("CONSUMING");
+            arrowStack.decrement(amt);
+        }
     }
 }
