@@ -72,27 +72,27 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
             witch set [0%]
                 need to implement (amplify positive effects and diminish negative effects by 125%, affects ingested and thrown potions)
         early-game accessories:
-            jetpack [80%]
+            jetpack [50%]
                 need to retexture, rename
                 add as loot in dungeons
-            guardian aglet [90%]
+            guardian aglet [50%]
                 need to texture
                 add as a drop from fishing near an ocean monument
-            glacial aglet [90%]
+            glacial aglet [50%]
                 need to texture
                 add as drop from mobs in ice biomes
-            carnivorous mask [90%]
+            carnivorous mask [50%]
                 need to implement (25% more hunger restored from meat)
                 need to texture
                 add as trade from master butcher villagers
-            farmer's hankerchief [90%]
+            farmer's hankerchief [50%]
                 need to implement (33% more hunger restored from plant-based food)
                 need to texture
                 add as trade from master farmer villagers
-            belt of discord [90%]
+            belt of discord [50%]
                 need to texture
                 add as drop from endermen
-            silky glove [90%]
+            silky glove [950%]
                 need to texture
                 add as drop from spiders
             broken ankle chain [0%]
@@ -103,13 +103,13 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to implement (decrease armor by 1.5%, increase speed by 2%)
                 need to texture
                 add as a drop from mobs in stronghold
-            lucky tackle [90%]
+            lucky tackle [50%]
                 need to texture
                 add recipe (3 rabbit's foot, 9 gold)
-            rain hat [90%]
+            rain hat [50%]
                 need to texture
                 add as trade from master fisherman
-            shock-wave shield attachment [0%]
+            shock-wave shield attachment [50%]
                 need to texture
                 add as drop when killing a mob you shielded from
             ranger's glove [0%]
@@ -145,11 +145,11 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to implement (fire damage and time spent on fire reduced by 50%)
                 need to texture
                 add as drop from fiery moon mobs
-            baby bib [90%]
+            baby bib [50%]
                 need to implement (15% more saturation from food)
                 need to texture
                 add as drop from baby zombies
-            adult bib [90%]
+            adult bib [50%]
                 need to implement (33% more hunger restored and 25% more saturation from food)
                 need to texture
                 add recipe (carnivorous mask, farmer's hankerchief, baby bib)
