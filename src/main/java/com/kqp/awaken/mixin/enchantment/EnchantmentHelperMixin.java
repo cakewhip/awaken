@@ -15,7 +15,9 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 /**
  * Used to:
- * Apply the guardian and glacial aglets
+ * Apply the guardian and glacial aglet effects.
+ * Apply the lucky tackle effect.
+ * Apply the snorkel mask effect.
  */
 @Mixin(EnchantmentHelper.class)
 public class EnchantmentHelperMixin {
@@ -27,6 +29,8 @@ public class EnchantmentHelperMixin {
         } else if (enchantment == Enchantments.FROST_WALKER && TrinketUtil.hasTrinket(entity, AwakenItems.Trinkets.GLACIAL_AGLET)) {
             callbackInfo.setReturnValue(Math.max(i, 1));
         } else if (enchantment == Enchantments.LUCK_OF_THE_SEA && TrinketUtil.hasTrinket(entity, AwakenItems.Trinkets.LUCKY_TACKLE)) {
+            callbackInfo.setReturnValue(i + 1);
+        } else if (enchantment == Enchantments.RESPIRATION && TrinketUtil.hasTrinket(entity, AwakenItems.Trinkets.SNORKEL_MASK)) {
             callbackInfo.setReturnValue(i + 1);
         }
     }

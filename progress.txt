@@ -143,10 +143,9 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to implement (fire damage and time spent on fire reduced by 50%)
                 need to texture
                 add as drop from fiery moon mobs
-            lava goggle [0%]
-                need to implement (see clearly in lava)
+            snorkel mask [50%]
                 need to texture
-                add as drop from fiery moon mobs
+                add as drop from ocean mobs
             magma visor [0%]
                 need to implement (completely immune to fire/lava)
                 need to texture

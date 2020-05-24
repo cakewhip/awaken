@@ -49,6 +49,7 @@
     "client.render.entity.PlayerEntityRendererMixin",
     "client.render.entity.SkeletonEntityRendererMixin",
     "client.render.entity.ZombieBaseEntityRendererMixin",
+    "client.render.BackgroundRendererMixin",
     "client.render.WorldRendererMixin"
   ],
   "server": [],
