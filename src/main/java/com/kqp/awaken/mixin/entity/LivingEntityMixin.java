@@ -81,9 +81,11 @@ public abstract class LivingEntityMixin {
 
     @Inject(method = "damage", at = @At("RETURN"))
     public void implementSpiderPoison(DamageSource source, float amount, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
+        // Check if damage is applied
         if (callbackInfoReturnable.getReturnValue()) {
             AwakenLevelData awakenLevelData = AwakenLevelData.getFor(((LivingEntity) (Object) this).world.getServer());
 
+            // Apply spider poison
             if (awakenLevelData.isWorldAwakened()) {
                 if (source.getAttacker() instanceof SpiderEntity) {
                     LivingEntity livingEntity = (LivingEntity) (Object) this;

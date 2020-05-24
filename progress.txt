@@ -120,8 +120,7 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to implement (unarmed attacks do 6x more damage and 2x more knockback)
                 need to texture
                 add as a drop from zombies
-            combat saddle [0%]
-                need to implement (4% more damage when mounted)
+            combat saddle [50%]
                 need to texture
                 add as a drop from spider jockeys and pillagers riding ravagers
         post-awakening accessories:

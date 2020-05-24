@@ -229,11 +229,18 @@ public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlightPropert
     private float applyUnarmedDamage(float f) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
+        // Apply combat saddle effect
+        if (player.hasVehicle() && TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.COMBAT_SADDLE)) {
+            System.out.println("saddled");
+            f *= 1.04;
+        }
+
+        // Apply unarmed attribute
         if (player.getMainHandStack().isEmpty()) {
             EntityAttributeInstance unarmedAttribute = player.getAttributeInstance(AwakenEntityAttributes.UNARMED_DAMAGE);
             unarmedAttribute.setBaseValue(f);
 
-            return (float) unarmedAttribute.getValue();
+            f = (float) unarmedAttribute.getValue();
         }
 
         return f;
