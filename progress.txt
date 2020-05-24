@@ -112,11 +112,11 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
             shock-wave shield attachment [50%]
                 need to texture
                 add as drop when killing a mob you shielded from
-            ranger's glove [0%]
+            ranger's glove [50%]
                 need to fix visual bug
                 need to texture
                 add as drop from skeletons
-            boxing gloves [0%]
+            boxing gloves [25%]
                 need to implement (unarmed attacks do 6x more damage and 2x more knockback)
                 need to texture
                 add as a drop from zombies

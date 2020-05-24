@@ -4,10 +4,12 @@ import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import com.kqp.awaken.entity.player.PlayerFlightProperties;
 import com.kqp.awaken.entity.player.PlayerReference;
 import com.kqp.awaken.init.AwakenDimensions;
+import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.item.effect.ArmorListener;
 import com.kqp.awaken.item.effect.Equippable;
 import com.kqp.awaken.item.effect.SpecialItemRegistry;
 import com.kqp.awaken.item.trinket.FlyingItem;
+import com.kqp.awaken.util.TrinketUtil;
 import com.kqp.awaken.world.dimension.NullSpaceTraveler;
 import com.kqp.awaken.world.placer.NullSpacePlacer;
 import com.kqp.awaken.world.placer.OverworldPlacer;
@@ -15,8 +17,10 @@ import com.mojang.authlib.GameProfile;
 import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
@@ -28,6 +32,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -36,13 +41,14 @@ import java.util.Random;
 
 /**
  * Used to:
- * Apply damage buffs
- * Detect item equips/unequips
- * Add custom attributes
- * Buff melee damage
- * Transport player to and from the null space
- * Rocket boots go brrrrrrrrrrrrrrrr
- * Set player reference in HungerManager
+ * Apply damage buffs.
+ * Detect item equips/unequips.
+ * Add custom attributes.
+ * Buff melee damage.
+ * Transport player to and from the null space.
+ * Rocket boots go brrrrrrrrrrrrrrrr.
+ * Set player reference in HungerManager.
+ * Apply unarmed damage attribute.
  */
 @Mixin(PlayerEntity.class)
 // @Implements(@Interface(iface = NullSpaceTraveler.class, prefix = "vw$"))
@@ -160,7 +166,7 @@ public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlightPropert
     }
 
     @Inject(method = "createPlayerAttributes", at = @At("RETURN"), cancellable = true)
-    private static void addRangedDamageAttribute(CallbackInfoReturnable<DefaultAttributeContainer.Builder> callbackInfoReturnable) {
+    private static void addCustomAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> callbackInfoReturnable) {
         callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.RANGED_DAMAGE);
         callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.BOW_DAMAGE);
         callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.CROSSBOW_DAMAGE);
@@ -169,6 +175,9 @@ public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlightPropert
         callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.MELEE_DAMAGE);
         callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.SWORD_DAMAGE);
         callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.AXE_DAMAGE);
+
+        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.UNARMED_DAMAGE);
+        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.POTION_DAMAGE);
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
@@ -214,6 +223,20 @@ public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlightPropert
     @Inject(method = "<init>*", at = @At("RETURN"))
     private void setPlayerReference(World world, BlockPos blockPos, GameProfile gameProfile, CallbackInfo callbackInfo) {
         ((PlayerReference) hungerManager).setPlayer((PlayerEntity) (Object) this);
+    }
+
+    @ModifyVariable(method = "attack", at = @At(value = "STORE", ordinal = 0))
+    private float applyUnarmedDamage(float f) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+
+        if (player.getMainHandStack().isEmpty()) {
+            EntityAttributeInstance unarmedAttribute = player.getAttributeInstance(AwakenEntityAttributes.UNARMED_DAMAGE);
+            unarmedAttribute.setBaseValue(f);
+
+            return (float) unarmedAttribute.getValue();
+        }
+
+        return f;
     }
 
     @Override

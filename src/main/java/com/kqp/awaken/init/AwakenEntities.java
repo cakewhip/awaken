@@ -91,6 +91,9 @@ public class AwakenEntities {
             Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "melee_damage"), AwakenEntityAttributes.MELEE_DAMAGE);
             Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "sword_damage"), AwakenEntityAttributes.SWORD_DAMAGE);
             Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "axe_damage"), AwakenEntityAttributes.AXE_DAMAGE);
+
+            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "potion_damage"), AwakenEntityAttributes.POTION_DAMAGE);
+            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "unarmed_damage"), AwakenEntityAttributes.UNARMED_DAMAGE);
         }
 
         // Custom Status Effects
@@ -127,7 +130,7 @@ public class AwakenEntities {
         FabricDefaultAttributeRegistry.register(type, attributeBuilder);
     }
 
-    private static Biome.SpawnEntry spawnEntry(EntityType<?> type, int weight, int min, int max, SpawnCondition... spawnConditions) {
+    private static Biome.SpawnEntry spawnEntry(EntityType<?> type, int weight, int min, int  max, SpawnCondition... spawnConditions) {
         ConditionalSpawnEntry spawnEntry = new ConditionalSpawnEntry(type, weight, min, max);
 
         for (SpawnCondition spawnCondition : spawnConditions) {

@@ -23,4 +23,10 @@ public class AwakenEntityAttributes {
             new ClampedEntityAttribute("attribute.name.generic.sword_damage", 2.0D, 0.0D, 2048.0D);
     public static final EntityAttribute AXE_DAMAGE =
             new ClampedEntityAttribute("attribute.name.generic.axe_damage", 2.0D, 0.0D, 2048.0D);
+
+    public static final EntityAttribute POTION_DAMAGE =
+            new ClampedEntityAttribute("attribute.name.generic.potion_damage", 2.0D, 0.0D, 2048.0D);
+
+    public static final EntityAttribute UNARMED_DAMAGE =
+            new ClampedEntityAttribute("attribute.name.generic.unarmed_damage", 2.0D, 0.0D, 2048.0D);
 }
