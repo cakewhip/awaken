@@ -12,6 +12,7 @@ import com.kqp.awaken.world.spawning.ConditionalSpawnEntry;
 import com.kqp.awaken.world.spawning.PostAwakeningSpawnCondition;
 import com.kqp.awaken.world.spawning.SpawnCondition;
 import com.kqp.awaken.world.spawning.SurfaceSpawnCondition;
+import com.kqp.awaken.world.spawning.BoneCrownSpawnCondition;
 import net.fabricmc.fabric.api.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
@@ -99,6 +100,21 @@ public class AwakenEntities {
         // Custom Status Effects
         {
             Registry.register(Registry.STATUS_EFFECT, new Identifier(Awaken.MOD_ID, "confusion"), AwakenStatusEffects.CONFUSION);
+        }
+
+        // Trinket Effects
+        {
+            // Apply wither rib effect
+            addHostileSpawn(spawnEntry(EntityType.SKELETON, 150, 4, 4, BoneCrownSpawnCondition.INSTANCE), biome -> {
+                    for (Biome.SpawnEntry entry : biome.getEntitySpawnList(EntityCategory.MONSTER)) {
+                        if (entry.type == EntityType.SKELETON) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+            );
         }
 
         // Phase 2 Mobs

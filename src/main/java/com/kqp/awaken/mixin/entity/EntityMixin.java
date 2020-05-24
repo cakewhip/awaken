@@ -1,13 +1,22 @@
 package com.kqp.awaken.mixin.entity;
 
 import com.kqp.awaken.entity.player.PlayerFlightProperties;
+import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.item.trinket.FlyingItem;
+import com.kqp.awaken.util.TrinketUtil;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+/**
+ * Used to:
+ * Apply the rocket boot effect.
+ * Apply the scorched mask effect.
+ */
 @Mixin(Entity.class)
 public class EntityMixin {
     private static final double FLOAT_SPEED = -0.07D;
@@ -46,6 +55,19 @@ public class EntityMixin {
         }
 
         entity.setVelocity(vel);
+    }
+
+    @ModifyVariable(method = "setOnFireFor", name = "i", at = @At(value = "STORE", ordinal = 0))
+    private int applyScorchedMaskEffect(int i) {
+        if ((Object) this instanceof LivingEntity) {
+            LivingEntity entity = (LivingEntity) (Object) this;
+
+            if (TrinketUtil.hasTrinket(entity, AwakenItems.Trinkets.SCORCHED_MASK)) {
+                i *= 0.25;
+            }
+        }
+
+        return i;
     }
 
     private static double absMin(double a, double b) {

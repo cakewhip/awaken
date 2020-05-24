@@ -7,6 +7,7 @@
     "enchantment.EnchantmentHelperMixin",
     "entity.attribute.ClampedEntityAttributeMixin",
     "entity.mob.AbstractSkeletonEntityMixin",
+    "entity.mob.MobEntityAccessor",
     "entity.mob.PiglinBrainMixin",
     "entity.mob.PiglinEntityMixin",
     "entity.mob.SpiderEntityMixin",

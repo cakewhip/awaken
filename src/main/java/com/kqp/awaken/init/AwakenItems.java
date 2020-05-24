@@ -162,6 +162,8 @@ public class AwakenItems {
         public static final Item RANGERS_GLOVE = register("rangers_glove", new AwakenTrinket(200));
         public static final Item BOXING_GLOVES = register("boxing_gloves", new AwakenTrinket(200));
         public static final Item COMBAT_SADDLE = register("combat_saddle", new AwakenTrinket(200));
+        public static final Item BONE_CROWN = register("bone_crown", new AwakenTrinket(200));
+        public static final Item SCORCHED_MASK = register("scorched_mask", new AwakenTrinket(200));
 
         public static final Item LUCKY_TACKLE = register("lucky_tackle", new AwakenTrinket(200));
 

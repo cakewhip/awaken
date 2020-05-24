@@ -124,10 +124,9 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to texture
                 add as a drop from spider jockeys and pillagers riding ravagers
         post-awakening accessories:
-            withered rib cage [0%]
-                need to implement (boost skeleton spawn rate, nearby skeletons are friendly and target whoever you attack, equippable on chest)
+            bone crown [50%]
                 need to texture
-                add as drop from wither skeletons
+                add as drop from skeletons
             molten jetpack [0%]
                 need to implement (better version of jetpack)
                 need to texture
@@ -140,10 +139,18 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to implement (depth strider effect, decrease speed by 2.5%, increase armor by 4%)
             glacial weights [0%]
                 need to implement (frostwalker effect, decrease armor by 2.5%, increase speed by 4%)
-            scorched mask [0%]
+            scorched mask [50%]
                 need to implement (fire damage and time spent on fire reduced by 50%)
                 need to texture
                 add as drop from fiery moon mobs
+            lava goggle [0%]
+                need to implement (see clearly in lava)
+                need to texture
+                add as drop from fiery moon mobs
+            magma visor [0%]
+                need to implement (completely immune to fire/lava)
+                need to texture
+                add recipe (lava goggle, scorched mask)
             baby bib [50%]
                 need to implement (15% more saturation from food)
                 need to texture
