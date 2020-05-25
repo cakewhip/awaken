@@ -4,12 +4,13 @@ import com.kqp.awaken.data.AwakenLevelData;
 import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import com.kqp.awaken.entity.player.PlayerFlightProperties;
 import com.kqp.awaken.init.AwakenItems;
+import com.kqp.awaken.item.effect.EntityEquipmentListener;
 import com.kqp.awaken.item.sword.AtlanteanSabreItem;
 import com.kqp.awaken.util.Broadcaster;
 import com.kqp.awaken.util.TrinketUtil;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -41,9 +42,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * Used to:
@@ -54,6 +58,7 @@ import java.util.List;
  * Apply the shock-wave shield effect.
  * Apply the scorched mask effect.
  * Apply the stick of dynamite, lightning bottle, and electrified dynamite effects.
+ * Listen for equipping and un-equipping.
  */
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -244,6 +249,57 @@ public abstract class LivingEntityMixin {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    @Inject(
+            method = "tick",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/server/world/ServerChunkManager;sendToOtherNearbyPlayers(Lnet/minecraft/entity/Entity;Lnet/minecraft/network/Packet;)V"
+            ),
+            locals = LocalCapture.CAPTURE_FAILHARD
+    )
+    private void listenForEquips(CallbackInfo callbackInfo,
+                                   EquipmentSlot[] equipmentSlots,
+                                   int numEquipment,
+                                   int index,
+                                   EquipmentSlot currentSlot,
+                                   ItemStack prevItemStack,
+                                   ItemStack currItemStack) {
+        LivingEntity living = (LivingEntity) (Object) this;
+        Optional<ItemStack> equip = Optional.empty(), unEquip = Optional.empty();
+
+        if (!currItemStack.isEmpty()) {
+            equip = Optional.of(currItemStack);
+        }
+
+        if (!prevItemStack.isEmpty()) {
+            unEquip = Optional.of(prevItemStack);
+        }
+
+        if (equip.isPresent() || unEquip.isPresent()) {
+            Set<ItemStack> listeners = new HashSet();
+
+            for (EquipmentSlot slot : equipmentSlots) {
+                ItemStack equippedStack = living.getEquippedStack(slot);
+
+                if (equippedStack.getItem() instanceof EntityEquipmentListener) {
+                    listeners.add(equippedStack);
+                }
+            }
+
+            // The equipment found in the previous loop does not contain the previously equipped stack
+            if (prevItemStack.getItem() instanceof EntityEquipmentListener) {
+                listeners.add(prevItemStack);
+            }
+
+            for (ItemStack itemStack : listeners) {
+                EntityEquipmentListener listener = (EntityEquipmentListener) itemStack.getItem();
+
+                equip.ifPresent(equippedStack -> listener.onEquip(living, itemStack, equippedStack, currentSlot));
+                unEquip.ifPresent(unEquippedStack -> listener.onUnEquip(living, itemStack, unEquippedStack, currentSlot));
             }
         }
     }
