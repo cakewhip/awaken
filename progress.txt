@@ -166,26 +166,22 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to implement (bow and crossbow launching makes fart sound)
                 need to texture
                 add as a drop from all mobs below y32
-            anchor [0%]
-                need to implement (plus 1 level of luck of the sea while in a boat)
-                need to texture
-                add as drop from fishing in deep ocean biomes
-            ancient hook [0%]
-                need to implement (can fish in any condition without penalty)
+            anchor [50%]
                 need to texture
                 add as drop from fishing in deep ocean biomes
             angler's tackle box [0%]
                 need to implement (plus 2 levels of luck of the sea, can fish in any condition, and wait times reduced by 20%)
                 need to texture
                 add recipe (lucky charm, rain chat, anchor, and magic tackle)
-            stick of dynamite [0%]
-                need to implement (10% melee chance to blow up enemy when killed)
+            stick of dynamite [50%]
                 need to texture
                 add as drop from creepers
-            lightning in a bottle [0%]
-                need to implement (15% ranged chance to strike enemies with lightning)
+            lightning in a bottle [50%]
                 need to texture
                 add as drop during thunderstorms
+            electrified dynamite [50%]
+                need to texture
+                add recipe (stick of dynamite, lightning in a bottle)
             shulker glove [0%]
                 need to implement (15% ranged chance to make enemies float, 20% chance to not consume arrows)
                 need to texture

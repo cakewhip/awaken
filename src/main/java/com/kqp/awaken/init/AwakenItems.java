@@ -165,8 +165,12 @@ public class AwakenItems {
         public static final Item BONE_CROWN = register("bone_crown", new AwakenTrinket(200));
         public static final Item SCORCHED_MASK = register("scorched_mask", new AwakenTrinket(200));
         public static final Item SNORKEL_MASK = register("snorkel_mask", new AwakenTrinket(200));
+        public static final Item STICK_OF_DYNAMITE = register("stick_of_dynamite", new AwakenTrinket(200));
+        public static final Item LIGHTNING_BOTTLE = register("lightning_bottle", new AwakenTrinket(200));
+        public static final Item ELECTRIFYING_DYNAMITE = register("electrifying_dynamite", new AwakenTrinket(200));
 
         public static final Item LUCKY_TACKLE = register("lucky_tackle", new AwakenTrinket(200));
+        public static final Item ANCHOR = register("anchor", new AwakenTrinket(200));
 
         public static final Item TEST_WINGS = register("test_wings", new WingsItem(100));
     }
