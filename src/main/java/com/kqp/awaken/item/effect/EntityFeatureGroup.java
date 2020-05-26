@@ -4,6 +4,7 @@ import com.google.common.collect.ArrayListMultimap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.resource.language.I18n;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -15,7 +16,9 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Used to hold status effects and entity attributes.
@@ -23,6 +26,7 @@ import java.util.List;
 public class EntityFeatureGroup {
     private final ArrayList<StatusEffectInstance> statusEffects = new ArrayList();
     private final ArrayListMultimap<EntityAttribute, EntityAttributeModifier> attributeModifiers = ArrayListMultimap.create();
+    private final HashMap<Enchantment, Integer> enchantmentModifiers = new HashMap();
 
     public EntityFeatureGroup addStatusEffect(StatusEffect effect, int amplifier) {
         statusEffects.add(new StatusEffectInstance(effect, Integer.MAX_VALUE, amplifier));
@@ -36,6 +40,11 @@ public class EntityFeatureGroup {
 
     public EntityFeatureGroup addEntityAttributeAddition(EntityAttribute attribute, String name, double amount) {
         attributeModifiers.put(attribute, new EntityAttributeModifier(name, amount, EntityAttributeModifier.Operation.ADDITION));
+        return this;
+    }
+
+    public EntityFeatureGroup addEnchantmentModifier(Enchantment enchantment, int modifier) {
+        enchantmentModifiers.put(enchantment, modifier);
         return this;
     }
 
@@ -85,5 +94,9 @@ public class EntityFeatureGroup {
 
     public ArrayListMultimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers() {
         return attributeModifiers;
+    }
+
+    public Map<Enchantment, Integer> getEnchantmentModifiers() {
+        return enchantmentModifiers;
     }
 }
