@@ -86,7 +86,6 @@ public class AwakenItems {
                 null).setCustomTextureLayer("beret"));
         public static final Item SALVIUM_MASK = register("salvium_mask", new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.HEAD, new EntityFeatureGroup()
                 .addEntityAttributeMultiplier(AwakenEntityAttributes.RANGED_DAMAGE, "salvium_ranged_damage", 7F / 100F)
-                .addEntityAttributeMultiplier(AwakenEntityAttributes.TRIDENT_DAMAGE, "salvium_trident_damage", 5F / 100F)
                 .addEntityAttributeMultiplier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "salvium_movement_speed", 20F / 100F),
                 null).setCustomTextureLayer("mask"));
         public static final Item SALVIUM_CHESTPLATE = register("salvium_chestplate", new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.CHEST));
@@ -105,7 +104,6 @@ public class AwakenItems {
                 null).setCustomTextureLayer("cap"));
         public static final Item VALERIUM_MASK = register("valerium_mask", new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.HEAD, new EntityFeatureGroup()
                 .addEntityAttributeMultiplier(AwakenEntityAttributes.RANGED_DAMAGE, "valerium_melee_damage", 7F / 100F)
-                .addEntityAttributeMultiplier(AwakenEntityAttributes.TRIDENT_DAMAGE, "valerium_trident_damage", 5F / 100F)
                 .addEntityAttributeAddition(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, "valerium_knockback_resistance", 6F / 100F),
                 null).setCustomTextureLayer("mask"));
         public static final Item VALERIUM_CHESTPLATE = register("valerium_chestplate", new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.CHEST));

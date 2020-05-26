@@ -118,7 +118,7 @@ public abstract class LivingEntityMixin {
     }
 
     @Inject(method = "getAttributeValue", at = @At("HEAD"), cancellable = true)
-    public void buffDamage(EntityAttribute entityAttribute, CallbackInfoReturnable<Double> callbackInfo) {
+    public void applyMeleeDamageAttributes(EntityAttribute entityAttribute, CallbackInfoReturnable<Double> callbackInfo) {
         if (((Object) this) instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) (Object) this;
 
@@ -137,8 +137,6 @@ public abstract class LivingEntityMixin {
                     attribute = player.getAttributeInstance(AwakenEntityAttributes.SWORD_DAMAGE);
                 } else if (held.getItem() instanceof AxeItem) {
                     attribute = player.getAttributeInstance(AwakenEntityAttributes.AXE_DAMAGE);
-                } else if (held.getItem() instanceof TridentItem) {
-                    attribute = player.getAttributeInstance(AwakenEntityAttributes.TRIDENT_DAMAGE);
                 }
 
                 if (attribute != null) {

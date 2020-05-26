@@ -13,9 +13,6 @@ public class AwakenEntityAttributes {
             new ClampedEntityAttribute("attribute.name.generic.bow_damage", 2.0D, 0.0D, 2048.0D);
     public static final EntityAttribute CROSSBOW_DAMAGE =
             new ClampedEntityAttribute("attribute.name.generic.crossbow_damage", 2.0D, 0.0D, 2048.0D);
-    public static final EntityAttribute TRIDENT_DAMAGE =
-            new ClampedEntityAttribute("attribute.name.generic.trident_damage", 2.0D, 0.0D, 2048.0D);
-
 
     public static final EntityAttribute MELEE_DAMAGE =
             new ClampedEntityAttribute("attribute.name.generic.melee_damage", 2.0D, 0.0D, 2048.0D);

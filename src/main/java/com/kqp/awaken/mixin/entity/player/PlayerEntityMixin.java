@@ -83,7 +83,6 @@ public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlightPropert
         callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.RANGED_DAMAGE);
         callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.BOW_DAMAGE);
         callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.CROSSBOW_DAMAGE);
-        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.TRIDENT_DAMAGE);
 
         callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.MELEE_DAMAGE);
         callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.SWORD_DAMAGE);

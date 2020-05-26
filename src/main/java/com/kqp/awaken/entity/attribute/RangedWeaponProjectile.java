@@ -8,7 +8,6 @@ public interface RangedWeaponProjectile {
     enum Type {
         BOW,
         CROSSBOW,
-        TRIDENT,
         NONE
     }
 }

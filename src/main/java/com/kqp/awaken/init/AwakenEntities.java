@@ -87,7 +87,6 @@ public class AwakenEntities {
             Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "ranged_damage"), AwakenEntityAttributes.RANGED_DAMAGE);
             Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "bow_damage"), AwakenEntityAttributes.BOW_DAMAGE);
             Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "crossbow_damage"), AwakenEntityAttributes.CROSSBOW_DAMAGE);
-            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "trident_damage"), AwakenEntityAttributes.TRIDENT_DAMAGE);
 
             Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "melee_damage"), AwakenEntityAttributes.MELEE_DAMAGE);
             Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "sword_damage"), AwakenEntityAttributes.SWORD_DAMAGE);
