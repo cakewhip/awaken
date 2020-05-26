@@ -1,8 +1,8 @@
 package com.kqp.awaken.mixin.entity;
 
 import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.init.AwakenEntityAttributes;
 import com.kqp.awaken.entity.player.PlayerFlightProperties;
+import com.kqp.awaken.init.AwakenEntityAttributes;
 import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.item.effect.EntityEquipmentListener;
 import com.kqp.awaken.item.sword.AtlanteanSabreItem;

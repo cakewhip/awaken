@@ -3,7 +3,7 @@ package com.kqp.awaken.entity.mob;
 import com.kqp.awaken.init.AwakenEntities;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -60,7 +60,7 @@ public class SpiderSacEntity extends HostileEntity {
                 for (int i = 0; i < count; i++) {
                     EntityType spider = this.random.nextBoolean() ? EntityType.SPIDER : EntityType.CAVE_SPIDER;
 
-                    spider.spawn(this.world, null, null, null, this.getBlockPos(), SpawnType.NATURAL, false, false);
+                    spider.spawn(this.world, null, null, null, this.getBlockPos(), SpawnReason.NATURAL, false, false);
                 }
 
                 this.remove();

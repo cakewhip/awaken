@@ -3,7 +3,7 @@ package com.kqp.awaken.item;
 import com.kqp.awaken.data.AwakenConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -57,7 +57,7 @@ public class BossSpawnerItem extends Item {
     }
 
     private void spawnEntity(World world, BlockPos blockPos) {
-        type.spawn(world, null, null, null, blockPos, SpawnType.MOB_SUMMONED, true, false);
+        type.spawn(world, null, null, null, blockPos, SpawnReason.MOB_SUMMONED, true, false);
     }
 
     private boolean isValidSpawnBlock(World world, BlockPos blockPos) {

@@ -4,7 +4,7 @@ import com.kqp.awaken.entity.ai.Move;
 import com.kqp.awaken.entity.mob.AbominationEntity;
 import com.kqp.awaken.init.AwakenNetworking;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -33,7 +33,7 @@ public class SpawnSpawnlingsMove extends Move<AbominationEntity> {
 
             type.spawn(world, null, null, null,
                     mob.getBlockPos().add(2 * (r.nextDouble() - r.nextDouble()), 0, 2 * (r.nextDouble() - r.nextDouble())),
-                    SpawnType.MOB_SUMMONED, true, false);
+                    SpawnReason.MOB_SUMMONED, true, false);
         }
 
         AwakenNetworking.ABOMINATION_SPAWN_SPAWNLINGS_S2C.send(mob);

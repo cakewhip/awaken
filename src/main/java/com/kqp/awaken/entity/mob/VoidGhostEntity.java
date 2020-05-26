@@ -2,7 +2,6 @@ package com.kqp.awaken.entity.mob;
 
 import com.kqp.awaken.entity.ai.FloatAroundGoal;
 import com.kqp.awaken.init.AwakenEntities;
-import com.kqp.awaken.world.dimension.NullSpaceTraveler;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
@@ -78,9 +77,7 @@ public class VoidGhostEntity extends HostileEntity {
 
     @Override
     public boolean tryAttack(Entity target) {
-        if (target instanceof NullSpaceTraveler) {
-            ((NullSpaceTraveler) target).setReturnMarker(true);
-        }
+        // AAAAAAAAAAAAAAAAAAAAAAAAAAA
 
         return true;
     }

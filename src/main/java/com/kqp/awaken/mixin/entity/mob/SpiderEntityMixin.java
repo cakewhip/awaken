@@ -5,13 +5,13 @@ import com.kqp.awaken.util.EntityAttributeUtil;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.WorldAccess;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -52,7 +52,7 @@ public abstract class SpiderEntityMixin {
     }
 
     @Inject(method = "initialize", at = @At("RETURN"))
-    public void addSkeletonRider(IWorld world, LocalDifficulty difficulty, SpawnType spawnType, @Nullable EntityData entityData, @Nullable CompoundTag entityTag, CallbackInfoReturnable callbackInfo) {
+    public void addSkeletonRider(WorldAccess world, LocalDifficulty difficulty, SpawnReason SpawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag, CallbackInfoReturnable callbackInfo) {
         SpiderEntity spider = (SpiderEntity) (Object) this;
 
         if (!spider.world.isClient) {
@@ -63,7 +63,7 @@ public abstract class SpiderEntityMixin {
                     SkeletonEntity skeletonEntity = EntityType.SKELETON.create(spider.world);
 
                     skeletonEntity.refreshPositionAndAngles(spider.getX(), spider.getY(), spider.getZ(), spider.yaw, 0.0F);
-                    skeletonEntity.initialize(world, difficulty, spawnType, null, null);
+                    skeletonEntity.initialize(world, difficulty, SpawnReason, null, null);
                     world.spawnEntity(skeletonEntity);
                     skeletonEntity.startRiding(spider);
                 }

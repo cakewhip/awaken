@@ -14,10 +14,10 @@ import com.kqp.awaken.world.spawning.SpawnCondition;
 import com.kqp.awaken.world.spawning.SurfaceSpawnCondition;
 import net.fabricmc.fabric.api.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
-import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -36,7 +36,7 @@ public class AwakenEntities {
     public static final EntityType<RaptorChickenEntity> RAPTOR_CHICKEN = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(Awaken.MOD_ID, "raptor_chicken"),
-            FabricEntityTypeBuilder.create(EntityCategory.MONSTER, RaptorChickenEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, RaptorChickenEntity::new)
                     .size(EntityDimensions.fixed(0.95F, 1.65F))
                     .trackable(72, 3)
                     .build()
@@ -45,7 +45,7 @@ public class AwakenEntities {
     public static final EntityType<DireWolfEntity> DIRE_WOLF = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(Awaken.MOD_ID, "dire_wolf"),
-            FabricEntityTypeBuilder.create(EntityCategory.MONSTER, DireWolfEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, DireWolfEntity::new)
                     .size(EntityDimensions.fixed(1.5F, 1F))
                     .trackable(72, 3)
                     .build()
@@ -54,7 +54,7 @@ public class AwakenEntities {
     public static final EntityType<SpiderSacEntity> SPIDER_SAC = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(Awaken.MOD_ID, "spider_sac"),
-            FabricEntityTypeBuilder.create(EntityCategory.MONSTER, SpiderSacEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SpiderSacEntity::new)
                     .size(EntityDimensions.fixed(0.8F, 0.8F))
                     .trackable(72, 3)
                     .build()
@@ -63,7 +63,7 @@ public class AwakenEntities {
     public static final EntityType<VoidGhostEntity> VOID_GHOST = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(Awaken.MOD_ID, "void_ghost"),
-            FabricEntityTypeBuilder.create(EntityCategory.MONSTER, VoidGhostEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, VoidGhostEntity::new)
                     .size(EntityDimensions.fixed(0.6F, 1.9F))
                     .trackable(72, 3)
                     .build()
@@ -72,7 +72,7 @@ public class AwakenEntities {
     public static final EntityType<AbominationEntity> ABOMINATION = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(Awaken.MOD_ID, "abomination"),
-            FabricEntityTypeBuilder.create(EntityCategory.MONSTER, AbominationEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, AbominationEntity::new)
                     .size(EntityDimensions.fixed(0.6F * 3F, 1.95F * 3F))
                     .trackable(72, 3)
                     .build()
@@ -90,7 +90,7 @@ public class AwakenEntities {
         {
             // Apply wither rib effect
             addHostileSpawn(spawnEntry(EntityType.SKELETON, 150, 4, 4, BoneCrownSpawnCondition.INSTANCE), biome -> {
-                        for (Biome.SpawnEntry entry : biome.getEntitySpawnList(EntityCategory.MONSTER)) {
+                        for (Biome.SpawnEntry entry : biome.getEntitySpawnList(SpawnGroup.MONSTER)) {
                             if (entry.type == EntityType.SKELETON) {
                                 return true;
                             }
@@ -144,7 +144,7 @@ public class AwakenEntities {
         for (Biome biome : Biome.BIOMES) {
             if (biomePredicate.test(biome)) {
                 System.out.println("adding " + spawnEntry.type.getTranslationKey() + " to " + biome.getTranslationKey());
-                biome.getEntitySpawnList(EntityCategory.MONSTER).add(spawnEntry);
+                biome.getEntitySpawnList(SpawnGroup.MONSTER).add(spawnEntry);
             }
         }
     }

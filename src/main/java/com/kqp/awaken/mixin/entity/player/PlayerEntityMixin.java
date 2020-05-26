@@ -1,17 +1,12 @@
 package com.kqp.awaken.mixin.entity.player;
 
-import com.kqp.awaken.init.AwakenEntityAttributes;
 import com.kqp.awaken.entity.player.PlayerFlightProperties;
 import com.kqp.awaken.entity.player.PlayerReference;
-import com.kqp.awaken.init.AwakenDimensions;
+import com.kqp.awaken.init.AwakenEntityAttributes;
 import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.item.trinket.FlyingItem;
 import com.kqp.awaken.util.TrinketUtil;
-import com.kqp.awaken.world.dimension.NullSpaceTraveler;
-import com.kqp.awaken.world.placer.NullSpacePlacer;
-import com.kqp.awaken.world.placer.OverworldPlacer;
 import com.mojang.authlib.GameProfile;
-import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -23,7 +18,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -47,11 +41,9 @@ import java.util.Random;
  */
 @Mixin(PlayerEntity.class)
 // @Implements(@Interface(iface = NullSpaceTraveler.class, prefix = "vw$"))
-public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlightProperties {
+public class PlayerEntityMixin implements PlayerFlightProperties {
     @Shadow
     protected HungerManager hungerManager;
-
-    public boolean returnMarker = false;
 
     public boolean secondSpacing;
     public boolean flying;
@@ -60,23 +52,6 @@ public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlightPropert
 
     private static final HashMap<PlayerEntity, DefaultedList<ItemStack>> PLAYER_ARMOR_TRACKER = new HashMap();
     private static final HashMap<PlayerEntity, ItemStack> PLAYER_HELD_TRACKER = new HashMap();
-
-    @Inject(method = "tick", at = @At("HEAD"))
-    public void doNullSpaceTravel(CallbackInfo callbackInfo) {
-        PlayerEntity player = (PlayerEntity) (Object) this;
-
-        if (!player.world.isClient) {
-
-            if (player.dimension == DimensionType.OVERWORLD && player.getY() <= -8D) {
-                FabricDimensions.teleport(player, AwakenDimensions.NULL_SPACE, new NullSpacePlacer());
-            }
-
-            if (player.dimension == AwakenDimensions.NULL_SPACE && this.returnMarker) {
-                FabricDimensions.teleport(player, DimensionType.OVERWORLD, new OverworldPlacer());
-                this.setReturnMarker(false);
-            }
-        }
-    }
 
     @Inject(method = "createPlayerAttributes", at = @At("RETURN"), cancellable = true)
     private static void addCustomAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> callbackInfoReturnable) {
@@ -156,16 +131,6 @@ public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlightPropert
         }
 
         return f;
-    }
-
-    @Override
-    public void setReturnMarker(boolean returnMarker) {
-        this.returnMarker = returnMarker;
-    }
-
-    @Override
-    public boolean getReturnMarker() {
-        return returnMarker;
     }
 
     @Override

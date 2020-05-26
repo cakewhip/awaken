@@ -12,7 +12,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
-import net.minecraft.util.dynamic.DynamicSerializableBoolean;
 import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -33,9 +32,9 @@ public class PiglinBrainMixin {
         if (awakenLevelData.isWorldAwakened() && itemStack.getItem() == Items.DRAGON_HEAD) {
             ItemStack itemStack2 = itemStack.split(1);
             piglin.equipStack(EquipmentSlot.OFFHAND, itemStack2);
-            piglin.method_25939(EquipmentSlot.OFFHAND);
+            piglin.updateDropChances(EquipmentSlot.OFFHAND);
 
-            piglin.getBrain().remember(MemoryModuleType.ADMIRING_ITEM, DynamicSerializableBoolean.of(true), 120L);
+            piglin.getBrain().remember(MemoryModuleType.ADMIRING_ITEM, true, 120L);
             callbackInfoReturnable.setReturnValue(true);
         }
     }
