@@ -2,7 +2,7 @@ package com.kqp.awaken.mixin.entity;
 
 import com.kqp.awaken.entity.player.PlayerFlightProperties;
 import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.item.trinket.FlyingItem;
+import com.kqp.awaken.item.trinket.FlightTrinketItem;
 import com.kqp.awaken.util.TrinketUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -32,7 +32,7 @@ public class EntityMixin {
                 if (flightProperties.isFlying()) {
                     landGently = true;
 
-                    FlyingItem flyingItem = flightProperties.getFlyingItem();
+                    FlightTrinketItem flyingItem = (FlightTrinketItem) flightProperties.getFlyingItemStack().getItem();
                     vel = vel.add(0D, flyingItem.getFlySpeed(), 0D);
 
                     vel = new Vec3d(vel.x, absMin(vel.y, flyingItem.getMaxFlySpeed()), vel.z);

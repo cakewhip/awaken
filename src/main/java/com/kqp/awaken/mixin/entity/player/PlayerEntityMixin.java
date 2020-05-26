@@ -4,15 +4,15 @@ import com.kqp.awaken.entity.player.PlayerFlightProperties;
 import com.kqp.awaken.entity.player.PlayerReference;
 import com.kqp.awaken.init.AwakenEntityAttributes;
 import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.item.trinket.FlyingItem;
+import com.kqp.awaken.item.trinket.FlightTrinketItem;
 import com.kqp.awaken.util.TrinketUtil;
 import com.mojang.authlib.GameProfile;
-import net.minecraft.entity.EquipmentSlot;
+import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.collection.DefaultedList;
@@ -72,7 +72,7 @@ public class PlayerEntityMixin implements PlayerFlightProperties {
         PlayerEntity player = ((PlayerEntity) (Object) this);
         if (this.canFly()) {
             if (player.isOnGround()) {
-                flyTime = this.getFlyingItem().getMaxFlyTime();
+                flyTime = ((FlightTrinketItem) this.getFlyingItemStack().getItem()).getMaxFlyTime();
 
                 this.setFloating(false);
                 this.setSecondSpacing(false);
@@ -154,15 +154,23 @@ public class PlayerEntityMixin implements PlayerFlightProperties {
     }
 
     @Override
-    public FlyingItem getFlyingItem() {
-        Item currentItem = ((PlayerEntity) (Object) this).getEquippedStack(EquipmentSlot.FEET).getItem();
+    public ItemStack getFlyingItemStack() {
+        Inventory trinkets = TrinketsApi.getTrinketsInventory((PlayerEntity) (Object) this);
 
-        return currentItem instanceof FlyingItem ? (FlyingItem) currentItem : null;
+        for (int i = 0; i < trinkets.size(); i++) {
+            ItemStack itemStack = trinkets.getStack(i);
+
+            if (itemStack.getItem() instanceof FlightTrinketItem) {
+                return itemStack;
+            }
+        }
+
+        return null;
     }
 
     @Override
     public boolean canFly() {
-        return getFlyingItem() != null;
+        return getFlyingItemStack() != null;
     }
 
     @Override
@@ -177,7 +185,7 @@ public class PlayerEntityMixin implements PlayerFlightProperties {
 
     @Override
     public boolean canFloat() {
-        return getFlyingItem().canFloat();
+        return ((FlightTrinketItem) getFlyingItemStack().getItem()).canFloat();
     }
 
     @Override

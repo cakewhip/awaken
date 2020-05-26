@@ -17,9 +17,10 @@ import com.kqp.awaken.item.sword.StatusEffectSwordItem;
 import com.kqp.awaken.item.tool.AwakenAxeItem;
 import com.kqp.awaken.item.tool.AwakenPickaxeItem;
 import com.kqp.awaken.item.trident.AwakenTridentItem;
-import com.kqp.awaken.item.trinket.AwakenTrinket;
-import com.kqp.awaken.item.trinket.RocketBoots;
-import com.kqp.awaken.item.trinket.wings.WingsItem;
+import com.kqp.awaken.item.trinket.AwakenTrinketItem;
+import com.kqp.awaken.item.trinket.FlightTrinketItem;
+import dev.emi.trinkets.api.SlotGroups;
+import dev.emi.trinkets.api.Slots;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffects;
@@ -142,31 +143,31 @@ public class AwakenItems {
     }
 
     public static class Trinkets {
-        public static final Item ROCKET_BOOTS = register("rocket_boots", new RocketBoots());
-        public static final Item GUARDIAN_AGLET = register("guardian_aglet", new AwakenTrinket(200));
-        public static final Item GLACIAL_AGLET = register("glacial_aglet", new AwakenTrinket(200));
-        public static final Item CARNIVOROUS_MASK = register("carnivorous_mask", new AwakenTrinket(200));
-        public static final Item FARMERS_HANKERCHIEF = register("farmers_hankerchief", new AwakenTrinket(200));
-        public static final Item BABY_BIB = register("baby_bib", new AwakenTrinket(200));
-        public static final Item ADULT_BIB = register("adult_bib", new AwakenTrinket(200));
-        public static final Item DISCORD_BELT = register("discord_belt", new AwakenTrinket(200));
-        public static final Item SILKY_GLOVE = register("silky_glove", new AwakenTrinket(200));
-        public static final Item RAIN_HAT = register("rain_hat", new AwakenTrinket(200));
-        public static final Item SHOCKWAVE_SHIELD = register("shockwave_shield", new AwakenTrinket(200));
-        public static final Item RANGERS_GLOVE = register("rangers_glove", new AwakenTrinket(200));
-        public static final Item BOXING_GLOVES = register("boxing_gloves", new AwakenTrinket(200));
-        public static final Item COMBAT_SADDLE = register("combat_saddle", new AwakenTrinket(200));
-        public static final Item BONE_CROWN = register("bone_crown", new AwakenTrinket(200));
-        public static final Item SCORCHED_MASK = register("scorched_mask", new AwakenTrinket(200));
-        public static final Item SNORKEL_MASK = register("snorkel_mask", new AwakenTrinket(200));
-        public static final Item STICK_OF_DYNAMITE = register("stick_of_dynamite", new AwakenTrinket(200));
-        public static final Item LIGHTNING_BOTTLE = register("lightning_bottle", new AwakenTrinket(200));
-        public static final Item ELECTRIFYING_DYNAMITE = register("electrifying_dynamite", new AwakenTrinket(200));
+        public static final Item ROCKET_BOOTS = register("rocket_boots", new FlightTrinketItem(SlotGroups.FEET, Slots.AGLET, 200, null, 0.3D, 0.1D, 20, false));
+        public static final Item GUARDIAN_AGLET = register("guardian_aglet", new AwakenTrinketItem(SlotGroups.FEET, Slots.AGLET, 200));
+        public static final Item GLACIAL_AGLET = register("glacial_aglet", new AwakenTrinketItem(SlotGroups.FEET, Slots.AGLET, 200));
+        public static final Item CARNIVOROUS_MASK = register("carnivorous_mask", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
+        public static final Item FARMERS_HANKERCHIEF = register("farmers_hankerchief", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
+        public static final Item BABY_BIB = register("baby_bib", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
+        public static final Item ADULT_BIB = register("adult_bib", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
+        public static final Item DISCORD_BELT = register("discord_belt", new AwakenTrinketItem(SlotGroups.CHEST, Slots.BELT, 200));
+        public static final Item SILKY_GLOVE = register("silky_glove", new AwakenTrinketItem(SlotGroups.HAND, Slots.GLOVES, 200));
+        public static final Item RAIN_HAT = register("rain_hat", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
+        public static final Item SHOCKWAVE_SHIELD = register("shockwave_shield", new AwakenTrinketItem(SlotGroups.HAND, Slots.RING, 200));
+        public static final Item RANGERS_GLOVE = register("rangers_glove", new AwakenTrinketItem(SlotGroups.HAND, Slots.GLOVES, 200));
+        public static final Item BOXING_GLOVES = register("boxing_gloves", new AwakenTrinketItem(SlotGroups.HAND, Slots.GLOVES, 200));
+        public static final Item COMBAT_SADDLE = register("combat_saddle", new AwakenTrinketItem(SlotGroups.CHEST, Slots.BELT, 200));
+        public static final Item BONE_CROWN = register("bone_crown", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
+        public static final Item SCORCHED_MASK = register("scorched_mask", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
+        public static final Item SNORKEL_MASK = register("snorkel_mask", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
+        public static final Item STICK_OF_DYNAMITE = register("stick_of_dynamite", new AwakenTrinketItem(SlotGroups.HAND, Slots.RING, 200));
+        public static final Item LIGHTNING_BOTTLE = register("lightning_bottle", new AwakenTrinketItem(SlotGroups.HAND, Slots.RING, 200));
+        public static final Item ELECTRIFYING_DYNAMITE = register("electrifying_dynamite", new AwakenTrinketItem(SlotGroups.HAND, Slots.RING, 200));
 
-        public static final Item LUCKY_TACKLE = register("lucky_tackle", new AwakenTrinket(200));
-        public static final Item ANCHOR = register("anchor", new AwakenTrinket(200));
+        public static final Item LUCKY_TACKLE = register("lucky_tackle", new AwakenTrinketItem(SlotGroups.HAND, Slots.RING, 200));
+        public static final Item ANCHOR = register("anchor", new AwakenTrinketItem(SlotGroups.HAND, Slots.RING, 200));
 
-        public static final Item TEST_WINGS = register("test_wings", new WingsItem(100));
+        public static final Item TEST_WINGS = register("test_wings", new FlightTrinketItem(SlotGroups.CHEST, Slots.CAPE, 200, null, 0.315D, 0.115D, 30, true).setWings(true));
     }
 
     public static class BossSpawners {

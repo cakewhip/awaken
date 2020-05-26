@@ -1,6 +1,6 @@
 package com.kqp.awaken.entity.player;
 
-import com.kqp.awaken.item.trinket.FlyingItem;
+import net.minecraft.item.ItemStack;
 
 /**
  * Various info on a player's flying abilities.
@@ -14,7 +14,7 @@ public interface PlayerFlightProperties {
 
     boolean isFlying();
 
-    FlyingItem getFlyingItem();
+    ItemStack getFlyingItemStack();
 
     boolean canFly();
 

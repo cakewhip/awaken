@@ -1,7 +1,8 @@
 package com.kqp.awaken.client.render.entity.feature;
 
 import com.kqp.awaken.client.model.WingsEntityModel;
-import com.kqp.awaken.item.trinket.wings.WingsItem;
+import com.kqp.awaken.entity.player.PlayerFlightProperties;
+import com.kqp.awaken.item.trinket.FlightTrinketItem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.OverlayTexture;
@@ -12,7 +13,6 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -27,21 +27,24 @@ public class WingsFeatureRenderer<T extends LivingEntity, M extends EntityModel<
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float customAngle, float headYaw, float headPitch) {
-        ItemStack itemStack = entity.getEquippedStack(EquipmentSlot.MAINHAND);
+        ItemStack flightTrinketItemStack = ((PlayerFlightProperties) entity).getFlyingItemStack();
 
-        if (itemStack.getItem() instanceof WingsItem) {
-            Identifier texture = ((WingsItem) itemStack.getItem()).getTexture();
+        if (flightTrinketItemStack != null) {
+            FlightTrinketItem flightTrinketItem = (FlightTrinketItem) flightTrinketItemStack.getItem();
+            if (flightTrinketItem.areWings) {
+                Identifier texture = flightTrinketItem.getWingTexture();
 
-            matrices.push();
-            matrices.translate(0.0D, 0.0D, 0.125D);
+                matrices.push();
+                matrices.translate(0.0D, 0.0D, 0.125D);
 
-            this.getContextModel().copyStateTo(this.wingsModel);
-            this.wingsModel.setAngles(entity, limbDistance, limbDistance, customAngle, headYaw, headPitch);
+                this.getContextModel().copyStateTo(this.wingsModel);
+                this.wingsModel.setAngles(entity, limbDistance, limbDistance, customAngle, headYaw, headPitch);
 
-            VertexConsumer vertexConsumer = ItemRenderer.getArmorVertexConsumer(vertexConsumers, this.wingsModel.getLayer(texture), false, itemStack.hasEnchantmentGlint());
-            this.wingsModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
+                VertexConsumer vertexConsumer = ItemRenderer.getArmorVertexConsumer(vertexConsumers, this.wingsModel.getLayer(texture), false, flightTrinketItemStack.hasEnchantmentGlint());
+                this.wingsModel.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
 
-            matrices.pop();
+                matrices.pop();
+            }
         }
     }
 }
