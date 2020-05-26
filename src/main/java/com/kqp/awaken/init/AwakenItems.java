@@ -1,6 +1,5 @@
 package com.kqp.awaken.init;
 
-import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import com.kqp.awaken.item.BossSpawnerItem;
 import com.kqp.awaken.item.armor.AwakenArmorItem;
 import com.kqp.awaken.item.bow.AwakenBowItem;

@@ -1,6 +1,5 @@
 package com.kqp.awaken.init;
 
-import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
 import com.kqp.awaken.entity.effect.AwakenStatusEffects;
 import com.kqp.awaken.entity.mob.AbominationEntity;
 import com.kqp.awaken.entity.mob.DireWolfEntity;
@@ -81,20 +80,6 @@ public class AwakenEntities {
 
     public static void init() {
         Awaken.info("Initializing entities");
-
-        // Custom Attributes
-        {
-            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "ranged_damage"), AwakenEntityAttributes.RANGED_DAMAGE);
-            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "bow_damage"), AwakenEntityAttributes.BOW_DAMAGE);
-            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "crossbow_damage"), AwakenEntityAttributes.CROSSBOW_DAMAGE);
-
-            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "melee_damage"), AwakenEntityAttributes.MELEE_DAMAGE);
-            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "sword_damage"), AwakenEntityAttributes.SWORD_DAMAGE);
-            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "axe_damage"), AwakenEntityAttributes.AXE_DAMAGE);
-
-            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "potion_damage"), AwakenEntityAttributes.POTION_DAMAGE);
-            Registry.register(Registry.ATTRIBUTES, new Identifier(Awaken.MOD_ID, "unarmed_damage"), AwakenEntityAttributes.UNARMED_DAMAGE);
-        }
 
         // Custom Status Effects
         {

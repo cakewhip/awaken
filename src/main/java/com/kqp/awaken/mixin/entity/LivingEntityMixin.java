@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin.entity;
 
 import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
+import com.kqp.awaken.init.AwakenEntityAttributes;
 import com.kqp.awaken.entity.player.PlayerFlightProperties;
 import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.item.effect.EntityEquipmentListener;
@@ -28,7 +28,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
-import net.minecraft.item.TridentItem;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;

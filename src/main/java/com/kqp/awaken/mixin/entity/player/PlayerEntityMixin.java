@@ -1,6 +1,6 @@
 package com.kqp.awaken.mixin.entity.player;
 
-import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
+import com.kqp.awaken.init.AwakenEntityAttributes;
 import com.kqp.awaken.entity.player.PlayerFlightProperties;
 import com.kqp.awaken.entity.player.PlayerReference;
 import com.kqp.awaken.init.AwakenDimensions;

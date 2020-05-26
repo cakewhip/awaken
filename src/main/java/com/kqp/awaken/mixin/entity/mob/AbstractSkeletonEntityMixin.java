@@ -2,7 +2,7 @@ package com.kqp.awaken.mixin.entity.mob;
 
 import com.kqp.awaken.data.AwakenLevelData;
 import com.kqp.awaken.entity.ai.BoneCrownTargetGoal;
-import com.kqp.awaken.entity.attribute.AwakenEntityAttributes;
+import com.kqp.awaken.init.AwakenEntityAttributes;
 import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.util.EntityAttributeUtil;
 import com.kqp.awaken.util.TrinketUtil;

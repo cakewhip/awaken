@@ -20,6 +20,7 @@ public class Awaken implements ModInitializer {
         info("Initializing Awaken");
 
         TimeUtil.profile(() -> {
+            AwakenEntityAttributes.init();
             AwakenBlocks.init();
             AwakenItems.init();
             AwakenEntities.init();
