@@ -140,7 +140,14 @@
 
     "__comment": "Entity Attributes",
     "attribute.name.generic.ranged_damage": "Ranged Damage",
+    "attribute.name.generic.bow_damage": "Bow Damage",
+    "attribute.name.generic.crossbow_damage": "Crossbow Damage",
+    "attribute.name.generic.trident_damage": "Trident Damage",
     "attribute.name.generic.melee_damage": "Melee Damage",
+    "attribute.name.generic.sword_damage": "Sword Damage",
+    "attribute.name.generic.axe_damage": "Axe Damage",
+    "attribute.name.generic.potion_damange": "Potion Damage",
+    "attribute.name.generic.unarmed_damage": "Unarmed Damage",
 
     "__comment": "Status Effects",
     "effect.awaken.confusion": "Confusion",

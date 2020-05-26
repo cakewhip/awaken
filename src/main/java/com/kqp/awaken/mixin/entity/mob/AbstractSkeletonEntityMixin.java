@@ -83,8 +83,7 @@ public abstract class AbstractSkeletonEntityMixin {
                 // TODO: investigate having the custom target selector be prioritized over the revenge one
                 goal = new RevengeGoal(
                         (AbstractSkeletonEntity) (Object) this,
-                        new Class[] { AbstractSkeletonEntity.class }
-                );
+                        AbstractSkeletonEntity.class);
             }
         }
 

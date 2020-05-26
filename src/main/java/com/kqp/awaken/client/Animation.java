@@ -61,6 +61,6 @@ public abstract class Animation<T extends Entity, M extends Model> {
     public enum State {
         STOPPED,
         STOPPING,
-        PLAYING;
+        PLAYING
     }
 }

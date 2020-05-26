@@ -1,35 +1,35 @@
 package com.kqp.awaken.item.tool;
 
+import com.kqp.awaken.item.effect.EntityFeatureGroup;
 import com.kqp.awaken.item.material.AwakenToolMaterial;
-import com.kqp.awaken.loot.AwakenRarity;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
-import net.minecraft.text.BaseText;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Class for creating pickaxes because the super constructor is protected.
  */
 public class AwakenPickaxeItem extends PickaxeItem {
-    public AwakenRarity rarity = AwakenRarity.OKAY;
+    public final Optional<EntityFeatureGroup> itemMods;
 
-    public AwakenPickaxeItem(AwakenToolMaterial material) {
+    public AwakenPickaxeItem(AwakenToolMaterial material, EntityFeatureGroup itemMods) {
         super(material, -1, material.getAttackSpeed() - 4, new Settings().group(ItemGroup.TOOLS));
+
+        this.itemMods = Optional.ofNullable(itemMods);
     }
 
-    public Item setRarity(AwakenRarity rarity) {
-        this.rarity = rarity;
-
-        return this;
+    public AwakenPickaxeItem(AwakenToolMaterial material) {
+        this(material, null);
     }
 
     @Override
@@ -37,7 +37,9 @@ public class AwakenPickaxeItem extends PickaxeItem {
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
 
-        BaseText firstLine = (BaseText) tooltip.get(0);
-        firstLine.setStyle(firstLine.getStyle().withColor(this.rarity.color));
+        itemMods.ifPresent(effects -> {
+            tooltip.add(new LiteralText("When Equipped:"));
+            effects.populateTooltips(tooltip);
+        });
     }
 }

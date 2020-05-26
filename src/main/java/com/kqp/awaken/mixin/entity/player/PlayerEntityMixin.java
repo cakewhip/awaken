@@ -5,9 +5,6 @@ import com.kqp.awaken.entity.player.PlayerFlightProperties;
 import com.kqp.awaken.entity.player.PlayerReference;
 import com.kqp.awaken.init.AwakenDimensions;
 import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.item.effect.ArmorListener;
-import com.kqp.awaken.item.effect.Equippable;
-import com.kqp.awaken.item.effect.SpecialItemRegistry;
 import com.kqp.awaken.item.trinket.FlyingItem;
 import com.kqp.awaken.util.TrinketUtil;
 import com.kqp.awaken.world.dimension.NullSpaceTraveler;
@@ -20,7 +17,6 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
@@ -42,7 +38,6 @@ import java.util.Random;
 /**
  * Used to:
  * Apply damage buffs.
- * Detect item equips/unequips.
  * Add custom attributes.
  * Buff melee damage.
  * Transport player to and from the null space.
@@ -80,88 +75,6 @@ public class PlayerEntityMixin implements NullSpaceTraveler, PlayerFlightPropert
                 FabricDimensions.teleport(player, DimensionType.OVERWORLD, new OverworldPlacer());
                 this.setReturnMarker(false);
             }
-        }
-    }
-
-    @Inject(method = "tick", at = @At("HEAD"))
-    public void detectEquippableArmor(CallbackInfo callbackInfo) {
-        PlayerEntity player = (PlayerEntity) (Object) this;
-
-        if (!player.world.isClient()) {
-            DefaultedList<ItemStack> curr = player.inventory.armor;
-
-            if (PLAYER_ARMOR_TRACKER.containsKey(player)) {
-                DefaultedList<ItemStack> prev = PLAYER_ARMOR_TRACKER.get(player);
-
-                for (int i = 0; i < curr.size(); i++) {
-                    ItemStack currItemStack = curr.get(i);
-                    ItemStack prevItemStack = prev.get(i);
-
-                    // TODO: make this prettier
-
-                    if (!ItemStack.areItemsEqual(currItemStack, prevItemStack)) {
-                        if (SpecialItemRegistry.EQUIPPABLE_ARMOR.containsKey(prevItemStack.getItem())) {
-                            SpecialItemRegistry.EQUIPPABLE_ARMOR.get(prevItemStack.getItem()).unEquip(prevItemStack, player);
-                        }
-
-                        if (SpecialItemRegistry.EQUIPPABLE_ARMOR.containsKey(currItemStack.getItem())) {
-                            SpecialItemRegistry.EQUIPPABLE_ARMOR.get(currItemStack.getItem()).equip(currItemStack, player);
-                        }
-
-                        for (int j = 0; j < 4 && j != i; j++) {
-                            ItemStack equipStack = player.inventory.armor.get(i);
-
-                            if (SpecialItemRegistry.EQUIPPABLE_ARMOR.containsKey(prevItemStack.getItem())) {
-                                Equippable equippable = SpecialItemRegistry.EQUIPPABLE_ARMOR.get(prevItemStack.getItem());
-
-                                if (equippable instanceof ArmorListener) {
-                                    ((ArmorListener) equippable).onOtherUnEquip(prevItemStack, player);
-                                }
-                            }
-
-                            if (SpecialItemRegistry.EQUIPPABLE_ARMOR.containsKey(currItemStack.getItem())) {
-                                Equippable equippable = SpecialItemRegistry.EQUIPPABLE_ARMOR.get(currItemStack.getItem());
-
-                                if (equippable instanceof ArmorListener) {
-                                    ((ArmorListener) equippable).onOtherEquip(currItemStack, player);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            DefaultedList<ItemStack> clone = DefaultedList.ofSize(4, ItemStack.EMPTY);
-            for (int i = 0; i < clone.size(); i++) {
-                clone.set(i, curr.get(i).copy());
-            }
-
-            PLAYER_ARMOR_TRACKER.put(player, clone);
-        }
-    }
-
-    @Inject(method = "tick", at = @At("HEAD"))
-    public void detectEquippableItems(CallbackInfo callbackInfo) {
-        PlayerEntity player = (PlayerEntity) (Object) this;
-
-        if (!player.world.isClient()) {
-            ItemStack curr = player.inventory.getMainHandStack();
-
-            if (PLAYER_HELD_TRACKER.containsKey(player)) {
-                ItemStack prev = PLAYER_HELD_TRACKER.get(player);
-
-                if (!ItemStack.areItemsEqual(curr, prev)) {
-                    if (SpecialItemRegistry.EQUIPPABLE_ITEM.containsKey(prev.getItem())) {
-                        SpecialItemRegistry.EQUIPPABLE_ITEM.get(prev.getItem()).unEquip(prev, player);
-                    }
-
-                    if (SpecialItemRegistry.EQUIPPABLE_ITEM.containsKey(curr.getItem())) {
-                        SpecialItemRegistry.EQUIPPABLE_ITEM.get(curr.getItem()).equip(curr, player);
-                    }
-                }
-            }
-
-            PLAYER_HELD_TRACKER.put(player, curr.copy());
         }
     }
 

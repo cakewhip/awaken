@@ -144,12 +144,8 @@ public class VoidTowerFeature extends Feature<DefaultFeatureConfig> {
 
     public boolean isInsideStructure(IWorld world, StructureAccessor structureAccessor, BlockPos blockPos) {
         Block block = world.getBlockState(blockPos).getBlock();
-        if (block == AwakenBlocks.CORRUPTED_NULL_STONE_BRICKS
+        return block == AwakenBlocks.CORRUPTED_NULL_STONE_BRICKS
                 || block == AwakenBlocks.GLOWING_NULL_STONE_BRICKS
-                || block == AwakenBlocks.NULL_STONE_BRICKS) {
-            return true;
-        }
-
-        return false;
+                || block == AwakenBlocks.NULL_STONE_BRICKS;
     }
 }

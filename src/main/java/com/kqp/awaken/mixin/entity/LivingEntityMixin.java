@@ -262,12 +262,12 @@ public abstract class LivingEntityMixin {
             locals = LocalCapture.CAPTURE_FAILHARD
     )
     private void listenForEquips(CallbackInfo callbackInfo,
-                                   EquipmentSlot[] equipmentSlots,
-                                   int numEquipment,
-                                   int index,
-                                   EquipmentSlot currentSlot,
-                                   ItemStack prevItemStack,
-                                   ItemStack currItemStack) {
+                                 EquipmentSlot[] equipmentSlots,
+                                 int numEquipment,
+                                 int index,
+                                 EquipmentSlot currentSlot,
+                                 ItemStack prevItemStack,
+                                 ItemStack currItemStack) {
         LivingEntity living = (LivingEntity) (Object) this;
         Optional<ItemStack> equip = Optional.empty(), unEquip = Optional.empty();
 

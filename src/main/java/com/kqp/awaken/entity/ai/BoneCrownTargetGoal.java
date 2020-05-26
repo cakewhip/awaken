@@ -37,10 +37,8 @@ public class BoneCrownTargetGoal extends TrackTargetGoal {
                     if (lastDamageSource != null) {
                         Entity lastAttacker = lastDamageSource.getAttacker();
 
-                        if (lastAttacker instanceof LivingEntity &&
-                                TrinketUtil.hasTrinket((LivingEntity) lastAttacker, AwakenItems.Trinkets.BONE_CROWN)) {
-                            return true;
-                        }
+                        return lastAttacker instanceof LivingEntity &&
+                                TrinketUtil.hasTrinket((LivingEntity) lastAttacker, AwakenItems.Trinkets.BONE_CROWN);
                     }
 
                     return false;

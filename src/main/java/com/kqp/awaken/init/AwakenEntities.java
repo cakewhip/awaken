@@ -7,12 +7,12 @@ import com.kqp.awaken.entity.mob.DireWolfEntity;
 import com.kqp.awaken.entity.mob.RaptorChickenEntity;
 import com.kqp.awaken.entity.mob.SpiderSacEntity;
 import com.kqp.awaken.entity.mob.VoidGhostEntity;
+import com.kqp.awaken.world.spawning.BoneCrownSpawnCondition;
 import com.kqp.awaken.world.spawning.CaveSpawnCondition;
 import com.kqp.awaken.world.spawning.ConditionalSpawnEntry;
 import com.kqp.awaken.world.spawning.PostAwakeningSpawnCondition;
 import com.kqp.awaken.world.spawning.SpawnCondition;
 import com.kqp.awaken.world.spawning.SurfaceSpawnCondition;
-import com.kqp.awaken.world.spawning.BoneCrownSpawnCondition;
 import net.fabricmc.fabric.api.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityCategory;
@@ -106,14 +106,14 @@ public class AwakenEntities {
         {
             // Apply wither rib effect
             addHostileSpawn(spawnEntry(EntityType.SKELETON, 150, 4, 4, BoneCrownSpawnCondition.INSTANCE), biome -> {
-                    for (Biome.SpawnEntry entry : biome.getEntitySpawnList(EntityCategory.MONSTER)) {
-                        if (entry.type == EntityType.SKELETON) {
-                            return true;
+                        for (Biome.SpawnEntry entry : biome.getEntitySpawnList(EntityCategory.MONSTER)) {
+                            if (entry.type == EntityType.SKELETON) {
+                                return true;
+                            }
                         }
-                    }
 
-                    return false;
-                }
+                        return false;
+                    }
             );
         }
 
@@ -146,7 +146,7 @@ public class AwakenEntities {
         FabricDefaultAttributeRegistry.register(type, attributeBuilder);
     }
 
-    private static Biome.SpawnEntry spawnEntry(EntityType<?> type, int weight, int min, int  max, SpawnCondition... spawnConditions) {
+    private static Biome.SpawnEntry spawnEntry(EntityType<?> type, int weight, int min, int max, SpawnCondition... spawnConditions) {
         ConditionalSpawnEntry spawnEntry = new ConditionalSpawnEntry(type, weight, min, max);
 
         for (SpawnCondition spawnCondition : spawnConditions) {
