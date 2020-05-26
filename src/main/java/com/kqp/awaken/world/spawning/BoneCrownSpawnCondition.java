@@ -5,7 +5,6 @@ import com.kqp.awaken.util.TrinketUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -21,8 +20,7 @@ public class BoneCrownSpawnCondition extends SpawnCondition {
 
         for (PlayerEntity player : players) {
             if (TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.BONE_CROWN)) {
-                /** {@link Vec3d#method_24953(Vec3i)} is used to convert block positions to Vec3d objects **/
-                if (player.squaredDistanceTo(Vec3d.method_24953(pos)) < MAX_SPAWN_DISTANCE_SQUARED) {
+                if (player.squaredDistanceTo(Vec3d.of(pos)) < MAX_SPAWN_DISTANCE_SQUARED) {
                     return true;
                 }
             }

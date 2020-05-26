@@ -1,6 +1,5 @@
 package com.kqp.awaken.util;
 
-import net.minecraft.network.MessageType;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;
@@ -21,7 +20,7 @@ public class Broadcaster {
         text.setStyle(style);
 
         server.getPlayerManager().getPlayerList().forEach(player -> {
-            player.sendMessage(text, MessageType.CHAT);
+            player.sendMessage(text, false);
         });
     }
 }

@@ -17,7 +17,6 @@
     "entity.projectile.EnderPearlEntityMixin",
     "entity.projectile.FishingBobberEntityMixin",
     "entity.projectile.PersistentProjectileEntityMixin",
-    "entity.projectile.TridentEntityMixin",
     "entity.raid.RaidMixin",
     "entity.DamageUtilMixin",
     "entity.EntityMixin",
@@ -32,8 +31,6 @@
     "server.network.ServerPlayerEntityMixin",
     "server.network.ServerPlayNetworkHandlerMixin",
     "world.chunk.WorldChunkMixin",
-    "world.gen.chunk.SurfaceChunkGeneratorAccessor",
-    "world.gen.chunk.ChunkGeneratorAccessor",
     "world.level.LevelPropertiesMixin",
     "world.ChunkSerializerMixin",
     "world.SpawnHelperMixin"

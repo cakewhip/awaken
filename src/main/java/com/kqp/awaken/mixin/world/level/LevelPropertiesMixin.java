@@ -5,7 +5,11 @@ import com.kqp.awaken.data.AwakenLevelDataContainer;
 import com.mojang.datafixers.DataFixer;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.border.WorldBorder;
+import net.minecraft.world.level.LevelInfo;
 import net.minecraft.world.level.LevelProperties;
+import net.minecraft.world.timer.Timer;
 import org.spongepowered.asm.mixin.Implements;
 import org.spongepowered.asm.mixin.Interface;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,14 +17,46 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+
 @Mixin(LevelProperties.class)
 @Implements(@Interface(iface = AwakenLevelDataContainer.class, prefix = "vw$"))
 public class LevelPropertiesMixin implements AwakenLevelDataContainer {
     private AwakenLevelData awakenLevelData = new AwakenLevelData();
 
     @Inject(method = "<init>(Lnet/minecraft/nbt/CompoundTag;Lcom/mojang/datafixers/DataFixer;ILnet/minecraft/nbt/CompoundTag;)V", at = @At("RETURN"))
-    private void loadAwakenData(CompoundTag tag, DataFixer dataFixer, int dataVersion, @Nullable CompoundTag playerData, CallbackInfo callbackInfo) {
-        CompoundTag awakenWorldDataTag = tag.getCompound("AwakenLevelData");
+    private void loadAwakenData(DataFixer dataFixer,
+                                int dataVersion,
+                                CompoundTag playerData,
+                                boolean modded,
+                                int spawnX,
+                                int spawnY,
+                                int spawnZ,
+                                long time,
+                                long timeOfDay,
+                                int version,
+                                int clearWeatherTime,
+                                int rainTime,
+                                boolean raining,
+                                int thunderTime,
+                                boolean thundering,
+                                boolean initialized,
+                                boolean difficultyLocked,
+                                WorldBorder.Properties worldBorder,
+                                int wanderingTraderSpawnDelay,
+                                int wanderingTraderSpawnChance,
+                                @Nullable UUID wanderingTraderId,
+                                LinkedHashSet<String> serverBrands,
+                                LinkedHashSet<String> enabledDataPacks,
+                                Set<String> disabledDataPacks,
+                                Timer<MinecraftServer> scheduledEvents,
+                                @Nullable CompoundTag customBossEvents,
+                                CompoundTag compoundTag,
+                                LevelInfo levelInfo,
+                                CallbackInfo callbackInfo) {
+        CompoundTag awakenWorldDataTag = compoundTag.getCompound("AwakenLevelData");
         awakenLevelData = new AwakenLevelData(awakenWorldDataTag);
     }
 

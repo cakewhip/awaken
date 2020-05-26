@@ -83,7 +83,7 @@ public class AwakenLevelData {
      * Updates stuff for fiery moon handling.
      */
     public void tickFieryMoon(MinecraftServer server) {
-        World world = server.getWorld(DimensionType.OVERWORLD);
+        World world = server.getWorld(DimensionType.OVERWORLD_REGISTRY_KEY);
         long time = world.getTimeOfDay() % 24000;
 
         if (this.fieryMoonActive) {
@@ -190,6 +190,6 @@ public class AwakenLevelData {
     }
 
     public static AwakenLevelData getFor(MinecraftServer server) {
-        return ((AwakenLevelDataContainer) server.getWorld(DimensionType.OVERWORLD).getLevelProperties()).getAwakenLevelData();
+        return ((AwakenLevelDataContainer) server.getWorld(DimensionType.OVERWORLD_REGISTRY_KEY).getLevelProperties()).getAwakenLevelData();
     }
 }

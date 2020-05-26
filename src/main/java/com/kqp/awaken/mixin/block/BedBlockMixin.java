@@ -25,7 +25,7 @@ public class BedBlockMixin {
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     private void triggerAwakening(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> callbackInfoReturnable) {
         if (!world.isClient) {
-            if (world.getDimension().getType() == DimensionType.THE_END) {
+            if (world.getDimension().isEnd()) {
                 AwakenLevelData awakenLevelData = AwakenLevelData.getFor(world.getServer());
 
                 if (!awakenLevelData.isWorldAwakened()
@@ -37,7 +37,7 @@ public class BedBlockMixin {
 
                     callbackInfoReturnable.setReturnValue(ActionResult.SUCCESS);
 
-                    player.changeDimension(DimensionType.OVERWORLD);
+                    player.changeDimension(DimensionType.OVERWORLD_REGISTRY_KEY);
                     Broadcaster.broadcastMessage(world.getServer(), "New ores have generated!", Formatting.LIGHT_PURPLE, false, true);
                 }
             }

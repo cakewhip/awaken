@@ -10,6 +10,15 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
+repositories {
+	mavenLocal()
+
+	maven {
+		name = "Ladysnake Libs"
+		url = 'https://dl.bintray.com/ladysnake/libs'
+	}
+}
+
 dependencies {
 	minecraft "com.mojang:minecraft:20w21a"
 	mappings "net.fabricmc:yarn:20w21a+build.10:v2"
@@ -17,6 +26,10 @@ dependencies {
 
 	//Fabric api
 	modImplementation "net.fabricmc.fabric-api:fabric-api:0.10.10+build.347-1.16"
+
+	// Currently pulling Trinkets from local Maven
+	// TODO: change this when Trinkets gets updated
+	modImplementation "dev.emi:trinkets:2.5.0"
 }
 
 processResources {

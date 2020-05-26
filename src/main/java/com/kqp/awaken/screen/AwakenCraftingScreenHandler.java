@@ -210,11 +210,8 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
     @Override
     public void close(PlayerEntity player) {
         super.close(player);
-        if (!player.isAlive() || player instanceof ServerPlayerEntity && ((ServerPlayerEntity) player).method_14239()) {
-            player.dropItem(lookUpResultInventory.getStack(0), false);
-        } else {
-            player.inventory.offerOrDrop(player.world, lookUpResultInventory.removeStack(0));
-        }
+
+        player.inventory.offerOrDrop(player.world, lookUpResultInventory.removeStack(0));
     }
 
     /**

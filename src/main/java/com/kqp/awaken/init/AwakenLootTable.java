@@ -83,13 +83,13 @@ public class AwakenLootTable {
     public static void addLootEntry(String id, ItemConvertible item, float chance, LootCondition.Builder... conditions) {
         FabricLootPoolBuilder fabricLootPoolBuilder =
                 FabricLootPoolBuilder.builder()
-                        .withRolls(ConstantLootTableRange.create(1))
-                        .withCondition(RandomChanceLootCondition.builder(chance))
-                        .withCondition(KilledByPlayerLootCondition.builder())
-                        .withEntry(ItemEntry.builder(item));
+                        .rolls(ConstantLootTableRange.create(1))
+                        .withCondition(RandomChanceLootCondition.builder(chance).build())
+                        .withCondition(KilledByPlayerLootCondition.builder().build())
+                        .withEntry(ItemEntry.builder(item).build());
 
         for (LootCondition.Builder condition : conditions) {
-            fabricLootPoolBuilder = fabricLootPoolBuilder.withCondition(condition);
+            fabricLootPoolBuilder = fabricLootPoolBuilder.withCondition(condition.build());
         }
 
         LOOT_MAP.put(new Identifier(id),
@@ -100,14 +100,14 @@ public class AwakenLootTable {
     public static void addLootEntry(String id, ItemConvertible item, float chance, int count, LootCondition.Builder... conditions) {
         FabricLootPoolBuilder fabricLootPoolBuilder =
                 FabricLootPoolBuilder.builder()
-                        .withRolls(ConstantLootTableRange.create(1))
-                        .withCondition(RandomChanceLootCondition.builder(chance))
-                        .withCondition(KilledByPlayerLootCondition.builder())
-                        .withFunction(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(count, count)))
-                        .withEntry(ItemEntry.builder(item));
+                        .rolls(ConstantLootTableRange.create(1))
+                        .withCondition(RandomChanceLootCondition.builder(chance).build())
+                        .withCondition(KilledByPlayerLootCondition.builder().build())
+                        .withFunction(LimitCountLootFunction.builder(BoundedIntUnaryOperator.create(count, count)).build())
+                        .withEntry(ItemEntry.builder(item).build());
 
         for (LootCondition.Builder condition : conditions) {
-            fabricLootPoolBuilder = fabricLootPoolBuilder.withCondition(condition);
+            fabricLootPoolBuilder = fabricLootPoolBuilder.withCondition(condition.build());
         }
 
         LOOT_MAP.put(new Identifier(id),
@@ -119,18 +119,18 @@ public class AwakenLootTable {
     public static void addLootEntry(String id, ItemConvertible item, float chance, int min, int max) {
         LOOT_MAP.put(new Identifier(id),
                 FabricLootPoolBuilder.builder()
-                        .withRolls(ConstantLootTableRange.create(1))
-                        .withCondition(RandomChanceLootCondition.builder(chance))
-                        .withCondition(KilledByPlayerLootCondition.builder())
-                        .withFunction(SetCountLootFunction.builder(new UniformLootTableRange(min, max)))
-                        .withEntry(ItemEntry.builder(item))
+                        .rolls(ConstantLootTableRange.create(1))
+                        .withCondition(RandomChanceLootCondition.builder(chance).build())
+                        .withCondition(KilledByPlayerLootCondition.builder().build())
+                        .withFunction(SetCountLootFunction.builder(new UniformLootTableRange(min, max)).build())
+                        .withEntry(ItemEntry.builder(item).build())
         );
     }
 
     public static void onLootTableLoading(ResourceManager resourceManager, LootManager lootManager, Identifier id, FabricLootSupplierBuilder supplier, LootTableLoadingCallback.LootTableSetter lootTableSetter) {
         LOOT_MAP.forEach((identifier, builder) -> {
             if (identifier.equals(id)) {
-                supplier.withPool(builder);
+                supplier.withPool(builder.build());
             }
         });
     }
