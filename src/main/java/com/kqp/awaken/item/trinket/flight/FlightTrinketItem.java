@@ -1,20 +1,16 @@
-package com.kqp.awaken.item.trinket;
+package com.kqp.awaken.item.trinket.flight;
 
 import com.kqp.awaken.item.effect.EntityFeatureGroup;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import com.kqp.awaken.item.trinket.AwakenTrinketItem;
 
 /**
  * Flight trinket item.
  */
-public class FlightTrinketItem extends AwakenTrinketItem {
+public abstract class FlightTrinketItem extends AwakenTrinketItem {
     public final double maxFlySpeed;
     public final double flySpeed;
     public final int flyTime;
     public final boolean canFloat;
-    public boolean areWings;
 
     public FlightTrinketItem(String trinketGroup, String trinketSlot, int durability, EntityFeatureGroup itemMods, double maxFlySpeed, double flySpeed, int flyTime, boolean canFloat) {
         super(trinketGroup, trinketSlot, durability, itemMods);
@@ -23,12 +19,6 @@ public class FlightTrinketItem extends AwakenTrinketItem {
         this.flySpeed = flySpeed;
         this.flyTime = flyTime;
         this.canFloat = canFloat;
-    }
-
-    public FlightTrinketItem setWings(boolean areWings) {
-        this.areWings = areWings;
-
-        return this;
     }
 
     /**
@@ -67,12 +57,5 @@ public class FlightTrinketItem extends AwakenTrinketItem {
      */
     public boolean canFloat() {
         return canFloat;
-    }
-
-    @Environment(EnvType.CLIENT)
-    public Identifier getWingTexture() {
-        Identifier id = Registry.ITEM.getId(this);
-
-        return new Identifier(id.getNamespace(), "textures/entity/wings/" + id.getPath() + ".png");
     }
 }

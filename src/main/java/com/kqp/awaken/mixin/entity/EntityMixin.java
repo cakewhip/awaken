@@ -2,10 +2,9 @@ package com.kqp.awaken.mixin.entity;
 
 import com.kqp.awaken.entity.player.PlayerFlightProperties;
 import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.item.trinket.FlightTrinketItem;
+import com.kqp.awaken.item.trinket.flight.FlightTrinketItem;
 import com.kqp.awaken.util.TrinketUtil;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;

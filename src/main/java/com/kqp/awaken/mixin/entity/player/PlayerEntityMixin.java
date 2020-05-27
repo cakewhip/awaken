@@ -4,7 +4,7 @@ import com.kqp.awaken.entity.player.PlayerFlightProperties;
 import com.kqp.awaken.entity.player.PlayerReference;
 import com.kqp.awaken.init.AwakenEntityAttributes;
 import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.item.trinket.FlightTrinketItem;
+import com.kqp.awaken.item.trinket.flight.FlightTrinketItem;
 import com.kqp.awaken.util.TrinketUtil;
 import com.mojang.authlib.GameProfile;
 import dev.emi.trinkets.api.TrinketsApi;
