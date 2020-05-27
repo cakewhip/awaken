@@ -19,7 +19,7 @@ public class BackgroundRendererMixin {
     private static void applySnorkelMaskEffect(float density) {
         PlayerEntity player = MinecraftClient.getInstance().player;
 
-        if (TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.SNORKEL_MASK)) {
+        if (TrinketUtil.hasAnyTrinkets(player, AwakenItems.Trinkets.SNORKEL_MASK, AwakenItems.Trinkets.MAGMA_VISOR)) {
             // When in lava, it's 2.0F
             // When it's in neither lava nor water, it's 1.0F
             if (density == 1.0F || density == 2.0F) {
