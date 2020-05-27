@@ -1,12 +1,23 @@
 package com.kqp.awaken.util;
 
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
+import dev.emi.trinkets.api.TrinketsApi;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class TrinketUtil {
-    public static boolean hasTrinket(LivingEntity entity, Item trinket) {
-        return entity.getEquippedStack(EquipmentSlot.MAINHAND).getItem() == trinket
-                || entity.getEquippedStack(EquipmentSlot.OFFHAND).getItem() == trinket;
+    public static boolean hasTrinket(PlayerEntity entity, Item trinket) {
+        Inventory trinkets = TrinketsApi.getTrinketsInventory(entity);
+
+        for (int i = 0; i < trinkets.size(); i++) {
+            ItemStack itemStack = trinkets.getStack(i);
+
+            if (itemStack.getItem() == trinket) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

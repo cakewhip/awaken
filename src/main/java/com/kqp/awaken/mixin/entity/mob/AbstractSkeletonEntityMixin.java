@@ -76,7 +76,7 @@ public abstract class AbstractSkeletonEntityMixin {
                         10,
                         true,
                         false,
-                        player -> !TrinketUtil.hasTrinket((LivingEntity) player, AwakenItems.Trinkets.BONE_CROWN)
+                        player -> !TrinketUtil.hasTrinket((PlayerEntity) player, AwakenItems.Trinkets.BONE_CROWN)
                 );
             } else if (goal instanceof RevengeGoal) {
                 // I don't know how I feel about entirely removing skeleton friendly fire

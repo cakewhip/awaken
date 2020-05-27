@@ -1,11 +1,13 @@
 package com.kqp.awaken.mixin.enchantment;
 
-import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.util.TrinketUtil;
+import com.kqp.awaken.item.trinket.AwakenTrinketItem;
+import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,28 +15,36 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Used to:
- * Apply the guardian and glacial aglet effects.
- * Apply the lucky tackle effect.
- * Apply the snorkel mask effect.
- * Apply the anchor effect.
+ * Apply trinket enchantment modifiers.
  */
 @Mixin(EnchantmentHelper.class)
 public class EnchantmentHelperMixin {
     @Inject(method = "getEquipmentLevel", at = @At(value = "RETURN", ordinal = 1), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
     private static void applyTrinketEffects(Enchantment enchantment, LivingEntity entity, CallbackInfoReturnable<Integer> callbackInfo,
                                             Iterable<ItemStack> _, int i) {
-        if (enchantment == Enchantments.DEPTH_STRIDER && TrinketUtil.hasTrinket(entity, AwakenItems.Trinkets.GUARDIAN_AGLET)) {
-            callbackInfo.setReturnValue(Math.max(i, 2));
-        } else if (enchantment == Enchantments.FROST_WALKER && TrinketUtil.hasTrinket(entity, AwakenItems.Trinkets.GLACIAL_AGLET)) {
-            callbackInfo.setReturnValue(Math.max(i, 1));
-        } else if (enchantment == Enchantments.LUCK_OF_THE_SEA) {
-            callbackInfo.setReturnValue(i + 1);
-        } else if (enchantment == Enchantments.RESPIRATION && TrinketUtil.hasTrinket(entity, AwakenItems.Trinkets.SNORKEL_MASK)) {
-            callbackInfo.setReturnValue(i + 1);
-        } else if (enchantment == Enchantments.LURE && TrinketUtil.hasTrinket(entity, AwakenItems.Trinkets.ANCHOR)) {
-            callbackInfo.setReturnValue(i + 1);
+        if (entity instanceof PlayerEntity) {
+            final AtomicInteger newLevel = new AtomicInteger(i);
+            Inventory trinkets = TrinketsApi.getTrinketsInventory((PlayerEntity) entity);
+
+            for (int j = 0; j < trinkets.size(); j++) {
+                ItemStack itemStack = trinkets.getStack(j);
+
+                if (itemStack.getItem() instanceof AwakenTrinketItem) {
+                    AwakenTrinketItem trinket = (AwakenTrinketItem) itemStack.getItem();
+
+                    trinket.getEntityFeatures().ifPresent(features -> {
+                        newLevel.set(newLevel.get() + features.getEnchantmentModifiers().getOrDefault(enchantment, 0));
+                    });
+                }
+            }
+
+            i = newLevel.get();
         }
+
+        callbackInfo.setReturnValue(i);
     }
 }

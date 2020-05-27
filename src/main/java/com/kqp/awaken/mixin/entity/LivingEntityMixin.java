@@ -54,9 +54,9 @@ import java.util.Set;
  * Deny riptide status when using the Atlantean sword.
  * Give spiders poison effect post-awakening.
  * Apply the silky glove effect.
+ * Apply the stick of dynamite, lightning bottle, and electrified dynamite effects.
  * Apply the shock-wave shield effect.
  * Apply the scorched mask effect.
- * Apply the stick of dynamite, lightning bottle, and electrified dynamite effects.
  * Listen for equipping and un-equipping.
  */
 @Mixin(LivingEntity.class)
@@ -162,42 +162,6 @@ public abstract class LivingEntityMixin {
         }
     }
 
-    @Inject(method = "isClimbing", at = @At("HEAD"), cancellable = true)
-    private void applySilkyGloveEffect(CallbackInfoReturnable<Boolean> callbackInfo) {
-        LivingEntity entity = (LivingEntity) (Object) this;
-
-        if (!entity.isSpectator()) {
-            if (entity.horizontalCollision) {
-                if (TrinketUtil.hasTrinket(entity, AwakenItems.Trinkets.SILKY_GLOVE)) {
-                    callbackInfo.setReturnValue(true);
-                }
-            }
-        }
-    }
-
-    @Inject(method = "takeShieldHit", at = @At("HEAD"), cancellable = true)
-    private void applyShockwaveShieldEffect(LivingEntity attacker, CallbackInfo callbackInfo) {
-        LivingEntity entity = (LivingEntity) (Object) this;
-        if (TrinketUtil.hasTrinket(entity, AwakenItems.Trinkets.SHOCKWAVE_SHIELD)) {
-            if (entity.getRandom().nextFloat() < 0.75F) {
-                attacker.takeKnockback(0.5F * 1.5F, entity.getX() - attacker.getX(), entity.getZ() - attacker.getZ());
-
-                callbackInfo.cancel();
-            }
-        }
-    }
-
-    @ModifyVariable(method = "damage", at = @At("HEAD"), ordinal = 0)
-    private float applyScorchedMaskEffect(float amount, DamageSource source, float amount2) {
-        LivingEntity entity = (LivingEntity) (Object) this;
-
-        if (source.isFire() && TrinketUtil.hasTrinket(entity, AwakenItems.Trinkets.SCORCHED_MASK)) {
-            amount *= 0.25F;
-        }
-
-        return amount;
-    }
-
     @Inject(method = "damage", at = @At(value = "RETURN"))
     private void applyDynamiteAndLightningEffects(DamageSource source, float amount, CallbackInfoReturnable<Boolean> callbackInfo) {
         if (callbackInfo.getReturnValue()) {
@@ -205,25 +169,25 @@ public abstract class LivingEntityMixin {
             Entity entity = source.getAttacker();
 
             if (entity != null && !entity.world.isClient) {
-                if (entity instanceof LivingEntity) {
-                    LivingEntity living = (LivingEntity) entity;
+                if (entity instanceof PlayerEntity) {
+                    PlayerEntity player = (PlayerEntity) entity;
 
-                    boolean dynamite = TrinketUtil.hasTrinket(living, AwakenItems.Trinkets.STICK_OF_DYNAMITE);
-                    boolean lightning = TrinketUtil.hasTrinket(living, AwakenItems.Trinkets.LIGHTNING_BOTTLE);
-                    boolean both = TrinketUtil.hasTrinket(living, AwakenItems.Trinkets.ELECTRIFYING_DYNAMITE);
+                    boolean dynamite = TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.STICK_OF_DYNAMITE);
+                    boolean lightning = TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.LIGHTNING_BOTTLE);
+                    boolean both = TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.ELECTRIFYING_DYNAMITE);
 
                     float explosionChance = both ? 0.10F : 0.06F;
                     float lightningChance = both ? 0.12F : 0.08F;
 
                     if (dynamite || both) {
-                        if (living.getRandom().nextFloat() < explosionChance) {
-                            living.world.createExplosion(
-                                    living,
+                        if (player.getRandom().nextFloat() < explosionChance) {
+                            player.world.createExplosion(
+                                    player,
                                     source.setExplosive(),
                                     target.getX(),
                                     target.getY(),
                                     target.getZ(),
-                                    1.5F + living.getRandom().nextFloat() * 1.5F,
+                                    1.5F + player.getRandom().nextFloat() * 1.5F,
                                     false,
                                     Explosion.DestructionType.NONE
                             );
@@ -231,23 +195,65 @@ public abstract class LivingEntityMixin {
                     }
 
                     if (lightning || both) {
-                        if (living.getRandom().nextFloat() < lightningChance) {
+                        if (player.getRandom().nextFloat() < lightningChance) {
                             LightningEntity lightningEntity = new LightningEntity(
-                                    living.world,
+                                    player.world,
                                     target.getX(),
                                     target.getY(),
                                     target.getZ(),
                                     true
                             );
 
-                            ((ServerWorld) living.world).addLightning(lightningEntity);
+                            ((ServerWorld) player.world).addLightning(lightningEntity);
 
-                            doLightningDamage(lightningEntity, living);
+                            doLightningDamage(lightningEntity, player);
                         }
                     }
                 }
             }
         }
+    }
+
+    @Inject(method = "isClimbing", at = @At("HEAD"), cancellable = true)
+    private void applySilkyGloveEffect(CallbackInfoReturnable<Boolean> callbackInfo) {
+        if ((Object) this instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) (Object) this;
+
+            if (!player.isSpectator()) {
+                if (player.horizontalCollision) {
+                    if (TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.SILKY_GLOVE)) {
+                        callbackInfo.setReturnValue(true);
+                    }
+                }
+            }
+        }
+    }
+
+    @Inject(method = "takeShieldHit", at = @At("HEAD"), cancellable = true)
+    private void applyShockwaveShieldEffect(LivingEntity attacker, CallbackInfo callbackInfo) {
+        if ((Object) this instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) (Object) this;
+            if (TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.SHOCKWAVE_SHIELD)) {
+                if (player.getRandom().nextFloat() < 0.75F) {
+                    attacker.takeKnockback(0.5F * 1.5F, player.getX() - attacker.getX(), player.getZ() - attacker.getZ());
+
+                    callbackInfo.cancel();
+                }
+            }
+        }
+    }
+
+    @ModifyVariable(method = "damage", at = @At("HEAD"), ordinal = 0)
+    private float applyScorchedMaskEffect(float amount, DamageSource source, float amount2) {
+        if ((Object) this instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) (Object) this;
+
+            if (source.isFire() && TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.SCORCHED_MASK)) {
+                amount *= 0.25F;
+            }
+        }
+
+        return amount;
     }
 
     @Inject(

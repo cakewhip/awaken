@@ -5,6 +5,7 @@ import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.item.bow.AwakenBowItem;
 import com.kqp.awaken.util.TrinketUtil;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.BowItem;
@@ -43,7 +44,7 @@ public class BowItemMixin {
                                          ItemStack bowStack, World world, LivingEntity user, int remainingUseTicks) {
         boolean consume = true;
 
-        if (TrinketUtil.hasTrinket(user, AwakenItems.Trinkets.RANGERS_GLOVE) || true) {
+        if (user instanceof PlayerEntity && TrinketUtil.hasTrinket((PlayerEntity) user, AwakenItems.Trinkets.RANGERS_GLOVE) || true) {
             if (user.getRandom().nextFloat() < 0.20F) {
                 consume = false;
             }

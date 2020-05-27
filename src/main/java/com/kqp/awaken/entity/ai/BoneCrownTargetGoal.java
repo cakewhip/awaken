@@ -8,6 +8,7 @@ import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.TrackTargetGoal;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
 
 public class BoneCrownTargetGoal extends TrackTargetGoal {
     protected LivingEntity targetEntity;
@@ -37,8 +38,8 @@ public class BoneCrownTargetGoal extends TrackTargetGoal {
                     if (lastDamageSource != null) {
                         Entity lastAttacker = lastDamageSource.getAttacker();
 
-                        return lastAttacker instanceof LivingEntity &&
-                                TrinketUtil.hasTrinket((LivingEntity) lastAttacker, AwakenItems.Trinkets.BONE_CROWN);
+                        return lastAttacker instanceof PlayerEntity &&
+                                TrinketUtil.hasTrinket((PlayerEntity) lastAttacker, AwakenItems.Trinkets.BONE_CROWN);
                     }
 
                     return false;

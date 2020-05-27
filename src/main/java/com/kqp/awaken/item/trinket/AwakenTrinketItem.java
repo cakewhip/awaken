@@ -42,4 +42,8 @@ public class AwakenTrinketItem extends Item implements ITrinket {
     public void onUnequip(PlayerEntity player, ItemStack stack) {
         itemMods.ifPresent(effects -> effects.removeFrom(player));
     }
+
+    public Optional<EntityFeatureGroup> getEntityFeatures() {
+        return itemMods;
+    }
 }

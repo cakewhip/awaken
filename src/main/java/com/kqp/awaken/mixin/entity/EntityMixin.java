@@ -6,6 +6,7 @@ import com.kqp.awaken.item.trinket.FlightTrinketItem;
 import com.kqp.awaken.util.TrinketUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -59,10 +60,10 @@ public class EntityMixin {
 
     @ModifyVariable(method = "setOnFireFor", name = "i", at = @At(value = "STORE", ordinal = 0))
     private int applyScorchedMaskEffect(int i) {
-        if ((Object) this instanceof LivingEntity) {
-            LivingEntity entity = (LivingEntity) (Object) this;
+        if ((Object) this instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) (Object) this;
 
-            if (TrinketUtil.hasTrinket(entity, AwakenItems.Trinkets.SCORCHED_MASK)) {
+            if (TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.SCORCHED_MASK)) {
                 i *= 0.25;
             }
         }
