@@ -172,7 +172,7 @@ public abstract class LivingEntityMixin {
                 if (entity instanceof PlayerEntity) {
                     PlayerEntity player = (PlayerEntity) entity;
 
-                    boolean dynamite = TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.STICK_OF_DYNAMITE);
+                    boolean dynamite = TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.DYNAMITE_STICK);
                     boolean lightning = TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.LIGHTNING_BOTTLE);
                     boolean both = TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.ELECTRIFYING_DYNAMITE);
 

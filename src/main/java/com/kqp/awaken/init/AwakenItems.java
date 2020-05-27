@@ -183,7 +183,7 @@ public class AwakenItems {
                 .addStatusEffect(StatusEffects.FIRE_RESISTANCE, 0)
         ));
 
-        public static final Item STICK_OF_DYNAMITE = register("stick_of_dynamite", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200));
+        public static final Item DYNAMITE_STICK = register("dynamite_stick", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200));
         public static final Item LIGHTNING_BOTTLE = register("lightning_bottle", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200));
         public static final Item ELECTRIFYING_DYNAMITE = register("electrifying_dynamite", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200));
 
@@ -208,7 +208,6 @@ public class AwakenItems {
         public static final Item COMBAT_SADDLE = register("combat_saddle", new AwakenTrinketItem(SlotGroups.CHEST, Slots.BELT, 200));
 
         public static final Item BONE_CROWN = register("bone_crown", new AwakenTrinketItem(SlotGroups.HEAD, AwakenSlots.HAT, 200));
-
 
         public static final Item RAIN_HAT = register("rain_hat", new AwakenTrinketItem(SlotGroups.HEAD, AwakenSlots.HAT, 200));
         public static final Item LUCKY_TACKLE = register("lucky_tackle", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200, new EntityFeatureGroup().addEnchantmentModifier(Enchantments.LUCK_OF_THE_SEA, 1)));

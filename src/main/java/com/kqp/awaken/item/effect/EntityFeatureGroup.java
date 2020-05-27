@@ -16,6 +16,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,28 +65,31 @@ public class EntityFeatureGroup {
             tooltip.add(
                     new TranslatableText(statusEffect
                             .getTranslationKey())
-                            .append(new TranslatableText("enchantment.level." + (statusEffect.getAmplifier() + 1)))
+                            .append(" ")
+                            .append(new TranslatableText("enchantment.level." + (statusEffect.getAmplifier() + 1)).formatted(Formatting.GRAY))
             );
         });
 
+        List<String> attribModText = new ArrayList();
+
         attributeModifiers.forEach((attribute, modifier) -> {
-            String value = String.format("%.1f", (modifier.getValue() * 100F)).replace(".0", "");
+            String value = String.format("%.1f", (Math.abs(modifier.getValue()) * (modifier.getOperation() == EntityAttributeModifier.Operation.ADDITION ? 1F : 100F))).replace(".0", "");
 
             String numberFormat = modifier.getOperation() != EntityAttributeModifier.Operation.ADDITION ? "%" : "";
 
-            String change = modifier.getValue() > 0 ? "increased" : "decreased";
-
-            Formatting color = modifier.getValue() > 0 ? Formatting.DARK_GREEN : Formatting.RED;
+            String change = modifier.getValue() > 0 ? "+" : "-";
 
             String attributeName = I18n.translate(attribute.getTranslationKey()).toLowerCase();
 
-            tooltip.add(new LiteralText(String.format("%s%s %s %s",
+            attribModText.add(String.format("%s%s%s %s",
+                    change,
                     value,
                     numberFormat,
-                    change,
                     attributeName
-            )).formatted(color));
+            ));
         });
+
+        attribModText.stream().sorted().forEach(text -> tooltip.add(new LiteralText(text).formatted(Formatting.GRAY)));
     }
 
     public List<StatusEffectInstance> getStatusEffects() {
