@@ -145,8 +145,30 @@ public class AwakenItems {
     }
 
     public static class Trinkets {
-        public static final Item GUARDIAN_AGLET = register("guardian_aglet", new AwakenTrinketItem(SlotGroups.FEET, Slots.AGLET, 200, new EntityFeatureGroup().addEnchantmentModifier(Enchantments.DEPTH_STRIDER, 2)));
-        public static final Item GLACIAL_AGLET = register("glacial_aglet", new AwakenTrinketItem(SlotGroups.FEET, Slots.AGLET, 200, new EntityFeatureGroup().addEnchantmentModifier(Enchantments.FROST_WALKER, 1)));
+        public static final Item BROKEN_ANKLE_CHAIN = register("broken_ankle_chain", new AwakenTrinketItem(SlotGroups.FEET, Slots.AGLET, 200, new EntityFeatureGroup()
+                .addEntityAttributeMultiplier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "broken_ankle_chain_speed", -1.5F / 100)
+                .addEntityAttributeMultiplier(EntityAttributes.GENERIC_ARMOR, "broken_ankle_chain_armor", 2F / 100F)
+        ));
+        public static final Item BROKEN_ANKLE_WEIGHTS = register("broken_ankle_weights", new AwakenTrinketItem(SlotGroups.FEET, Slots.AGLET, 200, new EntityFeatureGroup()
+                .addEntityAttributeMultiplier(EntityAttributes.GENERIC_ARMOR, "broken_ankle_weights_armor", -1.5F / 100)
+                .addEntityAttributeMultiplier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "broken_ankle_weights_speed", 2F / 100F)
+        ));
+        public static final Item GUARDIAN_AGLET = register("guardian_aglet", new AwakenTrinketItem(SlotGroups.FEET, Slots.AGLET, 200, new EntityFeatureGroup()
+                .addEnchantmentModifier(Enchantments.DEPTH_STRIDER, 2)
+        ));
+        public static final Item GLACIAL_AGLET = register("glacial_aglet", new AwakenTrinketItem(SlotGroups.FEET, Slots.AGLET, 200, new EntityFeatureGroup()
+                .addEnchantmentModifier(Enchantments.FROST_WALKER, 1)
+        ));
+        public static final Item GUARDIAN_CHAIN = register("guardian_chain", new AwakenTrinketItem(SlotGroups.FEET, Slots.AGLET, 200, new EntityFeatureGroup()
+                .addEnchantmentModifier(Enchantments.DEPTH_STRIDER, 2)
+                .addEntityAttributeMultiplier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "broken_ankle_chain_speed", -2.5F / 100)
+                .addEntityAttributeMultiplier(EntityAttributes.GENERIC_ARMOR, "broken_ankle_chain_armor", 4F / 100F)
+        ));
+        public static final Item GLACIAL_WEIGHTS = register("glacial_weights", new AwakenTrinketItem(SlotGroups.FEET, Slots.AGLET, 200, new EntityFeatureGroup()
+                .addEnchantmentModifier(Enchantments.FROST_WALKER, 1)
+                .addEntityAttributeMultiplier(EntityAttributes.GENERIC_ARMOR, "broken_ankle_weights_armor", -2.5F / 100)
+                .addEntityAttributeMultiplier(EntityAttributes.GENERIC_MOVEMENT_SPEED, "broken_ankle_weights_speed", 4F / 100F)
+        ));
         public static final Item CARNIVOROUS_MASK = register("carnivorous_mask", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
         public static final Item FARMERS_HANKERCHIEF = register("farmers_hankerchief", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
         public static final Item BABY_BIB = register("baby_bib", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
@@ -156,7 +178,6 @@ public class AwakenItems {
         public static final Item RAIN_HAT = register("rain_hat", new AwakenTrinketItem(SlotGroups.HEAD, AwakenSlots.HAT, 200));
         public static final Item SHOCKWAVE_SHIELD = register("shockwave_shield", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200));
         public static final Item RANGERS_GLOVE = register("rangers_glove", new AwakenTrinketItem(SlotGroups.HAND, Slots.GLOVES, 200));
-        public static final Item BOXING_GLOVES = register("boxing_gloves", new AwakenTrinketItem(SlotGroups.HAND, Slots.GLOVES, 200));
         public static final Item COMBAT_SADDLE = register("combat_saddle", new AwakenTrinketItem(SlotGroups.CHEST, Slots.BELT, 200));
         public static final Item BONE_CROWN = register("bone_crown", new AwakenTrinketItem(SlotGroups.HEAD, AwakenSlots.HAT, 200));
         public static final Item SCORCHED_MASK = register("scorched_mask", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
@@ -164,6 +185,20 @@ public class AwakenItems {
         public static final Item STICK_OF_DYNAMITE = register("stick_of_dynamite", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200));
         public static final Item LIGHTNING_BOTTLE = register("lightning_bottle", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200));
         public static final Item ELECTRIFYING_DYNAMITE = register("electrifying_dynamite", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200));
+
+        public static final Item MAGMA_VISOR = register("magma_visor", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200, new EntityFeatureGroup()
+                .addStatusEffect(StatusEffects.FIRE_RESISTANCE, 0)
+        ));
+
+        // TODO: make the knockback EAM affect players too
+        public static final Item BOXING_GLOVES = register("boxing_gloves", new AwakenTrinketItem(SlotGroups.HAND, Slots.GLOVES, 200, new EntityFeatureGroup()
+                .addEntityAttributeAddition(AwakenEntityAttributes.UNARMED_DAMAGE, "boxing_gloves_unarmed_damage", 6F)
+                .addEntityAttributeAddition(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, "boxing_gloves_knockback", 15F / 100F)
+        ));
+        public static final Item STEEL_GAUNTLET = register("steel_gauntlet", new AwakenTrinketItem(SlotGroups.HAND, Slots.GLOVES, 200, new EntityFeatureGroup()
+                .addEntityAttributeAddition(AwakenEntityAttributes.UNARMED_DAMAGE, "steel_gauntlet_unarmed_damage", 14F)
+                .addEntityAttributeAddition(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, "steel_gauntlet_knockback", 25F / 100F)
+        ));
 
         public static final Item LUCKY_TACKLE = register("lucky_tackle", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200, new EntityFeatureGroup().addEnchantmentModifier(Enchantments.LUCK_OF_THE_SEA, 1)));
         public static final Item ANCHOR = register("anchor", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200, new EntityFeatureGroup().addEnchantmentModifier(Enchantments.LURE, 1)));

@@ -95,12 +95,10 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
             silky glove [950%]
                 need to texture
                 add as drop from spiders
-            broken ankle chain [0%]
-                need to implement (decrease speed by 1.5%, increase armor by 2%)
+            broken ankle chain [50%]
                 need to texture
                 add as a drop from mobs in stronghold
-            broken ankle weights [0%]
-                need to implement (decrease armor by 1.5%, increase speed by 2%)
+            broken ankle weights [50%]
                 need to texture
                 add as a drop from mobs in stronghold
             lucky tackle [50%]
@@ -116,8 +114,7 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to fix visual bug
                 need to texture
                 add as drop from skeletons
-            boxing gloves [25%]
-                need to implement (unarmed attacks do 6x more damage and 2x more knockback)
+            boxing gloves [50%]
                 need to texture
                 add as a drop from zombies
             combat saddle [50%]
@@ -135,21 +132,18 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to implement (a little worse than molten jetpack, but can float)
                 need to texture
                 add recipe (raptor chicken feathers, chicken feathers, shulker pearl)
-            guardian chain [0%]
-                need to implement (depth strider effect, decrease speed by 2.5%, increase armor by 4%)
-            glacial weights [0%]
-                need to implement (frostwalker effect, decrease armor by 2.5%, increase speed by 4%)
+            guardian chain [50%]
+            glacial weights [50%]
             scorched mask [50%]
-                need to implement (fire damage and time spent on fire reduced by 50%)
                 need to texture
                 add as drop from fiery moon mobs
             snorkel mask [50%]
                 need to texture
                 add as drop from ocean mobs
-            magma visor [0%]
-                need to implement (completely immune to fire/lava)
+            magma visor [25%]
+                need to implement (completely immune to fire/lava AND see better in liquids)
                 need to texture
-                add recipe (lava goggle, scorched mask)
+                add recipe (snorkel mask, scorched mask)
             baby bib [50%]
                 need to implement (15% more saturation from food)
                 need to texture
@@ -158,21 +152,13 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to implement (33% more hunger restored and 25% more saturation from food)
                 need to texture
                 add recipe (carnivorous mask, farmer's hankerchief, baby bib)
-            prospector's ring [0%]
-                need to implement (beeps in the direction of a mineral ore)
-                need to texture
-                add as a drop from zombie miners
-            woop-e tron [0%]
-                need to implement (bow and crossbow launching makes fart sound)
-                need to texture
-                add as a drop from all mobs below y32
             anchor [50%]
                 need to texture
                 add as drop from fishing in deep ocean biomes
             angler's tackle box [0%]
                 need to implement (plus 2 levels of luck of the sea, can fish in any condition, and wait times reduced by 20%)
                 need to texture
-                add recipe (lucky charm, rain chat, anchor, and magic tackle)
+                add recipe (lucky tackle, rain hat, anchor)
             stick of dynamite [50%]
                 need to texture
                 add as drop from creepers
@@ -186,8 +172,7 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
                 need to implement (15% ranged chance to make enemies float, 20% chance to not consume arrows)
                 need to texture
                 add as drop from shulkers
-            gauntlet of steel [0%]
-                need to implement (unarmed attacks do 12x more damage and 3.5x more knockback)
+            gauntlet of steel [50%]
                 need to texture
                 add as drop from abomination
         post-awakening melee weapons:
