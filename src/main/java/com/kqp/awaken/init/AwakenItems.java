@@ -153,16 +153,16 @@ public class AwakenItems {
         public static final Item DISCORD_BELT = register("discord_belt", new AwakenTrinketItem(SlotGroups.CHEST, Slots.BELT, 200));
         public static final Item SILKY_GLOVE = register("silky_glove", new AwakenTrinketItem(SlotGroups.HAND, Slots.GLOVES, 200));
         public static final Item RAIN_HAT = register("rain_hat", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
-        public static final Item SHOCKWAVE_SHIELD = register("shockwave_shield", new AwakenTrinketItem(SlotGroups.HAND, Slots.RING, 200));
+        public static final Item SHOCKWAVE_SHIELD = register("shockwave_shield", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200));
         public static final Item RANGERS_GLOVE = register("rangers_glove", new AwakenTrinketItem(SlotGroups.HAND, Slots.GLOVES, 200));
         public static final Item BOXING_GLOVES = register("boxing_gloves", new AwakenTrinketItem(SlotGroups.HAND, Slots.GLOVES, 200));
         public static final Item COMBAT_SADDLE = register("combat_saddle", new AwakenTrinketItem(SlotGroups.CHEST, Slots.BELT, 200));
         public static final Item BONE_CROWN = register("bone_crown", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
         public static final Item SCORCHED_MASK = register("scorched_mask", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
         public static final Item SNORKEL_MASK = register("snorkel_mask", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200, new EntityFeatureGroup().addEnchantmentModifier(Enchantments.RESPIRATION, 1)));
-        public static final Item STICK_OF_DYNAMITE = register("stick_of_dynamite", new AwakenTrinketItem(SlotGroups.HAND, Slots.RING, 200));
-        public static final Item LIGHTNING_BOTTLE = register("lightning_bottle", new AwakenTrinketItem(SlotGroups.HAND, Slots.RING, 200));
-        public static final Item ELECTRIFYING_DYNAMITE = register("electrifying_dynamite", new AwakenTrinketItem(SlotGroups.HAND, Slots.RING, 200));
+        public static final Item STICK_OF_DYNAMITE = register("stick_of_dynamite", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200));
+        public static final Item LIGHTNING_BOTTLE = register("lightning_bottle", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200));
+        public static final Item ELECTRIFYING_DYNAMITE = register("electrifying_dynamite", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200));
 
         public static final Item LUCKY_TACKLE = register("lucky_tackle", new AwakenTrinketItem(SlotGroups.HAND, Slots.RING, 200, new EntityFeatureGroup().addEnchantmentModifier(Enchantments.LUCK_OF_THE_SEA, 1)));
         public static final Item ANCHOR = register("anchor", new AwakenTrinketItem(SlotGroups.HAND, Slots.RING, 200, new EntityFeatureGroup().addEnchantmentModifier(Enchantments.LURE, 1)));
