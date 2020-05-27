@@ -1,5 +1,6 @@
 package com.kqp.awaken.init;
 
+import com.kqp.awaken.trinket.AwakenSlots;
 import dev.emi.trinkets.api.SlotGroups;
 import dev.emi.trinkets.api.Slots;
 import dev.emi.trinkets.api.TrinketSlots;
@@ -7,6 +8,7 @@ import net.minecraft.util.Identifier;
 
 public class AwakenTrinkets {
     public static void init() {
+        TrinketSlots.addSlot(SlotGroups.HEAD, AwakenSlots.HAT, new Identifier(Awaken.MOD_ID, "textures/item/empty_trinket_slot_hat.png"));
         TrinketSlots.addSlot(SlotGroups.HEAD, Slots.MASK, new Identifier("trinkets", "textures/item/empty_trinket_slot_mask.png"));
         TrinketSlots.addSlot(SlotGroups.HEAD, Slots.NECKLACE, new Identifier("trinkets", "textures/item/empty_trinket_slot_necklace.png"));
         TrinketSlots.addSlot(SlotGroups.CHEST, Slots.BELT, new Identifier("trinkets", "textures/item/empty_trinket_slot_belt.png"));
