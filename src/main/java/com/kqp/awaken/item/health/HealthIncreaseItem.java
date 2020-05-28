@@ -1,6 +1,7 @@
 package com.kqp.awaken.item.health;
 
 import com.kqp.awaken.init.Awaken;
+import com.kqp.awaken.mixin.player.MaxHealthPersister;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -21,7 +22,7 @@ import java.util.List;
 
 /**
  * Health increase item-- right-click to increase life.
- * {@link com.kqp.awaken.mixin.server.network.ServerPlayerEntityMixin} makes the attributes persist.
+ * {@link MaxHealthPersister} makes the attributes persist.
  */
 public class HealthIncreaseItem extends Item {
     public static final ArrayList<HealthIncreaseItem> HEALTH_INCREASE_ITEMS = new ArrayList();
