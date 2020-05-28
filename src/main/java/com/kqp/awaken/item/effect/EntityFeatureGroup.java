@@ -16,7 +16,6 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,10 +62,18 @@ public class EntityFeatureGroup {
     public void populateTooltips(List<Text> tooltip) {
         statusEffects.forEach(statusEffect -> {
             tooltip.add(
-                    new TranslatableText(statusEffect
-                            .getTranslationKey())
-                            .append(" ")
+                    new TranslatableText(statusEffect.getTranslationKey()).formatted(Formatting.GRAY)
+                            .append(" ").formatted(Formatting.GRAY)
                             .append(new TranslatableText("enchantment.level." + (statusEffect.getAmplifier() + 1)).formatted(Formatting.GRAY))
+            );
+        });
+
+        enchantmentModifiers.forEach((enchantment, lvl) -> {
+            tooltip.add(
+                    new LiteralText("+").formatted(Formatting.GRAY)
+                            .append(new TranslatableText(enchantment.getTranslationKey())).formatted(Formatting.GRAY)
+                            .append(" ").formatted(Formatting.GRAY)
+                            .append(new TranslatableText("enchantment.level." + lvl)).formatted(Formatting.GRAY)
             );
         });
 
