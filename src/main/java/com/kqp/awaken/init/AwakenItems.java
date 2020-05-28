@@ -210,8 +210,16 @@ public class AwakenItems {
         public static final Item BONE_CROWN = register("bone_crown", new AwakenTrinketItem(SlotGroups.HEAD, AwakenSlots.HAT, 200));
 
         public static final Item RAIN_HAT = register("rain_hat", new AwakenTrinketItem(SlotGroups.HEAD, AwakenSlots.HAT, 200));
-        public static final Item LUCKY_TACKLE = register("lucky_tackle", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200, new EntityFeatureGroup().addEnchantmentModifier(Enchantments.LUCK_OF_THE_SEA, 1)));
-        public static final Item ANCHOR_CHARM = register("anchor_charm", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200, new EntityFeatureGroup().addEnchantmentModifier(Enchantments.LURE, 1)));
+        public static final Item LUCKY_TACKLE = register("lucky_tackle", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200, new EntityFeatureGroup()
+                .addEnchantmentModifier(Enchantments.LUCK_OF_THE_SEA, 1)
+        ));
+        public static final Item ANCHOR_CHARM = register("anchor_charm", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200, new EntityFeatureGroup()
+                .addEnchantmentModifier(Enchantments.LURE, 1)
+        ));
+        public static final Item ANGLERS_TACKLE_BOX = register("anglers_tackle_box", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200, new EntityFeatureGroup()
+                .addEnchantmentModifier(Enchantments.LURE, 1)
+                .addEnchantmentModifier(Enchantments.LUCK_OF_THE_SEA, 1)
+        ));
 
         // public static final Item JETPACK = register("jetpack", new FlightTrinketItem(SlotGroups.CHEST, Slots.CAPE, 200, null, 0.3D, 0.1D, 20, false));
         public static final Item TEST_WINGS = register("test_wings", new WingsTrinketItem(200, null, 0.315D, 0.115D, 30));

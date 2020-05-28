@@ -17,7 +17,7 @@ public class FishingBobberEntityMixin {
     private int applyRainHatEffect(int i) {
         PlayerEntity owner = ((FishingBobberEntity) (Object) this).getOwner();
 
-        if (TrinketUtil.hasTrinket(owner, AwakenItems.Trinkets.RAIN_HAT)) {
+        if (TrinketUtil.hasAnyTrinkets(owner, AwakenItems.Trinkets.RAIN_HAT, AwakenItems.Trinkets.ANGLERS_TACKLE_BOX)) {
             return i + 1;
         }
 
