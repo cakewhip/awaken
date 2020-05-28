@@ -28,18 +28,24 @@ public class EntityFeatureGroup {
     private final ArrayListMultimap<EntityAttribute, EntityAttributeModifier> attributeModifiers = ArrayListMultimap.create();
     private final HashMap<Enchantment, Integer> enchantmentModifiers = new HashMap();
 
+    private final String groupName;
+
+    public EntityFeatureGroup(String groupName) {
+        this.groupName = groupName;
+    }
+
     public EntityFeatureGroup addStatusEffect(StatusEffect effect, int amplifier) {
         statusEffects.add(new StatusEffectInstance(effect, Integer.MAX_VALUE, amplifier));
         return this;
     }
 
-    public EntityFeatureGroup addEntityAttributeMultiplier(EntityAttribute attribute, String name, double amount) {
-        attributeModifiers.put(attribute, new EntityAttributeModifier(name, amount, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
+    public EntityFeatureGroup addEntityAttributeMultiplier(EntityAttribute attribute, double amount) {
+        attributeModifiers.put(attribute, new EntityAttributeModifier(groupName + "_" + attribute.getTranslationKey(), amount, EntityAttributeModifier.Operation.MULTIPLY_TOTAL));
         return this;
     }
 
-    public EntityFeatureGroup addEntityAttributeAddition(EntityAttribute attribute, String name, double amount) {
-        attributeModifiers.put(attribute, new EntityAttributeModifier(name, amount, EntityAttributeModifier.Operation.ADDITION));
+    public EntityFeatureGroup addEntityAttributeAddition(EntityAttribute attribute, double amount) {
+        attributeModifiers.put(attribute, new EntityAttributeModifier(groupName + "_" + attribute.getTranslationKey(), amount, EntityAttributeModifier.Operation.ADDITION));
         return this;
     }
 
