@@ -58,6 +58,7 @@ import java.util.Set;
  * Apply the shock-wave shield effect.
  * Apply the scorched mask effect.
  * Listen for equipping and un-equipping.
+ * Apply the shulker charm and glove effect.
  */
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -303,6 +304,24 @@ public abstract class LivingEntityMixin {
 
                 equip.ifPresent(equippedStack -> listener.onEquip(living, itemStack, equippedStack, currentSlot));
                 unEquip.ifPresent(unEquippedStack -> listener.onUnEquip(living, itemStack, unEquippedStack, currentSlot));
+            }
+        }
+    }
+
+    @Inject(method = "damage", at = @At("RETURN"))
+    public void applyShulkerCharm(DamageSource source, float amount, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
+        // Check if damage is applied
+        if (callbackInfoReturnable.getReturnValue()) {
+            LivingEntity livingEntity = (LivingEntity) (Object) this;
+
+            if (source.getAttacker() instanceof PlayerEntity) {
+                if (TrinketUtil.hasAnyTrinkets((PlayerEntity) source.getAttacker(), AwakenItems.Trinkets.SHULKER_CHARM, AwakenItems.Trinkets.SHULKER_GLOVE)) {
+                    if (source.isProjectile()) {
+                        if (livingEntity.getRandom().nextFloat() < 0.15F) {
+                            livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 3 * 20, 0));
+                        }
+                    }
+                }
             }
         }
     }

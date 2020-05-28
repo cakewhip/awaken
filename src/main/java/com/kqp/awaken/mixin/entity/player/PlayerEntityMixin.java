@@ -118,7 +118,6 @@ public class PlayerEntityMixin implements PlayerFlightProperties {
 
         // Apply combat saddle effect
         if (player.hasVehicle() && TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.COMBAT_SADDLE)) {
-            System.out.println("saddled");
             f *= 1.04;
         }
 

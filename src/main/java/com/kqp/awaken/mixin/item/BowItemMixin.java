@@ -44,14 +44,13 @@ public class BowItemMixin {
                                          ItemStack bowStack, World world, LivingEntity user, int remainingUseTicks) {
         boolean consume = true;
 
-        if (user instanceof PlayerEntity && TrinketUtil.hasTrinket((PlayerEntity) user, AwakenItems.Trinkets.RANGERS_GLOVE) || true) {
+        if (user instanceof PlayerEntity && TrinketUtil.hasAnyTrinkets((PlayerEntity) user, AwakenItems.Trinkets.RANGERS_GLOVE, AwakenItems.Trinkets.SHULKER_GLOVE)) {
             if (user.getRandom().nextFloat() < 0.20F) {
                 consume = false;
             }
         }
 
         if (consume) {
-            System.out.println("CONSUMING");
             arrowStack.decrement(amt);
         }
     }

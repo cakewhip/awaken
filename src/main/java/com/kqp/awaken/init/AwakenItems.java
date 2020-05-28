@@ -201,9 +201,14 @@ public class AwakenItems {
 
         public static final Item SILKY_GLOVE = register("silky_glove", new AwakenTrinketItem(SlotGroups.HAND, Slots.GLOVES, 200));
 
+        public static final Item RANGERS_GLOVE = register("rangers_glove", new AwakenTrinketItem(SlotGroups.HAND, Slots.GLOVES, 200));
+
+        public static final Item SHULKER_CHARM = register("shulker_charm", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200));
+
+        public static final Item SHULKER_GLOVE = register("shulker_glove", new AwakenTrinketItem(SlotGroups.HAND, Slots.GLOVES, 200));
+
         public static final Item SHOCKWAVE_SHIELD = register("shockwave_shield", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200));
 
-        public static final Item RANGERS_GLOVE = register("rangers_glove", new AwakenTrinketItem(SlotGroups.HAND, Slots.GLOVES, 200));
 
         public static final Item COMBAT_SADDLE = register("combat_saddle", new AwakenTrinketItem(SlotGroups.CHEST, Slots.BELT, 200));
 

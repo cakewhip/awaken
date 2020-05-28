@@ -155,8 +155,7 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
             anchor [50%]
                 need to texture
                 add as drop from fishing in deep ocean biomes
-            angler's tackle box [0%]
-                need to implement (plus 2 levels of luck of the sea, can fish in any condition, and wait times reduced by 20%)
+            angler's tackle box [50%]
                 need to texture
                 add recipe (lucky tackle, rain hat, anchor)
             stick of dynamite [50%]
@@ -168,8 +167,7 @@ list of features for a 1.0.0b release with their todos, progress, and target pro
             electrified dynamite [50%]
                 need to texture
                 add recipe (stick of dynamite, lightning in a bottle)
-            shulker glove [0%]
-                need to implement (15% ranged chance to make enemies float, 20% chance to not consume arrows)
+            shulker glove [50%]
                 need to texture
                 add as drop from shulkers
             gauntlet of steel [50%]
