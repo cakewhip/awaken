@@ -1,0 +1,16 @@
+{
+  "name": "wither_bone",
+  "durability_multiplier": 45,
+  "protection_amounts": [
+    7,
+    8,
+    12,
+    7
+  ],
+  "enchantability": 14,
+  "equip_sound": "item.armor.equip_gold",
+  "toughness": 4.0,
+  "repair_ingredients": [
+    "awaken:wither_rib"
+  ]
+}

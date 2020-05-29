@@ -1,0 +1,16 @@
+{
+  "name": "salvium",
+  "durability_multiplier": 45,
+  "protection_amounts": [
+    7,
+    8,
+    12,
+    7
+  ],
+  "enchantability": 16,
+  "equip_sound": "item.armor.equip_gold",
+  "toughness": 5.0,
+  "repair_ingredients": [
+    "awaken:salvium_ingot"
+  ]
+}

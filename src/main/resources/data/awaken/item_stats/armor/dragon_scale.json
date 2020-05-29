@@ -1,0 +1,16 @@
+{
+  "name": "dragon_scale",
+  "durability_multiplier": 37,
+  "protection_amounts": [
+    6,
+    8,
+    10,
+    6
+  ],
+  "enchantability": 16,
+  "equip_sound": "item.armor.equip_elytra",
+  "toughness": 4.0,
+  "repair_ingredients": [
+    "awaken:ender_dragon_scale"
+  ]
+}

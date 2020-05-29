@@ -1,0 +1,16 @@
+{
+  "name": "valerium",
+  "durability_multiplier": 45,
+  "protection_amounts": [
+    7,
+    10,
+    12,
+    7
+  ],
+  "enchantability": 16,
+  "equip_sound": "item.armor.equip_gold",
+  "toughness": 7.5,
+  "repair_ingredients": [
+    "awaken:valerium_ingot"
+  ]
+}
