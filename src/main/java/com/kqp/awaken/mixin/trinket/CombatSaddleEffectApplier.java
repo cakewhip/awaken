@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin.trinket;
 
 import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.util.TrinketUtil;
+import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,7 +17,7 @@ public class CombatSaddleEffectApplier {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
         // Apply combat saddle effect
-        if (player.hasVehicle() && TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.COMBAT_SADDLE)) {
+        if (player.hasVehicle() && EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.COMBAT_SADDLE)) {
             f *= 1.04;
         }
 

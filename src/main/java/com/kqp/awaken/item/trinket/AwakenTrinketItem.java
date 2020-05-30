@@ -1,6 +1,7 @@
 package com.kqp.awaken.item.trinket;
 
 import com.kqp.awaken.item.effect.EntityFeatureGroup;
+import com.kqp.awaken.item.effect.EntityFeatureGroupProvider;
 import dev.emi.trinkets.api.ITrinket;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
@@ -16,10 +17,13 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
-public class AwakenTrinketItem extends Item implements ITrinket {
+public class AwakenTrinketItem extends Item implements ITrinket, EntityFeatureGroupProvider {
     public final String trinketGroup, trinketSlot;
 
     private final Optional<EntityFeatureGroup> itemMods;
@@ -71,5 +75,14 @@ public class AwakenTrinketItem extends Item implements ITrinket {
 
     public Optional<EntityFeatureGroup> getEntityFeatures() {
         return itemMods;
+    }
+
+    @Override
+    public Set<EntityFeatureGroup> getEntityFeatureGroups() {
+        Set<EntityFeatureGroup> entityFeatureGroups = new HashSet();
+
+        itemMods.ifPresent(entityFeatureGroups::add);
+
+        return entityFeatureGroups;
     }
 }

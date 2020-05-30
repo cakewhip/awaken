@@ -27,6 +27,13 @@ dependencies {
 	//Fabric api
 	modImplementation "net.fabricmc.fabric-api:fabric-api:0.10.10+build.347-1.16"
 
+	//Base
+	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.0-nightly.20w21a"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.0-nightly.20w21a"
+	//Entity
+	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.0-nightly.20w21a"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.0-nightly.20w21a"
+
 	// Currently pulling Trinkets from local Maven
 	// TODO: change this when Trinkets gets updated
 	modImplementation "dev.emi:trinkets:2.5.0"

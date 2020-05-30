@@ -1,7 +1,8 @@
 package com.kqp.awaken.mixin.client.trinket;
 
+import com.kqp.awaken.init.AwakenAbilities;
 import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.util.TrinketUtil;
+import com.kqp.awaken.util.EquipmentUtil;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BackgroundRenderer;
@@ -19,7 +20,7 @@ public class SnorkelMaskEffectApplier {
     private static void applySnorkelMaskEffect(float density) {
         PlayerEntity player = MinecraftClient.getInstance().player;
 
-        if (TrinketUtil.hasAnyTrinkets(player, AwakenItems.Trinkets.SNORKEL_MASK, AwakenItems.Trinkets.MAGMA_VISOR)) {
+        if (AwakenAbilities.SNORKEL_MASK_EFFECT.get(player).flag) {
             // When in lava, it's 2.0F
             // When it's in neither lava nor water, it's 1.0F
             if (density == 1.0F || density == 2.0F) {

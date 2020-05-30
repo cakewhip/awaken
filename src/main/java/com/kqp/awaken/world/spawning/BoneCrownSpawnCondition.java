@@ -1,7 +1,7 @@
 package com.kqp.awaken.world.spawning;
 
 import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.util.TrinketUtil;
+import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -19,7 +19,7 @@ public class BoneCrownSpawnCondition extends SpawnCondition {
         List<? extends PlayerEntity> players = spawnWorld.getPlayers();
 
         for (PlayerEntity player : players) {
-            if (TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.BONE_CROWN)) {
+            if (EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.BONE_CROWN)) {
                 if (player.squaredDistanceTo(Vec3d.of(pos)) < MAX_SPAWN_DISTANCE_SQUARED) {
                     return true;
                 }

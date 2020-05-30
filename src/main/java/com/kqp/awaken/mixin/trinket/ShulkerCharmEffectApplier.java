@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin.trinket;
 
 import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.util.TrinketUtil;
+import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -24,7 +24,7 @@ public abstract class ShulkerCharmEffectApplier {
             LivingEntity livingEntity = (LivingEntity) (Object) this;
 
             if (source.getAttacker() instanceof PlayerEntity) {
-                if (TrinketUtil.hasAnyTrinkets((PlayerEntity) source.getAttacker(), AwakenItems.Trinkets.SHULKER_CHARM, AwakenItems.Trinkets.SHULKER_GLOVE)) {
+                if (EquipmentUtil.hasAnyTrinkets((PlayerEntity) source.getAttacker(), AwakenItems.Trinkets.SHULKER_CHARM, AwakenItems.Trinkets.SHULKER_GLOVE)) {
                     if (source.isProjectile()) {
                         if (livingEntity.getRandom().nextFloat() < 0.15F) {
                             livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 3 * 20, 0));

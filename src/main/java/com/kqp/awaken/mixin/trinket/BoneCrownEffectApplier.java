@@ -3,7 +3,7 @@ package com.kqp.awaken.mixin.trinket;
 import com.kqp.awaken.entity.ai.BoneCrownTargetGoal;
 import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.mixin.accessor.MobEntityAccessor;
-import com.kqp.awaken.util.TrinketUtil;
+import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.GoalSelector;
@@ -41,7 +41,7 @@ public abstract class BoneCrownEffectApplier {
                         10,
                         true,
                         false,
-                        player -> !TrinketUtil.hasTrinket((PlayerEntity) player, AwakenItems.Trinkets.BONE_CROWN)
+                        player -> !EquipmentUtil.hasTrinket((PlayerEntity) player, AwakenItems.Trinkets.BONE_CROWN)
                 );
             } else if (goal instanceof RevengeGoal) {
                 // I don't know how I feel about entirely removing skeleton friendly fire

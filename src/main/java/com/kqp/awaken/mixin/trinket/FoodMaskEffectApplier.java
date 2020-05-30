@@ -2,7 +2,7 @@ package com.kqp.awaken.mixin.trinket;
 
 import com.kqp.awaken.entity.player.PlayerReference;
 import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.util.TrinketUtil;
+import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -28,22 +28,22 @@ public class FoodMaskEffectApplier implements PlayerReference {
 
     @Redirect(method = "eat", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/HungerManager;add(IF)V"))
     private void applyTrinketEffects(HungerManager hungerManager, int food, float saturation, Item item, ItemStack stack) {
-        if (TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.ADULT_BIB)) {
+        if (EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.ADULT_BIB)) {
             food *= 1.33;
             saturation *= 1.25;
         }
 
-        if (TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.BABY_BIB)) {
+        if (EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.BABY_BIB)) {
             saturation *= 1.15;
         }
 
-        if (TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.CARNIVOROUS_MASK)) {
+        if (EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.CARNIVOROUS_MASK)) {
             if (MEAT.contains(item)) {
                 food *= 1.25F;
             }
         }
 
-        if (TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.FARMERS_HANKERCHIEF)) {
+        if (EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.FARMERS_HANKERCHIEF)) {
             if (VEGETARIAN.contains(item)) {
                 food *= 1.33F;
             }

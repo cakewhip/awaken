@@ -1,6 +1,9 @@
 package com.kqp.awaken.item.effect;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.kqp.awaken.ability.Ability;
+import com.kqp.awaken.ability.AbilityComponent;
+import com.kqp.awaken.util.EquipmentUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.resource.language.I18n;
@@ -10,6 +13,7 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -17,8 +21,10 @@ import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Used to hold status effects and entity attributes.
@@ -27,6 +33,7 @@ public class EntityFeatureGroup {
     private final ArrayList<StatusEffectInstance> statusEffects = new ArrayList();
     private final ArrayListMultimap<EntityAttribute, EntityAttributeModifier> attributeModifiers = ArrayListMultimap.create();
     private final HashMap<Enchantment, Integer> enchantmentModifiers = new HashMap();
+    private final HashSet<Ability> abilitySet = new HashSet();
 
     private final String groupName;
 
@@ -54,14 +61,55 @@ public class EntityFeatureGroup {
         return this;
     }
 
+    public EntityFeatureGroup addAbility(Ability ability) {
+        abilitySet.add(ability);
+
+        return this;
+    }
+
     public void applyTo(LivingEntity living) {
         statusEffects.forEach(statusEffect -> living.addStatusEffect(statusEffect));
+
         living.getAttributes().addTemporaryModifiers(attributeModifiers);
+
+        if (!living.world.isClient && living instanceof PlayerEntity) {
+            abilitySet.forEach(ability -> {
+                AbilityComponent abilityComponent = ability.get((PlayerEntity) living);
+
+                boolean prevState = abilityComponent.flag;
+
+                abilityComponent.flag = true;
+
+                if (!prevState) {
+                    abilityComponent.sync();
+                }
+            });
+        }
     }
 
     public void removeFrom(LivingEntity living) {
         statusEffects.forEach(statusEffect -> living.removeStatusEffect(statusEffect.getEffectType()));
         living.getAttributes().removeModifiers(attributeModifiers);
+
+        if (!living.world.isClient && living instanceof PlayerEntity) {
+            abilitySet.forEach(ability -> {
+                ability.get((PlayerEntity) living).flag = false;
+            });
+
+            EquipmentUtil.getAllEntityFeatureGroupProviders((PlayerEntity) living).stream()
+                    .map(EntityFeatureGroup::getAbilitySet)
+                    .flatMap(Set::stream)
+                    .filter(abilitySet::contains)
+                    .forEach(ability -> {
+                        ability.get((PlayerEntity) living).flag = true;
+                    });
+
+            abilitySet.forEach(ability -> {
+                if (!ability.get((PlayerEntity) living).flag) {
+                    ability.getComponentType().get(living).sync();
+                }
+            });
+        }
     }
 
     @Environment(EnvType.CLIENT)
@@ -115,5 +163,13 @@ public class EntityFeatureGroup {
 
     public Map<Enchantment, Integer> getEnchantmentModifiers() {
         return enchantmentModifiers;
+    }
+
+    public Set<Ability> getAbilitySet() {
+        return abilitySet;
+    }
+
+    public String getGroupName() {
+        return groupName;
     }
 }

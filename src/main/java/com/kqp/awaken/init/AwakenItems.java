@@ -170,9 +170,11 @@ public class AwakenItems {
         public static final Item SCORCHED_MASK = register("scorched_mask", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200));
         public static final Item SNORKEL_MASK = register("snorkel_mask", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200, new EntityFeatureGroup("snorkel_mask")
                 .addEnchantmentModifier(Enchantments.RESPIRATION, 1)
+                .addAbility(AwakenAbilities.SNORKEL_MASK_EFFECT)
         ));
         public static final Item MAGMA_VISOR = register("magma_visor", new AwakenTrinketItem(SlotGroups.HEAD, Slots.MASK, 200, new EntityFeatureGroup("magma_visor")
                 .addStatusEffect(StatusEffects.FIRE_RESISTANCE, 0)
+                .addAbility(AwakenAbilities.SNORKEL_MASK_EFFECT)
         ));
 
         public static final Item DYNAMITE_STICK = register("dynamite_stick", new AwakenTrinketItem(SlotGroups.LEGS, Slots.CHARM, 200));

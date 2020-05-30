@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin.trinket;
 
 import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.util.TrinketUtil;
+import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,7 +19,7 @@ public abstract class ScorchedMaskFireDamageReducer {
         if ((Object) this instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) (Object) this;
 
-            if (source.isFire() && TrinketUtil.hasTrinket(player, AwakenItems.Trinkets.SCORCHED_MASK)) {
+            if (source.isFire() && EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.SCORCHED_MASK)) {
                 amount *= 0.25F;
             }
         }

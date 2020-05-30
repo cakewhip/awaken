@@ -1,7 +1,7 @@
 package com.kqp.awaken.entity.ai;
 
 import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.util.TrinketUtil;
+import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
@@ -39,7 +39,7 @@ public class BoneCrownTargetGoal extends TrackTargetGoal {
                         Entity lastAttacker = lastDamageSource.getAttacker();
 
                         return lastAttacker instanceof PlayerEntity &&
-                                TrinketUtil.hasTrinket((PlayerEntity) lastAttacker, AwakenItems.Trinkets.BONE_CROWN);
+                                EquipmentUtil.hasTrinket((PlayerEntity) lastAttacker, AwakenItems.Trinkets.BONE_CROWN);
                     }
 
                     return false;

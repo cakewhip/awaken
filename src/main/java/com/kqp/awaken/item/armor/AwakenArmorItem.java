@@ -2,6 +2,7 @@ package com.kqp.awaken.item.armor;
 
 import com.kqp.awaken.item.effect.EntityEquipmentListener;
 import com.kqp.awaken.item.effect.EntityFeatureGroup;
+import com.kqp.awaken.item.effect.EntityFeatureGroupProvider;
 import com.kqp.awaken.util.ArmorUtil;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
@@ -19,10 +20,13 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
-public class AwakenArmorItem extends ArmorItem implements EntityEquipmentListener {
+public class AwakenArmorItem extends ArmorItem implements EntityEquipmentListener, EntityFeatureGroupProvider {
     private String customTextureLayer = null;
 
     private final Optional<EntityFeatureGroup> itemMods, setMods;
@@ -82,5 +86,15 @@ public class AwakenArmorItem extends ArmorItem implements EntityEquipmentListene
         } else {
             setMods.ifPresent(effects -> effects.removeFrom(entity));
         }
+    }
+
+    @Override
+    public Set<EntityFeatureGroup> getEntityFeatureGroups() {
+        Set<EntityFeatureGroup> entityFeatureGroups = new HashSet();
+
+        itemMods.ifPresent(entityFeatureGroups::add);
+        setMods.ifPresent(entityFeatureGroups::add);
+
+        return entityFeatureGroups;
     }
 }
