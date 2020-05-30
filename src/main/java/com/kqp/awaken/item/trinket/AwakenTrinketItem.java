@@ -37,8 +37,12 @@ public class AwakenTrinketItem extends Item implements ITrinket, EntityFeatureGr
         this.itemMods = Optional.ofNullable(itemMods);
     }
 
+    public AwakenTrinketItem(String trinketGroup, String trinketSlot, int durability, String jsonName) {
+        this(trinketGroup, trinketSlot, durability, EntityFeatureGroup.fromJson("trinkets/" + jsonName));
+    }
+
     public AwakenTrinketItem(String trinketGroup, String trinketSlot, int durability) {
-        this(trinketGroup, trinketSlot, durability, null);
+        this(trinketGroup, trinketSlot, durability, (EntityFeatureGroup) null);
     }
 
     @Override
