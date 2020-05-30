@@ -17,6 +17,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -26,23 +27,15 @@ import java.util.Set;
 public class AwakenTrinketItem extends Item implements ITrinket, EntityFeatureGroupProvider {
     public final String trinketGroup, trinketSlot;
 
-    private final Optional<EntityFeatureGroup> itemMods;
+    private final List<EntityFeatureGroup> entityFeatureGroups;
 
-    public AwakenTrinketItem(String trinketGroup, String trinketSlot, int durability, EntityFeatureGroup itemMods) {
+    public AwakenTrinketItem(String trinketGroup, String trinketSlot, int durability) {
         super(new Item.Settings().maxCount(1).group(ItemGroup.COMBAT).maxDamage(durability));
 
         this.trinketGroup = trinketGroup;
         this.trinketSlot = trinketSlot;
 
-        this.itemMods = Optional.ofNullable(itemMods);
-    }
-
-    public AwakenTrinketItem(String trinketGroup, String trinketSlot, int durability, String jsonName) {
-        this(trinketGroup, trinketSlot, durability, EntityFeatureGroup.fromJson("trinkets/" + jsonName));
-    }
-
-    public AwakenTrinketItem(String trinketGroup, String trinketSlot, int durability) {
-        this(trinketGroup, trinketSlot, durability, (EntityFeatureGroup) null);
+        this.entityFeatureGroups = new ArrayList();
     }
 
     @Override
@@ -56,10 +49,6 @@ public class AwakenTrinketItem extends Item implements ITrinket, EntityFeatureGr
 
             translationKey = this.getTranslationKey().concat("_tooltip" + ++i);
         }
-
-        itemMods.ifPresent(effects -> {
-            effects.populateTooltips(tooltip);
-        });
     }
 
     @Override
@@ -69,24 +58,16 @@ public class AwakenTrinketItem extends Item implements ITrinket, EntityFeatureGr
 
     @Override
     public void onEquip(PlayerEntity player, ItemStack stack) {
-        itemMods.ifPresent(effects -> effects.applyTo(player));
+
     }
 
     @Override
     public void onUnequip(PlayerEntity player, ItemStack stack) {
-        itemMods.ifPresent(effects -> effects.removeFrom(player));
-    }
 
-    public Optional<EntityFeatureGroup> getEntityFeatures() {
-        return itemMods;
     }
 
     @Override
-    public Set<EntityFeatureGroup> getEntityFeatureGroups() {
-        Set<EntityFeatureGroup> entityFeatureGroups = new HashSet();
-
-        itemMods.ifPresent(entityFeatureGroups::add);
-
+    public List<EntityFeatureGroup> getEntityFeatureGroups() {
         return entityFeatureGroups;
     }
 }

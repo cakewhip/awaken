@@ -1,0 +1,9 @@
+{
+  "name": "scorched_mask",
+  "status_effects": [],
+  "attribute_modifiers": [],
+  "enchantment_modifiers": [],
+  "abilities": [
+    "awaken:discord_belt_effect"
+  ]
+}

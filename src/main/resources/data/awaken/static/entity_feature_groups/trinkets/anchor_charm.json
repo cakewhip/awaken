@@ -1,0 +1,12 @@
+{
+  "name": "anchor_charm",
+  "status_effects": [],
+  "attribute_modifiers": [],
+  "enchantment_modifiers": [
+    {
+      "enchantment": "lure",
+      "value": 1
+    }
+  ],
+  "abilities": []
+}

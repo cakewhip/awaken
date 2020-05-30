@@ -1,0 +1,18 @@
+{
+  "name": "steel_gauntlet",
+  "status_effects": [],
+  "attribute_modifiers": [
+    {
+      "entity_attribute": "awaken:unarmed_damage",
+      "operation": "addition",
+      "value": 14
+    },
+    {
+      "entity_attribute": "generic.attack_knockback",
+      "operation": "addition",
+      "value": 0.25
+    }
+  ],
+  "enchantment_modifiers": [],
+  "abilities": []
+}

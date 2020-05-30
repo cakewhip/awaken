@@ -36,7 +36,7 @@ dependencies {
 
 	// Currently pulling Trinkets from local Maven
 	// TODO: change this when Trinkets gets updated
-	modImplementation "dev.emi:trinkets:2.5.0"
+	modImplementation "dev.emi:entity_feature_groups:2.5.0"
 }
 
 processResources {

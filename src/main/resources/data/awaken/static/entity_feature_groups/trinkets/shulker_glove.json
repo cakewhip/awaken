@@ -1,0 +1,10 @@
+{
+  "name": "shulker_glove",
+  "status_effects": [],
+  "attribute_modifiers": [],
+  "enchantment_modifiers": [],
+  "abilities": [
+    "awaken:shulker_charm_effect",
+    "awaken:rangers_glove_effect"
+  ]
+}

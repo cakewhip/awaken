@@ -1,0 +1,16 @@
+{
+  "name": "anglers_tackle_box",
+  "status_effects": [],
+  "attribute_modifiers": [],
+  "enchantment_modifiers": [
+    {
+      "enchantment": "lure",
+      "value": 1
+    },
+    {
+      "enchantment": "luck_of_the_sea",
+      "value": 1
+    }
+  ],
+  "abilities": []
+}

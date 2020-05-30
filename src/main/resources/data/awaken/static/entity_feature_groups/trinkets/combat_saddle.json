@@ -1,0 +1,9 @@
+{
+  "name": "combat_saddle",
+  "status_effects": [],
+  "attribute_modifiers": [],
+  "enchantment_modifiers": [],
+  "abilities": [
+    "awaken:combat_saddle_effect"
+  ]
+}

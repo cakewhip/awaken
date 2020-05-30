@@ -1,0 +1,9 @@
+{
+  "name": "dynamite_stick",
+  "status_effects": [],
+  "attribute_modifiers": [],
+  "enchantment_modifiers": [],
+  "abilities": [
+    "awaken:dynamite_stick_effect"
+  ]
+}

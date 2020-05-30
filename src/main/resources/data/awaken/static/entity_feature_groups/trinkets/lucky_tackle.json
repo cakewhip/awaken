@@ -1,0 +1,12 @@
+{
+  "name": "lucky_tackle",
+  "status_effects": [],
+  "attribute_modifiers": [],
+  "enchantment_modifiers": [
+    {
+      "enchantment": "luck_of_the_sea",
+      "value": 1
+    }
+  ],
+  "abilities": []
+}

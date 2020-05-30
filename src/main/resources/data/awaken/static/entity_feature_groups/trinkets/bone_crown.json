@@ -1,0 +1,9 @@
+{
+  "name": "bone_crown",
+  "status_effects": [],
+  "attribute_modifiers": [],
+  "enchantment_modifiers": [],
+  "abilities": [
+    "awaken:bone_crown_effect"
+  ]
+}

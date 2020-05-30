@@ -39,6 +39,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -269,17 +270,17 @@ public class EntityFeatureGroup {
             .registerTypeAdapter(EntityFeatureGroup.class, DESERIALIZER)
             .create();
 
-    public static EntityFeatureGroup fromJson(String name) {
-        String path = String.format("data/%s/item_stats/entity_feature_group/%s.json", Awaken.MOD_ID, name);
+    public static Optional<EntityFeatureGroup> fromJson(String name) {
+        String path = String.format("data/%s/static/entity_feature_groups/%s.json", Awaken.MOD_ID, name);
 
         InputStream inputStream = EntityFeatureGroup.class.getClassLoader().getResourceAsStream(path);
 
         if (inputStream != null) {
             InputStreamReader reader = new InputStreamReader(inputStream);
 
-            return GSON.fromJson(reader, EntityFeatureGroup.class);
+            return Optional.of(GSON.fromJson(reader, EntityFeatureGroup.class));
         } else {
-            return null;
+            return Optional.empty();
         }
     }
 }

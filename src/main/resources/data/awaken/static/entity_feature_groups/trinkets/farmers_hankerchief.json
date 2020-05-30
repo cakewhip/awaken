@@ -1,0 +1,9 @@
+{
+  "name": "farmers_hankerchief",
+  "status_effects": [],
+  "attribute_modifiers": [],
+  "enchantment_modifiers": [],
+  "abilities": [
+    "awaken:farmers_hankerchief_effect"
+  ]
+}

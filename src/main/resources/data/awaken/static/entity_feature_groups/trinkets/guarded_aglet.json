@@ -1,0 +1,12 @@
+{
+  "name": "guarded_aglet",
+  "status_effects": [],
+  "attribute_modifiers": [],
+  "enchantment_modifiers": [
+    {
+      "enchantment": "depth_strider",
+      "value": 1
+    }
+  ],
+  "abilities": []
+}

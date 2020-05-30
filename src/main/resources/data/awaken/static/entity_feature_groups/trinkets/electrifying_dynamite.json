@@ -1,0 +1,10 @@
+{
+  "name": "electrifying_dynamite",
+  "status_effects": [],
+  "attribute_modifiers": [],
+  "enchantment_modifiers": [],
+  "abilities": [
+    "awaken:dynamite_stick_effect",
+    "awaken:lightning_bottle_effect"
+  ]
+}

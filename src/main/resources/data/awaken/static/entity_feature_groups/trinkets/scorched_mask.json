@@ -1,0 +1,9 @@
+{
+  "name": "scorched_mask",
+  "status_effects": [],
+  "attribute_modifiers": [],
+  "enchantment_modifiers": [],
+  "abilities": [
+    "awaken:scorched_mask_effect"
+  ]
+}

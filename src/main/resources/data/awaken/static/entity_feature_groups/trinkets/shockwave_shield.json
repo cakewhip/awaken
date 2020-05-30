@@ -1,0 +1,9 @@
+{
+  "name": "shockwave_shield",
+  "status_effects": [],
+  "attribute_modifiers": [],
+  "enchantment_modifiers": [],
+  "abilities": [
+    "awaken:shockwave_shield_effect"
+  ]
+}

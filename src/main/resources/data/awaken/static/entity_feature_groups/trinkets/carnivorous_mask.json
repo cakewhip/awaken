@@ -1,0 +1,9 @@
+{
+  "name": "carnivorous_mask",
+  "status_effects": [],
+  "attribute_modifiers": [],
+  "enchantment_modifiers": [],
+  "abilities": [
+    "awaken:carnivorous_mask_effect"
+  ]
+}
