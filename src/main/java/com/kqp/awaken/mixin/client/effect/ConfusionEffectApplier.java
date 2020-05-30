@@ -1,6 +1,6 @@
 package com.kqp.awaken.mixin.client.effect;
 
-import com.kqp.awaken.entity.effect.AwakenStatusEffects;
+import com.kqp.awaken.init.AwakenStatusEffects;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.input.KeyboardInput;
 import net.minecraft.client.network.ClientPlayerEntity;

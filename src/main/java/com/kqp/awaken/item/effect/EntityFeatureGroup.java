@@ -1,8 +1,16 @@
 package com.kqp.awaken.item.effect;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonObject;
 import com.kqp.awaken.ability.Ability;
 import com.kqp.awaken.ability.AbilityComponent;
+import com.kqp.awaken.init.Awaken;
+import com.kqp.awaken.init.AwakenAbilities;
+import com.kqp.awaken.item.material.AwakenArmorMaterial;
 import com.kqp.awaken.util.EquipmentUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -14,17 +22,25 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Supplier;
 
 /**
  * Used to hold status effects and entity attributes.
@@ -43,6 +59,11 @@ public class EntityFeatureGroup {
 
     public EntityFeatureGroup addStatusEffect(StatusEffect effect, int amplifier) {
         statusEffects.add(new StatusEffectInstance(effect, Integer.MAX_VALUE, amplifier));
+        return this;
+    }
+
+    public EntityFeatureGroup addEntityAttributeModifier(EntityAttribute attribute, EntityAttributeModifier.Operation operation, double amount) {
+        attributeModifiers.put(attribute, new EntityAttributeModifier(groupName + "_" + attribute.getTranslationKey(), amount, operation));
         return this;
     }
 
@@ -171,5 +192,94 @@ public class EntityFeatureGroup {
 
     public String getGroupName() {
         return groupName;
+    }
+
+    private static JsonDeserializer<EntityFeatureGroup> DESERIALIZER = (json, typeOfT, context) -> {
+        JsonObject jsonEfg = json.getAsJsonObject();
+
+        String name = jsonEfg.get("name").getAsString();
+        EntityFeatureGroup efg = new EntityFeatureGroup(name);
+
+        JsonArray statusEffectsJson = jsonEfg.get("status_effects").getAsJsonArray();
+        statusEffectsJson.forEach(statusEffectElement -> {
+            JsonObject statusEffectJson = statusEffectElement.getAsJsonObject();
+
+            Identifier statusEffectId = new Identifier(statusEffectJson.get("status_effect").getAsString());
+            StatusEffect statusEffect = Registry.STATUS_EFFECT.get(statusEffectId);
+
+            int amplifier = statusEffectJson.get("amplifier").getAsInt();
+
+            amplifier = amplifier - 1; // Just to make the JSON more human-friendly
+
+            efg.addStatusEffect(statusEffect, amplifier);
+        });
+
+        JsonArray attribModsJson = jsonEfg.get("attribute_modifiers").getAsJsonArray();
+        attribModsJson.forEach(attribModElement -> {
+            JsonObject attribModJson = attribModElement.getAsJsonObject();
+
+            Identifier attribId = new Identifier(attribModJson.get("entity_attribute").getAsString());
+            System.out.println(attribId);
+            EntityAttribute attribute = Registry.ATTRIBUTES.get(attribId);
+
+            String operationString = attribModJson.get("operation").getAsString();
+            EntityAttributeModifier.Operation operation = EntityAttributeModifier.Operation.ADDITION;
+
+            switch (operationString) {
+                case "addition":
+                    operation = EntityAttributeModifier.Operation.ADDITION;
+                    break;
+                case "multiply_base":
+                    operation = EntityAttributeModifier.Operation.MULTIPLY_BASE;
+                    break;
+                case "multiply_total":
+                    operation = EntityAttributeModifier.Operation.MULTIPLY_TOTAL;
+                    break;
+            }
+
+            double value = attribModJson.get("value").getAsDouble();
+
+            efg.addEntityAttributeModifier(attribute, operation, value);
+        });
+
+        JsonArray enchantModsJson = jsonEfg.get("enchantment_modifiers").getAsJsonArray();
+        enchantModsJson.forEach(enchantModElement -> {
+            JsonObject enchantModJson = enchantModElement.getAsJsonObject();
+
+            Identifier enchantmentId = new Identifier(enchantModJson.get("enchantment").getAsString());
+            Enchantment enchantment = Registry.ENCHANTMENT.get(enchantmentId);
+
+            int value = enchantModJson.get("value").getAsInt();
+
+            efg.addEnchantmentModifier(enchantment, value);
+        });
+
+        JsonArray abilitiesJson = jsonEfg.get("abilities").getAsJsonArray();
+        abilitiesJson.forEach(abilityElement -> {
+            Identifier abilityId = new Identifier(abilityElement.getAsString());
+            Ability ability = AwakenAbilities.ABILITY_MAP.get(abilityId);
+
+            efg.addAbility(ability);
+        });
+
+        return efg;
+    };
+
+    private static final Gson GSON = new GsonBuilder()
+            .registerTypeAdapter(EntityFeatureGroup.class, DESERIALIZER)
+            .create();
+
+    public static EntityFeatureGroup fromJson(String name) {
+        String path = String.format("data/%s/item_stats/entity_feature_group/%s.json", Awaken.MOD_ID, name);
+
+        InputStream inputStream = EntityFeatureGroup.class.getClassLoader().getResourceAsStream(path);
+
+        if (inputStream != null) {
+            InputStreamReader reader = new InputStreamReader(inputStream);
+
+            return GSON.fromJson(reader, EntityFeatureGroup.class);
+        } else {
+            return null;
+        }
     }
 }

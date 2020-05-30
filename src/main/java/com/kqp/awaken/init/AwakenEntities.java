@@ -1,6 +1,5 @@
 package com.kqp.awaken.init;
 
-import com.kqp.awaken.entity.effect.AwakenStatusEffects;
 import com.kqp.awaken.entity.mob.AbominationEntity;
 import com.kqp.awaken.entity.mob.DireWolfEntity;
 import com.kqp.awaken.entity.mob.RaptorChickenEntity;
@@ -93,11 +92,6 @@ public class AwakenEntities {
 
     public static void init() {
         Awaken.info("Initializing entities");
-
-        // Custom Status Effects
-        {
-            Registry.register(Registry.STATUS_EFFECT, new Identifier(Awaken.MOD_ID, "confusion"), AwakenStatusEffects.CONFUSION);
-        }
 
         // Trinket Effects
         {

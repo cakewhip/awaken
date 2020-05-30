@@ -1,0 +1,25 @@
+{
+  "name": "broken_ankle_chain",
+  "status_effects": [
+    {
+      "status_effect": "awaken:confusion",
+      "amplifier": 2
+    }
+  ],
+  "attribute_modifiers": [
+    {
+      "entity_attribute": "awaken:melee_damage",
+      "operation": "addition",
+      "value": 0.4
+    }
+  ],
+  "enchantment_modifiers": [
+    {
+      "enchantment": "minecraft:protection",
+      "value": 3
+    }
+  ],
+  "abilities": [
+    "awaken:snorkel_mask_effect"
+  ]
+}

@@ -137,10 +137,7 @@ public class AwakenItems {
     }
 
     public static class Trinkets {
-        public static final Item BROKEN_ANKLE_CHAIN = register("broken_ankle_chain", new AwakenTrinketItem(SlotGroups.FEET, Slots.AGLET, 200, new EntityFeatureGroup("broken_ankle_chain")
-                .addEntityAttributeMultiplier(EntityAttributes.GENERIC_MOVEMENT_SPEED, -1.5F / 100)
-                .addEntityAttributeMultiplier(EntityAttributes.GENERIC_ARMOR, 2F / 100F)
-        ));
+        public static final Item BROKEN_ANKLE_CHAIN = register("broken_ankle_chain", new AwakenTrinketItem(SlotGroups.FEET, Slots.AGLET, 200, EntityFeatureGroup.fromJson("broken_ankle_chain")));
         public static final Item BROKEN_ANKLE_WEIGHTS = register("broken_ankle_weights", new AwakenTrinketItem(SlotGroups.FEET, Slots.AGLET, 200, new EntityFeatureGroup("broken_ankle_weights")
                 .addEntityAttributeMultiplier(EntityAttributes.GENERIC_ARMOR, -1.5F / 100)
                 .addEntityAttributeMultiplier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 2F / 100F)
