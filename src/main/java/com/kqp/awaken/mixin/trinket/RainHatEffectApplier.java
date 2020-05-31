@@ -1,5 +1,6 @@
 package com.kqp.awaken.mixin.trinket;
 
+import com.kqp.awaken.init.AwakenAbilities;
 import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,7 +18,7 @@ public class RainHatEffectApplier {
     private int applyRainHatEffect(int i) {
         PlayerEntity owner = ((FishingBobberEntity) (Object) this).getOwner();
 
-        if (EquipmentUtil.hasAnyTrinkets(owner, AwakenItems.Trinkets.RAIN_HAT, AwakenItems.Trinkets.ANGLERS_TACKLE_BOX)) {
+        if (AwakenAbilities.RAIN_HAT_EFFECT.get(owner).flag) {
             return i + 1;
         }
 

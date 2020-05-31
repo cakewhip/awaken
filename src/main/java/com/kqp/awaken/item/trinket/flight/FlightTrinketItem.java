@@ -1,6 +1,5 @@
 package com.kqp.awaken.item.trinket.flight;
 
-import com.kqp.awaken.item.effect.EntityFeatureGroup;
 import com.kqp.awaken.item.trinket.AwakenTrinketItem;
 
 /**
@@ -12,8 +11,8 @@ public abstract class FlightTrinketItem extends AwakenTrinketItem {
     public final int flyTime;
     public final boolean canFloat;
 
-    public FlightTrinketItem(String trinketGroup, String trinketSlot, int durability, EntityFeatureGroup itemMods, double maxFlySpeed, double flySpeed, int flyTime, boolean canFloat) {
-        super(trinketGroup, trinketSlot, durability, itemMods);
+    public FlightTrinketItem(String trinketGroup, String trinketSlot, int durability, double maxFlySpeed, double flySpeed, int flyTime, boolean canFloat) {
+        super(trinketGroup, trinketSlot, durability);
 
         this.maxFlySpeed = maxFlySpeed;
         this.flySpeed = flySpeed;

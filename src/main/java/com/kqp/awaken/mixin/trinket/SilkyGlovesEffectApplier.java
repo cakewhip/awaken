@@ -1,5 +1,6 @@
 package com.kqp.awaken.mixin.trinket;
 
+import com.kqp.awaken.init.AwakenAbilities;
 import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.entity.LivingEntity;
@@ -21,7 +22,7 @@ public abstract class SilkyGlovesEffectApplier {
 
             if (!player.isSpectator()) {
                 if (player.horizontalCollision) {
-                    if (EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.SILKY_GLOVE)) {
+                    if (AwakenAbilities.SILKY_GLOVE_EFFECT.get(player).flag) {
                         callbackInfo.setReturnValue(true);
                     }
                 }

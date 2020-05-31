@@ -134,6 +134,9 @@ public class EntityFeatureGroup {
         }
     }
 
+    /**
+     * TODO: find a way to determine whether the entity attrib is a percentage or not; things like the ammo consumption attrib are confusing
+     */
     @Environment(EnvType.CLIENT)
     public void populateTooltips(List<Text> tooltip) {
         statusEffects.forEach(statusEffect -> {

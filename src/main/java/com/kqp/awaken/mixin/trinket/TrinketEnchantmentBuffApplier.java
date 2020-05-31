@@ -4,7 +4,6 @@ import com.kqp.awaken.item.trinket.AwakenTrinketItem;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -35,7 +34,7 @@ public class TrinketEnchantmentBuffApplier {
                 if (itemStack.getItem() instanceof AwakenTrinketItem) {
                     AwakenTrinketItem trinket = (AwakenTrinketItem) itemStack.getItem();
 
-                    trinket.getEntityFeatures().ifPresent(features -> {
+                    trinket.getEntityFeatureGroups().forEach(features -> {
                         newLevel.set(newLevel.get() + features.getEnchantmentModifiers().getOrDefault(enchantment, 0));
                     });
                 }

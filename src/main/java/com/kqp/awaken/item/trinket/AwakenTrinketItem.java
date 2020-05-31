@@ -49,6 +49,10 @@ public class AwakenTrinketItem extends Item implements ITrinket, EntityFeatureGr
 
             translationKey = this.getTranslationKey().concat("_tooltip" + ++i);
         }
+
+        entityFeatureGroups.forEach(entityFeatureGroup -> {
+            entityFeatureGroup.populateTooltips(tooltip);
+        });
     }
 
     @Override

@@ -1,9 +1,18 @@
 {
   "name": "adult_bib",
   "status_effects": [],
-  "attribute_modifiers": [],
+  "attribute_modifiers": [
+    {
+      "entity_attribute": "awaken:omnivore",
+      "operation": "multiply_base",
+      "value": 0.33
+    },
+    {
+      "entity_attribute": "awaken:food_saturation",
+      "operation": "multiply_base",
+      "value": 0.25
+    }
+  ],
   "enchantment_modifiers": [],
-  "abilities": [
-    "awaken:adult_bib_effect"
-  ]
+  "abilities": []
 }

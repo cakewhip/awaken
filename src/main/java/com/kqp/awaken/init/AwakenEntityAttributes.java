@@ -23,8 +23,18 @@ public class AwakenEntityAttributes {
     public static final EntityAttribute AXE_DAMAGE = register("axe_damage");
 
     public static final EntityAttribute POTION_DAMAGE = register("potion_damage");
-
     public static final EntityAttribute UNARMED_DAMAGE = register("unarmed_damage");
+
+    public static final EntityAttribute MOUNTED_DAMAGE = register("mounted_damage");
+
+    public static final EntityAttribute CARNIVORE = register("carnivore");
+    public static final EntityAttribute HERBIVORE = register("herbivore");
+    public static final EntityAttribute OMNIVORE = register("omnivore");
+    public static final EntityAttribute FOOD_SATURATION = register("food_saturation");
+
+    public static final EntityAttribute AMMO_CONSUMPTION = register("ammo_consumption");
+
+    public static final EntityAttribute SHIELD_KNOCKBACK = register("shield_knockback");
 
     public static void init() {
         Awaken.info("Initializing entity attributes");

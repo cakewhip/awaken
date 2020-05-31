@@ -1,7 +1,6 @@
 package com.kqp.awaken.mixin.trinket;
 
-import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.util.EquipmentUtil;
+import com.kqp.awaken.init.AwakenAbilities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,7 +17,7 @@ public class DiscordBeltEffectApplier {
     @Redirect(method = "onCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"))
     private boolean applyDiscordBeltEffect(Entity entity, DamageSource damageSource, float amt) {
         if (entity instanceof PlayerEntity) {
-            if (EquipmentUtil.hasTrinket((PlayerEntity) entity, AwakenItems.Trinkets.DISCORD_BELT)) {
+            if (AwakenAbilities.DISCORD_BELT_EFFECT.get((PlayerEntity) entity).flag) {
                 amt *= 0.25;
             }
         }

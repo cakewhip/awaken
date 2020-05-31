@@ -1,5 +1,6 @@
 package com.kqp.awaken.mixin.trinket;
 
+import com.kqp.awaken.init.AwakenAbilities;
 import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.advancement.criterion.Criteria;
@@ -34,9 +35,9 @@ public class DynamiteAndLightningEffectApplier {
                 if (entity instanceof PlayerEntity) {
                     PlayerEntity player = (PlayerEntity) entity;
 
-                    boolean dynamite = EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.DYNAMITE_STICK);
-                    boolean lightning = EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.LIGHTNING_BOTTLE);
-                    boolean both = EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.ELECTRIFYING_DYNAMITE);
+                    boolean dynamite = AwakenAbilities.DYNAMITE_STICK_EFFECT.get(player).flag;
+                    boolean lightning = AwakenAbilities.LIGHTNING_BOTTLE_EFFECT.get(player).flag;
+                    boolean both = dynamite && lightning;
 
                     float explosionChance = both ? 0.10F : 0.06F;
                     float lightningChance = both ? 0.12F : 0.08F;

@@ -15,15 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class CustomEntityAttributeAdder {
     @Inject(method = "createPlayerAttributes", at = @At("RETURN"), cancellable = true)
     private static void addCustomAttributes(CallbackInfoReturnable<DefaultAttributeContainer.Builder> callbackInfoReturnable) {
-        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.RANGED_DAMAGE);
-        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.BOW_DAMAGE);
-        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.CROSSBOW_DAMAGE);
-
-        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.MELEE_DAMAGE);
-        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.SWORD_DAMAGE);
-        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.AXE_DAMAGE);
-
-        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.UNARMED_DAMAGE);
-        callbackInfoReturnable.getReturnValue().add(AwakenEntityAttributes.POTION_DAMAGE);
+        AwakenEntityAttributes.NEW_ATTRIBUTES.forEach(callbackInfoReturnable.getReturnValue()::add);
     }
 }

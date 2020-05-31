@@ -1,9 +1,13 @@
 {
   "name": "carnivorous_mask",
   "status_effects": [],
-  "attribute_modifiers": [],
+  "attribute_modifiers": [
+    {
+      "entity_attribute": "awaken:carnivore",
+      "operation": "multiply_base",
+      "value": 0.25
+    }
+  ],
   "enchantment_modifiers": [],
-  "abilities": [
-    "awaken:carnivorous_mask_effect"
-  ]
+  "abilities": []
 }

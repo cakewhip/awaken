@@ -1,8 +1,11 @@
 package com.kqp.awaken.mixin.trinket;
 
 import com.kqp.awaken.entity.player.PlayerReference;
+import com.kqp.awaken.init.AwakenEntityAttributes;
 import com.kqp.awaken.init.AwakenItems;
+import com.kqp.awaken.util.AttributeUtil;
 import com.kqp.awaken.util.EquipmentUtil;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -28,26 +31,21 @@ public class FoodMaskEffectApplier implements PlayerReference {
 
     @Redirect(method = "eat", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/HungerManager;add(IF)V"))
     private void applyTrinketEffects(HungerManager hungerManager, int food, float saturation, Item item, ItemStack stack) {
-        if (EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.ADULT_BIB)) {
-            food *= 1.33;
-            saturation *= 1.25;
+        EntityAttributeInstance carnivore = player.getAttributeInstance(AwakenEntityAttributes.CARNIVORE);
+        EntityAttributeInstance herbivore = player.getAttributeInstance(AwakenEntityAttributes.HERBIVORE);
+        EntityAttributeInstance omnivore = player.getAttributeInstance(AwakenEntityAttributes.OMNIVORE);
+        EntityAttributeInstance foodSaturation = player.getAttributeInstance(AwakenEntityAttributes.FOOD_SATURATION);
+
+        if (MEAT.contains(item)) {
+            food = (int) AttributeUtil.applyAttribute(carnivore, food);
         }
 
-        if (EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.BABY_BIB)) {
-            saturation *= 1.15;
+        if (VEGETARIAN.contains(item)) {
+            food = (int) AttributeUtil.applyAttribute(herbivore, food);
         }
 
-        if (EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.CARNIVOROUS_MASK)) {
-            if (MEAT.contains(item)) {
-                food *= 1.25F;
-            }
-        }
-
-        if (EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.FARMERS_HANKERCHIEF)) {
-            if (VEGETARIAN.contains(item)) {
-                food *= 1.33F;
-            }
-        }
+        food = (int) AttributeUtil.applyAttribute(omnivore, food);
+        saturation = (float) AttributeUtil.applyAttribute(foodSaturation, saturation);
 
         ((HungerManager) (Object) this).add(food, saturation);
     }

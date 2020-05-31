@@ -1,9 +1,13 @@
 {
   "name": "rangers_glove",
   "status_effects": [],
-  "attribute_modifiers": [],
+  "attribute_modifiers": [
+    {
+      "entity_attribute": "awaken:ammo_consumption",
+      "operation": "addition",
+      "value": 0.15
+    }
+  ],
   "enchantment_modifiers": [],
-  "abilities": [
-    "awaken:rangers_glove_effect"
-  ]
+  "abilities": []
 }

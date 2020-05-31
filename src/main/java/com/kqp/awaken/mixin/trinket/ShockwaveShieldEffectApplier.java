@@ -1,8 +1,9 @@
 package com.kqp.awaken.mixin.trinket;
 
-import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.util.EquipmentUtil;
+import com.kqp.awaken.init.AwakenEntityAttributes;
+import com.kqp.awaken.util.AttributeUtil;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,13 +19,11 @@ public abstract class ShockwaveShieldEffectApplier {
     private void applyShockwaveShieldEffect(LivingEntity attacker, CallbackInfo callbackInfo) {
         if ((Object) this instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) (Object) this;
-            if (EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.SHOCKWAVE_SHIELD)) {
-                if (player.getRandom().nextFloat() < 0.75F) {
-                    attacker.takeKnockback(0.5F * 1.5F, player.getX() - attacker.getX(), player.getZ() - attacker.getZ());
+            EntityAttributeInstance shieldKnockack = player.getAttributeInstance(AwakenEntityAttributes.SHIELD_KNOCKBACK);
 
-                    callbackInfo.cancel();
-                }
-            }
+            attacker.takeKnockback((float) AttributeUtil.applyAttribute(shieldKnockack, 0.5D), player.getX() - attacker.getX(), player.getZ() - attacker.getZ());
+
+            callbackInfo.cancel();
         }
     }
 }

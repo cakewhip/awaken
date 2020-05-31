@@ -1,7 +1,6 @@
 package com.kqp.awaken.item.trinket.flight;
 
 import com.kqp.awaken.client.model.WingsEntityModel;
-import com.kqp.awaken.item.effect.EntityFeatureGroup;
 import dev.emi.trinkets.api.SlotGroups;
 import dev.emi.trinkets.api.Slots;
 import dev.emi.trinkets.api.TrinketsApi;
@@ -21,8 +20,8 @@ import net.minecraft.util.registry.Registry;
 public class WingsTrinketItem extends FlightTrinketItem {
     private static final WingsEntityModel<AbstractClientPlayerEntity> MODEL = new WingsEntityModel<>();
 
-    public WingsTrinketItem(int durability, EntityFeatureGroup itemMods, double maxFlySpeed, double flySpeed, int flyTime) {
-        super(SlotGroups.CHEST, Slots.CAPE, durability, itemMods, maxFlySpeed, flySpeed, flyTime, true);
+    public WingsTrinketItem(int durability, double maxFlySpeed, double flySpeed, int flyTime) {
+        super(SlotGroups.CHEST, Slots.CAPE, durability, maxFlySpeed, flySpeed, flyTime, true);
     }
 
     @Override

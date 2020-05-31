@@ -1,9 +1,13 @@
 {
   "name": "farmers_hankerchief",
   "status_effects": [],
-  "attribute_modifiers": [],
+  "attribute_modifiers": [
+    {
+      "entity_attribute": "awaken:herbivore",
+      "operation": "multiply_base",
+      "value": 0.33
+    }
+  ],
   "enchantment_modifiers": [],
-  "abilities": [
-    "awaken:farmers_hankerchief_effect"
-  ]
+  "abilities": []
 }

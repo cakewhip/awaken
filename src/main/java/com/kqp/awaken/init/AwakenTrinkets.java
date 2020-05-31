@@ -25,21 +25,21 @@ public class AwakenTrinkets {
 
     private static void addSlots() {
         TrinketSlots.addSlot(SlotGroups.HEAD, AwakenSlots.HAT, new Identifier(Awaken.MOD_ID, "textures/item/empty_trinket_slot_hat.png"));
-        TrinketSlots.addSlot(SlotGroups.HEAD, Slots.MASK, new Identifier("entity_feature_groups", "textures/item/empty_trinket_slot_mask.png"));
-        TrinketSlots.addSlot(SlotGroups.HEAD, Slots.NECKLACE, new Identifier("entity_feature_groups", "textures/item/empty_trinket_slot_necklace.png"));
-        TrinketSlots.addSlot(SlotGroups.CHEST, Slots.BELT, new Identifier("entity_feature_groups", "textures/item/empty_trinket_slot_belt.png"));
-        TrinketSlots.addSlot(SlotGroups.LEGS, Slots.CHARM, new Identifier("entity_feature_groups", "textures/item/empty_trinket_slot_charm.png"));
-        TrinketSlots.addSlot(SlotGroups.FEET, Slots.AGLET, new Identifier("entity_feature_groups", "textures/item/empty_trinket_slot_aglet.png"));
-        TrinketSlots.addSlot(SlotGroups.HAND, Slots.RING, new Identifier("entity_feature_groups", "textures/item/empty_trinket_slot_ring.png"));
-        TrinketSlots.addSlot(SlotGroups.HAND, Slots.GLOVES, new Identifier("entity_feature_groups", "textures/item/empty_trinket_slot_gloves.png"));
-        TrinketSlots.addSlot(SlotGroups.OFFHAND, Slots.RING, new Identifier("entity_feature_groups", "textures/item/empty_trinket_slot_ring.png"));
+        TrinketSlots.addSlot(SlotGroups.HEAD, Slots.MASK, new Identifier("trinkets", "textures/item/empty_trinket_slot_mask.png"));
+        TrinketSlots.addSlot(SlotGroups.HEAD, Slots.NECKLACE, new Identifier("trinkets", "textures/item/empty_trinket_slot_necklace.png"));
+        TrinketSlots.addSlot(SlotGroups.CHEST, Slots.BELT, new Identifier("trinkets", "textures/item/empty_trinket_slot_belt.png"));
+        TrinketSlots.addSlot(SlotGroups.LEGS, Slots.CHARM, new Identifier("trinkets", "textures/item/empty_trinket_slot_charm.png"));
+        TrinketSlots.addSlot(SlotGroups.FEET, Slots.AGLET, new Identifier("trinkets", "textures/item/empty_trinket_slot_aglet.png"));
+        TrinketSlots.addSlot(SlotGroups.HAND, Slots.RING, new Identifier("trinkets", "textures/item/empty_trinket_slot_ring.png"));
+        TrinketSlots.addSlot(SlotGroups.HAND, Slots.GLOVES, new Identifier("trinkets", "textures/item/empty_trinket_slot_gloves.png"));
+        TrinketSlots.addSlot(SlotGroups.OFFHAND, Slots.RING, new Identifier("trinkets", "textures/item/empty_trinket_slot_ring.png"));
     }
 
     private static void loadTrinkets() {
         InputStream inputStream = EntityFeatureGroup.class.getClassLoader().getResourceAsStream(TRINKETS_JSON_PATH);
 
         if (inputStream == null) {
-            throw new RuntimeException("Awaken entity_feature_groups JSON file could not be found!");
+            throw new RuntimeException("Awaken trinkets JSON file could not be found!");
         }
 
         InputStreamReader reader = new InputStreamReader(inputStream);
@@ -72,5 +72,5 @@ public class AwakenTrinkets {
     }
 
     private static final Gson GSON = new GsonBuilder().create();
-    private static final String TRINKETS_JSON_PATH = String.format("data/%s/static/%s.json", Awaken.MOD_ID, "entity_feature_groups");
+    private static final String TRINKETS_JSON_PATH = String.format("data/%s/static/%s.json", Awaken.MOD_ID, "trinkets");
 }

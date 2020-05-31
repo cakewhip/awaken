@@ -59,6 +59,7 @@ public class AwakenItems {
         public static final Item FIERY_HEART = register("fiery_heart", new HealthIncreaseItem("fiery_heart", 10, (HealthIncreaseItem) MONSTER_HEART));
     }
 
+    // TODO: move all armor to json files
     public static class Armor {
         public static final Item DRAGON_SCALE_HELMET = register("dragon_scale_helmet", new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.HEAD, null, new EntityFeatureGroup("dragon_scale_set_bonus")
                 .addEntityAttributeMultiplier(AwakenEntityAttributes.RANGED_DAMAGE, 5F / 100F)
@@ -138,7 +139,7 @@ public class AwakenItems {
 
     public static class Trinkets {
         // public static final Item JETPACK = register("jetpack", new FlightTrinketItem(SlotGroups.CHEST, Slots.CAPE, 200, null, 0.3D, 0.1D, 20, false));
-        public static final Item TEST_WINGS = register("test_wings", new WingsTrinketItem(200, null, 0.315D, 0.115D, 30));
+        public static final Item TEST_WINGS = register("test_wings", new WingsTrinketItem(200, 0.315D, 0.115D, 30));
     }
 
     public static class BossSpawners {

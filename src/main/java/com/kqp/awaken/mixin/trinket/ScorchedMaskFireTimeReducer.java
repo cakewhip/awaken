@@ -1,5 +1,6 @@
 package com.kqp.awaken.mixin.trinket;
 
+import com.kqp.awaken.init.AwakenAbilities;
 import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.entity.Entity;
@@ -18,7 +19,7 @@ public class ScorchedMaskFireTimeReducer {
         if ((Object) this instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) (Object) this;
 
-            if (EquipmentUtil.hasTrinket(player, AwakenItems.Trinkets.SCORCHED_MASK)) {
+            if (AwakenAbilities.SCORCHED_MASK_EFFECT.get(player).flag) {
                 i *= 0.25;
             }
         }

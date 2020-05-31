@@ -1,7 +1,6 @@
 package com.kqp.awaken.mixin.trinket;
 
-import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.util.EquipmentUtil;
+import com.kqp.awaken.init.AwakenEntityAttributes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BowItem;
@@ -24,8 +23,9 @@ public class RangersGloveEffectApplier {
                                          ItemStack bowStack, World world, LivingEntity user, int remainingUseTicks) {
         boolean consume = true;
 
-        if (user instanceof PlayerEntity && EquipmentUtil.hasAnyTrinkets((PlayerEntity) user, AwakenItems.Trinkets.RANGERS_GLOVE, AwakenItems.Trinkets.SHULKER_GLOVE)) {
-            if (user.getRandom().nextFloat() < 0.20F) {
+        if (user instanceof PlayerEntity) {
+            if (user.getRandom().nextFloat() <
+                    user.getAttributeInstance(AwakenEntityAttributes.AMMO_CONSUMPTION).getValue()) {
                 consume = false;
             }
         }

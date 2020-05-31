@@ -12,5 +12,7 @@
       "value": 1
     }
   ],
-  "abilities": []
+  "abilities": [
+    "rain_hat_effect"
+  ]
 }

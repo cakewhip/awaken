@@ -1,9 +1,13 @@
 {
   "name": "shockwave_shield",
   "status_effects": [],
-  "attribute_modifiers": [],
+  "attribute_modifiers": [
+    {
+      "entity_attribute": "awaken:shield_knockback",
+      "operation": "multiply_base",
+      "value": 0.2
+    }
+  ],
   "enchantment_modifiers": [],
-  "abilities": [
-    "awaken:shockwave_shield_effect"
-  ]
+  "abilities": []
 }

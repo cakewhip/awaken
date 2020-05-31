@@ -89,8 +89,8 @@ public class AwakenArmorItem extends ArmorItem implements EntityEquipmentListene
     }
 
     @Override
-    public Set<EntityFeatureGroup> getEntityFeatureGroups() {
-        Set<EntityFeatureGroup> entityFeatureGroups = new HashSet();
+    public List<EntityFeatureGroup> getEntityFeatureGroups() {
+        List<EntityFeatureGroup> entityFeatureGroups = new ArrayList();
 
         itemMods.ifPresent(entityFeatureGroups::add);
         setMods.ifPresent(entityFeatureGroups::add);
