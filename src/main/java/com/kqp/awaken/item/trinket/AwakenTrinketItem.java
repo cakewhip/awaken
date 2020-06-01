@@ -1,7 +1,7 @@
 package com.kqp.awaken.item.trinket;
 
-import com.kqp.awaken.item.effect.EntityFeatureGroup;
-import com.kqp.awaken.item.effect.EntityFeatureGroupProvider;
+import com.kqp.awaken.effect.EntityFeatureGroup;
+import com.kqp.awaken.effect.EntityFeatureGroupProvider;
 import dev.emi.trinkets.api.ITrinket;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
@@ -18,11 +18,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 public class AwakenTrinketItem extends Item implements ITrinket, EntityFeatureGroupProvider {
     public final String trinketGroup, trinketSlot;

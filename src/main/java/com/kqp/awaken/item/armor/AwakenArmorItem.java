@@ -1,8 +1,8 @@
 package com.kqp.awaken.item.armor;
 
-import com.kqp.awaken.item.effect.EntityEquipmentListener;
-import com.kqp.awaken.item.effect.EntityFeatureGroup;
-import com.kqp.awaken.item.effect.EntityFeatureGroupProvider;
+import com.kqp.awaken.effect.EntityEquipmentListener;
+import com.kqp.awaken.effect.EntityFeatureGroup;
+import com.kqp.awaken.effect.EntityFeatureGroupProvider;
 import com.kqp.awaken.util.ArmorUtil;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
@@ -21,10 +21,8 @@ import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public class AwakenArmorItem extends ArmorItem implements EntityEquipmentListener, EntityFeatureGroupProvider {
     private String customTextureLayer = null;

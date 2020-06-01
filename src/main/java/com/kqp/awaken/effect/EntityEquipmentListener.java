@@ -1,4 +1,4 @@
-package com.kqp.awaken.item.effect;
+package com.kqp.awaken.effect;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;

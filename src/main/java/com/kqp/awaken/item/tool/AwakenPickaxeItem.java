@@ -1,6 +1,6 @@
 package com.kqp.awaken.item.tool;
 
-import com.kqp.awaken.item.effect.EntityFeatureGroup;
+import com.kqp.awaken.effect.EntityFeatureGroup;
 import com.kqp.awaken.item.material.AwakenToolMaterial;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;

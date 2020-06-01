@@ -1,4 +1,4 @@
-package com.kqp.awaken.item.effect;
+package com.kqp.awaken.effect;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.gson.Gson;
@@ -10,7 +10,6 @@ import com.kqp.awaken.ability.Ability;
 import com.kqp.awaken.ability.AbilityComponent;
 import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.init.AwakenAbilities;
-import com.kqp.awaken.item.material.AwakenArmorMaterial;
 import com.kqp.awaken.util.EquipmentUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -22,9 +21,6 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -41,7 +37,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Supplier;
 
 /**
  * Used to hold status effects and entity attributes.

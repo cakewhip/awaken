@@ -1,4 +1,4 @@
-package com.kqp.awaken.item.effect;
+package com.kqp.awaken.effect;
 
 import java.util.List;
 

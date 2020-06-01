@@ -1,6 +1,6 @@
 package com.kqp.awaken.mixin.combat;
 
-import com.kqp.awaken.item.effect.EntityEquipmentListener;
+import com.kqp.awaken.effect.EntityEquipmentListener;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
