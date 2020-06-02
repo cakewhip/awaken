@@ -1,6 +1,6 @@
 package com.kqp.awaken.init;
 
-import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.world.data.AwakenLevelData;
 import net.fabricmc.fabric.api.event.world.WorldTickCallback;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 

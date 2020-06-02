@@ -1,0 +1,22 @@
+{
+  "trinket_group": "feet",
+  "trinket_slot": "aglet",
+  "durability": 200,
+  "entity_feature_group": {
+    "status_effects": [],
+    "attribute_modifiers": [
+      {
+        "entity_attribute": "generic.movement_speed",
+        "operation": "multiply_base",
+        "value": 0.02
+      },
+      {
+        "entity_attribute": "generic.armor",
+        "operation": "multiply_base",
+        "value": -0.015
+      }
+    ],
+    "enchantment_modifiers": [],
+    "abilities": []
+  }
+}

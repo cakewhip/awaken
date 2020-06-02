@@ -1,7 +1,7 @@
 package com.kqp.awaken.client;
 
-import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.data.AwakenLevelDataContainer;
+import com.kqp.awaken.world.data.AwakenLevelData;
+import com.kqp.awaken.world.data.AwakenLevelDataContainer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 

@@ -1,6 +1,6 @@
 package com.kqp.awaken.mixin.postawakening;
 
-import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.world.data.AwakenLevelData;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;

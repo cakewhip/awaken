@@ -1,9 +1,0 @@
-{
-  "name": "snorkel_mask",
-  "status_effects": [],
-  "attribute_modifiers": [],
-  "enchantment_modifiers": [],
-  "abilities": [
-    "awaken:snorkel_mask_effect"
-  ]
-}

@@ -1,6 +1,6 @@
 package com.kqp.awaken.mixin.network;
 
-import com.kqp.awaken.data.AwakenLevelDataTagContainer;
+import com.kqp.awaken.world.data.AwakenLevelDataTagContainer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.s2c.play.GameJoinS2CPacket;

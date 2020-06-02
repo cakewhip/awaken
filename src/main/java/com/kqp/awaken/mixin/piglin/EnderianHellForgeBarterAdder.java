@@ -1,6 +1,6 @@
 package com.kqp.awaken.mixin.piglin;
 
-import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.world.data.AwakenLevelData;
 import com.kqp.awaken.init.AwakenBlocks;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ai.TargetFinder;

@@ -1,0 +1,19 @@
+{
+  "trinket_group": "hand",
+  "trinket_slot": "gloves",
+  "durability": 200,
+  "entity_feature_group": {
+    "status_effects": [],
+    "attribute_modifiers": [
+      {
+        "entity_attribute": "awaken:ammo_consumption",
+        "operation": "addition",
+        "value": 0.2
+      }
+    ],
+    "enchantment_modifiers": [],
+    "abilities": [
+      "awaken:shulker_charm_effect"
+    ]
+  }
+}

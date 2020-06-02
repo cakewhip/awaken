@@ -1,6 +1,6 @@
 package com.kqp.awaken.mixin.awakening;
 
-import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.world.data.AwakenLevelData;
 import com.kqp.awaken.util.Broadcaster;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;

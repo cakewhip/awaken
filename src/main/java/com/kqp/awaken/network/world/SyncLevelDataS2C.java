@@ -1,7 +1,7 @@
 package com.kqp.awaken.network.world;
 
 import com.kqp.awaken.client.AwakenClientLevelData;
-import com.kqp.awaken.data.AwakenLevelData;
+import com.kqp.awaken.world.data.AwakenLevelData;
 import com.kqp.awaken.network.AwakenPacketS2C;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.minecraft.nbt.CompoundTag;

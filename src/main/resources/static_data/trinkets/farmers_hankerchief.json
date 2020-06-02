@@ -1,0 +1,17 @@
+{
+  "trinket_group": "head",
+  "trinket_slot": "mask",
+  "durability": 200,
+  "entity_feature_group": {
+    "status_effects": [],
+    "attribute_modifiers": [
+      {
+        "entity_attribute": "awaken:herbivore",
+        "operation": "multiply_base",
+        "value": 0.33
+      }
+    ],
+    "enchantment_modifiers": [],
+    "abilities": []
+  }
+}

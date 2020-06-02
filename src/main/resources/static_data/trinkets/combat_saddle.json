@@ -1,0 +1,17 @@
+{
+  "trinket_group": "chest",
+  "trinket_slot": "belt",
+  "durability": 200,
+  "entity_feature_group": {
+    "status_effects": [],
+    "attribute_modifiers": [
+      {
+        "entity_attribute": "awaken:mounted_damage",
+        "operation": "multiply_base",
+        "value": 0.04
+      }
+    ],
+    "enchantment_modifiers": [],
+    "abilities": []
+  }
+}

@@ -1,6 +1,6 @@
 package com.kqp.awaken.item;
 
-import com.kqp.awaken.data.AwakenConfig;
+import com.kqp.awaken.init.AwakenConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;

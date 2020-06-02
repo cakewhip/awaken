@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin.world.data;
 
-import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.data.AwakenLevelDataContainer;
+import com.kqp.awaken.world.data.AwakenLevelData;
+import com.kqp.awaken.world.data.AwakenLevelDataContainer;
 import com.mojang.datafixers.DataFixer;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.nbt.CompoundTag;
@@ -10,8 +10,6 @@ import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.level.LevelInfo;
 import net.minecraft.world.level.LevelProperties;
 import net.minecraft.world.timer.Timer;
-import org.spongepowered.asm.mixin.Implements;
-import org.spongepowered.asm.mixin.Interface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

@@ -47,11 +47,7 @@ public class EntityFeatureGroup {
     private final HashMap<Enchantment, Integer> enchantmentModifiers = new HashMap();
     private final HashSet<Ability> abilitySet = new HashSet();
 
-    private final String groupName;
-
-    public EntityFeatureGroup(String groupName) {
-        this.groupName = groupName;
-    }
+    private String groupName;
 
     public EntityFeatureGroup addStatusEffect(StatusEffect effect, int amplifier) {
         statusEffects.add(new StatusEffectInstance(effect, Integer.MAX_VALUE, amplifier));
@@ -189,15 +185,19 @@ public class EntityFeatureGroup {
         return abilitySet;
     }
 
+    public EntityFeatureGroup setGroupName(String groupName) {
+        this.groupName = groupName;
+
+        return this;
+    }
+
     public String getGroupName() {
         return groupName;
     }
 
-    private static JsonDeserializer<EntityFeatureGroup> DESERIALIZER = (json, typeOfT, context) -> {
-        JsonObject jsonEfg = json.getAsJsonObject();
-
-        String name = jsonEfg.get("name").getAsString();
-        EntityFeatureGroup efg = new EntityFeatureGroup(name);
+    public static EntityFeatureGroup fromJsonObject(String name, JsonObject jsonEfg) {
+        EntityFeatureGroup efg = new EntityFeatureGroup();
+        efg.setGroupName(name);
 
         JsonArray statusEffectsJson = jsonEfg.get("status_effects").getAsJsonArray();
         statusEffectsJson.forEach(statusEffectElement -> {
@@ -218,7 +218,6 @@ public class EntityFeatureGroup {
             JsonObject attribModJson = attribModElement.getAsJsonObject();
 
             Identifier attribId = new Identifier(attribModJson.get("entity_attribute").getAsString());
-            System.out.println(attribId);
             EntityAttribute attribute = Registry.ATTRIBUTES.get(attribId);
 
             String operationString = attribModJson.get("operation").getAsString();
@@ -262,23 +261,5 @@ public class EntityFeatureGroup {
         });
 
         return efg;
-    };
-
-    private static final Gson GSON = new GsonBuilder()
-            .registerTypeAdapter(EntityFeatureGroup.class, DESERIALIZER)
-            .create();
-
-    public static Optional<EntityFeatureGroup> fromJson(String name) {
-        String path = String.format("data/%s/static/entity_feature_groups/%s.json", Awaken.MOD_ID, name);
-
-        InputStream inputStream = EntityFeatureGroup.class.getClassLoader().getResourceAsStream(path);
-
-        if (inputStream != null) {
-            InputStreamReader reader = new InputStreamReader(inputStream);
-
-            return Optional.of(GSON.fromJson(reader, EntityFeatureGroup.class));
-        } else {
-            return Optional.empty();
-        }
     }
 }

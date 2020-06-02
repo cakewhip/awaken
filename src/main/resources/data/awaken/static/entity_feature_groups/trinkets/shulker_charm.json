@@ -1,9 +1,0 @@
-{
-  "name": "shulker_charm",
-  "status_effects": [],
-  "attribute_modifiers": [],
-  "enchantment_modifiers": [],
-  "abilities": [
-    "awaken:shulker_charm_effect"
-  ]
-}

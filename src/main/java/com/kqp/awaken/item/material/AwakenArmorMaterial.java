@@ -145,7 +145,7 @@ public class AwakenArmorMaterial implements ArmorMaterial {
             .create();
 
     private static AwakenArmorMaterial fromJson(String name) {
-        String path = String.format("data/%s/static/armor/%s.json", Awaken.MOD_ID, name);
+        String path = String.format("data/%s/static_data/armor/%s.json", Awaken.MOD_ID, name);
         InputStreamReader reader = new InputStreamReader(AwakenArmorMaterial.class.getClassLoader().getResourceAsStream(path));
 
         return GSON.fromJson(reader, AwakenArmorMaterial.class);

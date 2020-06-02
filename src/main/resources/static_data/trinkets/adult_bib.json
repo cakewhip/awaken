@@ -1,0 +1,22 @@
+{
+  "trinket_group": "head",
+  "trinket_slot": "mask",
+  "durability": 200,
+  "entity_feature_group": {
+    "status_effects": [],
+    "attribute_modifiers": [
+      {
+        "entity_attribute": "awaken:omnivore",
+        "operation": "multiply_base",
+        "value": 0.33
+      },
+      {
+        "entity_attribute": "awaken:food_saturation",
+        "operation": "multiply_base",
+        "value": 0.25
+      }
+    ],
+    "enchantment_modifiers": [],
+    "abilities": []
+  }
+}

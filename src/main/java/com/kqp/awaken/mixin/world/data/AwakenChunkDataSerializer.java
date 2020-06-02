@@ -1,6 +1,6 @@
 package com.kqp.awaken.mixin.world.data;
 
-import com.kqp.awaken.data.AwakenTemporalChunkData;
+import com.kqp.awaken.world.data.AwakenTemporalChunkData;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructureManager;

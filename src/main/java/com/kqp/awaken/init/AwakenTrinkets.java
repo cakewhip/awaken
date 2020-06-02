@@ -1,20 +1,22 @@
 package com.kqp.awaken.init;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonObject;
 import com.kqp.awaken.effect.EntityFeatureGroup;
 import com.kqp.awaken.item.trinket.AwakenTrinketItem;
 import com.kqp.awaken.trinket.AwakenSlots;
+import com.kqp.awaken.util.DataUtil;
 import dev.emi.trinkets.api.SlotGroups;
 import dev.emi.trinkets.api.Slots;
 import dev.emi.trinkets.api.TrinketSlots;
+import io.github.cottonmc.staticdata.StaticData;
+import io.github.cottonmc.staticdata.StaticDataItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.Optional;
 
 public class AwakenTrinkets {
     public static void init() {
@@ -35,41 +37,34 @@ public class AwakenTrinkets {
     }
 
     private static void loadTrinkets() {
-        InputStream inputStream = EntityFeatureGroup.class.getClassLoader().getResourceAsStream(TRINKETS_JSON_PATH);
+        ImmutableSet<StaticDataItem> trinketStaticData = StaticData.getAllInDirectory("trinkets");
 
-        if (inputStream == null) {
-            throw new RuntimeException("Awaken trinkets JSON file could not be found!");
-        }
-
-        InputStreamReader reader = new InputStreamReader(inputStream);
-
-        JsonObject trinketListJsonObject = GSON.fromJson(reader, JsonObject.class);
-        trinketListJsonObject.entrySet().forEach((entry) -> {
-            String trinketName = entry.getKey();
-
-            if (!trinketName.equals("__comment")) {
-                JsonObject trinketJsonObject = entry.getValue().getAsJsonObject();
+        trinketStaticData.forEach(staticDataItem -> {
+            try {
+                Identifier trinketItemId = DataUtil.getStrippedIdentifier(staticDataItem.getIdentifier());
+                JsonObject trinketJsonObject = DataUtil.getJsonObject(staticDataItem);
 
                 String trinketGroup = trinketJsonObject.get("trinket_group").getAsString();
                 String trinketSlot = trinketJsonObject.get("trinket_slot").getAsString();
                 int durability = trinketJsonObject.get("durability").getAsInt();
 
-                AwakenTrinketItem item = new AwakenTrinketItem(trinketGroup, trinketSlot, durability);
+                AwakenTrinketItem trinketItem = new AwakenTrinketItem(trinketGroup, trinketSlot, durability);
 
-                // Add default entity feature group if it exists
-                EntityFeatureGroup.fromJson(trinketName).ifPresent(item.getEntityFeatureGroups()::add);
+                JsonObject efgJsonObject = trinketJsonObject.get("entity_feature_group").getAsJsonObject();
+                EntityFeatureGroup efg = EntityFeatureGroup.fromJsonObject(trinketItemId.getPath(),
+                        efgJsonObject);
+                trinketItem.getEntityFeatureGroups().add(efg);
 
-                register(trinketName, item);
+                register(trinketItemId, trinketItem);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }
 
-    public static Item register(String name, Item item) {
-        Registry.register(Registry.ITEM, new Identifier(Awaken.MOD_ID, name), item);
+    public static Item register(Identifier id, Item item) {
+        Registry.register(Registry.ITEM, id, item);
 
         return item;
     }
-
-    private static final Gson GSON = new GsonBuilder().create();
-    private static final String TRINKETS_JSON_PATH = String.format("data/%s/static/%s.json", Awaken.MOD_ID, "trinkets");
 }

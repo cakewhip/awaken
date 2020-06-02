@@ -1,0 +1,16 @@
+{
+  "trinket_group": "legs",
+  "trinket_slot": "charm",
+  "durability": 200,
+  "entity_feature_group": {
+    "status_effects": [],
+    "attribute_modifiers": [],
+    "enchantment_modifiers": [
+      {
+        "enchantment": "lure",
+        "value": 1
+      }
+    ],
+    "abilities": []
+  }
+}

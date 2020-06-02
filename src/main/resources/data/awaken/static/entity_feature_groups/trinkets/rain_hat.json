@@ -1,9 +1,0 @@
-{
-  "name": "rain_hat",
-  "status_effects": [],
-  "attribute_modifiers": [],
-  "enchantment_modifiers": [],
-  "abilities": [
-    "awaken:rain_hat_effect"
-  ]
-}

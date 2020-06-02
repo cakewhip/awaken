@@ -1,9 +1,0 @@
-{
-  "name": "lightning_bottle",
-  "status_effects": [],
-  "attribute_modifiers": [],
-  "enchantment_modifiers": [],
-  "abilities": [
-    "awaken:lightning_bottle_effect"
-  ]
-}

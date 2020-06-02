@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin.world.gen;
 
-import com.kqp.awaken.data.AwakenLevelData;
-import com.kqp.awaken.data.AwakenTemporalChunkData;
+import com.kqp.awaken.world.data.AwakenLevelData;
+import com.kqp.awaken.world.data.AwakenTemporalChunkData;
 import com.kqp.awaken.init.AwakenBlocks;
 import com.kqp.awaken.world.AwakenOreGen;
 import net.minecraft.world.chunk.Chunk;

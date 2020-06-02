@@ -17,6 +17,10 @@ repositories {
 		name = "Ladysnake Libs"
 		url = 'https://dl.bintray.com/ladysnake/libs'
 	}
+
+	maven {
+		url = "http://server.bbkr.space:8081/artifactory/libs-release"
+	}
 }
 
 dependencies {
@@ -37,6 +41,10 @@ dependencies {
 	// Currently pulling Trinkets from local Maven
 	// TODO: change this when Trinkets gets updated
 	modImplementation "dev.emi:trinkets:2.5.0"
+
+	// Static Data
+	modImplementation "io.github.cottonmc:StaticData:1.1.2"
+	include "io.github.cottonmc:StaticData:1.1.2"
 }
 
 processResources {

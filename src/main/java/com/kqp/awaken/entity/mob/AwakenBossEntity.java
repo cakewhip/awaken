@@ -1,6 +1,6 @@
 package com.kqp.awaken.entity.mob;
 
-import com.kqp.awaken.data.AwakenConfig;
+import com.kqp.awaken.init.AwakenConfig;
 import com.kqp.awaken.init.AwakenNetworking;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.block.BlockState;

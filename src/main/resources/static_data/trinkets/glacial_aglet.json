@@ -1,0 +1,16 @@
+{
+  "trinket_group": "feet",
+  "trinket_slot": "aglet",
+  "durability": 200,
+  "entity_feature_group": {
+    "status_effects": [],
+    "attribute_modifiers": [],
+    "enchantment_modifiers": [
+      {
+        "enchantment": "frost_walker",
+        "value": 1
+      }
+    ],
+    "abilities": []
+  }
+}
