@@ -87,11 +87,8 @@ public class AwakenArmorMaterial implements ArmorMaterial {
         return this.toughness;
     }
 
-    private static JsonDeserializer<AwakenArmorMaterial> DESERIALIZER = (json, typeOfT, context) -> {
-        JsonObject jsonArmorMaterial = json.getAsJsonObject();
-
+    public static AwakenArmorMaterial fromJsonObject(String name, JsonObject jsonArmorMaterial) {
         // Easy to grab fields
-        String name = jsonArmorMaterial.get("name").getAsString();
         int durabilityMultiplier = jsonArmorMaterial.get("durability_multiplier").getAsInt();
         int enchantability = jsonArmorMaterial.get("enchantability").getAsInt();
         float toughness = jsonArmorMaterial.get("toughness").getAsFloat();
@@ -138,25 +135,5 @@ public class AwakenArmorMaterial implements ArmorMaterial {
                 0.0F,
                 repairIngredientsSupplier
         );
-    };
-
-    private static final Gson GSON = new GsonBuilder()
-            .registerTypeAdapter(AwakenArmorMaterial.class, DESERIALIZER)
-            .create();
-
-    private static AwakenArmorMaterial fromJson(String name) {
-        String path = String.format("data/%s/static_data/armor/%s.json", Awaken.MOD_ID, name);
-        InputStreamReader reader = new InputStreamReader(AwakenArmorMaterial.class.getClassLoader().getResourceAsStream(path));
-
-        return GSON.fromJson(reader, AwakenArmorMaterial.class);
     }
-
-    // TODO: move these to a registry and make armor items auto-magically pull from it
-    public static final AwakenArmorMaterial DRAGON_SCALE = fromJson("dragon_scale");
-
-    public static final AwakenArmorMaterial WITHER_BONE = fromJson("wither_bone");
-
-    public static final AwakenArmorMaterial SALVIUM = fromJson("salvium");
-
-    public static final AwakenArmorMaterial VALERIUM = fromJson("valerium");
 }

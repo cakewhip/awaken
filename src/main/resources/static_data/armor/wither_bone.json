@@ -1,0 +1,48 @@
+{
+  "material": {
+    "durability_multiplier": 45,
+    "protection_amounts": [
+      7,
+      8,
+      12,
+      7
+    ],
+    "enchantability": 14,
+    "equip_sound": "item.armor.equip_gold",
+    "toughness": 4.0,
+    "repair_ingredients": [
+      "awaken:wither_rib"
+    ]
+  },
+  "pieces": {
+    "boots": {
+      "slot": "feet"
+    },
+    "leggings": {
+      "slot": "legs"
+    },
+    "chestplate": {
+      "slot": "chest"
+    },
+    "helmet": {
+      "slot": "head",
+      "set_bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [
+          {
+            "entity_attribute": "awaken:melee_damage",
+            "operation": "multiply_total",
+            "value": 0.08
+          },
+          {
+            "entity_attribute": "generic.movement_speed",
+            "operation": "multiply_total",
+            "value": 0.02
+          }
+        ],
+        "enchantment_modifiers": [],
+        "abilities": []
+      }
+    }
+  }
+}

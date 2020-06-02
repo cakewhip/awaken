@@ -27,17 +27,21 @@ import java.util.Optional;
 public class AwakenArmorItem extends ArmorItem implements EntityEquipmentListener, EntityFeatureGroupProvider {
     private String customTextureLayer = null;
 
-    private final Optional<EntityFeatureGroup> itemMods, setMods;
-
-    public AwakenArmorItem(ArmorMaterial material, EquipmentSlot slot, EntityFeatureGroup itemMods, EntityFeatureGroup setMods) {
-        super(material, slot, new Item.Settings().group(ItemGroup.COMBAT));
-
-        this.itemMods = Optional.ofNullable(itemMods);
-        this.setMods = Optional.ofNullable(setMods);
-    }
+    private Optional<EntityFeatureGroup> itemMods, setMods;
 
     public AwakenArmorItem(ArmorMaterial material, EquipmentSlot slot) {
-        this(material, slot, null, null);
+        super(material, slot, new Item.Settings().group(ItemGroup.COMBAT));
+
+        setItemMods(null);
+        setSetMods(null);
+    }
+
+    public void setItemMods(EntityFeatureGroup efg) {
+        itemMods = Optional.ofNullable(efg);
+    }
+
+    public void setSetMods(EntityFeatureGroup efg) {
+        setMods = Optional.ofNullable(efg);
     }
 
     @Override

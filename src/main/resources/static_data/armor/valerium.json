@@ -1,0 +1,78 @@
+{
+  "material": {
+    "durability_multiplier": 45,
+    "protection_amounts": [
+      7,
+      10,
+      12,
+      7
+    ],
+    "enchantability": 16,
+    "equip_sound": "item.armor.equip_gold",
+    "toughness": 7.5,
+    "repair_ingredients": [
+      "awaken:valerium_ingot"
+    ]
+  },
+  "pieces": {
+    "boots": {
+      "slot": "feet"
+    },
+    "leggings": {
+      "slot": "legs"
+    },
+    "chestplate": {
+      "slot": "chest"
+    },
+    "mask": {
+      "slot": "head",
+      "set_bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [
+          {
+            "entity_attribute": "awaken:melee_damage",
+            "operation": "multiply_total",
+            "value": 0.1
+          },
+          {
+            "entity_attribute": "awaken:sword_damage",
+            "operation": "multiply_total",
+            "value": 0.05
+          },
+          {
+            "entity_attribute": "generic.movement_speed",
+            "operation": "multiply_total",
+            "value": 0.04
+          }
+        ],
+        "enchantment_modifiers": [],
+        "abilities": []
+      }
+    },
+    "helmet": {
+      "slot": "head",
+      "set_bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [
+          {
+            "entity_attribute": "awaken:melee_damage",
+            "operation": "multiply_total",
+            "value": 0.1
+          },
+          {
+            "entity_attribute": "awaken:axe_damage",
+            "operation": "multiply_total",
+            "value": 0.06
+          },
+          {
+            "entity_attribute": "generic.movement_speed",
+            "operation": "multiply_total",
+            "value": 0.03
+          }
+        ],
+        "enchantment_modifiers": [],
+        "abilities": []
+      }
+    }
+  }
+}

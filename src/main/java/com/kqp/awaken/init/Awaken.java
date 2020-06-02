@@ -24,6 +24,7 @@ public class Awaken implements ModInitializer {
             AwakenEntityAttributes.init();
             AwakenAbilities.init();
             AwakenTrinkets.init();
+            AwakenArmor.init();
             AwakenBlocks.init();
             AwakenItems.init();
             AwakenEntities.init();

@@ -54,53 +54,6 @@ public class AwakenItems {
         public static final Item FIERY_HEART = register("fiery_heart", new HealthIncreaseItem("fiery_heart", 10, (HealthIncreaseItem) MONSTER_HEART));
     }
 
-    // TODO: move all armor to json files
-    public static class Armor {
-        public static final Item DRAGON_SCALE_HELMET = register("dragon_scale_helmet", new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.HEAD, null, new EntityFeatureGroup().setGroupName("dragon_scale_set_bonus")
-                .addEntityAttributeMultiplier(AwakenEntityAttributes.RANGED_DAMAGE, 5F / 100F)
-                .addEntityAttributeMultiplier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 4F / 100F)
-        ));
-        public static final Item DRAGON_SCALE_CHESTPLATE = register("dragon_scale_chestplate", new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.CHEST));
-        public static final Item DRAGON_SCALE_LEGGINGS = register("dragon_scale_leggings", new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.LEGS));
-        public static final Item DRAGON_SCALE_BOOTS = register("dragon_scale_boots", new AwakenArmorItem(AwakenArmorMaterial.DRAGON_SCALE, EquipmentSlot.FEET));
-
-        public static final Item WITHER_BONE_HELMET = register("wither_bone_helmet", new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.HEAD, null, new EntityFeatureGroup().setGroupName("wither_bone_set_bonus")
-                .addEntityAttributeMultiplier(AwakenEntityAttributes.MELEE_DAMAGE, 5F / 100F)
-                .addEntityAttributeAddition(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 4F / 100F)
-        ));
-        public static final Item WITHER_BONE_CHESTPLATE = register("wither_bone_chestplate", new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.CHEST));
-        public static final Item WITHER_BONE_LEGGINGS = register("wither_bone_leggings", new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.LEGS));
-        public static final Item WITHER_BONE_BOOTS = register("wither_bone_boots", new AwakenArmorItem(AwakenArmorMaterial.WITHER_BONE, EquipmentSlot.FEET));
-
-        public static final Item SALVIUM_HEADGEAR = register("salvium_headgear", new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.HEAD, new EntityFeatureGroup().setGroupName("salvium_headgear_set_bonus")
-                .addEntityAttributeMultiplier(AwakenEntityAttributes.RANGED_DAMAGE, 7F / 100F)
-                .addEntityAttributeMultiplier(AwakenEntityAttributes.BOW_DAMAGE, 5F / 100F)
-                .addEntityAttributeMultiplier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 6F / 100F),
-                null));
-        public static final Item SALVIUM_BERET = register("salvium_beret", new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.HEAD, new EntityFeatureGroup().setGroupName("salvium_beret_set_bonus")
-                .addEntityAttributeMultiplier(AwakenEntityAttributes.RANGED_DAMAGE, 7F / 100F)
-                .addEntityAttributeMultiplier(AwakenEntityAttributes.CROSSBOW_DAMAGE, 5F / 100F)
-                .addEntityAttributeMultiplier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 6F / 100F),
-                null).setCustomTextureLayer("beret"));
-        public static final Item SALVIUM_CHESTPLATE = register("salvium_chestplate", new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.CHEST));
-        public static final Item SALVIUM_LEGGINGS = register("salvium_leggings", new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.LEGS));
-        public static final Item SALVIUM_BOOTS = register("salvium_boots", new AwakenArmorItem(AwakenArmorMaterial.SALVIUM, EquipmentSlot.FEET));
-
-        public static final Item VALERIUM_MASK = register("valerium_mask", new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.HEAD, null, new EntityFeatureGroup().setGroupName("valerium_mask_set_bonus")
-                .addEntityAttributeMultiplier(AwakenEntityAttributes.MELEE_DAMAGE, 7F / 100F)
-                .addEntityAttributeMultiplier(AwakenEntityAttributes.SWORD_DAMAGE, 5F / 100F)
-                .addEntityAttributeAddition(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 6F / 100F)
-        ).setCustomTextureLayer("mask"));
-        public static final Item VALERIUM_HELMET = register("valerium_helmet", new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.HEAD, null, new EntityFeatureGroup().setGroupName("valerium_helmet_set_bonus")
-                .addEntityAttributeMultiplier(AwakenEntityAttributes.MELEE_DAMAGE, 7F / 100F)
-                .addEntityAttributeMultiplier(AwakenEntityAttributes.AXE_DAMAGE, 5F / 100F)
-                .addEntityAttributeAddition(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 6F / 100F)
-        ));
-        public static final Item VALERIUM_CHESTPLATE = register("valerium_chestplate", new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.CHEST));
-        public static final Item VALERIUM_LEGGINGS = register("valerium_leggings", new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.LEGS));
-        public static final Item VALERIUM_BOOTS = register("valerium_boots", new AwakenArmorItem(AwakenArmorMaterial.VALERIUM, EquipmentSlot.FEET));
-    }
-
     public static class Pickaxes {
         public static final Item ESCAPE_PLAN = register("escape_plan", new AwakenPickaxeItem(
                 AwakenToolMaterial.tool(3, 1500, 7F, 6F, 1F, 10),
@@ -147,7 +100,6 @@ public class AwakenItems {
 
     public static void init() {
         new Reagents();
-        new Armor();
         new Pickaxes();
         new Shovels();
         new Swords();

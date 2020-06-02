@@ -1,0 +1,48 @@
+{
+  "material": {
+    "durability_multiplier": 37,
+    "protection_amounts": [
+      6,
+      8,
+      10,
+      6
+    ],
+    "enchantability": 16,
+    "equip_sound": "item.armor.equip_elytra",
+    "toughness": 4.0,
+    "repair_ingredients": [
+      "awaken:ender_dragon_scale"
+    ]
+  },
+  "pieces": {
+    "boots": {
+      "slot": "feet"
+    },
+    "leggings": {
+      "slot": "legs"
+    },
+    "chestplate": {
+      "slot": "chest"
+    },
+    "helmet": {
+      "slot": "head",
+      "set_bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [
+          {
+            "entity_attribute": "awaken:ranged_damage",
+            "operation": "multiply_total",
+            "value": 0.07
+          },
+          {
+            "entity_attribute": "generic.movement_speed",
+            "operation": "multiply_total",
+            "value": 0.04
+          }
+        ],
+        "enchantment_modifiers": [],
+        "abilities": []
+      }
+    }
+  }
+}
