@@ -185,15 +185,36 @@
     "awaken.recipe_type.requires.enderian_hell_forge": "Must be near an Enderian Hell Forge",
 
     "__comment": "Entity Attributes",
+    "attribute.default.tooltip.multiply": "${sign}${value*100}${perc} ${name}",
+    "attribute.default.tooltip.addition": "${sign}${value} ${name}",
+
+    "attribute.name.generic.crit_chance": "Critical Strike Chance",
+    "attribute.name.generic.crit_chance.tooltip.name": "crit chance",
+    "attribute.name.generic.crit_chance.tooltip.addition": "${sign}${value}${perc} ${name}",
+
     "attribute.name.generic.ranged_damage": "Ranged Damage",
     "attribute.name.generic.bow_damage": "Bow Damage",
     "attribute.name.generic.crossbow_damage": "Crossbow Damage",
-    "attribute.name.generic.trident_damage": "Trident Damage",
+
     "attribute.name.generic.melee_damage": "Melee Damage",
     "attribute.name.generic.sword_damage": "Sword Damage",
     "attribute.name.generic.axe_damage": "Axe Damage",
+
     "attribute.name.generic.potion_damange": "Potion Damage",
     "attribute.name.generic.unarmed_damage": "Unarmed Damage",
+
+    "attribute.name.generic.mounted_damage": "Mounted Damage",
+
+    "attribute.name.generic.carnivore": "Carnivore Bonus",
+    "attribute.name.generic.herbivore": "Herbivore Bonus",
+    "attribute.name.generic.omnivore": "Omnivore Bonus",
+    "attribute.name.generic.food_saturation": "Food Saturation Bonus",
+
+    "attribute.name.generic.ammo_consumption": "Ammo Consumption Chance",
+    "attribute.name.generic.ammo_consumption.tooltip.name": "chance to not consume ammo",
+    "attribute.name.generic.ammo_consumption.tooltip.addition": "${sign}${value}${perc} ${name}",
+
+    "attribute.name.generic.shield_knockback": "Shield Knockback",
 
     "__comment": "Status Effects",
     "effect.awaken.confusion": "Confusion",

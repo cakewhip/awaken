@@ -10,6 +10,7 @@ import com.kqp.awaken.ability.Ability;
 import com.kqp.awaken.ability.AbilityComponent;
 import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.init.AwakenAbilities;
+import com.kqp.awaken.util.AttributeUtil;
 import com.kqp.awaken.util.EquipmentUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -150,20 +151,7 @@ public class EntityFeatureGroup {
         List<String> attribModText = new ArrayList();
 
         attributeModifiers.forEach((attribute, modifier) -> {
-            String value = String.format("%.1f", (Math.abs(modifier.getValue()) * (modifier.getOperation() == EntityAttributeModifier.Operation.ADDITION ? 1F : 100F))).replace(".0", "");
-
-            String numberFormat = modifier.getOperation() != EntityAttributeModifier.Operation.ADDITION ? "%" : "";
-
-            String change = modifier.getValue() > 0 ? "+" : "-";
-
-            String attributeName = I18n.translate(attribute.getTranslationKey()).toLowerCase();
-
-            attribModText.add(String.format("%s%s%s %s",
-                    change,
-                    value,
-                    numberFormat,
-                    attributeName
-            ));
+            attribModText.add(AttributeUtil.toTooltip(attribute, modifier));
         });
 
         attribModText.stream().sorted().forEach(text -> tooltip.add(new LiteralText(text).formatted(Formatting.GRAY)));
