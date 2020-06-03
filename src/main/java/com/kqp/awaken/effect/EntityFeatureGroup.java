@@ -12,6 +12,7 @@ import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.init.AwakenAbilities;
 import com.kqp.awaken.util.AttributeUtil;
 import com.kqp.awaken.util.EquipmentUtil;
+import com.kqp.awaken.util.TooltipUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.resource.language.I18n;
@@ -131,6 +132,10 @@ public class EntityFeatureGroup {
      */
     @Environment(EnvType.CLIENT)
     public void populateTooltips(List<Text> tooltip) {
+        abilitySet.forEach(ability -> {
+            TooltipUtil.addIterableTooltips(tooltip, ability.getTranslationKey(), Formatting.BLUE);
+        });
+
         statusEffects.forEach(statusEffect -> {
             tooltip.add(
                     new TranslatableText(statusEffect.getTranslationKey()).formatted(Formatting.BLUE)
@@ -244,6 +249,10 @@ public class EntityFeatureGroup {
         abilitiesJson.forEach(abilityElement -> {
             Identifier abilityId = new Identifier(abilityElement.getAsString());
             Ability ability = AwakenAbilities.ABILITY_MAP.get(abilityId);
+
+            if (ability == null) {
+                throw new RuntimeException("Could not find ability with ID " + abilityId + " when parsing item " + name);
+            }
 
             efg.addAbility(ability);
         });

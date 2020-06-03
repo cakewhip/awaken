@@ -2,6 +2,7 @@ package com.kqp.awaken.item.trinket;
 
 import com.kqp.awaken.effect.EntityFeatureGroup;
 import com.kqp.awaken.effect.EntityFeatureGroupProvider;
+import com.kqp.awaken.util.TooltipUtil;
 import dev.emi.trinkets.api.ITrinket;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
@@ -12,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
@@ -37,15 +39,9 @@ public class AwakenTrinketItem extends Item implements ITrinket, EntityFeatureGr
     @Override
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        int i = 0;
-        String translationKey = this.getTranslationKey().concat("_tooltip" + i);
+        TooltipUtil.addIterableTooltips(tooltip, this.getTranslationKey(), Formatting.YELLOW);
 
-        while (I18n.hasTranslation(translationKey)) {
-            tooltip.add(new TranslatableText(translationKey).formatted(Formatting.GRAY));
-
-            translationKey = this.getTranslationKey().concat("_tooltip" + ++i);
-        }
-
+        tooltip.add(new LiteralText("When Equipped:").formatted(Formatting.GRAY));
         entityFeatureGroups.forEach(entityFeatureGroup -> {
             entityFeatureGroup.populateTooltips(tooltip);
         });

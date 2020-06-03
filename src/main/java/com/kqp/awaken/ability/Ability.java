@@ -1,6 +1,8 @@
 package com.kqp.awaken.ability;
 
 import nerdhub.cardinal.components.api.ComponentType;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
 
 /**
@@ -19,5 +21,10 @@ public class Ability {
 
     public ComponentType<AbilityComponent> getComponentType() {
         return componentType;
+    }
+
+    @Environment(EnvType.CLIENT)
+    public String getTranslationKey() {
+        return "ability." + componentType.getId().getPath();
     }
 }
