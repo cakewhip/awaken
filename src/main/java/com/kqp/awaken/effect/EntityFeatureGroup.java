@@ -133,18 +133,18 @@ public class EntityFeatureGroup {
     public void populateTooltips(List<Text> tooltip) {
         statusEffects.forEach(statusEffect -> {
             tooltip.add(
-                    new TranslatableText(statusEffect.getTranslationKey()).formatted(Formatting.GRAY)
-                            .append(" ").formatted(Formatting.GRAY)
-                            .append(new TranslatableText("enchantment.level." + (statusEffect.getAmplifier() + 1)).formatted(Formatting.GRAY))
+                    new TranslatableText(statusEffect.getTranslationKey()).formatted(Formatting.BLUE)
+                            .append(" ").formatted(Formatting.BLUE)
+                            .append(new TranslatableText("enchantment.level." + (statusEffect.getAmplifier() + 1)).formatted(Formatting.BLUE))
             );
         });
 
         enchantmentModifiers.forEach((enchantment, lvl) -> {
             tooltip.add(
-                    new LiteralText("+").formatted(Formatting.GRAY)
-                            .append(new TranslatableText(enchantment.getTranslationKey())).formatted(Formatting.GRAY)
-                            .append(" ").formatted(Formatting.GRAY)
-                            .append(new TranslatableText("enchantment.level." + lvl)).formatted(Formatting.GRAY)
+                    new LiteralText("+").formatted(Formatting.BLUE)
+                            .append(new TranslatableText(enchantment.getTranslationKey())).formatted(Formatting.BLUE)
+                            .append(" ").formatted(Formatting.BLUE)
+                            .append(new TranslatableText("enchantment.level." + lvl)).formatted(Formatting.BLUE)
             );
         });
 
@@ -154,7 +154,7 @@ public class EntityFeatureGroup {
             attribModText.add(AttributeUtil.toTooltip(attribute, modifier));
         });
 
-        attribModText.stream().sorted().forEach(text -> tooltip.add(new LiteralText(text).formatted(Formatting.GRAY)));
+        attribModText.stream().sorted().forEach(text -> tooltip.add(new LiteralText(text).formatted(Formatting.BLUE)));
     }
 
     public List<StatusEffectInstance> getStatusEffects() {

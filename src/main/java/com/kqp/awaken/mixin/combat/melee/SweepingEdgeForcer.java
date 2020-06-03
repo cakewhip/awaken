@@ -1,4 +1,4 @@
-package com.kqp.awaken.mixin.combat;
+package com.kqp.awaken.mixin.combat.melee;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.SwordItem;

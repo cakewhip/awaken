@@ -1,4 +1,4 @@
-package com.kqp.awaken.mixin.combat;
+package com.kqp.awaken.mixin.combat.melee;
 
 import com.kqp.awaken.init.AwakenEntityAttributes;
 import net.minecraft.entity.Entity;
