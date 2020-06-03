@@ -8,6 +8,7 @@ import com.kqp.awaken.entity.mob.VoidGhostEntity;
 import com.kqp.awaken.world.spawning.BoneCrownSpawnCondition;
 import com.kqp.awaken.world.spawning.CaveSpawnCondition;
 import com.kqp.awaken.world.spawning.ConditionalSpawnEntry;
+import com.kqp.awaken.world.spawning.FieryMoonSpawnCondition;
 import com.kqp.awaken.world.spawning.PostAwakeningSpawnCondition;
 import com.kqp.awaken.world.spawning.SpawnCondition;
 import com.kqp.awaken.world.spawning.SurfaceSpawnCondition;
@@ -126,6 +127,12 @@ public class AwakenEntities {
             register(VOID_GHOST, 0x0000000, 0xFFFFFF, VoidGhostEntity.createVoidGhostAttributes());
 
             register(ABOMINATION, 0xFFFFFF, 0x000000, AbominationEntity.createAbominationAttributes());
+        }
+
+        // Fiery Moon
+        {
+            addHostileSpawn(spawnEntry(EntityType.ZOMBIFIED_PIGLIN, 300, 4, 4, FieryMoonSpawnCondition.INSTANCE), biome -> true);
+            addHostileSpawn(spawnEntry(EntityType.ZOGLIN, 250, 4, 4, FieryMoonSpawnCondition.INSTANCE), biome -> true);
         }
     }
 
