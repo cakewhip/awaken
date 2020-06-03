@@ -1,14 +1,14 @@
 {
   "trinket_group": "chest",
-  "trinket_slot": "belt",
+  "trinket_slot": "necklace",
   "durability": 200,
   "entity_feature_group": {
     "status_effects": [],
     "attribute_modifiers": [
       {
-        "entity_attribute": "awaken:damage_mitigation",
+        "entity_attribute": "awaken:armor_penetration",
         "operation": "addition",
-        "value": 0.07
+        "value": 0.10
       }
     ],
     "enchantment_modifiers": [],
