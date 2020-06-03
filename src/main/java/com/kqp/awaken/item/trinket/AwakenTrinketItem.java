@@ -54,12 +54,12 @@ public class AwakenTrinketItem extends Item implements ITrinket, EntityFeatureGr
 
     @Override
     public void onEquip(PlayerEntity player, ItemStack stack) {
-
+        entityFeatureGroups.forEach(efg -> efg.applyTo(player));
     }
 
     @Override
     public void onUnequip(PlayerEntity player, ItemStack stack) {
-
+        entityFeatureGroups.forEach(efg -> efg.removeFrom(player));
     }
 
     @Override

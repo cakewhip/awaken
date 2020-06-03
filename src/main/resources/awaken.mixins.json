@@ -8,6 +8,7 @@
     "awakening.MobDeathListener",
     "awakening.RaidVictoryListener",
     "combat.attribute.CustomEntityAttributeAdder",
+    "combat.attribute.DamageMitigationApplier",
     "combat.attribute.EntityAttributeClampOverride",
     "combat.attribute.MeleeEntityAttributesApplier",
     "combat.attribute.UnarmedDamageAttributeApplier",

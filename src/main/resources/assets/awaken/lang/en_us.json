@@ -153,6 +153,7 @@
     "item.awaken.rain_hat": "Rain Hat",
     "item.awaken.lucky_tackle": "Lucky Tackle",
     "item.awaken.anchor_charm": "Anchor Charm",
+    "item.awaken.breastplate_stretcher": "Breastplate Stretcher",
 
     "__comment": "GUI Translations",
     "gui.awaken.awaken_crafting": "Crafting",
@@ -186,6 +187,9 @@
     "__comment": "Entity Attributes",
     "attribute.default.tooltip.multiply": "${sign}${value*100}${perc} ${name}",
     "attribute.default.tooltip.addition": "${sign}${value} ${name}",
+
+    "attribute.name.generic.damage_mitigation": "Damage Mitigation",
+    "attribute.name.generic.damage_mitigation.tooltip.addition": "${sign}${value*100}${perc} ${name}",
 
     "attribute.name.generic.crit_chance": "Critical Strike Chance",
     "attribute.name.generic.crit_chance.tooltip.name": "crit chance",

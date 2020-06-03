@@ -14,6 +14,8 @@ import java.util.Map;
 public class AwakenEntityAttributes {
     public static final Map<EntityAttribute, Double> NEW_ATTRIBUTES = new HashMap();
 
+    public static final EntityAttribute DAMAGE_MITIGATION = register("damage_mitigation");
+
     public static final EntityAttribute CRIT_CHANCE = register("crit_chance", 0.04D);
 
     public static final EntityAttribute RANGED_DAMAGE = register("ranged_damage");
