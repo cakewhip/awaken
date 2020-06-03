@@ -72,6 +72,7 @@ public class AwakenArmorItem extends ArmorItem implements EntityEquipmentListene
     public void onEquip(LivingEntity entity, ItemStack itemStack, ItemStack equippedStack, EquipmentSlot equipmentSlot) {
         if (itemStack.getItem() == this) {
             itemMods.ifPresent(effects -> effects.applyTo(entity));
+            checkForSetBonus(entity, itemStack);
         }
     }
 
@@ -80,6 +81,8 @@ public class AwakenArmorItem extends ArmorItem implements EntityEquipmentListene
         if (itemStack.getItem() == this) {
             itemMods.ifPresent(effects -> effects.removeFrom(entity));
         }
+
+        checkForSetBonus(entity, itemStack);
     }
 
     private void checkForSetBonus(LivingEntity entity, ItemStack itemStack) {
