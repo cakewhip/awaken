@@ -48,6 +48,7 @@
     "trinket.DiscordBeltEffectApplier",
     "trinket.DynamiteAndLightningEffectApplier",
     "trinket.FoodMaskEffectApplier",
+    "trinket.NetherianBeltEffectApplier",
     "trinket.RainHatEffectApplier",
     "trinket.RangersGloveEffectApplier",
     "trinket.ScorchedMaskFireDamageReducer",

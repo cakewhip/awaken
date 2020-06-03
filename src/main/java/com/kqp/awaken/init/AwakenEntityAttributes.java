@@ -18,6 +18,8 @@ public class AwakenEntityAttributes {
 
     public static final EntityAttribute CRIT_CHANCE = register("crit_chance", 0.04D);
 
+    public static final EntityAttribute ARMOR_PENETRATION = register("armor_penetration");
+
     public static final EntityAttribute RANGED_DAMAGE = register("ranged_damage");
     public static final EntityAttribute BOW_DAMAGE = register("bow_damage");
     public static final EntityAttribute CROSSBOW_DAMAGE = register("crossbow_damage");

@@ -22,6 +22,7 @@ public class AwakenAbilities {
     public static final Ability SCORCHED_MASK_EFFECT = register("scorched_mask_effect");
     public static final Ability SHULKER_CHARM_EFFECT = register("shulker_charm_effect");
     public static final Ability SILKY_GLOVE_EFFECT = register("silky_glove_effect");
+    public static final Ability NETHERIAN_BELT_EFFECT = register("netherian_belt_effect");
 
     public static void init() {
         EntityComponentCallback.event(PlayerEntity.class).register((player, components) -> {

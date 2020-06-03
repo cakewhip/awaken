@@ -188,7 +188,7 @@
     "ability.scorched_mask_effect.tooltip1": "75% less time on fire",
     "ability.shulker_charm_effect.tooltip0": "15% chance to inflict Levitation I",
     "ability.silky_glove_effect.tooltip0": "Ability to climb on walls",
-    "ability.netherian_belt_effect.tooltip0": "Gold tools and armor last 2.5x longer",
+    "ability.netherian_belt_effect.tooltip0": "Gold tools and armor last 6x longer",
 
     "__comment": "Entity Attributes",
     "attribute.default.tooltip.multiply": "${sign}${value*100}${perc} ${name}",
