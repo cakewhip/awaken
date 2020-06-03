@@ -8,7 +8,7 @@
       {
         "entity_attribute": "awaken:damage_mitigation",
         "operation": "addition",
-        "value": 0.5
+        "value": 0.7
       }
     ],
     "enchantment_modifiers": [],
