@@ -19,12 +19,14 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.StringRenderable;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -86,12 +88,16 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
     /**
      * Overriden to add the reagents needed to craft the hovered slot.
      *
-     * @param text
+     * @param matrices
+     * @param stack
      * @param x
      * @param y
      */
     @Override
-    public void renderTooltip(MatrixStack matrices, List<Text> text, int x, int y) {
+    protected void renderTooltip(MatrixStack matrices, ItemStack stack, int x, int y) {
+        List<StringRenderable> text = new ArrayList();
+        text.addAll(this.getTooltipFromItem(stack));
+
         if ((this.focusedSlot instanceof AwakenCraftingResultSlot && getScreenHandler().craftingResultRecipes != null)
                 || (this.focusedSlot instanceof AwakenLookUpResultSlot && getScreenHandler().lookUpRecipes != null)) {
             int currentIndex;
@@ -117,16 +123,16 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
                 text.add(new LiteralText("To Craft: "));
                 for (Reagent reagent : recipe.reagents.keySet()) {
                     String reagentLine = recipe.reagents.get(reagent) + " x " + reagent.toString();
-                    List<Text> split = this.textRenderer.wrapLines(new LiteralText(reagentLine), 126);
+                    List<StringRenderable> split = this.textRenderer.wrapLines(new LiteralText(reagentLine), 126);
 
-                    for (Text splitLine : split) {
+                    for (StringRenderable splitLine : split) {
                         text.add(splitLine);
                     }
                 }
             }
         }
 
-        super.renderTooltip(matrices, text, x, y);
+        this.renderTooltip(matrices, text, x, y);
     }
 
     @Override
@@ -160,7 +166,7 @@ public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHand
         this.itemRenderer.zOffset = 100.0F;
         RenderSystem.enableRescaleNormal();
         ItemStack itemStack = new ItemStack(Blocks.CRAFTING_TABLE);
-        this.itemRenderer.renderGuiItem(itemStack, this.x + 29 + (28 - 15) / 2, this.y - 28 + 10);
+        this.itemRenderer.renderGuiItemIcon(itemStack, this.x + 29 + (28 - 15) / 2, this.y - 28 + 10);
         this.itemRenderer.renderGuiItemOverlay(this.textRenderer, itemStack, this.x + 29 + (28 - 15) / 2, this.y - 28 + 10);
         this.itemRenderer.zOffset = 0.0F;
         this.setZOffset(0);

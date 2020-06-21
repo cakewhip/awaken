@@ -70,7 +70,7 @@ public class AbominationEntity extends AwakenBossEntity {
     }
 
     public boolean aboveHalfHealth() {
-        return (this.getHealth() / this.getMaximumHealth()) >= 0.5;
+        return (this.getHealth() / this.getMaxHealth()) >= 0.5;
     }
 
     static {

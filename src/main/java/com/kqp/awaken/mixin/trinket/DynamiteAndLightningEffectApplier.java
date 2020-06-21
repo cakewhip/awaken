@@ -5,6 +5,7 @@ import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -47,6 +48,7 @@ public class DynamiteAndLightningEffectApplier {
                             player.world.createExplosion(
                                     player,
                                     source.setExplosive(),
+                                    null,
                                     target.getX(),
                                     target.getY(),
                                     target.getZ(),
@@ -60,14 +62,22 @@ public class DynamiteAndLightningEffectApplier {
                     if (lightning || both) {
                         if (player.getRandom().nextFloat() < lightningChance) {
                             LightningEntity lightningEntity = new LightningEntity(
-                                    player.world,
+                                    EntityType.LIGHTNING_BOLT,
+                                    player.world
+                            );
+
+                            lightningEntity.refreshPositionAndAngles(
                                     target.getX(),
                                     target.getY(),
                                     target.getZ(),
-                                    true
+                                    0F,
+                                    0F
                             );
 
-                            ((ServerWorld) player.world).addLightning(lightningEntity);
+                            // Make cosmetic (no damage)
+                            lightningEntity.method_29498(true);
+
+                            ((ServerWorld) player.world).spawnEntity(lightningEntity);
 
                             doLightningDamage(lightningEntity, player);
                         }

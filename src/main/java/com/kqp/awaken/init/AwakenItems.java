@@ -1,13 +1,11 @@
 package com.kqp.awaken.init;
 
+import com.kqp.awaken.effect.EntityFeatureGroup;
 import com.kqp.awaken.item.BossSpawnerItem;
-import com.kqp.awaken.item.armor.AwakenArmorItem;
 import com.kqp.awaken.item.bow.AwakenBowItem;
 import com.kqp.awaken.item.bow.FlameBowItem;
 import com.kqp.awaken.item.bow.StatusEffectBowItem;
-import com.kqp.awaken.effect.EntityFeatureGroup;
 import com.kqp.awaken.item.health.HealthIncreaseItem;
-import com.kqp.awaken.item.material.AwakenArmorMaterial;
 import com.kqp.awaken.item.material.AwakenToolMaterial;
 import com.kqp.awaken.item.shovel.ArchaeologistSpadeItem;
 import com.kqp.awaken.item.sword.AtlanteanSabreItem;
@@ -18,7 +16,6 @@ import com.kqp.awaken.item.tool.AwakenAxeItem;
 import com.kqp.awaken.item.tool.AwakenPickaxeItem;
 import com.kqp.awaken.item.trident.AwakenTridentItem;
 import com.kqp.awaken.item.trinket.flight.WingsTrinketItem;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
@@ -99,6 +96,8 @@ public class AwakenItems {
     }
 
     public static void init() {
+        removeNetheriteArmorRecipes();
+
         new Reagents();
         new Pickaxes();
         new Shovels();
@@ -107,6 +106,14 @@ public class AwakenItems {
         new Bows();
         new BossSpawners();
         new Tridents();
+    }
+
+    private static void removeNetheriteArmorRecipes() {
+        // TODO: wait for cotton/LibCD to be updated
+        // RecipeUtil.removeRecipeFor(new ItemStack(Items.NETHERITE_HELMET));
+        // RecipeUtil.removeRecipeFor(new ItemStack(Items.NETHERITE_CHESTPLATE));
+        // RecipeUtil.removeRecipeFor(new ItemStack(Items.NETHERITE_LEGGINGS));
+        // RecipeUtil.removeRecipeFor(new ItemStack(Items.NETHERITE_BOOTS));
     }
 
     public static Item register(String name, Item item) {

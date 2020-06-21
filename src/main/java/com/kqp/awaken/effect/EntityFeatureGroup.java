@@ -211,7 +211,7 @@ public class EntityFeatureGroup {
             JsonObject attribModJson = attribModElement.getAsJsonObject();
 
             Identifier attribId = new Identifier(attribModJson.get("entity_attribute").getAsString());
-            EntityAttribute attribute = Registry.ATTRIBUTES.get(attribId);
+            EntityAttribute attribute = Registry.ATTRIBUTE.get(attribId);
 
             String operationString = attribModJson.get("operation").getAsString();
             EntityAttributeModifier.Operation operation = EntityAttributeModifier.Operation.ADDITION;

@@ -8,9 +8,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -20,14 +22,15 @@ import java.util.Set;
 @Mixin(LivingEntity.class)
 public abstract class EquipmentListener {
     @Inject(
-            method = "tick",
+            method = "method_30129", // this is where they add/remove modifiers that items give the player
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/server/world/ServerChunkManager;sendToOtherNearbyPlayers(Lnet/minecraft/entity/Entity;Lnet/minecraft/network/Packet;)V"
+                    target = "Lnet/minecraft/item/ItemStack;areEqual(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)Z"
             ),
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private void listenForEquips(CallbackInfo callbackInfo,
+    private void listenForEquips(CallbackInfoReturnable<Map<EquipmentSlot, ItemStack>> callbackInfo,
+                                 Map<EquipmentSlot, ItemStack> equipment,
                                  EquipmentSlot[] equipmentSlots,
                                  int numEquipment,
                                  int index,

@@ -25,7 +25,7 @@ public class CustomArmorLayerApplier {
     protected static Map<String, Identifier> ARMOR_TEXTURE_CACHE;
 
     @Inject(method = "getArmorTexture", at = @At("HEAD"), cancellable = true)
-    protected void useCustomTextureLayers(EquipmentSlot slot, ArmorItem item, boolean secondLayer, @Nullable String suffix, CallbackInfoReturnable<Identifier> callbackInfoReturnable) {
+    protected void useCustomTextureLayers(ArmorItem item, boolean secondLayer, @Nullable String suffix, CallbackInfoReturnable<Identifier> callbackInfoReturnable) {
         if (item instanceof AwakenArmorItem) {
             String customTextureLayer = ((AwakenArmorItem) item).getCustomTextureLayer();
 

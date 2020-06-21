@@ -4,10 +4,9 @@ import com.kqp.awaken.recipe.AwakenRecipeManager;
 import com.kqp.awaken.recipe.AwakenRecipeManagerProvider;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.resource.ReloadableResourceManager;
+import net.minecraft.resource.ServerResourceManager;
 import net.minecraft.server.MinecraftServer;
 import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Implements;
-import org.spongepowered.asm.mixin.Interface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,13 +16,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 /**
  * Used to initialize the Awaken recipe manager and add vanilla recipes to it.
  */
-@Mixin(MinecraftServer.class)
+@Mixin(ServerResourceManager.class)
 public abstract class AwakenRecipeManagerInitializer implements AwakenRecipeManagerProvider {
     private AwakenRecipeManager awakenRecipeManager;
 
     @Shadow
     @Final
-    private ReloadableResourceManager dataManager;
+    private ReloadableResourceManager resourceManager;
 
     @Shadow
     @Final
@@ -31,13 +30,8 @@ public abstract class AwakenRecipeManagerInitializer implements AwakenRecipeMana
 
     @Inject(method = "<init>*", at = @At("RETURN"))
     public void construct(CallbackInfo callbackInfo) {
-        this.awakenRecipeManager = new AwakenRecipeManager();
-        dataManager.registerListener(this.awakenRecipeManager);
-    }
-
-    @Inject(method = "reloadDataPacks", at = @At("RETURN"))
-    private void convertVanillaRecipes(CallbackInfo callbackInfo) {
-        this.awakenRecipeManager.addVanillaRecipes(this.recipeManager);
+        this.awakenRecipeManager = new AwakenRecipeManager(recipeManager);
+        resourceManager.registerListener(this.awakenRecipeManager);
     }
 
     @Override

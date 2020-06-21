@@ -3,26 +3,24 @@ package com.kqp.awaken.item.trinket;
 import com.kqp.awaken.effect.EntityFeatureGroup;
 import com.kqp.awaken.effect.EntityFeatureGroupProvider;
 import com.kqp.awaken.util.TooltipUtil;
-import dev.emi.trinkets.api.ITrinket;
+import dev.emi.trinkets.api.Trinket;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.client.resource.language.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AwakenTrinketItem extends Item implements ITrinket, EntityFeatureGroupProvider {
+public class AwakenTrinketItem extends Trinket implements EntityFeatureGroupProvider {
     public final String trinketGroup, trinketSlot;
 
     private final List<EntityFeatureGroup> entityFeatureGroups;

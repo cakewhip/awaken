@@ -5,12 +5,15 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
+import com.kqp.awaken.init.AwakenLootTable;
 import net.minecraft.entity.Entity;
 import net.minecraft.loot.condition.LootCondition;
+import net.minecraft.loot.condition.LootConditionType;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameter;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.JsonSerializer;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 
@@ -56,11 +59,13 @@ public class BiomeSpecificLootCondition implements LootCondition {
         };
     }
 
-    public static class Factory extends LootCondition.Factory<BiomeSpecificLootCondition> {
-        public Factory() {
-            super(new Identifier("biome-specific"), BiomeSpecificLootCondition.class);
-        }
+    @Override
+    public LootConditionType getType() {
+        return AwakenLootTable.BIOME_SPECIFIC_CONDITION;
+    }
 
+    public static class Serializer implements JsonSerializer<BiomeSpecificLootCondition> {
+        @Override
         public void toJson(JsonObject jsonObject, BiomeSpecificLootCondition biomeSpecificLootCondition, JsonSerializationContext jsonSerializationContext) {
             JsonArray biomeArray = new JsonArray();
 
@@ -71,6 +76,7 @@ public class BiomeSpecificLootCondition implements LootCondition {
             jsonObject.add("biomes", biomeArray);
         }
 
+        @Override
         public BiomeSpecificLootCondition fromJson(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext) {
             HashSet<Identifier> biomes = new HashSet();
 

@@ -6,18 +6,16 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.kqp.awaken.world.data.AwakenLevelData;
 import net.minecraft.loot.condition.LootCondition;
+import net.minecraft.loot.condition.LootConditionType;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameter;
 import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.util.Identifier;
+import net.minecraft.util.JsonSerializer;
 
 import java.util.Set;
 
 public class FieryMoonLootCondition implements LootCondition {
     private static final FieryMoonLootCondition INSTANCE = new FieryMoonLootCondition();
-
-    private FieryMoonLootCondition() {
-    }
 
     public Set<LootContextParameter<?>> getRequiredParameters() {
         return ImmutableSet.of(LootContextParameters.LAST_DAMAGE_PLAYER);
@@ -33,14 +31,17 @@ public class FieryMoonLootCondition implements LootCondition {
         return () -> INSTANCE;
     }
 
-    public static class Factory extends LootCondition.Factory<FieryMoonLootCondition> {
-        public Factory() {
-            super(new Identifier("fiery_moon_active"), FieryMoonLootCondition.class);
-        }
+    @Override
+    public LootConditionType getType() {
+        return null;
+    }
 
+    public static class Serializer implements JsonSerializer<FieryMoonLootCondition> {
+        @Override
         public void toJson(JsonObject jsonObject, FieryMoonLootCondition fieryMoonLootCondition, JsonSerializationContext jsonSerializationContext) {
         }
 
+        @Override
         public FieryMoonLootCondition fromJson(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext) {
             return FieryMoonLootCondition.INSTANCE;
         }

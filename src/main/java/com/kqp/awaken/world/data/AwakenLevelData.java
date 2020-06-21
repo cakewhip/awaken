@@ -4,17 +4,25 @@ import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.init.AwakenConfig;
 import com.kqp.awaken.init.AwakenNetworking;
 import com.kqp.awaken.util.Broadcaster;
+import nerdhub.cardinal.components.api.ComponentRegistry;
+import nerdhub.cardinal.components.api.ComponentType;
+import nerdhub.cardinal.components.api.component.Component;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 
 /**
  * Data class used to hold world data related to Awaken.
  */
-public class AwakenLevelData {
+public class AwakenLevelData implements Component {
+    public static final ComponentType<AwakenLevelData> LEVEL_DATA = ComponentRegistry.INSTANCE.registerIfAbsent(
+            new Identifier(Awaken.MOD_ID, "level_data"),
+            AwakenLevelData.class
+    );
+
     /**
      * If the ender dragon has been killed.
      */
@@ -55,17 +63,11 @@ public class AwakenLevelData {
      */
     private boolean dirty = false;
 
-    public AwakenLevelData(CompoundTag tag) {
-        postDragon = tag.getBoolean("PostDragon");
-        postWither = tag.getBoolean("PostWither");
-        postRaid = tag.getBoolean("PostRaid");
-        postElderGuardian = tag.getBoolean("PostElderGuardian");
-        worldAwakened = tag.getBoolean("WorldAwakened");
-        fieryMoonActive = tag.getBoolean("FieryMoonActive");
-        fieryMoonTickTime = tag.getLong("FieryMoonTickTime");
+    public AwakenLevelData() {
     }
 
-    public AwakenLevelData() {
+    public AwakenLevelData(CompoundTag tag) {
+        fromTag(tag);
     }
 
     /**
@@ -84,7 +86,7 @@ public class AwakenLevelData {
      * Updates stuff for fiery moon handling.
      */
     public void tickFieryMoon(MinecraftServer server) {
-        World world = server.getWorld(DimensionType.OVERWORLD_REGISTRY_KEY);
+        World world = server.getOverworld();
         long time = world.getTimeOfDay() % 24000;
 
         if (this.fieryMoonActive) {
@@ -169,7 +171,8 @@ public class AwakenLevelData {
         this.dirty = true;
     }
 
-    public void writeToTag(CompoundTag tag) {
+    @Override
+    public void fromTag(CompoundTag tag) {
         tag.putBoolean("PostDragon", postDragon);
         tag.putBoolean("PostWither", postWither);
         tag.putBoolean("PostRaid", postRaid);
@@ -179,9 +182,22 @@ public class AwakenLevelData {
         tag.putLong("FieryMoonTickTime", fieryMoonTickTime);
     }
 
+    @Override
+    public CompoundTag toTag(CompoundTag tag) {
+        postDragon = tag.getBoolean("PostDragon");
+        postWither = tag.getBoolean("PostWither");
+        postRaid = tag.getBoolean("PostRaid");
+        postElderGuardian = tag.getBoolean("PostElderGuardian");
+        worldAwakened = tag.getBoolean("WorldAwakened");
+        fieryMoonActive = tag.getBoolean("FieryMoonActive");
+        fieryMoonTickTime = tag.getLong("FieryMoonTickTime");
+
+        return tag;
+    }
+
     public void syncToClients(MinecraftServer server) {
         CompoundTag awakenLevelDataTag = new CompoundTag();
-        this.writeToTag(awakenLevelDataTag);
+        this.fromTag(awakenLevelDataTag);
 
         for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
             AwakenNetworking.SYNC_LEVEL_DATA_S2C.sendToPlayer(player, (buf) -> {
@@ -191,6 +207,6 @@ public class AwakenLevelData {
     }
 
     public static AwakenLevelData getFor(MinecraftServer server) {
-        return ((AwakenLevelDataContainer) server.getWorld(DimensionType.OVERWORLD_REGISTRY_KEY).getLevelProperties()).getAwakenLevelData();
+        return LEVEL_DATA.get(server.getOverworld().getLevelProperties());
     }
 }

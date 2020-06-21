@@ -13,7 +13,7 @@ import net.minecraft.loot.LootManager;
 import net.minecraft.loot.UniformLootTableRange;
 import net.minecraft.loot.condition.KilledByPlayerLootCondition;
 import net.minecraft.loot.condition.LootCondition;
-import net.minecraft.loot.condition.LootConditions;
+import net.minecraft.loot.condition.LootConditionType;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.function.LimitCountLootFunction;
@@ -21,6 +21,8 @@ import net.minecraft.loot.function.SetCountLootFunction;
 import net.minecraft.loot.operator.BoundedIntUnaryOperator;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.JsonSerializer;
+import net.minecraft.util.registry.Registry;
 
 /**
  * Class to help add things to the loot table of entities.
@@ -28,12 +30,11 @@ import net.minecraft.util.Identifier;
 public class AwakenLootTable {
     public static ArrayListMultimap<Identifier, FabricLootPoolBuilder> LOOT_MAP = ArrayListMultimap.create();
 
-    public static void init() {
-        // Custom Loot Conditions
-        LootConditions.register(new WorldAwakenedLootCondition.Factory());
-        LootConditions.register(new FieryMoonLootCondition.Factory());
-        LootConditions.register(new BiomeSpecificLootCondition.Factory());
+    public static final LootConditionType WORLD_AWAKENED_CONDITION = register("world_awakened", new WorldAwakenedLootCondition.Serializer());
+    public static final LootConditionType FIERY_MOON_CONDITION = register("fiery_moon", new FieryMoonLootCondition.Serializer());
+    public static final LootConditionType BIOME_SPECIFIC_CONDITION = register("biome_specific", new BiomeSpecificLootCondition.Serializer());
 
+    public static void init() {
         // Phase 1
         {
             // Reagents
@@ -133,5 +134,9 @@ public class AwakenLootTable {
                 supplier.withPool(builder.build());
             }
         });
+    }
+
+    private static LootConditionType register(String id, JsonSerializer<? extends LootCondition> serializer) {
+        return Registry.register(Registry.LOOT_CONDITION_TYPE, new Identifier(Awaken.MOD_ID, id),new LootConditionType(serializer));
     }
 }

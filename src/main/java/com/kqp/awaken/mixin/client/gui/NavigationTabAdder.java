@@ -58,7 +58,7 @@ public abstract class NavigationTabAdder extends AbstractInventoryScreen<PlayerS
         this.itemRenderer.zOffset = 100.0F;
         RenderSystem.enableRescaleNormal();
         ItemStack itemStack = new ItemStack(Blocks.CRAFTING_TABLE);
-        this.itemRenderer.renderGuiItem(itemStack, this.x + 29 + (28 - 15) / 2, this.y - 28 + 10);
+        this.itemRenderer.renderGuiItemIcon(itemStack, this.x + 29 + (28 - 15) / 2, this.y - 28 + 10);
         this.itemRenderer.renderGuiItemOverlay(this.textRenderer, itemStack, this.x + 29 + (28 - 15) / 2, this.y - 28 + 10);
         this.itemRenderer.zOffset = 0.0F;
         this.setZOffset(0);

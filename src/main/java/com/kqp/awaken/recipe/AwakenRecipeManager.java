@@ -6,6 +6,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.kqp.awaken.init.Awaken;
+import com.kqp.awaken.mixin.accessor.MinecraftServerResourceAccessor;
 import com.kqp.awaken.util.TimeUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.Item;
@@ -32,6 +33,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -46,8 +48,12 @@ public class AwakenRecipeManager extends JsonDataLoader {
      */
     private HashMap<Identifier, AwakenRecipe> recipes = new HashMap();
 
-    public AwakenRecipeManager() {
+    private final Optional<RecipeManager> vanillaRecipeManager;
+
+    public AwakenRecipeManager(RecipeManager vanillaRecipeManager) {
         super(GSON, "awaken_recipes");
+
+        this.vanillaRecipeManager = Optional.ofNullable(vanillaRecipeManager);
     }
 
     public void addRecipe(Identifier identifier, String recipeType, ItemStack output, HashMap<Reagent, Integer> reagents) {
@@ -196,14 +202,16 @@ public class AwakenRecipeManager extends JsonDataLoader {
      * @param profiler
      */
     @Override
-    protected void apply(Map<Identifier, JsonObject> loader, ResourceManager manager, Profiler profiler) {
+    protected void apply(Map<Identifier, JsonElement> loader, ResourceManager manager, Profiler profiler) {
         this.recipes.clear();
 
         Awaken.info("Loading Awaken recipes");
 
         TimeUtil.profile(
                 () -> {
-                    loader.forEach((id, json) -> {
+                    loader.forEach((id, element) -> {
+                        JsonObject json = element.getAsJsonObject();
+
                         String type = json.get("type").getAsString();
                         JsonObject recipeNode = json.getAsJsonObject("recipe");
 
@@ -253,6 +261,8 @@ public class AwakenRecipeManager extends JsonDataLoader {
                 },
                 time -> Awaken.info("Loading of Awaken recipes took " + time + "ms")
         );
+
+        vanillaRecipeManager.ifPresent(this::addVanillaRecipes);
     }
 
     /**
@@ -319,7 +329,7 @@ public class AwakenRecipeManager extends JsonDataLoader {
 
     public static AwakenRecipeManager getFor(World world) {
         if (!world.isClient) {
-            return ((AwakenRecipeManagerProvider) world.getServer()).getAwakenRecipeManager();
+            return ((AwakenRecipeManagerProvider) ((MinecraftServerResourceAccessor) world.getServer()).getServerResourceManager()).getAwakenRecipeManager();
         } else {
             return ((AwakenRecipeManagerProvider) MinecraftClient.getInstance().getNetworkHandler()).getAwakenRecipeManager();
         }

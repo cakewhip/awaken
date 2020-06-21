@@ -26,7 +26,7 @@ public class AwakenBossEntity extends HostileEntity {
         super(entityType, world);
 
         this.bossBar = new ServerBossBar(this.getDisplayName(), BossBar.Color.YELLOW, BossBar.Style.PROGRESS);
-        this.setHealth(this.getMaximumHealth());
+        this.setHealth(this.getMaxHealth());
         this.getNavigation().setCanSwim(true);
     }
 
@@ -34,7 +34,7 @@ public class AwakenBossEntity extends HostileEntity {
     protected void mobTick() {
         super.mobTick();
 
-        this.bossBar.setPercent(this.getHealth() / this.getMaximumHealth());
+        this.bossBar.setPercent(this.getHealth() / this.getMaxHealth());
 
         if (this.shouldRemove()) {
             this.remove();

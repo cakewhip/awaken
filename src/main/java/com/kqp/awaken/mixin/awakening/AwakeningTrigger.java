@@ -25,7 +25,7 @@ public class AwakeningTrigger {
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     private void triggerAwakening(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> callbackInfoReturnable) {
         if (!world.isClient) {
-            if (world.getDimension().isEnd()) {
+            if (world.getDimensionRegistryKey() == DimensionType.THE_END_REGISTRY_KEY) {
                 AwakenLevelData awakenLevelData = AwakenLevelData.getFor(world.getServer());
 
                 if (!awakenLevelData.isWorldAwakened()
@@ -37,7 +37,7 @@ public class AwakeningTrigger {
 
                     callbackInfoReturnable.setReturnValue(ActionResult.SUCCESS);
 
-                    player.changeDimension(DimensionType.OVERWORLD_REGISTRY_KEY);
+                    player.changeDimension(world.getServer().getOverworld());
                     Broadcaster.broadcastMessage(world.getServer(), "New ores have generated!", Formatting.LIGHT_PURPLE, false, true);
                 }
             }

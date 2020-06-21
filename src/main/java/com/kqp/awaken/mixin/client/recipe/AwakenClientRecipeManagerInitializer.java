@@ -22,7 +22,7 @@ public class AwakenClientRecipeManagerInitializer implements AwakenRecipeManager
 
     @Inject(method = "<init>*", at = @At("RETURN"))
     public void construct(CallbackInfo callbackInfo) {
-        this.awakenRecipeManager = new AwakenRecipeManager();
+        this.awakenRecipeManager = new AwakenRecipeManager(null);
     }
 
     @Override

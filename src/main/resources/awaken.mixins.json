@@ -3,6 +3,7 @@
   "package": "com.kqp.awaken.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "accessor.MinecraftServerResourceAccessor",
     "accessor.MobEntityAccessor",
     "awakening.AwakeningTrigger",
     "awakening.MobDeathListener",
@@ -42,7 +43,6 @@
     "postawakening.SpiderPoisonBuffApplier",
     "recipe.AwakenRecipeManagerInitializer",
     "recipe.IngredientHacker",
-    "recipe.NetheriteArmorRecipeRemover",
     "spawning.ConditionalSpawnEntryApplier",
     "trinket.BoneCrownEffectApplier",
     "trinket.CombatSaddleEffectApplier",
@@ -59,7 +59,6 @@
     "trinket.SilkyGlovesEffectApplier",
     "trinket.TrinketEnchantmentBuffApplier",
     "world.data.AwakenChunkDataSerializer",
-    "world.data.AwakenLevelDataImplementer",
     "world.gen.PostAwakeningOreGenerator"
   ],
   "client": [
