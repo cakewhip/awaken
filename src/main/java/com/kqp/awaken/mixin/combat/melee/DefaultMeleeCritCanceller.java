@@ -10,7 +10,19 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
  */
 @Mixin(PlayerEntity.class)
 public class DefaultMeleeCritCanceller {
-    @ModifyVariable(method = "attack", at = @At(value = "STORE"))
+    /**
+     * "b13" is the flag for determining whether the attack is critical
+     *
+     * @param b13
+     * @return
+     */
+    @ModifyVariable(
+            method = "attack",
+            at = @At(value = "STORE"),
+            index = 8,
+            ordinal = 2,
+            name = "b13"
+    )
     private boolean cancelCritFlag(boolean b13) {
         return false;
     }
