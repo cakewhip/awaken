@@ -11,6 +11,7 @@ import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameter;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.util.JsonSerializer;
+import net.minecraft.world.dimension.DimensionType;
 
 import java.util.Set;
 
@@ -18,13 +19,14 @@ public class FieryMoonLootCondition implements LootCondition {
     private static final FieryMoonLootCondition INSTANCE = new FieryMoonLootCondition();
 
     public Set<LootContextParameter<?>> getRequiredParameters() {
-        return ImmutableSet.of(LootContextParameters.LAST_DAMAGE_PLAYER);
+        return ImmutableSet.of(LootContextParameters.THIS_ENTITY);
     }
 
     public boolean test(LootContext lootContext) {
         AwakenLevelData awakenLevelData = AwakenLevelData.getFor(lootContext.getWorld().getServer());
+        boolean inOverworld = lootContext.get(LootContextParameters.THIS_ENTITY).world.getDimensionRegistryKey() == DimensionType.OVERWORLD_REGISTRY_KEY;
 
-        return awakenLevelData.isFieryMoonActive();
+        return awakenLevelData.isFieryMoonActive() && inOverworld;
     }
 
     public static LootCondition.Builder builder() {
