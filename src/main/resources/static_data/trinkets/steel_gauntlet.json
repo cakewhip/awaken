@@ -12,7 +12,7 @@
       },
       {
         "entity_attribute": "generic.attack_knockback",
-        "operation": "addition",
+        "operation": "multiply_base",
         "value": 0.25
       }
     ],
