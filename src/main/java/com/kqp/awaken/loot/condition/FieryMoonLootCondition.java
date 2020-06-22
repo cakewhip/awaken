@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
+import com.kqp.awaken.init.AwakenLootTable;
 import com.kqp.awaken.world.data.AwakenLevelData;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.condition.LootConditionType;
@@ -35,7 +36,7 @@ public class FieryMoonLootCondition implements LootCondition {
 
     @Override
     public LootConditionType getType() {
-        return null;
+        return AwakenLootTable.FIERY_MOON_CONDITION;
     }
 
     public static class Serializer implements JsonSerializer<FieryMoonLootCondition> {
