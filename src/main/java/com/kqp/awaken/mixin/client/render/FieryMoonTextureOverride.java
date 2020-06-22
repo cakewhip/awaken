@@ -3,15 +3,18 @@ package com.kqp.awaken.mixin.client.render;
 import com.kqp.awaken.client.AwakenClientLevelData;
 import com.kqp.awaken.world.data.AwakenLevelData;
 import com.kqp.awaken.init.Awaken;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.util.Identifier;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /**
- * Used to replace the moon texture during a fiery moon.
+ * Used to replace and up-scale the moon texture during a fiery moon.
  */
 @Mixin(WorldRenderer.class)
 public abstract class FieryMoonTextureOverride {
@@ -27,5 +30,18 @@ public abstract class FieryMoonTextureOverride {
         } else {
             return NORMAL_MOON;
         }
+    }
+
+    @ModifyConstant(method = "renderSky", constant = @Constant(floatValue = 20.0F))
+    private float scaleMoonSize(float size) {
+        AwakenLevelData awakenLevelData = AwakenClientLevelData.INSTANCE.getAwakenLevelData();
+
+        if (awakenLevelData.isFieryMoonActive()) {
+            if (size == 20.0F) {
+                return 60.0F;
+            }
+        }
+
+        return size;
     }
 }

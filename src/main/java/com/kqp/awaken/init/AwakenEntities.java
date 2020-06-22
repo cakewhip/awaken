@@ -131,8 +131,10 @@ public class AwakenEntities {
 
         // Fiery Moon
         {
-            addHostileSpawn(spawnEntry(EntityType.ZOMBIFIED_PIGLIN, 300, 4, 4, FieryMoonSpawnCondition.INSTANCE), biome -> true);
-            addHostileSpawn(spawnEntry(EntityType.ZOGLIN, 250, 4, 4, FieryMoonSpawnCondition.INSTANCE), biome -> true);
+            addHostileSpawn(spawnEntry(EntityType.ZOMBIFIED_PIGLIN, 600, 4, 4, FieryMoonSpawnCondition.INSTANCE), biome -> true);
+            addHostileSpawn(spawnEntry(EntityType.BLAZE, 600, 3, 3, FieryMoonSpawnCondition.INSTANCE), biome -> true);
+            addHostileSpawn(spawnEntry(EntityType.GHAST, 450, 1, 1, FieryMoonSpawnCondition.INSTANCE), biome -> true);
+            addHostileSpawn(spawnEntry(EntityType.ZOGLIN, 300, 1, 2, FieryMoonSpawnCondition.INSTANCE), biome -> true);
         }
     }
 

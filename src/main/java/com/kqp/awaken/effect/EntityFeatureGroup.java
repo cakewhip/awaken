@@ -102,6 +102,12 @@ public class EntityFeatureGroup {
         }
     }
 
+    public void applyToAndHeal(LivingEntity living) {
+        applyTo(living);
+
+        living.setHealth(living.getMaxHealth());
+    }
+
     public void removeFrom(LivingEntity living) {
         statusEffects.forEach(statusEffect -> living.removeStatusEffect(statusEffect.getEffectType()));
         living.getAttributes().removeModifiers(attributeModifiers);
