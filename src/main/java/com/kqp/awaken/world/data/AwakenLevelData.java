@@ -173,17 +173,6 @@ public class AwakenLevelData implements Component {
 
     @Override
     public void fromTag(CompoundTag tag) {
-        tag.putBoolean("PostDragon", postDragon);
-        tag.putBoolean("PostWither", postWither);
-        tag.putBoolean("PostRaid", postRaid);
-        tag.putBoolean("PostElderGuardian", postElderGuardian);
-        tag.putBoolean("WorldAwakened", worldAwakened);
-        tag.putBoolean("FieryMoonActive", fieryMoonActive);
-        tag.putLong("FieryMoonTickTime", fieryMoonTickTime);
-    }
-
-    @Override
-    public CompoundTag toTag(CompoundTag tag) {
         postDragon = tag.getBoolean("PostDragon");
         postWither = tag.getBoolean("PostWither");
         postRaid = tag.getBoolean("PostRaid");
@@ -191,16 +180,28 @@ public class AwakenLevelData implements Component {
         worldAwakened = tag.getBoolean("WorldAwakened");
         fieryMoonActive = tag.getBoolean("FieryMoonActive");
         fieryMoonTickTime = tag.getLong("FieryMoonTickTime");
+    }
+
+    @Override
+    public CompoundTag toTag(CompoundTag tag) {
+        tag.putBoolean("PostDragon", postDragon);
+        tag.putBoolean("PostWither", postWither);
+        tag.putBoolean("PostRaid", postRaid);
+        tag.putBoolean("PostElderGuardian", postElderGuardian);
+        tag.putBoolean("WorldAwakened", worldAwakened);
+        tag.putBoolean("FieryMoonActive", fieryMoonActive);
+        tag.putLong("FieryMoonTickTime", fieryMoonTickTime);
 
         return tag;
     }
 
     public void syncToClients(MinecraftServer server) {
         CompoundTag awakenLevelDataTag = new CompoundTag();
-        this.fromTag(awakenLevelDataTag);
+        this.toTag(awakenLevelDataTag);
 
         for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
-            AwakenNetworking.SYNC_LEVEL_DATA_S2C.sendToPlayer(player, (buf) -> {
+            AwakenNetworking.
+                    SYNC_LEVEL_DATA_S2C.sendToPlayer(player, (buf) -> {
                 buf.writeCompoundTag(awakenLevelDataTag);
             });
         }
