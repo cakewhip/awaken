@@ -13,6 +13,7 @@
     "combat.attribute.DamageMitigationApplier",
     "combat.attribute.EntityAttributeClampOverride",
     "combat.attribute.MeleeEntityAttributesApplier",
+    "combat.attribute.PlayerKnockbackImplementer",
     "combat.attribute.UnarmedDamageAttributeApplier",
     "combat.melee.DefaultMeleeCritCanceller",
     "combat.melee.MeleeCritChanceApplier",

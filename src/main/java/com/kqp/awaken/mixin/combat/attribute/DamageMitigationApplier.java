@@ -22,7 +22,6 @@ public abstract class DamageMitigationApplier extends LivingEntity {
     @Redirect(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"))
     private boolean applyDamageMitigation(LivingEntity player, DamageSource source, float amount) {
         double damageMitigation = player.getAttributeValue(AwakenEntityAttributes.DAMAGE_MITIGATION);
-        System.out.println(damageMitigation);
 
         amount *= (1D - damageMitigation);
 
