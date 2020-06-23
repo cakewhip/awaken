@@ -97,7 +97,7 @@ public class AwakenItems {
     }
 
     public static class Alchemist {
-        public static final Item POTION_BAG = register("potion_bag", new PotionBagItem(32));
+        public static final Item POTION_BAG = register("potion_bag", new PotionBagItem(512, 32));
     }
 
     public static void init() {

@@ -53,22 +53,14 @@ public class AwakenCraftingResultSlot extends Slot {
 
     /**
      * Called whenever an item is taken from this slot.
-     * TODO: have the recipe stored in the slot...
      *
      * @param stack ItemStack that is being crafted
      */
     @Override
     protected void onCrafted(ItemStack stack) {
         if (!stack.isEmpty()) {
-            HashMap<ComparableItemStack, Integer> compMap = AwakenRecipeManager.toComparableMap(playerInventory.main);
-            List<AwakenRecipe> matches = screenHandler.awakenRecipeManager.getMatchesForOutput(screenHandler.recipeTypes, stack);
-
-            for (AwakenRecipe recipe : matches) {
-                if (recipe.matches(compMap)) {
-                    recipe.onCraft(playerInventory);
-                    break;
-                }
-            }
+            AwakenRecipe recipe = screenHandler.craftingResultRecipes.get(currentIndex);
+            recipe.onCraft(playerInventory);
         }
 
         markDirty();

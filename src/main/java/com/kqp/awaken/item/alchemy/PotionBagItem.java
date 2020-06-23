@@ -25,8 +25,8 @@ import java.util.List;
 public class PotionBagItem extends Item {
     public final int maxCapacity;
 
-    public PotionBagItem(int maxCapacity) {
-        super(new Item.Settings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(10));
+    public PotionBagItem(int durability, int maxCapacity) {
+        super(new Item.Settings().group(ItemGroup.COMBAT).maxCount(1).maxDamage(durability));
 
         this.maxCapacity = maxCapacity;
     }

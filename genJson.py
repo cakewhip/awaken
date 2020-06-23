@@ -73,7 +73,10 @@ ITEMS = [
     "shulker_glove",
     "silky_glove",
     "snorkel_mask",
-    "steel_gauntlet"
+    "steel_gauntlet",
+    "witch_hat",
+    "clerics_hood",
+    "potion_bag"
 ]
 
 

@@ -7,6 +7,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.mixin.accessor.MinecraftServerResourceAccessor;
+import com.kqp.awaken.recipe.dynamic.DynamicAwakenRecipe;
+import com.kqp.awaken.recipe.dynamic.PotionBagRecipe;
 import com.kqp.awaken.util.TimeUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.Item;
@@ -48,12 +50,15 @@ public class AwakenRecipeManager extends JsonDataLoader {
      */
     private HashMap<Identifier, AwakenRecipe> recipes = new HashMap();
 
+    private ArrayList<DynamicAwakenRecipe> dynamicRecipes = new ArrayList();
+
     private final Optional<RecipeManager> vanillaRecipeManager;
 
     public AwakenRecipeManager(RecipeManager vanillaRecipeManager) {
         super(GSON, "awaken_recipes");
 
         this.vanillaRecipeManager = Optional.ofNullable(vanillaRecipeManager);
+        this.dynamicRecipes.add(new PotionBagRecipe());
     }
 
     public void addRecipe(Identifier identifier, String recipeType, ItemStack output, HashMap<Reagent, Integer> reagents) {
@@ -95,6 +100,10 @@ public class AwakenRecipeManager extends JsonDataLoader {
         HashMap<ComparableItemStack, Integer> input = AwakenRecipeManager.toComparableMap(itemStacks);
         ArrayList<AwakenRecipe> output = new ArrayList();
 
+        dynamicRecipes.forEach(dynamicRecipe -> {
+            output.addAll(dynamicRecipe.getPossibleRecipes(input));
+        });
+
         output.addAll(recipes.values().parallelStream()
                 .filter(recipe -> recipeTypeSet.contains(recipe.recipeType))
                 .filter(recipe -> recipe.matches(input))
@@ -103,30 +112,6 @@ public class AwakenRecipeManager extends JsonDataLoader {
 
         // Sort for that hot UX
         output.sort(Comparator.comparing(AwakenRecipe::getSortString));
-
-        return output;
-    }
-
-    /**
-     * Returns a list of recipes that have the passed item stack as an output.
-     *
-     * @param recipeTypes Recipe types to access
-     * @param itemStack   Item stack output
-     * @return List of recipes that have the passed item stack as an output
-     */
-    public List<AwakenRecipe> getMatchesForOutput(String[] recipeTypes, ItemStack itemStack) {
-        if (itemStack.isEmpty()) {
-            return Collections.emptyList();
-        }
-
-        HashSet<String> recipeTypeSet = new HashSet(Arrays.asList(recipeTypes));
-        ArrayList<AwakenRecipe> output = new ArrayList();
-
-        output.addAll(recipes.values().parallelStream()
-                .filter(recipe -> recipeTypeSet.contains(recipe.recipeType))
-                .filter(recipe -> ItemStack.areItemsEqual(recipe.result, itemStack))
-                .collect(Collectors.toList())
-        );
 
         return output;
     }

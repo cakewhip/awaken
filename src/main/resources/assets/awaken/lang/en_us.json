@@ -163,6 +163,9 @@
     "item.awaken.witch_hat": "Witch Hat",
     "item.awaken.clerics_hood": "Cleric's Hood",
 
+    "__comment": "Alchemist Stuff",
+    "item.awaken.potion_bag": "Potion Bag",
+
     "__comment": "GUI Translations",
     "gui.awaken.awaken_crafting": "Crafting",
     "gui.awaken.awaken_crafting_recipe_look_up": "Search Uses",
