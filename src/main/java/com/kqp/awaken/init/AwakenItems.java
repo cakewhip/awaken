@@ -2,6 +2,7 @@ package com.kqp.awaken.init;
 
 import com.kqp.awaken.effect.EntityFeatureGroup;
 import com.kqp.awaken.item.BossSpawnerItem;
+import com.kqp.awaken.item.alchemy.PotionBagItem;
 import com.kqp.awaken.item.bow.AwakenBowItem;
 import com.kqp.awaken.item.bow.FlameBowItem;
 import com.kqp.awaken.item.bow.StatusEffectBowItem;
@@ -95,6 +96,10 @@ public class AwakenItems {
         public static final Item FIERY_TRIDENT = register("fiery_trident", new AwakenTridentItem(16D, 500));
     }
 
+    public static class Alchemist {
+        public static final Item POTION_BAG = register("potion_bag", new PotionBagItem(32));
+    }
+
     public static void init() {
         removeNetheriteArmorRecipes();
 
@@ -106,6 +111,7 @@ public class AwakenItems {
         new Bows();
         new BossSpawners();
         new Tridents();
+        new Alchemist();
     }
 
     private static void removeNetheriteArmorRecipes() {
