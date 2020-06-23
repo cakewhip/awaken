@@ -22,8 +22,6 @@ public class WingsEntityModel<T extends LivingEntity> extends AnimalModel<T> {
      * we need to subtract the velocity from some constant.
      * It makes sense for this constant to be the max flying speed.
      * Which is declared here.
-     * <p>
-     * TODO: find the actual max flying speed lmao
      */
     private static final float MAX_FLYING_SPEED = 2F;
 

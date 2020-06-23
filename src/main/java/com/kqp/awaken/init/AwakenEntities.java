@@ -30,22 +30,6 @@ import net.minecraft.world.biome.Biomes;
 import java.util.function.Predicate;
 
 public class AwakenEntities {
-    // TODO: add killer bunny, hostile mob in savannahs
-    // TODO: add mummies, hostile mob in deserts
-    // TODO: add tarantulas, hostile mob in deserts
-    // TODO: add pharaohs, hostile mob in deserts
-    // TODO: add ender agent, hostile mob in strongholds
-    // TODO: add ice devil, hostile mob in ice biomes
-    // TODO: add wind spirit, hostile mob at high elevations
-    // TODO: add witch doctor, hostile mob in swamps
-    // TODO: add bullet ant, hostile mob in jungles
-    // TODO: add dart frog, hostile mob in jungles
-    // TODO: add pirate ghost, hostile mob in deep oceans and frozen oceans
-    // TODO: add fungal assassin, hostile mob in mushroom biomes and dark forests
-    // TODO: add woodland spirit, hostile mob in dark forests
-    // TODO: add renegade, hostile mob in badlands
-    // TODO: add vagabond, neutral mob in badlands
-
     public static final EntityType<RaptorChickenEntity> RAPTOR_CHICKEN = Registry.register(
             Registry.ENTITY_TYPE,
             new Identifier(Awaken.MOD_ID, "raptor_chicken"),

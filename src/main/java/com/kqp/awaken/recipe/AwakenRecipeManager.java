@@ -40,7 +40,6 @@ import java.util.stream.Collectors;
 
 /**
  * Manages all of the Awaken recipes.
- * TODO: take note of block tags and shorten recipe lists {@link net.minecraft.tag.BlockTags}.
  */
 public class AwakenRecipeManager extends JsonDataLoader {
     private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();

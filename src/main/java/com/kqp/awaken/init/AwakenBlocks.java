@@ -35,7 +35,6 @@ public class AwakenBlocks {
     public static final Block ANCIENT_SALVIUM_ORE = register("ancient_salvium_ore", new AwakenOreBlock(ancientOreSettings(15F).build()));
     public static final Block ANCIENT_VALERIUM_ORE = register("ancient_valerium_ore", new AwakenOreBlock(ancientOreSettings(15F).build()));
 
-    // TODO: find out why vanilla pickaxes don't work for mining level
     // as a result of the issue mentioned above, salvium and valerium will be minable by any pickaxe
     public static final Block SALVIUM_ORE = register("salvium_ore", new AwakenOreBlock(stoneSettings(10F, 40F, 0).build()));
     public static final Block VALERIUM_ORE = register("valerium_ore", new AwakenOreBlock(stoneSettings(10F, 40F, 0).build()));

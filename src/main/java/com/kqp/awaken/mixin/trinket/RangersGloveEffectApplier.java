@@ -15,9 +15,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  */
 @Mixin(BowItem.class)
 public class RangersGloveEffectApplier {
-    /**
-     * TODO: figure out why the cancel causes a visual error
-     */
     @Redirect(method = "onStoppedUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;decrement(I)V"))
     private void applyRangersGloveEffect(ItemStack arrowStack, int amt,
                                          ItemStack bowStack, World world, LivingEntity user, int remainingUseTicks) {

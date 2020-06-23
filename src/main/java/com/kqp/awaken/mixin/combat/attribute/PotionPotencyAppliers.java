@@ -56,7 +56,6 @@ public class PotionPotencyAppliers {
     /**
      * Makes all the update-able status effects be affecated by the beneficial and harmful potion potency attributes.
      * This redirect is nasty because Mojang's code is nasty.
-     * TODO: move these effect appliers to a registry where it can be expandable and not so hard coded
      *
      * @param target
      * @param amplifier

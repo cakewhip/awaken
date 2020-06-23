@@ -23,7 +23,6 @@ import java.util.Set;
  */
 @Mixin(HungerManager.class)
 public class FoodMaskEffectApplier implements PlayerReference {
-    // TODO: make all of this data-driven >:(
     private static final Set<Item> MEAT = new HashSet();
     private static final Set<Item> VEGETARIAN = new HashSet();
 

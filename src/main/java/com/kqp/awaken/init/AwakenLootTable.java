@@ -117,7 +117,6 @@ public class AwakenLootTable {
         );
     }
 
-    // TODO: the random drop count doesn't work
     public static void addLootEntry(EntityType entityType, ItemConvertible item, float chance, int min, int max) {
         LOOT_MAP.put(entityType.getLootTableId(),
                 FabricLootPoolBuilder.builder()

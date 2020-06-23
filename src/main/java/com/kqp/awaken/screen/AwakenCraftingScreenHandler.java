@@ -99,7 +99,6 @@ public class AwakenCraftingScreenHandler extends ScreenHandler {
      */
     public AwakenCraftingScreenHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
         super(null, syncId);
-        // TODO: figure out screen handler type
 
         // Init fields
         this.awakenRecipeManager = AwakenRecipeManager.getFor(playerInventory.player.world);
