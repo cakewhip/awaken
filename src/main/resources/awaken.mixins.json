@@ -14,6 +14,7 @@
     "combat.attribute.EntityAttributeClampOverride",
     "combat.attribute.MeleeEntityAttributesApplier",
     "combat.attribute.PlayerKnockbackImplementer",
+    "combat.attribute.PotionPotencyAppliers",
     "combat.attribute.UnarmedDamageAttributeApplier",
     "combat.melee.DefaultMeleeCritCanceller",
     "combat.melee.MeleeCritChanceApplier",

@@ -1,0 +1,22 @@
+{
+  "trinket_group": "head",
+  "trinket_slot": "hat",
+  "durability": 200,
+  "entity_feature_group": {
+    "status_effects": [],
+    "attribute_modifiers": [
+      {
+        "entity_attribute": "awaken:beneficial_potion_potency",
+        "operation": "multiply_total",
+        "value": 0.15
+      },
+      {
+        "entity_attribute": "awaken:harmful_potion_potency",
+        "operation": "multiply_total",
+        "value": -0.25
+      }
+    ],
+    "enchantment_modifiers": [],
+    "abilities": []
+  }
+}

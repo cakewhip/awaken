@@ -160,6 +160,8 @@
     "item.awaken.bycocket": "Bycocket",
     "item.awaken.dragon_tooth_necklace": "Dragon Tooth Necklace",
     "item.awaken.netherian_belt": "Netherian Belt",
+    "item.awaken.witch_hat": "Witch Hat",
+    "item.awaken.clerics_hood": "Cleric's Hood",
 
     "__comment": "GUI Translations",
     "gui.awaken.awaken_crafting": "Crafting",
@@ -213,7 +215,9 @@
     "attribute.name.generic.sword_damage": "Sword Damage",
     "attribute.name.generic.axe_damage": "Axe Damage",
 
-    "attribute.name.generic.potion_damange": "Potion Damage",
+    "attribute.name.generic.beneficial_potion_potency": "Beneficial Potion Potency",
+    "attribute.name.generic.harmful_potion_potency": "Harmful Potion Potency",
+
     "attribute.name.generic.unarmed_damage": "Unarmed Damage",
 
     "attribute.name.generic.mounted_damage": "Mounted Damage",

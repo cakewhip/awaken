@@ -28,7 +28,9 @@ public class AwakenEntityAttributes {
     public static final EntityAttribute SWORD_DAMAGE = register("sword_damage");
     public static final EntityAttribute AXE_DAMAGE = register("axe_damage");
 
-    public static final EntityAttribute POTION_DAMAGE = register("potion_damage");
+    public static final EntityAttribute BENEFICIAL_POTION_POTENCY = register("beneficial_potion_potency");
+    public static final EntityAttribute HARMFUL_POTION_POTENCY = register("harmful_potion_potency");
+
     public static final EntityAttribute UNARMED_DAMAGE = register("unarmed_damage");
 
     public static final EntityAttribute MOUNTED_DAMAGE = register("mounted_damage");
