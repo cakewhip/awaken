@@ -220,6 +220,7 @@
 
     "attribute.name.generic.beneficial_potion_potency": "Beneficial Potion Potency",
     "attribute.name.generic.harmful_potion_potency": "Harmful Potion Potency",
+    "attribute.name.generic.potion_throw_strength": "Potion Throw Strength",
 
     "attribute.name.generic.unarmed_damage": "Unarmed Damage",
 

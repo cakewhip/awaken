@@ -14,6 +14,11 @@
         "entity_attribute": "awaken:harmful_potion_potency",
         "operation": "multiply_total",
         "value": -0.25
+      },
+      {
+        "entity_attribute": "awaken:potion_throw_strength",
+        "operation": "multiply_total",
+        "value": 0.04
       }
     ],
     "enchantment_modifiers": [],

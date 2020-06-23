@@ -1,9 +1,12 @@
 package com.kqp.awaken.item.alchemy;
 
+import com.kqp.awaken.init.AwakenEntityAttributes;
+import com.kqp.awaken.util.AttributeUtil;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.item.Item;
@@ -62,10 +65,11 @@ public class PotionBagItem extends Item {
             ItemStack storedPotion = ItemStack.fromTag(tag.getCompound("StoredPotion"));
 
             if (storedPotion.getItem() instanceof ThrowablePotionItem) {
-                PotionEntity potionEntity = new PotionEntity(world, user);
+                EntityAttributeInstance potionThrowStrength = user.getAttributeInstance(AwakenEntityAttributes.POTION_THROW_STRENGTH);
 
+                PotionEntity potionEntity = new PotionEntity(world, user);
                 potionEntity.setItem(storedPotion);
-                potionEntity.setProperties(user, user.pitch, user.yaw, -20.0F, 0.5F, 1.0F);
+                potionEntity.setProperties(user, user.pitch, user.yaw, 0.0F, (float) AttributeUtil.applyAttribute(potionThrowStrength, 1F), 1.0F);
                 world.spawnEntity(potionEntity);
 
                 capacity--;

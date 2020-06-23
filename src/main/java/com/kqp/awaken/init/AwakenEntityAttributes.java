@@ -30,6 +30,7 @@ public class AwakenEntityAttributes {
 
     public static final EntityAttribute BENEFICIAL_POTION_POTENCY = register("beneficial_potion_potency");
     public static final EntityAttribute HARMFUL_POTION_POTENCY = register("harmful_potion_potency");
+    public static final EntityAttribute POTION_THROW_STRENGTH = register("potion_throw_strength");
 
     public static final EntityAttribute UNARMED_DAMAGE = register("unarmed_damage");
 
