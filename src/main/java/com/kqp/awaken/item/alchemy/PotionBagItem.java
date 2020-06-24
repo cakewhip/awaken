@@ -7,12 +7,13 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.PotionItem;
+import net.minecraft.item.Items;
 import net.minecraft.item.ThrowablePotionItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.potion.PotionUtil;
@@ -20,7 +21,6 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -37,63 +37,67 @@ public class PotionBagItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        CompoundTag tag = itemStack.getOrCreateSubTag("PotionBag");
-        int capacity = tag.getInt("Capacity");
 
-        if (user.isSneaking()) {
-            ItemStack storedPotion = tag.contains("StoredPotion") ? ItemStack.fromTag(tag.getCompound("StoredPotion")) : null;
+        if (!world.isClient) {
+            CompoundTag tag = itemStack.getOrCreateSubTag("PotionBag");
+            int capacity = tag.getInt("Capacity");
 
-            DefaultedList<ItemStack> inventory = user.inventory.main;
-            for (int i = 0; capacity < maxCapacity && i < inventory.size(); i++) {
-                ItemStack invStack = inventory.get(i);
+            if (capacity > 0) {
+                ItemStack storedPotion = ItemStack.fromTag(tag.getCompound("StoredPotion"));
 
-                if (invStack.getItem() instanceof PotionItem) {
-                    if (storedPotion == null) {
-                        CompoundTag stackTag = new CompoundTag();
-                        invStack.toTag(stackTag);
-
-                        tag.put("StoredPotion", stackTag);
-                        capacity++;
-                    } else if (ItemStack.areEqual(storedPotion, invStack)) {
-                        capacity++;
-                    }
-                }
-            }
-
-            tag.putInt("Capacity", capacity);
-        } else if (capacity > 0) {
-            ItemStack storedPotion = ItemStack.fromTag(tag.getCompound("StoredPotion"));
-
-            if (storedPotion.getItem() instanceof ThrowablePotionItem) {
-                EntityAttributeInstance potionThrowStrength = user.getAttributeInstance(AwakenEntityAttributes.POTION_THROW_STRENGTH);
-
-                PotionEntity potionEntity = new PotionEntity(world, user);
-                potionEntity.setItem(storedPotion);
-                potionEntity.setProperties(user, user.pitch, user.yaw, 0.0F, (float) AttributeUtil.applyAttribute(potionThrowStrength, 1F), 1.0F);
-                world.spawnEntity(potionEntity);
-
-                capacity--;
-
-                final int dropAmt = capacity;
-                user.getItemCooldownManager().set(this, 20);
-                itemStack.damage(1, user, (player) -> {
-                    for (int i = 0; i < dropAmt; i++) {
-                        player.dropStack(storedPotion.copy());
-                    }
-                });
-
-
-                if (capacity == 0) {
-                    tag.remove("StoredPotion");
+                if (storedPotion.getItem() instanceof ThrowablePotionItem) {
+                    throwPotion(world, user, storedPotion);
+                    user.getItemCooldownManager().set(this, 20);
+                } else {
+                    drinkPotion(world, user, storedPotion);
+                    user.getItemCooldownManager().set(this, 200);
                 }
 
-                tag.putInt("Capacity", capacity);
+                if (!user.abilities.creativeMode) {
+                    capacity--;
+
+                    final int dropAmt = capacity;
+                    itemStack.damage(1, user, (player) -> {
+                        for (int i = 0; i < dropAmt; i++) {
+                            player.dropStack(storedPotion.copy());
+                        }
+                    });
+
+                    tag.putInt("Capacity", capacity);
+
+                    if (capacity == 0) {
+                        tag.remove("StoredPotion");
+                    }
+
+                    user.inventory.offerOrDrop(world, new ItemStack(Items.GLASS_BOTTLE));
+                }
 
                 return TypedActionResult.success(itemStack);
             }
         }
 
         return TypedActionResult.pass(itemStack);
+    }
+
+    private void throwPotion(World world, PlayerEntity user, ItemStack potionStack) {
+        EntityAttributeInstance potionThrowStrength = user.getAttributeInstance(AwakenEntityAttributes.POTION_THROW_STRENGTH);
+
+        PotionEntity potionEntity = new PotionEntity(world, user);
+        potionEntity.setItem(potionStack);
+        potionEntity.setProperties(user, user.pitch, user.yaw, 0.0F, (float) AttributeUtil.applyAttribute(potionThrowStrength, 1F), 1.0F);
+        world.spawnEntity(potionEntity);
+    }
+
+    private void drinkPotion(World world, PlayerEntity user, ItemStack potionStack) {
+        List<StatusEffectInstance> statusEffects = PotionUtil.getPotionEffects(potionStack);
+
+        statusEffects.forEach(statusEffect -> {
+            if (statusEffect.getEffectType().isInstant()) {
+                statusEffect.getEffectType().applyInstantEffect(user, user, user, statusEffect.getAmplifier(), 1.0D);
+            } else {
+                user.addStatusEffect(new StatusEffectInstance(statusEffect));
+            }
+        });
     }
 
     @Override
