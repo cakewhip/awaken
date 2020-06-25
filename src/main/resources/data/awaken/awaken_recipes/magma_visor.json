@@ -1,0 +1,16 @@
+{
+  "type": "trinket_table",
+  "recipe": {
+    "output": {
+      "item": "awaken:magma_visor"
+    },
+    "reagents": [
+      {
+        "item": "awaken:snorkel_mask"
+      },
+      {
+        "item": "awaken:scorched_mask"
+      }
+    ]
+  }
+}

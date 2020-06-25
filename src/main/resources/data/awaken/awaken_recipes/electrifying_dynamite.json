@@ -1,0 +1,16 @@
+{
+  "type": "trinket_table",
+  "recipe": {
+    "output": {
+      "item": "awaken:electrifying_dynamite"
+    },
+    "reagents": [
+      {
+        "item": "awaken:dynamite_stick"
+      },
+      {
+        "item": "awaken:lightning_bottle"
+      }
+    ]
+  }
+}

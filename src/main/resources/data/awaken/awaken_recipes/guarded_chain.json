@@ -1,0 +1,16 @@
+{
+  "type": "trinket_table",
+  "recipe": {
+    "output": {
+      "item": "awaken:guarded_chain"
+    },
+    "reagents": [
+      {
+        "item": "awaken:broken_ankle_chain"
+      },
+      {
+        "item": "awaken:guarded_aglet"
+      }
+    ]
+  }
+}

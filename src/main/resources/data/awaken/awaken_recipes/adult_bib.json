@@ -1,0 +1,19 @@
+{
+  "type": "trinket_table",
+  "recipe": {
+    "output": {
+      "item": "awaken:adult_bib"
+    },
+    "reagents": [
+      {
+        "item": "awaken:baby_bib"
+      },
+      {
+        "item": "awaken:carnivorous_mask"
+      },
+      {
+        "item": "awaken:farmers_hankerchief"
+      }
+    ]
+  }
+}

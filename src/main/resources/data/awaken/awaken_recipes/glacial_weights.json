@@ -1,0 +1,16 @@
+{
+  "type": "trinket_table",
+  "recipe": {
+    "output": {
+      "item": "awaken:glacial_weights"
+    },
+    "reagents": [
+      {
+        "item": "awaken:broken_ankle_weights"
+      },
+      {
+        "item": "awaken:glacial_aglet"
+      }
+    ]
+  }
+}

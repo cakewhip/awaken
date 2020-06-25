@@ -1,0 +1,12 @@
+{
+    "parent": "minecraft:block/cube",
+    "textures": {
+        "particle": "awaken:block/trinket_table_front",
+        "north": "awaken:block/trinket_table_front",
+        "south": "awaken:block/trinket_table_side",
+        "east": "awaken:block/trinket_table_side",
+        "west": "awaken:block/trinket_table_front",
+        "up": "awaken:block/trinket_table_top",
+        "down": "minecraft:block/oak_planks"
+    }
+}

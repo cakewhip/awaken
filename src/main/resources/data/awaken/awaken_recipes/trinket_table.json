@@ -1,0 +1,48 @@
+{
+  "type": "crafting_table",
+  "recipe": {
+    "output": {
+      "item": "awaken:trinket_table",
+      "count": 1
+    },
+    "reagents": [
+      {
+        "item": "minecraft:oak_log",
+        "count": 64
+      },
+      {
+        "item": "minecraft:spruce_log",
+        "count": 64
+      },
+      {
+        "item": "minecraft:birch_log",
+        "count": 64
+      },
+      {
+        "item": "minecraft:jungle_log",
+        "count": 64
+      },
+      {
+        "item": "minecraft:acacia_log",
+        "count": 64
+      },
+      {
+        "item": "minecraft:dark_oak_log",
+        "count": 64
+      },
+      {
+        "item": "minecraft:crafting_table",
+        "count": 64
+      },
+      {
+        "item": "awaken:ancient_sickle"
+      },
+      {
+        "item": "awaken:ancient_dagger"
+      },
+      {
+        "item": "awaken:ancient_fork"
+      }
+    ]
+  }
+}

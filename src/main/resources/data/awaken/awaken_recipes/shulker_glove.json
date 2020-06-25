@@ -1,0 +1,16 @@
+{
+  "type": "trinket_table",
+  "recipe": {
+    "output": {
+      "item": "awaken:shulker_glove"
+    },
+    "reagents": [
+      {
+        "item": "awaken:shulker_charm"
+      },
+      {
+        "item": "awaken:rangers_glove"
+      }
+    ]
+  }
+}

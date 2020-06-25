@@ -76,7 +76,10 @@ ITEMS = [
     "steel_gauntlet",
     "witch_hat",
     "clerics_hood",
-    "potion_bag"
+    "potion_bag",
+    "ancient_sickle",
+    "ancient_fork",
+    "ancient_dagger"
 ]
 
 

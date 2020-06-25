@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.loot.ConstantLootTableRange;
 import net.minecraft.loot.LootManager;
+import net.minecraft.loot.LootTables;
 import net.minecraft.loot.UniformLootTableRange;
 import net.minecraft.loot.condition.KilledByPlayerLootCondition;
 import net.minecraft.loot.condition.LootCondition;
@@ -70,6 +71,40 @@ public class AwakenLootTable {
             addLootEntry(EntityType.ENDERMITE, AwakenItems.Swords.ENDERIAN_CUTLASS, 10F / 100F);
             addLootEntry(EntityType.SHULKER, AwakenItems.Swords.ENDERIAN_CUTLASS, 15F / 100F);
             addLootEntry(EntityType.ENDER_DRAGON, AwakenItems.Swords.ENDERIAN_CUTLASS, 25F / 100F);
+
+            // Trinket Table Reagents
+            addLootEntry(LootTables.SIMPLE_DUNGEON_CHEST, 20F / 100F,
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_SICKLE, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_FORK, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_DAGGER, 50));
+            addLootEntry(LootTables.STRONGHOLD_CORRIDOR_CHEST, 20F / 100F,
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_SICKLE, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_FORK, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_DAGGER, 50));
+            addLootEntry(LootTables.STRONGHOLD_CROSSING_CHEST, 20F / 100F,
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_SICKLE, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_FORK, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_DAGGER, 50));
+            addLootEntry(LootTables.DESERT_PYRAMID_CHEST, 20F / 100F,
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_SICKLE, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_FORK, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_DAGGER, 50));
+            addLootEntry(LootTables.BURIED_TREASURE_CHEST, 20F / 100F,
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_SICKLE, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_FORK, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_DAGGER, 50));
+            addLootEntry(LootTables.JUNGLE_TEMPLE_CHEST, 20F / 100F,
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_SICKLE, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_FORK, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_DAGGER, 50));
+            addLootEntry(LootTables.DESERT_PYRAMID_CHEST, 20F / 100F,
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_SICKLE, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_FORK, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_DAGGER, 50));
+            addLootEntry(LootTables.WOODLAND_MANSION_CHEST, 20F / 100F,
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_SICKLE, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_FORK, 50),
+                    new WeightedItem(AwakenItems.Reagents.ANCIENT_DAGGER, 50));
         }
 
         // Phase 2
@@ -80,6 +115,18 @@ public class AwakenLootTable {
             addLootEntry(EntityType.STRIDER, AwakenItems.Reagents.MAGMA_STRAND, 20F / 100F, FieryMoonLootCondition.builder());
             addLootEntry(EntityType.BLAZE, AwakenItems.Reagents.CINDERED_SOUL, 20F / 100F, FieryMoonLootCondition.builder());
         }
+    }
+
+    public static void addLootEntry(Identifier id, float chance, WeightedItem... items) {
+        FabricLootPoolBuilder fabricLootPoolBuilder = FabricLootPoolBuilder.builder()
+                .rolls(ConstantLootTableRange.create(1))
+                .withCondition(RandomChanceLootCondition.builder(chance).build() );
+
+        for (WeightedItem weightedItem : items) {
+            fabricLootPoolBuilder.withEntry(ItemEntry.builder(weightedItem.item).weight(weightedItem.weight).build());
+        }
+
+        LOOT_MAP.put(id, fabricLootPoolBuilder);
     }
 
     public static void addLootEntry(EntityType entityType, ItemConvertible item, float chance, LootCondition.Builder... conditions) {
@@ -137,6 +184,16 @@ public class AwakenLootTable {
     }
 
     private static LootConditionType register(String id, JsonSerializer<? extends LootCondition> serializer) {
-        return Registry.register(Registry.LOOT_CONDITION_TYPE, new Identifier(Awaken.MOD_ID, id),new LootConditionType(serializer));
+        return Registry.register(Registry.LOOT_CONDITION_TYPE, new Identifier(Awaken.MOD_ID, id), new LootConditionType(serializer));
+    }
+
+    static class WeightedItem {
+        public final ItemConvertible item;
+        public final int weight;
+
+        WeightedItem(ItemConvertible item, int weight) {
+            this.item = item;
+            this.weight = weight;
+        }
     }
 }

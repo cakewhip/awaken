@@ -1,0 +1,19 @@
+{
+  "type": "trinket_table",
+  "recipe": {
+    "output": {
+      "item": "awaken:anglers_tackle_box"
+    },
+    "reagents": [
+      {
+        "item": "awaken:rain_hat"
+      },
+      {
+        "item": "awaken:lucky_tackle"
+      },
+      {
+        "item": "awaken:anchor_charm"
+      }
+    ]
+  }
+}

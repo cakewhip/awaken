@@ -7,6 +7,9 @@
     "item.awaken.monster_heart": "Monster Heart",
     "item.awaken.ender_dragon_scale": "Ender Dragon Scale",
     "item.awaken.wither_rib": "Wither Rib",
+    "item.awaken.ancient_sickle": "Ancient Sickle",
+    "item.awaken.ancient_fork": "Ancient Fork",
+    "item.awaken.ancient_dagger": "Ancient Dagger",
 
     "__comment": "Phase 1 Tools",
     "item.awaken.escape_plan": "The Escape Plan",
@@ -85,6 +88,9 @@
     "item.awaken.ancient_salvium_ore": "Salvium Ore",
     "block.awaken.ancient_valerium_ore": "Valerium Ore",
     "item.awaken.ancient_valerium_ore": "Valerium Ore",
+    "block.awaken.trinket_table": "Trinket Table",
+    "item.awaken.trinket_table": "Trinket Table",
+    "block.awaken.trinket_table.tooltip0": "Also a crafting table!",
 
     "__comment": "Phase 2 Tools",
     "item.awaken.salverium_pickaxe": "Salverium Pickaxe",

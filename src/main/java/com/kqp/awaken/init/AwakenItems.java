@@ -1,6 +1,7 @@
 package com.kqp.awaken.init;
 
 import com.kqp.awaken.effect.EntityFeatureGroup;
+import com.kqp.awaken.item.AwakenItem;
 import com.kqp.awaken.item.BossSpawnerItem;
 import com.kqp.awaken.item.alchemy.PotionBagItem;
 import com.kqp.awaken.item.bow.AwakenBowItem;
@@ -34,6 +35,10 @@ public class AwakenItems {
 
         public static final Item ENDER_DRAGON_SCALE = genericItem("ender_dragon_scale");
         public static final Item WITHER_RIB = genericItem("wither_rib");
+
+        public static final Item ANCIENT_SICKLE = genericItem("ancient_sickle");
+        public static final Item ANCIENT_FORK = genericItem("ancient_fork");
+        public static final Item ANCIENT_DAGGER = genericItem("ancient_dagger");
 
 
         public static final Item FORTIFIED_STICK = genericItem("fortified_stick");
@@ -129,6 +134,6 @@ public class AwakenItems {
     }
 
     private static Item genericItem(String name) {
-        return register(name, new Item(new Item.Settings().group(ItemGroup.MATERIALS)));
+        return register(name, new AwakenItem(ItemGroup.MATERIALS));
     }
 }

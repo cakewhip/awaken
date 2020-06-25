@@ -3,9 +3,11 @@ package com.kqp.awaken.init;
 import com.kqp.awaken.block.AwakenOreBlock;
 import com.kqp.awaken.block.CraftingBlock;
 import com.kqp.awaken.block.NullStoneBlock;
+import com.kqp.awaken.block.TrinketTableBlock;
 import com.kqp.awaken.recipe.RecipeType;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.block.RedstoneOreBlock;
@@ -39,6 +41,7 @@ public class AwakenBlocks {
     public static final Block SALVIUM_ORE = register("salvium_ore", new AwakenOreBlock(stoneSettings(10F, 40F, 0).build()));
     public static final Block VALERIUM_ORE = register("valerium_ore", new AwakenOreBlock(stoneSettings(10F, 40F, 0).build()));
 
+    public static final Block TRINKET_TABLE = register("trinket_table", new TrinketTableBlock());
 
     public static final Block ENDERIAN_HELL_FORGE = register("enderian_hell_forge", new CraftingBlock(
             FabricBlockSettings.of(Material.STONE).strength(35F, 12F).lightLevel(12).build(),
