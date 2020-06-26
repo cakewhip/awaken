@@ -25,8 +25,8 @@ public class AwakenTrinketItem extends Item implements Trinket, EntityFeatureGro
 
     private final List<EntityFeatureGroup> entityFeatureGroups;
 
-    public AwakenTrinketItem(String trinketGroup, String trinketSlot, int durability) {
-        super(new Item.Settings().maxCount(1).group(ItemGroup.COMBAT).maxDamage(durability));
+    public AwakenTrinketItem(String trinketGroup, String trinketSlot) {
+        super(new Item.Settings().maxCount(1).group(ItemGroup.COMBAT));
 
         this.trinketGroup = trinketGroup;
         this.trinketSlot = trinketSlot;

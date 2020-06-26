@@ -1,7 +1,6 @@
 {
   "trinket_group": "legs",
   "trinket_slot": "charm",
-  "durability": 200,
   "entity_feature_group": {
     "status_effects": [],
     "attribute_modifiers": [

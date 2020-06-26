@@ -1,7 +1,6 @@
 {
   "trinket_group": "hand",
   "trinket_slot": "gloves",
-  "durability": 200,
   "entity_feature_group": {
     "status_effects": [],
     "attribute_modifiers": [],

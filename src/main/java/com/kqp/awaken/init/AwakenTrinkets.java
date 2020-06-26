@@ -16,7 +16,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import java.io.IOException;
-import java.util.Optional;
 
 public class AwakenTrinkets {
     public static void init() {
@@ -46,9 +45,8 @@ public class AwakenTrinkets {
 
                 String trinketGroup = trinketJsonObject.get("trinket_group").getAsString();
                 String trinketSlot = trinketJsonObject.get("trinket_slot").getAsString();
-                int durability = trinketJsonObject.get("durability").getAsInt();
 
-                AwakenTrinketItem trinketItem = new AwakenTrinketItem(trinketGroup, trinketSlot, durability);
+                AwakenTrinketItem trinketItem = new AwakenTrinketItem(trinketGroup, trinketSlot);
 
                 JsonObject efgJsonObject = trinketJsonObject.get("entity_feature_group").getAsJsonObject();
                 EntityFeatureGroup efg = EntityFeatureGroup.fromJsonObject(trinketItemId.getPath(),
