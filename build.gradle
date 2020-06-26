@@ -11,7 +11,7 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-	mavenLocal()
+	// mavenLocal()
 
 	maven {
 		name = "Ladysnake Libs"
@@ -22,29 +22,36 @@ repositories {
 		name = "Cotton"
 		url = "http://server.bbkr.space:8081/artifactory/libs-release/"
 	}
+
+	maven {
+		url = "https://jitpack.io"
+	}
+	maven {
+		name = "NerdHubMC"
+		url = "https://maven.abusedmaster.xyz/"
+	}
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:1.16-rc1"
-	mappings "net.fabricmc:yarn:1.16-rc1+build.8:v2"
+	minecraft "com.mojang:minecraft:1.16.1"
+	mappings "net.fabricmc:yarn:1.16.1+build.7:v2"
 	modImplementation "net.fabricmc:fabric-loader:0.8.8+build.202"
 
 	// Fabric api
-	modImplementation "net.fabricmc.fabric-api:fabric-api:0.12.5+build.367-1.16"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:0.14.0+build.371-1.16"
 
 	// Base
-	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.0-nightly.1.16-rc1"
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.0-nightly.1.16-rc1"
+	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.0"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.0"
 	// Entity
-	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.0-nightly.1.16-rc1"
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.0-nightly.1.16-rc1"
+	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.0"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.0"
 	// Level
-	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:2.4.0-nightly.1.16-rc1"
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:2.4.0-nightly.1.16-rc1"
+	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:2.4.0"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:2.4.0"
 
 	// Currently pulling Trinkets from local Maven
-	// TODO: change this when Trinkets gets updated
-	modImplementation "dev.emi:trinkets:2.5.1"
+	modImplementation "com.github.emilyploszaj:trinkets:2.6.1"
 
 	// Static Data
 	modImplementation "io.github.cottonmc:StaticData:1.1.2"

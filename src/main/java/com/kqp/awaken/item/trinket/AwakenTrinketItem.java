@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AwakenTrinketItem extends Trinket implements EntityFeatureGroupProvider {
+public class AwakenTrinketItem extends Item implements Trinket, EntityFeatureGroupProvider {
     public final String trinketGroup, trinketSlot;
 
     private final List<EntityFeatureGroup> entityFeatureGroups;

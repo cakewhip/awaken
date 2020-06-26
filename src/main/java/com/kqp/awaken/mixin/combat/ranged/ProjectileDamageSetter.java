@@ -1,6 +1,7 @@
 package com.kqp.awaken.mixin.combat.ranged;
 
 import com.kqp.awaken.entity.attribute.RangedWeaponProjectile;
+import com.kqp.awaken.entity.attribute.RangedWeaponProjectile.Type;
 import com.kqp.awaken.init.AwakenEntityAttributes;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;

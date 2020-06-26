@@ -36,7 +36,7 @@ public class WingsTrinketItem extends FlightTrinketItem {
         playerModel.copyStateTo(MODEL);
         MODEL.setAngles(player, 0F, 0F, 0F, headYaw, headPitch);
 
-        VertexConsumer vertexConsumer = ItemRenderer.getArmorVertexConsumer(vertexConsumers, MODEL.getLayer(texture), false, itemStack.hasEnchantmentGlint());
+        VertexConsumer vertexConsumer = ItemRenderer.getArmorVertexConsumer(vertexConsumers, MODEL.getLayer(texture), false, itemStack.hasEnchantments());
         MODEL.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 1.0F, 1.0F, 1.0F);
 
         matrices.pop();

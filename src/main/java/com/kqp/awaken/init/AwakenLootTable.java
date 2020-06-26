@@ -1,6 +1,7 @@
 package com.kqp.awaken.init;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.kqp.awaken.init.AwakenLootTable.WeightedItem;
 import com.kqp.awaken.loot.condition.BiomeSpecificLootCondition;
 import com.kqp.awaken.loot.condition.FieryMoonLootCondition;
 import com.kqp.awaken.loot.condition.WorldAwakenedLootCondition;

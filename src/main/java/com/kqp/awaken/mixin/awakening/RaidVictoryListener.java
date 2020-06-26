@@ -2,8 +2,8 @@ package com.kqp.awaken.mixin.awakening;
 
 import com.kqp.awaken.world.data.AwakenLevelData;
 import com.kqp.awaken.util.Broadcaster;
-import net.minecraft.entity.raid.Raid;
 import net.minecraft.util.Formatting;
+import net.minecraft.village.raid.Raid;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

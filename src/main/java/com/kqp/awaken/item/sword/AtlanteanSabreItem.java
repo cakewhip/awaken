@@ -72,7 +72,7 @@ public class AtlanteanSabreItem extends AwakenSwordItem {
         k *= n / m;
         l *= n / m;
         player.addVelocity(h, k, l);
-        player.setPushCooldown(20);
+        player.setRiptideTicks(20);
     }
 
     @Override
