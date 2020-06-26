@@ -15,7 +15,8 @@ import net.minecraft.entity.LivingEntity;
 public class WingsEntityModel<T extends LivingEntity> extends AnimalModel<T> {
     private static final float MAX_WING_FLUTTER_ANGLE = (float) (Math.PI / 4);
 
-    private static final float BASE_FLUTTER_TICK_DURATION = 16F;
+    private static final float ANIMATION_DURATION = 16F;
+    private static final float HALF_POINT = 8F;
 
     /**
      * Because speed and velocity are inversely related,
@@ -67,32 +68,28 @@ public class WingsEntityModel<T extends LivingEntity> extends AnimalModel<T> {
             // We do flutter animation if they're flying, floating or still mid-flutter animation
             if (flightProperties.isFlying() || flightProperties.isFloating() || flutterTickTimer != 0) {
                 double velY = entity.getVelocity().y;
-                float flutterTickDur;
+                float animationSpeed = 0.5F;
 
                 if (velY > 0) {
-                    flutterTickDur = (float) (BASE_FLUTTER_TICK_DURATION * (MAX_FLYING_SPEED - velY));
-                } else {
-                    flutterTickDur = 50;
+                    animationSpeed = (float) (MAX_FLYING_SPEED - velY) / 2F * 1.15F;
                 }
-
-                float halfFlutterTickDur = flutterTickDur / 2F;
 
                 // If they're not flying still and the tick delta pushes the flutter timer over,
                 // Reset to 0 so that it doesn't restart next loop
-                if (!flightProperties.isFlying() && !flightProperties.isFloating() && flutterTickTimer + tickDelta > flutterTickDur) {
+                if (!flightProperties.isFlying() && !flightProperties.isFloating() && flutterTickTimer + tickDelta > ANIMATION_DURATION) {
                     flutterTickTimer = 0;
                 } else {
-                    flutterTickTimer += tickDelta;
-                    flutterTickTimer %= flutterTickDur;
+                    flutterTickTimer += tickDelta * animationSpeed;
+                    flutterTickTimer %= ANIMATION_DURATION;
                 }
 
-                float flutterAnimMult = flutterTickTimer % halfFlutterTickDur;
+                float flutterAnimMult = flutterTickTimer % HALF_POINT;
 
-                if (flutterTickTimer > halfFlutterTickDur) {
-                    flutterAnimMult = halfFlutterTickDur - flutterAnimMult;
+                if (flutterTickTimer > HALF_POINT) {
+                    flutterAnimMult = HALF_POINT - flutterAnimMult;
                 }
 
-                flutterAnimMult /= halfFlutterTickDur;
+                flutterAnimMult /= HALF_POINT;
 
                 leftWing.yaw -= flutterAnimMult * MAX_WING_FLUTTER_ANGLE;
             } else {

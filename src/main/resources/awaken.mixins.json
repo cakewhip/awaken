@@ -72,6 +72,7 @@
     "client.combat.NonCombatCooldownCanceller",
     "client.effect.ConfusionEffectApplier",
     "client.gui.NavigationTabAdder",
+    "client.input.SecondSpacingListener",
     "client.network.AwakenClientLevelDataSynchronizer",
     "client.recipe.AwakenClientRecipeManagerInitializer",
     "client.render.entity.feature.CustomArmorLayerApplier",

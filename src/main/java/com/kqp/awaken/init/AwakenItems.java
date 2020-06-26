@@ -117,6 +117,7 @@ public class AwakenItems {
         new BossSpawners();
         new Tridents();
         new Alchemist();
+        new Trinkets();
     }
 
     private static void removeNetheriteArmorRecipes() {
