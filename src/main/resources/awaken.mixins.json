@@ -21,7 +21,7 @@
     "combat.melee.SweepingEdgeForcer",
     "combat.ranged.crit.DefaultBowCritCanceller",
     "combat.ranged.crit.DefaultCrossbowCritCanceller",
-    "combat.ranged.crit.RangedCritApplier",
+    "combat.ranged.crit.DefaultRangedCritCanceller",
     "combat.ranged.crit.RangedCritApplier",
     "combat.ranged.crit.RangedCritSetter",
     "combat.ranged.BowArrowTypeSetter",

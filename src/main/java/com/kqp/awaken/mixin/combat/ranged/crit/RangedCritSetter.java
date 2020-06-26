@@ -8,6 +8,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * Used to set whether a projectile is critical or not, depending on the player's crit chance attribute.
+ */
 @Mixin(PersistentProjectileEntity.class)
 public class RangedCritSetter {
     @Inject(method = "<init>*", at = @At("RETURN"))

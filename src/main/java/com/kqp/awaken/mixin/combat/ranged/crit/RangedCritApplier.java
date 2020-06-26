@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /**
- * Used to apply critical melee hits for both main hit targets and sweeping targets.
+ * Used to apply critical damage to projectiles.
  */
 @Mixin(PersistentProjectileEntity.class)
 public class RangedCritApplier {

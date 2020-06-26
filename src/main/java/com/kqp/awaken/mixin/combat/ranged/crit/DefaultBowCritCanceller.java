@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /**
- * Used to cancel the default bow crit behavior.
+ * Used to stop the bow item from setting the critical flag in the projectile entity.
  */
 @Mixin(BowItem.class)
 public class DefaultBowCritCanceller {
