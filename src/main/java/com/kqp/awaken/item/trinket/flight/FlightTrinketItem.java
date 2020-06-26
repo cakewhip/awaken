@@ -6,7 +6,7 @@ import com.kqp.awaken.item.trinket.AwakenTrinketItem;
 /**
  * Flight trinket item.
  */
-public abstract class FlightTrinketItem extends AwakenTrinketItem {
+public class FlightTrinketItem extends AwakenTrinketItem {
     public final double maxFlySpeed;
     public final double flySpeed;
     public final int flyTime;

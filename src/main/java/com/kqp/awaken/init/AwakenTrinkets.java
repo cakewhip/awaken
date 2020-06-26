@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonObject;
 import com.kqp.awaken.effect.EntityFeatureGroup;
 import com.kqp.awaken.item.trinket.AwakenTrinketItem;
+import com.kqp.awaken.item.trinket.flight.FlightTrinketItem;
 import com.kqp.awaken.trinket.AwakenSlots;
 import com.kqp.awaken.util.DataUtil;
 import dev.emi.trinkets.api.SlotGroups;
@@ -43,6 +44,11 @@ public class AwakenTrinkets {
                 Identifier trinketItemId = DataUtil.getStrippedIdentifier(staticDataItem.getIdentifier());
                 JsonObject trinketJsonObject = DataUtil.getJsonObject(staticDataItem);
 
+                String trinketType = "normal";
+                if (trinketJsonObject.has("trinket_type")) {
+                    trinketType = trinketJsonObject.get("trinket_type").getAsString();
+                }
+
                 String trinketGroup = trinketJsonObject.get("trinket_group").getAsString();
                 String trinketSlot = trinketJsonObject.get("trinket_slot").getAsString();
 
@@ -50,7 +56,24 @@ public class AwakenTrinkets {
                 EntityFeatureGroup efg = EntityFeatureGroup.fromJsonObject(trinketItemId.getPath(),
                         efgJsonObject);
 
-                AwakenTrinketItem trinketItem = new AwakenTrinketItem(trinketGroup, trinketSlot, efg);
+                AwakenTrinketItem trinketItem;
+
+                if (trinketType.equals("normal")) {
+                    trinketItem = new AwakenTrinketItem(trinketGroup, trinketSlot, efg);
+                } else if (trinketType.equals("flight")) {
+                    double maxFlySpeed = trinketJsonObject.get("max_fly_speed").getAsDouble();
+                    double flySpeed = trinketJsonObject.get("fly_speed").getAsDouble();
+                    int flyTime = trinketJsonObject.get("fly_time").getAsInt();
+                    boolean canFloat = trinketJsonObject.get("can_float").getAsBoolean();
+
+                    trinketItem = new FlightTrinketItem(trinketGroup, trinketSlot, efg, maxFlySpeed, flySpeed, flyTime, canFloat);
+                } else {
+                    throw new RuntimeException(String.format(
+                            "Unknown trinket type \"%s\" for ID %s",
+                            trinketType,
+                            trinketItemId.toString()
+                    ));
+                }
 
                 register(trinketItemId, trinketItem);
             } catch (IOException e) {

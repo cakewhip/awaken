@@ -1,0 +1,15 @@
+{
+  "trinket_type": "flight",
+  "trinket_group": "chest",
+  "trinket_slot": "cape",
+  "entity_feature_group": {
+    "status_effects": [],
+    "attribute_modifiers": [],
+    "enchantment_modifiers": [],
+    "abilities": []
+  },
+  "max_fly_speed": 0.315,
+  "fly_speed": 0.115,
+  "fly_time": 30,
+  "can_float": true
+}

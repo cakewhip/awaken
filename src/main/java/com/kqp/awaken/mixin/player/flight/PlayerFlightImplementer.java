@@ -48,13 +48,17 @@ public class PlayerFlightImplementer implements PlayerFlightProperties {
                                 r.nextDouble() - r.nextDouble(), -r.nextDouble(), r.nextDouble() - r.nextDouble()
                         );
                     } else {
-                        this.setFloating(true);
                         this.setFlying(false);
+                        this.setFloating(false);
 
-                        player.world.addParticle(ParticleTypes.POOF,
-                                player.getX(), player.getY(), player.getZ(),
-                                r.nextDouble() - r.nextDouble(), -r.nextDouble(), r.nextDouble() - r.nextDouble()
-                        );
+                        if (canFloat()) {
+                            this.setFloating(true);
+
+                            player.world.addParticle(ParticleTypes.POOF,
+                                    player.getX(), player.getY(), player.getZ(),
+                                    r.nextDouble() - r.nextDouble(), -r.nextDouble(), r.nextDouble() - r.nextDouble()
+                            );
+                        }
                     }
                 } else {
                     this.setFlying(false);
