@@ -90,7 +90,7 @@ public class AwakenItems {
 
     public static class Trinkets {
         // public static_data final Item JETPACK = register("jetpack", new FlightTrinketItem(SlotGroups.CHEST, Slots.CAPE, 200, null, 0.3D, 0.1D, 20, false));
-        public static final Item TEST_WINGS = register("test_wings", new WingsTrinketItem(200, 0.315D, 0.115D, 30));
+        public static final Item TEST_WINGS = register("test_wings", new WingsTrinketItem(new EntityFeatureGroup(), 0.315D, 0.115D, 30));
     }
 
     public static class BossSpawners {

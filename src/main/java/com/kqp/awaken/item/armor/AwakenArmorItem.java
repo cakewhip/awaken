@@ -2,7 +2,7 @@ package com.kqp.awaken.item.armor;
 
 import com.kqp.awaken.effect.EntityEquipmentListener;
 import com.kqp.awaken.effect.EntityFeatureGroup;
-import com.kqp.awaken.effect.EntityFeatureGroupProvider;
+import com.kqp.awaken.effect.ActiveEntityFeatureGroupProvider;
 import com.kqp.awaken.util.ArmorUtil;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
@@ -10,6 +10,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class AwakenArmorItem extends ArmorItem implements EntityEquipmentListener, EntityFeatureGroupProvider {
+public class AwakenArmorItem extends ArmorItem implements EntityEquipmentListener, ActiveEntityFeatureGroupProvider {
     private String customTextureLayer = null;
 
     private Optional<EntityFeatureGroup> itemMods, setMods;
@@ -94,11 +95,14 @@ public class AwakenArmorItem extends ArmorItem implements EntityEquipmentListene
     }
 
     @Override
-    public List<EntityFeatureGroup> getEntityFeatureGroups() {
+    public List<EntityFeatureGroup> getActiveEntityFeatureGroups(PlayerEntity player) {
         List<EntityFeatureGroup> entityFeatureGroups = new ArrayList();
 
         itemMods.ifPresent(entityFeatureGroups::add);
-        setMods.ifPresent(entityFeatureGroups::add);
+
+        if (ArmorUtil.wearingFullSet(player, this.type)) {
+            setMods.ifPresent(entityFeatureGroups::add);
+        }
 
         return entityFeatureGroups;
     }

@@ -1,7 +1,7 @@
 package com.kqp.awaken.util;
 
 import com.kqp.awaken.effect.EntityFeatureGroup;
-import com.kqp.awaken.effect.EntityFeatureGroupProvider;
+import com.kqp.awaken.effect.ActiveEntityFeatureGroupProvider;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -64,8 +64,8 @@ public class EquipmentUtil {
         player.getItemsEquipped().forEach(itemStack -> {
             Item item = itemStack.getItem();
 
-            if (item instanceof EntityFeatureGroupProvider) {
-                entityFeatureGroups.addAll(((EntityFeatureGroupProvider) item).getEntityFeatureGroups());
+            if (item instanceof ActiveEntityFeatureGroupProvider) {
+                entityFeatureGroups.addAll(((ActiveEntityFeatureGroupProvider) item).getActiveEntityFeatureGroups(player));
             }
         });
 
@@ -76,8 +76,8 @@ public class EquipmentUtil {
 
             Item item = itemStack.getItem();
 
-            if (item instanceof EntityFeatureGroupProvider) {
-                entityFeatureGroups.addAll(((EntityFeatureGroupProvider) item).getEntityFeatureGroups());
+            if (item instanceof ActiveEntityFeatureGroupProvider) {
+                entityFeatureGroups.addAll(((ActiveEntityFeatureGroupProvider) item).getActiveEntityFeatureGroups(player));
             }
         }
 

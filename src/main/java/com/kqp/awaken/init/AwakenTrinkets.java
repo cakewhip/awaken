@@ -46,12 +46,11 @@ public class AwakenTrinkets {
                 String trinketGroup = trinketJsonObject.get("trinket_group").getAsString();
                 String trinketSlot = trinketJsonObject.get("trinket_slot").getAsString();
 
-                AwakenTrinketItem trinketItem = new AwakenTrinketItem(trinketGroup, trinketSlot);
-
                 JsonObject efgJsonObject = trinketJsonObject.get("entity_feature_group").getAsJsonObject();
                 EntityFeatureGroup efg = EntityFeatureGroup.fromJsonObject(trinketItemId.getPath(),
                         efgJsonObject);
-                trinketItem.getEntityFeatureGroups().add(efg);
+
+                AwakenTrinketItem trinketItem = new AwakenTrinketItem(trinketGroup, trinketSlot, efg);
 
                 register(trinketItemId, trinketItem);
             } catch (IOException e) {

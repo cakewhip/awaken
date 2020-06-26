@@ -34,7 +34,7 @@ public class TrinketEnchantmentBuffApplier {
                 if (itemStack.getItem() instanceof AwakenTrinketItem) {
                     AwakenTrinketItem trinket = (AwakenTrinketItem) itemStack.getItem();
 
-                    trinket.getEntityFeatureGroups().forEach(features -> {
+                    trinket.getActiveEntityFeatureGroups((PlayerEntity) entity).forEach(features -> {
                         newLevel.set(newLevel.get() + features.getEnchantmentModifiers().getOrDefault(enchantment, 0));
                     });
                 }
