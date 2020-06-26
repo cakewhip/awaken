@@ -187,6 +187,8 @@
     "awaken.recipe_type.requires.furnace": "Must be near a Furnace",
     "awaken.recipe_type.enderian_hell_forge": "Enderian Hell Forge",
     "awaken.recipe_type.requires.enderian_hell_forge": "Must be near an Enderian Hell Forge",
+    "awaken.recipe_type.trinket_table": "Trinket Table",
+    "awaken.recipe_type.requires.trinket_table": "Must be near a Trinket Table",
 
     "__comment": "Player Abilities",
     "ability.snorkel_mask_effect.tooltip0": "See clearly when submerged",
@@ -249,5 +251,9 @@
     "__comment": "Boss Spawner Hints",
     "item.boss_spawner.not_top": "This should be used on top of a block",
     "item.boss_spawner.no_space": "There is not enough space (17x8x17 needed)",
-    "item.boss_spawner.wrong_time": "It is not the right time for this"
+    "item.boss_spawner.wrong_time": "It is not the right time for this",
+
+    "__comment": "Trinket Slot Localizations",
+    "trinkets.slot.legs.charm": "Charm",
+    "trinkets.slot.head.hat": "Hat"
 }
