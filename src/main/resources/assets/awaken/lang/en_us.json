@@ -168,6 +168,9 @@
     "item.awaken.netherian_belt": "Netherian Belt",
     "item.awaken.witch_hat": "Witch Hat",
     "item.awaken.clerics_hood": "Cleric's Hood",
+    "item.awaken.broken_molten_jetpack": "Molten Jetpack (Broken)",
+    "item.awaken.molten_jetpack": "Molten Jetpack",
+    "item.awaken.raptor_wings": "Raptor Wings",
 
     "__comment": "Alchemist Stuff",
     "item.awaken.potion_bag": "Potion Bag",
