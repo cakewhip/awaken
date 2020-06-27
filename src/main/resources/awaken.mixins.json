@@ -8,6 +8,7 @@
     "awakening.AwakeningTrigger",
     "awakening.MobDeathListener",
     "awakening.RaidVictoryListener",
+    "boss.RadianceBossSpawner",
     "combat.attribute.ArmorPenetrationAttributeApplier",
     "combat.attribute.CustomEntityAttributeAdder",
     "combat.attribute.DamageMitigationApplier",
