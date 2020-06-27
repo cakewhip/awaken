@@ -1,5 +1,7 @@
 package com.kqp.awaken.item.trinket;
 
+import com.kqp.awaken.client.trinket.TrinketRenderer;
+import com.kqp.awaken.client.trinket.TrinketRenderers;
 import com.kqp.awaken.effect.ActiveEntityFeatureGroupProvider;
 import com.kqp.awaken.effect.EntityFeatureGroup;
 import com.kqp.awaken.util.TooltipUtil;
@@ -8,6 +10,10 @@ import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.model.PlayerEntityModel;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -25,13 +31,17 @@ public class AwakenTrinketItem extends Item implements Trinket, ActiveEntityFeat
 
     private final EntityFeatureGroup entityFeatureGroup;
 
-    public AwakenTrinketItem(String trinketGroup, String trinketSlot, EntityFeatureGroup entityFeatureGroup) {
+    private final String rendererId;
+
+    public AwakenTrinketItem(String trinketGroup, String trinketSlot, EntityFeatureGroup entityFeatureGroup, String rendererId) {
         super(new Item.Settings().maxCount(1).group(ItemGroup.COMBAT));
 
         this.trinketGroup = trinketGroup;
         this.trinketSlot = trinketSlot;
 
         this.entityFeatureGroup = entityFeatureGroup;
+
+        this.rendererId = rendererId;
     }
 
     @Override
@@ -67,5 +77,14 @@ public class AwakenTrinketItem extends Item implements Trinket, ActiveEntityFeat
     @Override
     public List<EntityFeatureGroup> getActiveEntityFeatureGroups(PlayerEntity player) {
         return Arrays.asList(entityFeatureGroup);
+    }
+
+    @Override
+    public void render(String slot, MatrixStack matrixStack, VertexConsumerProvider vertexConsumer, int light, PlayerEntityModel<AbstractClientPlayerEntity> model, AbstractClientPlayerEntity player, float headYaw, float headPitch) {
+        if (rendererId != null && !rendererId.isEmpty()) {
+            TrinketRenderer renderer = TrinketRenderers.getTrinketRenderer(rendererId);
+
+            renderer.render(slot, matrixStack, vertexConsumer, light, model, player, headYaw, headPitch);
+        }
     }
 }

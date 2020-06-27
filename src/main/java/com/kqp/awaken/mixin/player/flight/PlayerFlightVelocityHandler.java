@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin.player.flight;
 
 import com.kqp.awaken.entity.player.PlayerFlightProperties;
-import com.kqp.awaken.item.trinket.flight.FlightTrinketItem;
+import com.kqp.awaken.item.trinket.FlightTrinketItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;

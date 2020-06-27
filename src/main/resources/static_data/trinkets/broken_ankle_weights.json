@@ -1,6 +1,6 @@
 {
-  "trinket_group": "feet",
-  "trinket_slot": "aglet",
+  "group": "feet",
+  "slot": "aglet",
   "entity_feature_group": {
     "status_effects": [],
     "attribute_modifiers": [

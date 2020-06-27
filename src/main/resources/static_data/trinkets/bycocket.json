@@ -1,6 +1,6 @@
 {
-  "trinket_group": "head",
-  "trinket_slot": "hat",
+  "group": "head",
+  "slot": "hat",
   "entity_feature_group": {
     "status_effects": [],
     "attribute_modifiers": [

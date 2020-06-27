@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin.player.flight;
 
 import com.kqp.awaken.entity.player.PlayerFlightProperties;
-import com.kqp.awaken.item.trinket.flight.FlightTrinketItem;
+import com.kqp.awaken.item.trinket.FlightTrinketItem;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;

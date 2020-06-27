@@ -1,7 +1,7 @@
 {
-  "trinket_type": "flight",
-  "trinket_group": "chest",
-  "trinket_slot": "cape",
+  "type": "flight",
+  "group": "chest",
+  "slot": "cape",
   "entity_feature_group": {
     "status_effects": [],
     "attribute_modifiers": [],

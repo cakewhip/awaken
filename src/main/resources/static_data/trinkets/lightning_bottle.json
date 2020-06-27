@@ -1,6 +1,6 @@
 {
-  "trinket_group": "legs",
-  "trinket_slot": "charm",
+  "group": "legs",
+  "slot": "charm",
   "entity_feature_group": {
     "name": "lightning_bottle",
     "status_effects": [],

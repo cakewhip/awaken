@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Used to animate the raptor chicken wings.
+ * Used to animate the raptor chicken trinket.
  */
 @Mixin(LivingEntityRenderer.class)
 public class RaptorChickenWingFlapApplier<T extends LivingEntity, M extends EntityModel<T>> {

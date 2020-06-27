@@ -1,6 +1,6 @@
 {
-  "trinket_group": "chest",
-  "trinket_slot": "belt",
+  "group": "chest",
+  "slot": "belt",
   "entity_feature_group": {
     "status_effects": [],
     "attribute_modifiers": [],
