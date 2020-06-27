@@ -44,8 +44,8 @@ public class PlayerFlightImplementer implements PlayerFlightProperties {
                         flyTime = Math.max(0, flyTime - 1);
 
                         player.world.addParticle(ParticleTypes.LAVA,
-                                player.getX(), player.getY(), player.getZ(),
-                                r.nextDouble() - r.nextDouble(), -r.nextDouble(), r.nextDouble() - r.nextDouble()
+                                player.getX(), player.getY() + 1.0D, player.getZ(),
+                                r.nextDouble() - r.nextDouble(), -r.nextDouble() * 4D, r.nextDouble() - r.nextDouble()
                         );
                     } else {
                         this.setFlying(false);

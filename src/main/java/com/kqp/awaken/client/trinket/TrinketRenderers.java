@@ -12,6 +12,7 @@ public class TrinketRenderers {
 
     public static void init() {
         RENDERER_MAP.put("wings", new WingsRenderer());
+        RENDERER_MAP.put("jetpack", new JetpackRenderer());
     }
 
     public static TrinketRenderer getTrinketRenderer(String id) {

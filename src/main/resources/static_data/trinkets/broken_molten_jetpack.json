@@ -2,6 +2,7 @@
   "type": "flight",
   "group": "chest",
   "slot": "cape",
+  "renderer": "jetpack",
   "entity_feature_group": {
     "status_effects": [],
     "attribute_modifiers": [],
