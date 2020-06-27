@@ -112,8 +112,8 @@ public class AwakenLootTable {
         {
             // Reagents
             addLootEntry(EntityType.ZOMBIFIED_PIGLIN, AwakenItems.Reagents.SMOLDERING_HEART, 5F / 100F, FieryMoonLootCondition.builder());
-            addLootEntry(EntityType.GHAST, AwakenItems.Reagents.FIERY_CORE, 10F / 100F, FieryMoonLootCondition.builder());
-            addLootEntry(EntityType.STRIDER, AwakenItems.Reagents.MAGMA_STRAND, 20F / 100F, FieryMoonLootCondition.builder());
+            addLootEntry(EntityType.GHAST, AwakenItems.Reagents.MAGMA_STRAND, 10F / 100F, FieryMoonLootCondition.builder());
+            addLootEntry(EntityType.MAGMA_CUBE, AwakenItems.Reagents.FIERY_CORE, 20F / 100F, FieryMoonLootCondition.builder());
             addLootEntry(EntityType.BLAZE, AwakenItems.Reagents.CINDERED_SOUL, 20F / 100F, FieryMoonLootCondition.builder());
         }
     }
