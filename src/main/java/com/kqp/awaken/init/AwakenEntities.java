@@ -2,6 +2,7 @@ package com.kqp.awaken.init;
 
 import com.kqp.awaken.entity.mob.AbominationEntity;
 import com.kqp.awaken.entity.mob.DireWolfEntity;
+import com.kqp.awaken.entity.mob.RadianceEntity;
 import com.kqp.awaken.entity.mob.RaptorChickenEntity;
 import com.kqp.awaken.entity.mob.SpiderSacEntity;
 import com.kqp.awaken.entity.mob.VoidGhostEntity;
@@ -75,6 +76,15 @@ public class AwakenEntities {
                     .build()
     );
 
+    public static final EntityType<RadianceEntity> RADIANCE = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(Awaken.MOD_ID, "radiance"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, RadianceEntity::new)
+                    .size(EntityDimensions.fixed(0.6F * 3F, 1.95F * 3F))
+                    .trackable(72, 3)
+                    .build()
+    );
+
     public static void init() {
         Awaken.info("Initializing entities");
 
@@ -111,6 +121,8 @@ public class AwakenEntities {
             register(VOID_GHOST, 0x0000000, 0xFFFFFF, VoidGhostEntity.createVoidGhostAttributes());
 
             register(ABOMINATION, 0xFFFFFF, 0x000000, AbominationEntity.createAbominationAttributes());
+
+            register(RADIANCE, 0xFFFFFF, 0x000000, RadianceEntity.createRadianceAttributes());
         }
 
         // Fiery Moon

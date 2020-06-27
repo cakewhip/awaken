@@ -1,22 +1,21 @@
 package com.kqp.awaken.mixin.boss;
 
+import com.kqp.awaken.entity.mob.RadianceEntity;
+import com.kqp.awaken.init.AwakenEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.block.pattern.BlockPatternBuilder;
 import net.minecraft.block.pattern.CachedBlockPosition;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SplashPotionItem;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.predicate.block.BlockStatePredicate;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.util.function.MaterialPredicate;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.world.World;
@@ -56,7 +55,7 @@ public class RadianceBossSpawner {
 
                 if (hasRegen) {
                     BlockPattern blockPattern = getRadianceBossPattern();
-                    BlockPattern.Result result = blockPattern.searchAround(world, potionEntity.getBlockPos());
+                    BlockPattern.Result result = blockPattern.searchAround(world, hitResult.getBlockPos());
 
                     if (result != null) {
                         for (int i = 0; i < blockPattern.getWidth(); i++) {
@@ -67,9 +66,10 @@ public class RadianceBossSpawner {
                             }
                         }
 
-                        CowEntity cow = EntityType.COW.create(world);
-                        cow.refreshPositionAndAngles(result.translate(1, 2, 0).getBlockPos(), 0F, 0F);
-                        world.spawnEntity(cow);
+                        RadianceEntity radiance = AwakenEntities.RADIANCE.create(world);
+                        radiance.refreshPositionAndAngles(result.translate(1, 2, 0).getBlockPos(), 0F, 0F);
+                        radiance.onSpawn();
+                        world.spawnEntity(radiance);
 
                         for (int i = 0; i < blockPattern.getWidth(); i++) {
                             for (int j = 0; j < blockPattern.getHeight(); j++) {

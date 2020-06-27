@@ -4,6 +4,7 @@ import com.kqp.awaken.init.AwakenConfig;
 import com.kqp.awaken.init.AwakenNetworking;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.boss.ServerBossBar;
@@ -86,6 +87,16 @@ public class AwakenBossEntity extends HostileEntity {
 
     @Override
     public void slowMovement(BlockState state, Vec3d multiplier) {
+    }
+
+    @Override
+    protected boolean canStartRiding(Entity entity) {
+        return false;
+    }
+
+    @Override
+    public boolean canUsePortals() {
+        return false;
     }
 
     @Override
