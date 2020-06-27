@@ -79,7 +79,11 @@ ITEMS = [
     "potion_bag",
     "ancient_sickle",
     "ancient_fork",
-    "ancient_dagger"
+    "ancient_dagger",
+    "broken_molten_jetpack",
+    "molten_jetpack",
+    "raptor_wings",
+    "aether_ring"
 ]
 
 

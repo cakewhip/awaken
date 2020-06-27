@@ -50,6 +50,7 @@
     "recipe.AwakenRecipeManagerInitializer",
     "recipe.IngredientHacker",
     "spawning.ConditionalSpawnEntryApplier",
+    "trinket.AetherRingEffectApplier",
     "trinket.BoneCrownEffectApplier",
     "trinket.CombatSaddleEffectApplier",
     "trinket.DiscordBeltEffectApplier",
