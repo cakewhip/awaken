@@ -256,6 +256,7 @@
     "item.boss_spawner.not_top": "This should be used on top of a block",
     "item.boss_spawner.no_space": "There is not enough space (17x8x17 needed)",
     "item.boss_spawner.wrong_time": "It is not the right time for this",
+    "radiance.spawn_time": "The Radiance can only spawn at night",
 
     "__comment": "Trinket Slot Localizations",
     "trinkets.slot.legs.charm": "Charm",

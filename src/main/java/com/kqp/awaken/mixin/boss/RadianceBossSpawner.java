@@ -1,6 +1,7 @@
 package com.kqp.awaken.mixin.boss;
 
 import com.kqp.awaken.entity.mob.RadianceEntity;
+import com.kqp.awaken.init.AwakenConfig;
 import com.kqp.awaken.init.AwakenEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -10,12 +11,15 @@ import net.minecraft.block.pattern.BlockPatternBuilder;
 import net.minecraft.block.pattern.CachedBlockPosition;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.PotionEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SplashPotionItem;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.predicate.block.BlockStatePredicate;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.function.MaterialPredicate;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.world.World;
@@ -35,11 +39,10 @@ public class RadianceBossSpawner {
         PotionEntity potionEntity = (PotionEntity) (Object) this;
         World world = potionEntity.world;
 
-        if (!world.isClient) {
+        if (!world.isClient && potionEntity.getOwner() instanceof PlayerEntity) {
             ItemStack itemStack = potionEntity.getStack();
 
             if (itemStack.getItem() instanceof SplashPotionItem) {
-                Potion potion = PotionUtil.getPotion(itemStack);
                 List<StatusEffectInstance> list = PotionUtil.getPotionEffects(itemStack);
 
                 boolean hasRegen = false;
@@ -58,26 +61,30 @@ public class RadianceBossSpawner {
                     BlockPattern.Result result = blockPattern.searchAround(world, hitResult.getBlockPos());
 
                     if (result != null) {
-                        for (int i = 0; i < blockPattern.getWidth(); i++) {
-                            for (int j = 0; j < blockPattern.getHeight(); j++) {
-                                CachedBlockPosition blockPos = result.translate(i, j, 0);
-                                world.setBlockState(blockPos.getBlockPos(), Blocks.AIR.getDefaultState(), 2);
-                                world.syncWorldEvent(2001, blockPos.getBlockPos(), Block.getRawIdFromState(blockPos.getBlockState()));
+                        if (!canSpawn(world)) {
+                            ((PlayerEntity) potionEntity.getOwner()).sendMessage(new TranslatableText("radiance.spawn_time"), true);
+                        } else {
+                            for (int i = 0; i < blockPattern.getWidth(); i++) {
+                                for (int j = 0; j < blockPattern.getHeight(); j++) {
+                                    CachedBlockPosition blockPos = result.translate(i, j, 0);
+                                    world.setBlockState(blockPos.getBlockPos(), Blocks.AIR.getDefaultState(), 2);
+                                    world.syncWorldEvent(2001, blockPos.getBlockPos(), Block.getRawIdFromState(blockPos.getBlockState()));
+                                }
                             }
-                        }
 
-                        RadianceEntity radiance = AwakenEntities.RADIANCE.create(world);
-                        radiance.refreshPositionAndAngles(result.translate(1, 2, 0).getBlockPos(), 0F, 0F);
-                        radiance.onSpawn();
-                        world.spawnEntity(radiance);
+                            RadianceEntity radiance = AwakenEntities.RADIANCE.create(world);
+                            radiance.refreshPositionAndAngles(result.translate(1, 3, 0).getBlockPos(), 0F, 0F);
+                            radiance.onSpawn();
+                            world.spawnEntity(radiance);
 
-                        for (int i = 0; i < blockPattern.getWidth(); i++) {
-                            for (int j = 0; j < blockPattern.getHeight(); j++) {
-                                world.updateNeighbors(result.translate(i, j, 0).getBlockPos(), Blocks.AIR);
+                            for (int i = 0; i < blockPattern.getWidth(); i++) {
+                                for (int j = 0; j < blockPattern.getHeight(); j++) {
+                                    world.updateNeighbors(result.translate(i, j, 0).getBlockPos(), Blocks.AIR);
+                                }
                             }
-                        }
 
-                        callbackInfo.cancel();
+                            callbackInfo.cancel();
+                        }
                     }
                 }
             }
@@ -95,5 +102,11 @@ public class RadianceBossSpawner {
         }
 
         return radianceBossPattern;
+    }
+
+    private static boolean canSpawn(World world) {
+        long time = world.getTimeOfDay() % 24000;
+
+        return time >= AwakenConfig.VALID_BOSS_TIME_START && time <= AwakenConfig.VALID_BOSS_TIME_END;
     }
 }

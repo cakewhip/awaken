@@ -32,8 +32,8 @@ public class AwakenBossEntity extends HostileEntity {
     }
 
     @Override
-    protected void mobTick() {
-        super.mobTick();
+    public void baseTick() {
+        super.baseTick();
 
         this.bossBar.setPercent(this.getHealth() / this.getMaxHealth());
 
