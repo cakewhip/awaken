@@ -55,8 +55,15 @@ public class AwakenTrinketItem extends Item implements Trinket, ActiveEntityFeat
             tooltip.add(new LiteralText(""));
         }
 
-        tooltip.add(new LiteralText("When Equipped:").formatted(Formatting.GRAY));
+        Text header = new LiteralText("When Equipped:").formatted(Formatting.GRAY);
+
+        tooltip.add(header);
         entityFeatureGroup.populateTooltips(tooltip);
+
+        Text last = tooltip.get(tooltip.size() - 1);
+        if (last == header) {
+            tooltip.remove(tooltip.size() - 1);
+        }
     }
 
     @Override
