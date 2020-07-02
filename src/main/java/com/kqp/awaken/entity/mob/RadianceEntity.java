@@ -1,14 +1,14 @@
 package com.kqp.awaken.entity.mob;
 
+import com.kqp.awaken.entity.projectile.RadianceLightEntity;
 import com.kqp.awaken.init.AwakenEntities;
+import com.kqp.awaken.init.AwakenNetworking;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
-import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
-import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -22,7 +22,6 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.WitherSkullEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.Vec3d;
@@ -30,7 +29,9 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob {
     private static final TrackedData<Integer> INVUL_TIMER;
@@ -51,7 +52,20 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
         this.noClip = true;
         this.setNoGravity(true);
 
-        tasks = new RadianceTask[] { new BasicTask(), new QuickMoveTask() };
+        tasks = new RadianceTask[] { new BasicTask(), new QuickMoveTask(), new CircleTask() };
+    }
+
+    public PlayerEntity getNextRandomTarget() {
+        List<PlayerEntity> targets = this.bossBar.getPlayers()
+                .stream()
+                .filter(player -> !player.isCreative())
+                .collect(Collectors.toList());
+
+        if (targets.isEmpty()) {
+            return null;
+        }
+
+        return targets.get(random.nextInt(targets.size()));
     }
 
     @Override
@@ -79,10 +93,19 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
 
             LivingEntity target = getTarget();
 
+            // If can't find a target, attempt to find one here
+            if (target == null) {
+                this.setTarget(getNextRandomTarget());
+                target = getTarget();
+            }
+
             if (target != null) {
                 if (currentTask == null || currentTask.isDone()) {
                     if (currentTask != null) {
                         currentTask.end();
+
+                        // When a task ends, go ahead and find another target
+                        this.setTarget(getNextRandomTarget());
                     }
 
                     currentTask = tasks[random.nextInt(tasks.length)];
@@ -118,6 +141,8 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
                         this.setVelocity(this.getVelocity().multiply(0.2D));
                     }
                 }
+
+                this.lookAtEntity(target, 10F, 10F);
             }
         }
 
@@ -131,7 +156,7 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
     }
 
     private boolean closeEnough(Vec3d targetVec) {
-        return getPos().squaredDistanceTo(targetVec) < 0.5D;
+        return getPos().squaredDistanceTo(targetVec) < 0.05D;
     }
 
     public void onSpawn() {
@@ -145,8 +170,6 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
         this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0D));
         this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(4, new LookAroundGoal(this));
-        this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
-        this.targetSelector.add(2, new FollowTargetGoal(this, PlayerEntity.class, 0, false, false, CAN_ATTACK_PREDICATE));
     }
 
     @Override
@@ -172,7 +195,7 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
 
     @Override
     public boolean damage(DamageSource source, float amount) {
-        if (this.isInvulnerableTo(source)) {
+        if (this.isInvulnerableTo(source) || source.getAttacker() == this) {
             return false;
         } else if (source != DamageSource.DROWN && !(source.getAttacker() instanceof WitherEntity)) {
             if (this.getInvulnerableTimer() > 0 && source != DamageSource.OUT_OF_WORLD) {
@@ -216,7 +239,7 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
 
     @Override
     public void attack(LivingEntity target, float pullProgress) {
-        if (battleStarted() && false) {
+        if (battleStarted()) {
             double g = this.getPos().x;
             double h = this.getPos().y + this.getHeight() / 2D;
             double i = this.getPos().z;
@@ -224,11 +247,12 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
             double k = target.getPos().y - h;
             double l = target.getPos().z - i;
 
-            WitherSkullEntity witherSkullEntity = new WitherSkullEntity(this.world, this, j, k, l);
-            witherSkullEntity.setOwner(this);
+            RadianceLightEntity lightEntity = new RadianceLightEntity(this.world, this, j, k, l);
+            lightEntity.setOwner(this);
+            lightEntity.setPos(g, h, i);
 
-            witherSkullEntity.setPos(g, h, i);
-            this.world.spawnEntity(witherSkullEntity);
+            AwakenNetworking.SPAWN_ENTITY_PACKET_S2C.send(lightEntity);
+            this.world.spawnEntity(lightEntity);
         }
     }
 
@@ -263,10 +287,44 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
         }
     }
 
+    class CircleTask extends RadianceTask {
+        private int timer = 0;
+        private double angle = 0;
+        private int direction = 1;
+
+        @Override
+        public void start() {
+            timer = 150;
+        }
+
+        @Override
+        public void tick() {
+            if (timer % 50 == 0) {
+                rollFlip();
+            }
+
+            angle += 4D * Math.PI / 180D * direction;
+            offsetVec = new Vec3d(Math.sin(angle), 0D, Math.cos(angle)).multiply(5D).add(0D, 3D, 0D);
+
+            timer--;
+        }
+
+        private void rollFlip() {
+            if (random.nextFloat() < 0.5F) {
+                direction = random.nextBoolean() ? 1 : -1;
+            }
+        }
+
+        @Override
+        public boolean isDone() {
+            return timer <= 0;
+        }
+    }
+
     class QuickMoveTask extends RadianceTask {
         private EntityAttributeModifier SPEED_BOOST = new EntityAttributeModifier(
                 "radiance_speed_boost",
-                1D,
+                1.5D,
                 EntityAttributeModifier.Operation.MULTIPLY_BASE
         );
 
@@ -274,14 +332,14 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
 
         @Override
         public void start() {
-            timer = 120;
+            timer = 128;
             getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).addTemporaryModifier(SPEED_BOOST);
         }
 
         @Override
         public void tick() {
-            if (timer % 15 == 0) {
-                offsetVec = genRandomHorizontalVector(2.5D).add(0D, 2D, 0D);
+            if (timer % 16 == 0) {
+                offsetVec = genRandomHorizontalVector(2.5D).add(0D, 2D + random.nextDouble() * 2D, 0D);
             }
 
             timer--;

@@ -6,6 +6,7 @@ import com.kqp.awaken.entity.mob.RadianceEntity;
 import com.kqp.awaken.entity.mob.RaptorChickenEntity;
 import com.kqp.awaken.entity.mob.SpiderSacEntity;
 import com.kqp.awaken.entity.mob.VoidGhostEntity;
+import com.kqp.awaken.entity.projectile.RadianceLightEntity;
 import com.kqp.awaken.world.spawning.BoneCrownSpawnCondition;
 import com.kqp.awaken.world.spawning.CaveSpawnCondition;
 import com.kqp.awaken.world.spawning.ConditionalSpawnEntry;
@@ -83,6 +84,15 @@ public class AwakenEntities {
                     .size(EntityDimensions.fixed(0.6F * 3F, 1.95F * 3F))
                     .trackable(72, 3)
                     .build()
+    );
+
+    public static final EntityType<RadianceLightEntity> RADIANCE_LIGHT = Registry.register(
+            Registry.ENTITY_TYPE,
+            new Identifier(Awaken.MOD_ID, "radiance_light"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, RadianceLightEntity::new)
+                .size(EntityDimensions.fixed(0.5F, 0.5F))
+                .trackable(72, 3)
+                .build()
     );
 
     public static void init() {

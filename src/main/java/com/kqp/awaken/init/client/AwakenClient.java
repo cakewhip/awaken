@@ -2,6 +2,7 @@ package com.kqp.awaken.init.client;
 
 import com.kqp.awaken.client.entity.AbominationRenderer;
 import com.kqp.awaken.client.entity.DireWolfRenderer;
+import com.kqp.awaken.client.entity.RadianceLightRenderer;
 import com.kqp.awaken.client.entity.RadianceRenderer;
 import com.kqp.awaken.client.entity.RaptorChickenRenderer;
 import com.kqp.awaken.client.entity.SpiderSacRenderer;
@@ -56,6 +57,9 @@ public class AwakenClient implements ClientModInitializer {
 
         EntityRendererRegistry.INSTANCE.register(AwakenEntities.RADIANCE, (dispatcher, context) ->
                 new RadianceRenderer(dispatcher));
+
+        EntityRendererRegistry.INSTANCE.register(AwakenEntities.RADIANCE_LIGHT, (dispatcher, context) ->
+                new RadianceLightRenderer(dispatcher));
     }
 
     /**
@@ -83,6 +87,8 @@ public class AwakenClient implements ClientModInitializer {
         register(AwakenNetworking.ABOMINATION_SMASH_ATTACK_S2C);
         register(AwakenNetworking.ABOMINATION_SPAWN_SPAWNLINGS_S2C);
         register(AwakenNetworking.BOSS_DESPAWNING_S2C);
+
+        register(AwakenNetworking.SPAWN_ENTITY_PACKET_S2C);
     }
 
     private static void register(AwakenPacket packet) {

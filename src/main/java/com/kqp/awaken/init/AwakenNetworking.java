@@ -4,6 +4,7 @@ import com.kqp.awaken.network.AwakenPacket;
 import com.kqp.awaken.network.entity.AbominationSmashAttackS2C;
 import com.kqp.awaken.network.entity.AbominationSpawnSpawnlingsS2C;
 import com.kqp.awaken.network.entity.BossDespawningS2C;
+import com.kqp.awaken.network.entity.SpawnEntityPacketS2C;
 import com.kqp.awaken.network.entity.player.PlayerInputSyncC2S;
 import com.kqp.awaken.network.recipe.SyncRecipesS2C;
 import com.kqp.awaken.network.screen.SyncCraftingResultSlotS2C;
@@ -36,6 +37,8 @@ public class AwakenNetworking {
     public static final AbominationSmashAttackS2C ABOMINATION_SMASH_ATTACK_S2C = new AbominationSmashAttackS2C();
     public static final AbominationSpawnSpawnlingsS2C ABOMINATION_SPAWN_SPAWNLINGS_S2C = new AbominationSpawnSpawnlingsS2C();
     public static final BossDespawningS2C BOSS_DESPAWNING_S2C = new BossDespawningS2C();
+
+    public static final SpawnEntityPacketS2C SPAWN_ENTITY_PACKET_S2C = new SpawnEntityPacketS2C();
 
 
     // Client to Server
