@@ -33,6 +33,7 @@
     "combat.ranged.ProjectileTypeImplementer",
     "combat.ArmorCalculationOverride",
     "combat.EquipmentListener",
+    "effect.EFGEnchantmentApplier",
     "fierymoon.FMBlazeImplementer",
     "fierymoon.FMGhastImplementer",
     "fierymoon.FMZoglinImplementer",
