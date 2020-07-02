@@ -35,7 +35,6 @@ import java.util.stream.Collectors;
 
 public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob {
     private static final TrackedData<Integer> INVUL_TIMER;
-    private static final Predicate<LivingEntity> CAN_ATTACK_PREDICATE;
 
     public final RadianceTask[] tasks;
     public RadianceTask currentTask;
@@ -358,6 +357,5 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
 
     static {
         INVUL_TIMER = DataTracker.registerData(RadianceEntity.class, TrackedDataHandlerRegistry.INTEGER);
-        CAN_ATTACK_PREDICATE = (livingEntity) -> livingEntity.getGroup() != EntityGroup.UNDEAD && livingEntity.isMobOrPlayer();
     }
 }
