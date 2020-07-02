@@ -3,12 +3,12 @@ package com.kqp.awaken.entity.mob;
 import com.kqp.awaken.entity.projectile.RadianceLightEntity;
 import com.kqp.awaken.init.AwakenEntities;
 import com.kqp.awaken.init.AwakenNetworking;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
-import net.minecraft.entity.ai.goal.ProjectileAttackGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -30,13 +30,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob {
     private static final TrackedData<Integer> INVUL_TIMER;
 
-    public final RadianceTask[] tasks;
+    public final RadianceTask[] firstPhase, secondPhase;
+    public RadianceTask[] currentTasks;
     public RadianceTask currentTask;
     public Vec3d offsetVec;
 
@@ -51,7 +51,8 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
         this.noClip = true;
         this.setNoGravity(true);
 
-        tasks = new RadianceTask[] { new BasicTask(), new QuickMoveTask(), new CircleTask() };
+        firstPhase = new RadianceTask[] { new BasicTask(), new QuickMoveTask(), new CircleTask(), new QuickAttackTask(1, 2.5D) };
+        secondPhase = new RadianceTask[] { new CircleTask(), new QuickAttackTask(3, 2.5D) };
     }
 
     public PlayerEntity getNextRandomTarget() {
@@ -70,7 +71,7 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
     @Override
     protected void mobTick() {
         int j;
-        if (this.getInvulnerableTimer() > 0) {
+        if (!battleStarted()) {
             j = this.getInvulnerableTimer() - 1;
 
             if (j <= 0) {
@@ -99,6 +100,12 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
             }
 
             if (target != null) {
+                if (this.aboveHalfHealth()) {
+                    currentTasks = secondPhase;
+                } else {
+                    currentTasks = firstPhase;
+                }
+
                 if (currentTask == null || currentTask.isDone()) {
                     if (currentTask != null) {
                         currentTask.end();
@@ -107,12 +114,24 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
                         this.setTarget(getNextRandomTarget());
                     }
 
-                    currentTask = tasks[random.nextInt(tasks.length)];
+                    currentTask = currentTasks[random.nextInt(currentTasks.length)];
                     currentTask.start();
                 }
 
                 currentTask.tick();
+
+                if (age % getAttackTime() == 0) {
+                    attack(target, 0F);
+                }
             }
+        }
+    }
+
+    protected int getAttackTime() {
+        if (aboveHalfHealth()) {
+            return 40;
+        } else {
+            return 25;
         }
     }
 
@@ -133,11 +152,22 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
                 if (offsetVec != null) {
                     Vec3d targetVec = target.getPos().add(offsetVec);
 
+                    double speed = getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+                    double distance = Math.sqrt(this.squaredDistanceTo(targetVec));
+
                     if (!closeEnough(targetVec)) {
+                        if (distance > 4D) {
+                            speed *= 3D;
+                        }
+
+                        if (speed > distance) {
+                            speed = distance;
+                        }
+
                         Vec3d diffVec = targetVec.add(this.getPos().negate()).normalize();
-                        this.setVelocity(diffVec.multiply(getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED)));
+                        this.setVelocity(diffVec.multiply(speed));
                     } else {
-                        this.setVelocity(this.getVelocity().multiply(0.2D));
+                        this.setVelocity(this.getVelocity().multiply(0.25D));
                     }
                 }
 
@@ -165,10 +195,9 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(1, new ProjectileAttackGoal(this, 1.0D, 40, 20.0F));
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0D));
-        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(4, new LookAroundGoal(this));
+        this.goalSelector.add(1, new WanderAroundFarGoal(this, 1.0D));
+        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(3, new LookAroundGoal(this));
     }
 
     @Override
@@ -225,6 +254,7 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
     public static DefaultAttributeContainer.Builder createRadianceAttributes() {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.45D)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.1D)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 450D)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64D)
                 .add(EntityAttributes.GENERIC_ARMOR, 12.0D)
@@ -352,6 +382,70 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
         @Override
         public void end() {
             getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).removeModifier(SPEED_BOOST);
+        }
+    }
+
+    class QuickAttackTask extends RadianceTask {
+
+        private final int maxTimes;
+        private final EntityAttributeModifier speedBoost;
+        private int times = 0;
+        private int timer = 0;
+
+        public QuickAttackTask(int maxTimes, double speedBoost) {
+            this.maxTimes = maxTimes;
+            this.speedBoost = new EntityAttributeModifier(
+                    "radiance_quick_attack_speed_boost",
+                    speedBoost,
+                    EntityAttributeModifier.Operation.MULTIPLY_BASE
+            );
+        }
+
+        @Override
+        public void start() {
+            getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).addTemporaryModifier(speedBoost);
+            times = 0;
+            restartAttack();
+        }
+
+        @Override
+        public void tick() {
+            if (timer > 8) {
+                if (timer % 16 == 0) {
+                    offsetVec = genRandomHorizontalVector(2.5D).add(0D, 2D + random.nextDouble() * 2D, 0D);
+                }
+            } else if (timer == 8) {
+                offsetVec = offsetVec.multiply(-2D);
+            } else if (timer > 0 && timer < 8) {
+                RadianceEntity radiance = RadianceEntity.this;
+                List<Entity> hit = world.getEntities(radiance, radiance.getBoundingBox());
+
+                for (Entity entity : hit) {
+                    if (entity instanceof PlayerEntity) {
+                        entity.damage(DamageSource.mob(radiance), (float) radiance.getAttributeValue(EntityAttributes.GENERIC_ATTACK_DAMAGE));
+                    }
+                }
+            } else if (timer <= 0) {
+                times++;
+                restartAttack();
+            }
+
+            timer--;
+        }
+
+        private void restartAttack() {
+            timer = 64;
+            offsetVec = genRandomHorizontalVector(4D).add(0D, 3D, 0D);
+        }
+
+        @Override
+        public boolean isDone() {
+            return times >= maxTimes;
+        }
+
+        @Override
+        public void end() {
+            getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).removeModifier(speedBoost);
         }
     }
 

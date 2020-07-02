@@ -69,10 +69,6 @@ public class AbominationEntity extends AwakenBossEntity {
         super.mobTick();
     }
 
-    public boolean aboveHalfHealth() {
-        return (this.getHealth() / this.getMaxHealth()) >= 0.5;
-    }
-
     static {
         CAN_ATTACK_PREDICATE = (entity) -> {
             for (EntityType type : FRIENDLY_TYPES) {

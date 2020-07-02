@@ -115,4 +115,8 @@ public class AwakenBossEntity extends HostileEntity {
 
         return time < AwakenConfig.VALID_BOSS_TIME_START || time > AwakenConfig.VALID_BOSS_TIME_END;
     }
+
+    public boolean aboveHalfHealth() {
+        return (this.getHealth() / this.getMaxHealth()) >= 0.5;
+    }
 }
