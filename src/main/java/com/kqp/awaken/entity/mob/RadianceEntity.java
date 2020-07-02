@@ -111,7 +111,7 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
                         currentTask.end();
 
                         // When a task ends, go ahead and find another target
-                        this.setTarget(getNextRandomTarget());
+                        targetRandomPlayer();
                     }
 
                     currentTask = currentTasks[random.nextInt(currentTasks.length)];
@@ -125,6 +125,10 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
                 }
             }
         }
+    }
+
+    protected void targetRandomPlayer() {
+        this.setTarget(getNextRandomTarget());
     }
 
     protected int getAttackTime() {
@@ -254,9 +258,9 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
     public static DefaultAttributeContainer.Builder createRadianceAttributes() {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.45D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.1D)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 450D)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 64D)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10D)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 750D)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 128D)
                 .add(EntityAttributes.GENERIC_ARMOR, 12.0D)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0D);
     }
@@ -434,6 +438,9 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
         }
 
         private void restartAttack() {
+            RadianceEntity radiance = RadianceEntity.this;
+
+            radiance.targetRandomPlayer();
             timer = 64;
             offsetVec = genRandomHorizontalVector(4D).add(0D, 3D, 0D);
         }

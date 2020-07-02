@@ -34,13 +34,13 @@ public class RadianceLightEntity extends ExplosiveProjectileEntity {
             boolean damageDealt;
             if (shooter instanceof LivingEntity) {
                 LivingEntity livingEntity = (LivingEntity) shooter;
-                damageDealt = target.damage(DamageSource.magic(this, shooter), 0.1F);
+                damageDealt = target.damage(DamageSource.magic(this, shooter), 8F);
 
                 if (damageDealt) {
                     this.dealDamage(livingEntity, target);
                 }
             } else {
-                damageDealt = target.damage(DamageSource.MAGIC, 0.1F);
+                damageDealt = target.damage(DamageSource.MAGIC, 8F);
             }
 
             if (damageDealt && target instanceof LivingEntity) {
