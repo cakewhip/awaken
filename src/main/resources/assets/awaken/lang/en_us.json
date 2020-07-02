@@ -172,6 +172,8 @@
     "item.awaken.molten_jetpack": "Molten Jetpack",
     "item.awaken.raptor_wings": "Raptor Wings",
     "item.awaken.aether_ring": "Ring of Aether",
+    "item.awaken.magma_shard": "Magma Shard",
+    "item.awaken.bifocals": "Bifocals",
 
     "__comment": "Alchemist Stuff",
     "item.awaken.potion_bag": "Potion Bag",
@@ -207,6 +209,7 @@
     "ability.shulker_charm_effect.tooltip0": "15% chance to inflict Levitation I",
     "ability.silky_glove_effect.tooltip0": "Ability to climb on walls",
     "ability.netherian_belt_effect.tooltip0": "Gold tools and armor last 6x longer",
+    "ability.no_fall_damage_effect.tooltip0": "No Fall Damage",
 
     "__comment": "Entity Attributes",
     "attribute.default.tooltip.multiply": "${sign}${value*100}${perc} ${name}",
@@ -248,6 +251,8 @@
     "attribute.name.generic.ammo_consumption.tooltip.addition": "${sign}${value*100}${perc} ${name}",
 
     "attribute.name.generic.shield_knockback": "Shield Knockback",
+
+    "attribute.name.generic.wisdom": "Wisdom",
 
     "__comment": "Status Effects",
     "effect.awaken.confusion": "Confusion",

@@ -6,7 +6,7 @@
     "attribute_modifiers": [],
     "enchantment_modifiers": [],
     "abilities": [
-      "awaken:aether_ring_effect"
+      "awaken:no_fall_damage_effect"
     ]
   }
 }

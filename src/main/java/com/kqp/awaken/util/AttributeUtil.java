@@ -7,10 +7,22 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 
+import java.util.Random;
+
 public class AttributeUtil {
     public static double applyAttribute(EntityAttributeInstance attributeInstance, double val) {
         attributeInstance.setBaseValue(val);
         return attributeInstance.getValue();
+    }
+
+    public static int applyAttribute(EntityAttributeInstance attributeInstance, int val, Random r) {
+        attributeInstance.setBaseValue(1D);
+
+        if (r.nextFloat() < attributeInstance.getValue() - 1D) {
+            val *= 2;
+        }
+
+        return val;
     }
 
     @Environment(EnvType.CLIENT)

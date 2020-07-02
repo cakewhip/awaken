@@ -1,0 +1,15 @@
+{
+  "group": "legs",
+  "slot": "charm",
+  "entity_feature_group": {
+    "status_effects": [],
+    "attribute_modifiers": [],
+    "enchantment_modifiers": [
+      {
+        "enchantment": "fire_aspect",
+        "value": 1
+      }
+    ],
+    "abilities": []
+  }
+}

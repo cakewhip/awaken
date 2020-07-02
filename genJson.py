@@ -83,7 +83,9 @@ ITEMS = [
     "broken_molten_jetpack",
     "molten_jetpack",
     "raptor_wings",
-    "aether_ring"
+    "aether_ring",
+    "magma_shard",
+    "bifocals"
 ]
 
 

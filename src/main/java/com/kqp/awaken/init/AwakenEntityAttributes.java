@@ -45,6 +45,8 @@ public class AwakenEntityAttributes {
 
     public static final EntityAttribute SHIELD_KNOCKBACK = register("shield_knockback");
 
+    public static final EntityAttribute WISDOM = register("wisdom");
+
     public static void init() {
         Awaken.info("Initializing entity attributes");
     }

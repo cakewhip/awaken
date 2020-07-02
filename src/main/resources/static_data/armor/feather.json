@@ -1,0 +1,39 @@
+{
+  "material": {
+    "durability_multiplier": 1,
+    "protection_amounts": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "enchantability": -1,
+    "equip_sound": "item.armor.equip_leather",
+    "toughness": 0.0,
+    "repair_ingredients": [
+      "minecraft:feather"
+    ]
+  },
+  "pieces": {
+    "boots": {
+      "slot": "feet"
+    },
+    "leggings": {
+      "slot": "legs"
+    },
+    "chestplate": {
+      "slot": "chest"
+    },
+    "helmet": {
+      "slot": "head",
+      "set_bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [],
+        "enchantment_modifiers": [],
+        "abilities": [
+          "awaken:no_fall_damage_effect"
+        ]
+      }
+    }
+  }
+}

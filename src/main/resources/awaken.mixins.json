@@ -5,6 +5,7 @@
   "mixins": [
     "accessor.MinecraftServerResourceAccessor",
     "accessor.MobEntityAccessor",
+    "attribute.WisdomAttributeApplier",
     "awakening.AwakeningTrigger",
     "awakening.MobDeathListener",
     "awakening.RaidVictoryListener",

@@ -1,0 +1,42 @@
+{
+  "material": {
+    "durability_multiplier": 4,
+    "protection_amounts": [
+      2,
+      3,
+      4,
+      2
+    ],
+    "enchantability": -1,
+    "equip_sound": "item.armor.equip_leather",
+    "toughness": 0.0,
+    "repair_ingredients": [
+      "minecraft:cactus"
+    ]
+  },
+  "pieces": {
+    "boots": {
+      "slot": "feet"
+    },
+    "leggings": {
+      "slot": "legs"
+    },
+    "chestplate": {
+      "slot": "chest"
+    },
+    "helmet": {
+      "slot": "head",
+      "set_bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [],
+        "enchantment_modifiers": [
+          {
+            "enchantment": "thorns",
+            "value": 3
+          }
+        ],
+        "abilities": []
+      }
+    }
+  }
+}

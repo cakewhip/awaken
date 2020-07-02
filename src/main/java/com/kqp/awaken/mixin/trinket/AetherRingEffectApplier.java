@@ -13,7 +13,7 @@ public class AetherRingEffectApplier {
     private void handleFallDamage(float fallDistance, float damageMultiplier, CallbackInfoReturnable<Boolean> callbackInfo) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
-        if (AwakenAbilities.AETHER_RING_EFFECT.get(player).flag) {
+        if (AwakenAbilities.NO_FALL_DAMAGE_EFFECT.get(player).flag) {
             callbackInfo.setReturnValue(false);
         }
     }
