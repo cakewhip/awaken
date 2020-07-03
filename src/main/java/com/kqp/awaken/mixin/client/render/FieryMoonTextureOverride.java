@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(WorldRenderer.class)
 public abstract class FieryMoonTextureOverride {
     private static final Identifier NORMAL_MOON = new Identifier("textures/environment/moon_phases.png");
-    private static final Identifier FIERY_MOON = new Identifier(Awaken.MOD_ID, "textures/environment/fiery_moon.png");
+    private static final Identifier FIERY_MOON = Awaken.id("textures/environment/fiery_moon.png");
 
     @Redirect(method = "renderSky", at = @At(value = "FIELD", opcode = Opcodes.GETSTATIC, target = "Lnet/minecraft/client/render/WorldRenderer;MOON_PHASES:Lnet/minecraft/util/Identifier;"))
     private final Identifier fieryMoonRedirect() {

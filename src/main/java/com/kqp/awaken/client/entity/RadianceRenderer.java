@@ -10,8 +10,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 
 public class RadianceRenderer extends MobEntityRenderer<RadianceEntity, RadianceModel<RadianceEntity>> {
-    private static final Identifier INVULNERABLE_TEXTURE = new Identifier(Awaken.MOD_ID, "textures/entity/radiance/invulnerable.png");
-    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/entity/radiance/radiance.png");
+    private static final Identifier INVULNERABLE_TEXTURE = Awaken.id("textures/entity/radiance/invulnerable.png");
+    private static final Identifier TEXTURE = Awaken.id("textures/entity/radiance/radiance.png");
 
     public RadianceRenderer(EntityRenderDispatcher entityRenderDispatcher) {
         super(entityRenderDispatcher, new RadianceModel<>(0.0F), 1.0F);

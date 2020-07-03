@@ -18,7 +18,7 @@ public class DireWolfRenderer<T extends DireWolfEntity> extends MobEntityRendere
 
     @Override
     public Identifier getTexture(T entity) {
-        return new Identifier(Awaken.MOD_ID, "textures/entity/dire_wolf.png");
+        return Awaken.id("textures/entity/dire_wolf.png");
     }
 
     @Override

@@ -11,7 +11,7 @@ public class AwakenStatusEffects {
     public static void init() {
         Awaken.info("Initializing status effects");
 
-        Registry.register(Registry.STATUS_EFFECT, new Identifier(Awaken.MOD_ID, "confusion"), AwakenStatusEffects.CONFUSION);
+        Registry.register(Registry.STATUS_EFFECT, Awaken.id("confusion"), AwakenStatusEffects.CONFUSION);
     }
 
     public static class AwakenStatusEffect extends StatusEffect {

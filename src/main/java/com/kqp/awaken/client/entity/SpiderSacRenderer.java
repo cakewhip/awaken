@@ -17,6 +17,6 @@ public class SpiderSacRenderer<T extends SpiderSacEntity> extends MobEntityRende
 
     @Override
     public Identifier getTexture(T entity) {
-        return new Identifier(Awaken.MOD_ID, "textures/entity/spider_sac.png");
+        return Awaken.id("textures/entity/spider_sac.png");
     }
 }

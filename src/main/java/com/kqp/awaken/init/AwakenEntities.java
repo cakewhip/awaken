@@ -34,7 +34,7 @@ import java.util.function.Predicate;
 public class AwakenEntities {
     public static final EntityType<RaptorChickenEntity> RAPTOR_CHICKEN = Registry.register(
             Registry.ENTITY_TYPE,
-            new Identifier(Awaken.MOD_ID, "raptor_chicken"),
+            Awaken.id("raptor_chicken"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, RaptorChickenEntity::new)
                     .size(EntityDimensions.fixed(0.95F, 1.65F))
                     .trackable(72, 3)
@@ -43,7 +43,7 @@ public class AwakenEntities {
 
     public static final EntityType<DireWolfEntity> DIRE_WOLF = Registry.register(
             Registry.ENTITY_TYPE,
-            new Identifier(Awaken.MOD_ID, "dire_wolf"),
+            Awaken.id("dire_wolf"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, DireWolfEntity::new)
                     .size(EntityDimensions.fixed(1.5F, 1F))
                     .trackable(72, 3)
@@ -52,7 +52,7 @@ public class AwakenEntities {
 
     public static final EntityType<SpiderSacEntity> SPIDER_SAC = Registry.register(
             Registry.ENTITY_TYPE,
-            new Identifier(Awaken.MOD_ID, "spider_sac"),
+            Awaken.id("spider_sac"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SpiderSacEntity::new)
                     .size(EntityDimensions.fixed(0.8F, 0.8F))
                     .trackable(72, 3)
@@ -61,7 +61,7 @@ public class AwakenEntities {
 
     public static final EntityType<VoidGhostEntity> VOID_GHOST = Registry.register(
             Registry.ENTITY_TYPE,
-            new Identifier(Awaken.MOD_ID, "void_ghost"),
+            Awaken.id("void_ghost"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, VoidGhostEntity::new)
                     .size(EntityDimensions.fixed(0.6F, 1.9F))
                     .trackable(72, 3)
@@ -70,7 +70,7 @@ public class AwakenEntities {
 
     public static final EntityType<AbominationEntity> ABOMINATION = Registry.register(
             Registry.ENTITY_TYPE,
-            new Identifier(Awaken.MOD_ID, "abomination"),
+            Awaken.id("abomination"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, AbominationEntity::new)
                     .size(EntityDimensions.fixed(0.6F * 3F, 1.95F * 3F))
                     .trackable(72, 3)
@@ -79,7 +79,7 @@ public class AwakenEntities {
 
     public static final EntityType<RadianceEntity> RADIANCE = Registry.register(
             Registry.ENTITY_TYPE,
-            new Identifier(Awaken.MOD_ID, "radiance"),
+            Awaken.id("radiance"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, RadianceEntity::new)
                     .size(EntityDimensions.fixed(0.6F * 3F, 1.95F * 3F))
                     .trackable(72, 3)
@@ -88,7 +88,7 @@ public class AwakenEntities {
 
     public static final EntityType<RadianceLightEntity> RADIANCE_LIGHT = Registry.register(
             Registry.ENTITY_TYPE,
-            new Identifier(Awaken.MOD_ID, "radiance_light"),
+            Awaken.id("radiance_light"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, RadianceLightEntity::new)
                 .size(EntityDimensions.fixed(0.5F, 0.5F))
                 .trackable(72, 3)

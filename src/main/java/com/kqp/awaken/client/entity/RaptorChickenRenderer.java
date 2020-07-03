@@ -20,7 +20,7 @@ public class RaptorChickenRenderer<T extends MobEntity> extends MobEntityRendere
 
     @Override
     public Identifier getTexture(T entity) {
-        return new Identifier(Awaken.MOD_ID, "textures/entity/raptor_chicken.png");
+        return Awaken.id("textures/entity/raptor_chicken.png");
     }
 
     /**

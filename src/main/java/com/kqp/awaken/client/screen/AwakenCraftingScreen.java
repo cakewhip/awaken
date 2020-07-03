@@ -35,9 +35,9 @@ import java.util.List;
  */
 @Environment(EnvType.CLIENT)
 public class AwakenCraftingScreen extends HandledScreen<AwakenCraftingScreenHandler> {
-    public static final String TITLE_TRANSLATION_KEY = Util.createTranslationKey("gui", new Identifier(Awaken.MOD_ID, "awaken_crafting"));
-    public static final String RECIPE_LOOK_UP_TRANSLATION_KEY = Util.createTranslationKey("gui", new Identifier(Awaken.MOD_ID, "awaken_crafting_recipe_look_up"));
-    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/gui/crafting_2.png");
+    public static final String TITLE_TRANSLATION_KEY = Util.createTranslationKey("gui", Awaken.id("awaken_crafting"));
+    public static final String RECIPE_LOOK_UP_TRANSLATION_KEY = Util.createTranslationKey("gui", Awaken.id("awaken_crafting_recipe_look_up"));
+    private static final Identifier TEXTURE = Awaken.id("textures/gui/crafting_2.png");
 
     /**
      * Position of the crafting outputs scroll bar.

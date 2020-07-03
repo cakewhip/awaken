@@ -2,6 +2,7 @@ package com.kqp.awaken.init;
 
 import com.kqp.awaken.util.TimeUtil;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,5 +46,9 @@ public class Awaken implements ModInitializer {
 
     public static void error(String message) {
         LOGGER.log(Level.ERROR, "[" + MOD_NAME + "] " + message);
+    }
+
+    public static Identifier id(String path) {
+        return new Identifier(MOD_ID, path);
     }
 }

@@ -18,7 +18,7 @@ import net.minecraft.util.Identifier;
  */
 @Environment(EnvType.CLIENT)
 public class VoidGhostRenderer<T extends VoidGhostEntity, M extends BipedEntityModel<T>> extends BipedEntityRenderer<T, M> {
-    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/entity/void_ghost.png");
+    private static final Identifier TEXTURE = Awaken.id("textures/entity/void_ghost.png");
 
     public VoidGhostRenderer(EntityRenderDispatcher dispatcher) {
         super(dispatcher, (M) new VoidGhostEntityModel(), 0.5F);

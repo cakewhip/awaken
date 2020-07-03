@@ -122,7 +122,7 @@ public class AwakenItems {
     }
 
     public static Item register(String name, Item item) {
-        Registry.register(Registry.ITEM, new Identifier(Awaken.MOD_ID, name), item);
+        Registry.register(Registry.ITEM, Awaken.id(name), item);
 
         return item;
     }

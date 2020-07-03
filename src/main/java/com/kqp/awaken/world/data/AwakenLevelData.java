@@ -19,7 +19,7 @@ import net.minecraft.world.World;
  */
 public class AwakenLevelData implements Component {
     public static final ComponentType<AwakenLevelData> LEVEL_DATA = ComponentRegistry.INSTANCE.registerIfAbsent(
-            new Identifier(Awaken.MOD_ID, "level_data"),
+            Awaken.id("level_data"),
             AwakenLevelData.class
     );
 

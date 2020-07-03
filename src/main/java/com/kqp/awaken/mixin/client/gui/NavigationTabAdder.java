@@ -27,7 +27,7 @@ import java.util.Arrays;
  */
 @Mixin(InventoryScreen.class)
 public abstract class NavigationTabAdder extends AbstractInventoryScreen<PlayerScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/gui/crafting_2.png");
+    private static final Identifier TEXTURE = Awaken.id("textures/gui/crafting_2.png");
 
     public NavigationTabAdder(PlayerScreenHandler screenHandler, PlayerInventory playerInventory, Text text) {
         super(screenHandler, playerInventory, text);

@@ -53,7 +53,7 @@ public class AwakenEntityAttributes {
 
     private static EntityAttribute register(String name, double baseValue) {
         EntityAttribute attribute = new ClampedEntityAttribute("attribute.name.generic." + name, 2.0D, 0.0D, 2048.0D);
-        Registry.register(Registry.ATTRIBUTE, new Identifier(Awaken.MOD_ID, name), attribute);
+        Registry.register(Registry.ATTRIBUTE, Awaken.id(name), attribute);
         NEW_ATTRIBUTES.put(attribute, baseValue);
 
         return attribute;

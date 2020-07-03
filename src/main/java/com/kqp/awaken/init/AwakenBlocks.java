@@ -52,8 +52,8 @@ public class AwakenBlocks {
     }
 
     public static Block register(String name, Block block) {
-        Registry.register(Registry.BLOCK, new Identifier(Awaken.MOD_ID, name), block);
-        Registry.register(Registry.ITEM, new Identifier(Awaken.MOD_ID, name), new BlockItem(block, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
+        Registry.register(Registry.BLOCK, Awaken.id(name), block);
+        Registry.register(Registry.ITEM, Awaken.id(name), new BlockItem(block, new Item.Settings().group(ItemGroup.BUILDING_BLOCKS)));
 
         return block;
     }

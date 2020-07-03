@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class AbominationRenderer<T extends AbominationEntity, M extends BipedEntityModel<T>> extends BipedEntityRenderer<T, M> {
-    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/entity/abomination.png");
+    private static final Identifier TEXTURE = Awaken.id("textures/entity/abomination.png");
 
     public AbominationRenderer(EntityRenderDispatcher dispatcher) {
         super(dispatcher, (M) new AbominationEntityModel(), 1.5F);

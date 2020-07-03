@@ -25,7 +25,7 @@ public class AwakenTrinkets {
     }
 
     private static void addSlots() {
-        TrinketSlots.addSlot(SlotGroups.HEAD, AwakenSlots.HAT, new Identifier(Awaken.MOD_ID, "textures/item/empty_trinket_slot_hat.png"));
+        TrinketSlots.addSlot(SlotGroups.HEAD, AwakenSlots.HAT, Awaken.id("textures/item/empty_trinket_slot_hat.png"));
         TrinketSlots.addSlot(SlotGroups.HEAD, Slots.MASK, new Identifier("trinkets", "textures/item/empty_trinket_slot_mask.png"));
         TrinketSlots.addSlot(SlotGroups.HEAD, Slots.NECKLACE, new Identifier("trinkets", "textures/item/empty_trinket_slot_necklace.png"));
         TrinketSlots.addSlot(SlotGroups.CHEST, Slots.BELT, new Identifier("trinkets", "textures/item/empty_trinket_slot_belt.png"));

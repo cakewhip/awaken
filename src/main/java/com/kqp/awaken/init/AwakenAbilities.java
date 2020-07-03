@@ -34,7 +34,7 @@ public class AwakenAbilities {
     }
 
     private static Ability register(String name) {
-        Ability ability = new Ability(ComponentRegistry.INSTANCE.registerIfAbsent(new Identifier(Awaken.MOD_ID, name), AbilityComponent.class));
+        Ability ability = new Ability(ComponentRegistry.INSTANCE.registerIfAbsent(Awaken.id(name), AbilityComponent.class));
 
         ABILITY_MAP.put(ability.getComponentType().getId(), ability);
 

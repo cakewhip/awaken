@@ -10,7 +10,7 @@ public abstract class AwakenPacket {
     public final Identifier id;
 
     public AwakenPacket(String name) {
-        this.id = new Identifier(Awaken.MOD_ID, name);
+        this.id = Awaken.id(name);
     }
 
     public abstract void accept(PacketContext context, PacketByteBuf data);

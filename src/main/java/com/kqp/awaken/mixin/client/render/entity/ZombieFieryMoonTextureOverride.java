@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 @Mixin(ZombieBaseEntityRenderer.class)
 public class ZombieFieryMoonTextureOverride {
-    private static final Identifier FIERY_MOON_TEXTURE = new Identifier(Awaken.MOD_ID, "textures/entity/fiery_moon/zombie.png");
+    private static final Identifier FIERY_MOON_TEXTURE = Awaken.id("textures/entity/fiery_moon/zombie.png");
 
     @Inject(method = "getTexture", at = @At("HEAD"), cancellable = true)
     private void overrideTextureForFieryMoon(ZombieEntity zombieEntity, CallbackInfoReturnable<Identifier> callbackInfo) {

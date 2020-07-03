@@ -14,7 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
 public class RadianceLightRenderer extends EntityRenderer<RadianceLightEntity> {
-    private static final Identifier TEXTURE = new Identifier(Awaken.MOD_ID, "textures/entity/radiance/radiance.png");
+    private static final Identifier TEXTURE = Awaken.id("textures/entity/radiance/radiance.png");
     
     private final SkullEntityModel model = new SkullEntityModel();
     

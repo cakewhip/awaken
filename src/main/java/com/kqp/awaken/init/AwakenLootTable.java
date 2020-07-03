@@ -185,7 +185,7 @@ public class AwakenLootTable {
     }
 
     private static LootConditionType register(String id, JsonSerializer<? extends LootCondition> serializer) {
-        return Registry.register(Registry.LOOT_CONDITION_TYPE, new Identifier(Awaken.MOD_ID, id), new LootConditionType(serializer));
+        return Registry.register(Registry.LOOT_CONDITION_TYPE, Awaken.id(id), new LootConditionType(serializer));
     }
 
     static class WeightedItem {
