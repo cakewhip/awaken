@@ -28,7 +28,7 @@ import java.util.Optional;
 public class AwakenArmorItem extends ArmorItem implements EntityEquipmentListener, ActiveEntityFeatureGroupProvider {
     private String customTextureLayer = null;
 
-    private Optional<EntityFeatureGroup> itemMods, setMods;
+    public Optional<EntityFeatureGroup> itemMods, setMods;
 
     public AwakenArmorItem(ArmorMaterial material, EquipmentSlot slot) {
         super(material, slot, new Item.Settings().group(ItemGroup.COMBAT));
@@ -48,11 +48,6 @@ public class AwakenArmorItem extends ArmorItem implements EntityEquipmentListene
     @Override
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        itemMods.ifPresent(effects -> {
-            tooltip.add(new LiteralText("When Equipped:").formatted(Formatting.GRAY));
-            effects.populateTooltips(tooltip);
-        });
-
         setMods.ifPresent(effects -> {
             tooltip.add(new LiteralText("Set Bonus:").formatted(Formatting.GRAY));
             effects.populateTooltips(tooltip);
