@@ -85,7 +85,15 @@ ITEMS = [
     "raptor_wings",
     "aether_ring",
     "magma_shard",
-    "bifocals"
+    "bifocals",
+    "chicken_boots",
+    "chicken_leggings",
+    "chicken_chestplate",
+    "chicken_helmet",
+    "cactus_boots",
+    "cactus_leggings",
+    "cactus_chestplate",
+    "cactus_helmet"
 ]
 
 

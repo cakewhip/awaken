@@ -2,17 +2,15 @@
   "material": {
     "durability_multiplier": 1,
     "protection_amounts": [
+      0,
       1,
       1,
-      1,
-      1
+      0
     ],
     "enchantability": -1,
     "equip_sound": "item.armor.equip_leather",
     "toughness": 0.0,
-    "repair_ingredients": [
-      "minecraft:feather"
-    ]
+    "repair_ingredients": []
   },
   "pieces": {
     "boots": {
@@ -28,7 +26,13 @@
       "slot": "head",
       "set_bonus_efg": {
         "status_effects": [],
-        "attribute_modifiers": [],
+        "attribute_modifiers": [
+          {
+            "entity_attribute": "generic.movement_speed",
+            "operation": "multiply_base",
+            "value": 0.12
+          }
+        ],
         "enchantment_modifiers": [],
         "abilities": [
           "awaken:no_fall_damage_ability"
