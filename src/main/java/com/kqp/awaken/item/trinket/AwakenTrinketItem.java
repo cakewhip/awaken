@@ -20,9 +20,11 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -47,22 +49,15 @@ public class AwakenTrinketItem extends Item implements Trinket, ActiveEntityFeat
     @Override
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        int size = tooltip.size();
         TooltipUtil.addIterableTooltips(tooltip, this.getTranslationKey(), Formatting.YELLOW);
 
-        // Only add divider if there were iterable tooltips to add
-        if (size != tooltip.size()) {
+        List<Text> efgTooltips = new ArrayList();
+        entityFeatureGroup.populateTooltips(efgTooltips);
+
+        if (efgTooltips.size() > 0) {
             tooltip.add(new LiteralText(""));
-        }
-
-        Text header = new LiteralText("When Equipped:").formatted(Formatting.GRAY);
-
-        tooltip.add(header);
-        entityFeatureGroup.populateTooltips(tooltip);
-
-        Text last = tooltip.get(tooltip.size() - 1);
-        if (last == header) {
-            tooltip.remove(tooltip.size() - 1);
+            tooltip.add(new TranslatableText("item.equipped").formatted(Formatting.GRAY));
+            tooltip.addAll(efgTooltips);
         }
     }
 

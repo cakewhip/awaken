@@ -128,6 +128,10 @@
     "entity.awaken.abomination": "Abomination",
     "item.awaken.abomination_spawn_egg": "Abomination Spawn Egg",
 
+    "__comment": "Item Tooltips",
+    "item.set_bonus": "Set bonus:",
+    "item.equipped": "When equipped:",
+
     "__comment": "Trinkets",
     "item.awaken.broken_ankle_chain": "Broken Ankle Chain",
     "item.awaken.broken_ankle_weights": "Broken Ankle Weights",

@@ -18,6 +18,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
@@ -49,7 +50,8 @@ public class AwakenArmorItem extends ArmorItem implements EntityEquipmentListene
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         setMods.ifPresent(effects -> {
-            tooltip.add(new LiteralText("Set Bonus:").formatted(Formatting.GRAY));
+            tooltip.add(new LiteralText(""));
+            tooltip.add(new TranslatableText("item.set_bonus").formatted(Formatting.GRAY));
             effects.populateTooltips(tooltip);
         });
     }
