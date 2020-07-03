@@ -40,7 +40,6 @@ public class DodgeChanceAttributeApplier {
 
                 if (AttributeUtil.rollAttribute(dodgeAttribute, player.getRandom())) {
                     callbackInfo.setReturnValue(false);
-                    System.out.println("DODGED!");
 
                     lastDamageTaken = amount;
                     player.timeUntilRegen = ((ImmunityTimeProvider) player).getImmunityTime();

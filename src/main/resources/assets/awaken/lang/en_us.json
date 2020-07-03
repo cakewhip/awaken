@@ -237,7 +237,7 @@
 
     "attribute.name.generic.crit_chance": "Critical Strike Chance",
     "attribute.name.generic.crit_chance.tooltip.name": "crit chance",
-    "attribute.name.generic.crit_chance.tooltip.addition": "${sign}${value}${perc} ${name}",
+    "attribute.name.generic.crit_chance.tooltip.addition": "${sign}${value*100}${perc} ${name}",
 
     "attribute.name.generic.ranged_damage": "Ranged Damage",
     "attribute.name.generic.bow_damage": "Bow Damage",
