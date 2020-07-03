@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class AmmoConsumptionAttributeApplier {
     @Redirect(method = "onStoppedUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;decrement(I)V"))
     private void applyAmmoConsumptionAttribute(ItemStack arrowStack, int amt,
-                                         ItemStack bowStack, World world, LivingEntity user, int remainingUseTicks) {
+                                               ItemStack bowStack, World world, LivingEntity user, int remainingUseTicks) {
         boolean consume = true;
 
         if (user instanceof PlayerEntity) {

@@ -1,9 +1,9 @@
 package com.kqp.awaken.mixin.network;
 
-import com.kqp.awaken.world.data.AwakenLevelData;
-import com.kqp.awaken.world.data.AwakenLevelDataTagContainer;
 import com.kqp.awaken.recipe.AwakenRecipeManager;
 import com.kqp.awaken.recipe.SyncAwakenRecipes;
+import com.kqp.awaken.world.data.AwakenLevelData;
+import com.kqp.awaken.world.data.AwakenLevelDataTagContainer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.Packet;

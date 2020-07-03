@@ -90,9 +90,9 @@ public class AwakenEntities {
             Registry.ENTITY_TYPE,
             Awaken.id("radiance_light"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, RadianceLightEntity::new)
-                .size(EntityDimensions.fixed(0.5F, 0.5F))
-                .trackable(72, 3)
-                .build()
+                    .size(EntityDimensions.fixed(0.5F, 0.5F))
+                    .trackable(72, 3)
+                    .build()
     );
 
     public static void init() {

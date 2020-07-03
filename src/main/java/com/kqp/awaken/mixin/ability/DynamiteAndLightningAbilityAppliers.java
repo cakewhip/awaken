@@ -1,8 +1,6 @@
 package com.kqp.awaken.mixin.ability;
 
 import com.kqp.awaken.init.AwakenAbilities;
-import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -77,7 +75,7 @@ public class DynamiteAndLightningAbilityAppliers {
                             // Make cosmetic (no damage)
                             lightningEntity.method_29498(true);
 
-                            ((ServerWorld) player.world).spawnEntity(lightningEntity);
+                            player.world.spawnEntity(lightningEntity);
 
                             doLightningDamage(lightningEntity, player);
                         }

@@ -22,7 +22,7 @@ public class PlayerFlightImplementer implements PlayerFlightProperties {
     public boolean secondSpacing;
     public boolean flying;
     public int flyTime;
-    public boolean floating;;
+    public boolean floating;
 
     @Inject(method = "tick", at = @At("HEAD"))
     public void makeRocketBootsGoBrrrr(CallbackInfo callbackInfo) {

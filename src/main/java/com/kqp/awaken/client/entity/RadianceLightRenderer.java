@@ -15,13 +15,13 @@ import net.minecraft.util.math.MathHelper;
 
 public class RadianceLightRenderer extends EntityRenderer<RadianceLightEntity> {
     private static final Identifier TEXTURE = Awaken.id("textures/entity/radiance/radiance.png");
-    
+
     private final SkullEntityModel model = new SkullEntityModel();
-    
+
     public RadianceLightRenderer(EntityRenderDispatcher dispatcher) {
         super(dispatcher);
     }
-    
+
     @Override
     public void render(RadianceLightEntity entity, float f, float g, MatrixStack matrices, VertexConsumerProvider vcProv, int i) {
         matrices.push();
@@ -37,7 +37,7 @@ public class RadianceLightRenderer extends EntityRenderer<RadianceLightEntity> {
         matrices.pop();
         super.render(entity, f, g, matrices, vcProv, i);
     }
-    
+
     @Override
     protected int getBlockLight(RadianceLightEntity witherSkullEntity, BlockPos blockPos) {
         return 15;

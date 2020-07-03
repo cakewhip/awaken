@@ -1,21 +1,16 @@
 package com.kqp.awaken.effect;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonObject;
 import com.kqp.awaken.ability.Ability;
 import com.kqp.awaken.ability.AbilityComponent;
-import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.init.AwakenAbilities;
 import com.kqp.awaken.util.AttributeUtil;
 import com.kqp.awaken.util.EquipmentUtil;
 import com.kqp.awaken.util.TooltipUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.resource.language.I18n;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -30,14 +25,11 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 /**

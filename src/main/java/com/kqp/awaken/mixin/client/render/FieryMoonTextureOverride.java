@@ -1,9 +1,8 @@
 package com.kqp.awaken.mixin.client.render;
 
 import com.kqp.awaken.client.AwakenClientLevelData;
-import com.kqp.awaken.world.data.AwakenLevelData;
 import com.kqp.awaken.init.Awaken;
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.kqp.awaken.world.data.AwakenLevelData;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.util.Identifier;
 import org.objectweb.asm.Opcodes;

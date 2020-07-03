@@ -1,7 +1,7 @@
 package com.kqp.awaken.util;
 
-import com.kqp.awaken.effect.EntityFeatureGroup;
 import com.kqp.awaken.effect.ActiveEntityFeatureGroupProvider;
+import com.kqp.awaken.effect.EntityFeatureGroup;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;

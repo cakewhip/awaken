@@ -1,8 +1,8 @@
 package com.kqp.awaken.mixin.client.render.entity;
 
 import com.kqp.awaken.client.AwakenClientLevelData;
-import com.kqp.awaken.world.data.AwakenLevelData;
 import com.kqp.awaken.init.Awaken;
+import com.kqp.awaken.world.data.AwakenLevelData;
 import net.minecraft.client.render.entity.ZombieBaseEntityRenderer;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.util.Identifier;

@@ -1,8 +1,8 @@
 package com.kqp.awaken.item.armor;
 
+import com.kqp.awaken.effect.ActiveEntityFeatureGroupProvider;
 import com.kqp.awaken.effect.EntityEquipmentListener;
 import com.kqp.awaken.effect.EntityFeatureGroup;
-import com.kqp.awaken.effect.ActiveEntityFeatureGroupProvider;
 import com.kqp.awaken.util.ArmorUtil;
 import jdk.internal.jline.internal.Nullable;
 import net.fabricmc.api.EnvType;

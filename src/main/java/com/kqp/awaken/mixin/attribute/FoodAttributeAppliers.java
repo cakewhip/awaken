@@ -2,9 +2,7 @@ package com.kqp.awaken.mixin.attribute;
 
 import com.kqp.awaken.entity.player.PlayerReference;
 import com.kqp.awaken.init.AwakenEntityAttributes;
-import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.util.AttributeUtil;
-import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;

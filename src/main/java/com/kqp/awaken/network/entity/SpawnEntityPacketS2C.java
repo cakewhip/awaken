@@ -56,7 +56,7 @@ public class SpawnEntityPacketS2C extends AwakenPacketS2C {
             ClientWorld world = MinecraftClient.getInstance().world;
             Entity entity = type.create(world);
 
-            if(entity != null) {
+            if (entity != null) {
                 entity.updatePosition(x, y, z);
                 entity.updateTrackedPosition(x, y, z);
 

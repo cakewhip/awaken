@@ -1,7 +1,7 @@
 package com.kqp.awaken.mixin.awakening;
 
-import com.kqp.awaken.world.data.AwakenLevelData;
 import com.kqp.awaken.util.Broadcaster;
+import com.kqp.awaken.world.data.AwakenLevelData;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;

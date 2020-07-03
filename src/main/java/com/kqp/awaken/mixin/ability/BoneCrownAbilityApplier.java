@@ -2,9 +2,7 @@ package com.kqp.awaken.mixin.ability;
 
 import com.kqp.awaken.entity.ai.BoneCrownTargetGoal;
 import com.kqp.awaken.init.AwakenAbilities;
-import com.kqp.awaken.init.AwakenItems;
 import com.kqp.awaken.mixin.accessor.MobEntityAccessor;
-import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.GoalSelector;

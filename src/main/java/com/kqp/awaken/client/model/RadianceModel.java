@@ -58,7 +58,7 @@ public class RadianceModel<T extends RadianceEntity> extends CompositeEntityMode
     }
 
     public void animateModel(T witherEntity, float f, float g, float h) {
-        for(int i = 1; i < 3; ++i) {
+        for (int i = 1; i < 3; ++i) {
             this.field_3612[i].yaw = (witherEntity.headYaw - witherEntity.bodyYaw) * 0.017453292F;
             this.field_3612[i].pitch = witherEntity.pitch * 0.017453292F;
         }

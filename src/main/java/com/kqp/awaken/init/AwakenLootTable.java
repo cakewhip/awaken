@@ -1,7 +1,6 @@
 package com.kqp.awaken.init;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.kqp.awaken.init.AwakenLootTable.WeightedItem;
 import com.kqp.awaken.loot.condition.BiomeSpecificLootCondition;
 import com.kqp.awaken.loot.condition.FieryMoonLootCondition;
 import com.kqp.awaken.loot.condition.WorldAwakenedLootCondition;
@@ -121,7 +120,7 @@ public class AwakenLootTable {
     public static void addLootEntry(Identifier id, float chance, WeightedItem... items) {
         FabricLootPoolBuilder fabricLootPoolBuilder = FabricLootPoolBuilder.builder()
                 .rolls(ConstantLootTableRange.create(1))
-                .withCondition(RandomChanceLootCondition.builder(chance).build() );
+                .withCondition(RandomChanceLootCondition.builder(chance).build());
 
         for (WeightedItem weightedItem : items) {
             fabricLootPoolBuilder.withEntry(ItemEntry.builder(weightedItem.item).weight(weightedItem.weight).build());

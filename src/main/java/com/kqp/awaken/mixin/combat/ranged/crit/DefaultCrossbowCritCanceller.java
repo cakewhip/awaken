@@ -1,7 +1,6 @@
 package com.kqp.awaken.mixin.combat.ranged.crit;
 
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.item.BowItem;
 import net.minecraft.item.CrossbowItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

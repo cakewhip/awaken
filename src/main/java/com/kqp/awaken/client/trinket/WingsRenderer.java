@@ -3,7 +3,6 @@ package com.kqp.awaken.client.trinket;
 import com.kqp.awaken.entity.player.PlayerFlightProperties;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.model.Model;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;

@@ -3,7 +3,6 @@ package com.kqp.awaken.mixin.client.render.entity.feature;
 import com.kqp.awaken.item.armor.AwakenArmorItem;
 import jdk.internal.jline.internal.Nullable;
 import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Final;

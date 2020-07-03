@@ -18,10 +18,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class CrossbowArrowTypeSetter {
     @Inject(method = "createArrow", at = @At("RETURN"))
     private static void setProjectileType(World world,
-                                   LivingEntity entity,
-                                   ItemStack crossbow,
-                                   ItemStack arrow,
-                                   CallbackInfoReturnable<PersistentProjectileEntity> callbackInfo) {
+                                          LivingEntity entity,
+                                          ItemStack crossbow,
+                                          ItemStack arrow,
+                                          CallbackInfoReturnable<PersistentProjectileEntity> callbackInfo) {
         ((RangedWeaponProjectile) callbackInfo.getReturnValue()).setType(RangedWeaponProjectile.Type.CROSSBOW);
     }
 }

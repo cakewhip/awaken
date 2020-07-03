@@ -1,8 +1,6 @@
 package com.kqp.awaken.mixin.ability;
 
 import com.kqp.awaken.init.AwakenAbilities;
-import com.kqp.awaken.init.AwakenItems;
-import com.kqp.awaken.util.EquipmentUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import org.spongepowered.asm.mixin.Mixin;
