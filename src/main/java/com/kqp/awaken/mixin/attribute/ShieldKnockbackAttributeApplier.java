@@ -1,4 +1,4 @@
-package com.kqp.awaken.mixin.trinket;
+package com.kqp.awaken.mixin.attribute;
 
 import com.kqp.awaken.init.AwakenEntityAttributes;
 import com.kqp.awaken.util.AttributeUtil;
@@ -14,9 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Used to apply the shock-wave shield effect.
  */
 @Mixin(LivingEntity.class)
-public abstract class ShockwaveShieldEffectApplier {
+public abstract class ShieldKnockbackAttributeApplier {
     @Inject(method = "takeShieldHit", at = @At("HEAD"), cancellable = true)
-    private void applyShockwaveShieldEffect(LivingEntity attacker, CallbackInfo callbackInfo) {
+    private void applyShockwaveShieldAttribute(LivingEntity attacker, CallbackInfo callbackInfo) {
         if ((Object) this instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) (Object) this;
             EntityAttributeInstance shieldKnockack = player.getAttributeInstance(AwakenEntityAttributes.SHIELD_KNOCKBACK);

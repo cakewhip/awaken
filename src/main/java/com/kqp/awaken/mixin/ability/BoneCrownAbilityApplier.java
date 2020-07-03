@@ -1,4 +1,4 @@
-package com.kqp.awaken.mixin.trinket;
+package com.kqp.awaken.mixin.ability;
 
 import com.kqp.awaken.entity.ai.BoneCrownTargetGoal;
 import com.kqp.awaken.init.AwakenAbilities;
@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * Used to implement the bone crown effect.
  */
 @Mixin(AbstractSkeletonEntity.class)
-public abstract class BoneCrownEffectApplier {
+public abstract class BoneCrownAbilityApplier {
     @Inject(method = "initGoals", at = @At("TAIL"))
     private void addBoneCrownTargetGoal(CallbackInfo callbackInfo) {
         GoalSelector targetSelector = ((MobEntityAccessor) this).getTargetSelector();
@@ -42,7 +42,7 @@ public abstract class BoneCrownEffectApplier {
                         10,
                         true,
                         false,
-                        player -> !AwakenAbilities.BONE_CROWN_EFFECT.get((PlayerEntity) player).flag
+                        player -> !AwakenAbilities.BONE_CROWN.get((PlayerEntity) player).flag
                 );
             } else if (goal instanceof RevengeGoal) {
                 // I don't know how I feel about entirely removing skeleton friendly fire

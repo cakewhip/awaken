@@ -1,4 +1,4 @@
-package com.kqp.awaken.mixin.trinket;
+package com.kqp.awaken.mixin.ability;
 
 import com.kqp.awaken.init.AwakenAbilities;
 import net.minecraft.item.ArmorItem;
@@ -20,11 +20,11 @@ import java.util.Random;
  * Used to apply the netherian belt effect.
  */
 @Mixin(ItemStack.class)
-public class NetherianBeltEffectApplier {
+public class NetherianBeltAbilityApplier {
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     private void damage(int amount, Random random, ServerPlayerEntity player, CallbackInfoReturnable<Boolean> callbackInfo) {
         if (player != null) {
-            if (AwakenAbilities.NETHERIAN_BELT_EFFECT.get(player).flag) {
+            if (AwakenAbilities.NETHERIAN_BELT.get(player).flag) {
                 ItemStack itemStack = (ItemStack) (Object) this;
                 Item item = itemStack.getItem();
 

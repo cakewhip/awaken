@@ -1,4 +1,4 @@
-package com.kqp.awaken.mixin.trinket;
+package com.kqp.awaken.mixin.ability;
 
 import com.kqp.awaken.init.AwakenAbilities;
 import net.minecraft.entity.player.PlayerEntity;
@@ -8,12 +8,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
-public class AetherRingEffectApplier {
+public class NoFallDamageAbilityApplier {
     @Inject(method = "handleFallDamage", at = @At("HEAD"), cancellable = true)
     private void handleFallDamage(float fallDistance, float damageMultiplier, CallbackInfoReturnable<Boolean> callbackInfo) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
-        if (AwakenAbilities.NO_FALL_DAMAGE_EFFECT.get(player).flag) {
+        if (AwakenAbilities.NO_FALL_DAMAGE.get(player).flag) {
             callbackInfo.setReturnValue(false);
         }
     }

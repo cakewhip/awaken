@@ -1,4 +1,4 @@
-package com.kqp.awaken.mixin.trinket;
+package com.kqp.awaken.mixin.ability;
 
 import com.kqp.awaken.init.AwakenAbilities;
 import com.kqp.awaken.init.AwakenItems;
@@ -14,15 +14,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * Used to apply the silky glove effect.
  */
 @Mixin(LivingEntity.class)
-public abstract class SilkyGlovesEffectApplier {
+public abstract class SilkyGlovesAbilityApplier {
     @Inject(method = "isClimbing", at = @At("HEAD"), cancellable = true)
-    private void applySilkyGloveEffect(CallbackInfoReturnable<Boolean> callbackInfo) {
+    private void applySilkyGloveAbility(CallbackInfoReturnable<Boolean> callbackInfo) {
         if ((Object) this instanceof PlayerEntity) {
             PlayerEntity player = (PlayerEntity) (Object) this;
 
             if (!player.isSpectator()) {
                 if (player.horizontalCollision) {
-                    if (AwakenAbilities.SILKY_GLOVE_EFFECT.get(player).flag) {
+                    if (AwakenAbilities.SILKY_GLOVE.get(player).flag) {
                         callbackInfo.setReturnValue(true);
                     }
                 }

@@ -6,7 +6,7 @@
     "attribute_modifiers": [],
     "enchantment_modifiers": [],
     "abilities": [
-      "awaken:netherian_belt_effect"
+      "awaken:netherian_belt_ability"
     ]
   }
 }

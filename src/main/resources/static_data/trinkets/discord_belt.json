@@ -6,7 +6,7 @@
     "attribute_modifiers": [],
     "enchantment_modifiers": [],
     "abilities": [
-      "awaken:discord_belt_effect"
+      "awaken:discord_belt_ability"
     ]
   }
 }

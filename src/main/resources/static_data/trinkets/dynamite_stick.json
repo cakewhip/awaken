@@ -6,7 +6,7 @@
     "attribute_modifiers": [],
     "enchantment_modifiers": [],
     "abilities": [
-      "awaken:dynamite_stick_effect"
+      "awaken:dynamite_stick_ability"
     ]
   }
 }

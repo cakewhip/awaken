@@ -38,7 +38,7 @@ public class BoneCrownTargetGoal extends TrackTargetGoal {
                         Entity lastAttacker = lastDamageSource.getAttacker();
 
                         return lastAttacker instanceof PlayerEntity
-                                && AwakenAbilities.BONE_CROWN_EFFECT.get((PlayerEntity) lastAttacker).flag;
+                                && AwakenAbilities.BONE_CROWN.get((PlayerEntity) lastAttacker).flag;
                     }
 
                     return false;

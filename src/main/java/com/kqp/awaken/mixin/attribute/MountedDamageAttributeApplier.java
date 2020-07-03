@@ -1,4 +1,4 @@
-package com.kqp.awaken.mixin.trinket;
+package com.kqp.awaken.mixin.attribute;
 
 import com.kqp.awaken.init.AwakenEntityAttributes;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -8,10 +8,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 /**
- * Used to apply combat saddle effect.
+ * Used to apply the mounted damage attribute.
  */
 @Mixin(PlayerEntity.class)
-public class CombatSaddleEffectApplier {
+public class MountedDamageAttributeApplier {
     @ModifyVariable(method = "attack", at = @At(value = "STORE", ordinal = 0))
     private float applyUnarmedDamage(float f) {
         PlayerEntity player = (PlayerEntity) (Object) this;

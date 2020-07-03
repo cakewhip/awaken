@@ -6,8 +6,8 @@
     "attribute_modifiers": [],
     "enchantment_modifiers": [],
     "abilities": [
-      "awaken:snorkel_mask_effect",
-      "awaken:scorched_mask_effect"
+      "awaken:snorkel_mask_ability",
+      "awaken:scorched_mask_ability"
     ]
   }
 }

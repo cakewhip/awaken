@@ -1,4 +1,4 @@
-package com.kqp.awaken.mixin.trinket;
+package com.kqp.awaken.mixin.ability;
 
 import com.kqp.awaken.init.AwakenAbilities;
 import com.kqp.awaken.init.AwakenItems;
@@ -13,12 +13,12 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
  * Used to apply the rain hat effect, which is also used by the angler's tackle box.
  */
 @Mixin(FishingBobberEntity.class)
-public class RainHatEffectApplier {
+public class RainHatAbilityApplier {
     @ModifyVariable(method = "tickFishingLogic", at = @At(value = "STORE", ordinal = 0))
-    private int applyRainHatEffect(int i) {
+    private int applyRainHatAbility(int i) {
         PlayerEntity owner = ((FishingBobberEntity) (Object) this).getOwner();
 
-        if (AwakenAbilities.RAIN_HAT_EFFECT.get(owner).flag) {
+        if (AwakenAbilities.RAIN_HAT.get(owner).flag) {
             return i + 1;
         }
 

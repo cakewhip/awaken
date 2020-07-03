@@ -6,7 +6,7 @@
     "attribute_modifiers": [],
     "enchantment_modifiers": [],
     "abilities": [
-      "awaken:scorched_mask_effect"
+      "awaken:scorched_mask_ability"
     ]
   }
 }

@@ -1,4 +1,4 @@
-package com.kqp.awaken.mixin.trinket;
+package com.kqp.awaken.mixin.ability;
 
 import com.kqp.awaken.init.AwakenAbilities;
 import net.minecraft.entity.Entity;
@@ -13,11 +13,11 @@ import org.spongepowered.asm.mixin.injection.Redirect;
  * Used to implement the belt of discord effect.
  */
 @Mixin(EnderPearlEntity.class)
-public class DiscordBeltEffectApplier {
+public class DiscordBeltAbilityApplier {
     @Redirect(method = "onCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"))
     private boolean applyDiscordBeltEffect(Entity entity, DamageSource damageSource, float amt) {
         if (entity instanceof PlayerEntity) {
-            if (AwakenAbilities.DISCORD_BELT_EFFECT.get((PlayerEntity) entity).flag) {
+            if (AwakenAbilities.DISCORD_BELT.get((PlayerEntity) entity).flag) {
                 amt *= 0.25;
             }
         }

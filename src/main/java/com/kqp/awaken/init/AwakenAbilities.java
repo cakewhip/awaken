@@ -13,17 +13,17 @@ import java.util.Map;
 public class AwakenAbilities {
     public static final Map<Identifier, Ability> ABILITY_MAP = new HashMap();
 
-    public static final Ability SNORKEL_MASK_EFFECT = register("snorkel_mask_effect");
-    public static final Ability BONE_CROWN_EFFECT = register("bone_crown_effect");
-    public static final Ability DISCORD_BELT_EFFECT = register("discord_belt_effect");
-    public static final Ability DYNAMITE_STICK_EFFECT = register("dynamite_stick_effect");
-    public static final Ability LIGHTNING_BOTTLE_EFFECT = register("lightning_bottle_effect");
-    public static final Ability RAIN_HAT_EFFECT = register("rain_hat_effect");
-    public static final Ability SCORCHED_MASK_EFFECT = register("scorched_mask_effect");
-    public static final Ability SHULKER_CHARM_EFFECT = register("shulker_charm_effect");
-    public static final Ability SILKY_GLOVE_EFFECT = register("silky_glove_effect");
-    public static final Ability NETHERIAN_BELT_EFFECT = register("netherian_belt_effect");
-    public static final Ability NO_FALL_DAMAGE_EFFECT = register("no_fall_damage_effect");
+    public static final Ability SNORKEL_MASK = register("snorkel_mask_ability");
+    public static final Ability BONE_CROWN = register("bone_crown_ability");
+    public static final Ability DISCORD_BELT = register("discord_belt_ability");
+    public static final Ability DYNAMITE_STICK = register("dynamite_stick_ability");
+    public static final Ability LIGHTNING_BOTTLE = register("lightning_bottle_ability");
+    public static final Ability RAIN_HAT = register("rain_hat_ability");
+    public static final Ability SCORCHED_MASK = register("scorched_mask_ability");
+    public static final Ability SHULKER_CHARM = register("shulker_charm_ability");
+    public static final Ability SILKY_GLOVE = register("silky_glove_ability");
+    public static final Ability NETHERIAN_BELT = register("netherian_belt_ability");
+    public static final Ability NO_FALL_DAMAGE = register("no_fall_damage_ability");
 
     public static void init() {
         EntityComponentCallback.event(PlayerEntity.class).register((player, components) -> {

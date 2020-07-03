@@ -1,4 +1,4 @@
-package com.kqp.awaken.mixin.trinket;
+package com.kqp.awaken.mixin.attribute;
 
 import com.kqp.awaken.entity.player.PlayerReference;
 import com.kqp.awaken.init.AwakenEntityAttributes;
@@ -19,17 +19,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Used to implement the carnivorous mask and the farmer's hankerchief.
+ * Used to implement food attributes.
  */
 @Mixin(HungerManager.class)
-public class FoodMaskEffectApplier implements PlayerReference {
+public class FoodAttributeAppliers implements PlayerReference {
     private static final Set<Item> MEAT = new HashSet();
     private static final Set<Item> VEGETARIAN = new HashSet();
 
     public PlayerEntity player;
 
     @Redirect(method = "eat", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/HungerManager;add(IF)V"))
-    private void applyTrinketEffects(HungerManager hungerManager, int food, float saturation, Item item, ItemStack stack) {
+    private void applyAttributes(HungerManager hungerManager, int food, float saturation, Item item, ItemStack stack) {
         EntityAttributeInstance carnivore = player.getAttributeInstance(AwakenEntityAttributes.CARNIVORE);
         EntityAttributeInstance herbivore = player.getAttributeInstance(AwakenEntityAttributes.HERBIVORE);
         EntityAttributeInstance omnivore = player.getAttributeInstance(AwakenEntityAttributes.OMNIVORE);

@@ -20,7 +20,7 @@ public class BoneCrownSpawnCondition extends SpawnCondition {
         List<? extends PlayerEntity> players = spawnWorld.getPlayers();
 
         for (PlayerEntity player : players) {
-            if (AwakenAbilities.BONE_CROWN_EFFECT.get(player).flag) {
+            if (AwakenAbilities.BONE_CROWN.get(player).flag) {
                 if (player.squaredDistanceTo(Vec3d.of(pos)) < MAX_SPAWN_DISTANCE_SQUARED) {
                     return true;
                 }

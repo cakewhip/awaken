@@ -6,7 +6,7 @@
     "attribute_modifiers": [],
     "enchantment_modifiers": [],
     "abilities": [
-      "awaken:shulker_charm_effect"
+      "awaken:shulker_charm_ability"
     ]
   }
 }

@@ -1,4 +1,4 @@
-package com.kqp.awaken.mixin.trinket;
+package com.kqp.awaken.mixin.ability;
 
 import com.kqp.awaken.init.AwakenAbilities;
 import com.kqp.awaken.init.AwakenItems;
@@ -25,7 +25,7 @@ import java.util.List;
  * Used to apply the effects of the stick of dynamite, lightning in a bottle, and electrifying dynamite.
  */
 @Mixin(LivingEntity.class)
-public class DynamiteAndLightningEffectApplier {
+public class DynamiteAndLightningAbilityAppliers {
     @Inject(method = "damage", at = @At(value = "RETURN"))
     private void applyDynamiteAndLightningEffects(DamageSource source, float amount, CallbackInfoReturnable<Boolean> callbackInfo) {
         if (callbackInfo.getReturnValue()) {
@@ -36,8 +36,8 @@ public class DynamiteAndLightningEffectApplier {
                 if (entity instanceof PlayerEntity) {
                     PlayerEntity player = (PlayerEntity) entity;
 
-                    boolean dynamite = AwakenAbilities.DYNAMITE_STICK_EFFECT.get(player).flag;
-                    boolean lightning = AwakenAbilities.LIGHTNING_BOTTLE_EFFECT.get(player).flag;
+                    boolean dynamite = AwakenAbilities.DYNAMITE_STICK.get(player).flag;
+                    boolean lightning = AwakenAbilities.LIGHTNING_BOTTLE.get(player).flag;
                     boolean both = dynamite && lightning;
 
                     float explosionChance = both ? 0.10F : 0.06F;
