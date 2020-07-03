@@ -46,6 +46,9 @@ public class AwakenEntityAttributes {
 
     public static final EntityAttribute WISDOM = register("wisdom");
 
+    public static final EntityAttribute DODGE_CHANCE = register("dodge_chance");
+    public static final EntityAttribute IMMUNITY_TIME = register("immunity_time");
+
     public static void init() {
         Awaken.info("Initializing entity attributes");
     }

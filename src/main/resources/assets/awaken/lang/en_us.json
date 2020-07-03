@@ -268,6 +268,13 @@
 
     "attribute.name.generic.wisdom": "Wisdom",
 
+    "attribute.name.generic.dodge_chance": "Dodge Chance",
+    "attribute.name.generic.dodge_chance.tooltip.name": "chance to dodge",
+    "attribute.name.generic.dodge_chance.tooltip.addition": "${sign}${value*100}${perc} ${name}",
+
+    "attribute.name.generic.immunity_time": "Immunity Time",
+    "attribute.name.generic.immunity_time.tooltip.addition": "${sign}${value/20}s of ${name}",
+
     "__comment": "Status Effects",
     "effect.awaken.confusion": "Confusion",
 
