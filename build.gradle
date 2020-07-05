@@ -26,6 +26,7 @@ repositories {
 	maven {
 		url = "https://jitpack.io"
 	}
+
 	maven {
 		name = "NerdHubMC"
 		url = "https://maven.abusedmaster.xyz/"
@@ -41,17 +42,16 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:0.14.0+build.371-1.16"
 
 	// Base
-	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.0"
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.0"
+	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.1"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.1"
 	// Entity
-	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.0"
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.0"
+	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.1"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.1"
 	// Level
-	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:2.4.0"
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:2.4.0"
+	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:2.4.1"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:2.4.1"
 
-	// Currently pulling Trinkets from local Maven
-	modImplementation "com.github.emilyploszaj:trinkets:2.6.1"
+	modImplementation "com.github.emilyploszaj:trinkets:2.6.2"
 
 	// Static Data
 	modImplementation "io.github.cottonmc:StaticData:1.1.2"
