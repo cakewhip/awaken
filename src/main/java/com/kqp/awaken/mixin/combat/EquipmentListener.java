@@ -36,38 +36,40 @@ public abstract class EquipmentListener {
                                  EquipmentSlot currentSlot,
                                  ItemStack prevItemStack,
                                  ItemStack currItemStack) {
-        LivingEntity living = (LivingEntity) (Object) this;
-        Optional<ItemStack> equip = Optional.empty(), unEquip = Optional.empty();
+        if(!ItemStack.areEqual(prevItemStack, currItemStack)) {
+            LivingEntity living = (LivingEntity) (Object) this;
+            Optional<ItemStack> equip = Optional.empty(), unEquip = Optional.empty();
 
-        if (!currItemStack.isEmpty()) {
-            equip = Optional.of(currItemStack);
-        }
+            if (!currItemStack.isEmpty()) {
+                equip = Optional.of(currItemStack);
+            }
 
-        if (!prevItemStack.isEmpty()) {
-            unEquip = Optional.of(prevItemStack);
-        }
+            if (!prevItemStack.isEmpty()) {
+                unEquip = Optional.of(prevItemStack);
+            }
 
-        if (equip.isPresent() || unEquip.isPresent()) {
-            Set<ItemStack> listeners = new HashSet();
+            if (equip.isPresent() || unEquip.isPresent()) {
+                Set<ItemStack> listeners = new HashSet();
 
-            for (EquipmentSlot slot : equipmentSlots) {
-                ItemStack equippedStack = living.getEquippedStack(slot);
+                for (EquipmentSlot slot : equipmentSlots) {
+                    ItemStack equippedStack = living.getEquippedStack(slot);
 
-                if (equippedStack.getItem() instanceof EntityEquipmentListener) {
-                    listeners.add(equippedStack);
+                    if (equippedStack.getItem() instanceof EntityEquipmentListener) {
+                        listeners.add(equippedStack);
+                    }
                 }
-            }
 
-            // The equipment found in the previous loop does not contain the previously equipped stack
-            if (prevItemStack.getItem() instanceof EntityEquipmentListener) {
-                listeners.add(prevItemStack);
-            }
+                // The equipment found in the previous loop does not contain the previously equipped stack
+                if (prevItemStack.getItem() instanceof EntityEquipmentListener) {
+                    listeners.add(prevItemStack);
+                }
 
-            for (ItemStack itemStack : listeners) {
-                EntityEquipmentListener listener = (EntityEquipmentListener) itemStack.getItem();
+                for (ItemStack itemStack : listeners) {
+                    EntityEquipmentListener listener = (EntityEquipmentListener) itemStack.getItem();
 
-                equip.ifPresent(equippedStack -> listener.onEquip(living, itemStack, equippedStack, currentSlot));
-                unEquip.ifPresent(unEquippedStack -> listener.onUnEquip(living, itemStack, unEquippedStack, currentSlot));
+                    equip.ifPresent(equippedStack -> listener.onEquip(living, itemStack, equippedStack, currentSlot));
+                    unEquip.ifPresent(unEquippedStack -> listener.onUnEquip(living, itemStack, unEquippedStack, currentSlot));
+                }
             }
         }
     }
