@@ -42,15 +42,16 @@ public class ArmorEFGImplementer implements ArmorEFGMutator, EntityEquipmentList
 
     @Override
     public void onEquip(LivingEntity entity, ItemStack itemStack, ItemStack equippedStack, EquipmentSlot equipmentSlot) {
-        if (itemStack.getItem() == (Object) this) {
+        if (equippedStack.getItem() == (Object) this) {
             itemMods.ifPresent(effects -> effects.applyTo(entity));
-            checkForSetBonus(entity, itemStack);
         }
+
+        checkForSetBonus(entity, itemStack);
     }
 
     @Override
     public void onUnEquip(LivingEntity entity, ItemStack itemStack, ItemStack unEquippedStack, EquipmentSlot equipmentSlot) {
-        if (itemStack.getItem() == (Object) this) {
+        if (unEquippedStack.getItem() == (Object) this) {
             itemMods.ifPresent(effects -> effects.removeFrom(entity));
         }
 
