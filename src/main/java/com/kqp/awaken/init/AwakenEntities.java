@@ -81,7 +81,7 @@ public class AwakenEntities {
             Registry.ENTITY_TYPE,
             Awaken.id("radiance"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, RadianceEntity::new)
-                    .size(EntityDimensions.fixed(0.6F * 3F, 1.95F * 3F))
+                    .size(EntityDimensions.fixed(0.9F, 3.5F))
                     .trackable(72, 3)
                     .build()
     );
