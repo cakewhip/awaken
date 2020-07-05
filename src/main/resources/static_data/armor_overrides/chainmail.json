@@ -1,0 +1,64 @@
+{
+  "pieces": {
+    "minecraft:chainmail_helmet": {
+      "priority": 0,
+      "bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [
+          {
+            "entity_attribute": "awaken:ranged_damage",
+            "operation": "multiply_total",
+            "value": 0.05
+          }
+        ],
+        "enchantment_modifiers": [],
+        "abilities": []
+      }
+    },
+    "minecraft:chainmail_chestplate": {
+      "priority": 0,
+      "bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [
+          {
+            "entity_attribute": "awaken:ammo_consumption",
+            "operation": "addition",
+            "value": 0.07
+          }
+        ],
+        "enchantment_modifiers": [],
+        "abilities": []
+      }
+    },
+    "minecraft:chainmail_leggings": {
+      "priority": 0,
+      "bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [
+          {
+            "entity_attribute": "awaken:crit_chance",
+            "operation": "addition",
+            "value": 0.04
+          }
+        ],
+        "enchantment_modifiers": [],
+        "abilities": []
+      }
+    },
+    "minecraft:chainmail_boots": {
+      "priority": 0,
+      "bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [
+          {
+            "entity_attribute": "generic.movement_speed",
+            "operation": "multiply_total",
+            "value": 0.02
+          }
+        ],
+        "enchantment_modifiers": [],
+        "abilities": []
+      }
+    }
+  }
+}

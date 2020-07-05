@@ -35,7 +35,7 @@ public class AttributeUtil {
     public static String toTooltip(EntityAttribute attrib, EntityAttributeModifier mod) {
         String translKey = attrib.getTranslationKey();
 
-        String name = translateOr(translKey + ".tooltip.name", translKey).toLowerCase();
+        String name = translateOr(translKey + ".tooltip.name", translKey);
 
         String sign = mod.getValue() > 0 ? "+" : "-";
         double value = Math.abs(mod.getValue());

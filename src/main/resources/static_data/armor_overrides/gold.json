@@ -1,0 +1,64 @@
+{
+  "pieces": {
+    "minecraft:golden_helmet": {
+      "priority": 0,
+      "bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [
+          {
+            "entity_attribute": "awaken:ranged_damage",
+            "operation": "multiply_total",
+            "value": 0.06
+          }
+        ],
+        "enchantment_modifiers": [],
+        "abilities": []
+      }
+    },
+    "minecraft:golden_chestplate": {
+      "priority": 0,
+      "bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [
+          {
+            "entity_attribute": "awaken:ammo_consumption",
+            "operation": "addition",
+            "value": 0.08
+          }
+        ],
+        "enchantment_modifiers": [],
+        "abilities": []
+      }
+    },
+    "minecraft:golden_leggings": {
+      "priority": 0,
+      "bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [
+          {
+            "entity_attribute": "awaken:crit_chance",
+            "operation": "addition",
+            "value": 0.06
+          }
+        ],
+        "enchantment_modifiers": [],
+        "abilities": []
+      }
+    },
+    "minecraft:golden_boots": {
+      "priority": 0,
+      "bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [
+          {
+            "entity_attribute": "generic.movement_speed",
+            "operation": "multiply_total",
+            "value": 0.03
+          }
+        ],
+        "enchantment_modifiers": [],
+        "abilities": []
+      }
+    }
+  }
+}

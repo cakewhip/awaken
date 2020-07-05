@@ -275,6 +275,8 @@
     "attribute.name.generic.immunity_time": "Immunity Time",
     "attribute.name.generic.immunity_time.tooltip.addition": "${sign}${value/20}s of ${name}",
 
+    "attribute.name.generic.knockback_resistance.tooltip.addition": "${sign}${value*10} ${name}",
+
     "__comment": "Status Effects",
     "effect.awaken.confusion": "Confusion",
 
