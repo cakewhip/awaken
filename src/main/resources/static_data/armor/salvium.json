@@ -16,10 +16,34 @@
   },
   "pieces": {
     "boots": {
-      "slot": "feet"
+      "slot": "feet",
+      "bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [
+          {
+            "entity_attribute": "generic.movement_speed",
+            "operation": "multiply_total",
+            "value": 0.05
+          }
+        ],
+        "enchantment_modifiers": [],
+        "abilities": []
+      }
     },
     "leggings": {
-      "slot": "legs"
+      "slot": "legs",
+      "bonus_efg": {
+        "status_effects": [],
+        "attribute_modifiers": [
+          {
+            "entity_attribute": "awaken:crit_chance",
+            "operation": "addition",
+            "value": 0.08
+          }
+        ],
+        "enchantment_modifiers": [],
+        "abilities": []
+      }
     },
     "chestplate": {
       "slot": "chest",
@@ -27,9 +51,9 @@
         "status_effects": [],
         "attribute_modifiers": [
           {
-            "entity_attribute": "awaken:crit_chance",
+            "entity_attribute": "awaken:ammo_consumption",
             "operation": "addition",
-            "value": 0.06
+            "value": 0.1
           }
         ],
         "enchantment_modifiers": [],
@@ -50,11 +74,6 @@
             "entity_attribute": "awaken:bow_damage",
             "operation": "multiply_total",
             "value": 0.05
-          },
-          {
-            "entity_attribute": "generic.movement_speed",
-            "operation": "multiply_total",
-            "value": 0.07
           }
         ],
         "enchantment_modifiers": [],
@@ -75,11 +94,6 @@
             "entity_attribute": "awaken:crossbow_damage",
             "operation": "multiply_total",
             "value": 0.06
-          },
-          {
-            "entity_attribute": "generic.movement_speed",
-            "operation": "multiply_total",
-            "value": 0.05
           }
         ],
         "enchantment_modifiers": [],

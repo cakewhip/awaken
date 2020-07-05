@@ -236,7 +236,6 @@
     "attribute.name.generic.damage_mitigation.tooltip.addition": "${sign}${value*100}${perc} ${name}",
 
     "attribute.name.generic.crit_chance": "Critical Strike Chance",
-    "attribute.name.generic.crit_chance.tooltip.name": "crit chance",
     "attribute.name.generic.crit_chance.tooltip.addition": "${sign}${value*100}${perc} ${name}",
 
     "attribute.name.generic.ranged_damage": "Ranged Damage",
@@ -261,7 +260,7 @@
     "attribute.name.generic.food_saturation": "Food Saturation Bonus",
 
     "attribute.name.generic.ammo_consumption": "Ammo Consumption Chance",
-    "attribute.name.generic.ammo_consumption.tooltip.name": "chance to not consume ammo",
+    "attribute.name.generic.ammo_consumption.tooltip.name": "Chance to Not Use Ammo",
     "attribute.name.generic.ammo_consumption.tooltip.addition": "${sign}${value*100}${perc} ${name}",
 
     "attribute.name.generic.shield_knockback": "Shield Knockback",
@@ -269,7 +268,7 @@
     "attribute.name.generic.wisdom": "Wisdom",
 
     "attribute.name.generic.dodge_chance": "Dodge Chance",
-    "attribute.name.generic.dodge_chance.tooltip.name": "chance to dodge",
+    "attribute.name.generic.dodge_chance.tooltip.name": "Chance to Dodge",
     "attribute.name.generic.dodge_chance.tooltip.addition": "${sign}${value*100}${perc} ${name}",
 
     "attribute.name.generic.immunity_time": "Immunity Time",

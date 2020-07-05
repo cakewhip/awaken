@@ -50,6 +50,7 @@ public class AttributeUtil {
         tooltip = tooltip.replace("${sign}", sign);
         tooltip = tooltip.replace("${value}", formatDouble(value));
         tooltip = tooltip.replace("${value*100}", formatDouble(value * 100));
+        tooltip = tooltip.replace("${value*10}", formatDouble(value * 10));
         tooltip = tooltip.replace("${value/20}", formatDouble(value / 20D));
         tooltip = tooltip.replace("${perc}", "%");
         tooltip = tooltip.replace("${name}", name);

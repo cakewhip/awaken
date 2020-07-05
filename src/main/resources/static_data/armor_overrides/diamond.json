@@ -2,7 +2,7 @@
   "pieces": {
     "minecraft:diamond_helmet": {
       "priority": 0,
-      "bonus_efg": {
+      "set_bonus_efg": {
         "status_effects": [],
         "attribute_modifiers": [
           {
