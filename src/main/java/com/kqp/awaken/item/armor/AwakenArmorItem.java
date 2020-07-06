@@ -6,20 +6,14 @@ import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 
+import java.util.Optional;
+
 public class AwakenArmorItem extends ArmorItem {
-    private String customTextureLayer = null;
+    public final Optional<String> customTextureLayer;
 
-    public AwakenArmorItem(ArmorMaterial material, EquipmentSlot slot) {
+    public AwakenArmorItem(ArmorMaterial material, EquipmentSlot slot, String customTextureLayer) {
         super(material, slot, new Item.Settings().group(ItemGroup.COMBAT));
-    }
 
-    public AwakenArmorItem setCustomTextureLayer(String customTextureLayer) {
-        this.customTextureLayer = customTextureLayer;
-
-        return this;
-    }
-
-    public String getCustomTextureLayer() {
-        return customTextureLayer;
+        this.customTextureLayer = Optional.ofNullable(customTextureLayer);
     }
 }

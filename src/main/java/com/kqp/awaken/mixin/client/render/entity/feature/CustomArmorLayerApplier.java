@@ -26,13 +26,11 @@ public class CustomArmorLayerApplier {
     @Inject(method = "getArmorTexture", at = @At("HEAD"), cancellable = true)
     protected void useCustomTextureLayers(ArmorItem item, boolean secondLayer, @Nullable String suffix, CallbackInfoReturnable<Identifier> callbackInfoReturnable) {
         if (item instanceof AwakenArmorItem) {
-            String customTextureLayer = ((AwakenArmorItem) item).getCustomTextureLayer();
-
-            if (customTextureLayer != null) {
+            ((AwakenArmorItem) item).customTextureLayer.ifPresent(customTextureLayer -> {
                 String string = "textures/models/armor/" + item.getMaterial().getName() + "_layer_" + (secondLayer ? 2 : 1) + "_" + customTextureLayer + ".png";
 
                 callbackInfoReturnable.setReturnValue(ARMOR_TEXTURE_CACHE.computeIfAbsent(string, Identifier::new));
-            }
+            });
         }
     }
 }

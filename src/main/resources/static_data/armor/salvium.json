@@ -82,6 +82,7 @@
     },
     "beret": {
       "slot": "head",
+      "custom_texture_layer": "beret",
       "set_bonus_efg": {
         "status_effects": [],
         "attribute_modifiers": [

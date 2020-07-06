@@ -62,6 +62,7 @@
     },
     "mask": {
       "slot": "head",
+      "custom_texture_layer": "mask",
       "set_bonus_efg": {
         "status_effects": [],
         "attribute_modifiers": [

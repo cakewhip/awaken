@@ -7,6 +7,7 @@ import com.kqp.awaken.item.armor.ArmorEFGMutator;
 import com.kqp.awaken.item.armor.AwakenArmorItem;
 import com.kqp.awaken.item.material.AwakenArmorMaterial;
 import com.kqp.awaken.util.DataUtil;
+import com.kqp.awaken.util.JsonUtil;
 import io.github.cottonmc.staticdata.StaticData;
 import io.github.cottonmc.staticdata.StaticDataItem;
 import net.minecraft.entity.EquipmentSlot;
@@ -17,6 +18,7 @@ import net.minecraft.util.registry.Registry;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Loads stuff related to armor, like armor items and any overrides.
@@ -50,8 +52,11 @@ public class AwakenArmor {
 
                     String slotName = pieceJsonObject.get("slot").getAsString();
                     EquipmentSlot slot = EquipmentSlot.byName(slotName);
+                    AtomicReference<String> customTextureLayer = new AtomicReference(null);
 
-                    AwakenArmorItem armorItem = new AwakenArmorItem(material, slot);
+                    JsonUtil.optionalElement(pieceJsonObject, "custom_texture_layer", layerJson -> customTextureLayer.set(layerJson.getAsString()));
+
+                    AwakenArmorItem armorItem = new AwakenArmorItem(material, slot, customTextureLayer.get());
 
                     JsonObject efgJsonObject = pieceJsonObject.getAsJsonObject("bonus_efg");
                     if (efgJsonObject != null) {
