@@ -7,6 +7,7 @@ import com.kqp.awaken.item.trinket.AwakenTrinketItem;
 import com.kqp.awaken.item.trinket.FlightTrinketItem;
 import com.kqp.awaken.trinket.AwakenSlots;
 import com.kqp.awaken.util.DataUtil;
+import com.kqp.awaken.util.JsonUtil;
 import dev.emi.trinkets.api.SlotGroups;
 import dev.emi.trinkets.api.Slots;
 import dev.emi.trinkets.api.TrinketSlots;
@@ -17,6 +18,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class AwakenTrinkets {
     public static void init() {
@@ -70,8 +72,13 @@ public class AwakenTrinkets {
                     double flySpeed = trinketJsonObject.get("fly_speed").getAsDouble();
                     int flyTime = trinketJsonObject.get("fly_time").getAsInt();
                     boolean canFloat = trinketJsonObject.get("can_float").getAsBoolean();
+                    AtomicReference<Identifier> flightParticleId = new AtomicReference(null);
+                    AtomicReference<Identifier> floatParticleId = new AtomicReference(null);
 
-                    trinketItem = new FlightTrinketItem(trinketGroup, trinketSlot, efg, maxFlySpeed, flySpeed, flyTime, canFloat, rendererId);
+                    JsonUtil.optionalElement(trinketJsonObject, "flight_particle_id", (particleJson -> flightParticleId.set(new Identifier(particleJson.getAsString()))));
+                    JsonUtil.optionalElement(trinketJsonObject, "float_particle_id", (particleJson -> floatParticleId.set(new Identifier(particleJson.getAsString()))));
+
+                    trinketItem = new FlightTrinketItem(trinketGroup, trinketSlot, efg, maxFlySpeed, flySpeed, flyTime, canFloat, rendererId, flightParticleId.get(), floatParticleId.get());
                 } else {
                     throw new RuntimeException(String.format(
                             "Unknown trinket type \"%s\" for ID %s",

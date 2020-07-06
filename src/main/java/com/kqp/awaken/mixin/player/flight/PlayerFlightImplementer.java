@@ -6,7 +6,11 @@ import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.DefaultParticleType;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleType;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -28,8 +32,10 @@ public class PlayerFlightImplementer implements PlayerFlightProperties {
     public void makeRocketBootsGoBrrrr(CallbackInfo callbackInfo) {
         PlayerEntity player = ((PlayerEntity) (Object) this);
         if (this.canFly()) {
+            FlightTrinketItem flightTrinketItem = ((FlightTrinketItem) this.getFlyingItemStack().getItem());
+            
             if (player.isOnGround()) {
-                flyTime = ((FlightTrinketItem) this.getFlyingItemStack().getItem()).getMaxFlyTime();
+                flyTime = flightTrinketItem.getMaxFlyTime();
 
                 this.setFloating(false);
                 this.setSecondSpacing(false);
@@ -43,10 +49,14 @@ public class PlayerFlightImplementer implements PlayerFlightProperties {
 
                         flyTime = Math.max(0, flyTime - 1);
 
-                        player.world.addParticle(ParticleTypes.LAVA,
-                                player.getX(), player.getY() + 1.0D, player.getZ(),
-                                r.nextDouble() - r.nextDouble(), -r.nextDouble() * 4D, r.nextDouble() - r.nextDouble()
-                        );
+                        flightTrinketItem.flightParticleId.ifPresent(flightParticleId -> {
+                            DefaultParticleType particle = (DefaultParticleType) Registry.PARTICLE_TYPE.get(flightParticleId);
+                            
+                            player.world.addParticle(particle,
+                                    player.getX(), player.getY() + 1.0D, player.getZ(),
+                                    r.nextDouble() - r.nextDouble(), -r.nextDouble() * 4D, r.nextDouble() - r.nextDouble()
+                            );
+                        });
                     } else {
                         this.setFlying(false);
                         this.setFloating(false);
@@ -54,10 +64,15 @@ public class PlayerFlightImplementer implements PlayerFlightProperties {
                         if (canFloat()) {
                             this.setFloating(true);
 
-                            player.world.addParticle(ParticleTypes.POOF,
-                                    player.getX(), player.getY(), player.getZ(),
-                                    r.nextDouble() - r.nextDouble(), -r.nextDouble(), r.nextDouble() - r.nextDouble()
-                            );
+                            flightTrinketItem.floatParticleId.ifPresent(floatParticleId -> {
+                                DefaultParticleType particle = (DefaultParticleType) Registry.PARTICLE_TYPE.get(floatParticleId);
+
+                                player.world.addParticle(particle,
+                                        player.getX(), player.getY(), player.getZ(),
+                                        r.nextDouble() - r.nextDouble(), -r.nextDouble(), r.nextDouble() - r.nextDouble()
+                                );
+                            });
+
                         }
                     }
                 } else {

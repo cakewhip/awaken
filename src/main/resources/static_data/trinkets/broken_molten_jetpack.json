@@ -12,5 +12,6 @@
   "max_fly_speed": 0.3,
   "fly_speed": 0.1,
   "fly_time": 20,
-  "can_float": false
+  "can_float": false,
+  "flight_particle_id": "minecraft:lava"
 }

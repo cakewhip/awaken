@@ -1,6 +1,9 @@
 package com.kqp.awaken.item.trinket;
 
 import com.kqp.awaken.effect.EntityFeatureGroup;
+import net.minecraft.util.Identifier;
+
+import java.util.Optional;
 
 /**
  * Flight trinket item.
@@ -10,14 +13,27 @@ public class FlightTrinketItem extends AwakenTrinketItem {
     public final double flySpeed;
     public final int flyTime;
     public final boolean canFloat;
+    public final Optional<Identifier> flightParticleId;
+    public final Optional<Identifier> floatParticleId;
 
-    public FlightTrinketItem(String trinketGroup, String trinketSlot, EntityFeatureGroup efg, double maxFlySpeed, double flySpeed, int flyTime, boolean canFloat, String rendererId) {
+    public FlightTrinketItem(String trinketGroup,
+                             String trinketSlot,
+                             EntityFeatureGroup efg,
+                             double maxFlySpeed,
+                             double flySpeed,
+                             int flyTime,
+                             boolean canFloat,
+                             String rendererId,
+                             Identifier flightParticleId,
+                             Identifier floatParticleId) {
         super(trinketGroup, trinketSlot, efg, rendererId);
 
         this.maxFlySpeed = maxFlySpeed;
         this.flySpeed = flySpeed;
         this.flyTime = flyTime;
         this.canFloat = canFloat;
+        this.flightParticleId = Optional.ofNullable(flightParticleId);
+        this.floatParticleId = Optional.ofNullable(floatParticleId);
     }
 
     /**
@@ -56,5 +72,13 @@ public class FlightTrinketItem extends AwakenTrinketItem {
      */
     public boolean canFloat() {
         return canFloat;
+    }
+
+    public Optional<Identifier> getFlightParticleId() {
+        return flightParticleId;
+    }
+
+    public Optional<Identifier> getFloatParticleId() {
+        return floatParticleId;
     }
 }
