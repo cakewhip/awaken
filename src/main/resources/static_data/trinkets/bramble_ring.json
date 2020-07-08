@@ -1,0 +1,12 @@
+{
+  "group": "hand",
+  "slot": "ring",
+  "entity_feature_group": {
+    "status_effects": [],
+    "attribute_modifiers": [],
+    "enchantment_modifiers": [],
+    "abilities": [
+      "awaken:bramble_ring_ability"
+    ]
+  }
+}

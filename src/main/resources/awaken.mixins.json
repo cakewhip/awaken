@@ -3,6 +3,7 @@
   "package": "com.kqp.awaken.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ability.BiomeRingAbilityApplier",
     "ability.BoneCrownAbilityApplier",
     "ability.DiscordBeltAbilityApplier",
     "ability.DynamiteAndLightningAbilityAppliers",
