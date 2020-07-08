@@ -1,3 +1,6 @@
+import shutil
+from os import path
+
 BLOCKS = [
     "ancient_coal_ore",
     "ancient_iron_ore",
@@ -93,7 +96,18 @@ ITEMS = [
     "cactus_boots",
     "cactus_leggings",
     "cactus_chestplate",
-    "cactus_helmet"
+    "cactus_helmet",
+    "world_ring",
+    "summit_ring",
+    "arid_ring",
+    "wooden_ring",
+    "frozen_ring",
+    "fungal_ring",
+    "archaic_ring",
+    "aquatic_ring",
+    "bramble_ring",
+    "pearl_ring",
+    "ember_ring"
 ]
 
 
@@ -115,6 +129,14 @@ itemModelsDir = modelsDir + "item/"
 blockModelsDir = modelsDir + "block/"
 blockstatesDir = "src/main/resources/assets/awaken/blockstates/"
 
+placeholder_texture_path = "src/main/resources/assets/awaken/textures/placeholder_texture.png"
+itemTexturesDir = "src/main/resources/assets/awaken/textures/item/"
+
+def write_texture(name):
+    texture_path = "{}{}.png".format(itemTexturesDir, name)
+
+    if not path.exists(texture_path):
+        shutil.copyfile(placeholder_texture_path, texture_path)
 
 def write_json(path, json):
     f = open(path, "w")
@@ -224,6 +246,7 @@ def write_block(name):
 
 def write_item(name):
     write_json("{}{}.json".format(itemModelsDir, name), item_json(name))
+    write_texture(name)
 
 
 def write_tool(name):
