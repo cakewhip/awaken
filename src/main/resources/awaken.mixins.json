@@ -14,6 +14,7 @@
     "ability.ScorchedMaskAbilityApplier2",
     "ability.ShulkerCharmAbilityApplier",
     "ability.SilkyGlovesAbilityApplier",
+    "accessor.MeleeAttackGoalAccessor",
     "accessor.MinecraftServerResourceAccessor",
     "accessor.MobEntityAccessor",
     "attribute.AmmoConsumptionAttributeApplier",

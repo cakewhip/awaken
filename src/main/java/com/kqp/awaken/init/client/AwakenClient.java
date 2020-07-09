@@ -2,12 +2,14 @@ package com.kqp.awaken.init.client;
 
 import com.kqp.awaken.client.entity.AbominationRenderer;
 import com.kqp.awaken.client.entity.DireWolfRenderer;
+import com.kqp.awaken.client.entity.GenericBipedRenderer;
 import com.kqp.awaken.client.entity.RadianceLightRenderer;
 import com.kqp.awaken.client.entity.RadianceRenderer;
 import com.kqp.awaken.client.entity.RaptorChickenRenderer;
 import com.kqp.awaken.client.entity.SpiderSacRenderer;
 import com.kqp.awaken.client.entity.VoidGhostRenderer;
 import com.kqp.awaken.client.trinket.TrinketRenderers;
+import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.init.AwakenEntities;
 import com.kqp.awaken.init.AwakenNetworking;
 import com.kqp.awaken.network.AwakenPacket;
@@ -60,6 +62,9 @@ public class AwakenClient implements ClientModInitializer {
 
         EntityRendererRegistry.INSTANCE.register(AwakenEntities.RADIANCE_LIGHT, (dispatcher, context) ->
                 new RadianceLightRenderer(dispatcher));
+
+        EntityRendererRegistry.INSTANCE.register(AwakenEntities.RENEGADE, (dispatcher, context) ->
+                new GenericBipedRenderer(dispatcher, "renegade"));
     }
 
     /**
