@@ -6,6 +6,7 @@ import com.kqp.awaken.entity.mob.RadianceEntity;
 import com.kqp.awaken.entity.mob.RaptorChickenEntity;
 import com.kqp.awaken.entity.mob.RenegadeEntity;
 import com.kqp.awaken.entity.mob.SpiderSacEntity;
+import com.kqp.awaken.entity.mob.VagabondEntity;
 import com.kqp.awaken.entity.mob.VoidGhostEntity;
 import com.kqp.awaken.entity.projectile.RadianceLightEntity;
 import com.kqp.awaken.world.spawning.BoneCrownSpawnCondition;
@@ -100,9 +101,18 @@ public class AwakenEntities {
             Registry.ENTITY_TYPE,
             Awaken.id("renegade"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, RenegadeEntity::new)
-            .size(EntityDimensions.fixed(0.6F, 1.95F))
-            .trackable(72, 3)
-            .build()
+                    .size(EntityDimensions.fixed(0.6F, 1.95F))
+                    .trackable(72, 3)
+                    .build()
+    );
+
+    public static final EntityType<VagabondEntity> VAGABOND = Registry.register(
+            Registry.ENTITY_TYPE,
+            Awaken.id("vagabond"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, VagabondEntity::new)
+                    .size(EntityDimensions.fixed(0.6F, 1.95F))
+                    .trackable(72, 3)
+                    .build()
     );
 
     public static void init() {
@@ -145,8 +155,13 @@ public class AwakenEntities {
             register(RADIANCE, 0xFFFFFF, 0x000000, RadianceEntity.createRadianceAttributes());
 
             register(RENEGADE, 0xFFFFFF, 0xFFFFFF, RenegadeEntity.createRenegadeAttributes());
-            addHostileSpawn(spawnEntry(RENEGADE, 200, 1, 1, CaveSpawnCondition.INSTANCE), biome ->
-                biome.getCategory() == Biome.Category.MESA || biome.getCategory() == Biome.Category.SAVANNA
+            addHostileSpawn(spawnEntry(RENEGADE, 200, 1, 1, SurfaceSpawnCondition.INSTANCE), biome ->
+                    biome.getCategory() == Biome.Category.MESA || biome.getCategory() == Biome.Category.SAVANNA
+            );
+
+            register(VAGABOND, 0xFFFFFF, 0xFFFFFF, VagabondEntity.createVagabondAttributes());
+            addHostileSpawn(spawnEntry(VAGABOND, 200, 1, 1, SurfaceSpawnCondition.INSTANCE), biome ->
+                    biome.getCategory() == Biome.Category.MESA || biome.getCategory() == Biome.Category.SAVANNA
             );
         }
 

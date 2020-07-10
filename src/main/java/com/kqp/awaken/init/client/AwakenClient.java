@@ -65,6 +65,9 @@ public class AwakenClient implements ClientModInitializer {
 
         EntityRendererRegistry.INSTANCE.register(AwakenEntities.RENEGADE, (dispatcher, context) ->
                 new GenericBipedRenderer(dispatcher, "renegade"));
+
+        EntityRendererRegistry.INSTANCE.register(AwakenEntities.VAGABOND, (dispatcher, context) ->
+                new GenericBipedRenderer(dispatcher, "vagabond"));
     }
 
     /**

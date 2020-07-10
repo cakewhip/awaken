@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.FleeEntityGoal;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
@@ -18,6 +19,8 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -25,21 +28,21 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
-public class RenegadeEntity extends HostileEntity {
-    public RenegadeEntity(World world) {
-        super(AwakenEntities.RENEGADE, world);
+public class VagabondEntity extends HostileEntity {
+    public VagabondEntity(World world) {
+        super(AwakenEntities.VAGABOND, world);
     }
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(1, new BetterMeleeAttackGoal(this, 1.8F));
-        this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(5, new LookAroundGoal(this));
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D));
+        this.goalSelector.add(1, new FleeEntityGoal(this, RenegadeEntity.class, 24.0F, 1.0D, 1.2D));
+        this.goalSelector.add(3, new FleeEntityGoal(this, PlayerEntity.class, 6.0F, 1.0D, 1.2D));
+        this.goalSelector.add(5, new BetterMeleeAttackGoal(this, 1.8F));
+        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(7, new LookAroundGoal(this));
+        this.goalSelector.add(7, new WanderAroundFarGoal(this, 1.0D));
 
-        this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
-        this.targetSelector.add(2, new FollowTargetGoal(this, VagabondEntity.class, true));
-        this.targetSelector.add(3, new FollowTargetGoal(this, PlayerEntity.class, true));
+        this.targetSelector.add(1, new FollowTargetGoal(this, AnimalEntity.class, true));
     }
 
     @Override
@@ -49,37 +52,11 @@ public class RenegadeEntity extends HostileEntity {
         return super.initialize(world, difficulty, spawnReason, entityData, entityTag);
     }
 
-    public static DefaultAttributeContainer.Builder createRenegadeAttributes() {
+    public static DefaultAttributeContainer.Builder createVagabondAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.305D)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0D)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.31D)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D)
                 .add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
-    }
-
-    @Override
-    public boolean tryAttack(Entity target) {
-        boolean success = super.tryAttack(target);
-
-        if (success) {
-            if (target instanceof LivingEntity) {
-                LivingEntity living = (LivingEntity) target;
-
-                living.addStatusEffect(new StatusEffectInstance(
-                        StatusEffects.POISON,
-                        80,
-                        1
-                ));
-            }
-        }
-
-        return success;
-    }
-
-    @Override
-    protected void initEquipment(LocalDifficulty difficulty) {
-        super.initEquipment(difficulty);
-
-        this.equipStack(EquipmentSlot.MAINHAND, new ItemStack(AwakenItems.Swords.RUSTY_SHANK));
     }
 }
