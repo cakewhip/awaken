@@ -35,8 +35,8 @@ public class VagabondEntity extends HostileEntity {
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(1, new FleeEntityGoal(this, RenegadeEntity.class, 24.0F, 1.0D, 1.2D));
-        this.goalSelector.add(3, new FleeEntityGoal(this, PlayerEntity.class, 6.0F, 1.0D, 1.2D));
+        this.goalSelector.add(1, new FleeEntityGoal(this, RenegadeEntity.class, 24.0F, 1.0D, 1.05D));
+        this.goalSelector.add(3, new FleeEntityGoal(this, PlayerEntity.class, 6.0F, 1.0D, 1.05D));
         this.goalSelector.add(5, new BetterMeleeAttackGoal(this, 1.8F));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(7, new LookAroundGoal(this));
@@ -55,8 +55,7 @@ public class VagabondEntity extends HostileEntity {
     public static DefaultAttributeContainer.Builder createVagabondAttributes() {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0D)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.31D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D)
-                .add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.305D)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.25D);
     }
 }

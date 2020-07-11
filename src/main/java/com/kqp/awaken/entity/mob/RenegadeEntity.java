@@ -53,8 +53,7 @@ public class RenegadeEntity extends HostileEntity {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 48.0D)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.305D)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D)
-                .add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
     }
 
     @Override

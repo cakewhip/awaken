@@ -79,6 +79,7 @@
   ],
   "client": [
     "client.ability.SnorkelMaskAbilityApplier",
+    "client.accessor.HeldItemFeatureRendererAccessor",
     "client.combat.AttackCooldownEnforcer",
     "client.combat.NonCombatCooldownCanceller",
     "client.effect.ConfusionEffectApplier",

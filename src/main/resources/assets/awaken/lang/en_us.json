@@ -141,6 +141,8 @@
     "item.awaken.radiance_spawn_egg": "Radiance Spawn Egg",
     "entity.awaken.renegade": "Renegade",
     "item.awaken.renegade_spawn_egg": "Renegade Spawn Egg",
+    "entity.awaken.ender_agent": "Ender Agent",
+    "item.awaken.ender_agent_spawn_egg": "Ender Agent Spawn Egg",
 
     "__comment": "Item Tooltips",
     "item.set_bonus": "Set bonus:",

@@ -2,6 +2,7 @@ package com.kqp.awaken.init.client;
 
 import com.kqp.awaken.client.entity.AbominationRenderer;
 import com.kqp.awaken.client.entity.DireWolfRenderer;
+import com.kqp.awaken.client.entity.GenericAgentRenderer;
 import com.kqp.awaken.client.entity.GenericBipedRenderer;
 import com.kqp.awaken.client.entity.RadianceLightRenderer;
 import com.kqp.awaken.client.entity.RadianceRenderer;
@@ -68,6 +69,9 @@ public class AwakenClient implements ClientModInitializer {
 
         EntityRendererRegistry.INSTANCE.register(AwakenEntities.VAGABOND, (dispatcher, context) ->
                 new GenericBipedRenderer(dispatcher, "vagabond"));
+
+        EntityRendererRegistry.INSTANCE.register(AwakenEntities.ENDER_AGENT, (dispatcher, context) ->
+                new GenericAgentRenderer(dispatcher, "ender_agent"));
     }
 
     /**

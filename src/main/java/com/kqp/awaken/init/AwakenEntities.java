@@ -2,6 +2,7 @@ package com.kqp.awaken.init;
 
 import com.kqp.awaken.entity.mob.AbominationEntity;
 import com.kqp.awaken.entity.mob.DireWolfEntity;
+import com.kqp.awaken.entity.mob.EnderAgentEntity;
 import com.kqp.awaken.entity.mob.RadianceEntity;
 import com.kqp.awaken.entity.mob.RaptorChickenEntity;
 import com.kqp.awaken.entity.mob.RenegadeEntity;
@@ -115,6 +116,15 @@ public class AwakenEntities {
                     .build()
     );
 
+    public static final EntityType<EnderAgentEntity> ENDER_AGENT = Registry.register(
+            Registry.ENTITY_TYPE,
+            Awaken.id("ender_agent"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EnderAgentEntity::new)
+                    .size(EntityDimensions.fixed(0.75F, 1.0F))
+                    .trackable(72, 3)
+                    .build()
+    );
+
     public static void init() {
         Awaken.info("Initializing entities");
 
@@ -163,6 +173,9 @@ public class AwakenEntities {
             addHostileSpawn(spawnEntry(VAGABOND, 200, 1, 1, SurfaceSpawnCondition.INSTANCE), biome ->
                     biome.getCategory() == Biome.Category.MESA || biome.getCategory() == Biome.Category.SAVANNA
             );
+
+            register(ENDER_AGENT, 0xFFFFFF, 0xFFFFFF, EnderAgentEntity.createEnderAgentAttributes());
+            addHostileSpawn(spawnEntry(ENDER_AGENT, 700, 4, 8), biome -> true);
         }
 
         // Fiery Moon
