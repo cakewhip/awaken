@@ -27,6 +27,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 
 import java.util.List;
 
@@ -37,17 +38,18 @@ public class EnderAgentEntity extends HostileEntity {
             AwakenItems.Reagents.ANCIENT_SICKLE
     };
 
+    private static final float DROP_CHANCE = 0.33F;
+
     public EnderAgentEntity(World world) {
         super(AwakenEntities.ENDER_AGENT, world);
     }
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(1, new BetterMeleeAttackGoal(this, 2.0F));
-        this.goalSelector.add(3, new FleeEntityGoal(this, PlayerEntity.class, 4.0F, 1.0D, 1.1D));
-        this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(0, new BetterMeleeAttackGoal(this, 2.0F));
+        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(5, new LookAroundGoal(this));
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D));
+        this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D));
 
         this.targetSelector.add(0, new HivemindTargetGoal(this));
         this.targetSelector.add(3, new RevengeGoal(this));
@@ -79,13 +81,16 @@ public class EnderAgentEntity extends HostileEntity {
     @Override
     protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
         super.dropEquipment(source, lootingMultiplier, allowDrops);
-        ItemStack held = this.getStackInHand(Hand.MAIN_HAND);
 
-        if (held != null && !held.isEmpty()) {
-            ItemEntity itemEntity = this.dropItem(held.getItem());
+        if (random.nextFloat() < DROP_CHANCE) {
+            ItemStack held = this.getStackInHand(Hand.MAIN_HAND);
 
-            if (itemEntity != null) {
-                itemEntity.setCovetedItem();
+            if (held != null && !held.isEmpty()) {
+                ItemEntity itemEntity = this.dropItem(held.getItem());
+
+                if (itemEntity != null) {
+                    itemEntity.setCovetedItem();
+                }
             }
         }
     }
