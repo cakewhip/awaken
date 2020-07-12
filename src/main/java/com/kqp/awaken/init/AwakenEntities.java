@@ -18,7 +18,7 @@ import com.kqp.awaken.world.spawning.PostAwakeningSpawnCondition;
 import com.kqp.awaken.world.spawning.SpawnCondition;
 import com.kqp.awaken.world.spawning.SurfaceSpawnCondition;
 import net.fabricmc.fabric.api.entity.FabricDefaultAttributeRegistry;
-import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -39,7 +39,7 @@ public class AwakenEntities {
             Registry.ENTITY_TYPE,
             Awaken.id("raptor_chicken"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, RaptorChickenEntity::new)
-                    .size(EntityDimensions.fixed(0.95F, 1.65F))
+                    .dimensions(EntityDimensions.fixed(0.95F, 1.65F))
                     .trackable(72, 3)
                     .build()
     );
@@ -48,7 +48,7 @@ public class AwakenEntities {
             Registry.ENTITY_TYPE,
             Awaken.id("dire_wolf"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, DireWolfEntity::new)
-                    .size(EntityDimensions.fixed(1.5F, 1F))
+                    .dimensions(EntityDimensions.fixed(1.5F, 1F))
                     .trackable(72, 3)
                     .build()
     );
@@ -57,7 +57,7 @@ public class AwakenEntities {
             Registry.ENTITY_TYPE,
             Awaken.id("spider_sac"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SpiderSacEntity::new)
-                    .size(EntityDimensions.fixed(0.8F, 0.8F))
+                    .dimensions(EntityDimensions.fixed(0.8F, 0.8F))
                     .trackable(72, 3)
                     .build()
     );
@@ -66,7 +66,7 @@ public class AwakenEntities {
             Registry.ENTITY_TYPE,
             Awaken.id("void_ghost"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, VoidGhostEntity::new)
-                    .size(EntityDimensions.fixed(0.6F, 1.9F))
+                    .dimensions(EntityDimensions.fixed(0.6F, 1.9F))
                     .trackable(72, 3)
                     .build()
     );
@@ -75,7 +75,7 @@ public class AwakenEntities {
             Registry.ENTITY_TYPE,
             Awaken.id("abomination"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, AbominationEntity::new)
-                    .size(EntityDimensions.fixed(0.6F * 3F, 1.95F * 3F))
+                    .dimensions(EntityDimensions.fixed(0.6F * 3F, 1.95F * 3F))
                     .trackable(72, 3)
                     .build()
     );
@@ -84,7 +84,7 @@ public class AwakenEntities {
             Registry.ENTITY_TYPE,
             Awaken.id("radiance"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, RadianceEntity::new)
-                    .size(EntityDimensions.fixed(0.9F, 3.5F))
+                    .dimensions(EntityDimensions.fixed(0.9F, 3.5F))
                     .trackable(72, 3)
                     .build()
     );
@@ -92,8 +92,8 @@ public class AwakenEntities {
     public static final EntityType<RadianceLightEntity> RADIANCE_LIGHT = Registry.register(
             Registry.ENTITY_TYPE,
             Awaken.id("radiance_light"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MISC, RadianceLightEntity::new)
-                    .size(EntityDimensions.fixed(0.5F, 0.5F))
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, RadianceLightEntity::factory)
+                    .dimensions(EntityDimensions.fixed(0.5F, 0.5F))
                     .trackable(72, 3)
                     .build()
     );
@@ -102,7 +102,7 @@ public class AwakenEntities {
             Registry.ENTITY_TYPE,
             Awaken.id("renegade"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, RenegadeEntity::new)
-                    .size(EntityDimensions.fixed(0.6F, 1.95F))
+                    .dimensions(EntityDimensions.fixed(0.6F, 1.95F))
                     .trackable(72, 3)
                     .build()
     );
@@ -111,7 +111,7 @@ public class AwakenEntities {
             Registry.ENTITY_TYPE,
             Awaken.id("vagabond"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, VagabondEntity::new)
-                    .size(EntityDimensions.fixed(0.6F, 1.95F))
+                    .dimensions(EntityDimensions.fixed(0.6F, 1.95F))
                     .trackable(72, 3)
                     .build()
     );
@@ -119,8 +119,9 @@ public class AwakenEntities {
     public static final EntityType<EnderAgentEntity> ENDER_AGENT = Registry.register(
             Registry.ENTITY_TYPE,
             Awaken.id("ender_agent"),
+            
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EnderAgentEntity::new)
-                    .size(EntityDimensions.fixed(0.75F, 1.0F))
+                    .dimensions(EntityDimensions.fixed(0.75F, 1.0F))
                     .trackable(72, 3)
                     .build()
     );

@@ -5,6 +5,7 @@ import com.kqp.awaken.init.AwakenEntities;
 import com.kqp.awaken.init.AwakenItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
@@ -26,8 +27,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 public class RenegadeEntity extends HostileEntity {
-    public RenegadeEntity(World world) {
-        super(AwakenEntities.RENEGADE, world);
+    public RenegadeEntity(EntityType type, World world) {
+        super(type, world);
     }
 
     @Override

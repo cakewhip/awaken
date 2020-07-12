@@ -5,6 +5,7 @@ import com.kqp.awaken.init.AwakenEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.AttackGoal;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
@@ -22,8 +23,8 @@ import net.minecraft.world.World;
 public class VoidGhostEntity extends HostileEntity {
     private FloatAroundGoal floatGoal;
 
-    public VoidGhostEntity(World world) {
-        super(AwakenEntities.VOID_GHOST, world);
+    public VoidGhostEntity(EntityType type, World world) {
+        super(type, world);
 
         this.noClip = true;
         this.setNoGravity(true);

@@ -21,8 +21,8 @@ public class SpiderSacEntity extends HostileEntity {
     public boolean hatching = false;
     public int hatchTime = 0;
 
-    public SpiderSacEntity(World world) {
-        super(AwakenEntities.SPIDER_SAC, world);
+    public SpiderSacEntity(EntityType type, World world) {
+        super(type, world);
     }
 
     public static DefaultAttributeContainer.Builder createSpiderSacAttributes() {

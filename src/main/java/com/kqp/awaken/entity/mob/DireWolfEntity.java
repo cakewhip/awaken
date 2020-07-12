@@ -2,6 +2,7 @@ package com.kqp.awaken.entity.mob;
 
 import com.kqp.awaken.init.AwakenEntities;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.AttackGoal;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
@@ -25,8 +26,8 @@ import net.minecraft.world.World;
  * Dire wolf entity class.
  */
 public class DireWolfEntity extends HostileEntity {
-    public DireWolfEntity(World world) {
-        super(AwakenEntities.DIRE_WOLF, world);
+    public DireWolfEntity(EntityType type, World world) {
+        super(type, world);
     }
 
     public static DefaultAttributeContainer.Builder createDireWolfAttributes() {

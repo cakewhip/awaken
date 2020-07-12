@@ -4,6 +4,7 @@ import com.kqp.awaken.entity.ai.BetterMeleeAttackGoal;
 import com.kqp.awaken.init.AwakenEntities;
 import com.kqp.awaken.init.AwakenItems;
 import net.minecraft.entity.EntityData;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.SpawnReason;
@@ -40,8 +41,8 @@ public class EnderAgentEntity extends HostileEntity {
 
     private static final float DROP_CHANCE = 0.33F;
 
-    public EnderAgentEntity(World world) {
-        super(AwakenEntities.ENDER_AGENT, world);
+    public EnderAgentEntity(EntityType type, World world) {
+        super(type, world);
     }
 
     @Override

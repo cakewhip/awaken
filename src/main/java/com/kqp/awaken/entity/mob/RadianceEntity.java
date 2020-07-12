@@ -5,6 +5,7 @@ import com.kqp.awaken.init.AwakenEntities;
 import com.kqp.awaken.init.AwakenNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.RangedAttackMob;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
@@ -40,8 +41,8 @@ public class RadianceEntity extends AwakenBossEntity implements RangedAttackMob 
     public RadianceTask currentTask;
     public Vec3d offsetVec;
 
-    public RadianceEntity(World world) {
-        super(AwakenEntities.RADIANCE, world);
+    public RadianceEntity(EntityType type, World world) {
+        super(type, world);
 
         this.bossBar.setColor(BossBar.Color.WHITE);
         this.experiencePoints = 50;

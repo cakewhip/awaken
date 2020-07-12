@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
@@ -51,8 +52,8 @@ public class RaptorChickenEntity extends AnimalEntity {
     public float field_6736;
     public float field_6737 = 1.0F;
 
-    public RaptorChickenEntity(World world) {
-        super(AwakenEntities.RAPTOR_CHICKEN, world);
+    public RaptorChickenEntity(EntityType type, World world) {
+        super(type, world);
 
         resetEggTimer();
 

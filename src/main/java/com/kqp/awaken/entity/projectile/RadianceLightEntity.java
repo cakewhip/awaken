@@ -2,6 +2,7 @@ package com.kqp.awaken.entity.projectile;
 
 import com.kqp.awaken.init.AwakenEntities;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -15,8 +16,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 
 public class RadianceLightEntity extends ExplosiveProjectileEntity {
-    public RadianceLightEntity(World world) {
-        super(AwakenEntities.RADIANCE_LIGHT, world);
+    private RadianceLightEntity(EntityType type, World world) {
+        super(type, world);
+    }
+
+    public static RadianceLightEntity factory(EntityType type, World world) {
+        return new RadianceLightEntity(type, world);
     }
 
     public RadianceLightEntity(World world, LivingEntity owner, double directionX, double directionY, double directionZ) {

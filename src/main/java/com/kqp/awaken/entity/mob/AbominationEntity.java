@@ -30,8 +30,8 @@ public class AbominationEntity extends AwakenBossEntity {
 
     public static final Predicate<Entity> CAN_ATTACK_PREDICATE;
 
-    public AbominationEntity(World world) {
-        super(AwakenEntities.ABOMINATION, world);
+    public AbominationEntity(EntityType type, World world) {
+        super(type, world);
 
         this.experiencePoints = 50;
         this.regenCoolDown = 20;
