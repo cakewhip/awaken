@@ -14,6 +14,7 @@ import com.kqp.awaken.world.spawning.BoneCrownSpawnCondition;
 import com.kqp.awaken.world.spawning.CaveSpawnCondition;
 import com.kqp.awaken.world.spawning.ConditionalSpawnEntry;
 import com.kqp.awaken.world.spawning.FieryMoonSpawnCondition;
+import com.kqp.awaken.world.spawning.LightLevelSpawnCondition;
 import com.kqp.awaken.world.spawning.PostAwakeningSpawnCondition;
 import com.kqp.awaken.world.spawning.SpawnCondition;
 import com.kqp.awaken.world.spawning.SurfaceSpawnCondition;
@@ -121,7 +122,7 @@ public class AwakenEntities {
             Awaken.id("ender_agent"),
 
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EnderAgentEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.75F, 1.0F))
+                    .dimensions(EntityDimensions.fixed(0.75F, 1.95F))
                     .trackable(72, 3)
                     .build()
     );
@@ -148,7 +149,7 @@ public class AwakenEntities {
         {
             register(RAPTOR_CHICKEN, 0x9C0202, 0x610000, RaptorChickenEntity.createRaptorChickenAttributes());
             addHostileSpawn(spawnEntry(RAPTOR_CHICKEN, 100, 1, 3, PostAwakeningSpawnCondition.INSTANCE),
-                    biome -> biome == Biomes.JUNGLE || biome == Biomes.JUNGLE_EDGE || biome == Biomes.JUNGLE_HILLS
+                    biome -> biome.getCategory() == Biome.Category.JUNGLE
             );
 
             register(DIRE_WOLF, 0xD6E9FF, 0x97ADCC, DireWolfEntity.createDireWolfAttributes());
@@ -176,7 +177,7 @@ public class AwakenEntities {
             );
 
             register(ENDER_AGENT, 0xFFFFFF, 0xFFFFFF, EnderAgentEntity.createEnderAgentAttributes());
-            addHostileSpawn(spawnEntry(ENDER_AGENT, 700, 4, 8), biome -> true);
+            addHostileSpawn(spawnEntry(ENDER_AGENT, 100, 1, 1, LightLevelSpawnCondition.INSTANCE_7), biome -> true);
         }
 
         // Fiery Moon
