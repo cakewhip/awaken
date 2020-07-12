@@ -79,6 +79,11 @@ public class RaptorChickenEntity extends AnimalEntity {
     }
 
     @Override
+    protected boolean isDisallowedInPeaceful() {
+        return true;
+    }
+
+    @Override
     protected float getActiveEyeHeight(EntityPose pose, EntityDimensions dimensions) {
         return this.isBaby() ? dimensions.height * 0.85F : dimensions.height * 0.92F;
     }

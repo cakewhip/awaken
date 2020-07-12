@@ -148,7 +148,7 @@ public class AwakenEntities {
         // Phase 2 Mobs
         {
             register(RAPTOR_CHICKEN, 0x9C0202, 0x610000, RaptorChickenEntity.createRaptorChickenAttributes());
-            addHostileSpawn(spawnEntry(RAPTOR_CHICKEN, 100, 1, 3, PostAwakeningSpawnCondition.INSTANCE),
+            addHostileSpawn(spawnEntry(RAPTOR_CHICKEN, 300, 1, 3, LightLevelSpawnCondition.INSTANCE_BLOCK_7, PostAwakeningSpawnCondition.INSTANCE, SurfaceSpawnCondition.INSTANCE),
                     biome -> biome.getCategory() == Biome.Category.JUNGLE
             );
 
@@ -158,7 +158,7 @@ public class AwakenEntities {
             );
 
             register(SPIDER_SAC, 0x000000, 0xFFFFFF, SpiderSacEntity.createSpiderSacAttributes());
-            addHostileSpawn(spawnEntry(SPIDER_SAC, 25, 1, 1, CaveSpawnCondition.INSTANCE), biome -> true);
+            addHostileSpawn(spawnEntry(SPIDER_SAC, 25, 1, 1, LightLevelSpawnCondition.INSTANCE_BOTH_7, CaveSpawnCondition.INSTANCE), biome -> true);
 
             register(VOID_GHOST, 0x0000000, 0xFFFFFF, VoidGhostEntity.createVoidGhostAttributes());
 
@@ -167,17 +167,17 @@ public class AwakenEntities {
             register(RADIANCE, 0xFFFFFF, 0x000000, RadianceEntity.createRadianceAttributes());
 
             register(RENEGADE, 0xFFFFFF, 0xFFFFFF, RenegadeEntity.createRenegadeAttributes());
-            addHostileSpawn(spawnEntry(RENEGADE, 200, 1, 1, SurfaceSpawnCondition.INSTANCE), biome ->
+            addHostileSpawn(spawnEntry(RENEGADE, 200, 1, 1, LightLevelSpawnCondition.INSTANCE_BOTH_7, CaveSpawnCondition.INSTANCE), biome ->
                     biome.getCategory() == Biome.Category.MESA || biome.getCategory() == Biome.Category.SAVANNA
             );
 
             register(VAGABOND, 0xFFFFFF, 0xFFFFFF, VagabondEntity.createVagabondAttributes());
-            addHostileSpawn(spawnEntry(VAGABOND, 200, 1, 1, SurfaceSpawnCondition.INSTANCE), biome ->
+            addHostileSpawn(spawnEntry(VAGABOND, 200, 1, 1, LightLevelSpawnCondition.INSTANCE_BOTH_7, CaveSpawnCondition.INSTANCE), biome ->
                     biome.getCategory() == Biome.Category.MESA || biome.getCategory() == Biome.Category.SAVANNA
             );
 
             register(ENDER_AGENT, 0xFFFFFF, 0xFFFFFF, EnderAgentEntity.createEnderAgentAttributes());
-            addHostileSpawn(spawnEntry(ENDER_AGENT, 100, 1, 1, LightLevelSpawnCondition.INSTANCE_7), biome -> true);
+            addHostileSpawn(spawnEntry(ENDER_AGENT, 100, 1, 1, LightLevelSpawnCondition.INSTANCE_BOTH_7, CaveSpawnCondition.INSTANCE), biome -> true);
         }
 
         // Fiery Moon
