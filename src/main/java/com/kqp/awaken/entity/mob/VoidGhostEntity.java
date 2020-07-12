@@ -1,7 +1,6 @@
 package com.kqp.awaken.entity.mob;
 
 import com.kqp.awaken.entity.ai.FloatAroundGoal;
-import com.kqp.awaken.init.AwakenEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;

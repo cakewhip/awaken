@@ -10,7 +10,7 @@ import net.minecraft.entity.mob.MobEntity;
 public class AgentEntityModel<T extends MobEntity> extends BipedEntityModel<T> {
     public AgentEntityModel() {
         super(0F, 0F, 64, 64);
-        
+
         this.head = new ModelPart(this, 0, 0);
         this.head.addCuboid(0F, 0F, 0F, 0F, 0F, 0F);
         this.head.setPivot(0.0F, 0.0F, 0.0F);

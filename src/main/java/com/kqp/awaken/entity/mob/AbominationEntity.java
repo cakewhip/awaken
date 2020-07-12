@@ -2,7 +2,6 @@ package com.kqp.awaken.entity.mob;
 
 import com.kqp.awaken.entity.ai.abomination.AbominationPhase1MoveSetGoal;
 import com.kqp.awaken.entity.ai.abomination.AbominationPhase2MoveSetGoal;
-import com.kqp.awaken.init.AwakenEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;

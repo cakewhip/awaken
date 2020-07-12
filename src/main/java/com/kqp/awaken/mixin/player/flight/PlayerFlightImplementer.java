@@ -7,9 +7,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.DefaultParticleType;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleType;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -33,7 +30,7 @@ public class PlayerFlightImplementer implements PlayerFlightProperties {
         PlayerEntity player = ((PlayerEntity) (Object) this);
         if (this.canFly()) {
             FlightTrinketItem flightTrinketItem = ((FlightTrinketItem) this.getFlyingItemStack().getItem());
-            
+
             if (player.isOnGround()) {
                 flyTime = flightTrinketItem.getMaxFlyTime();
 
@@ -51,7 +48,7 @@ public class PlayerFlightImplementer implements PlayerFlightProperties {
 
                         flightTrinketItem.flightParticleId.ifPresent(flightParticleId -> {
                             DefaultParticleType particle = (DefaultParticleType) Registry.PARTICLE_TYPE.get(flightParticleId);
-                            
+
                             player.world.addParticle(particle,
                                     player.getX(), player.getY() + 1.0D, player.getZ(),
                                     r.nextDouble() - r.nextDouble(), -r.nextDouble() * 4D, r.nextDouble() - r.nextDouble()

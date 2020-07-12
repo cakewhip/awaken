@@ -1,7 +1,6 @@
 package com.kqp.awaken.entity.mob;
 
 import com.kqp.awaken.entity.projectile.RadianceLightEntity;
-import com.kqp.awaken.init.AwakenEntities;
 import com.kqp.awaken.init.AwakenNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityGroup;

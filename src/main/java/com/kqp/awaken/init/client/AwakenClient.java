@@ -10,7 +10,6 @@ import com.kqp.awaken.client.entity.RaptorChickenRenderer;
 import com.kqp.awaken.client.entity.SpiderSacRenderer;
 import com.kqp.awaken.client.entity.VoidGhostRenderer;
 import com.kqp.awaken.client.trinket.TrinketRenderers;
-import com.kqp.awaken.init.Awaken;
 import com.kqp.awaken.init.AwakenEntities;
 import com.kqp.awaken.init.AwakenNetworking;
 import com.kqp.awaken.network.AwakenPacket;

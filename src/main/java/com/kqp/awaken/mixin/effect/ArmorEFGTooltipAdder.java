@@ -1,7 +1,6 @@
 package com.kqp.awaken.mixin.effect;
 
 import com.kqp.awaken.item.armor.ArmorEFGMutator;
-import com.kqp.awaken.item.armor.AwakenArmorItem;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;

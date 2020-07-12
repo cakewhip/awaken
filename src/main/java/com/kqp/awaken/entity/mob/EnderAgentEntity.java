@@ -1,14 +1,12 @@
 package com.kqp.awaken.entity.mob;
 
 import com.kqp.awaken.entity.ai.BetterMeleeAttackGoal;
-import com.kqp.awaken.init.AwakenEntities;
 import com.kqp.awaken.init.AwakenItems;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.FleeEntityGoal;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
@@ -28,7 +26,6 @@ import net.minecraft.util.math.Box;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
 
 import java.util.List;
 

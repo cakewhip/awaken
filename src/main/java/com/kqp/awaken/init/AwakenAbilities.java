@@ -9,7 +9,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,10 +85,10 @@ public class AwakenAbilities {
 
         return ability;
     }
-    
+
     public static class BiomeRingAbility extends Ability {
         public final Set<Biome> biomes = new HashSet();
-        
+
         public BiomeRingAbility(ComponentType<AbilityComponent> componentType) {
             super(componentType);
 

@@ -1,6 +1,5 @@
 package com.kqp.awaken.entity.mob;
 
-import com.kqp.awaken.init.AwakenEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

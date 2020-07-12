@@ -36,7 +36,7 @@ public abstract class EquipmentListener {
                                  EquipmentSlot currentSlot,
                                  ItemStack prevItemStack,
                                  ItemStack currItemStack) {
-        if(!ItemStack.areEqual(prevItemStack, currItemStack)) {
+        if (!ItemStack.areEqual(prevItemStack, currItemStack)) {
             LivingEntity living = (LivingEntity) (Object) this;
             Optional<ItemStack> equip = Optional.empty(), unEquip = Optional.empty();
 

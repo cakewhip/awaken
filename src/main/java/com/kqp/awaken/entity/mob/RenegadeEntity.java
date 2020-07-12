@@ -1,7 +1,6 @@
 package com.kqp.awaken.entity.mob;
 
 import com.kqp.awaken.entity.ai.BetterMeleeAttackGoal;
-import com.kqp.awaken.init.AwakenEntities;
 import com.kqp.awaken.init.AwakenItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityData;
@@ -38,7 +37,7 @@ public class RenegadeEntity extends HostileEntity {
         this.goalSelector.add(5, new LookAroundGoal(this));
         this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D));
 
-        this.targetSelector.add(1, new RevengeGoal(this, new Class[0]));
+        this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new FollowTargetGoal(this, VagabondEntity.class, true));
         this.targetSelector.add(3, new FollowTargetGoal(this, PlayerEntity.class, true));
     }

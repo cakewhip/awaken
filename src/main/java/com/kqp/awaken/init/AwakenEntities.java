@@ -119,7 +119,7 @@ public class AwakenEntities {
     public static final EntityType<EnderAgentEntity> ENDER_AGENT = Registry.register(
             Registry.ENTITY_TYPE,
             Awaken.id("ender_agent"),
-            
+
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EnderAgentEntity::new)
                     .dimensions(EntityDimensions.fixed(0.75F, 1.0F))
                     .trackable(72, 3)
