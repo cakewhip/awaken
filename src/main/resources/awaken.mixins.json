@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "ability.BiomeRingAbilityApplier",
+    "ability.BlueprintAbilityApplier",
     "ability.BoneCrownAbilityApplier",
     "ability.DiscordBeltAbilityApplier",
     "ability.DynamiteAndLightningAbilityAppliers",
