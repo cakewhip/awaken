@@ -2,6 +2,8 @@ package com.kqp.awaken.network.entity;
 
 import com.kqp.awaken.entity.mob.AwakenBossEntity;
 import com.kqp.awaken.network.AwakenPacketS2C;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
@@ -30,27 +32,32 @@ public class BossDespawningS2C extends AwakenPacketS2C {
         int id = data.readInt();
 
         context.getTaskQueue().execute(() -> {
-            World world = MinecraftClient.getInstance().world;
-            Entity entity = world.getEntityById(id);
-            Random r = world.random;
-
-            for (int i = 0; i < 3; i++) {
-                world.addParticle(ParticleTypes.LAVA,
-                        entity.getX() + 2 * (r.nextDouble() - r.nextDouble()),
-                        entity.getY(),
-                        entity.getZ() + 2 * (r.nextDouble() - r.nextDouble()),
-                        r.nextDouble() - r.nextDouble(), r.nextDouble(), r.nextDouble() - r.nextDouble()
-                );
-            }
-
-            for (int i = 0; i < 3; i++) {
-                world.addParticle(ParticleTypes.LARGE_SMOKE,
-                        entity.getX() + 2 * (r.nextDouble() - r.nextDouble()),
-                        entity.getY(),
-                        entity.getZ() + 2 * (r.nextDouble() - r.nextDouble()),
-                        0, r.nextDouble(), 0
-                );
-            }
+            despawn(id);
         });
+    }
+
+    @Environment(EnvType.CLIENT)
+    private static void despawn(int id) {
+        World world = MinecraftClient.getInstance().world;
+        Entity entity = world.getEntityById(id);
+        Random r = world.random;
+
+        for (int i = 0; i < 3; i++) {
+            world.addParticle(ParticleTypes.LAVA,
+                    entity.getX() + 2 * (r.nextDouble() - r.nextDouble()),
+                    entity.getY(),
+                    entity.getZ() + 2 * (r.nextDouble() - r.nextDouble()),
+                    r.nextDouble() - r.nextDouble(), r.nextDouble(), r.nextDouble() - r.nextDouble()
+            );
+        }
+
+        for (int i = 0; i < 3; i++) {
+            world.addParticle(ParticleTypes.LARGE_SMOKE,
+                    entity.getX() + 2 * (r.nextDouble() - r.nextDouble()),
+                    entity.getY(),
+                    entity.getZ() + 2 * (r.nextDouble() - r.nextDouble()),
+                    0, r.nextDouble(), 0
+            );
+        }
     }
 }

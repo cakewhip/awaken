@@ -53,7 +53,6 @@
     "combat.ArmorCalculationOverride",
     "combat.EquipmentListener",
     "effect.ArmorEFGImplementer",
-    "effect.ArmorEFGTooltipAdder",
     "effect.EFGEnchantmentApplier",
     "effect.TrinketEFGEnchantmentApplier",
     "fierymoon.FMBlazeImplementer",
@@ -83,6 +82,7 @@
     "client.accessor.HeldItemFeatureRendererAccessor",
     "client.combat.AttackCooldownEnforcer",
     "client.combat.NonCombatCooldownCanceller",
+    "client.effect.ArmorEFGTooltipAdder",
     "client.effect.ConfusionEffectApplier",
     "client.gui.NavigationTabAdder",
     "client.input.SecondSpacingListener",
@@ -92,7 +92,7 @@
     "client.render.entity.RaptorChickenWingFlapApplier",
     "client.render.entity.SkeletonFieryMoonTextureOverride",
     "client.render.entity.ZombieFieryMoonTextureOverride",
-    "client.render.FieryMoonTextureOverride",
+    "client.render.FieryMoonTextureOverride"
   ],
   "server": [],
   "injectors": {

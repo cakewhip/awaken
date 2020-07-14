@@ -1,6 +1,8 @@
 package com.kqp.awaken.network.screen.navigation;
 
 import com.kqp.awaken.network.AwakenPacketS2C;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
@@ -19,11 +21,16 @@ public class CloseCraftingS2C extends AwakenPacketS2C {
         double mouseY = data.readDouble();
 
         context.getTaskQueue().execute(() -> {
-            ClientPlayerEntity player = MinecraftClient.getInstance().player;
-            player.closeScreen();
-            MinecraftClient.getInstance().openScreen(new InventoryScreen(player));
-
-            InputUtil.setCursorParameters(MinecraftClient.getInstance().getWindow().getHandle(), 212993, mouseX, mouseY);
+            closeCraftingMenu(mouseX, mouseY);
         });
+    }
+
+    @Environment(EnvType.CLIENT)
+    private static void closeCraftingMenu(double mouseX, double mouseY) {
+        ClientPlayerEntity player = MinecraftClient.getInstance().player;
+        player.closeScreen();
+        MinecraftClient.getInstance().openScreen(new InventoryScreen(player));
+
+        InputUtil.setCursorParameters(MinecraftClient.getInstance().getWindow().getHandle(), 212993, mouseX, mouseY);
     }
 }

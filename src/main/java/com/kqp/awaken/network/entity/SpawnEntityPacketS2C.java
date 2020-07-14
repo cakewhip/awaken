@@ -1,6 +1,8 @@
 package com.kqp.awaken.network.entity;
 
 import com.kqp.awaken.network.AwakenPacketS2C;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
@@ -53,21 +55,26 @@ public class SpawnEntityPacketS2C extends AwakenPacketS2C {
         float yaw = (data.readByte() * 360) / 256.0F;
 
         context.getTaskQueue().execute(() -> {
-            ClientWorld world = MinecraftClient.getInstance().world;
-            Entity entity = type.create(world);
-
-            if (entity != null) {
-                entity.updatePosition(x, y, z);
-                entity.updateTrackedPosition(x, y, z);
-
-                entity.pitch = pitch;
-                entity.yaw = yaw;
-
-                entity.setEntityId(entityID);
-                entity.setUuid(entityUUID);
-
-                world.addEntity(entityID, entity);
-            }
+            spawnEntity(type, entityUUID, entityID, x, y, z, pitch, yaw);
         });
+    }
+
+    @Environment(EnvType.CLIENT)
+    private static void spawnEntity(EntityType type, UUID entityUUID, int entityID, double x, double y, double z, float pitch, float yaw) {
+        ClientWorld world = MinecraftClient.getInstance().world;
+        Entity entity = type.create(world);
+
+        if (entity != null) {
+            entity.updatePosition(x, y, z);
+            entity.updateTrackedPosition(x, y, z);
+
+            entity.pitch = pitch;
+            entity.yaw = yaw;
+
+            entity.setEntityId(entityID);
+            entity.setUuid(entityUUID);
+
+            world.addEntity(entityID, entity);
+        }
     }
 }

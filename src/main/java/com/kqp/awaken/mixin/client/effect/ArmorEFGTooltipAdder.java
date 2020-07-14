@@ -1,4 +1,4 @@
-package com.kqp.awaken.mixin.effect;
+package com.kqp.awaken.mixin.client.effect;
 
 import com.kqp.awaken.item.armor.ArmorEFGMutator;
 import net.minecraft.client.item.TooltipContext;

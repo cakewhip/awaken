@@ -4,6 +4,8 @@ import com.kqp.awaken.client.screen.AwakenCraftingScreen;
 import com.kqp.awaken.init.client.AwakenClient;
 import com.kqp.awaken.network.AwakenPacketS2C;
 import com.kqp.awaken.screen.AwakenCraftingScreenHandler;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.network.PacketContext;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -34,6 +36,7 @@ public class OpenCraftingS2C extends AwakenPacketS2C {
      * @param mouseX
      * @param mouseY
      */
+    @Environment(EnvType.CLIENT)
     private static void openCraftingMenu(int syncId, double mouseX, double mouseY) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         AwakenCraftingScreenHandler screenHandler = new AwakenCraftingScreenHandler(syncId, player.inventory);
