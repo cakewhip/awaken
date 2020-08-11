@@ -2,7 +2,7 @@ package com.kqp.awaken.entity.ai;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.mob.MobEntityWithAi;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -10,13 +10,13 @@ import java.util.EnumSet;
 import java.util.Random;
 
 public class FloatAroundGoal extends Goal {
-    protected final MobEntityWithAi mob;
+    protected final MobEntity mob;
     protected int chance;
     protected boolean ignoringChance;
 
     public BlockPos target;
 
-    public FloatAroundGoal(MobEntityWithAi mob) {
+    public FloatAroundGoal(MobEntity mob) {
         this.mob = mob;
         this.chance = 120;
         this.setControls(EnumSet.of(Goal.Control.MOVE));

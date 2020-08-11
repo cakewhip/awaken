@@ -62,8 +62,6 @@ public class AwakenAbilities {
     public static final Ability EMBER_RING = registerBiomeRingAbility("ember")
             .addFrom(Biome.Category.NETHER);
 
-    public static final Ability BLUEPRINT = register("blueprint_ability");
-
     public static void init() {
         EntityComponentCallback.event(PlayerEntity.class).register((player, components) -> {
             ABILITY_MAP.forEach((id, ability) -> {

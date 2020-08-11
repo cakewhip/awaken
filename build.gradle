@@ -31,31 +31,43 @@ repositories {
 		name = "NerdHubMC"
 		url = "https://maven.abusedmaster.xyz/"
 	}
+
+	maven {
+		url = "https://www.cursemaven.com"
+	}
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:1.16.1"
-	mappings "net.fabricmc:yarn:1.16.1+build.7:v2"
-	modImplementation "net.fabricmc:fabric-loader:0.8.8+build.202"
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// Fabric api
-	modImplementation "net.fabricmc.fabric-api:fabric-api:0.14.0+build.371-1.16"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// Base
-	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.1"
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:2.4.1"
+	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cc_version}"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cc_version}"
 	// Entity
-	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.1"
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:2.4.1"
+	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${project.cc_version}"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-entity:${project.cc_version}"
 	// Level
-	modCompile "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:2.4.1"
-	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:2.4.1"
+	modImplementation "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:${project.cc_version}"
+	include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-level:${project.cc_version}"
 
-	modImplementation "com.github.emilyploszaj:trinkets:2.6.2"
+	modImplementation "com.github.emilyploszaj:trinkets:${project.trinkets_version}"
 
 	// Static Data
-	modImplementation "io.github.cottonmc:StaticData:1.1.2"
-	include "io.github.cottonmc:StaticData:1.1.2"
+	modImplementation "io.github.cottonmc:StaticData:${project.staticdata_version}"
+	include "io.github.cottonmc:StaticData:${project.staticdata_version}"
+
+	// TCrafting
+	modImplementation "com.github.cakewhip:tcrafting:${project.tcrafting_version}"
+	modRuntime "com.github.cakewhip:tcrafting:${project.tcrafting_version}"
+
+	// Inventory Tabs
+	modImplementation "com.github.cakewhip:inventorytabs:${project.inventorytabs_version}"
+	modRuntime "com.github.cakewhip:inventorytabs:${project.inventorytabs_version}"
 
 	// Cotton/LibCD has a recipe util to remove recipes
 	// TODO: add this back in when it's updated

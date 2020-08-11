@@ -4,7 +4,6 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "ability.BiomeRingAbilityApplier",
-    "ability.BlueprintAbilityApplier",
     "ability.BoneCrownAbilityApplier",
     "ability.DiscordBeltAbilityApplier",
     "ability.DynamiteAndLightningAbilityAppliers",
@@ -71,8 +70,6 @@
     "player.MaxHealthPersister",
     "postawakening.SpiderJockeyChanceBuffApplier",
     "postawakening.SpiderPoisonBuffApplier",
-    "recipe.AwakenRecipeManagerInitializer",
-    "recipe.IngredientHacker",
     "spawning.ConditionalSpawnEntryApplier",
     "world.data.AwakenChunkDataSerializer",
     "world.gen.PostAwakeningOreGenerator"
@@ -84,10 +81,8 @@
     "client.combat.NonCombatCooldownCanceller",
     "client.effect.ArmorEFGTooltipAdder",
     "client.effect.ConfusionEffectApplier",
-    "client.gui.NavigationTabAdder",
     "client.input.SecondSpacingListener",
     "client.network.AwakenClientLevelDataSynchronizer",
-    "client.recipe.AwakenClientRecipeManagerInitializer",
     "client.render.entity.feature.CustomArmorLayerApplier",
     "client.render.entity.RaptorChickenWingFlapApplier",
     "client.render.entity.SkeletonFieryMoonTextureOverride",
